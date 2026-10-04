@@ -23,7 +23,7 @@ import ru.aiforge.realwar.handheld.GunKind;
 import ru.aiforge.realwar.handheld.MagazineItem;
 import ru.aiforge.realwar.registry.ModItems;
 
-/** Reply 22/23: AK-12 / M4A1 / RPG-7V2 / T-5000 / PKP server logic. */
+/** Reply 22-24: AK-12 / M4A1 / RPG-7V2 / T-5000 / PKP / Saiga-12K / Remington 870 server logic. */
 @GameTestHolder("aiarsenal")
 @PrefixGameTestTemplate(false)
 public final class SmallArmsTests {
@@ -150,6 +150,48 @@ public final class SmallArmsTests {
         h.assertTrue(GunKind.PKP.auto && !GunKind.PKP.selector(), "PKP is full-auto only");
         for (int i = 0; i < 3; i++) Firearms.fire(p, gun, GunKind.PKP, false);
         h.assertTrue(FirearmItem.ammo(gun) == 97, "3 rounds fired");
+        h.succeed();
+    }
+
+    // ------------------------------------------------------------------ r24
+
+    @GameTest(template = "arena", batch = "rw_small", timeoutTicks = 120)
+    public static void saiga12_buckshot_pattern_hits(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        BlockPos o = h.absolutePos(new BlockPos(2, 1, 2));
+        for (int dz = 0; dz < 10; dz++) for (int dy = 0; dy < 4; dy++) level.setBlock(o.offset(0, dy, dz), Blocks.AIR.defaultBlockState(), 2);
+        ItemStack gun = new ItemStack(ModItems.SAIGA12.get());
+        FirearmItem.setAmmo(gun, 8);
+        FakePlayer p = shooter(h, gun, o.getX() + 0.5, o.getY(), o.getZ() + 0.5);
+        Husk t = EntityType.HUSK.create(level);
+        t.moveTo(o.getX() + 0.5, o.getY(), o.getZ() + 6.5, 180f, 0f);
+        t.setNoAi(true);
+        level.addFreshEntity(t);
+        float hp0 = t.getHealth();
+        int b0 = Firearms.bullets(level);
+        Firearms.fire(p, gun, GunKind.SAIGA12, true);
+        h.assertTrue(FirearmItem.ammo(gun) == 7, "one shell per shot");
+        h.assertTrue(Firearms.bullets(level) - b0 == 9, "00 buckshot = 9 pellets, got " + (Firearms.bullets(level) - b0));
+        h.assertTrue(GunKind.SAIGA12.maxLoaded(true) == 9 && !GunKind.SAIGA12.auto, "semi-auto, 8 + 1");
+        h.runAfterDelay(6, () -> {
+            h.assertTrue(!t.isAlive() || t.getHealth() <= hp0 - 12f, "buckshot at 6 m must hit hard: hp " + t.getHealth());
+            t.discard();
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void r870_tube_loads_shell_by_shell(GameTestHelper h) {
+        BlockPos o = h.absolutePos(new BlockPos(2, 1, 2));
+        ItemStack gun = new ItemStack(ModItems.R870.get());
+        FakePlayer p = shooter(h, gun, o.getX() + 0.5, o.getY(), o.getZ() + 0.5);
+        p.getInventory().add(new ItemStack(ModItems.SHELL_12.get(), 7));
+        for (int i = 0; i < 7; i++) Firearms.finishReload(p, gun, GunKind.R870);
+        int left = 0;
+        for (ItemStack s : p.getInventory().items) if (s.is(ModItems.SHELL_12.get())) left += s.getCount();
+        h.assertTrue(FirearmItem.ammo(gun) == 5, "4 in the tube + 1 chambered, got " + FirearmItem.ammo(gun));
+        h.assertTrue(left == 2, "only 5 shells used (7 tries), left " + left);
+        h.assertTrue(GunKind.R870.pumpAction() && GunKind.R870.tube() && GunKind.R870.semiCooldown() >= 12, "pump action, tube fed");
         h.succeed();
     }
 }

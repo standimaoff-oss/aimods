@@ -1,6 +1,8 @@
 """r22/r23 player weapons, built from real dimensions (Blender 5.x headless):
      ORSIS T-5000M .338 LM + 5-25x56   1270 mm, barrel 700, 5-rd box, folding skeleton stock, Harris bipod   (r23)
      PKP Pecheneg 6P41                1155 mm, barrel 658 (finned, shrouded), 100-rd box, carry handle      (r23)
+     Saiga-12K isp.030 (12/76)        910 mm, barrel 430, 8-rd box, AK-74M folding stock, railed cover      (r24)
+     Remington 870 Police Magnum      978 mm, 18" barrel + rifle sights, 4+1 tube, pump with action bars   (r24)
    First-person hands = the player's vanilla arms (r23); the GLB carries only the hand anchors <w>.arm_r / <w>.arm_l.
      AK-12 6P70 (2018)   945 mm, barrel 415, 30-rd 6L31 magazine, diopter rear sight, telescoping folding stock
      M4A1 + Aimpoint CompM4 on QRP2   838 mm (stock extended), 14.5" barrel, STANAG 30, A2 FSB / grip / birdcage
@@ -79,6 +81,7 @@ mat("GloveBlack", "T_GloveBlack", 0.85)
 mat("GloveCoyote", "T_GloveCoyote", 0.85)
 mat("Flash", "T_Flash", 0.9, emissive=True, clip=True)
 mat("RedDot", "T_RedDot", 0.9, emissive=True, clip=True)
+mat("ShellRed", "T_ShellRed", 0.6)
 
 # ------------------------------------------------------------------ build state
 U0 = 0.0
@@ -1223,17 +1226,265 @@ def pkp():
     return sc
 
 
+# ====================================================================================== shotguns (r24)
+def shell(g, uc, cv, x=0.0, length=70.0):
+    """12/70 shell lying along the bore, centred at u = uc: brass head (rim r 11.2, 16 mm) + red ribbed hull, crimp"""
+    u0 = uc - length / 2
+    lathe(g, [(u0, 0), (u0, 11.2), (u0 + 1.6, 11.2), (u0 + 1.6, 10.4), (u0 + 16, 10.4)], "Brass", 16, x, cv, smooth=True)
+    lathe(g, [(u0 + 16, 10.25), (u0 + length - 3, 10.25), (u0 + length, 8.0), (u0 + length, 0)], "ShellRed", 16, x, cv)
+
+
+# Saiga-12K isp.030 (Izhmash / Kalashnikov Concern): 12/76, barrel 430 mm, 910 mm (670 folded), 3.8 kg, 8-rd box,
+# AK-74M pattern gas system, side-folding polymer stock, hinged receiver cover with a Picatinny rail, magwell funnel,
+# front sight in the gas-chamber housing with a short rail below, removable slotted flash hider (M22x0.75).
+def saiga_mag(g):
+    # 8-rd staggered box: 92 mm front-to-back (70 mm shells), 42 mm thick, slight forward sweep, ribbed sides
+    prism(g, [(428, -30), (520, -30), (520, -62), (530, -206), (442, -212), (428, -62)], -21, 21, "Polymer", 2.0)
+    for s in (1, -1):
+        for k in range(4):
+            v0 = -78 - k * 32
+            prism(g, [(436 + k * 2.5, v0), (514 + k * 2.6, v0), (515 + k * 2.6, v0 - 6), (437 + k * 2.5, v0 - 6)],
+                  21 * s, 22.2 * s, "Polymer", 0.4)
+    prism(g, [(436, -206), (536, -200), (538, -214), (438, -222)], -23, 23, "Polymer", 1.5)          # floorplate
+    box(g, 518, 530, -44, -32, -7, 7, "Steel", 0.4)                                              # front lug
+    box(g, 422, 428, -54, -46, -7, 7, "Steel", 0.4)                                              # rear catch lug
+    shell(g, 474, -36, 5.5)
+
+
+def saiga_body(g):
+    # --- receiver (stamped, taller than the AK), hinged top cover with Picatinny rail, cover latch
+    prism(g, [(262, -42), (262, 14), (270, 20), (560, 20), (560, -40), (532, -44), (528, -48), (424, -48), (420, -44),
+              (300, -44)], -19, 19, "Parker", 1.2)
+    xsec(g, [(-20, 16), (20, 16), (20, 24), (16, 30), (-16, 30), (-20, 24)], 268, 556, "Parker", 0.8)
+    picatinny(g, 290, 540, 30, "Parker")
+    box(g, 262, 270, 18, 26, -5, 5, "Steel")
+    for s in (1, -1):                                                                            # cover hinge
+        cylx(g, 552, 22, 20 * s, 22 * s, 5, "Steel", 12)
+    # magwell funnel
+    prism(g, [(414, -44), (534, -44), (540, -68), (408, -68)], -25, 25, "Polymer", 2.5)
+    box(g, 404, 416, -66, -54, -8, 8, "Steel", 0.6)                                              # mag catch paddle
+    # ejection port (12 ga: long) and the AK safety lever (right side)
+    box(g, 418, 528, -2, 18, -19.4, -19.0, "Rubber", 0.1)
+    prism(g, [(300, 6), (408, 6), (416, 1), (408, -6), (318, -4), (300, 1)], -21.6, -19.0, "Steel", 0.4)
+    box(g, 408, 418, -12, 1, -27, -21.6, "Steel", 0.6)
+    cylx(g, 306, 2, -23, -21.6, 4.2, "Steel")
+    for (u, v) in ((285, -30), (332, -30), (386, -34), (440, -46), (500, -46), (545, -12), (545, -30)):
+        cylx(g, u, v, 19, 20.2, 2.6, "Steel", 10)
+        cylx(g, u, v, -20.2, -19, 2.6, "Steel", 10)
+    # trigger guard (bolt-hold-open lever ahead of it), pistol grip AK-74M pattern, cap
+    prism(g, [(336, -44), (342, -44), (345, -60), (391, -62), (393, -44), (399, -44), (398, -67), (341, -66)], -5, 5, "Steel", 0.6)
+    prism(g, [(300, -44), (344, -44), (342, -54), (334, -66), (330, -80), (331, -92), (325, -104), (318, -122), (308, -140),
+              (270, -142), (268, -134), (280, -94), (288, -64), (294, -52)], -15, 15, "Polymer", 3.0)
+    for k in range(5):
+        for s in (1, -1):
+            box(g, 284 + k * 4, 288 + k * 4, -126 + k * 14, -114 + k * 14, 15 * s, 15.7 * s, "Polymer", 0.3)
+    # --- AK-74M side-folding polymer stock (folds left), hinge block, lightening grooves, rubber butt pad, sling loop
+    box(g, 240, 262, -38, 22, -18, 18, "Polymer", 3)
+    cylz(g, 250, 20, -36, 22, 4, "Steel")
+    box(g, 244, 256, -8, 6, -22, -18, "Steel", 0.6)                                              # fold latch button
+    prism(g, [(10, -116), (40, -116), (240, -38), (240, 14), (34, 4), (10, 4)], -17, 17, "Polymer", 2.5)
+    for s in (1, -1):
+        prism(g, [(74, -78), (200, -40), (200, 4), (74, -4)], 17 * s, 17.8 * s, "Polymer", 0.6)
+        prism(g, [(86, -64), (190, -36), (190, -4), (86, -10)], 17.8 * s, 18.2 * s, "Rubber", 0.2)
+    prism(g, [(-6, -118), (10, -118), (10, 6), (-6, 6)], -20, 20, "Rubber", 3)
+    ring_rod_loop(g, P(30, -106, 0), 7, 1.6, "Steel")
+    # --- AK rear sight (leaf + slider with the notch) on the trunnion block
+    box(g, 556, 602, 14, 30, -14, 14, "Parker", 1)
+    prism(g, [(560, 30), (600, 30), (600, 35), (560, 39)], -10, 10, "Parker", 0.6)
+    box(g, 588, 598, 35, 47, -9, 9, "Parker", 0.4)
+    box(g, 587.6, 598.4, 42, 47.4, -1.8, 1.8, "Rubber", 0.1)                                    # notch
+    box(g, 580, 588, 30, 36, -11, 11, "Steel", 0.4)                                              # range slider
+    # --- upper handguard on the gas tube, lower handguard (polymer, ribbed), cap
+    xsec(g, [(-17, 12), (17, 12), (19, 20), (15, 30), (-15, 30), (-19, 20)], 602, 762, "Polymer", 1.5)
+    xsec(g, [(-22, -32), (22, -32), (26, -24), (26, 8), (20, 12), (-20, 12), (-26, 8), (-26, -24)], 604, 756, "Polymer", 2)
+    for i in range(5):
+        for s in (1, -1):
+            box(g, 616 + i * 27, 628 + i * 27, -24, 4, 25.6 * s, 26.6 * s, "Polymer", 0.3)
+    box(g, 756, 764, -34, 14, -27, 27, "Steel", 1)
+    # --- barrel (12 ga, OD 25 mm) and the gas-chamber housing with the adjustable front post, rail below
+    lathe(g, [(560, 12.8), (868, 12.3)], "Parker", 20)
+    box(g, 764, 802, -18, 30, -15, 15, "Parker", 2)
+    lathe(g, [(764, 0), (764, 8), (770, 8), (770, 0)], "Steel", 12, 0, 22)
+    prism(g, [(774, 30), (794, 30), (792, 40), (776, 40)], -6, 6, "Parker", 0.8)
+    for s in (1, -1):
+        prism(g, [(774, 30), (794, 30), (793, 54), (777, 54)], 8 * s, 11 * s, "Parker", 0.6)
+    cylz(g, 785, 0, 38, 44, 1.6, "Steel", 8)                                                     # post tip v 44
+    picatinny(g, 766, 800, -18, "Parker", down=True)
+    # --- removable slotted flash hider, bore
+    lathe(g, [(848, 0), (848, 16), (862, 16), (866, 15), (910, 15), (910, 0)], "Parker", 24)
+    for k in range(4):
+        a = D(45 + 90 * k)
+        obox(g, P(890, math.sin(a) * 15, math.cos(a) * 15), [Vector((0, 1, 0)), Vector((-math.sin(a), 0, math.cos(a))),
+             Vector((math.cos(a), 0, math.sin(a)))], (34, 4.5, 1.6), "Rubber", 0.2)
+    lathe(g, [(909.8, 9.4), (910.6, 9.4)], "Rubber", 16)
+
+
+def saiga12():
+    global U0
+    sc = new_scene("SAIGA12")
+    U0 = 372.0
+    root = empty("saiga12", (0, 0, 0))
+    gun = empty("saiga12.gun", (0, 0, 0), root)
+    saiga_body("saiga12.body")
+    saiga_mag("saiga12.mag")
+    prism("saiga12.trigger", [(366, -44), (372, -44), (374, -52), (373, -60), (369, -61), (370, -54)], -3, 3, "Steel", 0.5)
+    box("saiga12.bolt", 418, 528, 2, 16, -19.3, -16.5, "Steel", 0.4)                            # carrier through the port
+    box("saiga12.bolt", 520, 536, 3, 15, -27, -19.3, "Steel", 0.6)
+    cylx("saiga12.bolt", 530, 9, -40, -27, 8, "Steel", 14)                                     # charging handle knob
+    flash("saiga12.flash", 911, 0, 120, 52)
+    hand("saiga12.arm_r", P(305, -92, 0))
+    hand("saiga12.arm_l", P(680, -12, 0))
+    join_node("saiga12.body", gun)
+    join_node("saiga12.mag", gun, P(474, -45, 0))
+    join_node("saiga12.trigger", gun, P(369, -44, 0))
+    join_node("saiga12.bolt", gun, P(470, 8, 0))
+    join_node("saiga12.flash", gun, P(911, 0, 0))
+    join_node("saiga12.arm_r", gun)
+    join_node("saiga12.arm_l", gun)
+    empty("saiga12.sight", P(200, 44, 0), gun)          # eye on the line rear notch (v 42..47) -> front post tip (v 44)
+    empty("saiga12.muzzle", P(911, 0, 0), gun)
+    G, M, A, B = (bpy.data.objects[n] for n in ("saiga12.gun", "saiga12.mag", "saiga12.arm_l", "saiga12.bolt"))
+    Z = (0, 0, 0)
+    tilt = ((0.02, 0.0, 0.03), (-8, -26, 6))
+    mag_keys = [(0, Z, Z), (12, Z, Z), (16, Z, (-12, 0, 0)), (20, (0, -0.01, -0.09), (-18, 0, 0)),
+                (26, (0, 0.05, -0.40), (-30, 0, 0)), (34, (0, 0.05, -0.40), (-30, 0, 0)), (40, (0, -0.012, -0.07), (-16, 0, 0)),
+                (44, Z, (-10, 0, 0)), (47, Z, Z)]
+    to_mag = (0, (680 - 474) / 1000.0, -0.10)
+    arm_keys = [(0, Z, Z), (8, to_mag, Z), (12, to_mag, Z), (20, (0, 0.21, -0.19), Z), (26, (0.03, 0.24, -0.48), Z),
+                (34, (0.03, 0.24, -0.48), Z), (40, (0, 0.21, -0.17), Z), (44, (0, 0.21, -0.11), Z), (48, to_mag, Z)]
+    clip("saiga12_reload", G, [(0, Z, Z), (8, *tilt), (44, *tilt), (54, Z, Z), (60, Z, Z)])
+    clip("saiga12_reload", M, mag_keys + [(60, Z, Z)])
+    clip("saiga12_reload", A, arm_keys + [(56, Z, Z), (60, Z, Z)])
+    rack = ((0.0, 0.01, 0.02), (-6, 22, -4))
+    clip("saiga12_reload_empty", G, [(0, Z, Z), (8, *tilt), (44, *tilt), (52, *rack), (64, *rack), (72, Z, Z), (76, Z, Z)])
+    clip("saiga12_reload_empty", M, mag_keys + [(76, Z, Z)])
+    hk = (680 - 530) / 1000.0
+    clip("saiga12_reload_empty", A, arm_keys + [(53, (-0.05, hk, 0.02), (0, 30, 0)), (56, (-0.05, hk, 0.015), Z),
+                                                (60, (-0.05, hk + 0.11, 0.015), Z), (63, (-0.05, hk + 0.11, 0.02), Z),
+                                                (71, Z, Z), (76, Z, Z)])
+    clip("saiga12_reload_empty", B, [(0, Z, Z), (56, Z, Z), (60, (0, 0.11, 0), Z), (61, (0, 0.11, 0), Z), (63, Z, Z), (76, Z, Z)])
+    return sc
+
+
+# Remington 870 Police Magnum: 12 ga 2 3/4 & 3", 18" (457 mm) cylinder-bore barrel with rifle sights, 38.5" (978 mm),
+# 4+1 tube magazine, steel receiver, twin action bars, short (police) ribbed walnut forend, walnut stock (LOP 14"),
+# cross-bolt safety behind the trigger, action release ahead of the guard, bottom loading port, right ejection port.
+def r870_body(g):
+    # --- walnut stock (drop at comb 1.5", heel 2.5"), black recoil pad, sling stud
+    prism(g, [(22, -150), (22, -34), (200, -4), (300, 12), (320, 18), (320, -46), (298, -60), (264, -68)], -18, 18, "Wood", 5)
+    prism(g, [(0, -152), (22, -150), (22, -34), (0, -32)], -20, 20, "Rubber", 4)
+    for k in range(6):
+        box(g, 2 + k * 3, 3.2 + k * 3, -146, -38, -20.4, 20.4, "Rubber", 0.1)
+    cylz(g, 70, 0, -132, -124, 4, "Steel", 10)
+    # --- milled steel receiver: tang, flat top, bottom loading port, ejection port, pins
+    prism(g, [(318, -46), (318, 14), (330, 21), (528, 21), (528, -46)], -17.5, 17.5, "Parker", 1.5)
+    box(g, 300, 330, 12, 20, -7, 7, "Parker", 1.5)                                             # upper tang
+    box(g, 396, 494, -46.6, -45.8, -12, 12, "Rubber", 0.1)                                      # loading port
+    box(g, 404, 484, -6, 15, -17.9, -17.5, "Rubber", 0.1)                                      # ejection port
+    for (u, v) in ((360, -36), (470, -36)):
+        cylx(g, u, v, -18.4, 18.4, 3.0, "Steel", 12)                                            # trigger plate pins
+    # --- trigger plate / guard, cross-bolt safety, action release lever
+    box(g, 330, 430, -52, -46, -11, 11, "Anod", 1)
+    prism(g, [(338, -52), (344, -52), (350, -74), (408, -76), (414, -52), (420, -52), (416, -82), (344, -80)], -6, 6, "Anod", 1)
+    cylx(g, 336, -58, -14, 14, 4.2, "Steel", 12)
+    box(g, 416, 428, -60, -52, 11, 14, "Steel", 0.5)
+    # --- 18" barrel with rifle sights, magazine tube, barrel ring + cap, sling swivel
+    lathe(g, [(520, 10.4), (978, 10.4)], "Parker", 20)
+    lathe(g, [(518, 0), (518, 13), (532, 13), (532, 0)], "Parker", 20)                          # barrel extension collar
+    box(g, 590, 626, 9, 15, -6, 6, "Parker", 0.6)                                               # rear sight base
+    prism(g, [(600, 15), (620, 15), (620, 25), (604, 25)], -7, 7, "Parker", 0.4)
+    box(g, 603.6, 620.4, 20.5, 25.4, -1.6, 1.6, "Rubber", 0.1)                                 # rear notch
+    prism(g, [(936, 9), (972, 9), (972, 24), (964, 24)], -2.6, 2.6, "Parker", 0.4)              # front ramp blade, tip v 24
+    box(g, 936, 974, 8, 11, -5, 5, "Parker", 0.4)
+    lathe(g, [(977.8, 9.2), (978.6, 9.2)], "Rubber", 16)
+    lathe(g, [(528, 11.5), (882, 11.5)], "Parker", 18, 0, -23)                                  # magazine tube
+    lathe(g, [(866, 13.6), (882, 13.6)], "Parker", 18, 0, -23)                                  # barrel ring lug
+    box(g, 866, 882, -14, -8, -6, 6, "Parker", 0.4)
+    lathe(g, [(882, 0), (882, 12.6), (914, 12.6), (918, 8), (918, 0)], "Parker", 20, 0, -23)   # magazine cap
+    for k in range(5):
+        lathe(g, [(886 + k * 5, 13.1), (888 + k * 5, 13.1)], "Steel", 20, 0, -23)
+    ring_rod_loop(g, P(904, -40, 0), 7, 1.6, "Steel")
+
+
+def r870():
+    global U0
+    sc = new_scene("R870")
+    U0 = 360.0
+    root = empty("r870", (0, 0, 0))
+    gun = empty("r870.gun", (0, 0, 0), root)
+    r870_body("r870.body")
+    prism("r870.trigger", [(356, -52), (362, -52), (364, -60), (363, -68), (359, -69), (360, -60)], -3, 3, "Steel", 0.5)
+    # pump: short ribbed walnut forend on the tube + twin action bars into the receiver
+    xsec("r870.pump", [(-22, -50), (22, -50), (27, -40), (27, -18), (20, -12), (-20, -12), (-27, -18), (-27, -40)], 600, 770, "Wood", 3)
+    for i in range(9):
+        for s in (1, -1):
+            box("r870.pump", 612 + i * 17, 619 + i * 17, -44, -18, 26.6 * s, 27.6 * s, "Rubber", 0.3)
+    xsec("r870.pump", [(-14, -36), (14, -36), (15, -14), (-15, -14)], 770, 778, "Parker", 0.8)  # front collar
+    for s in (1, -1):
+        box("r870.pump", 520, 602, -30, -25, 12 * s, 14 * s, "Steel", 0.3)                      # action bars
+    # bolt seen through the ejection port, a shell for the loading animations (rests hidden inside the receiver)
+    box("r870.bolt", 410, 478, -2, 12, -17.6, -15.5, "Steel", 0.3)
+    shell("r870.shell", 455, -30)
+    flash("r870.flash", 979, 0, 110, 50)
+    hand("r870.arm_r", P(300, -40, 0))
+    hand("r870.arm_l", P(686, -40, 0))
+    join_node("r870.body", gun)
+    join_node("r870.trigger", gun, P(359, -52, 0))
+    pump = join_node("r870.pump", gun, P(686, -23, 0))
+    bolt = join_node("r870.bolt", gun, P(444, 5, 0))
+    sh = join_node("r870.shell", gun, P(455, -30, 0))
+    join_node("r870.flash", gun, P(979, 0, 0))
+    join_node("r870.arm_r", gun)
+    join_node("r870.arm_l", pump)                       # the left hand rides on the pump
+    empty("r870.sight", P(220, 23, 0), gun)             # eye on the rear notch (v 20.5..25) -> front blade tip (v 24)
+    empty("r870.muzzle", P(979, 0, 0), gun)
+    G, A = bpy.data.objects["r870.gun"], bpy.data.objects["r870.arm_l"]
+    Z = (0, 0, 0)
+    back = (0, 0.089, 0)                                # 3.5" pump stroke
+    # pump cycle after each shot (0.5 s)
+    clip("r870_pump", G, [(0, Z, Z), (3, (0, 0.004, 0.006), (3, 0, -3)), (9, (0, 0.002, 0.003), (1, 0, -1)), (12, Z, Z)])
+    clip("r870_pump", pump, [(0, Z, Z), (2, Z, Z), (5, back, Z), (6, back, Z), (9, Z, Z), (12, Z, Z)])
+    clip("r870_pump", bolt, [(0, Z, Z), (2, Z, Z), (5, back, Z), (6, back, Z), (9, Z, Z), (12, Z, Z)])
+    # one shell through the bottom loading port (0.65 s, repeated per shell)
+    tilt = ((0.01, 0.0, 0.02), (6, 0, -22))
+    clip("r870_reload", G, [(0, Z, Z), (3, *tilt), (12, *tilt), (15, Z, Z)])
+    clip("r870_reload", A, [(0, Z, Z), (4, (0, 0.23, -0.085), Z), (7, (0, 0.23, -0.03), Z), (9, (0, 0.20, -0.025), Z),
+                            (13, Z, Z), (15, Z, Z)])
+    clip("r870_reload", sh, [(0, Z, Z), (1, (0, 0.0, -0.09), Z), (4, (0, 0.0, -0.085), Z), (7, (0, 0.0, -0.028), Z),
+                             (9, (0, -0.03, -0.004), Z), (10, Z, Z), (15, Z, Z)])
+    # empty: pump back, a shell into the ejection port, pump forward (1.2 s)
+    tilt2 = ((0.01, 0.0, 0.02), (4, 0, 18))
+    clip("r870_reload_empty", G, [(0, Z, Z), (4, *tilt2), (22, *tilt2), (27, Z, Z), (28, Z, Z)])
+    clip("r870_reload_empty", pump, [(0, Z, Z), (3, back, Z), (21, back, Z), (25, Z, Z), (28, Z, Z)])
+    clip("r870_reload_empty", bolt, [(0, Z, Z), (3, back, Z), (21, back, Z), (25, Z, Z), (28, Z, Z)])
+    hy = (686 - 445) / 1000.0 - 0.089
+    clip("r870_reload_empty", A, [(0, Z, Z), (4, Z, Z), (9, (-0.035, hy, -0.07), Z), (13, (-0.035, hy, 0.040), Z),
+                                  (16, (-0.03, hy, 0.03), Z), (21, Z, Z), (28, Z, Z)])
+    clip("r870_reload_empty", sh, [(0, Z, Z), (6, Z, Z), (7, (-0.03, 0.01, -0.08), Z), (9, (-0.03, 0.01, -0.05), Z),
+                                   (13, (-0.03, 0.01, 0.036), Z), (15, (0, 0.0, 0.03), Z), (21, (0, 0.0, 0.03), Z),
+                                   (25, (0, -0.10, 0.03), Z), (26, Z, Z), (28, Z, Z)])
+    return sc
+
+
+def shell_item(g):
+    shell(g, 400, 0)
+
+
 ak = ak12()
 m4 = m4a1()
 rp = rpg7()
 t5 = t5000()
 pk = pkp()
+sg = saiga12()
+rm = r870()
 # stand-alone item models
 U0 = 433.0
 sm1 = mag_scene("MAG_AK12", ak12_mag, 433.0, None)
 sm2 = mag_scene("MAG_STANAG", stanag, 375.0, None)
 sm3 = mag_scene("MAG_T5000", t5000_mag, 490.0, None)
 sm4 = mag_scene("BOX_PKP", pkp_box, 495.0, None)
+sm5 = mag_scene("MAG_SAIGA12", saiga_mag, 474.0, None)
+sm6 = mag_scene("SHELL_12", shell_item, 400.0, None)
 sc = new_scene("PG7V")
 U0 = 950.0
 pg7vl("pg7v", 950, full=True)
@@ -1249,6 +1500,10 @@ export(t5, "t5000")
 export(pk, "pkp")
 export(sm3, "mag_t5000", False)
 export(sm4, "box_pkp", False)
+export(sg, "saiga12")
+export(rm, "r870")
+export(sm5, "mag_saiga12", False)
+export(sm6, "shell_12", False)
 
 for s in list(bpy.data.scenes):
     if s.name not in SCENES:

@@ -59,6 +59,11 @@ public final class ModItems {
     public static final RegistryObject<Item> PKP = ITEMS.register("pkp", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.PKP, new Item.Properties()));
     public static final RegistryObject<Item> MAG_T5000 = ITEMS.register("mag_t5000", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.T5000, new Item.Properties()));
     public static final RegistryObject<Item> BOX_PKP = ITEMS.register("box_pkp", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.PKP, new Item.Properties()));
+    // r24: Saiga-12K isp.030 and Remington 870 Police Magnum (12 ga)
+    public static final RegistryObject<Item> SAIGA12 = ITEMS.register("saiga12", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.SAIGA12, new Item.Properties()));
+    public static final RegistryObject<Item> R870 = ITEMS.register("r870", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.R870, new Item.Properties()));
+    public static final RegistryObject<Item> MAG_SAIGA12 = ITEMS.register("mag_saiga12", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.SAIGA12, new Item.Properties()));
+    public static final RegistryObject<Item> SHELL_12 = ITEMS.register("shell_12", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties()));
     public static final RegistryObject<Item> IGLA = ITEMS.register("igla", () -> new ru.aiforge.realwar.handheld.LauncherWeaponItem(ru.aiforge.realwar.handheld.HandheldKind.IGLA, new Item.Properties()));
     public static final RegistryObject<Item> JAVELIN = ITEMS.register("javelin", () -> new ru.aiforge.realwar.handheld.LauncherWeaponItem(ru.aiforge.realwar.handheld.HandheldKind.JAVELIN, new Item.Properties()));
     public static final RegistryObject<Item> PG7V = ITEMS.register("pg7v", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.RPG7, new Item.Properties()));

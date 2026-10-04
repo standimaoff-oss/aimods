@@ -1830,5 +1830,21 @@
   "hud.aiarsenal.gun.pgo": "ПГО-7В3",
   "subtitles.aiarsenal.rifle_t5000": "Выстрел T-5000",
   "subtitles.aiarsenal.mg_pkp": "Очередь ПКП",
-  "subtitles.aiarsenal.bolt_cycle": "Перезаряжание затвора"
+  "subtitles.aiarsenal.bolt_cycle": "Перезаряжание затвора",
+  "item.aiarsenal.saiga12": "Сайга-12К исп. 030 (12/76)",
+  "item.aiarsenal.r870": "Remington 870 Police Magnum (12 калибр)",
+  "item.aiarsenal.mag_saiga12": "Магазин Сайги-12 (8 патронов 12/76)",
+  "item.aiarsenal.shell_12": "Патрон 12/70 (картечь 00)",
+  "tooltip.aiarsenal.gun.saiga12": "12/76, 910 мм (670 со сложенным прикладом), ствол 430 мм, газоотводная, магазин 8",
+  "tooltip.aiarsenal.gun.r870": "12/76, 978 мм, ствол 457 мм (18\"), помповый, подствольный магазин 4+1",
+  "tooltip.aiarsenal.gun.keys_semi": "ЛКМ — выстрел, ПКМ — прицел, R — перезарядка",
+  "tooltip.aiarsenal.gun.keys_pump": "ЛКМ — выстрел (затем помпа), ПКМ — прицел, R — заряжать по патрону (ЛКМ прерывает)",
+  "tooltip.aiarsenal.mag.saiga12": "Для Сайги-12. Пустой: + медь + порох = снаряжённый",
+  "tooltip.aiarsenal.shell_12": "9 картечин 8,4 мм, ~400 м/с. Для Remington 870",
+  "hud.aiarsenal.gun.name.saiga12": "Сайга-12К",
+  "hud.aiarsenal.gun.name.r870": "Rem 870",
+  "subtitles.aiarsenal.shotgun_saiga": "Выстрел Сайги-12",
+  "subtitles.aiarsenal.shotgun_870": "Выстрел Remington 870",
+  "subtitles.aiarsenal.pump_action": "Передёргивание помпы",
+  "subtitles.aiarsenal.shell_in": "Патрон в магазин"
 }

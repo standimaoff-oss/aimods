@@ -15,7 +15,11 @@ public enum GunKind {
     // r23: ORSIS T-5000M .338 LM (bolt action, 700 mm barrel, 5 rds, ~905 m/s, 1 MOA) and PKP Pecheneg (7.62x54R,
     // 650 rds/min, 825 m/s, 100-rd belt box, full-auto only, open bolt)
     T5000("t5000", "mag_t5000", 5, 40, 905, 24f, 18f, 0.060f, 0.0003f, 4.5f, 0.9f, 60, 76, 0.125f, "rifle_t5000", false),
-    PKP("pkp", "box_pkp", 100, 650, 825, 11f, 10f, 0.045f, 0.0025f, 1.05f, 0.55f, 120, 130, 0.80f, "mg_pkp", true);
+    PKP("pkp", "box_pkp", 100, 650, 825, 11f, 10f, 0.045f, 0.0025f, 1.05f, 0.55f, 120, 130, 0.80f, "mg_pkp", true),
+    // r24: 12-gauge 00 buckshot (9 x 8.4 mm pellets, ~400 m/s). Damage / pen are per pellet; reload of the R870 is per
+    // shell (13 ticks; 24 for the first one through the ejection port + pump). Saiga-12K: gas semi-auto, 8-rd box.
+    SAIGA12("saiga12", "mag_saiga12", 8, 300, 400, 2.6f, 1.5f, 0.022f, 0.006f, 3.0f, 0.8f, 50, 63, 0.85f, "shotgun_saiga", false),
+    R870("r870", "shell_12", 4, 70, 400, 2.6f, 1.5f, 0.022f, 0.006f, 3.4f, 0.9f, 13, 24, 0.85f, "shotgun_870", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;
@@ -69,6 +73,41 @@ public enum GunKind {
     /** rifles keep one round in the chamber on a tactical reload (30 + 1) */
     public int maxLoaded(boolean chambered) {
         return this.closedBolt() ? this.cap + (chambered ? 1 : 0) : this.cap;
+    }
+
+    /** pellets per shot (00 buckshot) */
+    public int pellets() {
+        return this == SAIGA12 || this == R870 ? 9 : 1;
+    }
+
+    /** pellet cone half-angle (rad): cylinder bore ~1 m pattern at 25 m */
+    public float choke() {
+        return this == SAIGA12 ? 0.040f : this == R870 ? 0.034f : 0f;
+    }
+
+    /** tube magazine loaded one loose round at a time (Remington 870) */
+    public boolean tube() {
+        return this == R870;
+    }
+
+    /** pump action: the pump is cycled after every shot */
+    public boolean pumpAction() {
+        return this == R870;
+    }
+
+    /** manually cycled after each shot (bolt or pump) */
+    public boolean manual() {
+        return this.boltAction() || this.pumpAction();
+    }
+
+    /** reloaded from loose rounds (PG-7VL grenades, 12 ga shells) instead of magazines */
+    public boolean looseAmmo() {
+        return this.launcher() || this.tube();
+    }
+
+    /** ticks between two semi-automatic shots */
+    public int semiCooldown() {
+        return this.launcher() ? 10 : this.boltAction() ? 26 : this.pumpAction() ? 14 : this == SAIGA12 ? 4 : 2;
     }
 
     /** shots per tick at the cyclic rate */

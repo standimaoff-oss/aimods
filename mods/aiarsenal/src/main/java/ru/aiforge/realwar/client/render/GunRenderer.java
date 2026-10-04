@@ -97,8 +97,8 @@ public final class GunRenderer {
             if (GunClient.reloadEmpty()) an = lm.model.animation(k.id + "_reload_empty");
             if (an == null) an = lm.model.animation(k.id + "_reload");
             if (an != null) pose.sample(an, Math.min(GunClient.reloadTime(), an.duration - 0.001f));
-        } else if (k.boltAction() && since > 0.12f) {                            // T-5000: bolt cycled after the shot
-            GlbModel.Animation an = lm.model.animation(k.id + "_bolt");
+        } else if (k.manual() && since > 0.12f) {                                // T-5000 bolt / R870 pump after the shot
+            GlbModel.Animation an = lm.model.animation(k.id + (k.boltAction() ? "_bolt" : "_pump"));
             if (an != null && since - 0.12f < an.duration) pose.sample(an, Math.min(since - 0.12f, an.duration - 0.001f));
         }
         boolean flash = since < (k.launcher() ? 0.09f : 0.045f);
@@ -108,7 +108,7 @@ public final class GunRenderer {
             float fs = 0.8f + (GunClient.shotCount() * 37 % 10) * 0.05f;
             pose.scale(k.id + ".flash", fs, fs, fs);
         }
-        if (!k.launcher() && !k.boltAction() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -0.075f * (1f - since / 0.06f));
+        if (!k.launcher() && !k.manual() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -0.075f * (1f - since / 0.06f));
         if (k.launcher() && FirearmItem.ammo(st) == 0 && !rel) pose.hide("rpg7.round", true);
         pose.compute();
         int light = flash ? 0xF000F0 : e.getPackedLight();

@@ -1830,5 +1830,21 @@
   "hud.aiarsenal.gun.pgo": "PGO-7V3",
   "subtitles.aiarsenal.rifle_t5000": "T-5000 fires",
   "subtitles.aiarsenal.mg_pkp": "PKP fires",
-  "subtitles.aiarsenal.bolt_cycle": "Bolt cycled"
+  "subtitles.aiarsenal.bolt_cycle": "Bolt cycled",
+  "item.aiarsenal.saiga12": "Saiga-12K isp. 030 (12/76)",
+  "item.aiarsenal.r870": "Remington 870 Police Magnum (12 ga)",
+  "item.aiarsenal.mag_saiga12": "Saiga-12 magazine (8 x 12/76)",
+  "item.aiarsenal.shell_12": "12/70 shell (00 buckshot)",
+  "tooltip.aiarsenal.gun.saiga12": "12/76, 910 mm (670 folded), 430 mm barrel, gas-operated, 8-round box",
+  "tooltip.aiarsenal.gun.r870": "12/76, 978 mm, 457 mm (18\") barrel, pump action, 4+1 tube",
+  "tooltip.aiarsenal.gun.keys_semi": "LMB fire, RMB aim, R reload",
+  "tooltip.aiarsenal.gun.keys_pump": "LMB fire (then pump), RMB aim, R load shell by shell (LMB interrupts)",
+  "tooltip.aiarsenal.mag.saiga12": "For the Saiga-12. Empty: + copper + gunpowder = loaded",
+  "tooltip.aiarsenal.shell_12": "9 x 8.4 mm pellets, ~400 m/s. For the Remington 870",
+  "hud.aiarsenal.gun.name.saiga12": "Saiga-12K",
+  "hud.aiarsenal.gun.name.r870": "Rem 870",
+  "subtitles.aiarsenal.shotgun_saiga": "Saiga-12 fires",
+  "subtitles.aiarsenal.shotgun_870": "Remington 870 fires",
+  "subtitles.aiarsenal.pump_action": "Pump racked",
+  "subtitles.aiarsenal.shell_in": "Shell loaded"
 }

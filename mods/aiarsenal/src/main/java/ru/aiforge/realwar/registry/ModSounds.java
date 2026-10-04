@@ -63,6 +63,11 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> RIFLE_T5000 = ModSounds.reg("rifle_t5000");
     public static final RegistryObject<SoundEvent> MG_PKP = ModSounds.reg("mg_pkp");
     public static final RegistryObject<SoundEvent> BOLT_CYCLE = ModSounds.reg("bolt_cycle");
+    // r24 (tools/make_sounds_r24.py)
+    public static final RegistryObject<SoundEvent> SHOTGUN_SAIGA = ModSounds.reg("shotgun_saiga");
+    public static final RegistryObject<SoundEvent> SHOTGUN_870 = ModSounds.reg("shotgun_870");
+    public static final RegistryObject<SoundEvent> PUMP_ACTION = ModSounds.reg("pump_action");
+    public static final RegistryObject<SoundEvent> SHELL_IN = ModSounds.reg("shell_in");
     public static final RegistryObject<SoundEvent> RIFLE_M4 = ModSounds.reg("rifle_m4");
     public static final RegistryObject<SoundEvent> MAG_OUT = ModSounds.reg("mag_out");
     public static final RegistryObject<SoundEvent> MAG_IN = ModSounds.reg("mag_in");

@@ -49,6 +49,8 @@ public final class Firearms {
     private static final double G = 9.81 / 400.0;
     private static final double DRAG = 0.9985;
     private static final int LIFE = 60;
+    /** 00 buckshot: 400 m/s -> ~290 m/s at 50 m (per tick = per 20 m) */
+    private static final double PELLET_DRAG = 0.88;
 
     private static final Map<UUID, State> STATES = new HashMap<>();
     private static final Map<ServerLevel, List<Bullet>> BULLETS = new IdentityHashMap<>();
@@ -68,6 +70,9 @@ public final class Firearms {
         Vec3 pos, vel, origin;
         int owner, age;
         float dmg, pen;
+        float ref = 900f;                // muzzle speed giving full damage
+        double drag = DRAG;
+        int life = LIFE;
     }
 
     private static State st(Player p) {
@@ -116,7 +121,7 @@ public final class Firearms {
         for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
             ItemStack s = p.getInventory().getItem(i);
             if (!s.is(want)) continue;
-            int r = k.launcher() ? 1 : MagazineItem.rounds(s);
+            int r = k.looseAmmo() ? 1 : MagazineItem.rounds(s);
             if (r > bestR) {
                 best = i;
                 bestR = r;
@@ -143,7 +148,7 @@ public final class Firearms {
         s.reload = s.reloadTotal;
         s.trigger = false;
         s.gun = stack.getItem();
-        sound(p, k.launcher() ? "mag_out" : "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
+        if (!k.tube()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
         fx(p, s.reloadEmpty && !k.launcher() ? GunFxPacket.RELOAD_EMPTY : GunFxPacket.RELOAD, ammo);
         return true;
     }
@@ -157,6 +162,13 @@ public final class Firearms {
             if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
             else if (slot < 0 && !creative) return;
             FirearmItem.setAmmo(stack, 1);
+            return;
+        }
+        if (k.tube()) {                                         // r24: one shell into the tube (or the chamber)
+            if (ammo >= k.maxLoaded(true)) return;
+            if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
+            else if (slot < 0 && !creative) return;
+            FirearmItem.setAmmo(stack, Math.min(k.maxLoaded(true), ammo + 1));
             return;
         }
         int load;
@@ -199,20 +211,36 @@ public final class Firearms {
                 fx(p, GunFxPacket.CANCEL, FirearmItem.ammo(stack));
                 return;
             }
+            if (k.tube() && s.trigger && !s.reloadEmpty && FirearmItem.ammo(stack) > 0) {
+                s.reload = 0;                                   // r24: LMB interrupts the shell-by-shell loading
+                fx(p, GunFxPacket.LOADED, FirearmItem.ammo(stack));
+            } else {
             int done = s.reloadTotal - s.reload;
-            if (!k.launcher() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
+            if (k.tube() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "shell_in", 0.8f, 0.95f + p.getRandom().nextFloat() * 0.1f);
+            if (k.tube() && s.reloadEmpty && done == (int) (s.reloadTotal * 0.78f)) sound(p, "pump_action", 0.8f, 1.0f);
+            if (!k.launcher() && !k.tube() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
             if (k == GunKind.PKP && (done == 14 || done == (int) (s.reloadTotal * 0.80f))) sound(p, "selector", 0.9f, 0.6f);   // feed cover
             if (k.launcher() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "mag_in", 0.8f, 0.6f);
-            if (s.reloadEmpty && !k.launcher() && !k.boltAction() && done == (int) (s.reloadTotal * (k == GunKind.PKP ? 0.86f : 0.82f))) sound(p, "bolt_rack", 0.8f, k == GunKind.PKP ? 0.8f : 1.0f);
+            if (s.reloadEmpty && !k.launcher() && !k.manual() && done == (int) (s.reloadTotal * (k == GunKind.PKP ? 0.86f : 0.82f))) sound(p, "bolt_rack", 0.8f, k == GunKind.PKP ? 0.8f : 1.0f);
             if (s.reloadEmpty && k.boltAction() && done == (int) (s.reloadTotal * 0.68f)) sound(p, "bolt_cycle", 0.8f, 1.0f);
             if (--s.reload == 0) {
                 finishReload(p, stack, k);
-                fx(p, GunFxPacket.LOADED, FirearmItem.ammo(stack));
+                int now = FirearmItem.ammo(stack);
+                if (k.tube() && now < k.maxLoaded(true) && (p.getAbilities().instabuild || findAmmo(p, k) >= 0)) {
+                    s.reloadEmpty = false;                      // next shell
+                    s.reloadTotal = k.reload;
+                    s.reload = k.reload;
+                    fx(p, GunFxPacket.RELOAD, now);
+                } else {
+                    fx(p, GunFxPacket.LOADED, now);
+                }
             }
             return;
+            }
         }
         if (s.cooldown > 0) s.cooldown--;
         if (k.boltAction() && s.cooldown == 21) sound(p, "bolt_cycle", 0.8f, 1.0f);   // T-5000: bolt cycled after the shot
+        if (k.pumpAction() && s.cooldown == 12) sound(p, "pump_action", 0.9f, 1.0f);  // R870: pump cycled after the shot
         if (!s.trigger) {
             s.credit = 0;
             return;
@@ -232,7 +260,7 @@ public final class Firearms {
             if (!s.semiDone && s.cooldown == 0) {
                 fire(p, stack, k, s.aiming);
                 s.semiDone = true;
-                s.cooldown = k.launcher() ? 10 : k.boltAction() ? 26 : 2;
+                s.cooldown = k.semiCooldown();
             }
             return;
         }
@@ -267,15 +295,23 @@ public final class Firearms {
             sl.playSound(null, p.getX(), p.getY(), p.getZ(), ru.aiforge.realwar.registry.ModSounds.ROCKET_LAUNCH_SMALL.get(), SoundSource.PLAYERS, 2.4f, 1.0f);
             backblast(sl, p, look);
         } else {
-            Bullet b = new Bullet();
-            b.pos = p.getEyePosition();
-            b.origin = b.pos;
-            b.vel = dir.scale(k.speed / 20.0);
-            b.owner = p.getId();
-            b.dmg = k.damage;
-            b.pen = k.pen;
+            int n = k.pellets();
             List<Bullet> l = BULLETS.computeIfAbsent(sl, x -> new ArrayList<>());
-            if (l.size() < 4000) l.add(b);
+            for (int i = 0; i < n; i++) {
+                Bullet b = new Bullet();
+                b.pos = p.getEyePosition();
+                b.origin = b.pos;
+                b.vel = (n > 1 ? jitter(dir, k.choke(), sl) : dir).scale(k.speed / 20.0);
+                b.owner = p.getId();
+                b.dmg = k.damage;
+                b.pen = k.pen;
+                if (n > 1) {                                    // r24: buckshot pellets slow down fast
+                    b.ref = k.speed;
+                    b.drag = PELLET_DRAG;
+                    b.life = 14;
+                }
+                if (l.size() < 4000) l.add(b);
+            }
             sound(p, k.sound, 3.0f, 0.95f + sl.random.nextFloat() * 0.1f);
             Vec3 m = p.getEyePosition().add(look.scale(0.9)).add(0, -0.1, 0);
             sl.sendParticles(ParticleTypes.SMOKE, m.x, m.y, m.z, 1, 0.02, 0.02, 0.02, 0.005);
@@ -374,7 +410,7 @@ public final class Firearms {
             Vec3 dir = b.vel.normalize();
             if (hit != null) {
                 double v = b.vel.length() * 20.0;
-                float dmg = b.dmg * (float) Math.max(0.45, Math.min(1.0, v * v / (900.0 * 900.0) * 1.15));
+                float dmg = b.dmg * (float) Math.max(b.ref < 800f ? 0.15 : 0.45, Math.min(1.0, v * v / ((double) b.ref * b.ref) * 1.15));
                 if (hit instanceof LivingEntity le && !(hit instanceof ru.aiforge.realwar.vehicle.VehicleEntity)
                         && hitPos.y > le.getEyeY() - 0.22 && le.getBbHeight() > 1.0f) dmg *= 2.0f;     // head
                 Entity owner = sl.getEntity(b.owner);
@@ -398,8 +434,8 @@ public final class Firearms {
             return false;
         }
         b.pos = to;
-        b.vel = new Vec3(b.vel.x * DRAG, b.vel.y * DRAG - G, b.vel.z * DRAG);
-        return ++b.age < LIFE;
+        b.vel = new Vec3(b.vel.x * b.drag, b.vel.y * b.drag - G, b.vel.z * b.drag);
+        return ++b.age < b.life;
     }
 
     // ------------------------------------------------------------------ helpers

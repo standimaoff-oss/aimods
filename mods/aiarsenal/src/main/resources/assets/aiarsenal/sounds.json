@@ -688,5 +688,41 @@
       }
     ],
     "subtitle": "subtitles.aiarsenal.bolt_cycle"
+  },
+  "shotgun_saiga": {
+    "sounds": [
+      {
+        "name": "aiarsenal:shotgun_saiga",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.shotgun_saiga"
+  },
+  "shotgun_870": {
+    "sounds": [
+      {
+        "name": "aiarsenal:shotgun_870",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.shotgun_870"
+  },
+  "pump_action": {
+    "sounds": [
+      {
+        "name": "aiarsenal:pump_action",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.pump_action"
+  },
+  "shell_in": {
+    "sounds": [
+      {
+        "name": "aiarsenal:shell_in",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.shell_in"
   }
 }

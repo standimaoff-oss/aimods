@@ -93,7 +93,8 @@ public class FirearmItem extends Item {
         tip.add(Component.translatable("tooltip.aiarsenal.gun.ammo", ammo(st), this.kind.cap,
                 Component.translatable("item.aiarsenal." + this.kind.ammo)).withStyle(ChatFormatting.GOLD));
         tip.add(Component.translatable(this.kind.launcher() ? "tooltip.aiarsenal.gun.keys_rpg" : this.kind.scope() ? "tooltip.aiarsenal.gun.keys_sniper"
-                : this.kind.selector() ? "tooltip.aiarsenal.gun.keys" : "tooltip.aiarsenal.gun.keys_mg").withStyle(ChatFormatting.DARK_GRAY));
+                : this.kind.selector() ? "tooltip.aiarsenal.gun.keys" : this.kind.tube() ? "tooltip.aiarsenal.gun.keys_pump"
+                : !this.kind.auto ? "tooltip.aiarsenal.gun.keys_semi" : "tooltip.aiarsenal.gun.keys_mg").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     @Override
