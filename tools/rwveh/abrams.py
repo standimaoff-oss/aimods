@@ -103,10 +103,12 @@ def T(x, y, z):
     return Vector((x, TC.y + y, z))
 half = [(0.0, -1.62), (0.42, -1.74), (1.30, -1.32), (1.70, -0.55), (1.70, 1.20), (1.52, 1.60), (1.38, 2.55), (0.0, 2.58)]
 rings = []
-for z, s, dy in ((1.64, 0.93, 0.10), (1.82, 1.0, 0.0), (2.36, 0.93, 0.10)):
-    rings.append([T(x * s, y + (dy if y < 0 else -dy * 0.3), z) for x, y in mirror_outline(half)])
+# r27: the turret floated 0.22 m above the deck (hull roof z 1.37-1.40) - shell now starts on the deck
+for z, s, dy in ((1.43, 0.80, 0.22), (1.82, 1.0, 0.0), (2.36, 0.93, 0.10)):
+    # undercut lower edge: sits on the deck under the crew compartment, the bustle overhangs the engine deck
+    rings.append([T(x * s, y + (dy if y < 0 else -dy * 0.3), z if (z > 1.5 or y < 0.9) else 1.72) for x, y in mirror_outline(half)])
 loft_rings(P + "_tshell", rings, M, GT, bevel=0.025)
-lathe_y(P + "_tring", [(0.0, 1.05), (0.0, 1.13), (0.07, 1.13), (0.07, 1.05)], (0, TC.y, 1.60), ["M_Dark"], GT, seg=40, axis='Z')
+lathe_y(P + "_tring", [(0.0, 1.05), (0.0, 1.13), (0.07, 1.13), (0.07, 1.05)], (0, TC.y, 1.385), ["M_Dark"], GT, seg=40, axis='Z')
 # front armour panel seams + lifting eyes
 for sx in (1, -1):
     for f in (0.35, 0.7):

@@ -968,9 +968,9 @@
   "hud.aiarsenal.rw.gun.sel.msta_he": "Снаряд: 152 мм 3ОФ45",
   "hud.aiarsenal.rw.gun.round.m777_he": "155 мм M795",
   "hud.aiarsenal.rw.gun.sel.m777_he": "Снаряд: 155 мм M795",
-  "entity.aiarsenal.t90m": "Т-90М «Прорыв»",
-  "item.aiarsenal.t90m_vehicle": "Т-90М «Прорыв»",
-  "item.aiarsenal.t90m_vehicle.desc": "Основной боевой танк: 125-мм 2А46М-4, автомат заряжания на 22 выстрела, ДЗ «Реликт». Механик-водитель + наводчик (смена места — клавиша места). ПКМ по земле — поставить технику.",
+  "entity.aiarsenal.t90m": "Т-90А",
+  "item.aiarsenal.t90m_vehicle": "Т-90А",
+  "item.aiarsenal.t90m_vehicle.desc": "Основной боевой танк: 125-мм 2А46М-5, автомат заряжания на 22 выстрела, ДЗ «Контакт-5», КОЭП «Штора-1» (датчики лазерного облучения, автоматическая дымовая завеса, ИК-прожекторы против управляемых ракет). ПКМ по земле — поставить технику.",
   "entity.aiarsenal.abrams": "M1A2 SEPv3 «Абрамс»",
   "item.aiarsenal.abrams_vehicle": "M1A2 SEPv3 «Абрамс»",
   "item.aiarsenal.abrams_vehicle.desc": "Американский ОБТ: 120-мм M256, 34 выстрела в кормовой нише башни, ГТД 1500 л.с. ПКМ по земле — поставить технику.",
@@ -987,7 +987,7 @@
   "item.aiarsenal.m777_vehicle": "Гаубица M777A2",
   "item.aiarsenal.m777_vehicle.desc": "155-мм лёгкая буксируемая гаубица (титан), сектор ±22,5°, дальность ~24 км. ПКМ по земле — поставить технику.",
   "item.aiarsenal.shells_125": "Выстрелы 125 мм",
-  "item.aiarsenal.shells_125.desc": "Для Т-90М: ОФС 3ОФ26 и БОПС 3БМ60 (тип выбирается в машине).",
+  "item.aiarsenal.shells_125.desc": "Для Т-90А: ОФС 3ОФ26 и БОПС 3БМ60 (тип выбирается в машине).",
   "item.aiarsenal.shells_120": "Выстрелы 120 мм",
   "item.aiarsenal.shells_120.desc": "Для M1A2: M830A1 MPAT и БОПС M829A4.",
   "item.aiarsenal.shells_100": "Выстрелы 100 мм 3УОФ19",
@@ -1889,5 +1889,6 @@
   "subtitles.aiarsenal.smg_mp40": "Стреляет MP 40",
   "subtitles.aiarsenal.rifle_mosin": "Выстрел винтовки Мосина",
   "subtitles.aiarsenal.rifle_k98": "Выстрел Kar98k",
-  "subtitles.aiarsenal.clip_in": "Обойма заряжена"
+  "subtitles.aiarsenal.clip_in": "Обойма заряжена",
+  "hud.aiarsenal.rw.shtora.alarm": "ЛАЗЕРНОЕ ОБЛУЧЕНИЕ! «Штора»: завеса + помеха"
 }

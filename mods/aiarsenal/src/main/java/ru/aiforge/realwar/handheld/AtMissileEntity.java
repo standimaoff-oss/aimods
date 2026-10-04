@@ -29,6 +29,7 @@ public class AtMissileEntity extends Projectile {
     private static final EntityDataAccessor<Byte> KIND = SynchedEntityData.defineId(AtMissileEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Integer> TARGET = SynchedEntityData.defineId(AtMissileEntity.class, EntityDataSerializers.INT);
 
+    private final ru.aiforge.realwar.vehicle.Shtora.Jam shtora = new ru.aiforge.realwar.vehicle.Shtora.Jam();
     private Vec3 aimPoint;            // Javelin point lock / last known target position
     private boolean diving;
     private double apex;
@@ -132,7 +133,12 @@ public class AtMissileEntity extends Projectile {
 
     /** Desired flight direction (unit) or null to fly on. */
     private Vec3 guidance(HandheldKind k, Vec3 dir, double sp) {
-        if (k == HandheldKind.TOW) return this.saclos(sp);
+        if (k == HandheldKind.TOW) {
+            // r27: Shtora-1 dazzlers blind the TOW's IR goniometer / aerosol hides the target from the gunner
+            Vec3 w = this.saclos(sp);
+            Entity o = this.getOwner();
+            return this.level() instanceof ServerLevel sl ? ru.aiforge.realwar.vehicle.Shtora.apply(sl, this, this.shtora, w, o != null ? o.position() : this.position(), this.tickCount) : w;
+        }
         if (k == HandheldKind.RPG7 || this.tickCount < (k == HandheldKind.JAVELIN ? 5 : 3)) return null;
         Entity t = this.targetId() >= 0 ? this.level().getEntity(this.targetId()) : null;
         if (k.air() && t != null && !(t instanceof ru.aiforge.realwar.craft.CraftOrdnance)) {

@@ -968,9 +968,9 @@
   "hud.aiarsenal.rw.gun.sel.msta_he": "Round: 152 mm 3OF45",
   "hud.aiarsenal.rw.gun.round.m777_he": "155 mm M795",
   "hud.aiarsenal.rw.gun.sel.m777_he": "Round: 155 mm M795",
-  "entity.aiarsenal.t90m": "T-90M Proryv",
-  "item.aiarsenal.t90m_vehicle": "T-90M Proryv",
-  "item.aiarsenal.t90m_vehicle.desc": "Main battle tank, 125 mm 2A46M-4, autoloader 22 rounds, Relikt ERA. Driver + gunner (switch seats with the seat key). Right-click the ground to place.",
+  "entity.aiarsenal.t90m": "T-90A",
+  "item.aiarsenal.t90m_vehicle": "T-90A",
+  "item.aiarsenal.t90m_vehicle.desc": "Main battle tank, 125 mm 2A46M-5, autoloader 22 rounds, Kontakt-5 ERA, Shtora-1 optronic suppression (laser warning, auto smoke, IR dazzlers vs guided missiles). Right-click the ground to place.",
   "entity.aiarsenal.abrams": "M1A2 SEPv3 Abrams",
   "item.aiarsenal.abrams_vehicle": "M1A2 SEPv3 Abrams",
   "item.aiarsenal.abrams_vehicle.desc": "US main battle tank, 120 mm M256, 34 ready rounds in the bustle, gas-turbine 1500 hp. Right-click the ground to place.",
@@ -987,7 +987,7 @@
   "item.aiarsenal.m777_vehicle": "M777A2 howitzer",
   "item.aiarsenal.m777_vehicle.desc": "155 mm lightweight towed howitzer (titanium), +-22.5 deg traverse, range ~24 km. Right-click the ground to place.",
   "item.aiarsenal.shells_125": "125 mm tank rounds",
-  "item.aiarsenal.shells_125.desc": "For the T-90M: HE-FRAG 3OF26 and APFSDS 3BM60 (selected in the vehicle).",
+  "item.aiarsenal.shells_125.desc": "For the T-90A: HE-FRAG 3OF26 and APFSDS 3BM60 (selected in the vehicle).",
   "item.aiarsenal.shells_120": "120 mm tank rounds",
   "item.aiarsenal.shells_120.desc": "For the M1A2: M830A1 MPAT and M829A4 APFSDS.",
   "item.aiarsenal.shells_100": "100 mm rounds 3UOF19",
@@ -1889,5 +1889,6 @@
   "subtitles.aiarsenal.smg_mp40": "MP 40 fires",
   "subtitles.aiarsenal.rifle_mosin": "Mosin rifle fires",
   "subtitles.aiarsenal.rifle_k98": "Kar98k fires",
-  "subtitles.aiarsenal.clip_in": "Clip loaded"
+  "subtitles.aiarsenal.clip_in": "Clip loaded",
+  "hud.aiarsenal.rw.shtora.alarm": "LASER WARNING! Shtora: smoke + dazzlers"
 }

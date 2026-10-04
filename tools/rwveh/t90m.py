@@ -1,10 +1,11 @@
-# T-90M "Proryv" main battle tank — GunVehicle node contract.
+# T-90A (r27: was T-90M "Proryv") main battle tank — GunVehicle node contract.
 # Nodes: root > hull geo, rw_L_i/rw_R_i, spk_*, idl_*, rr_*_i, track links (clips track_L/track_R),
 #        launcher_yaw (turret ring 0,1.47,0.30 glTF) > launcher_pitch (trunnion) > barrel (recoil along -Z glTF)
 # Blender: front = -Y, +X = vehicle left.  glTF = (x, z, -y).
 reset_scene()
 col_get("BUILD"); col_get("RIG")
 armor_mats()
+amat("M_Dazzler", None, 0.2, 0.0, factor=(0.95, 0.22, 0.04, 1), emissive=(0.85, 0.18, 0.02, 1))
 P = "T90"
 G = P + "_hull"
 GT = P + "_turret"
@@ -59,11 +60,9 @@ for sx in (1, -1):
         for j in (-1, 1):
             acyl("%s_serb%d_%d_%d" % (P, sx, k, j), 0.014, 0.014, (sx * 1.87, y + 0.2 * j, 1.08), "M_Steel", G, axis=0, seg=6, dirt=False)
         abox("%s_serh%d_%d" % (P, sx, k), (0.02, 0.4, 0.04), (sx * 1.87, y, 0.78), "M_Dark", G, bevel=0.0)
-    for k in range(10):
-        y = 0.95 + k * 0.24
-        abox("%s_slat%d_%d" % (P, sx, k), (0.02, 0.03, 0.46), (sx * 1.80, y, 0.92), "M_Dark", G, bevel=0.0)
-    for z in (0.7, 1.12):
-        abox("%s_slatr%d_%d" % (P, sx, int(z * 10)), (0.03, 2.25, 0.03), (sx * 1.80, 2.03, z), "M_Dark", G, bevel=0.0)
+    # r27 T-90A: rubber skirt flaps over the engine half (no slat screen)
+    for k in range(4):
+        abox("%s_rskirt%d_%d" % (P, sx, k), (0.02, 0.56, 0.46), (sx * 1.765, 1.05 + k * 0.6, 0.90), "M_Rubber", G, bevel=0.004)
 # glacis Relikt rows (plate rises ~22.6 deg towards the rear)
 gl0, gl1 = Vector((0, -3.43, 0.86)), Vector((0, -2.05, 1.44))
 ang = math.atan2(gl1.z - gl0.z, gl1.y - gl0.y)
@@ -120,79 +119,101 @@ tow_cable(P, "L", (1.15, -2.8, 1.52), (1.15, -0.6, 1.52), 0.02, G)
 # ---------------------------------------------------------------- turret (launcher_yaw)
 def T(x, y, z):
     return Vector((x, TC.y + y, z))
-half_b = [(0.0, -1.42), (0.62, -1.34), (1.07, -0.92), (1.18, -0.18), (1.12, 0.55), (0.96, 0.98), (0.86, 1.18), (0.0, 1.22)]
-half_m = [(0.0, -1.38), (0.66, -1.30), (1.12, -0.90), (1.22, -0.18), (1.15, 0.55), (0.98, 1.0), (0.88, 1.2), (0.0, 1.24)]
-half_t = [(0.0, -1.10), (0.55, -1.04), (0.92, -0.74), (1.02, -0.15), (1.0, 0.5), (0.88, 0.92), (0.80, 1.12), (0.0, 1.16)]
-rings = [[T(x, y, z) for x, y in mirror_outline(h)] for h, z in ((half_b, 1.50), (half_m, 1.78), (half_t, 2.20))]
-loft_rings(P + "_tshell", rings, "M_Body", GT, bevel=0.03)
+# r27: T-90A (obr. 2004-2006) welded turret per the reference photos - angular plan view, Kontakt-5 "brow" wedges,
+#      Shtora-1 TShU-1-7 IR dazzlers either side of the gun, TShU-1-11 laser warning heads, 902B smoke grenade tubes.
+half_b = [(0.0, -1.30), (0.95, -1.18), (1.20, -0.72), (1.22, 0.40), (1.06, 1.04), (0.76, 1.30), (0.0, 1.32)]
+half_m = [(0.0, -1.32), (0.98, -1.20), (1.24, -0.72), (1.26, 0.40), (1.09, 1.06), (0.79, 1.32), (0.0, 1.34)]
+half_t = [(0.0, -1.04), (0.80, -0.98), (1.08, -0.62), (1.12, 0.40), (0.98, 0.98), (0.72, 1.22), (0.0, 1.24)]
+rings = [[T(x, y, z) for x, y in mirror_outline(h)] for h, z in ((half_b, 1.50), (half_m, 1.80), (half_t, 2.20))]
+loft_rings(P + "_tshell", rings, "M_Body", GT, bevel=0.025)
 lathe_y(P + "_tring", [(0.0, 1.0), (0.0, 1.08), (0.07, 1.08), (0.07, 1.0)], (0, TC.y, 1.47), ["M_Dark"], GT, seg=40, axis='Z')
-# bustle ammo compartment (T-90M) + blow-out panels + slat cage
-abox(P + "_bustle", (1.9, 0.75, 0.55), tuple(T(0, 1.55, 1.86)), "M_Body", GT, bevel=0.03)
+# weld seams along the plate joints
 for sx in (1, -1):
-    abox("%s_bpanel%d" % (P, sx), (0.6, 0.5, 0.02), tuple(T(sx * 0.45, 1.55, 2.14)), "M_Plain", GT, bevel=0.005)
-for k in range(12):
-    x = -1.05 + k * 0.19
-    rod("%s_cage%d" % (P, k), T(x, 2.12, 1.55), T(x, 2.12, 2.15), 0.012, "M_Dark", GT, seg=5)
-for z in (1.58, 2.12):
-    rod("%s_cageh%d" % (P, int(z * 100)), T(-1.08, 2.12, z), T(1.08, 2.12, z), 0.014, "M_Dark", GT, seg=5)
-    for sx in (1, -1):
-        rod("%s_cages%d_%d" % (P, sx, int(z * 100)), T(sx * 1.08, 2.12, z), T(sx * 0.95, 1.2, z), 0.014, "M_Dark", GT, seg=5)
-# Relikt wedge modules on the turret front cheeks (V-shape) + roof modules
+    rod("%s_weld%d" % (P, sx), T(sx * 0.97, -1.20, 1.80), T(sx * 0.80, -0.98, 2.20), 0.012, "M_Body", GT, seg=5)
+    rod("%s_weldr%d" % (P, sx), T(sx * 1.25, -0.72, 1.80), T(sx * 1.27, 0.40, 1.80), 0.012, "M_Body", GT, seg=5)
+# rear stowage basket (T-90A has no bustle) + OPVT snorkel tube on the rear
 for sx in (1, -1):
-    # Relikt cheek block: wedge seen from above (tip forward beside the mantlet), modules as seams
-    q = [(sx * 0.33, -1.74), (sx * 1.13, -1.02), (sx * 1.13, -0.74), (sx * 0.33, -1.22)]
+    rod("%s_bskside%d" % (P, sx), T(sx * 0.95, 1.05, 1.88), T(sx * 0.95, 1.62, 1.88), 0.014, "M_Dark", GT, seg=5)
+    rod("%s_bsksidel%d" % (P, sx), T(sx * 0.95, 1.05, 1.62), T(sx * 0.95, 1.62, 1.62), 0.014, "M_Dark", GT, seg=5)
+for z in (1.62, 1.88):
+    rod("%s_bskrear%d" % (P, int(z * 100)), T(-0.95, 1.62, z), T(0.95, 1.62, z), 0.014, "M_Dark", GT, seg=5)
+for k in range(9):
+    x = -0.95 + k * 0.2375
+    rod("%s_bskv%d" % (P, k), T(x, 1.62, 1.62), T(x, 1.62, 1.88), 0.01, "M_Dark", GT, seg=5)
+abox(P + "_bskfloor", (1.9, 0.55, 0.02), tuple(T(0, 1.36, 1.61)), "M_Dark", GT, bevel=0.0)
+abox(P + "_bskload", (1.5, 0.42, 0.22), tuple(T(0.05, 1.36, 1.73)), "M_Canvas", GT, bevel=0.04)
+acyl(P + "_snork", 0.09, 1.1, tuple(T(0.0, 1.40, 1.98)), "M_DarkGreen", GT, axis=0, seg=14)
+# Kontakt-5 wedge "brows" on the turret front: forward-sloping armoured lids with the K-5 cassettes underneath
+for sx in (1, -1):
+    q = [(sx * 0.34, -1.52), (sx * 1.05, -1.38), (sx * 1.14, -0.80), (sx * 0.34, -0.86)]
     if sx < 0:
         q = list(reversed(q))
-    q_top = [(x * 0.97, y + 0.06) for x, y in q]
-    loft_rings("%s_cheek%d" % (P, sx), [[T(x, y, 1.56) for x, y in q], [T(x, y, 2.17) for x, y in q_top]], "M_Body", GT, bevel=0.015)
-    for k in range(1, 4):
-        f = k / 4.0
-        x0, y0 = q[0] if sx > 0 else q[-1]
-        x1, y1 = q[1] if sx > 0 else q[-2]
-        px, py = x0 + (x1 - x0) * f, y0 + (y1 - y0) * f
-        abox("%s_cseam%d_%d" % (P, sx, k), (0.025, 0.02, 0.6), tuple(T(px, py - 0.005, 1.86)), "M_Dark", GT, rot=(0, 0, -sx * 0.73), bevel=0.0)
-    for z in (1.76, 1.98):
-        x0, y0 = q[0] if sx > 0 else q[-1]
-        x1, y1 = q[1] if sx > 0 else q[-2]
-        abox("%s_cseamh%d_%d" % (P, sx, int(z * 100)), (1.07, 0.02, 0.02), tuple(T((x0 + x1) / 2, (y0 + y1) / 2 - 0.005, z)), "M_Dark", GT, rot=(0, 0, -sx * 0.73), bevel=0.0)
+    lo = [T(x, y, 1.96) for x, y in q]
+    hi = [T(x * 0.98, y + (0.30 if y < -1.0 else 0.0), 2.26) for x, y in q]
+    loft_rings("%s_k5brow%d" % (P, sx), [lo, hi], "M_Body", GT, bevel=0.012)
+    # cassette lid seams (5 lids per side) + lifting eyes
+    for k in range(1, 5):
+        f = k / 5.0
+        x = sx * (0.34 + 0.75 * f)
+        rod("%s_k5seam%d_%d" % (P, sx, k), T(x, -1.47 + 0.11 * f, 1.985), T(x * 0.98, -1.15 + 0.08 * f, 2.27), 0.008, "M_Dark", GT, seg=4)
     for k in range(3):
-        abox("%s_rera%d_%d" % (P, sx, k), (0.34, 0.3, 0.07), tuple(T(sx * (0.35 + k * 0.0), -0.95 + k * 0.32, 2.24)), "M_Body", GT, rot=(0.12, 0, 0), bevel=0.008)
-    # side stowage + 902A smoke dischargers (6 per side)
-    abox("%s_tbox%d" % (P, sx), (0.25, 0.9, 0.4), tuple(T(sx * 1.26, 0.35, 1.85)), "M_Body", GT, bevel=0.015)
-    smoke_dischargers(P, "s%d" % sx, T(sx * 1.08, -0.62, 2.18), 6, 6.0, sx * 18.0, 12.0, GT)
-# mantlet + dust cover
-abox(P + "_mantf", (0.62, 0.25, 0.5), tuple(T(0, -1.33, 1.86)), "M_Body", GT, bevel=0.03)
-# gunner's Sosna-U sight (left front roof) with armoured doors
-S = T(0.52, -0.92, 2.35)
-abox(P + "_sosna", (0.38, 0.5, 0.32), tuple(S), "M_Body", GT, bevel=0.02)
-abox(P + "_sosnaw", (0.3, 0.02, 0.18), tuple(S + Vector((0, -0.26, 0.02))), "M_Lens", GT, bevel=0.0, dirt=False)
+        acyl("%s_k5bolt%d_%d" % (P, sx, k), 0.018, 0.02, tuple(T(sx * (0.48 + k * 0.25), -1.05, 2.275)), "M_Steel", GT, seg=6, dirt=False)
+    # vertical K-5 cassettes on the cheek below the brow (outboard of the dazzler)
+    abox("%s_k5cheek%d" % (P, sx), (0.22, 0.16, 0.42), tuple(T(sx * 1.07, -1.27, 1.74)), "M_Body", GT, rot=(0, 0, sx * 0.25), bevel=0.01)
+    # --- Shtora-1 TShU-1-7 IR dazzler: armoured box, round orange-red emitter window, sun hood, cable conduit
+    D = T(sx * 0.70, -1.39, 1.78)
+    abox("%s_tshu%d" % (P, sx), (0.34, 0.30, 0.34), tuple(D), "M_Body", GT, bevel=0.025)
+    abox("%s_tshub%d" % (P, sx), (0.26, 0.12, 0.26), tuple(D + Vector((0, 0.19, 0))), "M_Body", GT, bevel=0.01)
+    acyl("%s_tshur%d" % (P, sx), 0.135, 0.05, tuple(D + Vector((0, -0.165, 0))), "M_Dark", GT, axis=1, seg=24)
+    acyl("%s_tshul%d" % (P, sx), 0.115, 0.012, tuple(D + Vector((0, -0.192, 0))), "M_Dazzler", GT, axis=1, seg=24, dirt=False)
+    abox("%s_tshuh%d" % (P, sx), (0.36, 0.10, 0.025), tuple(D + Vector((0, -0.20, 0.175))), "M_Body", GT, rot=(-0.25, 0, 0), bevel=0.005)
+    rod("%s_tshuc%d" % (P, sx), D + Vector((sx * 0.17, 0.05, -0.1)), D + Vector((sx * 0.30, 0.18, -0.12)), 0.02, "M_Dark", GT, seg=6)
+    # TShU-1-11 coarse laser-warning heads on the front roof corners (blue window) + precise head on a stalk
+    W = T(sx * 1.00, -0.62, 2.24)
+    abox("%s_lwsc%d" % (P, sx), (0.14, 0.12, 0.09), tuple(W), "M_Dark", GT, bevel=0.012)
+    abox("%s_lwscw%d" % (P, sx), (0.10, 0.012, 0.06), tuple(W + Vector((0, -0.065, 0.005))), "M_Lens", GT, bevel=0.0, dirt=False)
+    # 902B Tucha smoke grenade launchers: 6 tubes per side on the turret flanks, fanned forward/outward
+    smoke_dischargers(P, "s%d" % sx, T(sx * 1.17, -0.30, 2.12), 6, 7.0, sx * 25.0, 15.0, GT, r=0.042, L=0.24)
+    # side stowage boxes behind the launchers
+    abox("%s_tbox%d" % (P, sx), (0.22, 0.75, 0.36), tuple(T(sx * 1.30, 0.55, 1.82)), "M_Body", GT, bevel=0.015)
+# Shtora control box + precise TShU-1-11 heads at the rear roof
 for sx in (1, -1):
-    abox("%s_sosnad%d" % (P, sx), (0.17, 0.03, 0.22), tuple(S + Vector((sx * 0.24, -0.24, 0.02))), "M_Body", GT, rot=(0, 0, sx * 0.9), bevel=0.005)
-hatch(P, "gnr", T(0.52, -0.25, 2.21), 0.28, GT)
-# commander's cupola (right) + PK-5 panoramic sight + Kord RWS (UDP T05BV-1)
+    rod("%s_lwsps%d" % (P, sx), T(sx * 0.35, 0.95, 2.18), T(sx * 0.35, 0.95, 2.36), 0.015, "M_Dark", GT, seg=6)
+    acyl("%s_lwsp%d" % (P, sx), 0.06, 0.07, tuple(T(sx * 0.35, 0.95, 2.39)), "M_Dark", GT, seg=12)
+    acyl("%s_lwspw%d" % (P, sx), 0.045, 0.01, tuple(T(sx * 0.35, 0.95, 2.43)), "M_Lens", GT, seg=12, dirt=False)
+abox(P + "_shtcb", (0.32, 0.22, 0.12), tuple(T(0.0, 0.70, 2.25)), "M_Body", GT, bevel=0.012)
+# mantlet + dust cover
+abox(P + "_mantf", (0.56, 0.22, 0.48), tuple(T(0, -1.36, 1.86)), "M_Body", GT, bevel=0.03)
+# gunner's 1G46 day sight (left front roof) with armoured door; blue window
+S = T(0.42, -0.86, 2.36)
+abox(P + "_sosna", (0.30, 0.42, 0.30), tuple(S), "M_Body", GT, bevel=0.02)
+abox(P + "_sosnaw", (0.22, 0.02, 0.16), tuple(S + Vector((0, -0.22, 0.02))), "M_Lens", GT, bevel=0.0, dirt=False)
+abox(P + "_sosnad", (0.26, 0.03, 0.06), tuple(S + Vector((0, -0.20, 0.17))), "M_Body", GT, rot=(-0.6, 0, 0), bevel=0.005)
+# Buran-PA / Essa gunner's night sight box behind it
+abox(P + "_buran", (0.24, 0.30, 0.22), tuple(T(0.70, -0.55, 2.31)), "M_Body", GT, bevel=0.015)
+acyl(P + "_buranw", 0.06, 0.01, tuple(T(0.70, -0.71, 2.33)), "M_Lens", GT, axis=1, seg=12, dirt=False)
+hatch(P, "gnr", T(0.48, -0.15, 2.21), 0.28, GT)
+# commander's TKN-4S cupola (right) with the remote 12.7 mm Kord (UDP T05BV-1) on its own box
 C = T(-0.52, -0.15, 2.21)
 lathe_y(P + "_cup", [(0.0, 0.0), (0.0, 0.42), (0.16, 0.38), (0.16, 0.0)], tuple(C), ["M_Body"], GT, seg=28, axis='Z')
 acyl(P + "_cuplid", 0.32, 0.05, tuple(C + Vector((0, 0.05, 0.19))), "M_Body", GT, seg=24)
 for k in range(5):
     a = math.radians(-60 + k * 30)
     periscope(P, "cup%d" % k, C + Vector((math.sin(a) * 0.38, -math.cos(a) * 0.38, 0.12)), GT, a)
-pk = C + Vector((0.0, -0.45, 0.2))
-acyl(P + "_pk5", 0.13, 0.32, tuple(pk), "M_Body", GT, seg=16)
-acyl(P + "_pk5h", 0.15, 0.22, tuple(pk + Vector((0, 0, 0.26))), "M_Dark", GT, seg=16)
-abox(P + "_pk5w", (0.14, 0.02, 0.1), tuple(pk + Vector((0, -0.15, 0.27))), "M_Lens", GT, bevel=0.0, dirt=False)
+tkn = C + Vector((0.0, -0.40, 0.24))
+abox(P + "_tkn", (0.26, 0.22, 0.20), tuple(tkn), "M_Body", GT, bevel=0.015)
+abox(P + "_tknw", (0.18, 0.02, 0.09), tuple(tkn + Vector((0, -0.12, 0.02))), "M_Lens", GT, bevel=0.0, dirt=False)
 rws = C + Vector((0.05, 0.25, 0.32))
 abox(P + "_rwsb", (0.36, 0.36, 0.22), tuple(rws), "M_Body", GT, bevel=0.02)
 acyl(P + "_kord", 0.022, 1.25, tuple(rws + Vector((0.08, -0.75, 0.08))), "M_Dark", GT, axis=1, seg=10)
 acyl(P + "_kordfh", 0.035, 0.12, tuple(rws + Vector((0.08, -1.38, 0.08))), "M_Dark", GT, axis=1, seg=10)
 abox(P + "_kordr", (0.12, 0.4, 0.14), tuple(rws + Vector((0.08, -0.05, 0.1))), "M_Dark", GT, bevel=0.01)
 abox(P + "_kordbox", (0.14, 0.26, 0.2), tuple(rws + Vector((-0.17, 0.0, 0.05))), "M_DarkGreen", GT, bevel=0.01)
-# meteo mast, two antennas, laser warning sensors
+# meteo mast, two antennas
 rod(P + "_mast", T(-0.15, 0.9, 2.2), T(-0.15, 0.9, 2.62), 0.015, "M_Dark", GT, seg=6)
 acyl(P + "_mastv", 0.04, 0.06, tuple(T(-0.15, 0.9, 2.65)), "M_Dark", GT, seg=8)
 antenna(P, "a1", T(0.85, 0.82, 2.2), 2.4, GT)
 antenna(P, "a2", T(-0.85, 0.82, 2.2), 1.2, GT)
-for sx in (1, -1):
-    abox("%s_lws%d" % (P, sx), (0.1, 0.1, 0.07), tuple(T(sx * 0.95, -0.55, 2.23)), "M_Dark", GT, bevel=0.01)
 
 # ---------------------------------------------------------------- gun (launcher_pitch) + barrel (recoils)
 abox(P + "_cradle", (0.5, 0.75, 0.42), (0, TRN.y + 0.15, TRN.z), "M_Body", GG, bevel=0.02)

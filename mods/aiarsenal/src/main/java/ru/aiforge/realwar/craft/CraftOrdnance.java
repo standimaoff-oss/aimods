@@ -72,6 +72,7 @@ public class CraftOrdnance extends Entity {
     private int sourceId = -1;
     private int operatorId = -1;
     private int targetId = -1;
+    private final ru.aiforge.realwar.vehicle.Shtora.Jam shtora = new ru.aiforge.realwar.vehicle.Shtora.Jam();
     @Nullable
     private Vec3 spot;
     private int ignitedAt = -1;
@@ -155,6 +156,9 @@ public class CraftOrdnance extends Entity {
             case VIKHR, HELLFIRE -> {
                 if (this.tickCount < t.burn) sp = Math.min(t.speed, sp + (t.speed - t.boost) / t.burn);
                 Vec3 want = t == Type.VIKHR ? this.beamGuidance() : this.laserGuidance(sl);
+                // r27: Shtora-1 on the target (laser warning -> aerosol + dazzlers)
+                Entity src = sl.getEntity(this.sourceId);
+                want = ru.aiforge.realwar.vehicle.Shtora.apply(sl, this, this.shtora, want, src != null ? src.position() : this.position(), this.tickCount);
                 if (want != null && this.tickCount > 3) dir = turnToward(dir, want, Math.toRadians(t.turn));
                 this.v = dir.scale(sp);
             }

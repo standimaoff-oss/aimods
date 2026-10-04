@@ -422,13 +422,21 @@ public class GunVehicle extends LauncherVehicle {
 
     /** Fires one salvo (6 grenades, or the rest) in the gun direction; the T-34 drops a smoke drum behind. */
     public void fireSmoke(ServerPlayer p) {
-        if (this.seatOf(p) != this.operatorSeat() || !(this.level() instanceof ServerLevel sl)) return;
-        int left = this.smoke();
-        if (left <= 0) {
+        if (this.seatOf(p) != this.operatorSeat() || !(this.level() instanceof ServerLevel)) return;
+        if (this.smoke() <= 0) {
             p.displayClientMessage(Component.translatable("hud.aiarsenal.rw.smoke.empty"), true);
             return;
         }
         if (this.tickCount < this.smokeCooldown) return;
+        this.smokeSalvo(this.launchDir(this.az(), 0));
+        p.displayClientMessage(Component.translatable("hud.aiarsenal.rw.smoke.fired", this.smoke()), true);
+    }
+
+    /** One smoke salvo towards the horizontal direction of {@code f}; false if nothing was fired. */
+    public boolean smokeSalvo(Vec3 f) {
+        if (!(this.level() instanceof ServerLevel sl)) return false;
+        int left = this.smoke();
+        if (left <= 0 || this.tickCount < this.smokeCooldown) return false;
         this.smokeCooldown = this.tickCount + 40;
         if (this.kind == VehicleKind.T34) {
             Vec3 b = this.localToWorld(0, 1.0, -this.spec.length() * 0.55);
@@ -436,7 +444,6 @@ public class GunVehicle extends LauncherVehicle {
             this.entityData.set(SMOKE, left - 1);
         } else {
             int n = Math.min(6, left);
-            Vec3 f = this.launchDir(this.az(), 0);
             Vec3 h = new Vec3(f.x, 0, f.z);
             if (h.lengthSqr() < 1e-4) h = new Vec3(0, 0, 1);
             h = h.normalize();
@@ -451,7 +458,42 @@ public class GunVehicle extends LauncherVehicle {
             this.entityData.set(SMOKE, left - n);
         }
         sl.playSound(null, this.getX(), this.getY(), this.getZ(), net.minecraft.sounds.SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.NEUTRAL, 2.5f, 0.6f);
-        p.displayClientMessage(Component.translatable("hud.aiarsenal.rw.smoke.fired", this.smoke()), true);
+        return true;
+    }
+
+    // ------------------------------------------------------------------ r27: Shtora-1 (T-90A)
+    /** Vehicles carrying the Shtora-1 optronic suppression system (TShU-1-7 IR dazzlers + TShU-1-11 laser warning). */
+    public static boolean hasShtora(VehicleKind k) {
+        return k == VehicleKind.T90M;
+    }
+
+    /** Game tick until which the dazzlers / aerosol screen spoil a guided missile's tracking. */
+    private int shtoraUntil = -1;
+    private int shtoraAlarmTick = -100;
+
+    public boolean shtoraActive() {
+        return hasShtora(this.kind) && !this.dmg.dead() && this.tickCount < this.shtoraUntil;
+    }
+
+    /**
+     * Laser illumination / missile launch detected by the TShU-1-11 heads (called by the guided missile each tick while
+     * it is aimed at this vehicle). Raises the alarm for the crew, fires an aerosol salvo towards the threat (auto mode,
+     * like the real system) and switches the IR dazzlers on for 8 s. Returns true while the system is jamming.
+     */
+    public boolean shtoraWarn(Vec3 threat) {
+        if (!hasShtora(this.kind) || this.dmg.dead() || !(this.level() instanceof ServerLevel sl)) return false;
+        if (this.tickCount - this.shtoraAlarmTick > 30) {
+            this.shtoraAlarmTick = this.tickCount;
+            sl.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.MISSILE_WARN.get(), SoundSource.NEUTRAL, 1.5f, 1.25f);
+            for (Entity e : this.getPassengers()) {
+                if (e instanceof ServerPlayer sp) sp.displayClientMessage(Component.translatable("hud.aiarsenal.rw.shtora.alarm"), true);
+            }
+        }
+        if (this.tickCount >= this.shtoraUntil) {
+            this.shtoraUntil = this.tickCount + 160;
+            this.smokeSalvo(threat.subtract(this.position()));
+        }
+        return true;
     }
 
     /** r20: weapon / round chosen directly with the number keys (slot = position on the HUD slot bar). */
