@@ -70,6 +70,15 @@ public final class ModItems {
     public static final RegistryObject<Item> IGLA_MISSILE = ITEMS.register("igla_missile", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.IGLA, new Item.Properties()));
     public static final RegistryObject<Item> STINGER = ITEMS.register("stinger", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.STINGER, new Item.Properties()));
     public static final RegistryObject<Item> STINGER_MISSILE = ITEMS.register("stinger_missile", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.STINGER, new Item.Properties()));
+    // r26 WW2 small arms
+    public static final RegistryObject<Item> PPSH41 = ITEMS.register("ppsh41", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.PPSH41, new Item.Properties()));
+    public static final RegistryObject<Item> MAG_PPSH = ITEMS.register("mag_ppsh", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.PPSH41, new Item.Properties()));
+    public static final RegistryObject<Item> MP40 = ITEMS.register("mp40", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.MP40, new Item.Properties()));
+    public static final RegistryObject<Item> MAG_MP40 = ITEMS.register("mag_mp40", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.MP40, new Item.Properties()));
+    public static final RegistryObject<Item> MOSIN = ITEMS.register("mosin", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.MOSIN, new Item.Properties()));
+    public static final RegistryObject<Item> CLIP_MOSIN = ITEMS.register("clip_mosin", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_mosin"));
+    public static final RegistryObject<Item> K98K = ITEMS.register("k98k", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.K98K, new Item.Properties()));
+    public static final RegistryObject<Item> CLIP_K98 = ITEMS.register("clip_k98", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_k98"));
     public static final RegistryObject<Item> JAVELIN_MISSILE = ITEMS.register("javelin_missile", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.JAVELIN, new Item.Properties()));
     public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new GeigerCounterItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> POTASSIUM_IODIDE = ITEMS.register("potassium_iodide", () -> new PotassiumIodideItem(new Item.Properties().stacksTo(16).food(new FoodProperties.Builder().nutrition(0).saturationMod(0.0f).alwaysEat().build())));

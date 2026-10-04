@@ -134,10 +134,21 @@ public final class Firearms {
         return ForgeRegistries.ITEMS.getValue(new net.minecraft.resources.ResourceLocation("aiarsenal", k.ammo));
     }
 
+    /** gametests: would R start a reload now? (refusals only: full magazine, clip into a non-empty rifle, no ammo) */
+    public static boolean reloadAllowed(Player p, ItemStack stack, GunKind k) {
+        int ammo = FirearmItem.ammo(stack);
+        if (ammo >= k.maxLoaded(ammo > 0) || k.clipFed() && ammo > 0) return false;
+        return p.getAbilities().instabuild || findAmmo(p, k) >= 0;
+    }
+
     public static boolean startReload(Player p, ItemStack stack, GunKind k, State s) {
         if (s.reload > 0) return false;
         int ammo = FirearmItem.ammo(stack);
         if (ammo >= k.maxLoaded(ammo > 0)) return false;
+        if (k.clipFed() && ammo > 0) {                          // r26: a stripper clip only goes into an empty magazine
+            p.displayClientMessage(net.minecraft.network.chat.Component.translatable("msg.aiarsenal.gun.clip_not_empty"), true);
+            return false;
+        }
         if (!p.getAbilities().instabuild && findAmmo(p, k) < 0) {
             p.displayClientMessage(net.minecraft.network.chat.Component.translatable("msg.aiarsenal.gun.no_mag",
                     net.minecraft.network.chat.Component.translatable("item.aiarsenal." + k.ammo)), true);
@@ -148,7 +159,8 @@ public final class Firearms {
         s.reload = s.reloadTotal;
         s.trigger = false;
         s.gun = stack.getItem();
-        if (!k.tube()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
+        if (k.clipFed()) sound(p, "bolt_cycle", 0.8f, 1.1f);   // bolt opened
+        else if (!k.tube()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
         fx(p, s.reloadEmpty && !k.launcher() ? GunFxPacket.RELOAD_EMPTY : GunFxPacket.RELOAD, ammo);
         return true;
     }
@@ -162,6 +174,12 @@ public final class Firearms {
             if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
             else if (slot < 0 && !creative) return;
             FirearmItem.setAmmo(stack, 1);
+            return;
+        }
+        if (k.clipFed()) {                                      // r26: one clip = 5 rounds, the empty clip is discarded
+            if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
+            else if (slot < 0 && !creative) return;
+            FirearmItem.setAmmo(stack, k.cap);
             return;
         }
         if (k.tube()) {                                         // r24: one shell into the tube (or the chamber)
@@ -219,11 +237,13 @@ public final class Firearms {
             int done = s.reloadTotal - s.reload;
             if (k.tube() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "shell_in", 0.8f, 0.95f + p.getRandom().nextFloat() * 0.1f);
             if (k.tube() && s.reloadEmpty && done == (int) (s.reloadTotal * 0.78f)) sound(p, "pump_action", 0.8f, 1.0f);
-            if (!k.launcher() && !k.tube() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
+            if (k.clipFed() && done == (int) (s.reloadTotal * 0.45f)) sound(p, "clip_in", 0.9f, k == GunKind.K98K ? 1.05f : 0.95f);
+            if (k.clipFed() && done == (int) (s.reloadTotal * 0.80f)) sound(p, "bolt_cycle", 0.8f, 0.95f);
+            if (!k.launcher() && !k.tube() && !k.clipFed() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
             if (k == GunKind.PKP && (done == 14 || done == (int) (s.reloadTotal * 0.80f))) sound(p, "selector", 0.9f, 0.6f);   // feed cover
             if (k.launcher() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "mag_in", 0.8f, 0.6f);
             if (s.reloadEmpty && !k.launcher() && !k.manual() && done == (int) (s.reloadTotal * (k == GunKind.PKP ? 0.86f : 0.82f))) sound(p, "bolt_rack", 0.8f, k == GunKind.PKP ? 0.8f : 1.0f);
-            if (s.reloadEmpty && k.boltAction() && done == (int) (s.reloadTotal * 0.68f)) sound(p, "bolt_cycle", 0.8f, 1.0f);
+            if (s.reloadEmpty && k.boltAction() && !k.clipFed() && done == (int) (s.reloadTotal * 0.68f)) sound(p, "bolt_cycle", 0.8f, 1.0f);
             if (--s.reload == 0) {
                 finishReload(p, stack, k);
                 int now = FirearmItem.ammo(stack);

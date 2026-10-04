@@ -23,7 +23,15 @@ public enum GunKind {
     // r25 MANPADS: one missile per launch tube; the gripstock is moved onto a fresh tube (5 s). Hold RMB on the target:
     // the seeker cools (Igla-S 1.5 s, Stinger 1 s), then locks (tone); LMB launches only when locked.
     IGLA("igla", "igla_missile", 1, 0, 0, 0f, 0f, 0.020f, 0.006f, 2.0f, 0.6f, 100, 100, 0.80f, "", false),
-    STINGER("stinger", "stinger_missile", 1, 0, 0, 0f, 0f, 0.020f, 0.006f, 2.0f, 0.6f, 100, 100, 0.80f, "", false);
+    STINGER("stinger", "stinger_missile", 1, 0, 0, 0f, 0f, 0.020f, 0.006f, 2.0f, 0.6f, 100, 100, 0.80f, "", false),
+    // r26 WW2: PPSh-41 (7.62x25 TT, 843 mm, 71-rd drum, ~1000 rds/min in game, 488 m/s, open bolt, selector in the
+    // trigger guard); MP 40 (9x19, 833 mm stock extended, 32-rd box, 550 rds/min, ~400 m/s, open bolt, full-auto only);
+    // Mosin 91/30 (7.62x54R, 1232 mm, 865 m/s, 5-rd stripper clip) and Kar98k (7.92x57, 1110 mm, 760 m/s, 5-rd clip):
+    // manual bolts loaded through the open action from a stripper clip once the magazine is empty.
+    PPSH41("ppsh41", "mag_ppsh", 71, 1000, 488, 5.0f, 2.5f, 0.032f, 0.0035f, 0.55f, 0.35f, 70, 84, 0.85f, "smg_ppsh", true),
+    MP40("mp40", "mag_mp40", 32, 550, 400, 5.2f, 2.5f, 0.030f, 0.0030f, 0.50f, 0.30f, 50, 62, 0.85f, "smg_mp40", true),
+    MOSIN("mosin", "clip_mosin", 5, 30, 865, 16f, 11f, 0.055f, 0.0006f, 3.6f, 0.8f, 50, 50, 0.75f, "rifle_mosin", false),
+    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;
@@ -66,17 +74,32 @@ public enum GunKind {
 
     /** manual bolt: one aimed shot, then the bolt is cycled (~1.3 s) */
     public boolean boltAction() {
-        return this == T5000;
+        return this == T5000 || this.clipFed();
+    }
+
+    /** r26: WW2 bolt rifles charged with a 5-round stripper clip through the open action (only when empty) */
+    public boolean clipFed() {
+        return this == MOSIN || this == K98K;
+    }
+
+    /** rounds one ammo item adds (a stripper clip holds 5) */
+    public int roundsPerItem() {
+        return this.clipFed() ? 5 : 1;
+    }
+
+    /** r26 open-bolt submachine guns (no round stays chambered on a reload) */
+    public boolean openBolt() {
+        return this == PPSH41 || this == MP40;
     }
 
     /** fire selector (B): AK-12 / M4A1; the PKP is full-auto only */
     public boolean selector() {
-        return this.auto && this != PKP;
+        return this.auto && this != PKP && this != MP40;
     }
 
     /** closed-bolt guns keep a round in the chamber on a tactical reload; the belt-fed PKP fires from an open bolt */
     public boolean closedBolt() {
-        return !this.launcher() && this != PKP;
+        return !this.launcher() && this != PKP && !this.openBolt() && !this.clipFed();
     }
 
     /** variable-power riflescope overlay (T-5000: 5-25x) */
@@ -116,7 +139,7 @@ public enum GunKind {
 
     /** reloaded from loose rounds (PG-7VL grenades, 12 ga shells) instead of magazines */
     public boolean looseAmmo() {
-        return this.launcher() || this.tube();
+        return this.launcher() || this.tube() || this.clipFed();
     }
 
     /** ticks between two semi-automatic shots */

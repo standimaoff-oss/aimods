@@ -724,5 +724,50 @@
       }
     ],
     "subtitle": "subtitles.aiarsenal.shell_in"
+  },
+  "smg_ppsh": {
+    "sounds": [
+      {
+        "name": "aiarsenal:smg_ppsh",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.smg_ppsh"
+  },
+  "smg_mp40": {
+    "sounds": [
+      {
+        "name": "aiarsenal:smg_mp40",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.smg_mp40"
+  },
+  "rifle_mosin": {
+    "sounds": [
+      {
+        "name": "aiarsenal:rifle_mosin",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.rifle_mosin"
+  },
+  "rifle_k98": {
+    "sounds": [
+      {
+        "name": "aiarsenal:rifle_k98",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.rifle_k98"
+  },
+  "clip_in": {
+    "sounds": [
+      {
+        "name": "aiarsenal:clip_in",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.clip_in"
   }
 }

@@ -194,4 +194,65 @@ public final class SmallArmsTests {
         h.assertTrue(GunKind.R870.pumpAction() && GunKind.R870.tube() && GunKind.R870.semiCooldown() >= 12, "pump action, tube fed");
         h.succeed();
     }
+
+    // ------------------------------------------------------------------ r26 WW2
+
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void ppsh_mp40_open_bolt_magazines(GameTestHelper h) {
+        BlockPos o = h.absolutePos(new BlockPos(2, 1, 2));
+        ItemStack gun = new ItemStack(ModItems.PPSH41.get());
+        FirearmItem.setAmmo(gun, 10);
+        FakePlayer p = shooter(h, gun, o.getX() + 0.5, o.getY(), o.getZ() + 0.5);
+        p.getInventory().add(new ItemStack(ModItems.MAG_PPSH.get()));
+        Firearms.finishReload(p, gun, GunKind.PPSH41);
+        h.assertTrue(FirearmItem.ammo(gun) == 71, "open bolt: a full drum = 71, nothing chambered, got " + FirearmItem.ammo(gun));
+        int back = -1;
+        for (ItemStack s : p.getInventory().items) if (s.is(ModItems.MAG_PPSH.get())) back = MagazineItem.rounds(s);
+        h.assertTrue(back == 10, "the old drum comes back with its 10 rounds, got " + back);
+        h.assertTrue(GunKind.PPSH41.selector() && !GunKind.MP40.selector() && GunKind.MP40.auto, "PPSh single/auto, MP 40 auto only");
+        h.assertTrue(!GunKind.PPSH41.closedBolt() && !GunKind.MP40.closedBolt() && GunKind.MP40.maxLoaded(true) == 32, "open bolt SMGs");
+        h.succeed();
+    }
+
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void mosin_clip_loads_only_when_empty(GameTestHelper h) {
+        BlockPos o = h.absolutePos(new BlockPos(2, 1, 2));
+        ItemStack gun = new ItemStack(ModItems.MOSIN.get());
+        FirearmItem.setAmmo(gun, 2);
+        FakePlayer p = shooter(h, gun, o.getX() + 0.5, o.getY(), o.getZ() + 0.5);
+        p.getInventory().add(new ItemStack(ModItems.CLIP_MOSIN.get(), 2));
+        h.assertTrue(!Firearms.reloadAllowed(p, gun, GunKind.MOSIN), "no clip into a magazine that still has rounds");
+        FirearmItem.setAmmo(gun, 0);
+        h.assertTrue(Firearms.reloadAllowed(p, gun, GunKind.MOSIN), "empty magazine takes a clip");
+        Firearms.finishReload(p, gun, GunKind.MOSIN);
+        int left = 0;
+        for (ItemStack s : p.getInventory().items) if (s.is(ModItems.CLIP_MOSIN.get())) left += s.getCount();
+        h.assertTrue(FirearmItem.ammo(gun) == 5, "one clip = 5 rounds, got " + FirearmItem.ammo(gun));
+        h.assertTrue(left == 1, "the clip is used up, left " + left);
+        h.assertTrue(GunKind.MOSIN.boltAction() && GunKind.K98K.manual() && GunKind.K98K.clipFed() && GunKind.K98K.maxLoaded(true) == 5,
+                "bolt action, 5 rounds, no +1");
+        h.succeed();
+    }
+
+    @GameTest(template = "arena", batch = "rw_small", timeoutTicks = 120)
+    public static void k98k_rifle_round_hits_hard(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        BlockPos o = h.absolutePos(new BlockPos(2, 1, 2));
+        for (int dz = 0; dz < 14; dz++) for (int dy = 0; dy < 4; dy++) level.setBlock(o.offset(0, dy, dz), Blocks.AIR.defaultBlockState(), 2);
+        ItemStack gun = new ItemStack(ModItems.K98K.get());
+        FirearmItem.setAmmo(gun, 5);
+        FakePlayer p = shooter(h, gun, o.getX() + 0.5, o.getY(), o.getZ() + 0.5);
+        Husk t = EntityType.HUSK.create(level);
+        t.moveTo(o.getX() + 0.5, o.getY(), o.getZ() + 12.5, 180f, 0f);
+        t.setNoAi(true);
+        level.addFreshEntity(t);
+        float hp0 = t.getHealth();
+        Firearms.fire(p, gun, GunKind.K98K, true);
+        h.assertTrue(FirearmItem.ammo(gun) == 4, "one round per shot");
+        h.runAfterDelay(6, () -> {
+            h.assertTrue(!t.isAlive() || t.getHealth() <= hp0 - 12f, "7.92x57 at 12 m must hit hard: hp " + t.getHealth());
+            t.discard();
+            h.succeed();
+        });
+    }
 }

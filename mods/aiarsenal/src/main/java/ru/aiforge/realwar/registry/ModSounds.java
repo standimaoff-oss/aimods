@@ -74,6 +74,12 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> BOLT_RACK = ModSounds.reg("bolt_rack");
     public static final RegistryObject<SoundEvent> DRY_FIRE = ModSounds.reg("dry_fire");
     public static final RegistryObject<SoundEvent> SELECTOR = ModSounds.reg("selector");
+    // r26 WW2 small arms (tools/make_sounds_r26.py)
+    public static final RegistryObject<SoundEvent> SMG_PPSH = ModSounds.reg("smg_ppsh");
+    public static final RegistryObject<SoundEvent> SMG_MP40 = ModSounds.reg("smg_mp40");
+    public static final RegistryObject<SoundEvent> RIFLE_MOSIN = ModSounds.reg("rifle_mosin");
+    public static final RegistryObject<SoundEvent> RIFLE_K98 = ModSounds.reg("rifle_k98");
+    public static final RegistryObject<SoundEvent> CLIP_IN = ModSounds.reg("clip_in");
 
     private ModSounds() {
     }

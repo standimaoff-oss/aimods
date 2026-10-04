@@ -356,7 +356,7 @@ public final class GunClient {
         net.minecraft.world.item.Item want = Firearms.ammoItem(k);
         for (int i = 0; i < p.getInventory().getContainerSize(); i++) {
             ItemStack s = p.getInventory().getItem(i);
-            if (s.is(want)) spare += k.looseAmmo() ? s.getCount() : (MagazineItem.rounds(s) > 0 ? s.getCount() : 0);
+            if (s.is(want)) spare += k.looseAmmo() ? s.getCount() * k.roundsPerItem() : (MagazineItem.rounds(s) > 0 ? s.getCount() : 0);
         }
         boolean auto = k.auto && (!k.selector() || FirearmItem.mode(st) == 1);
         float rem = 0f;

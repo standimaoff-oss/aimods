@@ -4,6 +4,7 @@
      Saiga-12K isp.030 (12/76)        910 mm, barrel 430, 8-rd box, AK-74M folding stock, railed cover      (r24)
      Remington 870 Police Magnum      978 mm, 18" barrel + rifle sights, 4+1 tube, pump with action bars   (r24)
      9K338 Igla-S / FIM-92 Stinger    1700 / 1520 mm tubes, gripstocks, NIP / BCU, IFF grid, sights      (r25)
+     WW2: PPSh-41, MP 40, Mosin-Nagant 1891/30, Karabiner 98k (stripper clips)                        (r26)
    First-person hands = the player's vanilla arms (r23); the GLB carries only the hand anchors <w>.arm_r / <w>.arm_l.
      AK-12 6P70 (2018)   945 mm, barrel 415, 30-rd 6L31 magazine, diopter rear sight, telescoping folding stock
      M4A1 + Aimpoint CompM4 on QRP2   838 mm (stock extended), 14.5" barrel, STANAG 30, A2 FSB / grip / birdcage
@@ -83,6 +84,12 @@ mat("GloveCoyote", "T_GloveCoyote", 0.85)
 mat("Flash", "T_Flash", 0.9, emissive=True, clip=True)
 mat("RedDot", "T_RedDot", 0.9, emissive=True, clip=True)
 mat("ShellRed", "T_ShellRed", 0.6)
+mat("Blued", "T_Blued", 0.45, 0.7)
+mat("Birch", "T_Birch", 0.6)
+mat("Walnut", "T_Walnut", 0.5)
+mat("Bakelite", "T_Bakelite", 0.35)
+mat("Copper", "T_Copper", 0.35, 0.85)
+mat("ClipSteel", "T_ClipSteel", 0.5, 0.6)
 
 # ------------------------------------------------------------------ build state
 U0 = 0.0
@@ -103,7 +110,7 @@ def _mk(name, bm, m, grp, smooth=False, bevel=0.0):
     bm.free()
     me.materials.append(MATS[m])
     for p in me.polygons:
-        p.use_smooth = smooth
+        p.use_smooth = smooth and len(p.vertices) <= 4      # n-gon caps stay flat (no dome shading)
     ob = bpy.data.objects.new(name, me)
     COLL.objects.link(ob)
     if bevel > 0:
@@ -1822,6 +1829,456 @@ def stinger():
     return sc
 
 
+# ====================================================================================== r26 WW2 small arms
+# PPSh-41 (USSR 1941): 7.62x25 TT, 843 mm, barrel 269 mm, 71-rd drum, ~1000 rds/min, 488 m/s, birch stock, perforated
+#   barrel jacket whose slanted front is the compensator, hooded front post, L-flip rear sight 100/200 m.
+# MP 40 (Germany 1940): 9x19, 833 mm stock open, barrel 251 mm, 32-rd stick magazine, ~550 rds/min, 400 m/s, receiver tube,
+#   bakelite grip frame + ribbed fore panel, under-folding steel stock, barrel rest bar, bolt handle on the LEFT.
+# Mosin-Nagant 1891/30 (USSR): 7.62x54R, 1232 mm (no bayonet), barrel 730 mm, 5-rd box, stripper clips, 865 m/s,
+#   straight bolt handle, hooded front post, tangent rear sight, two barrel bands, cleaning rod.
+# Karabiner 98k (Germany): 7.92x57 Mauser, 1110 mm, barrel 600 mm, 5 rds flush magazine, stripper clips, 760 m/s,
+#   turned-down bolt handle, wing safety, semi-pistol grip walnut stock, H nose cap with bayonet lug, hooded barleycorn.
+
+def arc_xsec(r_out, r_in, a0, a1, n=12, cv=0.0):
+    pts = [(r_out * math.cos(D(a0 + (a1 - a0) * i / n)), cv + r_out * math.sin(D(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
+    pts += [(r_in * math.cos(D(a1 - (a1 - a0) * i / n)), cv + r_in * math.sin(D(a1 - (a1 - a0) * i / n))) for i in range(n + 1)]
+    return pts
+
+
+def cartridge(g, u_rim, cv, case_len, rim_r, base_r, shoulder_r, neck_r, oal, bullet_r, x=0.0, seg=12):
+    sh = case_len * 0.80
+    lathe(g, [(u_rim, 0), (u_rim, rim_r), (u_rim + 1.6, rim_r), (u_rim + 1.6, base_r * 0.86), (u_rim + 3.2, base_r),
+              (u_rim + sh, shoulder_r), (u_rim + sh + 4.5, neck_r), (u_rim + case_len, neck_r)], "Brass", seg, x, cv)
+    lathe(g, [(u_rim + case_len, bullet_r), (u_rim + case_len + (oal - case_len) * 0.42, bullet_r),
+              (u_rim + oal - 1.2, bullet_r * 0.30), (u_rim + oal, 0)], "Copper", seg, x, cv)
+
+
+def band_xsec(top, bot, half):
+    return [(-half + 1.5, bot), (half - 1.5, bot), (half + 1.5, bot + 7), (half + 1.5, top - 12), (half - 4, top - 3),
+            (6, top), (-6, top), (-half + 4, top - 3), (-half - 1.5, top - 12), (-half - 1.5, bot + 7)]
+
+
+def rifle_bolt_clip(name, bolt, AR, knob_rel, grip_rel, f0, total, lift=85, back=0.09, hold=4):
+    """bolt: lift, pull back, (hold), push, lock; the right hand rides on the knob (T-5000 scheme, generalised)"""
+    Z = (0, 0, 0)
+    bk = [(0, Z, 0), (4, Z, lift), (9, (0, back, 0), lift), (9 + hold, (0, back, 0), lift), (13 + hold, Z, lift), (17 + hold, Z, 0)]
+
+    def knob_at(t, a):
+        return Matrix.Rotation(D(a), 3, 'Y') @ knob_rel + Vector(t)
+
+    keys = [(0, Z, Z)] if f0 > 0 else []
+    keys += [(f0 + f, t, (0, a, 0)) for (f, t, a) in bk]
+    keys.append((max(total, f0 + 18 + hold), Z, Z))
+    clip(name, bolt, keys)
+    off = Vector((0, 0.01, -0.02))
+    hk = [(0, Z, Z), (f0 + 2, tuple(knob_at(Z, 0) - grip_rel + off), Z)]
+    for (f, t, a) in bk[1:-1]:
+        hk.append((f0 + f, tuple(knob_at(t, a) - grip_rel + off), Z))
+    hk.append((f0 + 19 + hold, tuple(knob_at(Z, 0) - grip_rel + off), Z))
+    hk.append((f0 + 23 + hold, Z, Z))
+    hk.append((max(total, f0 + 24 + hold), Z, Z))
+    clip(name, AR, hk)
+
+
+def clip_reload(w, G, bolt, AR, AL, CL, knob_rel, grip_rel, arm_to_clip, up, back, total=60):
+    """stripper-clip reload (bolt rifles, only from an empty magazine): bolt open, clip into the charger guides,
+       thumb strips the five rounds down, clip out, bolt closed"""
+    Z = (0, 0, 0)
+    tilt = ((0.015, 0.0, 0.03), (-6, -18, 6))
+    clip(w + "_reload", G, [(0, Z, Z), (6, *tilt), (total - 10, *tilt), (total - 2, Z, Z), (total, Z, Z)])
+    rifle_bolt_clip(w + "_reload", bolt, AR, knob_rel, grip_rel, 2, total, back=back, hold=total - 30)
+    clip(w + "_reload", CL, [(0, Z, Z), (13, Z, Z), (14, (0, 0, up), Z), (22, (0, 0, up), Z), (34, (0, 0, up * 0.52), Z),
+                             (36, (0, 0, up * 0.52), Z), (37, Z, Z), (total, Z, Z)])
+    a = Vector(arm_to_clip)
+    clip(w + "_reload", AL, [(0, Z, Z), (8, tuple(a * 0.6 + Vector((0, 0, -0.02))), Z), (13, tuple(a), Z), (22, tuple(a + Vector((0, 0, 0.01))), Z),
+                             (34, tuple(a + Vector((0, 0, -up * 0.48 + 0.01))), Z), (38, tuple(a + Vector((0, -0.02, 0.02))), Z),
+                             (46, Z, Z), (total, Z, Z)])
+
+
+def smg_reload(w, G, M, A, B, frames, frames_e, to_mag, drop=(0, 0.04, -0.36), side=1, rack_arm=(-0.05, 0.15, 0.03)):
+    """AK-style magazine change scaled to the reload time; on an empty gun the bolt is racked afterwards"""
+    Z = (0, 0, 0)
+    s = frames / 60.0
+    f = lambda x: max(1, int(round(x * s)))
+    tm = Vector(to_mag)
+    dv = Vector(drop)
+    tilt = ((0.02, 0.0, 0.03), (-8, -24 * side, 6 * side))
+    mag_keys = [(0, Z, Z), (f(12), Z, Z), (f(16), (0, 0, -0.012), (-6, 0, 0)), (f(20), (0, -0.005, -0.07), (-10, 0, 0)),
+                (f(26), tuple(dv), (-16, 0, 0)), (f(34), tuple(dv), (-16, 0, 0)), (f(40), (0, -0.006, -0.06), (-8, 0, 0)),
+                (f(44), (0, 0, -0.01), (-3, 0, 0)), (f(47), Z, Z)]
+    arm_keys = [(0, Z, Z), (f(8), tuple(tm), Z), (f(12), tuple(tm), Z), (f(20), tuple(tm + Vector((0, -0.005, -0.07))), Z),
+                (f(26), tuple(tm + dv), Z), (f(34), tuple(tm + dv), Z), (f(40), tuple(tm + Vector((0, -0.006, -0.06))), Z),
+                (f(44), tuple(tm), Z), (f(48), tuple(tm), Z)]
+    clip(w + "_reload", G, [(0, Z, Z), (f(8), *tilt), (f(44), *tilt), (f(54), Z, Z), (frames, Z, Z)])
+    clip(w + "_reload", M, mag_keys + [(frames, Z, Z)])
+    clip(w + "_reload", A, arm_keys + [(f(56), Z, Z), (frames, Z, Z)])
+    e = frames_e
+    rack = ((0.0, 0.01, 0.02), (-6, 22 * side, -4 * side))
+    clip(w + "_reload_empty", G, [(0, Z, Z), (f(8), *tilt), (f(44), *tilt), (f(52), *rack), (f(52) + 12, *rack), (e - 4, Z, Z), (e, Z, Z)])
+    clip(w + "_reload_empty", M, mag_keys + [(e, Z, Z)])
+    r = Vector(rack_arm)
+    clip(w + "_reload_empty", A, arm_keys + [(f(53), tuple(r), Z), (f(53) + 3, tuple(r), Z), (f(53) + 7, tuple(r + Vector((0, 0.10, 0))), Z),
+                                             (f(53) + 10, tuple(r + Vector((0, 0.10, 0))), Z), (e - 5, Z, Z), (e, Z, Z)])
+    if B is not None:
+        clip(w + "_reload_empty", B, [(0, Z, Z), (f(53) + 3, Z, Z), (f(53) + 7, (0, 0.10, 0), Z), (f(53) + 8, (0, 0.10, 0), Z),
+                                      (f(53) + 10, Z, Z), (e, Z, Z)])
+
+
+# -------------------------------------------------------------------------------------- PPSh-41
+def ppsh_mag(g):
+    c_u, c_v = 478, -112
+    cylx(g, c_u, c_v, -27, 27, 75, "Blued", 40)                       # drum body (side view = circle)
+    cylx(g, c_u, c_v, -2.2, 2.2, 76.6, "Blued", 40)                   # rolled seam between cover and body
+    cylx(g, c_u, c_v, -28, 28, 62, "Blued", 36)                       # pressed steps of the cover / back
+    cylx(g, c_u, c_v, -29, 29, 36, "Blued", 28)
+    cylx(g, c_u, c_v, 29, 33, 9, "Steel", 12)                         # spring winding key (left)
+    box(g, c_u - 13, c_u + 13, c_v - 3, c_v + 3, 32, 34.5, "Steel", 0.6)
+    cylx(g, c_u + 40, c_v - 40, 27.5, 29.5, 4, "Steel", 10)          # cover latch
+    box(g, 460, 496, -46, -22, -9, 9, "Blued", 0.8)                    # feed tower into the magazine well
+    box(g, 496, 499, -40, -30, -4, 4, "Steel", 0.3)                    # catch notch
+    cartridge(g, 466, -25, 25, 5.0, 4.9, 4.7, 4.2, 35, 3.9, 0, 10)   # top round 7.62x25 in the lips
+
+
+def ppsh_body(g):
+    prism(g, [(0, -44), (6, -42), (6, -168), (0, -170)], -20.5, 20.5, "Blued", 1.0)                      # butt plate
+    prism(g, [(6, -42), (100, -34), (200, -26), (290, -20), (330, -20), (352, -22), (352, -56), (330, -60), (290, -64),
+              (250, -72), (200, -88), (140, -112), (70, -142), (6, -168)], -20, 20, "Birch", 3.0)          # butt + wrist (comb drops to the heel)
+    prism(g, [(345, -20), (560, -20), (568, -28), (565, -42), (552, -50), (352, -50), (345, -40)], -18, 18, "Birch", 2.5)
+    ring_rod_loop(g, P(120, -127, 0), 7, 1.6, "Steel")                                                    # sling swivel
+    box(g, 112, 128, -122, -116, -5, 5, "Steel", 0.4)
+    ring_rod_loop(g, P(548, -55, 0), 6, 1.5, "Steel")
+    # stamped receiver (hinged upper), rear cap with the latch
+    R = [(-16, -20), (16, -20), (17, 8), (13, 17), (6, 21.5), (-6, 21.5), (-13, 17), (-17, 8)]
+    xsec(g, R, 352, 560, "Blued", 1.2)
+    xsec(g, [(-14, -20), (14, -20), (14.5, 6), (9, 14), (-9, 14), (-14.5, 6)], 336, 352, "Blued", 1.5)
+    box(g, 328, 340, -4, 8, -6, 6, "Steel", 1.0)
+    box(g, 440, 500, 19.5, 22.2, -6, 6, "BlackPaint", 0.2)            # ejection port (bolt visible through it)
+    box(g, 392, 476, 1, 8, -17.6, -16.4, "BlackPaint", 0.2)           # cocking slot (right)
+    box(g, 392, 404, 8, 12, -17.4, -16.2, "BlackPaint", 0.2)          # safety notch
+    # L-flip rear sight 100 / 200 m
+    box(g, 512, 546, 21, 24.5, -7, 7, "Blued", 0.4)
+    box(g, 528, 531, 24.5, 36, -6, -1.6, "Blued", 0.2)
+    box(g, 528, 531, 24.5, 36, 1.6, 6, "Blued", 0.2)
+    box(g, 528, 531, 24.5, 31, -1.6, 1.6, "Blued", 0.2)
+    box(g, 531, 546, 24.5, 26, -6, 6, "Blued", 0.2)
+    # perforated barrel jacket, slots as recessed dark bands, slanted front = compensator
+    lathe(g, [(560, 16), (815, 16)], "Blued", 24)
+    for ang in (0, 38, -38, 180, 142, 218, 90):
+        a = D(ang)
+        nrm = Vector((math.cos(a), 0, math.sin(a)))
+        tan = Vector((0, -1, 0)).cross(nrm)
+        for i in range(7):
+            u = 585 + i * 31
+            if ang == 90 and u > 770:
+                continue
+            c = P(u, 16.2 * math.sin(a), 16.2 * math.cos(a))
+            obox(g, c, (Vector((0, -1, 0)), nrm, tan), (19, 0.8, 7.5), "BlackPaint", 0.3)
+    prism(g, [(815, -16), (843, -16), (843, -6), (815, 12)], -16, 16, "Blued", 0.8)
+    lathe(g, [(824, 4.6), (846, 4.6)], "BlackPaint", 12)              # bore opening through the brake face
+    # hooded front post
+    box(g, 798, 820, 15, 20, -5, 5, "Blued", 0.4)
+    box(g, 807, 810, 20, 30, -1.2, 1.2, "Blued", 0.2)
+    ring(g, 800, 818, 8.5, 10, "Blued", 20, 0, 26)
+    # trigger guard, selector, magazine well + catch
+    box(g, 385, 446, -77, -73, -5, 5, "Blued", 0.6)
+    box(g, 440, 446, -73, -50, -5, 5, "Blued", 0.6)
+    box(g, 385, 391, -73, -52, -5, 5, "Blued", 0.6)
+    box(g, 428, 434, -56, -50, -3, 3, "Steel", 0.3)
+    box(g, 453, 503, -54, -49, -15, 15, "Blued", 0.6)
+    box(g, 446, 452, -58, -50, -4, 4, "Steel", 0.3)
+
+
+def ppsh41():
+    global U0
+    sc = new_scene("PPSH41")
+    U0 = 412.0
+    root = empty("ppsh41", (0, 0, 0))
+    gun = empty("ppsh41.gun", (0, 0, 0), root)
+    ppsh_body("ppsh41.body")
+    ppsh_mag("ppsh41.mag")
+    prism("ppsh41.trigger", [(408, -50), (414, -50), (416, -58), (415, -66), (411, -67), (412, -58)], -3, 3, "Steel", 0.5)
+    box("ppsh41.bolt", 440, 498, 14, 20, -5, 5, "Steel", 0.4)          # bolt top seen through the port
+    box("ppsh41.bolt", 455, 470, 2.5, 7.5, -24, -16.5, "Steel", 0.6)   # cocking handle (right)
+    cylx("ppsh41.bolt", 463, 5, -31, -23, 5, "Steel", 12)
+    flash("ppsh41.flash", 846, 0, 100, 40)
+    hand("ppsh41.arm_r", P(330, -46, 0))
+    hand("ppsh41.arm_l", P(585, -34, 0))
+    join_node("ppsh41.body", gun)
+    join_node("ppsh41.mag", gun, P(478, -60, 0))
+    join_node("ppsh41.trigger", gun, P(411, -50, 0))
+    join_node("ppsh41.bolt", gun, P(465, 8, 0))
+    join_node("ppsh41.flash", gun, P(846, 0, 0))
+    join_node("ppsh41.arm_r", gun)
+    join_node("ppsh41.arm_l", gun)
+    empty("ppsh41.sight", P(430, 31, 0), gun)            # rear notch (v 31) -> hooded post tip (v 30)
+    empty("ppsh41.muzzle", P(846, 0, 0), gun)
+    G, M, A, B = (bpy.data.objects[n] for n in ("ppsh41.gun", "ppsh41.mag", "ppsh41.arm_l", "ppsh41.bolt"))
+    smg_reload("ppsh41", G, M, A, B, 84, 100, (0, (585 - 478) / 1000.0, (-34 + 112) / -1000.0), drop=(0.03, 0.04, -0.34),
+               rack_arm=(-0.045, (585 - 463) / 1000.0, 0.038))
+    return sc
+
+
+# -------------------------------------------------------------------------------------- MP 40
+def mp40_mag(g):
+    box(g, 490, 528, -250, -20, -11.5, 11.5, "Blued", 0.8)
+    box(g, 487, 531, -258, -250, -13, 13, "Blued", 1.2)                # floorplate
+    for s in (1, -1):
+        box(g, 497, 521, -244, -104, 11.4 * s, 12.2 * s, "Blued", 0.3)  # pressed stiffening ribs
+        for i in range(5):
+            cylx(g, 509, -120 - i * 26, 11.6 * s, 12.6 * s, 2.2, "BlackPaint", 8)   # round-count witness holes
+    cartridge(g, 495, -22, 19, 4.9, 4.9, 4.8, 4.8, 29.7, 4.5, 0, 10)
+
+
+def mp40_body(g):
+    # receiver tube + rear cap, barrel housing, barrel
+    lathe(g, [(240, 15), (248, 17.5), (250, 19), (545, 19)], "Blued", 24)
+    lathe(g, [(234, 13.5), (242, 13.5)], "Steel", 18)
+    lathe(g, [(545, 16), (565, 16), (565, 14), (610, 14)], "Blued", 20)
+    lathe(g, [(610, 10.5), (800, 10.5), (800, 11), (815, 11), (815, 9.5), (833, 9.5)], "Blued", 18)
+    lathe(g, [(830, 3.6), (834, 3.6)], "BlackPaint", 10)
+    # front sight: base, post, hood
+    lathe(g, [(798, 13), (822, 13)], "Blued", 18)
+    box(g, 808, 811, 12, 30, -1.2, 1.2, "Blued", 0.2)
+    ring(g, 800, 820, 8, 9.5, "Blued", 20, 0, 24)
+    # flip rear sight 100 / 200 m
+    box(g, 468, 500, 18, 22, -8, 8, "Blued", 0.4)
+    box(g, 484, 487, 22, 33, -6, -1.5, "Blued", 0.2)
+    box(g, 484, 487, 22, 33, 1.5, 6, "Blued", 0.2)
+    box(g, 484, 487, 22, 30, -1.5, 1.5, "Blued", 0.2)
+    box(g, 487, 500, 22, 23.5, -6, 6, "Blued", 0.2)
+    # bolt handle slot + safety notch (left side), sling bar
+    box(g, 330, 472, 0, 6, 17.8, 19.5, "BlackPaint", 0.2)
+    box(g, 330, 342, 6, 12, 16.8, 19.0, "BlackPaint", 0.2)
+    box(g, 250, 262, -12, -6, 18, 22, "Steel", 0.4)
+    # grip frame (steel) + bakelite pistol grip and ribbed fore panel
+    box(g, 285, 470, -38, -16, -15, 15, "Blued", 1.0)
+    prism(g, [(320, -38), (372, -38), (376, -48), (360, -128), (348, -136), (316, -134), (306, -124), (322, -48)], -16, 16, "Bakelite", 2.0)
+    cylx(g, 341, -86, -16.6, 16.6, 3.5, "Steel", 10)
+    box(g, 425, 482, -52, -16, -16, 16, "Bakelite", 1.5)
+    for i in range(5):
+        v0 = -48 + i * 6
+        box(g, 428, 479, v0, v0 + 2.5, -16.8, 16.8, "Bakelite", 0.4)
+    # trigger guard
+    box(g, 376, 428, -70, -66, -5, 5, "Blued", 0.6)
+    box(g, 422, 428, -66, -50, -5, 5, "Blued", 0.6)
+    box(g, 376, 382, -66, -38, -5, 5, "Blued", 0.6)
+    # magazine housing with release button (left)
+    box(g, 482, 538, -98, -16, -15, 15, "Blued", 1.0)
+    for v0 in (-94, -80):
+        box(g, 484, 536, v0, v0 + 3, -15.6, 15.6, "Blued", 0.3)
+    cylx(g, 505, -40, 15, 19.5, 5, "Steel", 12)
+    # barrel rest bar ("Laufhalter")
+    prism(g, [(700, -9), (782, -9), (787, -14), (782, -27), (768, -30), (748, -20), (700, -16)], -6, 6, "Blued", 1.0)
+    # under-folding stock: hinge, two struts, butt plate
+    cylx(g, 290, -27, -16.5, 16.5, 6, "Steel", 14)
+    for s in (1, -1):
+        rod(g, P(290, -27, 13 * s), P(30, -44, 13 * s), 5.5, 5.5, "Blued", 10)
+    box(g, 22, 40, -52, -36, -15, 15, "Blued", 1.0)
+    prism(g, [(8, -12), (24, -12), (26, -112), (14, -118), (6, -110)], -21, 21, "Blued", 2.0)
+    cylx(g, 302, -8, 15, 20, 4, "Steel", 10)                          # stock release button
+
+
+def mp40():
+    global U0
+    sc = new_scene("MP40")
+    U0 = 395.0
+    root = empty("mp40", (0, 0, 0))
+    gun = empty("mp40.gun", (0, 0, 0), root)
+    mp40_body("mp40.body")
+    mp40_mag("mp40.mag")
+    prism("mp40.trigger", [(392, -40), (398, -40), (400, -48), (399, -56), (395, -57), (396, -48)], -3, 3, "Steel", 0.5)
+    rod("mp40.bolt", P(340, 3, 18), P(340, 3, 33), 3.6, 3.6, "Steel", 10)    # bolt handle (left), knob
+    lathe("mp40.bolt", [(334, 0), (334, 6), (346, 6.5), (346, 0)], "Steel", 12, 38, 3)
+    box("mp40.bolt", 336, 344, 0.5, 5.5, 14, 19, "Steel", 0.3)
+    flash("mp40.flash", 834, 0, 90, 34)
+    hand("mp40.arm_r", P(345, -82, 0))
+    hand("mp40.arm_l", P(580, -26, 0))
+    join_node("mp40.body", gun)
+    join_node("mp40.mag", gun, P(509, -60, 0))
+    join_node("mp40.trigger", gun, P(395, -40, 0))
+    join_node("mp40.bolt", gun, P(340, 3, 19))
+    join_node("mp40.flash", gun, P(834, 0, 0))
+    join_node("mp40.arm_r", gun)
+    join_node("mp40.arm_l", gun)
+    empty("mp40.sight", P(400, 30, 0), gun)              # rear notch (v 30) -> hooded post tip (v 30)
+    empty("mp40.muzzle", P(834, 0, 0), gun)
+    G, M, A, B = (bpy.data.objects[n] for n in ("mp40.gun", "mp40.mag", "mp40.arm_l", "mp40.bolt"))
+    smg_reload("mp40", G, M, A, B, 60, 74, (0, (580 - 510) / 1000.0, (-26 + 212) / -1000.0), drop=(0.0, 0.03, -0.34),
+               rack_arm=(0.035, (580 - 340) / 1000.0, (26 + 3) / 1000.0))
+    return sc
+
+
+# -------------------------------------------------------------------------------------- Mosin-Nagant 1891/30
+def mosin_clip(g):
+    for i, v in enumerate((-60, -47, -34, -21, -8)):
+        cartridge(g, 482, v, 53.7, 7.2, 6.2, 5.8, 4.3, 77.0, 3.9, 0, 12)
+    box(g, 478, 484, -67, -1, -7.5, 7.5, "ClipSteel", 0.4)             # stripper clip spine
+    for s in (1, -1):
+        box(g, 484, 487, -67, -1, 6.6 * s, 7.6 * s, "ClipSteel", 0.2)
+
+
+def mosin_body(g):
+    prism(g, [(0, -38), (7, -38), (7, -164), (0, -166)], -21, 21, "Blued", 1.0)                         # butt plate
+    prism(g, [(7, -38), (200, -26), (330, -15), (400, -12), (565, -12), (565, -44), (480, -44), (440, -45), (400, -47),
+              (345, -62), (260, -82), (150, -118), (7, -164)], -20, 20, "Birch", 3.0)
+    prism(g, [(560, -12), (1150, -6), (1160, -16), (1152, -30), (900, -36), (570, -42)], -16, 16, "Birch", 2.5)
+    xsec(g, arc_xsec(17, 11, -20, 200, 14), 690, 1105, "Birch", 1.0)                                    # upper handguard
+    xsec(g, band_xsec(19, -38, 18), 860, 878, "Blued", 0.8)                                              # rear band
+    xsec(g, band_xsec(19, -33, 17), 1112, 1130, "Blued", 0.8)                                            # front band
+    box(g, 880, 900, -14, -8, -17.2, -16, "Steel", 0.3)                                                  # band springs
+    box(g, 1132, 1148, -14, -8, -17.2, -16, "Steel", 0.3)
+    box(g, 160, 190, -108, -96, -20.6, 20.6, "BlackPaint", 0.5)                                          # sling slots
+    box(g, 980, 1004, -31, -23, -16.6, 16.6, "BlackPaint", 0.5)
+    # receiver (round 1930s pattern), tang, loading port, charger guides at the bridge
+    lathe(g, [(398, 10), (405, 14), (420, 17), (560, 17), (560, 15)], "Blued", 24)
+    box(g, 380, 405, -14, -6, -6, 6, "Blued", 0.8)
+    cylz(g, 392, 0, -6, -5, 2.5, "Steel", 8)
+    box(g, 440, 530, 14.5, 17.7, -7, 7, "BlackPaint", 0.2)
+    box(g, 420, 432, 17, 23, -9, 9, "Blued", 0.4)
+    box(g, 422, 430, 19, 23.5, -3, 3, "BlackPaint", 0.2)
+    # magazine box with floorplate latch, trigger guard
+    prism(g, [(468, -40), (566, -40), (562, -72), (478, -74)], -13, 13, "Blued", 1.0)
+    box(g, 552, 562, -70, -64, -4, 4, "Steel", 0.3)
+    box(g, 402, 470, -66, -62, -5, 5, "Blued", 0.6)
+    box(g, 402, 408, -62, -44, -5, 5, "Blued", 0.6)
+    # barrel with the muzzle, tangent rear sight, hooded front post, cleaning rod
+    lathe(g, [(560, 14.5), (575, 14.5), (575, 13.5), (700, 12.8), (900, 11.6), (1100, 10.6), (1232, 10)], "Blued", 20)
+    lathe(g, [(1228, 3.8), (1233, 3.8)], "BlackPaint", 10)
+    box(g, 590, 670, 13, 18.5, -10, 10, "Blued", 0.6)
+    box(g, 600, 668, 18.5, 21, -5.5, 5.5, "Blued", 0.3)
+    box(g, 625, 640, 18.5, 23, -7, 7, "Blued", 0.3)
+    box(g, 600, 604, 21, 27.5, -5.5, -1.4, "Blued", 0.2)
+    box(g, 600, 604, 21, 27.5, 1.4, 5.5, "Blued", 0.2)
+    box(g, 600, 604, 21, 25, -1.4, 1.4, "Blued", 0.2)
+    lathe(g, [(1192, 12.5), (1216, 12.5)], "Blued", 18)
+    box(g, 1202, 1206, 10, 24.5, -1.1, 1.1, "Blued", 0.2)
+    ring(g, 1194, 1216, 9.5, 11, "Blued", 20, 0, 19)
+    rod(g, P(1150, -17, 0), P(1236, -17, 0), 3, 3, "Steel", 8)
+    sphere(g, P(1236, -17, 0), 3.8, "Steel", seg=8)
+
+
+def mosin():
+    global U0
+    sc = new_scene("MOSIN")
+    U0 = 432.0
+    root = empty("mosin", (0, 0, 0))
+    gun = empty("mosin.gun", (0, 0, 0), root)
+    mosin_body("mosin.body")
+    mosin_clip("mosin.clip")
+    prism("mosin.trigger", [(428, -44), (434, -44), (437, -52), (436, -62), (431, -63), (432, -52)], -3, 3, "Steel", 0.5)
+    lathe("mosin.bolt", [(445, 0), (445, 9), (530, 9), (530, 0)], "Steel", 16)
+    lathe("mosin.bolt", [(372, 0), (372, 9.5), (398, 9.5), (398, 7), (404, 7), (404, 0)], "Steel", 20)
+    for i in range(6):
+        lathe("mosin.bolt", [(374 + i * 4, 9.9), (376 + i * 4, 9.9)], "Steel", 20)                   # knurled cocking knob
+    rod("mosin.bolt", P(418, 1, -9), P(418, -1, -57), 4.8, 4.6, "Steel", 12)
+    sphere("mosin.bolt", P(418, -1, -63), 8, "Steel", seg=12)
+    flash("mosin.flash", 1233, 0, 130, 46)
+    hand("mosin.arm_r", P(360, -50, 0))
+    hand("mosin.arm_l", P(780, -30, 0))
+    join_node("mosin.body", gun)
+    cl = join_node("mosin.clip", gun, P(520, -34, 0))
+    join_node("mosin.trigger", gun, P(431, -44, 0))
+    bolt = join_node("mosin.bolt", gun, P(450, 0, 0))
+    join_node("mosin.flash", gun, P(1233, 0, 0))
+    join_node("mosin.arm_r", gun)
+    join_node("mosin.arm_l", gun)
+    empty("mosin.sight", P(480, 25, 0), gun)             # rear notch (v 25) -> hooded post tip (v 24.5)
+    empty("mosin.muzzle", P(1233, 0, 0), gun)
+    G, AL, AR = (bpy.data.objects[n] for n in ("mosin.gun", "mosin.arm_l", "mosin.arm_r"))
+    knob = P(418, -1, -63) - P(450, 0, 0)
+    grip = P(360, -50, 0) - P(450, 0, 0)
+    Z = (0, 0, 0)
+    clip("mosin_bolt", G, [(0, Z, Z), (3, (0, 0, 0.006), (2, 6, 0)), (19, (0, 0, 0.006), (2, 6, 0)), (26, Z, Z), (30, Z, Z)])
+    rifle_bolt_clip("mosin_bolt", bolt, AR, knob, grip, 0, 30, back=0.095)
+    clip_reload("mosin", G, bolt, AR, AL, cl, knob, grip, (0, (780 - 520) / 1000.0, (30 + 90 + 30) / 1000.0), 0.090, 0.095)
+    return sc
+
+
+# -------------------------------------------------------------------------------------- Karabiner 98k
+def k98_clip(g):
+    for i in range(5):
+        cartridge(g, 476, -34.5 + i * 10.8, 57.0, 5.9, 5.95, 5.6, 4.4, 80.0, 4.1, 0, 12)
+    box(g, 472, 478, -41, 15, -7, 7, "ClipSteel", 0.4)
+    for s in (1, -1):
+        box(g, 478, 481, -41, 15, 6.0 * s, 7.0 * s, "ClipSteel", 0.2)
+
+
+def k98_body(g):
+    prism(g, [(0, -40), (8, -40), (8, -160), (0, -163)], -21, 21, "Blued", 1.0)                          # cupped butt plate
+    prism(g, [(8, -40), (200, -27), (320, -15), (395, -13), (605, -13), (605, -40), (470, -40), (440, -42), (405, -44),
+              (385, -62), (372, -86), (352, -92), (325, -86), (300, -80), (150, -118), (8, -160)], -20, 20, "Walnut", 3.0)
+    prism(g, [(600, -13), (1000, -7), (1004, -10), (1004, -30), (900, -34), (640, -37), (600, -40)], -16, 16, "Walnut", 2.5)
+    box(g, 640, 800, -24, -21.5, -16.4, 16.4, "Walnut", 0.2)                                              # finger grooves (edges)
+    box(g, 640, 800, -27.5, -25, -16.4, 16.4, "Walnut", 0.2)
+    xsec(g, arc_xsec(16, 10.5, -20, 200, 14), 665, 858, "Walnut", 1.0)                                    # upper handguard
+    xsec(g, band_xsec(18, -36, 17), 855, 873, "Blued", 0.8)                                               # barrel band
+    ring_rod_loop(g, P(864, -26, 19.5), 6, 1.4, "Steel")                                                  # sling swivel (left)
+    xsec(g, [(-14, -32), (14, -32), (15, -12), (12, 4), (7, 12), (-7, 12), (-12, 4), (-15, -12)], 1000, 1040, "Blued", 1.0)
+    box(g, 1010, 1058, -40, -32, -5, 5, "Blued", 0.5)                                                     # bayonet lug
+    rod(g, P(1040, -21, 0), P(1070, -21, 0), 3, 3, "Steel", 8)                                            # cleaning rod
+    sphere(g, P(1070, -21, 0), 4, "Steel", seg=8)
+    box(g, 170, 200, -112, -100, -20.6, 20.6, "BlackPaint", 0.5)                                          # sling slot
+    cylx(g, 150, -90, -20.8, -19.5, 13, "Blued", 18)                                                      # butt disc (right)
+    # barrel, rear sight, hooded barleycorn
+    lathe(g, [(600, 14.5), (660, 14.5), (680, 13), (860, 11.5), (1110, 9.2)], "Blued", 20)
+    lathe(g, [(1106, 3.9), (1111, 3.9)], "BlackPaint", 10)
+    box(g, 600, 660, 13, 18, -10, 10, "Blued", 0.6)
+    box(g, 612, 660, 18, 20.5, -5.5, 5.5, "Blued", 0.3)
+    box(g, 630, 644, 18, 22.5, -7, 7, "Blued", 0.3)
+    box(g, 612, 616, 20.5, 28, -5.5, -1.3, "Blued", 0.2)
+    box(g, 612, 616, 20.5, 28, 1.3, 5.5, "Blued", 0.2)
+    box(g, 612, 616, 20.5, 25, -1.3, 1.3, "Blued", 0.2)
+    lathe(g, [(1078, 11.5), (1102, 11.5)], "Blued", 18)
+    prism(g, [(1086, 10), (1096, 10), (1093, 25), (1089, 25)], -1.1, 1.1, "Blued", 0.2)
+    ring(g, 1080, 1100, 11, 12.5, "Blued", 20, 0, 15)
+    # receiver, bridge with charger guides, tang, floorplate, trigger guard
+    lathe(g, [(398, 12), (405, 16), (420, 17), (560, 17), (565, 18.5), (600, 18.5), (600, 14.5)], "Blued", 24)
+    box(g, 440, 520, 14.5, 17.6, -7, 7, "BlackPaint", 0.2)
+    box(g, 422, 434, 17, 20.5, -9, 9, "Blued", 0.4)                   # bridge + charger guides (below the sight line)
+    box(g, 424, 432, 19, 21, -3, 3, "BlackPaint", 0.2)
+    box(g, 378, 400, -14, -7, -6, 6, "Blued", 0.8)
+    box(g, 470, 562, -42, -38, -12, 12, "Blued", 0.6)
+    box(g, 410, 472, -64, -60, -5, 5, "Blued", 0.6)
+    box(g, 410, 416, -60, -44, -5, 5, "Blued", 0.6)
+
+
+def k98k():
+    global U0
+    sc = new_scene("K98K")
+    U0 = 445.0
+    root = empty("k98k", (0, 0, 0))
+    gun = empty("k98k.gun", (0, 0, 0), root)
+    k98_body("k98k.body")
+    k98_clip("k98k.clip")
+    prism("k98k.trigger", [(441, -44), (447, -44), (450, -52), (449, -60), (444, -61), (445, -52)], -3, 3, "Steel", 0.5)
+    lathe("k98k.bolt", [(440, 0), (440, 9), (520, 9), (520, 0)], "Steel", 16)
+    lathe("k98k.bolt", [(380, 0), (380, 11), (400, 12), (400, 0)], "Blued", 20)                     # bolt shroud
+    box("k98k.bolt", 386, 396, -1.5, 1.5, -26, -10, "Steel", 0.4)                                    # wing safety (fire)
+    rod("k98k.bolt", P(432, 0, -10), P(438, -18, -40), 5, 4.5, "Steel", 12)                          # turned-down handle
+    sphere("k98k.bolt", P(440, -26, -44), 9.5, "Steel", seg=12)
+    flash("k98k.flash", 1111, 0, 130, 46)
+    hand("k98k.arm_r", P(365, -62, 0))
+    hand("k98k.arm_l", P(740, -30, 0))
+    join_node("k98k.body", gun)
+    cl = join_node("k98k.clip", gun, P(516, -13, 0))
+    join_node("k98k.trigger", gun, P(444, -44, 0))
+    bolt = join_node("k98k.bolt", gun, P(450, 0, 0))
+    join_node("k98k.flash", gun, P(1111, 0, 0))
+    join_node("k98k.arm_r", gun)
+    join_node("k98k.arm_l", gun)
+    empty("k98k.sight", P(500, 25, 0), gun)              # V notch (v 25) -> barleycorn tip (v 25)
+    empty("k98k.muzzle", P(1111, 0, 0), gun)
+    G, AL, AR = (bpy.data.objects[n] for n in ("k98k.gun", "k98k.arm_l", "k98k.arm_r"))
+    knob = P(440, -26, -44) - P(450, 0, 0)
+    grip = P(365, -62, 0) - P(450, 0, 0)
+    Z = (0, 0, 0)
+    clip("k98k_bolt", G, [(0, Z, Z), (3, (0, 0, 0.006), (2, 6, 0)), (19, (0, 0, 0.006), (2, 6, 0)), (26, Z, Z), (30, Z, Z)])
+    rifle_bolt_clip("k98k_bolt", bolt, AR, knob, grip, 0, 30, back=0.088)
+    clip_reload("k98k", G, bolt, AR, AL, cl, knob, grip, (0, (740 - 516) / 1000.0, (30 + 60 + 25) / 1000.0), 0.060, 0.088, total=55)
+    return sc
+
+
+
 ak = ak12()
 m4 = m4a1()
 rp = rpg7()
@@ -1841,6 +2298,14 @@ ig = igla()
 sn = stinger()
 sm7 = mag_scene("IGLA_MISSILE", igla_missile, 820.0, None)
 sm8 = mag_scene("STINGER_MISSILE", stinger_missile, 690.0, None)
+pp = ppsh41()
+mp = mp40()
+mo = mosin()
+kk = k98k()
+sm9 = mag_scene("MAG_PPSH", ppsh_mag, 478.0, None)
+sm10 = mag_scene("MAG_MP40", mp40_mag, 509.0, None)
+sm11 = mag_scene("CLIP_MOSIN", mosin_clip, 520.0, None)
+sm12 = mag_scene("CLIP_K98", k98_clip, 516.0, None)
 sc = new_scene("PG7V")
 U0 = 950.0
 pg7vl("pg7v", 950, full=True)
@@ -1864,6 +2329,14 @@ export(ig, "igla")
 export(sn, "stinger")
 export(sm7, "igla_missile", False)
 export(sm8, "stinger_missile", False)
+export(pp, "ppsh41")
+export(mp, "mp40")
+export(mo, "mosin")
+export(kk, "k98k")
+export(sm9, "mag_ppsh", False)
+export(sm10, "mag_mp40", False)
+export(sm11, "clip_mosin", False)
+export(sm12, "clip_k98", False)
 
 for s in list(bpy.data.scenes):
     if s.name not in SCENES:
