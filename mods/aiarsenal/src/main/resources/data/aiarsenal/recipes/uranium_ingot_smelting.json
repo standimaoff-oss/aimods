@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "aiarsenal:raw_uranium"
+  },
+  "result": "aiarsenal:uranium_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}
