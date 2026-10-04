@@ -3,6 +3,7 @@
      PKP Pecheneg 6P41                1155 mm, barrel 658 (finned, shrouded), 100-rd box, carry handle      (r23)
      Saiga-12K isp.030 (12/76)        910 mm, barrel 430, 8-rd box, AK-74M folding stock, railed cover      (r24)
      Remington 870 Police Magnum      978 mm, 18" barrel + rifle sights, 4+1 tube, pump with action bars   (r24)
+     9K338 Igla-S / FIM-92 Stinger    1700 / 1520 mm tubes, gripstocks, NIP / BCU, IFF grid, sights      (r25)
    First-person hands = the player's vanilla arms (r23); the GLB carries only the hand anchors <w>.arm_r / <w>.arm_l.
      AK-12 6P70 (2018)   945 mm, barrel 415, 30-rd 6L31 magazine, diopter rear sight, telescoping folding stock
      M4A1 + Aimpoint CompM4 on QRP2   838 mm (stock extended), 14.5" barrel, STANAG 30, A2 FSB / grip / birdcage
@@ -1470,6 +1471,357 @@ def shell_item(g):
     shell(g, 400, 0)
 
 
+# ====================================================================================== MANPADS (r25)
+# 9K338 Igla-S: 9P338 launch tube (glass fibre, 1700 mm) + 9P522 launching mechanism + 9B238 power/coolant unit (NIP),
+#   9M342 missile 1635 mm x 72 mm with the aerospike needle; sight on the left (front frame + post, rear peep with the
+#   target-lock light). In the combat position the front cover is off: the seeker dome and needle sit in the muzzle.
+# FIM-92 Stinger: launch tube 1520 mm (~90 mm OD) with frangible front / aft covers, M171 gripstock, BCU screwed into
+#   the front of the gripstock, folding IFF antenna grid (top left), sight assembly on the left (range-ring front frame,
+#   rubber eyecup, acquisition indicator at the cheek), shoulder support; missile 1520 mm at launch / 1370 mm in flight.
+mat("IglaTube", "T_IglaTube", 0.7)
+mat("StingerTube", "T_StingerTube", 0.7)
+mat("GripGreen", "T_GripGreen", 0.6, 0.2)
+mat("BlackPaint", "T_BlackPaint", 0.6, 0.1)
+mat("YellowBand", "T_YellowBand", 0.6)
+mat("BrownBand", "T_BrownBand", 0.6)
+mat("MissileWhite", "T_MissileWhite", 0.45, 0.1)
+mat("MissileGrey", "T_MissileGrey", 0.5, 0.3)
+mat("StencilIgla", "T_StencilIgla", 0.8, clip=True)
+mat("StencilStinger", "T_StencilStinger", 0.8, clip=True)
+mat("StencilDanger", "T_StencilDanger", 0.8, clip=True)
+mat("StencilBlast", "T_StencilBlast", 0.8, clip=True)
+
+
+def decal(grp, u0, u1, v0, v1, x, m, left=True):
+    """flat stencil quad in the plane x = const (mm), text reading front->rear on the left side, rear->front on the right"""
+    bm = bmesh.new()
+    vs = [bm.verts.new(P(u0, v0, x)), bm.verts.new(P(u1, v0, x)), bm.verts.new(P(u1, v1, x)), bm.verts.new(P(u0, v1, x))]
+    bm.faces.new(vs)
+    ob = _mk(grp + "_dc", bm, m, grp)
+    me = ob.data
+    uvl = me.uv_layers[0]
+    for li in me.polygons[0].loop_indices:
+        co = me.vertices[me.loops[li].vertex_index].co
+        u = U0 - co.y * 1000.0
+        v = co.z * 1000.0
+        fu = (u1 - u) / (u1 - u0) if left else (u - u0) / (u1 - u0)
+        uvl.data[li].uv = (fu, (v - v0) / (v1 - v0))
+    return ob
+
+
+def ring(grp, u0, u1, r_in, r_out, m, seg=32, cx=0.0, cv=0.0):
+    """hollow band (no end discs)"""
+    return lathe(grp, [(u0, r_in), (u0, r_out), (u1, r_out), (u1, r_in)], m, seg, cx, cv, closed=True)
+
+
+def fin(grp, u_root0, u_root1, u_tip0, u_tip1, r0, r1, ang, m, t=2.0):
+    """thin trapezoid fin / canard in the plane through the bore at roll angle ang (deg, 0 = left, 90 = up)"""
+    a = D(ang)
+    rad = Vector((math.cos(a), 0, math.sin(a)))
+    nrm = Vector((-math.sin(a), 0, math.cos(a)))
+    bm = bmesh.new()
+    pts = [(u_root0, r0), (u_root1, r0), (u_tip1, r1), (u_tip0, r1)]
+    A = [bm.verts.new(P(u, 0, 0) + rad * (r / 1000.0) + nrm * (t / 2000.0)) for (u, r) in pts]
+    B = [bm.verts.new(P(u, 0, 0) + rad * (r / 1000.0) - nrm * (t / 2000.0)) for (u, r) in pts]
+    bm.faces.new(A)
+    bm.faces.new(list(reversed(B)))
+    for i in range(4):
+        j = (i + 1) % 4
+        bm.faces.new((A[i], A[j], B[j], B[i]))
+    return _mk(grp + "_fin", bm, m, grp, False, 0.3)
+
+
+def frame_xv(grp, u0, u1, x0, x1, v0, v1, t, m):
+    """rectangular sight frame in the cross-section plane"""
+    xsec(grp, [(x0, v0), (x1, v0), (x1, v0 + t), (x0, v0 + t)], u0, u1, m, 0.3)
+    xsec(grp, [(x0, v1 - t), (x1, v1 - t), (x1, v1), (x0, v1)], u0, u1, m, 0.3)
+    xsec(grp, [(x0, v0 + t), (x0 + t, v0 + t), (x0 + t, v1 - t), (x0, v1 - t)], u0, u1, m, 0.3)
+    xsec(grp, [(x1 - t, v0 + t), (x1, v0 + t), (x1, v1 - t), (x1 - t, v1 - t)], u0, u1, m, 0.3)
+
+
+# ------------------------------------------------------------------ 9K338 Igla-S
+IG_SX, IG_SV = 78.0, 30.0          # sight line (left of / above the bore)
+
+
+def igla_tube(g):
+    T = "IglaTube"
+    # rear bell (hollow, reinforced lip) - the rear cover is blown out at launch
+    lathe(g, [(0, 52), (8, 52), (30, 49), (90, 44), (140, 41), (140, 36), (90, 39), (30, 44), (0, 47)], T, 32, closed=True)
+    ring(g, 2, 14, 51.5, 53.2, "BlackPaint")
+    lathe(g, [(134, 36.5), (137, 36.5)], "BlackPaint", 24)                         # dark bore seen from behind
+    # glass-fibre tube body and the wider front section (seeker compartment), front lip
+    lathe(g, [(140, 40), (1460, 40)], T, 32)
+    lathe(g, [(1460, 40), (1476, 45), (1560, 45)], T, 32)
+    ring(g, 1560, 1688, 41, 45, T)                                                  # open muzzle (front cover off)
+    lathe(g, [(1562, 41.2), (1565, 41.2)], "BlackPaint", 24)
+    ring(g, 1688, 1700, 41, 47, T)
+    ring(g, 1694, 1700, 47, 47.8, "BlackPaint")
+    # clamp bands with sling swivels, front-cover hinge lug
+    for u in (300, 1262):
+        ring(g, u, u + 24, 39.5, 42.6, "BlackPaint")
+        box(g, u + 6, u + 18, -47, -41, -3.5, 3.5, "BlackPaint", 0.5)
+        ring_rod_loop(g, P(u + 12, -54, 0), 8, 1.8, "Steel")
+    box(g, 1670, 1694, 44, 52, -8, 8, "BlackPaint", 0.8)
+    cylx(g, 1682, 52, -10, 10, 3.2, "Steel")
+    # connector strip under the tube for the launching mechanism (electrical + mechanical lock)
+    box(g, 780, 1064, -46, -38, -22, 22, "BlackPaint", 0.8)
+    for u in (800, 1040):
+        cylx(g, u, -44, -24, 24, 3.5, "Steel")
+    # front sight (u 1330): band, folding arm, frame 52 x 52 with the post and two lead marks
+    ring(g, 1318, 1342, 39.5, 42.8, "GripGreen")
+    box(g, 1322, 1338, 8, 22, 36, 56, "GripGreen", 1)
+    cylz(g, 1330, 50, 4, 26, 4.5, "Steel")                                          # fold hinge pin
+    frame_xv(g, 1328, 1332, 52, 104, 4, 56, 4, "BlackPaint")
+    xsec(g, [(IG_SX - 1.2, 8), (IG_SX + 1.2, 8), (IG_SX + 1.2, IG_SV), (IG_SX - 1.2, IG_SV)], 1328.5, 1331.5, "Steel", 0.2)
+    for dx in (-16, 16):
+        xsec(g, [(IG_SX + dx - 3, IG_SV - 0.8), (IG_SX + dx + 3, IG_SV - 0.8), (IG_SX + dx + 3, IG_SV + 0.8),
+                 (IG_SX + dx - 3, IG_SV + 0.8)], 1328.5, 1331.5, "Steel", 0.1)
+    # rear sight (u 750): band, arm, peep ring on the sight line, lock-light housing with its lens towards the eye
+    ring(g, 738, 762, 39.5, 42.8, "GripGreen")
+    box(g, 742, 758, 8, 20, 36, 62, "GripGreen", 1)
+    box(g, 744, 756, 14, 24, 60, 96, "GripGreen", 1)
+    ring(g, 744, 756, 7.5, 11, "BlackPaint", 24, IG_SX, IG_SV)                       # ghost-ring peep
+    box(g, 728, 790, 18, 56, 92, 116, "GripGreen", 2.5)
+    lathe(g, [(724, 4.5), (728, 4.5)], "LensSolid", 16, 104, 44)
+    ring(g, 724, 729, 4.5, 6.5, "BlackPaint", 16, 104, 44)
+    cylx(g, 770, 30, 116, 120, 6, "Rubber")                                         # lamp test button
+    # stencils: left side (type / lot), right side (backblast warning)
+    decal(g, 380, 700, -15, 15, 43.4, "StencilIgla", True)
+    decal(g, 170, 460, -7, 7, -43.4, "StencilDanger", False)
+
+
+def igla_grip(g):
+    G_ = "GripGreen"
+    # 9P522 launching mechanism housing (cast, rounded) under the tube
+    prism(g, [(790, -46), (1064, -46), (1072, -60), (1064, -96), (1012, -104), (902, -104), (860, -98), (800, -80)], -26, 26, G_, 3)
+    box(g, 930, 1000, -104, -100, -18, 18, "BlackPaint", 0.6)                     # name plate
+    # pistol grip (ribbed plastic), trigger guard
+    prism(g, [(838, -98), (884, -98), (880, -120), (872, -180), (868, -214), (862, -222), (830, -222), (826, -212), (832, -170),
+              (836, -120)], -15, 15, "Stipple", 3)
+    for i in range(6):
+        box(g, 828 + i * 0.6, 836 + i * 0.6, -128 - i * 14, -122 - i * 14, -15.5, 15.5, "Polymer", 0.4)
+    prism(g, [(884, -104), (944, -104), (944, -112), (934, -140), (884, -142), (884, -136), (926, -134), (936, -112),
+              (884, -110)], -4, 4, G_, 0.6)
+    # launch key lever + pivot (left), switch, IFF interrogator ("Parol") connector with its rubber cap
+    box(g, 918, 984, -72, -64, 26, 30, "Steel", 0.6)
+    cylx(g, 980, -68, 25, 32, 4.5, "Steel")
+    cylx(g, 1030, -64, 26, 34, 5, "BlackPaint")
+    cylx(g, 1000, -84, 26, 40, 9, "BlackPaint")
+    cylx(g, 1000, -84, 40, 44, 10, "Rubber")
+    # 9B238 NIP (battery + coolant gas bottle) plugged in at the front, pointing forward-down
+    a, b = P(1060, -82, 0), P(1252, -112, 0)
+    rod(g, P(1048, -80, 0), P(1074, -84, 0), 31, 31, "BlackPaint", 20)
+    rod(g, a, b, 27, 27, G_, 20)
+    for f in (0.30, 0.55, 0.80):
+        c = a.lerp(b, f)
+        rod(g, c, c + (b - a).normalized() * 0.006, 28, 28, "BlackPaint", 20)
+    rod(g, b, b + (b - a).normalized() * 0.012, 28.5, 25, "Rubber", 20)
+    rod(g, a.lerp(b, 0.45) + Vector((0.028, 0, 0)), a.lerp(b, 0.45) + Vector((0.036, 0, 0)), 5, 5, "Steel", 10)
+
+
+def igla_nose(g, u):
+    """9M342 seeker dome + aerospike (sits in the open muzzle in the combat position)"""
+    lathe(g, [(u - 60, 35.8), (u - 20, 35.8), (u, 30), (u + 12, 22)], "Warhead", 28)
+    lathe(g, [(u + 12, 22), (u + 22, 15), (u + 28, 7), (u + 30, 0)], "LensSolid", 20)
+    rod(g, P(u + 28, 0, 0), P(u + 80, 0, 0), 2.6, 1.6, "Steel", 10)
+    lathe(g, [(u + 80, 2.2), (u + 88, 3.6), (u + 94, 0)], "Steel", 12)
+
+
+def igla_round(g):
+    igla_nose(g, 1610)
+    # remains of the rear cover seat (blown out on launch): the cover itself
+    lathe(g, [(-6, 44), (-2, 51), (8, 51)], "Rubber", 32)
+    box(g, -8, 10, 46, 60, -6, 6, "Rubber", 0.5)                                       # pull tab
+
+
+def igla_missile(g):
+    """9M342 in flight: u 0 = nozzle exit, 1635 to the dome tip, needle in front"""
+    lathe(g, [(0, 26), (6, 30), (22, 35.8)], "Steel", 24)
+    lathe(g, [(0, 0), (0, 22)], "BlackPaint", 20)
+    lathe(g, [(22, 35.8), (1100, 35.8)], "Warhead", 28)
+    lathe(g, [(1100, 35.8), (1440, 35.8)], "MissileGrey", 28)                         # warhead + fuze section
+    ring(g, 1180, 1200, 35, 36.4, "BlackPaint", 28)
+    ring(g, 600, 640, 35, 36.4, "BlackPaint", 28)
+    lathe(g, [(1440, 35.8), (1560, 35.8), (1590, 30), (1602, 22)], "Warhead", 28)
+    lathe(g, [(1602, 22), (1612, 15), (1618, 7), (1620, 0)], "LensSolid", 20)
+    rod(g, P(1618, 0, 0), P(1670, 0, 0), 2.6, 1.6, "Steel", 10)
+    lathe(g, [(1670, 2.2), (1678, 3.6), (1684, 0)], "Steel", 12)
+    for k in range(4):                                                                 # tail fins (deployed, 160 span)
+        fin(g, 30, 120, 70, 130, 35, 80, 45 + 90 * k, "Warhead", 2.0)
+    for k in range(2):                                                                 # control canards
+        fin(g, 1450, 1500, 1462, 1492, 35, 62, 90 * k, "MissileGrey", 2.2)
+    for k in range(2):                                                                 # fixed destabilisers
+        fin(g, 1530, 1552, 1536, 1550, 35, 52, 90 * k + 180, "MissileGrey", 1.6)
+
+
+def igla():
+    global U0
+    sc = new_scene("IGLA")
+    U0 = 900.0
+    root = empty("igla", (0, 0, 0))
+    gun = empty("igla.gun", (0, 0, 0), root)
+    igla_tube("igla.tube")
+    igla_grip("igla.grip")
+    igla_round("igla.round")
+    prism("igla.trigger", [(896, -104), (904, -104), (906, -116), (905, -126), (901, -127), (902, -116)], -3, 3, "Steel", 0.5)
+    flash("igla.flash", 1701, 0, 260, 110)
+    hand("igla.arm_r", P(852, -160, 0))
+    hand("igla.arm_l", P(1150, -56, 0))
+    tube = join_node("igla.tube", gun)
+    join_node("igla.grip", gun)
+    join_node("igla.round", tube)
+    join_node("igla.trigger", gun, P(900, -104, 0))
+    join_node("igla.flash", tube, P(1701, 0, 0))
+    join_node("igla.arm_r", gun)
+    al = join_node("igla.arm_l", gun)
+    empty("igla.sight", P(735, IG_SV, IG_SX), gun)
+    empty("igla.muzzle", P(1702, 0, 0), gun)
+    manpads_reload("igla", bpy.data.objects["igla.gun"], tube, al)
+    return sc
+
+
+def manpads_reload(w, G, tube, al):
+    """the launching mechanism is moved onto a fresh tube: spent tube off forward / dropped right, new tube in from the
+    left, locked onto the connector (100 ticks = 5 s -> 120 frames)"""
+    Z = (0, 0, 0)
+    low = ((0.05, 0.10, -0.15), (-24, -10, 14))
+    clip(w + "_reload", G, [(0, Z, Z), (14, *low), (100, *low), (116, Z, Z), (120, Z, Z)])
+    k = [(0, Z, Z), (14, Z, Z), (22, (0, -0.05, 0), Z), (40, (-0.36, -0.30, -0.55), (30, 0, -40)),
+         (41, (0.48, 0.25, -0.62), (-20, 0, 30)), (72, (0.04, -0.07, -0.05), (0, 0, 4)), (84, (0, -0.05, 0), Z),
+         (92, Z, Z), (120, Z, Z)]
+    clip(w + "_reload", tube, k)
+    clip(w + "_reload", al, k)
+
+
+# ------------------------------------------------------------------ FIM-92 Stinger
+ST_SX, ST_SV = 88.0, 42.0
+
+
+def stinger_tube(g):
+    T = "StingerTube"
+    ring(g, 0, 40, 42, 48.5, T)
+    ring(g, 2, 10, 48.4, 49.5, "BlackPaint")
+    lathe(g, [(34, 41.5), (37, 41.5)], "BlackPaint", 24)
+    lathe(g, [(40, 45), (1480, 45)], T, 32)
+    ring(g, 1480, 1520, 42, 49, T)
+    ring(g, 1512, 1520, 48.9, 50, "BlackPaint")
+    lathe(g, [(1483, 41.5), (1486, 41.5)], "BlackPaint", 24)
+    for u in (250, 700, 1180, 1400):                                                   # moulded stiffening rings
+        ring(g, u, u + 18, 44.5, 47.2, T)
+    # shoulder support (rubber saddle) and sling swivels
+    xsec(g, [(-36, -30), (36, -30), (44, -46), (36, -60), (-36, -60), (-44, -46)], 380, 620, "Rubber", 3)
+    for u in (300, 1300):
+        box(g, u - 6, u + 6, -52, -44, -3.5, 3.5, "BlackPaint", 0.5)
+        ring_rod_loop(g, P(u, -58, 0), 8, 1.8, "Steel")
+    # sight assembly (left): front frame with the range ring at u 1290, rear eyepiece at u 616-660
+    box(g, 1280, 1300, -2, 14, 40, 66, "BlackPaint", 1)
+    cylz(g, 1290, 60, -4, 18, 4.5, "Steel")
+    frame_xv(g, 1288, 1292, 58, 118, 8, 76, 3.2, "BlackPaint")
+    ring(g, 1288.5, 1291.5, 21, 23, "BlackPaint", 28, ST_SX, ST_SV)                   # range ring
+    for d in ((0, 23, 0, 30), (0, -30, 0, -23), (23, 0, 30, 0), (-30, 0, -23, 0)):     # ring ticks
+        x0, v0, x1, v1 = d
+        xsec(g, [(ST_SX + min(x0, x1) - 0.7, ST_SV + min(v0, v1) - 0.7), (ST_SX + max(x0, x1) + 0.7, ST_SV + min(v0, v1) - 0.7),
+                 (ST_SX + max(x0, x1) + 0.7, ST_SV + max(v0, v1) + 0.7), (ST_SX + min(x0, x1) - 0.7, ST_SV + max(v0, v1) + 0.7)],
+             1289, 1291, "BlackPaint", 0.1)
+    box(g, 630, 662, 2, 26, 60, 75, "BlackPaint", 1)                                 # eyepiece bracket
+    ring(g, 616, 660, 8, 10.5, "BlackPaint", 24, ST_SX, ST_SV)
+    ring(g, 594, 616, 9, 15.5, "Rubber", 24, ST_SX, ST_SV)
+    # acquisition indicator (bone-conduction speaker at the cheek)
+    box(g, 556, 606, 22, 56, 50, 70, "Polymer", 2)
+    cylx(g, 581, 39, 70, 73, 11, "Rubber")
+    # stencils
+    decal(g, 150, 560, -14, 14, 48.0, "StencilStinger", True)
+    decal(g, 60, 380, -8, 8, -48.0, "StencilBlast", False)
+
+
+def stinger_grip(g):
+    G_ = "GripGreen"
+    # M171 gripstock housing
+    prism(g, [(650, -44), (982, -44), (992, -58), (982, -92), (930, -100), (780, -100), (720, -96), (660, -70)], -30, 30, G_, 3)
+    box(g, 650, 990, -48, -40, -26, 26, "BlackPaint", 0.8)                           # tube interface
+    prism(g, [(690, -94), (736, -94), (732, -120), (724, -180), (720, -214), (714, -222), (684, -222), (680, -212), (686, -170),
+              (690, -120)], -15, 15, "Stipple", 3)
+    for i in range(6):
+        box(g, 680 + i * 0.6, 688 + i * 0.6, -128 - i * 14, -122 - i * 14, -15.5, 15.5, "Polymer", 0.4)
+    prism(g, [(736, -100), (800, -100), (800, -108), (790, -138), (736, -140), (736, -134), (784, -132), (792, -108),
+              (736, -106)], -4, 4, G_, 0.6)
+    # safety & actuator device (thumb bar, left) and the uncage switch
+    box(g, 800, 872, -62, -52, 30, 38, "BlackPaint", 0.8)
+    cylx(g, 800, -57, 29, 39, 5, "Steel")
+    cylx(g, 846, -82, 30, 37, 6.5, "Rubber")
+    # IFF interrogator cable connector (right)
+    cylx(g, 900, -70, -44, -30, 8, "BlackPaint")
+    cylx(g, 900, -70, -48, -44, 9, "Rubber")
+    # BCU receptacle + battery coolant unit screwed in from the front (black, knurled cap)
+    lathe(g, [(975, 31), (1000, 31)], "BlackPaint", 24, 0, -72)
+    lathe(g, [(1000, 24.5), (1128, 24.5)], "BlackPaint", 24, 0, -72)
+    for u in (1030, 1070, 1100):
+        ring(g, u, u + 4, 24, 25.8, "Steel", 24, 0, -72)
+    lathe(g, [(1128, 26.5), (1146, 26.5), (1150, 22)], "Rubber", 24, 0, -72)
+    # IFF antenna: hinge block on the top left, folding arm, wire grid perpendicular to the bore (deployed)
+    box(g, 948, 992, -12, 10, 40, 60, "BlackPaint", 1)
+    cylz(g, 970, 58, -14, 12, 5, "Steel")
+    rod(g, P(970, 6, 54), P(1002, 76, 74), 4.2, 3.6, "BlackPaint", 10)
+    U, x0, x1, v0, v1 = 1004, 30.0, 200.0, 76.0, 186.0
+    for (a, b) in (((v0, x0), (v0, x1)), ((v1, x0), (v1, x1)), ((v0, x0), (v1, x0)), ((v0, x1), (v1, x1))):
+        rod(g, P(U, a[0], a[1]), P(U, b[0], b[1]), 2.6, 2.6, "BlackPaint", 8)
+    for i in range(1, 6):
+        x = x0 + (x1 - x0) * i / 6
+        rod(g, P(U, v0, x), P(U, v1, x), 1.3, 1.3, "Steel", 6, caps=False)
+    rod(g, P(U, (v0 + v1) / 2, x0), P(U, (v0 + v1) / 2, x1), 1.3, 1.3, "Steel", 6, caps=False)
+    box(g, U - 8, U + 8, 70, 82, 54, 90, "BlackPaint", 1)                              # feed block
+
+
+def stinger_round(g):
+    # frangible front cover and the aft cover (both broken out at launch)
+    lathe(g, [(1514, 50.2), (1522, 50.2), (1528, 44), (1531, 0)], "BlackPaint", 32)
+    ring(g, 1522, 1524, 30, 44, "Rubber", 28)
+    lathe(g, [(-8, 40), (-4, 49.6), (6, 49.6)], "BlackPaint", 32)
+
+
+def stinger_missile(g):
+    """FIM-92 in flight (ejection motor gone): u 0 = nozzle exit, 1370 dome tip"""
+    lathe(g, [(0, 24), (8, 30), (24, 35)], "Steel", 24)
+    lathe(g, [(0, 0), (0, 20)], "BlackPaint", 20)
+    lathe(g, [(24, 35), (1180, 35)], "MissileWhite", 28)
+    ring(g, 500, 530, 34.5, 35.8, "BrownBand", 28)                                    # rocket motor
+    ring(g, 1080, 1110, 34.5, 35.8, "YellowBand", 28)                                 # HE warhead
+    lathe(g, [(1180, 35), (1290, 35), (1330, 29)], "MissileWhite", 28)
+    lathe(g, [(1330, 29), (1350, 22), (1364, 11), (1370, 0)], "LensSolid", 8, smooth=False)   # faceted IR/UV dome
+    for k in range(4):                                                                 # tail fins (pop-out)
+        fin(g, 26, 110, 64, 116, 35, 70, 45 + 90 * k, "MissileGrey", 1.8)
+    for k in range(2):                                                                 # control canards
+        fin(g, 1230, 1280, 1244, 1272, 35, 60, 90 * k, "MissileGrey", 2.0)
+    for k in range(2):                                                                 # fixed canards
+        fin(g, 1236, 1262, 1242, 1258, 35, 50, 90 * k + 180, "MissileGrey", 1.6)
+
+
+def stinger():
+    global U0
+    sc = new_scene("STINGER")
+    U0 = 752.0
+    root = empty("stinger", (0, 0, 0))
+    gun = empty("stinger.gun", (0, 0, 0), root)
+    stinger_tube("stinger.tube")
+    stinger_grip("stinger.grip")
+    stinger_round("stinger.round")
+    prism("stinger.trigger", [(748, -100), (756, -100), (758, -112), (757, -122), (753, -123), (754, -112)], -3, 3, "Steel", 0.5)
+    flash("stinger.flash", 1525, 0, 260, 110)
+    hand("stinger.arm_r", P(706, -160, 0))
+    hand("stinger.arm_l", P(1062, -40, 0))
+    tube = join_node("stinger.tube", gun)
+    join_node("stinger.grip", gun)
+    join_node("stinger.round", tube)
+    join_node("stinger.trigger", gun, P(752, -100, 0))
+    join_node("stinger.flash", tube, P(1525, 0, 0))
+    join_node("stinger.arm_r", gun)
+    al = join_node("stinger.arm_l", gun)
+    empty("stinger.sight", P(588, ST_SV, ST_SX), gun)
+    empty("stinger.muzzle", P(1530, 0, 0), gun)
+    manpads_reload("stinger", bpy.data.objects["stinger.gun"], tube, al)
+    return sc
+
+
 ak = ak12()
 m4 = m4a1()
 rp = rpg7()
@@ -1485,6 +1837,10 @@ sm3 = mag_scene("MAG_T5000", t5000_mag, 490.0, None)
 sm4 = mag_scene("BOX_PKP", pkp_box, 495.0, None)
 sm5 = mag_scene("MAG_SAIGA12", saiga_mag, 474.0, None)
 sm6 = mag_scene("SHELL_12", shell_item, 400.0, None)
+ig = igla()
+sn = stinger()
+sm7 = mag_scene("IGLA_MISSILE", igla_missile, 820.0, None)
+sm8 = mag_scene("STINGER_MISSILE", stinger_missile, 690.0, None)
 sc = new_scene("PG7V")
 U0 = 950.0
 pg7vl("pg7v", 950, full=True)
@@ -1504,6 +1860,10 @@ export(sg, "saiga12")
 export(rm, "r870")
 export(sm5, "mag_saiga12", False)
 export(sm6, "shell_12", False)
+export(ig, "igla")
+export(sn, "stinger")
+export(sm7, "igla_missile", False)
+export(sm8, "stinger_missile", False)
 
 for s in list(bpy.data.scenes):
     if s.name not in SCENES:

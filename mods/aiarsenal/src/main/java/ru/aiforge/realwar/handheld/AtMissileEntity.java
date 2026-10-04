@@ -47,7 +47,7 @@ public class AtMissileEntity extends Projectile {
         m.entityData.set(TARGET, targetId);
         m.aimPoint = point;
         m.setPos(pos.x, pos.y, pos.z);
-        double v0 = k == HandheldKind.JAVELIN ? 0.9 : (k == HandheldKind.IGLA ? 1.6 : (k == HandheldKind.TOW ? 1.2 : 2.2));   // ejection, then the motor
+        double v0 = k == HandheldKind.JAVELIN ? 0.9 : (k.air() ? 1.6 : (k == HandheldKind.TOW ? 1.2 : 2.2));   // ejection, then the motor
         m.setDeltaMovement(dir.normalize().scale(v0));
         m.faceVelocity();
         m.yRotO = m.getYRot();
@@ -106,14 +106,14 @@ public class AtMissileEntity extends Projectile {
                 this.detonate(hit instanceof EntityHitResult eh ? eh.getEntity() : null);
                 return;
             }
-            if (k == HandheldKind.IGLA) {
-                // proximity fuse over the whole tick segment (7 blocks/tick would otherwise skip past)
+            if (k.air()) {
+                // proximity fuse (Stinger: impact fuze -> only the hitbox tolerance) over the whole tick segment (7 blocks/tick would otherwise skip past)
                 Entity t = this.level().getEntity(this.targetId());
                 if (t != null && this.tickCount > 8) {
                     Vec3 c = t.getBoundingBox().getCenter(), a = this.position();
                     double s = v.lengthSqr() < 1e-9 ? 0 : Mth.clamp(c.subtract(a).dot(v) / v.lengthSqr(), 0.0, 1.0);
                     Vec3 q = a.add(v.scale(s));
-                    if (q.distanceTo(c) < 4.0) {
+                    if (q.distanceTo(c) < (k == HandheldKind.STINGER ? 2.5 : 4.0)) {
                         this.setPos(q.x, q.y, q.z);
                         this.detonate(t);
                         return;
@@ -135,7 +135,7 @@ public class AtMissileEntity extends Projectile {
         if (k == HandheldKind.TOW) return this.saclos(sp);
         if (k == HandheldKind.RPG7 || this.tickCount < (k == HandheldKind.JAVELIN ? 5 : 3)) return null;
         Entity t = this.targetId() >= 0 ? this.level().getEntity(this.targetId()) : null;
-        if (k == HandheldKind.IGLA && t != null && !(t instanceof ru.aiforge.realwar.craft.CraftOrdnance)) {
+        if (k.air() && t != null && !(t instanceof ru.aiforge.realwar.craft.CraftOrdnance)) {
             // IR seeker vs decoy flares: a flare inside the seeker's field of view may steal the lock
             Entity decoy = ru.aiforge.realwar.craft.Flares.decoyFor(this, t);
             if (decoy != null) {
@@ -156,7 +156,7 @@ public class AtMissileEntity extends Projectile {
         }
         Vec3 to = tp.subtract(this.position());
         double dist = to.length();
-        if (k == HandheldKind.IGLA) {
+        if (k.air()) {
             double tgo = dist / Math.max(1.0, sp);
             Vec3 lead = tp.add(tv.scale(Math.min(tgo, 40.0)));
             return lead.subtract(this.position()).normalize();

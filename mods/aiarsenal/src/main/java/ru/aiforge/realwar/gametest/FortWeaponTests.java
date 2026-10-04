@@ -147,6 +147,79 @@ public final class FortWeaponTests {
         });
     }
 
+    /** r25 Stinger: the faster IR missile homes onto the same off-axis phantom (impact fuze, 2.5 m tolerance). */
+    @GameTest(template = "arena", batch = "rw_hh", timeoutTicks = 240)
+    public static void stinger_homes_on_air_target(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        int top = floor(h, 15, 15, 14);
+        BlockPos lp = h.absolutePos(new BlockPos(4, 0, 4));
+        Vec3 from = new Vec3(lp.getX() + 0.5, top + 2.0, lp.getZ() + 0.5);
+        Phantom ph = EntityType.PHANTOM.create(level);
+        ph.moveTo(from.x + 18, from.y + 30, from.z + 60, 0, 0);
+        ph.setNoAi(true);
+        ph.setNoGravity(true);
+        ph.setPersistenceRequired();
+        level.addFreshEntity(ph);
+        ServerPlayer p = player(h);
+        p.moveTo(from.x, from.y, from.z, 0, 0);
+        // launched straight up-north, the target is far off-axis -> has to turn
+        TestChunks.path(level, from, ph.position());
+        // gunner fires roughly along the line of sight; the seeker has to correct ~6 degrees
+        Vec3 los = ph.position().subtract(from).normalize();
+        // launch once the forced chunks are entity-ticking (other batches may be generating terrain concurrently)
+        AtMissileEntity[] mm = new AtMissileEntity[1];
+        h.runAfterDelay(20, () -> {
+            mm[0] = AtMissileEntity.launch(level, p, HandheldKind.STINGER, from, los.add(0.1, -0.05, 0).normalize(), ph.getId(), null);
+            TestChunks.follow(mm[0]);
+        });
+        h.onEachTick(() -> {
+            AtMissileEntity m = mm[0];
+            if (m != null && m.isRemoved()) {
+                h.assertTrue(!ph.isAlive() || ph.getHealth() < ph.getMaxHealth(), "Stinger burst without hurting the target: " + AtMissileEntity.lastDetonation + " phantom@" + ph.blockPosition().toShortString());
+                ph.discard();
+                h.succeed();
+            }
+        });
+    }
+
+    /** r25: the Igla-S firearm only launches after the seeker cooled down and locked an air target. */
+    @GameTest(template = "arena", batch = "rw_hh", timeoutTicks = 60)
+    public static void igla_gun_needs_lock_then_fires(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        int top = floor(h, 15, 15, 14);
+        BlockPos lp = h.absolutePos(new BlockPos(4, 0, 4));
+        Vec3 from = new Vec3(lp.getX() + 0.5, top, lp.getZ() + 0.5);
+        Phantom ph = EntityType.PHANTOM.create(level);
+        ph.moveTo(from.x + 2, from.y + 14, from.z + 26, 0, 0);
+        ph.setNoAi(true);
+        ph.setNoGravity(true);
+        ph.setPersistenceRequired();
+        level.addFreshEntity(ph);
+        ServerPlayer p = player(h);
+        p.moveTo(from.x, from.y, from.z, 0, 0);
+        Vec3 to = ph.getBoundingBox().getCenter().subtract(p.getEyePosition());
+        p.setYRot((float) (Math.toDegrees(Math.atan2(-to.x, to.z))));
+        p.setXRot((float) (-Math.toDegrees(Math.atan2(to.y, Math.hypot(to.x, to.z)))));
+        net.minecraft.world.item.ItemStack gun = new net.minecraft.world.item.ItemStack(ModItems.IGLA.get());
+        ru.aiforge.realwar.handheld.FirearmItem.setAmmo(gun, 1);
+        p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, gun);
+        int t = 1;
+        for (; t <= 20; t++) ru.aiforge.realwar.handheld.Firearms.seekerTick(p, gun, ru.aiforge.realwar.handheld.GunKind.IGLA, true, t);
+        h.assertTrue(ru.aiforge.realwar.handheld.Firearms.cool(gun) < 100 && ru.aiforge.realwar.handheld.Firearms.lock(gun) == 0, "seeker locked before cooling down");
+        for (; t <= 120 && ru.aiforge.realwar.handheld.Firearms.lock(gun) < 100; t++)
+            ru.aiforge.realwar.handheld.Firearms.seekerTick(p, gun, ru.aiforge.realwar.handheld.GunKind.IGLA, true, t);
+        h.assertTrue(ru.aiforge.realwar.handheld.Firearms.lock(gun) >= 100 && ru.aiforge.realwar.handheld.Firearms.target(gun) == ph.getId(),
+                "no lock on the phantom after " + t + " ticks: lock " + ru.aiforge.realwar.handheld.Firearms.lock(gun));
+        h.assertTrue(t > 30 + 25, "lock was too fast: " + t);
+        ru.aiforge.realwar.handheld.Firearms.fire(p, gun, ru.aiforge.realwar.handheld.GunKind.IGLA, true);
+        h.assertTrue(ru.aiforge.realwar.handheld.FirearmItem.ammo(gun) == 0 && ru.aiforge.realwar.handheld.Firearms.lock(gun) == 0, "tube not spent / lock not reset");
+        var mm = level.getEntitiesOfClass(AtMissileEntity.class, new net.minecraft.world.phys.AABB(BlockPos.containing(from)).inflate(6));
+        h.assertTrue(!mm.isEmpty() && mm.get(0).kind() == HandheldKind.IGLA, "9M342 not launched");
+        mm.forEach(Entity::discard);
+        ph.discard();
+        h.succeed();
+    }
+
     /** Javelin: from 60 m it climbs well above the launch point, dives and hits the locked BM-21 from above. */
     @GameTest(template = "arena", batch = "rw_hh", timeoutTicks = 260)
     public static void javelin_top_attack(GameTestHelper h) {
@@ -206,11 +279,12 @@ public final class FortWeaponTests {
         p.setYRot((float) (Math.toDegrees(Math.atan2(-to.x, to.z))));
         p.setXRot((float) (-Math.toDegrees(Math.atan2(to.y, Math.hypot(to.x, to.z)))));
         LauncherWeaponItem jav = (LauncherWeaponItem) ModItems.JAVELIN.get();
-        LauncherWeaponItem igla = (LauncherWeaponItem) ModItems.IGLA.get();
         LauncherWeaponItem.Seek s = jav.seek(level, p);
         h.assertTrue(s != null && s.entity() == grad, "Javelin seeker did not pick the BM-21: " + (s == null ? "none" : String.valueOf(s.entity())));
-        LauncherWeaponItem.Seek s2 = igla.seek(level, p);
+        LauncherWeaponItem.Seek s2 = LauncherWeaponItem.seek(level, p, HandheldKind.IGLA);
         h.assertTrue(s2 == null || s2.entity() != grad, "Igla locked a ground vehicle");
+        LauncherWeaponItem.Seek s3 = LauncherWeaponItem.seek(level, p, HandheldKind.STINGER);
+        h.assertTrue(s3 == null || s3.entity() != grad, "Stinger locked a ground vehicle");
         grad.discard();
         h.succeed();
     }

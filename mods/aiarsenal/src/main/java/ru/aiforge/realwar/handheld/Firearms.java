@@ -61,7 +61,7 @@ public final class Firearms {
     static final class State {
         boolean trigger, aiming, semiDone, dryDone;
         float credit;
-        int reload, reloadTotal, cooldown;
+        int reload, reloadTotal, cooldown, aimTicks;
         boolean reloadEmpty;
         Item gun;
     }
@@ -202,6 +202,7 @@ public final class Firearms {
             s.trigger = false;
             s.aiming = false;
             s.credit = 0;
+            s.aimTicks = 0;
             return;
         }
         GunKind k = g.kind;
@@ -241,6 +242,10 @@ public final class Firearms {
         if (s.cooldown > 0) s.cooldown--;
         if (k.boltAction() && s.cooldown == 21) sound(p, "bolt_cycle", 0.8f, 1.0f);   // T-5000: bolt cycled after the shot
         if (k.pumpAction() && s.cooldown == 12) sound(p, "pump_action", 0.9f, 1.0f);  // R870: pump cycled after the shot
+        if (k.manpads()) {                                                               // r25: IR seeker
+            s.aimTicks = s.aiming ? s.aimTicks + 1 : 0;
+            seekerTick(p, stack, k, s.aiming, s.aimTicks);
+        }
         if (!s.trigger) {
             s.credit = 0;
             return;
@@ -258,6 +263,13 @@ public final class Firearms {
         boolean auto = k.auto && (!k.selector() || FirearmItem.mode(stack) == 1);
         if (!auto) {
             if (!s.semiDone && s.cooldown == 0) {
+                if (k.manpads() && lock(stack) < 100) {                  // r25: the launch circuit needs the lock
+                    p.displayClientMessage(net.minecraft.network.chat.Component.translatable(
+                            !s.aiming ? "msg.aiarsenal.gun.aim_first" : cool(stack) < 100 ? "msg.aiarsenal.gun.no_seeker" : "msg.aiarsenal.gun.no_lock"), true);
+                    sound(p, "dry_fire", 0.5f, 1.4f);
+                    s.semiDone = true;
+                    return;
+                }
                 fire(p, stack, k, s.aiming);
                 s.semiDone = true;
                 s.cooldown = k.semiCooldown();
@@ -290,10 +302,21 @@ public final class Firearms {
         Vec3 dir = jitter(look, spread, sl);
         if (k.launcher()) {
             Vec3 right = look.cross(new Vec3(0, 1, 0)).normalize();
-            Vec3 pos = p.getEyePosition().add(look.scale(1.0)).add(right.scale(aiming ? 0.05 : 0.22)).add(0, -0.08, 0);
-            AtMissileEntity.launch(sl, p, HandheldKind.RPG7, pos, dir, -1, null);
-            sl.playSound(null, p.getX(), p.getY(), p.getZ(), ru.aiforge.realwar.registry.ModSounds.ROCKET_LAUNCH_SMALL.get(), SoundSource.PLAYERS, 2.4f, 1.0f);
-            backblast(sl, p, look);
+            int tid = -1;
+            if (k.manpads()) {                                          // r25: the seeker already points the missile
+                int t = target(stack);
+                tid = t == Integer.MIN_VALUE ? -1 : t;
+                dir = look;
+                net.minecraft.nbt.CompoundTag tag = stack.getOrCreateTag();
+                tag.putInt("Lock", 0);
+                tag.putInt("Cool", 0);
+                tag.remove("Tgt");
+            }
+            Vec3 pos = p.getEyePosition().add(look.scale(1.0)).add(right.scale(k.manpads() ? 0.16 : aiming ? 0.05 : 0.22)).add(0, k.manpads() ? -0.02 : -0.08, 0);
+            AtMissileEntity.launch(sl, p, k.missile(), pos, dir, tid, null);
+            sl.playSound(null, p.getX(), p.getY(), p.getZ(), k.manpads() ? ru.aiforge.realwar.registry.ModSounds.SAM_LAUNCH.get()
+                    : ru.aiforge.realwar.registry.ModSounds.ROCKET_LAUNCH_SMALL.get(), SoundSource.PLAYERS, 2.4f, k == GunKind.STINGER ? 1.1f : 1.0f);
+            backblast(sl, p, look, k.manpads() ? 4.0 : 6.0);
         } else {
             int n = k.pellets();
             List<Bullet> l = BULLETS.computeIfAbsent(sl, x -> new ArrayList<>());
@@ -327,9 +350,8 @@ public final class Firearms {
         return d.add(u.scale(Math.cos(a) * r)).add(v.scale(Math.sin(a) * r)).normalize();
     }
 
-    /** RPG-7: ~6 m dangerous cone behind the venturi (burns). */
-    static void backblast(ServerLevel sl, Player p, Vec3 look) {
-        double len = 6.0;
+    /** RPG-7: ~6 m dangerous cone behind the venturi (burns); MANPADS ejection motor ~4 m. */
+    static void backblast(ServerLevel sl, Player p, Vec3 look, double len) {
         Vec3 back = p.getEyePosition().subtract(look.scale(0.5));
         for (int i = 0; i < 16; i++) {
             double f = 0.4 + i / 16.0 * len;
@@ -343,8 +365,67 @@ public final class Firearms {
             double d = to.length();
             if (d > len || d < 1e-3 || to.scale(1 / d).dot(look.reverse()) < 0.75) continue;
             le.hurt(sl.damageSources().inFire(), (float) (6.0 * (1 - d / len) + 1));
-            le.setSecondsOnFire(2);
+            if (len > 5) le.setSecondsOnFire(2);
         }
+    }
+
+    // ------------------------------------------------------------------ r25 MANPADS seeker
+
+    /** seeker cool-down before it sees anything: Igla-S 9B238 NIP ~1.5 s, Stinger BCU (argon) ~1 s */
+    public static int coolTicks(GunKind k) {
+        return k == GunKind.IGLA ? 30 : 20;
+    }
+
+    /** lock progress 0..100 (NBT "Lock") */
+    public static int lock(ItemStack s) {
+        return s.hasTag() ? s.getTag().getInt("Lock") : 0;
+    }
+
+    /** seeker cooling progress 0..100 (NBT "Cool") */
+    public static int cool(ItemStack s) {
+        return s.hasTag() ? s.getTag().getInt("Cool") : 0;
+    }
+
+    /** locked / tracked entity id, Integer.MIN_VALUE = none */
+    public static int target(ItemStack s) {
+        return s.hasTag() && s.getTag().contains("Tgt") ? s.getTag().getInt("Tgt") : Integer.MIN_VALUE;
+    }
+
+    /**
+     * One tick of the IR seeker (public for gametests): while aimed with a missile in the tube the seeker cools down,
+     * then tracks the best air target inside its cone; the lock builds up over HandheldKind.lockTicks and is lost
+     * gradually when the target leaves the cone. The state lives in the item NBT so the HUD and the tone can follow it.
+     */
+    public static void seekerTick(Player p, ItemStack st, GunKind k, boolean aiming, int aimTicks) {
+        net.minecraft.nbt.CompoundTag t = st.getOrCreateTag();
+        int lk = t.getInt("Lock"), cool = t.getInt("Cool");
+        if (!aiming || FirearmItem.ammo(st) <= 0) {
+            if (lk != 0 || cool != 0 || t.contains("Tgt")) {
+                t.putInt("Lock", 0);
+                t.putInt("Cool", 0);
+                t.remove("Tgt");
+            }
+            return;
+        }
+        int c = Math.min(100, aimTicks * 100 / coolTicks(k));
+        if (c != cool) t.putInt("Cool", c);
+        if (c < 100) return;
+        HandheldKind hk = k.missile();
+        LauncherWeaponItem.Seek sk = LauncherWeaponItem.seek(p.level(), p, hk);
+        int prev = t.contains("Tgt") ? t.getInt("Tgt") : Integer.MIN_VALUE;
+        int nl = lk;
+        if (sk == null || sk.entity() == null) {
+            nl = Math.max(0, lk - 12);
+            if (nl == 0) t.remove("Tgt");
+        } else {
+            int id = sk.entity().getId();
+            if (id != prev) nl = 0;
+            nl = Math.min(100, nl + Math.max(1, 100 / hk.lockTicks));
+            if (id != prev) t.putInt("Tgt", id);
+            if (nl >= 100 && lk < 100) p.level().playSound(null, p.getX(), p.getY(), p.getZ(),
+                    ru.aiforge.realwar.registry.ModSounds.LOCK_DONE.get(), SoundSource.PLAYERS, 0.8f, 1.2f);
+        }
+        if (nl != lk) t.putInt("Lock", nl);
     }
 
     // ------------------------------------------------------------------ bullets

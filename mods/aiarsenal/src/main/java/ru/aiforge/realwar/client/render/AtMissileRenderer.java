@@ -17,7 +17,8 @@ public class AtMissileRenderer extends EntityRenderer<AtMissileEntity> {
             new ResourceLocation("aiarsenal", "models/glb/pg7v.glb"),
             new ResourceLocation("aiarsenal", "models/glb/igla_missile.glb"),
             new ResourceLocation("aiarsenal", "models/glb/javelin_missile.glb"),
-            new ResourceLocation("aiarsenal", "models/glb/tow_missile.glb")};
+            new ResourceLocation("aiarsenal", "models/glb/tow_missile.glb"),
+            new ResourceLocation("aiarsenal", "models/glb/stinger_missile.glb")};
 
     public AtMissileRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);

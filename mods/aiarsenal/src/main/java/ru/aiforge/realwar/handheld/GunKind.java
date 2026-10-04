@@ -19,7 +19,11 @@ public enum GunKind {
     // r24: 12-gauge 00 buckshot (9 x 8.4 mm pellets, ~400 m/s). Damage / pen are per pellet; reload of the R870 is per
     // shell (13 ticks; 24 for the first one through the ejection port + pump). Saiga-12K: gas semi-auto, 8-rd box.
     SAIGA12("saiga12", "mag_saiga12", 8, 300, 400, 2.6f, 1.5f, 0.022f, 0.006f, 3.0f, 0.8f, 50, 63, 0.85f, "shotgun_saiga", false),
-    R870("r870", "shell_12", 4, 70, 400, 2.6f, 1.5f, 0.022f, 0.006f, 3.4f, 0.9f, 13, 24, 0.85f, "shotgun_870", false);
+    R870("r870", "shell_12", 4, 70, 400, 2.6f, 1.5f, 0.022f, 0.006f, 3.4f, 0.9f, 13, 24, 0.85f, "shotgun_870", false),
+    // r25 MANPADS: one missile per launch tube; the gripstock is moved onto a fresh tube (5 s). Hold RMB on the target:
+    // the seeker cools (Igla-S 1.5 s, Stinger 1 s), then locks (tone); LMB launches only when locked.
+    IGLA("igla", "igla_missile", 1, 0, 0, 0f, 0f, 0.020f, 0.006f, 2.0f, 0.6f, 100, 100, 0.80f, "", false),
+    STINGER("stinger", "stinger_missile", 1, 0, 0, 0f, 0f, 0.020f, 0.006f, 2.0f, 0.6f, 100, 100, 0.80f, "", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;
@@ -47,7 +51,17 @@ public enum GunKind {
     }
 
     public boolean launcher() {
-        return this == RPG7;
+        return this == RPG7 || this.manpads();
+    }
+
+    /** r25 IR-homing shoulder-launched SAMs (Igla-S, Stinger) */
+    public boolean manpads() {
+        return this == IGLA || this == STINGER;
+    }
+
+    /** the munition this launcher fires */
+    public HandheldKind missile() {
+        return this == IGLA ? HandheldKind.IGLA : this == STINGER ? HandheldKind.STINGER : HandheldKind.RPG7;
     }
 
     /** manual bolt: one aimed shot, then the bolt is cycled (~1.3 s) */

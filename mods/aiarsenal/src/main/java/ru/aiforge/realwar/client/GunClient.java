@@ -1,5 +1,7 @@
 package ru.aiforge.realwar.client;
 
+import net.minecraft.world.phys.Vec3;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,6 +42,7 @@ public final class GunClient {
     private static int zoomIdx = 1;
     private static final int[] ZOOM = {5, 8, 12, 18, 25};
     private static Double sensSaved;
+    private static int toneT;
     private static final java.util.Random RND = new java.util.Random();
 
     private GunClient() {
@@ -166,11 +169,20 @@ public final class GunClient {
         boolean b = AircraftClient.KEY_BRAKE.isDown();
         while (AircraftClient.KEY_BRAKE.consumeClick()) bc = true;
         if ((bc || b && !bPrev) && k.selector()) send(Firearms.MODE);
-        else if ((bc || b && !bPrev) && k.launcher()) {
+        else if ((bc || b && !bPrev) && k == GunKind.RPG7) {
             rpgOptic = !rpgOptic;                                            // r23: PGO-7V3 <-> iron sights
             p.playSound(ru.aiforge.realwar.registry.ModSounds.SELECTOR.get(), 0.5f, 0.8f);
         }
         bPrev = b;
+        if (k.manpads() && aim && ads > 0.5f && !reloading && FirearmItem.ammo(p.getMainHandItem()) > 0) {
+            // r25 seeker tone: silent while cooling, slow growl searching, faster while locking, high and steady when locked
+            ItemStack st = p.getMainHandItem();
+            int lk = Firearms.lock(st), cl = Firearms.cool(st);
+            int period = cl < 100 ? 0 : lk >= 100 ? 3 : lk > 0 ? 6 : 14;
+            if (period > 0 && ++toneT % period == 0)
+                p.level().playLocalSound(p.getX(), p.getY(), p.getZ(), ru.aiforge.realwar.registry.ModSounds.LOCK_TONE.get(),
+                        net.minecraft.sounds.SoundSource.PLAYERS, 0.35f, lk >= 100 ? 1.6f : 0.8f + lk / 200f, false);
+        }
         if (reloading && reloadTime() > (reloadEmpty ? k.reloadEmpty : k.reload) / 20f + 1.0f) reloading = false;
     }
 
@@ -309,6 +321,7 @@ public final class GunClient {
         } else if (a < 0.4f) {
             hipCross(g, w, h, k, p, 1f - a / 0.4f);
         }
+        if (k.manpads() && a > 0.5f && !reloading && FirearmItem.ammo(p.getMainHandItem()) > 0) seeker(g, mc.font, p, k, w, h, pt);
         panel(g, mc.font, p, k, w, h);
     }
 
@@ -354,7 +367,8 @@ public final class GunClient {
         String name = Component.translatable("hud.aiarsenal.gun.name." + k.id).getString();
         java.util.List<WtHud.Slot> sl = java.util.List.of(new WtHud.Slot(k.launcher() ? 3 : 2, ammo, k.cap, true, rem, name));
         StringBuilder b = new StringBuilder(name).append("  \u00b7  ");
-        if (k.launcher()) b.append(Component.translatable("hud.aiarsenal.gun.pg7vl").getString()).append("  \u00b7  ")
+        if (k.manpads()) b.append(Component.translatable("hud.aiarsenal.gun.m." + k.id).getString());
+        else if (k.launcher()) b.append(Component.translatable("hud.aiarsenal.gun.pg7vl").getString()).append("  \u00b7  ")
                 .append(Component.translatable(rpgOptic ? "hud.aiarsenal.gun.pgo" : "hud.aiarsenal.gun.irons").getString());
         else if (k.scope()) b.append(zoom()).append("\u00d7");
         else b.append(Component.translatable(auto ? "hud.aiarsenal.gun.auto" : "hud.aiarsenal.gun.semi").getString());
@@ -371,6 +385,65 @@ public final class GunClient {
         g.pose().pushPose();
         g.pose().translate(band / 2f + 3 - w / 2f, 0, 0);
         WtHud.drawSlots(g, f, sl, b.toString(), col, w, h, ActionBar.gun(k, k.launcher() ? rpgOptic : auto, reloading), band);
+        g.pose().popPose();
+    }
+
+    // ------------------------------------------------------------------ r25 MANPADS seeker overlay
+
+    /**
+     * Seeker field of view (circle of the real cone), its state under it (cooling / search / locking / locked) and a
+     * small diamond on the tracked target with its range; colours like the WT crosshair (green / amber / red).
+     */
+    private static void seeker(GuiGraphics g, Font f, Player p, GunKind k, int w, int h, float pt) {
+        ItemStack st = p.getMainHandItem();
+        int lk = Firearms.lock(st), cl = Firearms.cool(st);
+        float fovV = (float) (Minecraft.getInstance().options.fov().get() * adsFactor(k));
+        float ppd = h / fovV;
+        int cx = w / 2, cy = h / 2;
+        int r = Math.max(6, Math.round(k.missile().cone * ppd));
+        int col = cl < 100 ? 0xB0B0B0B0 : lk >= 100 ? 0xFFFF3030 : lk > 0 ? 0xFFFFC020 : 0xD040FF60;
+        int n = Math.max(24, r * 2);
+        for (int i = 0; i < n; i++) {
+            double t = Math.PI * 2 * i / n;
+            int x = cx + (int) Math.round(Math.cos(t) * r), y = cy + (int) Math.round(Math.sin(t) * r);
+            g.fill(x, y, x + 1, y + 1, col);
+        }
+        String state = cl < 100 ? Component.translatable("hud.aiarsenal.gun.cooling", cl).getString()
+                : lk >= 100 ? Component.translatable("hud.aiarsenal.gun.locked").getString()
+                : lk > 0 ? Component.translatable("hud.aiarsenal.hh.locking", lk).getString()
+                : Component.translatable("hud.aiarsenal.hh.search").getString();
+        g.pose().pushPose();
+        g.pose().translate(cx, cy + r + 5, 0);
+        g.pose().scale(0.75f, 0.75f, 1f);
+        g.drawCenteredString(f, state, 0, 0, col);
+        g.pose().popPose();
+        int tid = Firearms.target(st);
+        net.minecraft.world.entity.Entity t = tid != Integer.MIN_VALUE ? p.level().getEntity(tid) : null;
+        if (t == null) return;
+        Vec3 eye = p.getEyePosition(pt);
+        Vec3 to = t.getBoundingBox().getCenter().subtract(eye);
+        double dist = to.length();
+        to = to.normalize();
+        Vec3 fwd = p.getViewVector(pt);
+        Vec3 right = fwd.cross(new Vec3(0, 1, 0));
+        if (right.lengthSqr() < 1e-6) return;
+        right = right.normalize();
+        Vec3 up = right.cross(fwd).normalize();
+        double z = to.dot(fwd);
+        if (z < 0.05) return;
+        float sx = cx + (float) Math.toDegrees(Math.atan(to.dot(right) / z)) * ppd;
+        float sy = cy - (float) Math.toDegrees(Math.atan(to.dot(up) / z)) * ppd;
+        int x = Math.round(sx), y = Math.round(sy), d = 5;
+        for (int i = 0; i <= d; i++) {
+            g.fill(x - d + i, y - i, x - d + i + 1, y - i + 1, col);
+            g.fill(x + d - i, y - i, x + d - i + 1, y - i + 1, col);
+            g.fill(x - d + i, y + i, x - d + i + 1, y + i + 1, col);
+            g.fill(x + d - i, y + i, x + d - i + 1, y + i + 1, col);
+        }
+        g.pose().pushPose();
+        g.pose().translate(x + d + 3, y - 3, 0);
+        g.pose().scale(0.7f, 0.7f, 1f);
+        g.drawString(f, Math.round(dist) + " m", 0, 0, col, true);
         g.pose().popPose();
     }
 

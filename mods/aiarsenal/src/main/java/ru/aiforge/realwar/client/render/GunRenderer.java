@@ -109,7 +109,9 @@ public final class GunRenderer {
             pose.scale(k.id + ".flash", fs, fs, fs);
         }
         if (!k.launcher() && !k.manual() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -0.075f * (1f - since / 0.06f));
-        if (k.launcher() && FirearmItem.ammo(st) == 0 && !rel) pose.hide("rpg7.round", true);
+        // spent tube: no grenade (RPG-7) / open muzzle without the seeker dome or covers (MANPADS) until the fresh tube is on
+        if (k.launcher() && FirearmItem.ammo(st) == 0 && (!rel || k.manpads() && GunClient.reloadTime() < k.reload / 20f * 0.4f))
+            pose.hide(k.id + ".round", true);
         pose.compute();
         int light = flash ? 0xF000F0 : e.getPackedLight();
         GlbRenderer.render(lm, pose, ps, e.getMultiBufferSource(), light, OverlayTexture.NO_OVERLAY);
@@ -258,7 +260,7 @@ public final class GunRenderer {
             pose.hide(id + ".arm_l", true);
             pose.hide(id + ".arm_r", true);
             pose.hide(id + ".flash", true);
-            if (stack.getItem() instanceof FirearmItem && FirearmItem.ammo(stack) == 0 && ctx != ItemDisplayContext.GUI) pose.hide("rpg7.round", true);
+            if (stack.getItem() instanceof FirearmItem && FirearmItem.ammo(stack) == 0 && ctx != ItemDisplayContext.GUI) pose.hide(id + ".round", true);
             pose.compute();
             GlbRenderer.render(lm, pose, ps, buf, light, OverlayTexture.NO_OVERLAY);
             ps.popPose();

@@ -184,15 +184,21 @@ public class LauncherWeaponItem extends Item {
     /** Best target in the seeker cone: Igla = air targets; Javelin = vehicles/mobs, else the aimed block (point lock). */
     @Nullable
     public Seek seek(Level level, Player p) {
+        return seek(level, p, this.kind);
+    }
+
+    /** r25: shared with the Igla-S / Stinger firearms */
+    @Nullable
+    public static Seek seek(Level level, Player p, HandheldKind kind) {
         Vec3 eye = p.getEyePosition();
         Vec3 look = p.getLookAngle();
-        double cos = Math.cos(Math.toRadians(this.kind.cone));
-        double r = this.kind.range;
+        double cos = Math.cos(Math.toRadians(kind.cone));
+        double r = kind.range;
         Entity best = null;
         double bestDot = cos;
-        AABB box = new AABB(eye, eye.add(look.scale(r))).inflate(r * Math.sin(Math.toRadians(this.kind.cone)) + 8);
+        AABB box = new AABB(eye, eye.add(look.scale(r))).inflate(r * Math.sin(Math.toRadians(kind.cone)) + 8);
         for (Entity e : level.getEntities(p, box, x -> x.isAlive() && x != p.getVehicle())) {
-            boolean ok = this.kind == HandheldKind.IGLA ? AirTargets.isAirTarget(e) || airborne(e) : ground(e);
+            boolean ok = kind.air() ? AirTargets.isAirTarget(e) || airborne(e) : ground(e);
             if (!ok) continue;
             Vec3 to = e.getBoundingBox().getCenter().subtract(eye);
             double d = to.length();
@@ -204,7 +210,7 @@ public class LauncherWeaponItem extends Item {
             bestDot = dot;
         }
         if (best != null) return new Seek(best, best.getBoundingBox().getCenter());
-        if (this.kind == HandheldKind.JAVELIN) {
+        if (kind == HandheldKind.JAVELIN) {
             BlockHitResult bh = level.clip(new ClipContext(eye, eye.add(look.scale(r)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p));
             if (bh.getType() == HitResult.Type.BLOCK && bh.getLocation().distanceTo(eye) > 20) return new Seek(null, bh.getLocation());
         }

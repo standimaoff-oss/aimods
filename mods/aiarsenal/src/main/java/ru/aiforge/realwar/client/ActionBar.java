@@ -87,7 +87,7 @@ public final class ActionBar {
         List<Chip> l = new java.util.ArrayList<>();
         l.add(c(VehicleClient.KEY_RELOAD, I_RELOAD, reloading ? Chip.ACTIVE : Chip.NORMAL));
         if (k.selector()) l.add(c(AircraftClient.KEY_BRAKE, I_AUTO, auto ? Chip.ACTIVE : Chip.NORMAL));
-        else if (k.launcher()) l.add(c(AircraftClient.KEY_BRAKE, I_SIGHT, auto ? Chip.ACTIVE : Chip.NORMAL));   // r23: PGO-7V3 on/off
+        else if (k == ru.aiforge.realwar.handheld.GunKind.RPG7) l.add(c(AircraftClient.KEY_BRAKE, I_SIGHT, auto ? Chip.ACTIVE : Chip.NORMAL));   // r23: PGO-7V3 on/off
         return l;
     }
 
