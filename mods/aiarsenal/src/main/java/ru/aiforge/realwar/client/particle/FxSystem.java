@@ -55,12 +55,24 @@ public final class FxSystem {
     }
 
     public static void tick() {
-        Iterator<FxParticle> it = ALL.iterator();
-        while (it.hasNext()) {
-            FxParticle p = it.next();
+        int n = ALL.size();
+        int w = 0;
+        for (int i = 0; i < n; ++i) {
+            FxParticle p = ALL.get(i);
+            if (p == null) continue;
             p.tick();
-            if (p.isAlive()) continue;
-            it.remove();
+            if (p.isAlive()) {
+                ALL.set(w++, p);
+            }
+        }
+        for (int i = n, sz = ALL.size(); i < sz; ++i) {
+            FxParticle p = ALL.get(i);
+            if (p != null && p.isAlive()) {
+                ALL.set(w++, p);
+            }
+        }
+        if (w < ALL.size()) {
+            ALL.subList(w, ALL.size()).clear();
         }
     }
 
@@ -83,7 +95,9 @@ public final class FxSystem {
         Minecraft mc = Minecraft.getInstance();
         Vec3 cp = camera.getPosition();
         VISIBLE.clear();
-        for (FxParticle p : ALL) {
+        for (int i = 0, sz = ALL.size(); i < sz; ++i) {
+            FxParticle p = ALL.get(i);
+            if (p == null) continue;
             if (frustum != null && !frustum.isVisible(p.getBoundingBox())) continue;
             double dx = p.lerpX(partial) - cp.x;
             double dy = p.lerpY(partial) - cp.y;

@@ -170,6 +170,18 @@ extends VehicleEntity {
         this.setLoadedMask(this.kind.magazine >= 64 ? -1L : (1L << this.kind.magazine) - 1L);
     }
 
+    public void deployOnPad(float azDeg, float elDeg) {
+        if (this.kind.magazine > 0) {
+            this.fillMagazine();
+        }
+        this.stationaryTicks = 100;
+        this.entityData.set(JACK, Float.valueOf(1.0f));
+        this.entityData.set(AZ, Float.valueOf(azDeg));
+        this.entityData.set(EL, Float.valueOf(elDeg));
+        this.azVis = this.azVisO = azDeg;
+        this.elVis = this.elVisO = elDeg;
+    }
+
     public int reloadTube() {
         return (Integer)this.entityData.get(RELOAD_TUBE);
     }
@@ -560,9 +572,13 @@ extends VehicleEntity {
         this.setLoadedMask(tag.contains("loaded") ? tag.getLong("loaded") : 0L);
         this.entityData.set(AZ, Float.valueOf(tag.getFloat("az")));
         this.entityData.set(EL, Float.valueOf(tag.contains("el") ? tag.getFloat("el") : this.kind.elMin));
-        this.entityData.set(JACK, Float.valueOf(0.0f));
-        this.azVis = this.az();
-        this.elVis = this.el();
+        float jk = tag.contains("jack") ? tag.getFloat("jack") : 0.0f;
+        this.entityData.set(JACK, Float.valueOf(jk));
+        if (jk > 0.5f) {
+            this.stationaryTicks = 60;
+        }
+        this.azVis = this.azVisO = this.az();
+        this.elVis = this.elVisO = this.el();
     }
 
     @Override
@@ -571,6 +587,7 @@ extends VehicleEntity {
         tag.putLong("loaded", this.loadedMask());
         tag.putFloat("az", this.az());
         tag.putFloat("el", this.el());
+        tag.putFloat("jack", this.jack());
     }
 }
 

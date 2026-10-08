@@ -22,8 +22,9 @@ import net.minecraft.world.level.ItemLike;
 public enum ModArmorMaterial implements ArmorMaterial
 {
     HAZMAT("hazmat", 18, new int[]{1, 2, 3, 1}, 6, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f),
-    /** r15 uniforms: field kit (ballistic helmet, Ratnik / OCP) and service dress. {feet, legs, chest, head} */
+    /** r15 uniforms: field kit (ballistic helmet, Ratnik / OCP), WWII SN-42 steel armor, and service dress. {feet, legs, chest, head} */
     UNIFORM_FIELD("uniform_field", 14, new int[]{1, 2, 3, 2}, 12, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f),
+    UNIFORM_ARMORED("uniform_armored", 18, new int[]{2, 3, 6, 3}, 12, SoundEvents.ARMOR_EQUIP_IRON, 1.5f, 0.05f),
     UNIFORM_DRESS("uniform_dress", 10, new int[]{1, 1, 2, 1}, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f);
 
     private static final int[] BASE_DURABILITY;

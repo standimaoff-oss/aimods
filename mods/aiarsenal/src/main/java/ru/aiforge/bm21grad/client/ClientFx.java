@@ -90,6 +90,9 @@ public final class ClientFx {
         switch (p.kind()) {
             case FxPacket.HE, FxPacket.BLAST -> {
                 int k = p.kind() == FxPacket.BLAST ? 2 : 1;
+                ru.aiforge.realwar.client.fx.ClientBlastManager.startConv(
+                        new ru.aiforge.realwar.network.ConventionalEffectPacket(x, y, z, 22.0f * k * k, true, r.nextLong())
+                );
                 lv.addAlwaysVisibleParticle(ParticleTypes.FLASH, true, x, y + 1, z, 0, 0, 0);
                 lv.addAlwaysVisibleParticle(ParticleTypes.EXPLOSION_EMITTER, true, x, y + 0.5, z, 0, 0, 0);
                 for (int i = 0; i < 70 * k; i++)

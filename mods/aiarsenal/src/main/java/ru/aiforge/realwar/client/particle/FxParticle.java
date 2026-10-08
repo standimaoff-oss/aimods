@@ -89,6 +89,18 @@ extends TextureSheetParticle {
         this.z = nz;
     }
 
+    public double x() {
+        return this.x;
+    }
+
+    public double y() {
+        return this.y;
+    }
+
+    public double z() {
+        return this.z;
+    }
+
     public void translate(double dx, double dy, double dz) {
         this.x += dx;
         this.y += dy;

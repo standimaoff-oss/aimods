@@ -217,6 +217,22 @@ public final class GunClient {
                     if (p != null && p.isCrouching()) m *= 0.75f;
                     pendP += k.recoilPitch * m * (0.85f + RND.nextFloat() * 0.3f);
                     pendY += k.recoilYaw * m * (RND.nextFloat() * 2f - 0.8f);    // slight right drift like a real AK / AR
+                    if (p != null && p.level() instanceof net.minecraft.client.multiplayer.ClientLevel cl) {
+                        net.minecraft.world.phys.Vec3 look = p.getLookAngle();
+                        net.minecraft.world.phys.Vec3 right = look.cross(new net.minecraft.world.phys.Vec3(0.0, 1.0, 0.0));
+                        if (right.lengthSqr() > 1.0E-4) right = right.normalize();
+                        double sideOff = ads > 0.5f ? 0.04 : 0.22;
+                        net.minecraft.world.phys.Vec3 muzzle = p.getEyePosition()
+                                .add(look.scale(k.launcher() ? 0.95 : 0.82))
+                                .add(right.scale(sideOff))
+                                .add(0.0, -0.14, 0.0);
+                        if (k.launcher()) {
+                            ru.aiforge.realwar.client.fx.TrailFx.launch(cl, muzzle, look, 0, 1.1);
+                        } else {
+                            float cal = k.damage >= 18f ? 1.45f : (k.damage >= 9f ? 1.0f : 0.68f);
+                            ru.aiforge.realwar.client.fx.TrailFx.smallArmsShot(cl, muzzle, look, right, cal);
+                        }
+                    }
                 }
             }
             case GunFxPacket.RELOAD, GunFxPacket.RELOAD_EMPTY -> {

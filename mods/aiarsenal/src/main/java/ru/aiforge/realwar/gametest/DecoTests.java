@@ -132,7 +132,7 @@ public final class DecoTests {
         h.succeed();
     }
 
-    /** r15/r19: all 64 uniform pieces registered, in the right slots, with field/dress armour, craftable, and a zombie wears them. */
+    /** r15/r19/ww2: all 88 uniform pieces registered, in the right slots, with field/armored/dress armour, craftable, and a zombie wears them. */
     @GameTest(template = "arena", batch = "rw_deco", timeoutTicks = 40)
     public static void uniforms_registered_and_wearable(GameTestHelper h) {
         ServerLevel l = h.getLevel();
@@ -141,12 +141,16 @@ public final class DecoTests {
             if (!(e.getValue().get() instanceof ru.aiforge.realwar.item.UniformItem u)) { h.fail("not uniform " + e.getKey()); return; }
             String slot = ru.aiforge.realwar.item.UniformItem.slotName(u.getType());
             if (!e.getKey().endsWith("_" + slot)) { h.fail("slot mismatch " + e.getKey()); return; }
-            boolean field = ru.aiforge.realwar.item.UniformItem.field(u.set);
-            if (u.getMaterial() != (field ? ru.aiforge.realwar.item.ModArmorMaterial.UNIFORM_FIELD : ru.aiforge.realwar.item.ModArmorMaterial.UNIFORM_DRESS)) { h.fail("material " + e.getKey()); return; }
+            ru.aiforge.realwar.item.ModArmorMaterial expected = "rkka_rifleman".equals(u.set)
+                    ? ru.aiforge.realwar.item.ModArmorMaterial.UNIFORM_ARMORED
+                    : (ru.aiforge.realwar.item.UniformItem.field(u.set)
+                            ? ru.aiforge.realwar.item.ModArmorMaterial.UNIFORM_FIELD
+                            : ru.aiforge.realwar.item.ModArmorMaterial.UNIFORM_DRESS);
+            if (u.getMaterial() != expected) { h.fail("material " + e.getKey()); return; }
             if (l.getRecipeManager().byKey(new net.minecraft.resources.ResourceLocation("aiarsenal", e.getKey())).isEmpty()) { h.fail("no recipe " + e.getKey()); return; }
             n++;
         }
-        if (n != ru.aiforge.realwar.item.UniformItem.SETS.length * 4 || n != 64) { h.fail("uniform count " + n); return; }
+        if (n != ru.aiforge.realwar.item.UniformItem.SETS.length * 4 || n != 88) { h.fail("uniform count " + n); return; }
         var z = h.spawn(EntityType.ZOMBIE, new BlockPos(2, 2, 2));
         z.setNoAi(true);
         final int base = z.getArmorValue();

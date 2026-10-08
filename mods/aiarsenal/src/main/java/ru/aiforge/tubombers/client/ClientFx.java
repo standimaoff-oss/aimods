@@ -92,6 +92,9 @@ public final class ClientFx {
             case FxPacket.HEAVY -> 2.6f;
             default -> 1.8f;
         };
+        ru.aiforge.realwar.client.fx.ClientBlastManager.startConv(
+                new ru.aiforge.realwar.network.ConventionalEffectPacket(x, y, z, 85.0f * k * k, true, r.nextLong())
+        );
         lv.addAlwaysVisibleParticle(ParticleTypes.FLASH, true, x, y + 1, z, 0, 0, 0);
         lv.addAlwaysVisibleParticle(ParticleTypes.EXPLOSION_EMITTER, true, x, y + 0.5, z, 0, 0, 0);
         // ejecta of the real ground material

@@ -71,25 +71,14 @@ public final class BattleshipFx {
             FxSystem.add(f);
         }
         TrailFx.muzzleFlash(level, m, dir);
-        // brown cordite cloud rolling forward, then drifting
-        int n = main ? 22 : 8;
+        // brown cordite cloud rolling forward with physical buoyancy, wind shear, and curl turbulence
+        int n = main ? 26 : 10;
         for (int k = 0; k < n; k++) {
             double d = R.nextDouble() * s * 6;
             Vec3 p = m.add(dir.scale(d)).add(R.nextGaussian() * s * 0.6, R.nextGaussian() * s * 0.4, R.nextGaussian() * s * 0.6);
-            FxParticle c = new FxParticle(level, p.x, p.y, p.z, Sprites.smoke(R.nextInt(4)), main ? 140 : 70, false, s);
-            double sp = (1 - d / (s * 6)) * (main ? 0.8 : 0.4);
-            c.velocity(dir.x * sp, dir.y * sp + 0.02, dir.z * sp);
-            int life = main ? 140 : 70;
-            float base = s;
-            c.motion = (pp, age) -> {
-                float ff = age / (float) life;
-                pp.translate(pp.getDeltaX(), pp.getDeltaY() + 0.01, pp.getDeltaZ());
-                pp.scaleVelocity(0.9);
-                pp.size = base * (1.0f + 3.5f * ff);
-                pp.color(0.62f, 0.57f, 0.5f);
-                pp.alpha(0.55f * (1 - ff));
-            };
-            FxSystem.add(c);
+            double sp = (1 - d / (s * 6)) * (main ? 0.85 : 0.45);
+            Vec3 vel = new Vec3(dir.x * sp, dir.y * sp + 0.02, dir.z * sp);
+            TrailFx.physicalSmoke(level, p, vel, s * 1.15, false, main ? 0.92f : 0.78f, 0.65f, false, b.getY() + b.kind.water.draft());
         }
         if (main) {
             // blast pressure flattening the sea beside the hull
