@@ -777,25 +777,25 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
         set(level, o.offset(2, 5, -11), ModBlocks.BEACON_RED.get().defaultBlockState().setValue(LampBlock.LIT, true));
         placeStandingWarningSign(level, o.offset(-2, 5, -7), ModBlocks.WARNING_SIGN_RADIATION.get(), Direction.SOUTH);
 
-        // 4. West Hardened S-400 SAM Launch Pad & Revetment on the Bunker Roof (dx = -11..-4, dz = -8..+1, dy = +1)
+        // 4. West Hardened S-400 SAM Launch Pad & Revetment on the Bunker Roof (dx = -11..-4, dz = -9..0, dy = +1)
         for (int dx = -10; dx <= -5; dx++) {
-            for (int dz = -7; dz <= 0; dz++) {
-                boolean padBorder = (dx == -10 || dx == -5 || dz == -7 || dz == 0);
+            for (int dz = -8; dz <= 0; dz++) {
+                boolean padBorder = (dx == -10 || dx == -5 || dz == -8 || dz == 0);
                 set(level, o.offset(dx, 1, dz), padBorder ? hazardSt : steelSt);
             }
         }
         // U-shaped Sandbag Blast Revetment around the S-400 pad (dy = +2..+3)
         BlockState sandbag = ModBlocks.SANDBAGS.get().defaultBlockState();
         for (int dx = -11; dx <= -4; dx++) {
-            set(level, o.offset(dx, 2, -8), sandbag);
-            set(level, o.offset(dx, 3, -8), sandbag);
+            set(level, o.offset(dx, 2, -9), sandbag);
+            set(level, o.offset(dx, 3, -9), sandbag);
         }
-        for (int dz = -8; dz <= 0; dz++) {
+        for (int dz = -9; dz <= 0; dz++) {
             set(level, o.offset(-11, 2, dz), sandbag);
             set(level, o.offset(-11, 3, dz), sandbag);
         }
-        SiteUtil.placeCrate(level, o.offset(-10, 2, -7), ModBlocks.CRATE_AMMO.get(), Direction.SOUTH, rand);
-        set(level, o.offset(-4, 2, -8), ModBlocks.BEACON_RED.get().defaultBlockState().setValue(LampBlock.LIT, true));
+        SiteUtil.placeCrate(level, o.offset(-10, 2, -8), ModBlocks.CRATE_AMMO.get(), Direction.SOUTH, rand);
+        set(level, o.offset(-4, 2, -9), ModBlocks.BEACON_RED.get().defaultBlockState().setValue(LampBlock.LIT, true));
 
         // 5. East Hardened Mobile Radar Pad on the Bunker Roof (dx = +4..+10, dz = -7..0, dy = +1)
         for (int dx = 5; dx <= 9; dx++) {
@@ -1049,9 +1049,9 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
             old.discard();
         }
 
-        // 1. S-400 "Triumph" SAM Launcher on the West Bunker Roof Revetment (dx = -7.5, dy = +2.05, dz = -3.5)
+        // 1. S-400 "Triumph" SAM Launcher on the West Bunker Roof Revetment (dx = -7.5, dy = +2.05, dz = -4.8)
         SamLauncherEntity s400 = new SamLauncherEntity(ModEntities.S400.get(), level.getLevel(), VehicleKind.S400);
-        s400.moveTo(o.getX() - 7.5, o.getY() + 2.05, o.getZ() - 3.5, 0.0f, 0.0f);
+        s400.moveTo(o.getX() - 7.5, o.getY() + 2.05, o.getZ() - 4.8, 0.0f, 0.0f);
         s400.setCombatDuty(true);
         level.addFreshEntity(s400);
 
