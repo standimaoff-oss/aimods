@@ -131,6 +131,7 @@ public final class VehicleClient {
             TrailFx.rocketTick(e);
             RocketSound.tick(e);
         };
+        ru.aiforge.realwar.handheld.AtMissileEntity.clientHook = TrailFx::handheldRocketTick;
     }
 
     private static float[] input(VehicleEntity v) {

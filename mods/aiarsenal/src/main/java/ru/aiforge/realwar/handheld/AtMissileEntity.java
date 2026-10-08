@@ -34,6 +34,7 @@ public class AtMissileEntity extends Projectile {
     private double apex;
     public static int detonations;    // gametest counter
     public static String lastDetonation = "";
+    public static java.util.function.Consumer<AtMissileEntity> clientHook = e -> {};
 
     public AtMissileEntity(EntityType<? extends AtMissileEntity> type, Level level) {
         super(type, level);
@@ -226,15 +227,7 @@ public class AtMissileEntity extends Projectile {
     }
 
     private void trail(HandheldKind k, Vec3 v) {
-        Vec3 back = this.position().subtract(v.normalize().scale(0.6));
-        Level l = this.level();
-        boolean motor = k != HandheldKind.RPG7 || this.tickCount < 8;
-        if (motor) l.addParticle(ParticleTypes.FLAME, back.x, back.y, back.z, 0, 0, 0);
-        for (int i = 0; i < (k == HandheldKind.RPG7 ? 2 : 3); i++) {
-            double f = i / 3.0;
-            l.addParticle(motor ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, back.x - v.x * f, back.y - v.y * f, back.z - v.z * f,
-                    (this.random.nextDouble() - 0.5) * 0.02, 0.01, (this.random.nextDouble() - 0.5) * 0.02);
-        }
+        clientHook.accept(this);
     }
 
     @Override

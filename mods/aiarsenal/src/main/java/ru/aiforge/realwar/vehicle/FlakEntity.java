@@ -94,6 +94,14 @@ extends VehicleEntity {
         this.entityData.set(AMMO, Mth.clamp((int)a, (int)0, (int)100));
     }
 
+    public void deployOnPosition(float azDeg, float elDeg) {
+        this.setAmmo(CAPACITY);
+        this.entityData.set(TAZ, Float.valueOf(azDeg));
+        this.entityData.set(TEL, Float.valueOf(elDeg));
+        this.azVis = this.azVisO = azDeg;
+        this.elVis = this.elVisO = elDeg;
+    }
+
     public boolean firing() {
         return (Boolean)this.entityData.get(FIRING);
     }

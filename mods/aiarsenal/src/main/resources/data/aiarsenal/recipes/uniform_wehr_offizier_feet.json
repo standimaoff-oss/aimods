@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "W W",
+    "WCI"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:cyan_wool"
+    },
+    "C": {
+      "item": "minecraft:leather"
+    },
+    "I": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "result": {
+    "item": "aiarsenal:uniform_wehr_offizier_feet"
+  }
+}

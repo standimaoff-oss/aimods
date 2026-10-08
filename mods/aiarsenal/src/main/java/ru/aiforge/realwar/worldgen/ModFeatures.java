@@ -13,6 +13,8 @@ public final class ModFeatures {
             () -> new WreckSiteFeature(NoneFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> SUPPLY_CACHE = FEATURES.register("supply_cache",
             () -> new SupplyCacheFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> MILITARY_BASE = FEATURES.register("military_base",
+            MilitaryBaseFeature::new);
 
     private ModFeatures() {
     }

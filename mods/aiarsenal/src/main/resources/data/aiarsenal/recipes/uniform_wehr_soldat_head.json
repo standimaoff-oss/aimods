@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "WWW",
+    "WCI"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:cyan_wool"
+    },
+    "C": {
+      "item": "minecraft:leather"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "aiarsenal:uniform_wehr_soldat_head"
+  }
+}

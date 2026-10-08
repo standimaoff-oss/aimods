@@ -54,6 +54,7 @@ public final class RWConfig {
         public final ForgeConfigSpec.IntValue flakRange;
         public final ForgeConfigSpec.BooleanValue wreckSites;
         public final ForgeConfigSpec.BooleanValue supplyCaches;
+        public final ForgeConfigSpec.BooleanValue militaryBases;
 
         Common(ForgeConfigSpec.Builder b) {
             b.comment("\u042f\u0434\u0435\u0440\u043d\u044b\u0435 \u0432\u0437\u0440\u044b\u0432\u044b").push("nuclear");
@@ -84,6 +85,7 @@ public final class RWConfig {
             b.comment("Worldgen (r17)").push("worldgen");
             this.wreckSites = b.comment("Burnt-out vehicle wreck sites with loot crates (~1 per 160 chunks)").define("wreckSites", true);
             this.supplyCaches = b.comment("Sandbagged supply caches with loot crates (~1 per 120 chunks)").define("supplyCaches", true);
+            this.militaryBases = b.comment("Fortified Air-Defense (PVO) military bases with multi-room underground command bunkers (~1 per 320 chunks)").define("militaryBases", true);
             b.pop();
         }
     }

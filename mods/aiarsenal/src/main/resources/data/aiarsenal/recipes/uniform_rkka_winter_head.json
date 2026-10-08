@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "WWW",
+    "WCI"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:brown_wool"
+    },
+    "C": {
+      "item": "minecraft:leather"
+    },
+    "I": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "result": {
+    "item": "aiarsenal:uniform_rkka_winter_head"
+  }
+}

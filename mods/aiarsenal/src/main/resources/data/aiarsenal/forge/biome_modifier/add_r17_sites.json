@@ -3,7 +3,8 @@
  "biomes": "#minecraft:is_overworld",
  "features": [
   "aiarsenal:wreck_site",
-  "aiarsenal:supply_cache"
+  "aiarsenal:supply_cache",
+  "aiarsenal:military_base"
  ],
  "step": "surface_structures"
 }

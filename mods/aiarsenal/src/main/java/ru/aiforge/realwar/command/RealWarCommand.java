@@ -62,6 +62,7 @@ public final class RealWarCommand {
         CommandDispatcher d = e.getDispatcher();
         ru.aiforge.realwar.damage.DamageCommand.register(e.getDispatcher());
         ru.aiforge.realwar.strike.StrikeCommand.register(e.getDispatcher());
+        registerBaseCommands(e.getDispatcher());
         d.register((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal((String)"realwar").requires(s -> s.hasPermission(2))).then(((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal((String)"nuke").then(((LiteralArgumentBuilder)Commands.literal((String)"little_boy").then(((LiteralArgumentBuilder)Commands.literal((String)"air").executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.LITTLE_BOY, false, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.LITTLE_BOY, false, Vec3Argument.getVec3((CommandContext)c, (String)"pos")))))).then(((LiteralArgumentBuilder)Commands.literal((String)"surface").executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.LITTLE_BOY, true, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.LITTLE_BOY, true, Vec3Argument.getVec3((CommandContext)c, (String)"pos"))))))).then(((LiteralArgumentBuilder)Commands.literal((String)"rds_4").then(((LiteralArgumentBuilder)Commands.literal((String)"air").executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.RDS_4, false, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.RDS_4, false, Vec3Argument.getVec3((CommandContext)c, (String)"pos")))))).then(((LiteralArgumentBuilder)Commands.literal((String)"surface").executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.RDS_4, true, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.nukeType((CommandContext<CommandSourceStack>)c, BombType.RDS_4, true, Vec3Argument.getVec3((CommandContext)c, (String)"pos"))))))).then(((RequiredArgumentBuilder)Commands.argument((String)"kt", (ArgumentType)DoubleArgumentType.doubleArg((double)0.01, (double)100000.0)).then(((LiteralArgumentBuilder)Commands.literal((String)"air").executes(c -> RealWarCommand.nuke((CommandContext<CommandSourceStack>)c, false, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.nuke((CommandContext<CommandSourceStack>)c, false, Vec3Argument.getVec3((CommandContext)c, (String)"pos")))))).then(((LiteralArgumentBuilder)Commands.literal((String)"surface").executes(c -> RealWarCommand.nuke((CommandContext<CommandSourceStack>)c, true, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.nuke((CommandContext<CommandSourceStack>)c, true, Vec3Argument.getVec3((CommandContext)c, (String)"pos")))))))).then(Commands.literal((String)"blast").then(((RequiredArgumentBuilder)Commands.argument((String)"kg", (ArgumentType)DoubleArgumentType.doubleArg((double)0.1, (double)1000000.0)).executes(c -> RealWarCommand.blast((CommandContext<CommandSourceStack>)c, null))).then(Commands.argument((String)"pos", (ArgumentType)Vec3Argument.vec3()).executes(c -> RealWarCommand.blast((CommandContext<CommandSourceStack>)c, Vec3Argument.getVec3((CommandContext)c, (String)"pos"))))))).then(((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal((String)"radiation").then(Commands.literal((String)"dose").then(Commands.argument((String)"player", (ArgumentType)EntityArgument.player()).executes(RealWarCommand::doseGet)))).then(Commands.literal((String)"set").then(Commands.argument((String)"player", (ArgumentType)EntityArgument.player()).then(Commands.argument((String)"rem", (ArgumentType)DoubleArgumentType.doubleArg((double)0.0, (double)100000.0)).executes(RealWarCommand::doseSet))))).then(Commands.literal((String)"clear").executes(RealWarCommand::clearPlumes))).then(Commands.literal((String)"here").executes(RealWarCommand::rateHere)))).then(Commands.literal((String)"status").executes(RealWarCommand::status)));
     }
 
@@ -154,6 +155,31 @@ public final class RealWarCommand {
             src.sendSuccess(() -> Component.literal((String)(" \u2022 " + s)), false);
         }
         return active;
+    }
+
+    private static void registerBaseCommands(CommandDispatcher<CommandSourceStack> d) {
+        d.register(Commands.literal("realwar").requires(s -> s.hasPermission(2))
+                .then(Commands.literal("base")
+                        .executes(c -> spawnBase(c, null))
+                        .then(Commands.argument("pos", Vec3Argument.vec3())
+                                .executes(c -> spawnBase(c, Vec3Argument.getVec3(c, "pos")))))
+                .then(Commands.literal("site")
+                        .then(Commands.literal("base").executes(c -> spawnBase(c, null)))));
+    }
+
+    private static int spawnBase(CommandContext<CommandSourceStack> c, Vec3 pos) {
+        CommandSourceStack src = c.getSource();
+        ServerLevel level = src.getLevel();
+        Vec3 baseVec = pos != null ? pos : src.getPosition().add(0.0, 0.0, -20.0);
+        int bx = (int) Math.floor(baseVec.x);
+        int bz = (int) Math.floor(baseVec.z);
+        int by = pos != null ? (int) Math.floor(pos.y)
+                : level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, bx, bz);
+        net.minecraft.core.BlockPos origin = new net.minecraft.core.BlockPos(bx, by, bz);
+        ru.aiforge.realwar.worldgen.MilitaryBaseFeature.build(level, origin, level.random, true);
+        src.sendSuccess(() -> Component.translatable("command.aiarsenal.rw.base.ok",
+                origin.getX(), origin.getY(), origin.getZ()), true);
+        return 1;
     }
 }
 

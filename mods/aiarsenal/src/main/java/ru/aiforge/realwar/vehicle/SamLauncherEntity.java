@@ -57,9 +57,21 @@ implements RadarNet.RadarEmitter {
     private int idle;
     private boolean autoFire;
     private int autoFireT;
+    private boolean combatDuty;
 
     public SamLauncherEntity(EntityType<?> type, Level level, VehicleKind kind) {
         super(type, level, kind);
+    }
+
+    public void setCombatDuty(boolean on) {
+        this.combatDuty = on;
+        if (on) {
+            this.deployOnPad(0.0f, ERECT_EL);
+        }
+    }
+
+    public boolean isCombatDuty() {
+        return this.combatDuty;
     }
 
     @Override
@@ -200,14 +212,18 @@ implements RadarNet.RadarEmitter {
         float[] fArray;
         boolean lower;
         boolean want;
-        boolean bl = want = this.lockId() >= 0 || this.fireHeld(this.operatorSeat()) || this.autoFire;
+        boolean bl2 = lower = this.reloadHeld(this.operatorSeat()) || Math.abs(this.throttle()) > 0.05f;
+        if (lower) {
+            return new float[]{0.0f, 0.0f};
+        }
+        boolean bl = want = this.lockId() >= 0 || this.fireHeld(this.operatorSeat()) || this.autoFire
+                || (this.combatDuty && this.loadedCount() > 0);
         if (want) {
             this.idle = 0;
             return new float[]{0.0f, 88.0f};
         }
         ++this.idle;
-        boolean bl2 = lower = this.reloadHeld(this.operatorSeat()) || Math.abs(this.throttle()) > 0.05f || this.idle > 400;
-        if (lower) {
+        if (this.idle > 400) {
             float[] fArray2 = new float[2];
             fArray2[0] = 0.0f;
             fArray = fArray2;
@@ -216,6 +232,16 @@ implements RadarNet.RadarEmitter {
             fArray = null;
         }
         return fArray;
+    }
+
+    private static boolean isAutoInterceptThreat(Entity e) {
+        return e instanceof ru.aiforge.realwar.missile.MissileEntity
+                || e instanceof ru.aiforge.realwar.ordnance.RocketEntity
+                || e instanceof ru.aiforge.arsenal.entity.MissileEntity
+                || e instanceof ru.aiforge.arsenal.entity.IcbmEntity
+                || e instanceof ru.aiforge.arsenal.entity.ShahedDrone
+                || e instanceof ru.aiforge.arsenal.entity.FpvDrone
+                || e instanceof ru.aiforge.bm21grad.entity.RocketEntity;
     }
 
     @Override
@@ -231,6 +257,27 @@ implements RadarNet.RadarEmitter {
                 Level level;
                 boolean trigger;
                 int id = this.lockId();
+                if (id < 0 && this.combatDuty && this.operator() == null && this.loadedCount() > 0
+                        && this.tickCount % 10 == 0 && !RadarNet.sources(this).isEmpty()) {
+                    Entity best = null;
+                    double bestD = 810000.0;
+                    for (Entity e : this.radarTargets()) {
+                        if (!isAutoInterceptThreat(e)) continue;
+                        double d = e.distanceToSqr(this);
+                        if (d < bestD && d > 400.0) {
+                            bestD = d;
+                            best = e;
+                        }
+                    }
+                    if (best != null) {
+                        id = best.getId();
+                        this.entityData.set(LOCK, id);
+                        this.entityData.set(LOCK_T, 20);
+                        this.autoFire = true;
+                        this.autoFireT = 200;
+                        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), (SoundEvent)ModSounds.LOCK_TONE.get(), SoundSource.NEUTRAL, 1.0f, 1.0f);
+                    }
+                }
                 if (id >= 0 && this.tickCount % 20 == 0 && RadarNet.sources(this).isEmpty()) {
                     this.entityData.set(LOCK, -1);
                     this.entityData.set(LOCK_T, 0);
@@ -260,7 +307,7 @@ implements RadarNet.RadarEmitter {
                 }
                 ServerPlayer op = this.operator();
                 boolean bl = trigger = this.fireHeld(this.operatorSeat()) || this.autoFire;
-                if (op == null || !trigger || !((level = this.level()) instanceof ServerLevel)) break block17;
+                if ((op == null && !this.combatDuty) || !trigger || !((level = this.level()) instanceof ServerLevel)) break block17;
                 sl = (ServerLevel)level;
                 if (this.fireCd <= 0) break block18;
             }
@@ -316,6 +363,18 @@ implements RadarNet.RadarEmitter {
         if (this.level().isClientSide) {
             return;
         }
+    }
+
+    @Override
+    protected void readAdditionalSaveData(net.minecraft.nbt.CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.combatDuty = tag.getBoolean("combatDuty");
+    }
+
+    @Override
+    protected void addAdditionalSaveData(net.minecraft.nbt.CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("combatDuty", this.combatDuty);
     }
 }
 
