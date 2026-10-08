@@ -164,7 +164,8 @@ public final class RealWarCommand {
                         .then(Commands.argument("pos", Vec3Argument.vec3())
                                 .executes(c -> spawnBase(c, Vec3Argument.getVec3(c, "pos")))))
                 .then(Commands.literal("site")
-                        .then(Commands.literal("base").executes(c -> spawnBase(c, null)))));
+                        .then(Commands.literal("base").executes(c -> spawnBase(c, null)))
+                        .then(Commands.literal("military_base").executes(c -> spawnBase(c, null)))));
     }
 
     private static int spawnBase(CommandContext<CommandSourceStack> c, Vec3 pos) {
@@ -173,8 +174,9 @@ public final class RealWarCommand {
         Vec3 baseVec = pos != null ? pos : src.getPosition().add(0.0, 0.0, -20.0);
         int bx = (int) Math.floor(baseVec.x);
         int bz = (int) Math.floor(baseVec.z);
-        int by = pos != null ? (int) Math.floor(pos.y)
+        int rawY = pos != null ? (int) Math.floor(pos.y)
                 : level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, bx, bz);
+        int by = Math.max(rawY, level.getMinBuildHeight() + 11);
         net.minecraft.core.BlockPos origin = new net.minecraft.core.BlockPos(bx, by, bz);
         ru.aiforge.realwar.worldgen.MilitaryBaseFeature.build(level, origin, level.random, true);
         src.sendSuccess(() -> Component.translatable("command.aiarsenal.rw.base.ok",

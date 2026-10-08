@@ -139,6 +139,11 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     public static void build(WorldGenLevel level, BlockPos origin, RandomSource rand, boolean force) {
+        // Ensure the 10-block-deep underground bunker (-10..-1) never drops below bedrock in shallow superflat worlds
+        int minSafeY = level.getMinBuildHeight() + 11;
+        if (origin.getY() < minSafeY) {
+            origin = new BlockPos(origin.getX(), minSafeY, origin.getZ());
+        }
         Holder<Biome> b = level.getBiome(origin);
         boolean cold = b.value().coldEnoughToSnow(origin) || b.is(BiomeTags.IS_MOUNTAIN);
         boolean sandy = b.is(Biomes.DESERT) || b.is(BiomeTags.IS_BADLANDS) || b.is(Biomes.SAVANNA) || b.is(Biomes.SAVANNA_PLATEAU);
@@ -154,7 +159,7 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
         Block redStar = ModBlocks.ARMOR_PLATE_STAR_RED.get();
 
         // 1. Clear air volume above compound and build engineered terrain foundation
-        prepareFoundationAndClear(level, origin, rc, sandy, cold);
+        prepareFoundationAndClear(level, origin, rc, sandy, cold, force);
 
         // 2. Build the Deep Multi-Room Underground Command Bunker (dy = -10..-1)
         buildUndergroundBunker(level, origin, rand, rc, steel, armor, hazard, redStar);
@@ -175,7 +180,7 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
         spawnPvoUnits(level, origin);
     }
 
-    private static void prepareFoundationAndClear(WorldGenLevel level, BlockPos o, Block rc, boolean sandy, boolean cold) {
+    private static void prepareFoundationAndClear(WorldGenLevel level, BlockPos o, Block rc, boolean sandy, boolean cold, boolean force) {
         BlockState air = Blocks.AIR.defaultBlockState();
         BlockState rcSt = rc.defaultBlockState();
         BlockState stoneBricks = Blocks.STONE_BRICKS.defaultBlockState();
@@ -220,6 +225,26 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
                     set(level, o.offset(dx, 0, dz), roadLine);
                 } else {
                     set(level, o.offset(dx, 0, dz), asphalt);
+                }
+            }
+        }
+
+        // If raised above shallow ground (e.g. default superflat), build a south approach ramp up to the KPP gate
+        if (force) {
+            int groundY = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, o.getX(), o.getZ() + RADIUS + 1) - 1;
+            int diff = o.getY() - groundY;
+            if (diff > 0 && diff <= 12) {
+                for (int step = 1; step <= diff; step++) {
+                    int dz = RADIUS + step;
+                    int ry = o.getY() - step + 1;
+                    for (int dx = -3; dx <= 3; dx++) {
+                        set(level, new BlockPos(o.getX() + dx, ry, o.getZ() + dz),
+                                Math.abs(dx) == 3 ? stair(Blocks.STONE_BRICK_STAIRS, Direction.NORTH, Half.BOTTOM)
+                                        : stair(Blocks.POLISHED_BLACKSTONE_STAIRS, Direction.NORTH, Half.BOTTOM));
+                        for (int fy = groundY; fy < ry; fy++) {
+                            set(level, new BlockPos(o.getX() + dx, fy, o.getZ() + dz), stoneBricks);
+                        }
+                    }
                 }
             }
         }
@@ -1044,9 +1069,11 @@ public class MilitaryBaseFeature extends Feature<NoneFeatureConfiguration> {
     private static void spawnPvoUnits(WorldGenLevel level, BlockPos o) {
         if (level.getLevel() == null) return;
         // Remove any existing base vehicles in the footprint if re-running /realwar base at the same spot
-        AABB bounds = new AABB(o.offset(-RADIUS, -12, -RADIUS), o.offset(RADIUS + 1, 14, RADIUS + 1));
-        for (VehicleEntity old : level.getEntitiesOfClass(VehicleEntity.class, bounds)) {
-            old.discard();
+        if (level instanceof net.minecraft.server.level.ServerLevel) {
+            AABB bounds = new AABB(o.offset(-RADIUS, -12, -RADIUS), o.offset(RADIUS + 1, 14, RADIUS + 1));
+            for (VehicleEntity old : level.getEntitiesOfClass(VehicleEntity.class, bounds)) {
+                old.discard();
+            }
         }
 
         // 1. S-400 "Triumph" SAM Launcher on the West Bunker Roof Revetment (dx = -7.5, dy = +2.05, dz = -4.8)

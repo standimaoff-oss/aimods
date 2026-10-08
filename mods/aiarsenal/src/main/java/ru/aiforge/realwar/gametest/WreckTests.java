@@ -149,6 +149,15 @@ public final class WreckTests {
             if (l.getBlockState(p).getBlock() instanceof WreckBlock) cells++;
         h.assertTrue(crates >= 1, "cache has crates");
         h.assertTrue(cells >= 10, "wreck site has wreck cells: " + cells);
+
+        // Also verify the fortified Military Base & Underground Command Bunker generator
+        int baseY = Math.max(c.getY(), l.getMinBuildHeight() + 11);
+        BlockPos bc = new BlockPos(((c.getX() + 112) & ~15) + 8, baseY, (c.getZ() & ~15) + 8);
+        ru.aiforge.realwar.worldgen.MilitaryBaseFeature.build(l, bc, RandomSource.create(11), true);
+        h.assertTrue(l.getBlockState(bc.offset(-1, 1, 6)).is(ModBlocks.GATE_BLAST.get()), "3x3 blast gate at bunker entrance");
+        h.assertTrue(l.getBlockState(bc.offset(-2, 1, 16)).is(ModBlocks.GATE_BOOM.get()), "boom gate at KPP");
+        h.assertTrue(l.getBlockState(bc.offset(-2, 1, 15)).is(ModBlocks.GATE_SLIDING.get()), "sliding gate at KPP");
+        h.assertTrue(l.getBlockState(bc.offset(0, -8, -2)).is(ModBlocks.DOOR_BUNKER.get()), "hermetic bunker airlock door");
         h.succeed();
     }
 }

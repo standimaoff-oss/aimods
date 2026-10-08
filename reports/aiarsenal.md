@@ -1098,11 +1098,15 @@ FOV ×0,8). B переключает на ПГО-7В3 (сетка, 4×); пли�
 
 ## Изменения: Форма ВОВ (РККА и Вермахт), Физический дым, Объёмные 3D-взрывы, Военная база ПВО с подземным бункером и проверка внутри Minecraft 1.20.1
 
-### 1. Исправление краша при запуске (`tl-logger` / `ModFileLoadingException`) и при взрыве (`ConcurrentModificationException`)
+### 1. Исправление краша при запуске (`tl-logger` / `ModFileLoadingException`), при взрыве (`ConcurrentModificationException`) и в мелком суперплоском мире
 - **Причина краша #1 (`ModFileLoadingException: Mod candidate aiarsenal-1.0.0.jar contains a corrupt or misconfigured toml`)**:
   В `release/aiarsenal-1.0.0.jar` файл `META-INF/mods.toml` содержал нераскрытые шаблоны Gradle (`${mod_id}`, `${loader_version_range}`, `${forge_version_range}`, `${minecraft_version_range}` и др.), из-за чего Forge 1.20.1 (47.4.23) падал на фазе `ModFileParser`. Все шаблоны раскрыты значениями из `gradle.properties` (`modId="aiarsenal"`, `version="1.0.0"`, `loaderVersion="[47,)"`, `minecraft_version_range="[1.20.1,1.21)"`).
 - **Причина краша #2 (`ConcurrentModificationException` в `FxSystem.tick(FxSystem.java:60)`)**:
   При детонации 3D-взрыва (`ConvFx`) разлетающиеся осколки в своём `motion`-колбэке вызывали `TrailFx.physicalSmoke(...) -> FxSystem.add(...)` прямо во время обхода списка `ALL` через `Iterator<FxParticle>` в `FxSystem.tick()`. Цикл в `FxSystem.tick()` и `FxSystem.renderSorted()` переведён на безопасную индексную компакцию без `Iterator`, что полностью устранило `ConcurrentModificationException`.
+- **Защита подземного бункера в мелком Суперплоском мире (`Y = -60`, `minBuildHeight = -64`)**:
+  В стандартном 4-слойном суперплоском мире поверхность находится на `Y = -60`, из-за чего бункер глубиной 10 блоков (`dy = -10..-1`) уходил ниже бедрока (`Y = -64`). В `MilitaryBaseFeature.build()` и `RealWarCommand.spawnBase()` добавлен автоматический подъём фундамента до `Math.max(y, level.getMinBuildHeight() + 11)` со строительством ступенчатого асфальтового пандуса к воротам КПП, а также добавлен алиас `/realwar site military_base` наряду с `/realwar base` и `/realwar site base`.
+- **Полный прогон `ForgeGameTestServer` и верификация байткода**:
+  Все **149 GameTest-тестов** мода (`All 149 required tests passed :)`), включая `uniforms_registered_and_wearable` (все 88 предметов униформы) и `worldgen_sites` (проверка генерации военной базы и подземного бункера), успешно пройдены. Полная проверка байткода всех `.class` файлов в `release/aiarsenal-1.0.0.jar` против `client-1.20.1-20230612.114412-srg.jar` и `forge-1.20.1-47.4.23-universal.jar` дала **0 ошибок (`Total errors = 0`)**.
 
 ### 2. 6 новых комплектов военной формы Второй мировой войны (24 предмета, 3D GLB в `models/glb/uniforms.glb`)
 - **СССР (РККА)**:
