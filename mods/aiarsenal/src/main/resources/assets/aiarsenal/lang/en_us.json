@@ -1976,5 +1976,13 @@
   "item.aiarsenal.plasmaheli.tip": "Propeller-less plasma-lift helicopter, 2 crew. 30 mm 2A42 on a remote turret, S-8 pods. Place on the ground.",
   "entity.aiarsenal.starship": "Starship \"Zvezdolet\"",
   "item.aiarsenal.starship_plane": "Starship \"Zvezdolet\"",
-  "item.aiarsenal.starship.tip": "Delta plasma-jet space-ship aircraft, 1 pilot. Two aft plasma nozzles. Placeholder guns and rockets."
+  "item.aiarsenal.starship.tip": "Delta plasma-jet space-ship aircraft, 1 pilot. Two aft plasma nozzles. Placeholder guns and rockets.",
+  "entity.aiarsenal.sanctuary": "Sanctuary II",
+  "item.aiarsenal.sanctuary_remote": "Sanctuary II Remote",
+  "item.aiarsenal.sanctuary_remote.tip": "Right click a point: opens a rift and the ship comes out, or sends it there with the current order. Shift + right click: change order.",
+  "order.aiarsenal.sanctuary.hold": "Order: hold position",
+  "order.aiarsenal.sanctuary.move": "Order: advance to point",
+  "order.aiarsenal.sanctuary.shell_rain": "Order: shell rain (all guns fire down on the area)",
+  "order.aiarsenal.sanctuary.recall": "Order: return through the rift",
+  "msg.aiarsenal.sanctuary.rift": "Rift opened: Sanctuary II is coming through"
 }

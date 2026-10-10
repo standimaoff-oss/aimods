@@ -149,6 +149,7 @@ public final class ClientModEvents {
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.SU57.get(), ru.aiforge.realwar.client.craft.CraftRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.PLASMA_HELI.get(), ru.aiforge.realwar.client.craft.CraftRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.STARSHIP.get(), ru.aiforge.realwar.client.craft.CraftRenderer::new);
+        e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.SANCTUARY.get(), ru.aiforge.realwar.client.sanctuary.SanctuaryRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.ARADO.get(), ru.aiforge.realwar.client.craft.AradoRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.ORDNANCE.get(), ru.aiforge.realwar.client.craft.CraftOrdnanceRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.SHELL.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);

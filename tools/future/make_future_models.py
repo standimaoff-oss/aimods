@@ -428,6 +428,61 @@ def starship():
     return sc
 
 
+def _rock(radius_xyz, center, m, seed, bump=0.16):
+    """Rock blob: deformed icosphere scaled to (rx, ry, rz) - the film's organic-mechanical hull."""
+    rng = np.random.default_rng(seed)
+    ico = trimesh.creation.icosphere(subdivisions=3, radius=1.0)
+    v = ico.vertices.copy()
+    v += rng.normal(0, bump, v.shape) * np.linalg.norm(v, axis=1, keepdims=True)
+    v = v * np.array(radius_xyz)
+    v = v + np.array(center)
+    t = trimesh.Trimesh(v, ico.faces, process=True)
+    t.visual.material = m
+    return t
+
+
+def sanctuary():
+    """r31 'Sanctuary II' (Avengers: Infinity War / Endgame, Thanos' flagship): T-shaped rock-and-machine hull,
+    two forward hammer arms, two lower wings with docking bays, tail fin, gun ports with glowing cores.
+    Origin at the centre of mass. Length 30 m (z -15..15), span 30 m (x), height 12 m (y)."""
+    sc = trimesh.Scene()
+    P = "sanctuary"
+    sc.graph.update(frame_to="root", frame_from="world", matrix=np.eye(4))
+    R = mat((0.34, 0.32, 0.30), 0.35, 0.65)                 # rock hull
+    M = mat((0.22, 0.22, 0.24), 0.7, 0.35)                  # machine plates
+    G = mat((1.0, 0.45, 0.10), 0.1, 0.25, (1.0, 0.42, 0.08), 3.0)   # orange gun cores
+    H = mat((0.05, 0.05, 0.06), 0.2, 0.6)                   # bay mouths
+    parts = [
+        ("spine", _rock((5.5, 3.6, 12.5), (0, 0.5, 0), R, 1)),
+        ("nose", _rock((4.2, 3.0, 4.5), (0, 0.8, 11.0), R, 2, 0.10)),
+        ("arm_L", _rock((4.0, 2.2, 6.0), (7.5, 1.0, 9.5), R, 3)),
+        ("arm_R", _rock((4.0, 2.2, 6.0), (-7.5, 1.0, 9.5), R, 4)),
+        ("wing_L", _rock((7.0, 1.4, 9.0), (7.2, -2.2, -1.5), R, 5, 0.09)),
+        ("wing_R", _rock((7.0, 1.4, 9.0), (-7.2, -2.2, -1.5), R, 6, 0.09)),
+        ("tail", _rock((1.2, 6.5, 4.5), (0, 6.0, -12.0), M, 7, 0.07)),
+        ("aft", _rock((4.0, 2.6, 3.0), (0, 0.3, -13.5), R, 8, 0.10)),
+    ]
+    for name, g in parts:
+        sc.add_geometry(g, node_name=P + "_" + name, geom_name=P + "_" + name, parent_node_name="root")
+    # docking bays under the lower wings (dark mouths)
+    for sx in (1, -1):
+        sc.add_geometry(box((4.0, 0.3, 5.0), (sx * 7.2, -3.6, -1.5), H), node_name="%s_bay%d" % (P, sx),
+                        geom_name="%s_bay%d" % (P, sx), parent_node_name="root")
+    # gun ports: cylinders with glowing orange cores on the hull and wing undersides
+    ports = [(0, 3.4, 9.0), (2.5, 3.0, 8.0), (-2.5, 3.0, 8.0), (4.5, 2.2, 3.0), (-4.5, 2.2, 3.0),
+             (3.0, 3.0, -4.0), (-3.0, 3.0, -4.0), (7.0, -3.0, 3.0), (-7.0, -3.0, 3.0), (9.5, -2.8, -5.0),
+             (-9.5, -2.8, -5.0), (5.0, -3.0, -8.0), (-5.0, -3.0, -8.0), (0, -3.5, -2.0)]
+    for i, (x, y, z) in enumerate(ports):
+        sc.add_geometry(cyl(0.45, 1.1, (x, y, z), "z", M, sections=12), node_name="%s_port%d" % (P, i),
+                        geom_name="%s_port%d" % (P, i), parent_node_name="root")
+        sc.add_geometry(sphere(0.30, (x, y, z + 0.6), G), node_name="%s_core%d" % (P, i),
+                        geom_name="%s_core%d" % (P, i), parent_node_name="root")
+    # heavy laser at the nose (the main battery)
+    sc.add_geometry(sphere(0.9, (0, 0.8, 15.2), G), node_name=P + "_nose_laser",
+                    geom_name=P + "_nose_laser", parent_node_name="root")
+    return sc
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     export_rifle("laser", "cyan", "laser.glb")
@@ -438,6 +493,7 @@ def main():
     tank().export(os.path.join(OUT, "plasma_tank.glb"))
     plasma_heli().export(os.path.join(OUT, "plasma_heli.glb"))
     starship().export(os.path.join(OUT, "starship.glb"))
+    sanctuary().export(os.path.join(OUT, "sanctuary.glb"))
     print("written to", OUT)
 
 

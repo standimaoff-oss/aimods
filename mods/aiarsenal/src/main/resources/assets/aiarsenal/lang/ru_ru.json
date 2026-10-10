@@ -1976,5 +1976,13 @@
   "item.aiarsenal.plasmaheli.tip": "Вертолёт без винтов на плазменной подъёмной тяге, 2 члена экипажа. 30-мм 2А42 на дистанционной турели, блоки С-8. Ставится на землю.",
   "entity.aiarsenal.starship": "Звездолёт «Звездолёт»",
   "item.aiarsenal.starship_plane": "Звездолёт «Звездолёт»",
-  "item.aiarsenal.starship.tip": "Дельтавидный плазменно-реактивный космический самолёт, 1 пилот. Два кормовых плазменных сопла. Пушки и ракеты временные."
+  "item.aiarsenal.starship.tip": "Дельтавидный плазменно-реактивный космический самолёт, 1 пилот. Два кормовых плазменных сопла. Пушки и ракеты временные.",
+  "entity.aiarsenal.sanctuary": "Санктуарий II",
+  "item.aiarsenal.sanctuary_remote": "Пульт Санктуария II",
+  "item.aiarsenal.sanctuary_remote.tip": "ПКМ по точке: открывает разлом, и корабль выходит, либо отправляет его туда с текущим приказом. Шифт + ПКМ: сменить приказ.",
+  "order.aiarsenal.sanctuary.hold": "Приказ: удерживать позицию",
+  "order.aiarsenal.sanctuary.move": "Приказ: выдвинуться к точке",
+  "order.aiarsenal.sanctuary.shell_rain": "Приказ: град снарядов (все орудия бьют вниз по площади)",
+  "order.aiarsenal.sanctuary.recall": "Приказ: вернуться через разлом",
+  "msg.aiarsenal.sanctuary.rift": "Разлом открыт: Санктуарий II выходит"
 }

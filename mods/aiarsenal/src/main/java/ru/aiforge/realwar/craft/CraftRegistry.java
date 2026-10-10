@@ -33,6 +33,10 @@ public final class CraftRegistry {
     public static final RegistryObject<EntityType<PlaneEntity>> SU57 = plane(CraftKind.SU57);
     public static final RegistryObject<EntityType<HeliEntity>> PLASMA_HELI = heli(CraftKind.PLASMA_HELI);
     public static final RegistryObject<EntityType<PlaneEntity>> STARSHIP = plane(CraftKind.STARSHIP);
+    /** Sanctuary II (r31): unpiloted flagship, summoned by the remote. */
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.sanctuary.SanctuaryEntity>> SANCTUARY = ENTITIES.register("sanctuary",
+            () -> EntityType.Builder.<ru.aiforge.realwar.sanctuary.SanctuaryEntity>of((t, l) -> new ru.aiforge.realwar.sanctuary.SanctuaryEntity(t, l), MobCategory.MISC)
+                    .sized(32f, 18f).clientTrackingRange(128).updateInterval(2).fireImmune().build("sanctuary"));
     public static final RegistryObject<EntityType<CraftOrdnance>> ORDNANCE = ENTITIES.register("craft_ordnance",
             () -> EntityType.Builder.<CraftOrdnance>of(CraftOrdnance::new, MobCategory.MISC).sized(0.3f, 0.3f)
                     .clientTrackingRange(16).updateInterval(1).fireImmune().build("craft_ordnance"));
@@ -51,6 +55,8 @@ public final class CraftRegistry {
     public static final RegistryObject<Item> SU57_ITEM = item(CraftKind.SU57, "su57_plane");
     public static final RegistryObject<Item> PLASMA_HELI_ITEM = item(CraftKind.PLASMA_HELI, "plasmaheli_vehicle");
     public static final RegistryObject<Item> STARSHIP_ITEM = item(CraftKind.STARSHIP, "starship_plane");
+    public static final RegistryObject<Item> SANCTUARY_REMOTE = ITEMS.register("sanctuary_remote",
+            () -> new ru.aiforge.realwar.sanctuary.SanctuaryRemoteItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SERVICE_KIT = ITEMS.register("craft_service_kit",
             () -> new CraftServiceKitItem(new Item.Properties().stacksTo(16)));
 
