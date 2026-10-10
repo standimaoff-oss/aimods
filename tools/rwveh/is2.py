@@ -84,7 +84,7 @@ abox(P + "_tbal", (0.30, 0.20, 0.25), (0.0, TC.y + 1.08, 1.95), BODY, GT, bevel=
 antenna(P, "ant", Vector((0.80, TC.y + 0.55, 2.40)), 2.2, GT)
 
 # ---------------------------------------------------------------- mantlet + D-25T
-abox(P + "_mant", (1.15, 0.30, 0.66), (0, TC.y - 1.42, TRN.z), BODY, GG, bevel=0.10)
+abox(P + "_mant", (0.84, 0.30, 0.62), (0, TC.y - 1.42, TRN.z), BODY, GG, bevel=0.10)   # r27: narrow mantlet neck (drawing)
 lathe_y(P + "_mantc", [(0.0, 0.0), (0.0, 0.26), (0.18, 0.22), (0.36, 0.17), (0.40, 0.0)], (0, TC.y - 1.56, TRN.z), [BODY], GG, seg=18)
 acyl(P + "_coax", 0.022, 0.10, (0.30, TC.y - 1.60, TRN.z), "M_Dark", GG, axis=1, seg=8)
 acyl(P + "_sight", 0.035, 0.08, (-0.28, TC.y - 1.60, TRN.z + 0.10), "M_Lens", GG, axis=1, seg=8, dirt=False)
