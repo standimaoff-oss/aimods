@@ -170,100 +170,140 @@ def plasma_cell(name):
 
 # ---------------------------------------------------------------- plasma tank (T-90M node contract)
 def tank():
+    """r29 'Vikhr': futuristic tank after the reference render - armoured skirts with ribs, yellow glowing track
+    shoes, blue lamps and mesh grille, an eight-tube launcher on the turret, yellow underglow and cable looms.
+    Node contract unchanged (root > hull, rw_/rr_/spk_/idl_, launcher_yaw > launcher_pitch > barrel)."""
     sc = trimesh.Scene()
     P = "plasma_tank"
     sc.graph.update(frame_to="root", frame_from="world", matrix=np.eye(4))
     TX, TW, RR = 1.395, 0.58, 0.375
     ZW = RR + 0.07
+    W = mat((0.66, 0.68, 0.66), 0.5, 0.32)                   # pale grey armour
+    D = mat((0.12, 0.13, 0.14), 0.5, 0.45)                   # dark rubber/alloy
+    Y = mat((1.0, 0.82, 0.10), 0.1, 0.25, (1.0, 0.80, 0.10), 2.6)   # yellow glow
+    B = mat((0.20, 0.45, 1.0), 0.1, 0.2, (0.20, 0.55, 1.0), 2.2)    # blue lamps
+    GR = mat((0.22, 0.25, 0.28), 0.8, 0.4)                   # grille / steel
 
-    # hull: the T-90M side profile (glTF y,z) extruded across the width; front is +Z
-    prof = [(3.00, 0.47), (3.43, 0.86), (2.05, 1.44), (-2.15, 1.47), (-3.43, 1.40), (-3.40, 0.64), (-2.95, 0.47)]
-    poly = np.array(prof)                       # (z, y) in the XY plane of the 2D polygon
+    # hull: T-90M side profile extruded across the width (front = +Z)
+    prof = [(3.00, 0.55), (3.43, 0.95), (2.05, 1.40), (-2.15, 1.42), (-3.43, 1.30), (-3.40, 0.70), (-2.95, 0.50)]
     from trimesh.creation import extrude_polygon
     from shapely.geometry import Polygon
-    hull = extrude_polygon(Polygon(poly), height=2.16)
+    hull = extrude_polygon(Polygon(np.array(prof)), height=2.00)
     v = hull.vertices.copy()
-    nv = np.stack([v[:, 2] - 1.08, v[:, 1], v[:, 0]], axis=1)    # (w, v, u) -> (x, y, z)
+    nv = np.stack([v[:, 2] - 1.00, v[:, 1], v[:, 0]], axis=1)
     hull = trimesh.Trimesh(nv, hull.faces, process=True).fix_normals()
-    hull.visual.material = M["hull"]
+    hull.visual.material = W
     sc.add_geometry(hull, node_name=P + "_hull", geom_name=P + "_hull", parent_node_name="root")
-    # reactive-armour / plasma-shield stripes on the glacis and the turret (cyan emitters)
-    for sx in (1, -1):
-        sc.add_geometry(box((0.03, 0.06, 5.8), (sx * 1.10, 1.08, 0.2), "cyan"), node_name=P + "_stripe%d" % sx,
-                        geom_name=P + "_stripe%d" % sx, parent_node_name="root")
-    # skirts / fenders / tracks (static)
-    for sx, xw in ((1, TX), (-1, -TX)):
-        sc.add_geometry(box((TW, 0.42, 7.6), (xw, 0.66, 0.0), "track"), node_name=P + "_track%d" % sx,
-                        geom_name=P + "_track%d" % sx, parent_node_name="root")
-        sc.add_geometry(box((0.66, 0.03, 6.6), (sx * 1.41, 1.2, 0.1), "body"), node_name=P + "_fender%d" % sx,
-                        geom_name=P + "_fender%d" % sx, parent_node_name="root")
 
-    # road wheels, return rollers, sprockets, idlers: one node per wheel (pivots are the axle centres)
+    # side armour skirts: ribbed plates covering the tracks, with a yellow shoe at the bottom front/rear corners
+    for sx in (1, -1):
+        sc.add_geometry(box((0.10, 0.62, 6.6), (sx * 1.46, 0.66, 0.0), D), node_name="%s_skirt%d" % (P, sx),
+                        geom_name="%s_skirt%d" % (P, sx), parent_node_name="root")
+        for k in range(12):
+            z = 2.9 - k * 0.53
+            sc.add_geometry(box((0.12, 0.50, 0.30), (sx * 1.52, 0.70, z), W),
+                            node_name="%s_rib%d_%d" % (P, sx, k), geom_name="%s_rib%d_%d" % (P, sx, k),
+                            parent_node_name="root")
+            sc.add_geometry(sphere(0.03, (sx * 1.58, 0.92, z), D), node_name="%s_rivet%d_%d" % (P, sx, k),
+                            geom_name="%s_rivet%d_%d" % (P, sx, k), parent_node_name="root")
+        for z in (-2.85, 2.85):
+            sc.add_geometry(box((0.42, 0.14, 0.95), (sx * 1.30, 0.13, z), Y),
+                            node_name="%s_shoe%d_%d" % (P, sx, int(z > 0)), geom_name="%s_shoe%d_%d" % (P, sx, int(z > 0)),
+                            parent_node_name="root")
+        # blue headlamp and grille block on the front plate
+        sc.add_geometry(box((0.42, 0.10, 0.06), (sx * 0.85, 1.10, 3.30), B), node_name="%s_lamp%d" % (P, sx),
+                        geom_name="%s_lamp%d" % (P, sx), parent_node_name="root")
+        sc.add_geometry(box((0.42, 0.10, 0.05), (sx * 0.85, 0.78, 3.31), GR), node_name="%s_mesh%d" % (P, sx),
+                        geom_name="%s_mesh%d" % (P, sx), parent_node_name="root")
+    # rear engine block with yellow exhaust grille and two side pods (photo: rear wings)
+    sc.add_geometry(box((2.60, 0.60, 0.40), (0.0, 1.30, -3.40), D), node_name=P + "_engrear",
+                    geom_name=P + "_engrear", parent_node_name="root")
+    sc.add_geometry(box((2.0, 0.34, 0.06), (0.0, 1.42, -3.62), Y), node_name=P + "_exhaust",
+                    geom_name=P + "_exhaust", parent_node_name="root")
+    # yellow underglow under the belly (the photo's floating glow)
+    sc.add_geometry(box((2.6, 0.02, 5.4), (0.0, 0.05, 0.0), Y), node_name=P + "_underglow",
+                    geom_name=P + "_underglow", parent_node_name="root")
+    # cable looms along the hull
+    for sx in (1, -1):
+        sc.add_geometry(cyl(0.03, 4.8, (sx * 1.05, 1.44, 0.0), "z", D, sections=8), node_name="%s_loom%d" % (P, sx),
+                        geom_name="%s_loom%d" % (P, sx), parent_node_name="root")
+
+    # track assemblies and wheels (same node names and pivots as T-90M)
+    for sx, side, xw in ((1, "L", TX), (-1, "R", -TX)):
+        sc.add_geometry(box((TW, 0.42, 7.6), (xw, 0.66, 0.0), D), node_name=P + "_track%d" % sx,
+                        geom_name=P + "_track%d" % sx, parent_node_name="root")
     road = [2.15 - k * 0.812 for k in range(6)]
     for sx, side, xw in ((1, "L", TX), (-1, "R", -TX)):
         for k, z in enumerate(road):
             nm = "rw_%s_%d" % (side, k)
-            g = cyl(RR, TW * 0.86, (0, 0, 0), "x", "rubber", sections=24)
-            sc.add_geometry(g, node_name=nm, geom_name=nm, parent_node_name="root",
-                            transform=translation_matrix([xw, ZW, z]))
+            sc.add_geometry(cyl(RR, TW * 0.86, (0, 0, 0), "x", D, sections=24), node_name=nm, geom_name=nm,
+                            parent_node_name="root", transform=translation_matrix([xw, ZW, z]))
         for k, z in enumerate((-1.25, 0.0, 1.25)):
             nm = "rr_%s_%d" % (side, k)
-            g = cyl(0.11, TW * 0.7, (0, 0, 0), "x", "steel", sections=16)
-            sc.add_geometry(g, node_name=nm, geom_name=nm, parent_node_name="root",
-                            transform=translation_matrix([xw, 0.975, z]))
+            sc.add_geometry(cyl(0.11, TW * 0.7, (0, 0, 0), "x", GR, sections=16), node_name=nm, geom_name=nm,
+                            parent_node_name="root", transform=translation_matrix([xw, 0.975, z]))
         nm = "spk_" + side
-        sc.add_geometry(cyl(0.33, TW * 0.6, (0, 0, 0), "x", "steel", sections=16), node_name=nm, geom_name=nm,
+        sc.add_geometry(cyl(0.33, TW * 0.6, (0, 0, 0), "x", GR, sections=16), node_name=nm, geom_name=nm,
                         parent_node_name="root", transform=translation_matrix([xw, 0.70, -2.86]))
         nm = "idl_" + side
-        sc.add_geometry(cyl(0.30, TW * 0.6, (0, 0, 0), "x", "steel", sections=16), node_name=nm, geom_name=nm,
+        sc.add_geometry(cyl(0.30, TW * 0.6, (0, 0, 0), "x", GR, sections=16), node_name=nm, geom_name=nm,
                         parent_node_name="root", transform=translation_matrix([xw, 0.62, 2.93]))
-        # track bar
-        sc.add_geometry(box((0.07, 0.10, 7.2), (xw, 0.32, 0.0), "track"), node_name=P + "_bar" + side,
-                        geom_name=P + "_bar" + side, parent_node_name="root")
 
-    # turret: launcher_yaw ring (0, 1.47, 0.30); shell and plasma emitter parts in the yaw frame
-    Y = np.array([0.0, 1.47, 0.30])
-    sc.graph.update(frame_to="launcher_yaw", frame_from="root", matrix=translation_matrix(Y))
-    tur = sphere(1.0, (0, 0.50, -0.15), "olive", scale=(1.00, 0.36, 1.25))       # low dome, flat top
-    tur.apply_translation((0, 0.0, 0.0))
-    sc.add_geometry(tur, node_name="launcher_yaw_shell", geom_name="launcher_yaw_shell",
-                    parent_node_name="launcher_yaw")
-    sc.add_geometry(cyl(1.02, 0.10, (0, 0.13, -0.15), "y", "body", sections=36), node_name="launcher_yaw_ring",
+    # turret ring (launcher_yaw pivot 0, 1.47, 0.30)
+    Yp = np.array([0.0, 1.47, 0.30])
+    sc.graph.update(frame_to="launcher_yaw", frame_from="root", matrix=translation_matrix(Yp))
+    sc.add_geometry(sphere(1.0, (0, 0.50, -0.15), W, scale=(1.00, 0.34, 1.22)), node_name="launcher_yaw_shell",
+                    geom_name="launcher_yaw_shell", parent_node_name="launcher_yaw")
+    sc.add_geometry(cyl(1.04, 0.10, (0, 0.10, -0.15), "y", D, sections=36), node_name="launcher_yaw_ring",
                     geom_name="launcher_yaw_ring", parent_node_name="launcher_yaw")
-    sc.add_geometry(box((1.2, 0.08, 1.3), (0.0, 0.62, -0.20), "steel"), node_name="launcher_yaw_plate",
-                    geom_name="launcher_yaw_plate", parent_node_name="launcher_yaw")
-    # side plasma capacitors (glow) on the turret cheeks
+    # front wedge and angled armour plates of the turret
+    sc.add_geometry(box((1.5, 0.22, 0.6), (0, 0.72, 0.85), W), node_name="launcher_yaw_wedge",
+                    geom_name="launcher_yaw_wedge", parent_node_name="launcher_yaw")
     for sx in (1, -1):
-        sc.add_geometry(box((0.06, 0.20, 0.9), (sx * 1.05, 0.45, -0.1), "cyan"), node_name="launcher_yaw_cap%d" % sx,
-                        geom_name="launcher_yaw_cap%d" % sx, parent_node_name="launcher_yaw")
-    # commander cupola and sensor mast
-    sc.add_geometry(cyl(0.32, 0.22, (-0.5, 0.80, 0.9), "y", "olive", sections=24), node_name="launcher_yaw_cup",
+        sc.add_geometry(box((0.10, 0.36, 1.2), (sx * 1.06, 0.55, -0.2), W), node_name="launcher_yaw_cheek%d" % sx,
+                        geom_name="launcher_yaw_cheek%d" % sx, parent_node_name="launcher_yaw")
+        sc.add_geometry(box((0.05, 0.10, 1.0), (sx * 1.12, 0.62, -0.2), Y), node_name="launcher_yaw_band%d" % sx,
+                        geom_name="launcher_yaw_band%d" % sx, parent_node_name="launcher_yaw")
+        sc.add_geometry(box((0.20, 0.10, 0.20), (sx * 0.55, 0.92, -0.45), B), node_name="launcher_yaw_sensor%d" % sx,
+                        geom_name="launcher_yaw_sensor%d" % sx, parent_node_name="launcher_yaw")
+    # commander cupola with a green screen, sensor mast with a dish, twin antennas
+    sc.add_geometry(cyl(0.30, 0.22, (-0.5, 0.82, 0.9), "y", W, sections=24), node_name="launcher_yaw_cup",
                     geom_name="launcher_yaw_cup", parent_node_name="launcher_yaw")
-    sc.add_geometry(box((0.05, 0.6, 0.05), (0.7, 0.92, 0.1), "body"), node_name="launcher_yaw_mast",
+    sc.add_geometry(box((0.22, 0.04, 0.16), (-0.5, 1.05, 1.1), mat((0.1, 0.5, 0.2), 0.1, 0.2, (0.1, 0.9, 0.3), 1.5)),
+                    node_name="launcher_yaw_screen", geom_name="launcher_yaw_screen", parent_node_name="launcher_yaw")
+    sc.add_geometry(cyl(0.03, 1.6, (-0.2, 1.50, -1.0), "y", D, sections=8), node_name="launcher_yaw_mast",
                     geom_name="launcher_yaw_mast", parent_node_name="launcher_yaw")
+    sc.add_geometry(cyl(0.22, 0.04, (-0.2, 2.30, -1.0), "y", GR, sections=20), node_name="launcher_yaw_dish",
+                    geom_name="launcher_yaw_dish", parent_node_name="launcher_yaw")
+    for sx in (1, -1):
+        sc.add_geometry(cyl(0.012, 1.2, (sx * 0.8, 1.65, -0.6), "y", D, sections=6), node_name="launcher_yaw_ant%d" % sx,
+                        geom_name="launcher_yaw_ant%d" % sx, parent_node_name="launcher_yaw")
 
-    # launcher_pitch (trunnion at 0, 1.86, 1.45) relative to the yaw ring
+    # launcher_pitch: trunnion at 0, 1.86, 1.45 relative to the yaw ring
     TRN = np.array([0.0, 1.86, 1.45])
-    sc.graph.update(frame_to="launcher_pitch", frame_from="launcher_yaw", matrix=translation_matrix(TRN - Y))
-    sc.add_geometry(box((0.55, 0.40, 0.36), (0, 0.0, 0.05), "olive"), node_name="launcher_pitch_cradle",
+    sc.graph.update(frame_to="launcher_pitch", frame_from="launcher_yaw", matrix=translation_matrix(TRN - Yp))
+    sc.add_geometry(box((0.62, 0.42, 0.40), (0, 0.0, 0.05), W), node_name="launcher_pitch_cradle",
                     geom_name="launcher_pitch_cradle", parent_node_name="launcher_pitch")
-    sc.add_geometry(cyl(0.11, 1.20, (0, 0.0, 0.0), "x", "steel", sections=20), node_name="launcher_pitch_trunnion",
+    sc.add_geometry(cyl(0.11, 1.30, (0, 0.0, 0.0), "x", GR, sections=20), node_name="launcher_pitch_trunnion",
                     geom_name="launcher_pitch_trunnion", parent_node_name="launcher_pitch")
+    for sx in (1, -1):
+        sc.add_geometry(box((0.10, 0.20, 0.5), (sx * 0.34, 0.06, 0.1), Y), node_name="launcher_pitch_hose%d" % sx,
+                        geom_name="launcher_pitch_hose%d" % sx, parent_node_name="launcher_pitch")
 
-    # barrel: from the breech (trunnion) to the muzzle (z = 6.20), recoils along -Z
+    # barrel: eight-tube launcher (2 rows x 4), breech at the trunnion, recoils along -Z, muzzle at local 4.75
     sc.graph.update(frame_to="barrel", frame_from="launcher_pitch", matrix=np.eye(4))
-    sc.add_geometry(cyl(0.085, 4.75, (0, 0, 2.375 + 0.0), "z", "steel", sections=20), node_name="barrel_tube",
-                    geom_name="barrel_tube", parent_node_name="barrel")
-    sc.add_geometry(cyl(0.16, 0.10, (0, 0, 0.35), "z", "body", sections=20), node_name="barrel_sleeve",
-                    geom_name="barrel_sleeve", parent_node_name="barrel")
-    sc.add_geometry(cyl(0.12, 0.45, (0, 0, 4.60), "z", "cyan", sections=24), node_name="barrel_emitter",
-                    geom_name="barrel_emitter", parent_node_name="barrel")
-    sc.add_geometry(cyl(0.14, 0.04, (0, 0, 4.85), "z", "lens", sections=24), node_name="barrel_muzzle",
-                    geom_name="barrel_muzzle", parent_node_name="barrel")
-    for i, z in enumerate((1.2, 2.0, 2.8, 3.6)):
-        sc.add_geometry(cyl(0.105, 0.10, (0, 0, z), "z", "cyan", sections=20), node_name="barrel_coil%d" % i,
-                        geom_name="barrel_coil%d" % i, parent_node_name="barrel")
-    sc.add_geometry(sphere(0.24, (0, 0, -0.6), "plasma", scale=(1, 1, 1.0)), node_name="barrel_breech",
+    sc.add_geometry(box((0.62, 0.34, 3.2), (0, 0.0, 1.70), D), node_name="barrel_housing",
+                    geom_name="barrel_housing", parent_node_name="barrel")
+    for r, yy in enumerate((0.09, -0.09)):
+        for c, xx in enumerate((-0.15, -0.05, 0.05, 0.15)):
+            i = r * 4 + c
+            sc.add_geometry(cyl(0.042, 4.75, (xx, yy, 2.375), "z", GR, sections=14), node_name="barrel_tube%d" % i,
+                            geom_name="barrel_tube%d" % i, parent_node_name="barrel")
+            sc.add_geometry(cyl(0.048, 0.10, (xx, yy, 4.70), "z", Y, sections=14), node_name="barrel_cap%d" % i,
+                            geom_name="barrel_cap%d" % i, parent_node_name="barrel")
+            sc.add_geometry(cyl(0.030, 0.04, (xx, yy, 0.70), "z", Y, sections=10), node_name="barrel_ring%d" % i,
+                            geom_name="barrel_ring%d" % i, parent_node_name="barrel")
+    sc.add_geometry(sphere(0.24, (0, 0, -0.6), Y, scale=(1, 1, 1.0)), node_name="barrel_breech",
                     geom_name="barrel_breech", parent_node_name="barrel")
     return sc
 
