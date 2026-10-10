@@ -63,6 +63,13 @@ public final class ModItems {
     public static final RegistryObject<Item> SAIGA12 = ITEMS.register("saiga12", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.SAIGA12, new Item.Properties()));
     public static final RegistryObject<Item> R870 = ITEMS.register("r870", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.R870, new Item.Properties()));
     public static final RegistryObject<Item> MAG_SAIGA12 = ITEMS.register("mag_saiga12", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.SAIGA12, new Item.Properties()));
+    // r27 FUTURE weapons (fictional): ISKRA-9 laser pistol, ZARYA-4 laser rifle, SPOLOKH-7 plasma rifle + their power sources
+    public static final RegistryObject<Item> ISKRA9 = ITEMS.register("iskra9", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.ISKRA9, new Item.Properties()));
+    public static final RegistryObject<Item> ZARYA4 = ITEMS.register("zarya4", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.ZARYA4, new Item.Properties()));
+    public static final RegistryObject<Item> SPOLOKH7 = ITEMS.register("spolokh7", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.SPOLOKH7, new Item.Properties()));
+    public static final RegistryObject<Item> CELL_ISKRA9 = ITEMS.register("cell_iskra9", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.ISKRA9, new Item.Properties()));
+    public static final RegistryObject<Item> CELL_ZARYA4 = ITEMS.register("cell_zarya4", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.ZARYA4, new Item.Properties()));
+    public static final RegistryObject<Item> CANISTER_SPOLOKH7 = ITEMS.register("canister_spolokh7", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.SPOLOKH7, new Item.Properties()));
     public static final RegistryObject<Item> SHELL_12 = ITEMS.register("shell_12", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties()));
     public static final RegistryObject<Item> IGLA = ITEMS.register("igla", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.IGLA, new Item.Properties()));
     public static final RegistryObject<Item> JAVELIN = ITEMS.register("javelin", () -> new ru.aiforge.realwar.handheld.LauncherWeaponItem(ru.aiforge.realwar.handheld.HandheldKind.JAVELIN, new Item.Properties()));

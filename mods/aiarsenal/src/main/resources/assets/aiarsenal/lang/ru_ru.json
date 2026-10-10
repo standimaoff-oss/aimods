@@ -1889,5 +1889,20 @@
   "subtitles.aiarsenal.smg_mp40": "Стреляет MP 40",
   "subtitles.aiarsenal.rifle_mosin": "Выстрел винтовки Мосина",
   "subtitles.aiarsenal.rifle_k98": "Выстрел Kar98k",
-  "subtitles.aiarsenal.clip_in": "Обойма заряжена"
+  "subtitles.aiarsenal.clip_in": "Обойма заряжена",
+  "item.aiarsenal.iskra9": "ИСКРА-9 (лазерный пистолет)",
+  "item.aiarsenal.zarya4": "ЗАРЯ-4 (лазерная штурмовая винтовка)",
+  "item.aiarsenal.spolokh7": "СПОЛОХ-7 (плазменная винтовка)",
+  "item.aiarsenal.cell_iskra9": "Энергоячейка ИСКРА-9",
+  "item.aiarsenal.cell_zarya4": "Энергоячейка ЗАРЯ-4",
+  "item.aiarsenal.canister_spolokh7": "Плазменная канистра СПОЛОХ-7",
+  "tooltip.aiarsenal.gun.iskra9": "Вымышленный лазерный пистолет · 24 заряда · 240 выстр/мин · урон 6 · 60 м",
+  "tooltip.aiarsenal.gun.zarya4": "Вымышленная лазерная винтовка · 40 зарядов · 600 выстр/мин · урон 9 · 150 м · авто",
+  "tooltip.aiarsenal.gun.spolokh7": "Вымышленная плазменная винтовка · 12 зарядов · 180 выстр/мин · урон 16 + взрыв 1,5 м · 200 м",
+  "tooltip.aiarsenal.mag.iskra9": "Для ИСКРА-9. Вставить новую энергоячейку.",
+  "tooltip.aiarsenal.mag.zarya4": "Для ЗАРЯ-4. Вставить новую энергоячейку.",
+  "tooltip.aiarsenal.mag.spolokh7": "Для СПОЛОХ-7. Вставить новую плазменную канистру.",
+  "hud.aiarsenal.gun.name.iskra9": "ИСКРА-9",
+  "hud.aiarsenal.gun.name.zarya4": "ЗАРЯ-4",
+  "hud.aiarsenal.gun.name.spolokh7": "СПОЛОХ-7"
 }

@@ -31,7 +31,13 @@ public enum GunKind {
     PPSH41("ppsh41", "mag_ppsh", 71, 1000, 488, 5.0f, 2.5f, 0.032f, 0.0035f, 0.55f, 0.35f, 70, 84, 0.85f, "smg_ppsh", true),
     MP40("mp40", "mag_mp40", 32, 550, 400, 5.2f, 2.5f, 0.030f, 0.0030f, 0.50f, 0.30f, 50, 62, 0.85f, "smg_mp40", true),
     MOSIN("mosin", "clip_mosin", 5, 30, 865, 16f, 11f, 0.055f, 0.0006f, 3.6f, 0.8f, 50, 50, 0.75f, "rifle_mosin", false),
-    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false);
+    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false),
+    // r27 FUTURE (fictional, see notes/future_weapons.md): laser pistol, laser assault rifle, plasma rifle.
+    // Laser / plasma bolts are fast projectiles here (speeds are placeholders for the beam / plasma ball).
+    // Sounds are borrowed from existing samples until dedicated laser / plasma sounds are made.
+    ISKRA9("iskra9", "cell_iskra9", 24, 240, 1500, 6f, 1f, 0.010f, 0.0040f, 0.60f, 0.30f, 36, 40, 0.85f, "smg_mp40", false),
+    ZARYA4("zarya4", "cell_zarya4", 40, 600, 2500, 9f, 3f, 0.012f, 0.0040f, 0.70f, 0.30f, 48, 58, 0.80f, "rifle_m4", true),
+    SPOLOKH7("spolokh7", "canister_spolokh7", 12, 180, 300, 16f, 6f, 0.020f, 0.0080f, 2.00f, 0.80f, 64, 77, 0.80f, "shotgun_870", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;

@@ -1846,5 +1846,419 @@
   0,
   0.5,
   1
+ ],
+ "iskra9.fp": [
+  0.1,
+  -0.085,
+  -0.3,
+  -2,
+  0.02,
+  0.0035
+ ],
+ "iskra9.thirdperson_righthand": [
+  0,
+  0,
+  0,
+  180,
+  -25,
+  0,
+  1.0,
+  0
+ ],
+ "iskra9.thirdperson_lefthand": [
+  0,
+  0,
+  0,
+  180,
+  -25,
+  0,
+  1.0,
+  0
+ ],
+ "iskra9.gui": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  1,
+  1
+ ],
+ "iskra9.fixed": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  1,
+  1
+ ],
+ "iskra9.ground": [
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.8,
+  1
+ ],
+ "iskra9.head": [
+  0,
+  0.6,
+  0,
+  90,
+  0,
+  0,
+  0.9,
+  1
+ ],
+ "zarya4.fp": [
+  0.1,
+  -0.085,
+  -0.3,
+  -2,
+  0.02,
+  0.0035
+ ],
+ "zarya4.thirdperson_righthand": [
+  0,
+  0,
+  0,
+  180,
+  -25,
+  0,
+  1.0,
+  0
+ ],
+ "zarya4.thirdperson_lefthand": [
+  0,
+  0,
+  0,
+  180,
+  -25,
+  0,
+  1.0,
+  0
+ ],
+ "zarya4.gui": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  1,
+  1
+ ],
+ "zarya4.fixed": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  1,
+  1
+ ],
+ "zarya4.ground": [
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.8,
+  1
+ ],
+ "zarya4.head": [
+  0,
+  0.6,
+  0,
+  90,
+  0,
+  0,
+  0.9,
+  1
+ ],
+ "spolokh7.fp": [
+  0.1,
+  -0.085,
+  -0.3,
+  -2,
+  0.02,
+  0.0035
+ ],
+ "spolokh7.thirdperson_righthand": [
+  0,
+  0,
+  0,
+  180,
+  -25,
+  0,
+  1.0,
+  0
+ ],
+ "spolokh7.thirdperson_lefthand": [
+  0,
+  0,
+  0,
+  180,
+  -25,
+  0,
+  1.0,
+  0
+ ],
+ "spolokh7.gui": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  1,
+  1
+ ],
+ "spolokh7.fixed": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  1,
+  1
+ ],
+ "spolokh7.ground": [
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.8,
+  1
+ ],
+ "spolokh7.head": [
+  0,
+  0.6,
+  0,
+  90,
+  0,
+  0,
+  0.9,
+  1
+ ],
+ "cell_iskra9.gui": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  0.95,
+  1
+ ],
+ "cell_iskra9.fixed": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  0.9,
+  1
+ ],
+ "cell_iskra9.ground": [
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  1
+ ],
+ "cell_iskra9.thirdperson_righthand": [
+  0,
+  0.05,
+  0.05,
+  90,
+  0,
+  0,
+  0.45,
+  1
+ ],
+ "cell_iskra9.thirdperson_lefthand": [
+  0,
+  0.05,
+  0.05,
+  90,
+  0,
+  0,
+  0.45,
+  1
+ ],
+ "cell_iskra9.firstperson_righthand": [
+  -0.1,
+  0.1,
+  0,
+  90,
+  10,
+  0,
+  0.5,
+  1
+ ],
+ "cell_iskra9.firstperson_lefthand": [
+  0.1,
+  0.1,
+  0,
+  90,
+  10,
+  0,
+  0.5,
+  1
+ ],
+ "cell_zarya4.gui": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  0.95,
+  1
+ ],
+ "cell_zarya4.fixed": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  0.9,
+  1
+ ],
+ "cell_zarya4.ground": [
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  1
+ ],
+ "cell_zarya4.thirdperson_righthand": [
+  0,
+  0.05,
+  0.05,
+  90,
+  0,
+  0,
+  0.45,
+  1
+ ],
+ "cell_zarya4.thirdperson_lefthand": [
+  0,
+  0.05,
+  0.05,
+  90,
+  0,
+  0,
+  0.45,
+  1
+ ],
+ "cell_zarya4.firstperson_righthand": [
+  -0.1,
+  0.1,
+  0,
+  90,
+  10,
+  0,
+  0.5,
+  1
+ ],
+ "cell_zarya4.firstperson_lefthand": [
+  0.1,
+  0.1,
+  0,
+  90,
+  10,
+  0,
+  0.5,
+  1
+ ],
+ "canister_spolokh7.gui": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  0.95,
+  1
+ ],
+ "canister_spolokh7.fixed": [
+  0,
+  0,
+  0,
+  90,
+  0,
+  0,
+  0.9,
+  1
+ ],
+ "canister_spolokh7.ground": [
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  1
+ ],
+ "canister_spolokh7.thirdperson_righthand": [
+  0,
+  0.05,
+  0.05,
+  90,
+  0,
+  0,
+  0.45,
+  1
+ ],
+ "canister_spolokh7.thirdperson_lefthand": [
+  0,
+  0.05,
+  0.05,
+  90,
+  0,
+  0,
+  0.45,
+  1
+ ],
+ "canister_spolokh7.firstperson_righthand": [
+  -0.1,
+  0.1,
+  0,
+  90,
+  10,
+  0,
+  0.5,
+  1
+ ],
+ "canister_spolokh7.firstperson_lefthand": [
+  0.1,
+  0.1,
+  0,
+  90,
+  10,
+  0,
+  0.5,
+  1
  ]
 }

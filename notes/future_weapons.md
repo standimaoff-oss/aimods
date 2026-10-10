@@ -53,3 +53,19 @@
 - Анимаций, LOD, камер и HDRI в файлах нет (ключевой и заполняющий свет и нейтральный мир для просмотра — есть).
 - Модели не подключены к моду `aiarsenal` (нет GLB-экспорта и кода стрельбы в моде) — это следующий шаг.
 - Проверка открытия: `python tools/blender/future_weapons.py --check` — все три файла открываются без аддонов.
+
+## Интеграция в мод aiarsenal (r27)
+
+Что добавлено:
+- `GunKind`: `ISKRA9`, `ZARYA4`, `SPOLOKH7` (id `iskra9`, `zarya4`, `spolokh7`), патроны `cell_iskra9`, `cell_zarya4`, `canister_spolokh7`.
+- `ModItems`: `FirearmItem` и `MagazineItem` для каждого; `ModTabs`: вкладка «Оружие».
+- `models/glb/`: `iskra9.glb`, `zarya4.glb`, `spolokh7.glb` (оружие), `cell_iskra9.glb`, `cell_zarya4.glb`, `canister_spolokh7.glb` (патроны). Экспорт: `future_weapons.py --glb <dir>`.
+- `models/item/`: JSON-заготовки для всех шести предметов (как у `ak12` / `mag_ak12`).
+- `handheld_view.json`: позиции в руке и магазинах скопированы с AK-12 / его магазина; подлежат подгонке в игре.
+- `lang/en_us.json`, `lang/ru_ru.json`: названия, подсказки, HUD-имена.
+
+Отклонения и ограничения:
+- Звуки выстрелов временные: `iskra9` → `smg_mp40`, `zarya4` → `rifle_m4`, `spolokh7` → `shotgun_870`. Лазерные/плазменные звуки не созданы.
+- Режим огня: `zarya4` — автоматический, `iskra9` и `spolokh7` — одиночный.
+- Сборка мода (Gradle, Java 17) и запуск в игре в среде не проверялись: Java отсутствует. Синтаксис Java проверен только по структуре добавленных строк.
+- Узлы модели: `<id>.arm_r`, `<id>.arm_l` (позиции рук), `<id>.sight`, `<id>.flash`, `<id>.bolt`; якоря `ANCHOR_*` сохранены.

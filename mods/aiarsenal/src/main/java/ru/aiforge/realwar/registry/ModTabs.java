@@ -104,7 +104,7 @@ public final class ModTabs {
         ModTabs.put(Cat.FORTIFICATION, "trap_punji", "trap_spike_strip", "trap_flare", "trap_ied", "trap_electric_fence");
         ModTabs.put(Cat.PROTECTION, "ration_irp", "bandage", "first_aid_kit");
         // <<< r17
-        ModTabs.put(Cat.WEAPONS, "ak12", "mag_ak12", "m4a1", "mag_stanag", "t5000", "mag_t5000", "pkp", "box_pkp", "saiga12", "mag_saiga12", "r870", "shell_12", "rpg7", "pg7v", "igla", "igla_missile", "stinger", "stinger_missile", "javelin", "javelin_missile", "ppsh41", "mag_ppsh", "mp40", "mag_mp40", "mosin", "clip_mosin", "k98k", "clip_k98");
+        ModTabs.put(Cat.WEAPONS, "iskra9", "cell_iskra9", "zarya4", "cell_zarya4", "spolokh7", "canister_spolokh7", "ak12", "mag_ak12", "m4a1", "mag_stanag", "t5000", "mag_t5000", "pkp", "box_pkp", "saiga12", "mag_saiga12", "r870", "shell_12", "rpg7", "pg7v", "igla", "igla_missile", "stinger", "stinger_missile", "javelin", "javelin_missile", "ppsh41", "mag_ppsh", "mp40", "mag_mp40", "mosin", "clip_mosin", "k98k", "clip_k98");
         VEHICLES = ModTabs.tab("vehicles", Cat.VEHICLES, () -> new ItemStack((ItemLike)ModItems.GRAD_VEHICLE.get()));
         DRONES = ModTabs.tab("drones", Cat.DRONES, () -> new ItemStack((ItemLike)BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal", "shahed136"))));
         NUCLEAR = ModTabs.tab("nuclear", Cat.NUCLEAR, () -> new ItemStack((ItemLike)ModItems.LITTLE_BOY.get()));

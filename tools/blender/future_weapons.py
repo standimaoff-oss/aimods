@@ -281,6 +281,7 @@ def build_iskra9(col):
         "ANCHOR_Muzzle": (0.0, 0.2605, 0.036),
         "ANCHOR_Grip": (0.0, 0.008, -0.030),
         "ANCHOR_Sight": (0.0, 0.160, 0.072),
+        "ANCHOR_Foregrip": (0.0, 0.0, 0.0),  # pistol: off hand on the grip
     }
 
 
@@ -339,6 +340,7 @@ def build_zarya4(col):
         "ANCHOR_Muzzle": (0.0, 0.892, 0.090),
         "ANCHOR_Grip": (0.0, 0.000, -0.040),
         "ANCHOR_Sight": (0.0, 0.060, 0.178),
+        "ANCHOR_Foregrip": (0.0, 0.360, 0.005),
     }
 
 
@@ -392,6 +394,7 @@ def build_spolokh7(col):
         "ANCHOR_Muzzle": (0.0, 0.830, 0.100),
         "ANCHOR_Grip": (0.0, -0.060, -0.040),
         "ANCHOR_Sight": (0.0, 0.050, 0.232),
+        "ANCHOR_Foregrip": (0.0, 0.120, -0.030),
     }
 
 
@@ -399,24 +402,74 @@ def build_spolokh7(col):
 
 WEAPONS = {
     "iskra9_pistol_laser": dict(
-        title="ИСКРА-9 (лазерный пистолет)", build=build_iskra9, root="WPN_Iskra9",
+        title="ИСКРА-9 (лазерный пистолет)", build=build_iskra9, root="WPN_Iskra9", mod_id="iskra9",
+        cell=("cell_iskra9", "iskra9_cell"),
         props=dict(weapon_id="iskra9", kind="pistol_laser", fire_mode="semi", rpm=240, magazine=24,
                    reload_s=1.8, damage=6.0, headshot_mult=1.5, range_m=60, projectile="laser_bolt",
                    spread_deg=1.0, heat_per_shot=4.0, heat_max=100.0, cooldown_s=0.4,
                    muzzle_flash_color="#33D9FF", ammo_item="energy_cell_pistol")),
     "zarya4_laser_rifle": dict(
-        title="ЗАРЯ-4 (лазерная штурмовая винтовка)", build=build_zarya4, root="WPN_Zarya4",
+        title="ЗАРЯ-4 (лазерная штурмовая винтовка)", build=build_zarya4, root="WPN_Zarya4", mod_id="zarya4",
+        cell=("cell_zarya4", "zarya4_cell"),
         props=dict(weapon_id="zarya4", kind="rifle_laser", fire_mode="auto", rpm=600, magazine=40,
                    reload_s=2.4, damage=9.0, headshot_mult=2.0, range_m=150, projectile="laser_beam",
                    spread_deg=0.6, heat_per_shot=2.5, heat_max=100.0, cooldown_s=3.0,
                    muzzle_flash_color="#33D9FF", ammo_item="energy_cell_rifle")),
     "spolokh7_plasma_rifle": dict(
-        title="СПОЛОХ-7 (плазменная винтовка)", build=build_spolokh7, root="WPN_Spolokh7",
+        title="СПОЛОХ-7 (плазменная винтовка)", build=build_spolokh7, root="WPN_Spolokh7", mod_id="spolokh7",
+        cell=("canister_spolokh7", "spolokh7_canister"),
         props=dict(weapon_id="spolokh7", kind="rifle_plasma", fire_mode="semi_burst", rpm=180, magazine=12,
                    reload_s=3.2, damage=16.0, aoe_radius_m=1.5, headshot_mult=1.3, range_m=200,
                    projectile="plasma_ball", spread_deg=1.5, heat_per_shot=12.0, heat_max=100.0, cooldown_s=2.0,
                    muzzle_flash_color="#FF26B3", ammo_item="plasma_canister")),
 }
+
+
+def add_mod_nodes(col, mod_id, anchors):
+    """Узлы, которые читает мод (realwar GunRenderer): <id>.sight, <id>.arm_r, <id>.arm_l, <id>.bolt, <id>.flash."""
+    grip = anchors["ANCHOR_Grip"]
+    add_anchor(col, f"{mod_id}.sight", anchors["ANCHOR_Sight"], {})
+    add_anchor(col, f"{mod_id}.arm_r", grip, {})
+    add_anchor(col, f"{mod_id}.arm_l", anchors["ANCHOR_Foregrip"], {})
+    add_anchor(col, f"{mod_id}.bolt", grip, {})
+    flash_mat = make_material(f"M_{mod_id}_Flash", (0.0, 0.0, 0.0), emit=(1.0, 0.8, 0.4), emit_strength=25.0,
+                              rough_var=0.0, bump=0.0)
+    add_part(col, f"{mod_id}.flash", "sphere", flash_mat, loc=anchors["ANCHOR_Muzzle"], r=0.016)
+
+
+def build_cell(key, spec):
+    """Патрон-источник для винтовки/пистолета: энергоячейка или канистра (модели в мод отдельные)."""
+    cell_name, _ = spec["cell"]
+    reset_scene()
+    col = get_collection("COL_" + cell_name)
+    body = make_material("M_" + cell_name + "_Body", (0.12, 0.13, 0.15), metallic=0.5, roughness=0.35)
+    glow = make_material("M_" + cell_name + "_Glow", (0.0, 0.0, 0.0), emit=(0.05, 0.85, 1.0), emit_strength=8.0,
+                         rough_var=0.0, bump=0.0)
+    if key == "spolokh7_plasma_rifle":
+        add_part(col, cell_name + "_body", "cyl", body, loc=(0, 0, 0), r=0.034, L=0.150, seg=28)
+        add_part(col, cell_name + "_band", "torus", glow, loc=(0, 0, 0.040), R=0.034, r=0.004)
+    else:
+        size = (0.034, 0.050, 0.130) if key == "zarya4_laser_rifle" else (0.026, 0.030, 0.014)
+        add_part(col, cell_name + "_body", "box", body, loc=(0, 0, 0), size=size)
+        add_part(col, cell_name + "_strip", "box", glow, loc=(size[0] / 2 + 0.002, 0, 0),
+                 size=(0.004, size[1] * 0.6, size[2] * 0.8))
+    path = os.path.join(OUT_DIR, cell_name + ".blend")
+    finalize_and_save(path)
+    return path
+
+
+def export_glb(collection_name, glb_path):
+    """GLB для мода: только меши и пустышки коллекции (без света и камер)."""
+    bpy.ops.object.select_all(action="DESELECT")
+    col = bpy.data.collections[collection_name]
+    for o in col.objects:
+        if o.type in {"MESH", "EMPTY"}:
+            o.select_set(True)
+            bpy.context.view_layer.objects.active = o
+    os.makedirs(os.path.dirname(glb_path), exist_ok=True)
+    bpy.ops.export_scene.gltf(filepath=glb_path, export_format="GLB", use_selection=True,
+                              export_apply=True, export_lights=False, export_cameras=False)
+    return glb_path
 
 
 def build_one(key):
@@ -427,7 +480,8 @@ def build_one(key):
     for name, loc in anchors.items():
         props = dict(spec["props"]) if name == "ANCHOR_Muzzle" else {}
         props.setdefault("anchor", name)
-        obj = add_anchor(col, name, loc, props)
+        add_anchor(col, name, loc, props)
+    add_mod_nodes(col, spec["mod_id"], anchors)
     root = bpy.data.objects.new(spec["root"], None)
     root.empty_display_type = "PLAIN_AXES"
     root.empty_display_size = 0.05
@@ -521,9 +575,21 @@ def main(argv):
         for key in WEAPONS:
             qa_render(os.path.join(OUT_DIR, key + ".blend"), outdir)
         return
+    if "--glb" in argv:
+        # GLB для мода: открыть каждый .blend и экспортировать коллекцию оружия и патрона
+        glb_dir = argv[argv.index("--glb") + 1]
+        for key, spec in WEAPONS.items():
+            bpy.ops.wm.open_mainfile(filepath=os.path.join(OUT_DIR, key + ".blend"), load_ui=False)
+            print("[GLB]", export_glb("COL_" + spec["root"], os.path.join(glb_dir, spec["mod_id"] + ".glb")))
+            cell_file = os.path.join(OUT_DIR, spec["cell"][0] + ".blend")
+            bpy.ops.wm.open_mainfile(filepath=cell_file, load_ui=False)
+            print("[GLB]", export_glb("COL_" + spec["cell"][0], os.path.join(glb_dir, spec["cell"][0] + ".glb")))
+        return
     for key in WEAPONS:
         p = build_one(key)
         print("[BUILD]", p)
+        c = build_cell(key, WEAPONS[key])
+        print("[BUILD]", c)
 
 
 if __name__ == "__main__":

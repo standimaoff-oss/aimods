@@ -1889,5 +1889,20 @@
   "subtitles.aiarsenal.smg_mp40": "MP 40 fires",
   "subtitles.aiarsenal.rifle_mosin": "Mosin rifle fires",
   "subtitles.aiarsenal.rifle_k98": "Kar98k fires",
-  "subtitles.aiarsenal.clip_in": "Clip loaded"
+  "subtitles.aiarsenal.clip_in": "Clip loaded",
+  "item.aiarsenal.iskra9": "ISKRA-9 (laser pistol)",
+  "item.aiarsenal.zarya4": "ZARYA-4 (laser assault rifle)",
+  "item.aiarsenal.spolokh7": "SPOLOKH-7 (plasma rifle)",
+  "item.aiarsenal.cell_iskra9": "Power cell ISKRA-9",
+  "item.aiarsenal.cell_zarya4": "Power cell ZARYA-4",
+  "item.aiarsenal.canister_spolokh7": "Plasma canister SPOLOKH-7",
+  "tooltip.aiarsenal.gun.iskra9": "Fictional laser pistol · 24 cells · 240 shots/min · 6 dmg · 60 m",
+  "tooltip.aiarsenal.gun.zarya4": "Fictional laser rifle · 40 cells · 600 shots/min · 9 dmg · 150 m · auto",
+  "tooltip.aiarsenal.gun.spolokh7": "Fictional plasma rifle · 12 charges · 180 shots/min · 16 dmg + 1.5 m blast · 200 m",
+  "tooltip.aiarsenal.mag.iskra9": "For the ISKRA-9. Insert a new power cell.",
+  "tooltip.aiarsenal.mag.zarya4": "For the ZARYA-4. Insert a new power cell.",
+  "tooltip.aiarsenal.mag.spolokh7": "For the SPOLOKH-7. Insert a new plasma canister.",
+  "hud.aiarsenal.gun.name.iskra9": "ISKRA-9",
+  "hud.aiarsenal.gun.name.zarya4": "ZARYA-4",
+  "hud.aiarsenal.gun.name.spolokh7": "SPOLOKH-7"
 }
