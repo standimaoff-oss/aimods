@@ -120,7 +120,7 @@ public final class Warheads {
             double z = center.z + Math.sin(a) * r;
             if (!sl.hasChunk(Mth.floor((double)x) >> 4, Mth.floor((double)z) >> 4)) continue;
             double y = (double)sl.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mth.floor((double)x), Mth.floor((double)z)) + 0.3;
-            sl.sendParticles((ParticleOptions)ParticleTypes.SMOKE, x, y + 14.0, z, 3, 0.1, 6.0, 0.1, 0.0);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, x, y + 14.0, z, 3, 0.1, 6.0, 0.1, 0.0);
             ConventionalBlast.explode(sl, new Vec3(x, y, z), bombKg, 1.3);
         }
     }

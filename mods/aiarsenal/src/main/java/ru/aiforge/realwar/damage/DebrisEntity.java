@@ -134,7 +134,7 @@ public class DebrisEntity extends Entity {
             double bounce = vyB < -0.18 ? -vyB * 0.22 : 0.0;
             v = new Vec3(v.x * 0.55, bounce, v.z * 0.55);
             if (vyB < -0.3 && this.level() instanceof ServerLevel sl) {
-                sl.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getX(), this.getY() + 0.2, this.getZ(), 4, 0.5, 0.1, 0.5, 0.01);
+                ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getX(), this.getY() + 0.2, this.getZ(), 4, 0.5, 0.1, 0.5, 0.01);
                 sl.playSound(null, this.getX(), this.getY(), this.getZ(), net.minecraft.sounds.SoundEvents.ANVIL_LAND, net.minecraft.sounds.SoundSource.NEUTRAL,
                         Math.min(3f, (float) -vyB * 2f), 0.5f);
             }
@@ -149,7 +149,7 @@ public class DebrisEntity extends Entity {
         int burn = s.getInt("burn");
         if (burn > 0 && this.tickCount < burn && mode != TRACK) {
             Vec3 p = this.position().add(0, this.getBbHeight() * 0.5, 0);
-            if (this.tickCount % 2 == 0) this.level().addParticle(ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 0, 0.06, 0);
+            if (this.tickCount % 2 == 0) ru.aiforge.realwar.particle.SmokeFx.add(this.level(), ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 0, 0.06, 0);
             if (this.tickCount < burn / 2 && this.random.nextInt(2) == 0) this.level().addParticle(ParticleTypes.FLAME, p.x, p.y, p.z, 0, 0.03, 0);
         }
         this.qO.set(this.q);

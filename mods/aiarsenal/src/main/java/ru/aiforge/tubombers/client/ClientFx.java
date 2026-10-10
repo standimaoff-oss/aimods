@@ -119,7 +119,7 @@ public final class ClientFx {
                     vx * sp, vy * sp, vz * sp);
         }
         for (int i = 0; i < 18 * k; i++)
-            lv.addAlwaysVisibleParticle(ModRegistry.P_BLAST_SMOKE.get(), true, x + r.nextGaussian() * rad * 0.5, y + 1 + r.nextDouble() * rad * 1.5,
+            ru.aiforge.realwar.client.particle.VolumeFx.puffBlast(lv, x + r.nextGaussian() * rad * 0.5, y + 1 + r.nextDouble() * rad * 1.5,
                     z + r.nextGaussian() * rad * 0.5, r.nextGaussian() * 0.06, 0.1 + r.nextDouble() * 0.14, r.nextGaussian() * 0.06);
         for (int i = 0; i < 40 * k; i++)
             lv.addAlwaysVisibleParticle(ParticleTypes.FLAME, true, x, y + 0.5, z, r.nextGaussian() * 0.4, 0.3 + r.nextDouble() * 0.6, r.nextGaussian() * 0.4);

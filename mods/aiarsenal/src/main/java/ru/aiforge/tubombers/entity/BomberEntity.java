@@ -442,7 +442,7 @@ public class BomberEntity extends Entity {
         if (dead) {
             destroyedTicks++;
             if (tickCount % 3 == 0)
-                sl.sendParticles(net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, getX(), getY() + 4, getZ(), 6, 3, 1, 3, 0.02);
+                ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, getX(), getY() + 4, getZ(), 6, 3, 1, 3, 0.02);
             if (st.onGround && destroyedTicks > 60) crash("destroyed");
         }
         if (getY() < level().getMinBuildHeight() - 64) discard();

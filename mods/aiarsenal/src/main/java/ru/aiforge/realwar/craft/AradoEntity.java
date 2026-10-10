@@ -120,7 +120,7 @@ public class AradoEntity extends Entity {
             this.rollC += Mth.wrapDegrees(this.roll() - this.rollC) * 0.5f;
             this.propAngle = (this.propAngle + (this.state() == S_WATER ? 25f : 61f)) % 360f;
             if (this.state() == S_CRASH && this.tickCount % 2 == 0)
-                this.level().addParticle(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 1.5, this.getZ(), 0, 0.05, 0);
+                ru.aiforge.realwar.particle.SmokeFx.add(this.level(), ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 1.5, this.getZ(), 0, 0.05, 0);
             return;
         }
         ServerLevel sl = (ServerLevel) this.level();
@@ -302,7 +302,7 @@ public class AradoEntity extends Entity {
                 continue;
             }
             b[0] = n.x; b[1] = n.y; b[2] = n.z;
-            sl.sendParticles(ParticleTypes.SMOKE, n.x, n.y, n.z, 1, 0, 0, 0, 0);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, n.x, n.y, n.z, 1, 0, 0, 0, 0);
         }
     }
 

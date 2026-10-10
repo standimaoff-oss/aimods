@@ -1183,3 +1183,35 @@ FOV ×0,8). B переключает на ПГО-7В3 (сетка, 4×); пли�
 - Нет отдельных моделей ПУ и батарей, блок использует общий стальной куб с чёрной крышкой.
 - Нет поддержки снарядов в самом ПУ (склад); сейчас снаряды берутся из инвентаря оператора.
 - Дым (вопрос в ответе 28) — ждём название мода или скриншот для сравнения.
+
+## Изменения ответа 28, часть 2: дым из volpyro в военный мод
+
+Эталон — `volpyro-1.5.6-nuclear (1).jar` (MIT, VolPyro Contributors) из `main`. Порт **частичный**: полноэкранной симуляции шлейфов нет, шлейфы и взрывы собираются из объёмных пуфов (сферы-импостеры), а не из поля плотности.
+
+### Что перенесено
+- **Шейдер `volsmoke.fsh` (r28):** dual-lobe Henyey-Greenstein, 3-октавная сумма multiple scattering (густой дым не чернеет), billow-октавы плотности (кучевая форма краёв), blackbody-эмиссия для горячих пуфов вместо старого оранжевого градиента. Raymarch до 16 шагов. Интерфейс uniform/varying с Java не менялся.
+- **Качество:** `VolParams` теперь 6 / 10 / 16 шагов (было 5 / 8 / 12) в `VolumeFx.setup`.
+- **Все дымовые частицы стали объёмными** (33 вызова переведены регулярным выражением, остальные — вручную):
+  - серверные `sendParticles(SMOKE / LARGE_SMOKE / CAMPFIRE_SIGNAL_SMOKE / CAMPFIRE_COSY_SMOKE)` → `VSmokeOptions.sendVanilla` (пресеты `vanillaPreset`, для остальных типов поведение прежнее);
+  - клиентские и общие `level.addParticle(...)` с дымовыми типами → `SmokeFx.add` (только на клиенте, сервер ничего не грузит);
+  - `BigPuffParticle` (BLAST_SMOKE, SMOKE_WALL) в `bm21grad` и `tubombers` → `VolumeFx.puffBlast` / `puffWall`. Сами регистрации `BigPuffParticle` оставлены (не мешают);
+  - `DamageFx.puff` (дым повреждённых самолётов) → `SmokeFx.add`;
+  - тернарники (`CraftFx`, `AtMissileEntity`, `LauncherWeaponItem`) переведены вручную.
+- **Ядерки:** `realwar/client/fx/NukeFx` уже строился на `FxParticle` с объёмным флагом (r27), отдельной правки не понадобилось.
+- **Пресеты** (`VSmokeOptions.vanillaPreset`): SMOKE — светло-серый, LARGE_SMOKE — тёмный, CAMPFIRE_COSY — средний, CAMPFIRE_SIGNAL — светлый и долгий.
+
+### Файлы
+- Новые: `realwar/particle/SmokeFx.java`, `realwar/gametest/SmokeTests.java`, `NOTICE.md` (атрибуция MIT).
+- Изменены: `volsmoke.fsh`, `VSmokeOptions.java`, `client/particle/VolumeFx.java` (`vanilla`, `addVanilla`, `puffBlast`, `puffWall`, шаги), `DamageFx`, `SmokeScreenEntity`, `ClientFx` (bm21grad и tubombers), `CraftFx`, `AtMissileEntity`, `LauncherWeaponItem`, а также вызовы в сущностях (`LauncherEntity`, `MissileEntity`, `ReconDrone`, `ShahedDrone`, `Bm21Entity`, `RocketEntity`, `SubmunitionEntity`, `AradoEntity`, `BattleshipEntity`, `CraftEntity`, `PlaneEntity`, `DebrisEntity`, `LampBlock`, `WreckBlockEntity`, `Firearms`, `Warheads`, `BulletManager`, `BomberEntity`, `Bm21ClientState`).
+
+### Проверка
+- **Шейдер:** `@webgpu/glslang` 0.0.15 (WASM, сборка onefile), копия с `#version 450`, binding'ами и location. `volsmoke.fsh` (r28) и `volsmoke.vsh` компилируются в SPIR-V. Для сравнения r27 тоже компилируется.
+- **ECJ** (`tools/ecj/check.sh`): 0 ошибок в файлах мода. Контрольный файл с заведомо ошибочным кодом был пойман, значит проверка идёт по нашим файлам.
+- **Gametest** `SmokeTests` (пресеты дыма, огонь и взрыв не переходят в пуфы) написан, но не запускался: в песочнице нет игры.
+- Нумерованный numpy-референс `tools/render/volsmoke_ref.py` не обновлён под r28 (это r27).
+
+### Не сделано / требует игровой проверки
+- **Яркость и плотность** дыма нужно подстроить в игре: порт сделан по формулам эталона, но без рендера его не сравнить.
+- Полноэкранная симуляция volpyro (поле плотности, шлейфы ракет как единый объём) не портирована. Шлейфы — последовательность пуфов.
+- Производительность: каждый пуф — отдельный raymarch. В сцене с десятками пуфов у камеры могут быть просадки FPS (лимит `MAX_INSIDE = 8` сохранён).
+- Для сравнения с эталоном нужны скриншоты в игре.

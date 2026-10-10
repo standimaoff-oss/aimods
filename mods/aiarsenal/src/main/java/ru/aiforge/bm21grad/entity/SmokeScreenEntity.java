@@ -44,7 +44,8 @@ public class SmokeScreenEntity extends Entity {
             if (tickCount > LIFETIME - 100) n = random.nextInt(3) == 0 ? 1 : 0;
             for (int i = 0; i < n; i++) {
                 double a = random.nextDouble() * Math.PI * 2, d = Math.sqrt(random.nextDouble()) * r;
-                level().addAlwaysVisibleParticle(ru.aiforge.bm21grad.registry.ModRegistry.P_SMOKE_WALL.get(), true,
+                // r28: volumetric wall puff (VolumeFx.puffWall), was a BigPuffParticle billboard
+                ru.aiforge.realwar.client.particle.VolumeFx.puffWall(level(),
                         getX() + Math.cos(a) * d, getY() + 0.8 + random.nextDouble() * random.nextDouble() * 4.0, getZ() + Math.sin(a) * d,
                         (random.nextDouble() - 0.5) * 0.02, random.nextDouble() * 0.006, (random.nextDouble() - 0.5) * 0.02);
             }

@@ -261,7 +261,7 @@ public class ReconDrone extends ArsEntity implements Controllable {
                 v = v.add(0, -0.05, 0).scale(0.99);
                 setRoll(roll() + 6f);
                 if (age % 2 == 0)
-                    sl.sendParticles(net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 2, 0.3, 0.3, 0.3, 0.01);
+                    ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 2, 0.3, 0.3, 0.3, 0.01);
             }
             default -> {
             }

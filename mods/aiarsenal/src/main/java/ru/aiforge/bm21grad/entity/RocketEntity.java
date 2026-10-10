@@ -170,7 +170,7 @@ public class RocketEntity extends Projectile {
                         (random.nextDouble() - 0.5) * 0.03, 0.01, (random.nextDouble() - 0.5) * 0.03);   // r27: volumetric trail
                 level().addParticle(ParticleTypes.FLAME, x, y, z, back.x * 0.05, back.y * 0.05, back.z * 0.05);
             } else if (a < 200) {
-                level().addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0.005, 0);
+                ru.aiforge.realwar.particle.SmokeFx.add(level(), ParticleTypes.SMOKE, x, y, z, 0, 0.005, 0);
             }
         }
     }

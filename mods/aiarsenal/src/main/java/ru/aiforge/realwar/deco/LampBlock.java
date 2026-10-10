@@ -69,7 +69,7 @@ public class LampBlock extends Block {
     public void animateTick(BlockState s, Level lv, BlockPos p, RandomSource r) {
         if (fuel != 1 || !s.getValue(LIT)) return;
         double y = flameY(s);
-        if (r.nextInt(3) == 0) lv.addParticle(ParticleTypes.SMOKE, p.getX() + 0.5, p.getY() + y + 0.22, p.getZ() + 0.5, 0, 0.01, 0);
+        if (r.nextInt(3) == 0) ru.aiforge.realwar.particle.SmokeFx.add(lv, ParticleTypes.SMOKE, p.getX() + 0.5, p.getY() + y + 0.22, p.getZ() + 0.5, 0, 0.01, 0);
         if (r.nextInt(6) == 0) lv.addParticle(ParticleTypes.SMALL_FLAME, p.getX() + 0.5, p.getY() + y + 0.03, p.getZ() + 0.5, 0, 0.002, 0);
     }
 

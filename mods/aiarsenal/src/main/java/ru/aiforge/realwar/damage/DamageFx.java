@@ -80,7 +80,7 @@ public final class DamageFx {
     }
 
     static void puff(Level l, ParticleOptions p, Vec3 c, RandomSource r, double spread, double up) {
-        l.addParticle(p, c.x + (r.nextDouble() - 0.5) * spread, c.y + (r.nextDouble() - 0.5) * spread * 0.5, c.z + (r.nextDouble() - 0.5) * spread,
+        ru.aiforge.realwar.particle.SmokeFx.add(l, p, c.x + (r.nextDouble() - 0.5) * spread, c.y + (r.nextDouble() - 0.5) * spread * 0.5, c.z + (r.nextDouble() - 0.5) * spread,
                 (r.nextDouble() - 0.5) * 0.02, up, (r.nextDouble() - 0.5) * 0.02);
     }
 }

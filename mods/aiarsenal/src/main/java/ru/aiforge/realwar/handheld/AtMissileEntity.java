@@ -232,7 +232,7 @@ public class AtMissileEntity extends Projectile {
         if (motor) l.addParticle(ParticleTypes.FLAME, back.x, back.y, back.z, 0, 0, 0);
         for (int i = 0; i < (k == HandheldKind.RPG7 ? 2 : 3); i++) {
             double f = i / 3.0;
-            l.addParticle(motor ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, back.x - v.x * f, back.y - v.y * f, back.z - v.z * f,
+            ru.aiforge.realwar.particle.SmokeFx.add(l, motor ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, back.x - v.x * f, back.y - v.y * f, back.z - v.z * f,
                     (this.random.nextDouble() - 0.5) * 0.02, 0.01, (this.random.nextDouble() - 0.5) * 0.02);
         }
     }

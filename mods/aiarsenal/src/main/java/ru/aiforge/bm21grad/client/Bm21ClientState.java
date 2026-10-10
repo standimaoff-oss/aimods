@@ -84,7 +84,7 @@ public final class Bm21ClientState {
         Level lv = e.level();
         for (int i = 0; i < 16; i++) {
             Vec3 q = e.toWorld((lv.random.nextDouble() - 0.5) * 7, 0.2, -2 - lv.random.nextDouble() * 6);
-            lv.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, q.x, q.y, q.z, (lv.random.nextDouble() - 0.5) * 0.1, 0.02, (lv.random.nextDouble() - 0.5) * 0.1);
+            ru.aiforge.realwar.particle.SmokeFx.add(lv, ParticleTypes.CAMPFIRE_COSY_SMOKE, q.x, q.y, q.z, (lv.random.nextDouble() - 0.5) * 0.1, 0.02, (lv.random.nextDouble() - 0.5) * 0.1);
         }
     }
 

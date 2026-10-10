@@ -582,7 +582,7 @@ public abstract class CraftEntity extends Entity implements ru.aiforge.realwar.d
         float dmg = (dv - safe) * (dv - safe) * (this.kind.isHeli() ? 3.2f : 1.4f);
         this.damage(dmg);
         if (this.level() instanceof ServerLevel sl) {
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 1, this.getZ(), 10, 1, 0.5, 1, 0.02);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 1, this.getZ(), 10, 1, 0.5, 1, 0.02);
             sl.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, Math.min(3f, dv / 6f), 1.3f);
         }
         for (Entity e : this.getPassengers()) e.hurt(this.level().damageSources().fall(), Math.max(0, dv - 9f) * 1.6f);
@@ -705,7 +705,7 @@ public abstract class CraftEntity extends Entity implements ru.aiforge.realwar.d
         for (Entity e : this.getPassengers()) if (this.kind.isSub() || !this.kind.isAir()) e.setAirSupply(e.getMaxAirSupply());
         if (this.tickCount % 20 == 0 && this.hp() < this.kind.hp * 0.3f && this.level() instanceof ServerLevel sl) {
             Vec3 c = this.localToWorld(0, this.kind.height * 0.8, -1);
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, c.x, c.y, c.z, 4, 0.3, 0.3, 0.3, 0.02);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.LARGE_SMOKE, c.x, c.y, c.z, 4, 0.3, 0.3, 0.3, 0.02);
         }
     }
 

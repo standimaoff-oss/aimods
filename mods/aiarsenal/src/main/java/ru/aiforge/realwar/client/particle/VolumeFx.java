@@ -19,6 +19,7 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -153,7 +154,7 @@ public final class VolumeFx {
         sh.safeGetUniform("DepthSize").set((float) depth.width, (float) depth.height);
         lighting(mc, sh);
         int q = RWConfig.CLIENT.volumetricQuality.get();
-        float steps = q <= 1 ? 5.0f : (q == 2 ? 8.0f : 12.0f);
+        float steps = q <= 1 ? 6.0f : (q == 2 ? 10.0f : 16.0f);   // r28: 6/10/16 (was 5/8/12)
         sh.safeGetUniform("VolParams").set(steps, q >= 2 ? 1.0f : 0.0f, (float) (Util.getMillis() % 3600000L) / 1000.0f, 1.0f);
         RenderSystem.disableDepthTest();          // occlusion is done in the shader against the depth copy
         RenderSystem.depthMask(false);
@@ -316,20 +317,37 @@ public final class VolumeFx {
      */
     public static void vanilla(ClientLevel lv, net.minecraft.core.particles.ParticleOptions type, double x, double y, double z, double vx, double vy, double vz) {
         if (on) {
-            VSmokeOptions o = null;
-            if (type == net.minecraft.core.particles.ParticleTypes.CAMPFIRE_COSY_SMOKE) {
-                o = new VSmokeOptions(0.55f, 0.55f, 0.54f, 0.9f, 3.0f, 110 + lv.random.nextInt(40), 0.65f, 0.0f, 0.0012f);
-            } else if (type == net.minecraft.core.particles.ParticleTypes.CAMPFIRE_SIGNAL_SMOKE) {
-                o = new VSmokeOptions(0.6f, 0.6f, 0.59f, 1.0f, 3.6f, 220 + lv.random.nextInt(80), 0.7f, 0.0f, 0.0018f);
-            } else if (type == net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE) {
-                o = new VSmokeOptions(0.22f, 0.21f, 0.2f, 0.5f, 3.0f, 45 + lv.random.nextInt(20), 0.6f, 0.0f, 0.001f);
-            }
+            VSmokeOptions o = VSmokeOptions.vanillaPreset(type, lv.random);   // r28: SMOKE added, presets shared with the server
             if (o != null) {
                 puff(lv, x, y, z, vx, vy, vz, o);
                 return;
             }
         }
         lv.addAlwaysVisibleParticle(type, true, x, y, z, vx, vy, vz);
+    }
+
+    /**
+     * r28: {@link #vanilla} for code that only has a {@link net.minecraft.world.level.Level} (entities, blocks). Does
+     * nothing on the server: server-side smoke goes through {@link VSmokeOptions#sendVanilla}.
+     */
+    public static void addVanilla(net.minecraft.world.level.Level lv, net.minecraft.core.particles.ParticleOptions type, double x, double y, double z, double vx, double vy, double vz) {
+        if (lv instanceof ClientLevel cl) {
+            vanilla(cl, type, x, y, z, vx, vy, vz);
+        }
+    }
+
+    /** r28: BM-21 / tubombers blast smoke (dark, rises and spreads, 4-7 s) as a volumetric puff; no-op on the server. */
+    public static void puffBlast(Level lv, double x, double y, double z, double vx, double vy, double vz) {
+        if (lv instanceof ClientLevel cl) {
+            puff(cl, x, y, z, vx, vy, vz, new VSmokeOptions(0.2f, 0.19f, 0.18f, 1.2f, 3.0f, 80 + cl.random.nextInt(60), 0.7f, 0.0f, 0.002f));
+        }
+    }
+
+    /** r28: BM-21 / tubombers smoke-screen wall puff (white-grey, almost static, 12-16 s) as a volumetric puff. */
+    public static void puffWall(Level lv, double x, double y, double z, double vx, double vy, double vz) {
+        if (lv instanceof ClientLevel cl) {
+            puff(cl, x, y, z, vx, vy, vz, new VSmokeOptions(0.8f, 0.8f, 0.79f, 2.2f, 1.4f, 240 + cl.random.nextInt(80), 0.6f, 0.0f, 0.0f));
+        }
     }
 
     /**

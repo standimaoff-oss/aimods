@@ -78,12 +78,12 @@ public final class CraftFx {
         if (h.engineOn() && R.nextInt(3) == 0) {
             for (int s = -1; s <= 1; s += 2) {
                 Vec3 ex = h.localToWorld(s * 0.95, 2.55, h.kind == CraftKind.AH64 ? -0.4 : -0.9);
-                level.addParticle(ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.02, 0);
+                ru.aiforge.realwar.particle.SmokeFx.add(level, ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.02, 0);
             }
         }
         if (h.hp() < h.kind.hp * 0.3f) {
             Vec3 ex = h.localToWorld(0, 2.5, -0.8);
-            level.addParticle(ParticleTypes.LARGE_SMOKE, ex.x, ex.y, ex.z, 0, 0.12, 0);
+            ru.aiforge.realwar.particle.SmokeFx.add(level, ParticleTypes.LARGE_SMOKE, ex.x, ex.y, ex.z, 0, 0.12, 0);
             if (R.nextInt(3) == 0) level.addParticle(ParticleTypes.FLAME, ex.x, ex.y, ex.z, 0, 0.05, 0);
         }
     }
@@ -116,7 +116,7 @@ public final class CraftFx {
             if (p.engineOn() && R.nextInt(p.aux < 0.35f ? 1 : 4) == 0) {
                 for (int s = -1; s <= 1; s += 2) {
                     Vec3 ex = p.localToWorld(e[0] + s * (n == 1 ? 0.42 : 0.55), e[1] + 0.05, e[2] - (n == 1 ? 1.0 : 1.3));
-                    level.addParticle(p.aux < 0.35f ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, ex.x, ex.y, ex.z,
+                    ru.aiforge.realwar.particle.SmokeFx.add(level, p.aux < 0.35f ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, ex.x, ex.y, ex.z,
                             -bas[0].x * 0.1 + bas[2].x * s * 0.05, 0.02, -bas[0].z * 0.1 + bas[2].z * s * 0.05);
                 }
             }
@@ -132,7 +132,7 @@ public final class CraftFx {
             }
             if (p.hp() < p.kind.hp * 0.3f && i == p.getId() % n) {
                 Vec3 ex = p.localToWorld(e[0], e[1] + 0.3, e[2] - 1.5);
-                level.addParticle(ParticleTypes.LARGE_SMOKE, ex.x, ex.y, ex.z, 0, 0.08, 0);
+                ru.aiforge.realwar.particle.SmokeFx.add(level, ParticleTypes.LARGE_SMOKE, ex.x, ex.y, ex.z, 0, 0.08, 0);
                 if (R.nextInt(2) == 0) level.addParticle(ParticleTypes.FLAME, ex.x, ex.y, ex.z, 0, 0.03, 0);
             }
         }
@@ -196,11 +196,11 @@ public final class CraftFx {
         }
         if (b.engineOn() && !sub && R.nextInt(4) == 0) {
             Vec3 ex = b.localToWorld(0.6, w.hullH() + 0.4, -w.length() * 0.35);
-            level.addParticle(ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.03, 0);
+            ru.aiforge.realwar.particle.SmokeFx.add(level, ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.03, 0);
         }
         if (sub && b.engineOn() && R.nextInt(3) == 0) {
             Vec3 ex = b.localToWorld(0, 13.2, 7.0);
-            level.addParticle(ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.05, 0);
+            ru.aiforge.realwar.particle.SmokeFx.add(level, ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.05, 0);
         }
     }
 

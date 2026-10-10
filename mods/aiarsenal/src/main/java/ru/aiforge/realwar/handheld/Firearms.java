@@ -357,7 +357,7 @@ public final class Firearms {
             }
             sound(p, k.sound, 3.0f, 0.95f + sl.random.nextFloat() * 0.1f);
             Vec3 m = p.getEyePosition().add(look.scale(0.9)).add(0, -0.1, 0);
-            sl.sendParticles(ParticleTypes.SMOKE, m.x, m.y, m.z, 1, 0.02, 0.02, 0.02, 0.005);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, m.x, m.y, m.z, 1, 0.02, 0.02, 0.02, 0.005);
         }
         fx(p, GunFxPacket.SHOT, FirearmItem.ammo(stack));
     }
@@ -528,7 +528,7 @@ public final class Firearms {
                 if (!bs.isAir()) {
                     sl.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, bs), hitPos.x, hitPos.y, hitPos.z, 5, 0.04, 0.04, 0.04, 0.08);
                 }
-                sl.sendParticles(ParticleTypes.SMOKE, hitPos.x, hitPos.y, hitPos.z, 1, 0.03, 0.03, 0.03, 0.01);
+                ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, hitPos.x, hitPos.y, hitPos.z, 1, 0.03, 0.03, 0.03, 0.01);
                 if (bs.getSoundType() != null && sl.random.nextInt(2) == 0) {
                     sl.playSound(null, hitPos.x, hitPos.y, hitPos.z, bs.getSoundType().getHitSound(), SoundSource.BLOCKS, 0.5f, 1.4f);
                 }

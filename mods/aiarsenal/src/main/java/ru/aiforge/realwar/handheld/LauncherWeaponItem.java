@@ -249,7 +249,7 @@ public class LauncherWeaponItem extends Item {
             for (int i = 0; i < 14; i++) {
                 double f = 0.5 + i / 14.0 * len;
                 Vec3 q = back.subtract(look.scale(f));
-                sl.sendParticles(i < 4 ? net.minecraft.core.particles.ParticleTypes.FLAME : net.minecraft.core.particles.ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, i < 4 ? net.minecraft.core.particles.ParticleTypes.FLAME : net.minecraft.core.particles.ParticleTypes.CAMPFIRE_COSY_SMOKE,
                         q.x, q.y, q.z, 1, 0.15 * f / len, 0.15 * f / len, 0.15 * f / len, 0.01);
             }
             for (Entity e : level.getEntities(p, new AABB(back, back).inflate(len))) {

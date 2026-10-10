@@ -160,7 +160,7 @@ public final class BulletManager {
                 hitEntity.invulnerableTime = 0;
                 sl.sendParticles((ParticleOptions)ParticleTypes.CRIT, hitPos.x, hitPos.y, hitPos.z, 3, 0.1, 0.1, 0.1, 0.2);
             } else if (b.tracer || sl.random.nextInt(3) == 0) {
-                sl.sendParticles((ParticleOptions)ParticleTypes.SMOKE, hitPos.x, hitPos.y, hitPos.z, 2, 0.1, 0.1, 0.1, 0.02);
+                ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, hitPos.x, hitPos.y, hitPos.z, 2, 0.1, 0.1, 0.1, 0.02);
             }
             return false;
         }

@@ -136,9 +136,9 @@ public class MissileEntity extends ArsEntity {
             // r27: the booster trail itself is client-side volumetric smoke (ArsTrails -> TrailFx); no flat large-smoke sprites
         } else if (engine() && k == Kind.HELLFIRE) {
             sl.sendParticles(ParticleTypes.FLAME, back.x, back.y, back.z, 1, 0.02, 0.02, 0.02, 0.0);
-            sl.sendParticles(ParticleTypes.SMOKE, back.x, back.y, back.z, 2, 0.05, 0.05, 0.05, 0.0);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, back.x, back.y, back.z, 2, 0.05, 0.05, 0.05, 0.0);
         } else if (engine() && age % 2 == 0) {
-            sl.sendParticles(ParticleTypes.SMOKE, back.x, back.y, back.z, 1, 0.05, 0.05, 0.05, 0.0);
+            ru.aiforge.realwar.particle.VSmokeOptions.sendVanilla(sl, ParticleTypes.SMOKE, back.x, back.y, back.z, 1, 0.05, 0.05, 0.05, 0.0);
         }
         HitResult h = sweep(v, true);
         if (h != null) {

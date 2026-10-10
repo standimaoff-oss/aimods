@@ -114,7 +114,7 @@ public final class ClientFx {
                             vx * sp, vy * sp, vz * sp);
                 }
                 for (int i = 0; i < 16 * k; i++)
-                    lv.addAlwaysVisibleParticle(ModRegistry.P_BLAST_SMOKE.get(), true, x + r.nextGaussian() * rad * 0.5, y + 1 + r.nextDouble() * rad, z + r.nextGaussian() * rad * 0.5,
+                    ru.aiforge.realwar.client.particle.VolumeFx.puffBlast(lv, x + r.nextGaussian() * rad * 0.5, y + 1 + r.nextDouble() * rad, z + r.nextGaussian() * rad * 0.5,
                             r.nextGaussian() * 0.06, 0.08 + r.nextDouble() * 0.12, r.nextGaussian() * 0.06);
                 for (int i = 0; i < 30 * k; i++)
                     lv.addAlwaysVisibleParticle(ParticleTypes.FLAME, true, x, y + 0.5, z, r.nextGaussian() * 0.35, 0.3 + r.nextDouble() * 0.5, r.nextGaussian() * 0.35);
@@ -136,7 +136,7 @@ public final class ClientFx {
             }
             case FxPacket.SMOKE -> {
                 for (int i = 0; i < 30; i++)
-                    lv.addAlwaysVisibleParticle(ModRegistry.P_SMOKE_WALL.get(), true, x + r.nextGaussian() * 1.5, y + 0.8 + r.nextDouble() * 1.5, z + r.nextGaussian() * 1.5,
+                    ru.aiforge.realwar.client.particle.VolumeFx.puffWall(lv, x + r.nextGaussian() * 1.5, y + 0.8 + r.nextDouble() * 1.5, z + r.nextGaussian() * 1.5,
                             r.nextGaussian() * 0.25, 0.02 + r.nextDouble() * 0.05, r.nextGaussian() * 0.25);
                 for (int i = 0; i < 50; i++)
                     ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, x + r.nextGaussian() * 2, y + 0.5, z + r.nextGaussian() * 2,
@@ -147,7 +147,7 @@ public final class ClientFx {
                 for (int i = 0; i < 6; i++)
                     lv.addAlwaysVisibleParticle(ModRegistry.P_FIREBALL.get(), true, x, y, z, r.nextGaussian() * 0.15, r.nextGaussian() * 0.1, r.nextGaussian() * 0.15);
                 for (int i = 0; i < 8; i++)
-                    lv.addAlwaysVisibleParticle(ModRegistry.P_BLAST_SMOKE.get(), true, x + r.nextGaussian(), y, z + r.nextGaussian(), r.nextGaussian() * 0.05, 0.02, r.nextGaussian() * 0.05);
+                    ru.aiforge.realwar.client.particle.VolumeFx.puffBlast(lv, x + r.nextGaussian(), y, z + r.nextGaussian(), r.nextGaussian() * 0.05, 0.02, r.nextGaussian() * 0.05);
                 for (int i = 0; i < 30; i++)
                     ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.LARGE_SMOKE, x + r.nextGaussian(), y, z + r.nextGaussian(),
                             r.nextGaussian() * 0.15, r.nextGaussian() * 0.05, r.nextGaussian() * 0.15);
@@ -156,7 +156,7 @@ public final class ClientFx {
                 lv.addAlwaysVisibleParticle(ParticleTypes.EXPLOSION, true, x, y + 0.3, z, 0, 0, 0);
                 for (int i = 0; i < 3; i++)
                     lv.addAlwaysVisibleParticle(ModRegistry.P_FIREBALL.get(), true, x, y + 0.5, z, r.nextGaussian() * 0.08, 0.06, r.nextGaussian() * 0.08);
-                lv.addAlwaysVisibleParticle(ModRegistry.P_BLAST_SMOKE.get(), true, x, y + 0.8, z, 0, 0.05, 0);
+                ru.aiforge.realwar.client.particle.VolumeFx.puffBlast(lv, x, y + 0.8, z, 0, 0.05, 0);
                 for (int i = 0; i < 16; i++)
                     lv.addAlwaysVisibleParticle(dirt, true, x, y + 0.2, z, r.nextGaussian() * 0.25, 0.3 + r.nextDouble() * 0.5, r.nextGaussian() * 0.25);
                 for (int i = 0; i < 5; i++)

@@ -339,8 +339,8 @@ public class Bm21Entity extends Entity {
         if (hasState(ST_ENGINE) && tickCount % 3 == 0) {
             Vec3 p = toWorld(-1.12, 1.64, -1.12);
             float load = Math.min(1f, Math.abs(displaySpeed()) * 2f);
-            level().addParticle(ParticleTypes.SMOKE, p.x, p.y, p.z, 0, 0.03 + load * 0.05, 0);
-            if (load > 0.5f) level().addParticle(ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 0, 0.05, 0);
+            ru.aiforge.realwar.particle.SmokeFx.add(level(), ParticleTypes.SMOKE, p.x, p.y, p.z, 0, 0.03 + load * 0.05, 0);
+            if (load > 0.5f) ru.aiforge.realwar.particle.SmokeFx.add(level(), ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 0, 0.05, 0);
         }
     }
 
