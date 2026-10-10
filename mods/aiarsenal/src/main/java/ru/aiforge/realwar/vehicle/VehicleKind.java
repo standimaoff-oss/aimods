@@ -62,7 +62,10 @@ public enum VehicleKind {
      *  salvo 0.5 s per rocket, launcher +-30 deg / 0..+65 deg, reload by the TZM crane ~40 s per rocket. */
     TOS1A(Specs.TOS1A, 560, 44300.0f, 618.0f, 60.0f, 1.3f, 24, 40, 5, 30.0f, 0.0f, 65.0f, 4.1f, 25.0f, 90.0f),
     /** Ural-4320-31: 6x6, 8.6 t curb / 15.2 t gross (troops: ~12 t), YaMZ-238M2 240 hp, 85 km/h; 2 cab + 12 bench seats. */
-    URAL(Specs.URAL, 180, 12000.0f, 176.0f, 85.0f, 1.3f, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+    URAL(Specs.URAL, 180, 12000.0f, 176.0f, 85.0f, 1.3f, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f),
+    /** r28 plasma tank "Vikhr": T-90M layout (same pivots and nodes), 52 t, 1100 kW hybrid, 70 km/h; plasma gun
+     *  (PLASMA_BOLT, 20 cells in the autoloader, 30 s per cycle here); -6..+15 deg. Shot = plasma bolt, not a shell. */
+    PLASMA_TANK(Specs.PLASMA_TANK, 700, 52000.0f, 1100.0f, 70.0f, 1.8f, 20, 30, 100, 180.0f, -6.0f, 15.0f, 4.75f, 0.0f, 6.0f);
 
     public final VehicleSpec spec;
     public final int hp;
@@ -121,7 +124,7 @@ public enum VehicleKind {
     public boolean tracked() {
         return this == T90M || this == ABRAMS || this == BMP3 || this == MSTA || this == PZ2 || this == PZ4 || this == TIGER
                 || this == STURMTIGER || this == MAUS || this == RATTE || this == T34 || this == KV2 || this == IS2 || this == KV5
-                || this == BRADLEY || this == TOS1A;
+                || this == BRADLEY || this == TOS1A || this == PLASMA_TANK;
     }
 
     public boolean artillery() {

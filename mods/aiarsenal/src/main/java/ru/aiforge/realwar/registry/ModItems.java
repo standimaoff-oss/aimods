@@ -53,6 +53,11 @@ public final class ModItems {
     public static final RegistryObject<Item> AK12 = ITEMS.register("ak12", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.AK12, new Item.Properties()));
     public static final RegistryObject<Item> M4A1 = ITEMS.register("m4a1", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.M4A1, new Item.Properties()));
     public static final RegistryObject<Item> MAG_AK12 = ITEMS.register("mag_ak12", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.AK12, new Item.Properties()));
+    // r28: future rifles (GunKind ids are the model names: laser.glb / plasma.glb)
+    public static final RegistryObject<Item> LASER = ITEMS.register("laser", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.LASER, new Item.Properties()));
+    public static final RegistryObject<Item> MAG_LASER = ITEMS.register("mag_laser", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.LASER, new Item.Properties()));
+    public static final RegistryObject<Item> PLASMA = ITEMS.register("plasma", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.PLASMA, new Item.Properties()));
+    public static final RegistryObject<Item> MAG_PLASMA = ITEMS.register("mag_plasma", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.PLASMA, new Item.Properties()));
     public static final RegistryObject<Item> MAG_STANAG = ITEMS.register("mag_stanag", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.M4A1, new Item.Properties()));
     // r23: ORSIS T-5000M (.338 LM) and PKP Pecheneg
     public static final RegistryObject<Item> T5000 = ITEMS.register("t5000", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.T5000, new Item.Properties()));
@@ -223,6 +228,7 @@ public final class ModItems {
     public static final RegistryObject<Item> RADAR_MOBILE_VEHICLE = ITEMS.register("radar_mobile_vehicle", () -> new VehicleItem(VehicleKind.RADAR_MOBILE, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> RADAR_POST_VEHICLE = ITEMS.register("radar_post_vehicle", () -> new VehicleItem(VehicleKind.RADAR_POST, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ZU23_VEHICLE = ITEMS.register("zu23_vehicle", () -> new VehicleItem(VehicleKind.ZU23, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> PLASMA_TANK_VEHICLE = ITEMS.register("plasma_tank_vehicle", () -> new VehicleItem(VehicleKind.PLASMA_TANK, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> T90M_VEHICLE = ITEMS.register("t90m_vehicle", () -> new VehicleItem(VehicleKind.T90M, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> ABRAMS_VEHICLE = ITEMS.register("abrams_vehicle", () -> new VehicleItem(VehicleKind.ABRAMS, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> BMP3_VEHICLE = ITEMS.register("bmp3_vehicle", () -> new VehicleItem(VehicleKind.BMP3, new Item.Properties().stacksTo(1)));
@@ -252,6 +258,7 @@ public final class ModItems {
     public static final RegistryObject<Item> SHELLS_280 = ModItems.item("shells_280", 0.0, 4);
     public static final RegistryObject<Item> ROCKET_380 = ModItems.item("rocket_380", 0.0, 2);
     public static final RegistryObject<Item> ROCKET_M13 = ModItems.item("rocket_m13", 0.0, 16);
+    public static final RegistryObject<Item> PLASMA_CHARGE = ModItems.item("plasma_charge", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_125 = ModItems.item("shells_125", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_120 = ModItems.item("shells_120", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_100 = ModItems.item("shells_100", 0.0, 16);
@@ -333,6 +340,7 @@ public final class ModItems {
             case RADAR_POST -> RADAR_POST_VEHICLE;
             case YARS -> ru.aiforge.arsenal.registry.ArsenalRegistry.UNITS.get(ru.aiforge.arsenal.core.Kind.YARS_TEL);
             case T90M -> T90M_VEHICLE;
+            case PLASMA_TANK -> PLASMA_TANK_VEHICLE;
             case ABRAMS -> ABRAMS_VEHICLE;
             case BMP3 -> BMP3_VEHICLE;
             case MSTA -> MSTA_VEHICLE;

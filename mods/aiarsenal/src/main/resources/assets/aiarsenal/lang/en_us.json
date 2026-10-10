@@ -1961,5 +1961,14 @@
   "gui.aiarsenal.rw.fdc.st.done": "done",
   "gui.aiarsenal.rw.fdc.st.lost": "no link",
   "gui.aiarsenal.rw.fdc.st.range": "out of range",
-  "gui.aiarsenal.rw.fdc.msg.idle": "Ready"
+  "gui.aiarsenal.rw.fdc.msg.idle": "Ready",
+  "item.aiarsenal.laser": "Laser rifle \"Luch-9\"",
+  "item.aiarsenal.laser.desc": "Pulsed laser, near-instant shot (1500 m/s), full auto, 40-cell energy magazine.",
+  "item.aiarsenal.mag_laser": "Energy cell \"Luch\"",
+  "item.aiarsenal.plasma": "Plasma rifle \"Plazma-7\"",
+  "item.aiarsenal.plasma.desc": "Plasma bolt at 300 m/s, big blast on impact, semi-auto, 20 cells.",
+  "item.aiarsenal.mag_plasma": "Plasma cartridge",
+  "item.aiarsenal.plasma_charge": "Plasma charge",
+  "item.aiarsenal.plasma_tank_vehicle": "Plasma tank \"Vikhr\"",
+  "item.aiarsenal.plasma_tank_vehicle.desc": "Future tank: T-90M layout, 52 t, 1100 kW, 70 km/h. Plasma gun firing bolts, autoloader for 20 rounds."
 }

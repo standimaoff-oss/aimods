@@ -21,6 +21,12 @@ public final class Specs {
             new float[][]{{0.0f, 1.5f, 2.36f, 0.4f, 0.2f, 0.4f}, {0.0f, 1.85f, 0.3f, 1.2f, 0.4f, 1.5f}, {0.0f, 1.0f, -3.55f, 1.3f, 0.5f, 0.3f}, {0.0f, 0.9f, 0.0f, 1.8f, 0.55f, 3.45f}},
             new String[]{"door_driver", "door_gunner", "rear", "body"}, new float[][]{{0.0f, 0.0f, 4.75f}}, new float[0][],
             new float[]{0.0f, 1.47f, 0.30f}, new float[]{0.0f, 0.39f, 1.15f}, new float[0][]);
+    // r28: plasma tank Vikhr - same chassis/turret contract as T-90M
+    public static final VehicleSpec PLASMA_TANK = new VehicleSpec("plasma_tank", 3.6f, 2.4f, 9.63f, 2.25f, new float[0][],
+            new float[][]{{0.0f, 0.95f, 2.36f}, {-0.25f, 2.2f, -0.2f}}, new String[]{"driver", "gunner"},
+            new float[][]{{0.0f, 1.5f, 2.36f, 0.4f, 0.2f, 0.4f}, {0.0f, 1.85f, 0.3f, 1.2f, 0.4f, 1.5f}, {0.0f, 1.0f, -3.55f, 1.3f, 0.5f, 0.3f}, {0.0f, 0.9f, 0.0f, 1.8f, 0.55f, 3.45f}},
+            new String[]{"door_driver", "door_gunner", "rear", "body"}, new float[][]{{0.0f, 0.0f, 4.75f}}, new float[0][],
+            new float[]{0.0f, 1.47f, 0.30f}, new float[]{0.0f, 0.39f, 1.15f}, new float[0][]);
     public static final VehicleSpec ABRAMS = new VehicleSpec("abrams", 3.66f, 2.45f, 9.77f, 2.44f, new float[0][],
             new float[][]{{0.0f, 1.0f, 2.95f}, {-0.25f, 2.38f, -0.4f}}, new String[]{"driver", "gunner"},
             new float[][]{{0.0f, 1.6f, 2.95f, 0.4f, 0.2f, 0.4f}, {0.0f, 2.0f, -0.1f, 1.3f, 0.4f, 1.9f}, {0.0f, 1.0f, -4.0f, 1.4f, 0.55f, 0.3f}, {0.0f, 0.95f, 0.0f, 1.85f, 0.6f, 3.97f}},

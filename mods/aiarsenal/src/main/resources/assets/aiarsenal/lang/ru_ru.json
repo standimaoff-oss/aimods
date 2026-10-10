@@ -1961,5 +1961,14 @@
   "gui.aiarsenal.rw.fdc.st.done": "выполнено",
   "gui.aiarsenal.rw.fdc.st.lost": "нет связи",
   "gui.aiarsenal.rw.fdc.st.range": "вне дальности",
-  "gui.aiarsenal.rw.fdc.msg.idle": "Готов"
+  "gui.aiarsenal.rw.fdc.msg.idle": "Готов",
+  "item.aiarsenal.laser": "Лазерная винтовка «Луч-9»",
+  "item.aiarsenal.laser.desc": "Импульсный лазер, почти мгновенный выстрел (1500 м/с), полная очередь, 40 зарядов в энергоячейке.",
+  "item.aiarsenal.mag_laser": "Энергоячейка «Луч»",
+  "item.aiarsenal.plasma": "Плазменная винтовка «Плазма-7»",
+  "item.aiarsenal.plasma.desc": "Плазменный сгусток 300 м/с, большой взрыв при попадании, одиночный огонь, 20 зарядов.",
+  "item.aiarsenal.mag_plasma": "Плазменный картридж",
+  "item.aiarsenal.plasma_charge": "Плазменный заряд",
+  "item.aiarsenal.plasma_tank_vehicle": "Плазменный танк «Вихрь»",
+  "item.aiarsenal.plasma_tank_vehicle.desc": "Танк будущего: корпус и башня по схеме Т-90М, 52 т, 1100 кВт, 70 км/h. Плазменная пушка выстреливает сгустками, автомат заряжания на 20 зарядов."
 }

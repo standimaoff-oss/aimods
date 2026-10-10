@@ -31,7 +31,11 @@ public enum GunKind {
     PPSH41("ppsh41", "mag_ppsh", 71, 1000, 488, 5.0f, 2.5f, 0.032f, 0.0035f, 0.55f, 0.35f, 70, 84, 0.85f, "smg_ppsh", true),
     MP40("mp40", "mag_mp40", 32, 550, 400, 5.2f, 2.5f, 0.030f, 0.0030f, 0.50f, 0.30f, 50, 62, 0.85f, "smg_mp40", true),
     MOSIN("mosin", "clip_mosin", 5, 30, 865, 16f, 11f, 0.055f, 0.0006f, 3.6f, 0.8f, 50, 50, 0.75f, "rifle_mosin", false),
-    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false);
+    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false),
+    // r28 future rifles: LASER - 1 kJ-class pulse, near-hitscan (1500 m/s), 40-cell energy magazine, 600 rds/min,
+    // full auto, light recoil. PLASMA - plasma bolt (300 m/s, slow, big splash on the impact), 20-cell cartridge, 240 rds/min, semi.
+    LASER("laser", "mag_laser", 40, 600, 1500, 9f, 4f, 0.020f, 0.0008f, 0.45f, 0.20f, 60, 70, 0.75f, "rifle_m4", true),
+    PLASMA("plasma", "mag_plasma", 20, 240, 300, 22f, 14f, 0.030f, 0.0020f, 2.0f, 0.8f, 50, 60, 0.70f, "rifle_t5000", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;

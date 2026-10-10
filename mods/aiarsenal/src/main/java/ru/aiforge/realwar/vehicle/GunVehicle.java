@@ -129,6 +129,8 @@ public class GunVehicle extends LauncherVehicle {
         return switch (k) {
             case T90M -> new Cfg(Ballistics.Profile.T125_HE, Ballistics.Profile.T125_AP, false, 0.30f,
                     1.395f, 0.375f, 0.33f, 0.28f, 0.115f, 6, 3, 0.13646f, 32.0f, 2.0f, 0.9f, () -> ModItems.SHELLS_125.get());
+            case PLASMA_TANK -> new Cfg(Ballistics.Profile.PLASMA_BOLT, null, false, 0.30f,
+                    1.395f, 0.375f, 0.33f, 0.28f, 0.115f, 6, 3, 0.13646f, 32.0f, 2.0f, 0.9f, () -> ModItems.PLASMA_CHARGE.get());
             case ABRAMS -> new Cfg(Ballistics.Profile.T120_HE, Ballistics.Profile.T120_AP, false, 0.30f,
                     1.43f, 0.32f, 0.33f, 0.32f, 0.11f, 7, 2, 0.15418f, 30.0f, 2.2f, 1.0f, () -> ModItems.SHELLS_120.get());
             case BMP3 -> new Cfg(Ballistics.Profile.B100_HE, null, true, 0.22f,
