@@ -55,15 +55,26 @@ extends TextureSheetParticle {
     public float spin;
     public float drag = 1.0f;
     public double sortKey;
+    // r27: volumetric smoke (VolumeFx). Non-additive particles are drawn as raymarched spheres when VolumeFx.on().
+    /** false = always a flat sprite (e.g. sparks, decals drawn with the smoke sheet) */
+    public boolean volume = true;
+    /** emission 0..1 (fireballs, fire-lit smoke); the colour ramps from deep orange to yellow-white */
+    public float heat;
+    /** extinction multiplier on top of alpha (thick oil smoke > 1, haze < 1) */
+    public float dens = 1.0f;
+    /** volume radius multiplier relative to the sprite size */
+    public float volScale = 1.0f;
+    /** random per puff: noise offset / rotation in the shader */
+    public final float seed;
 
-    private static void fogPush() {
+    static void fogPush() {
         savedFogStart = RenderSystem.getShaderFogStart();
         savedFogEnd = RenderSystem.getShaderFogEnd();
         RenderSystem.setShaderFogStart((float)(savedFogEnd * 6.0f));
         RenderSystem.setShaderFogEnd((float)(savedFogEnd * 8.0f));
     }
 
-    private static void fogPop() {
+    static void fogPop() {
         RenderSystem.setShaderFogStart((float)savedFogStart);
         RenderSystem.setShaderFogEnd((float)savedFogEnd);
     }
@@ -80,6 +91,7 @@ extends TextureSheetParticle {
         this.yd = 0.0;
         this.xd = 0.0;
         this.oRoll = this.roll = level.random.nextFloat() * ((float)Math.PI * 2);
+        this.seed = level.random.nextFloat();
         this.setSprite(sprite);
     }
 
@@ -178,7 +190,7 @@ extends TextureSheetParticle {
             this.zd *= (double)this.drag;
         }
         this.roll += this.spin;
-        double h = (double)Math.max(this.size, 0.25f) * 0.75;
+        double h = (double)Math.max(this.size, 0.25f) * (this.additive ? 0.75 : 0.9 * Math.max(1.0f, this.volScale));
         this.setBoundingBox(new AABB(this.x - h, this.y - h, this.z - h, this.x + h, this.y + h, this.z + h));
     }
 
@@ -187,7 +199,30 @@ extends TextureSheetParticle {
     }
 
     public ParticleRenderType getRenderType() {
-        return this.additive ? ADDITIVE : SMOKE;
+        if (this.additive) {
+            return ADDITIVE;
+        }
+        return this.volume && VolumeFx.on() ? VolumeFx.TYPE : SMOKE;
+    }
+
+    public boolean isVolume() {
+        return !this.additive && this.volume && VolumeFx.on();
+    }
+
+    @Override
+    public void render(com.mojang.blaze3d.vertex.VertexConsumer vc, net.minecraft.client.Camera cam, float pt) {
+        if (vc instanceof BufferBuilder bb && this.isVolume()) {
+            net.minecraft.world.phys.Vec3 cp = cam.getPosition();
+            float cx = (float)(Mth.lerp((double)pt, this.xo, this.x) - cp.x);
+            float cy = (float)(Mth.lerp((double)pt, this.yo, this.y) - cp.y);
+            float cz = (float)(Mth.lerp((double)pt, this.zo, this.z) - cp.z);
+            float rad = Math.max(0.05f, this.getQuadSize(pt) * VolumeFx.RADIUS_K * this.volScale);
+            float age01 = Math.min(1.0f, ((float)this.age + pt) / (float)this.lifetime);
+            VolumeFx.quad(bb, cam, cx, cy, cz, rad, this.rCol, this.gCol, this.bCol, this.alpha * VolumeFx.ALPHA_K,
+                    this.getLightColor(pt), this.seed, this.heat, this.dens, age01);
+            return;
+        }
+        super.render(vc, cam, pt);
     }
 
     protected int getLightColor(float partial) {

@@ -769,5 +769,78 @@
       }
     ],
     "subtitle": "subtitles.aiarsenal.clip_in"
+  },
+  "grenade_pin": {
+    "sounds": [
+      {
+        "name": "aiarsenal:grenade_pin",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.grenade_pin"
+  },
+  "grenade_throw": {
+    "sounds": [
+      {
+        "name": "aiarsenal:grenade_throw",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.grenade_throw"
+  },
+  "grenade_bounce": {
+    "sounds": [
+      {
+        "name": "aiarsenal:grenade_bounce1",
+        "stream": false
+      },
+      {
+        "name": "aiarsenal:grenade_bounce2",
+        "stream": false
+      },
+      {
+        "name": "aiarsenal:grenade_bounce3",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.grenade_bounce"
+  },
+  "grenade_blast": {
+    "sounds": [
+      {
+        "name": "aiarsenal:grenade_blast",
+        "stream": false,
+        "attenuation_distance": 96
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.grenade_blast"
+  },
+  "flashbang": {
+    "sounds": [
+      {
+        "name": "aiarsenal:flashbang",
+        "stream": false,
+        "attenuation_distance": 96
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.flashbang"
+  },
+  "tinnitus": {
+    "sounds": [
+      {
+        "name": "aiarsenal:tinnitus",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.tinnitus"
+  },
+  "smoke_hiss": {
+    "sounds": [
+      {
+        "name": "aiarsenal:smoke_hiss",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.smoke_hiss"
   }
 }

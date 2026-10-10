@@ -100,7 +100,8 @@ public final class Warheads {
             }
             if (stop) break;
         }
-        sl.sendParticles((ParticleOptions)ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 1.0, pos.z, 30, 0.6, 0.6, 0.6, 0.1);
+        ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.3f, 0.27f, 0.24f,
+                1.0f, 3.0f, 90, 0.75f, 0.3f, 0.001f), pos.x, pos.y + 1.0, pos.z, 8, 0.6, 0.6, 0.6, 0.06);   // r27: volumetric
         sl.playSound(null, pos.x, pos.y, pos.z, (SoundEvent)ModSounds.BLAST_SMALL.get(), SoundSource.HOSTILE, 4.0f, 0.6f);
         return new Vec3(pos.x, (double)(y - Math.max(1, depth - 1)) + 1.5, pos.z);
     }

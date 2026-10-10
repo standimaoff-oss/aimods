@@ -77,7 +77,7 @@ public class ShellEntity extends RocketEntity {
             ru.aiforge.realwar.damage.HitContext.hurt(direct, ModDamage.source(sl, ModDamage.ORDNANCE), dmg, pos, this.lastDir, ru.aiforge.realwar.damage.HitContext.Kind.AP, this.kineticDamage(), this.shot());
             if (direct instanceof LivingEntity le) le.knockback(1.2, -this.lastDir.x, -this.lastDir.z);
             sl.sendParticles(ParticleTypes.LAVA, pos.x, pos.y, pos.z, 8, 0.2, 0.2, 0.2, 0.0);
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, pos.x, pos.y, pos.z, 6, 0.3, 0.3, 0.3, 0.02);
+            ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.32f, 0.3f, 0.28f, 0.5f, 3.0f, 60, 0.7f, 0.4f, 0.001f), pos.x, pos.y, pos.z, 2, 0.3, 0.3, 0.3, 0.02);   // r27
             sl.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ANVIL_LAND, SoundSource.NEUTRAL, 3.0f, 0.5f);
             this.exploded = true;
             this.discard();

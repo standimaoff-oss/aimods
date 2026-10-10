@@ -108,7 +108,7 @@ public final class Detonations {
             }
         }
         l.sendParticles(ParticleTypes.FLAME, c.x, c.y + 0.5, c.z, 60, 1.2, 0.8, 1.2, 0.08);
-        l.sendParticles(ParticleTypes.LARGE_SMOKE, c.x, c.y + 1.0, c.z, 30, 1.0, 1.2, 1.0, 0.03);
+        ru.aiforge.realwar.particle.VSmokeOptions.send(l, new ru.aiforge.realwar.particle.VSmokeOptions(0.14f, 0.12f, 0.1f, 1.2f, 3.5f, 140, 0.8f, 0.8f, 0.002f), c.x, c.y + 1.0, c.z, 8, 1.0, 1.2, 1.0, 0.03);   // r27
         l.playSound(null, c.x, c.y, c.z, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 2.0f, 0.6f);
         if (l.getBlockState(o).isAir() && BaseFireBlock.canBePlacedAt(l, o, net.minecraft.core.Direction.UP)) l.setBlock(o, BaseFireBlock.getState(l, o), 11);
     }

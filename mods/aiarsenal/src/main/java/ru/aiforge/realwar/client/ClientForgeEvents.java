@@ -190,8 +190,11 @@ public final class ClientForgeEvents {
 
     @SubscribeEvent
     public static void renderLevel(RenderLevelStageEvent e) {
-        if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
+        if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
+            // r27: after weather/clouds (and the Fabulous composite) so the volumetric smoke sees the final depth
             FxSystem.render(e.getPoseStack(), e.getCamera(), e.getPartialTick(), e.getFrustum());
+        }
+        if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
             ru.aiforge.realwar.client.sight.Optics.renderHeat(e.getPoseStack(), e.getCamera(), e.getPartialTick());   // r21: thermal signatures
         }
         if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {

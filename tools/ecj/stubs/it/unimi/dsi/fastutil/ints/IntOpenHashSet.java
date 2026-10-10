@@ -1,0 +1,2 @@
+package it.unimi.dsi.fastutil.ints;
+public class IntOpenHashSet extends java.util.AbstractSet<Integer> { public IntOpenHashSet() {} public IntOpenHashSet(int n) {} public boolean add(int k) { return true; } public boolean contains(int k) { return false; } public boolean remove(int k) { return false; } public java.util.Iterator<Integer> iterator() { return null; } public int size() { return 0; } public void clear() {} public int[] toIntArray() { return null; } }

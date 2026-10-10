@@ -78,24 +78,32 @@ for sx in (1, -1):
     acyl("%s_mdsh%d" % (P, sx), 0.15, 0.55, (sx * 0.55, HL + 0.12, 0.88), "M_Dark", G, axis=0, seg=14)
 
 # ---------------------------------------------------------------- cast turret (90 mm front) with 3-man layout
-tl = [(1.55, superellipse(1.02, 1.12, 1.48, n=24, e=2.3, y0=TC.y)),
-      (2.00, superellipse(1.00, 1.08, 1.50, n=24, e=2.3, y0=TC.y)),
-      (2.40, superellipse(0.86, 0.92, 1.35, n=24, e=2.2, y0=TC.y)),
-      (2.47, superellipse(0.72, 0.75, 1.15, n=24, e=2.2, y0=TC.y))]
+# r27: T-34-85 cast turret rebuilt from the D-5T drawings: 1.42 m ring, widest at mid-height, sloped front face
+# (mantlet 1.02 m out from the turret centre), flat roof 0.8 m above the ring, overhanging rear bustle. Plan is
+# elongated, widest at mid-length. Centre TC.y is the ring centre.
+def _tt(hw, front, rear, e=2.6):
+    """plan outline: front face front m ahead of TC (-Y), rear face rear m behind it (+Y)"""
+    L = (front + rear) / 2.0
+    return superellipse(hw, L, L, n=28, e=e, y0=TC.y + (rear - front) / 2.0)
+tl = [(1.52, _tt(0.84, 0.98, 1.20)),          # ring level (inside the hull roof)
+      (1.80, _tt(0.90, 1.00, 1.26)),          # widest band
+      (2.08, _tt(0.82, 0.86, 1.18)),          # front face leans back: sloped front of the turret
+      (2.22, _tt(0.66, 0.66, 1.02, e=2.4)),   # shoulders close in
+      (2.30, _tt(0.52, 0.52, 0.92, e=2.2))]   # roof
 turret_loft(P + "_turret", tl, BODY, GT, bevel=0.0, smooth=True)
-cupola_ru(P, "cmd", (0.45, TC.y + 0.55, 2.42), 0.33, GT, mat=BODY, h=0.24)
-hatch(P, "ld", (-0.45, TC.y + 0.30, 2.48), 0.27, GT, mat=BODY)
-periscope(P, "ld", Vector((-0.45, TC.y - 0.10, 2.48)), GT)
-periscope(P, "gn", Vector((0.25, TC.y - 0.35, 2.48)), GT)
-for sx in (-0.2, 0.25):                                   # two ventilator domes at the turret rear
-    lathe_y("%s_vent%d" % (P, int(sx * 10)), [(0.0, 0.16), (0.06, 0.16), (0.12, 0.08), (0.13, 0.0)], (sx, TC.y + 0.95, 2.40), [BODY], GT, seg=14, axis='Z')
+cupola_ru(P, "cmd", (0.42, TC.y + 0.45, 2.30), 0.33, GT, mat=BODY, h=0.24)
+hatch(P, "ld", (-0.42, TC.y - 0.28, 2.32), 0.27, GT, mat=BODY)
+periscope(P, "ld", Vector((-0.42, TC.y - 0.50, 2.32)), GT)
+periscope(P, "gn", Vector((0.25, TC.y - 0.62, 2.30)), GT)
+for sx in (-0.2, 0.25):                                   # two ventilator domes on the rear bustle
+    lathe_y("%s_vent%d" % (P, int(sx * 10)), [(0.0, 0.16), (0.06, 0.16), (0.12, 0.08), (0.13, 0.0)], (sx, TC.y + 0.90, 2.20), [BODY], GT, seg=14, axis='Z')
 for sx in (1, -1):
-    acyl("%s_pport%d" % (P, sx), 0.05, 0.06, (sx * 0.98, TC.y + 0.65, 1.95), BODY, GT, axis=0, seg=10)
-    lift_hooks(P, "t%d" % sx, [(sx * 0.80, TC.y - 0.40, 2.40), (sx * 0.75, TC.y + 1.00, 2.40)], GT)
+    acyl("%s_pport%d" % (P, sx), 0.05, 0.06, (sx * 0.84, TC.y + 0.65, 1.95), BODY, GT, axis=0, seg=10)
+    lift_hooks(P, "t%d" % sx, [(sx * 0.80, TC.y - 0.40, 2.28), (sx * 0.75, TC.y + 1.00, 2.28)], GT)
 for k in range(3):                                         # hand rails on the turret sides (tank riders)
     pass
 for sx in (1, -1):
-    rod("%s_trail%d" % (P, sx), Vector((sx * 1.04, TC.y - 0.4, 2.10)), Vector((sx * 1.04, TC.y + 0.9, 2.10)), 0.014, BODY, GT, seg=6)
+    rod("%s_trail%d" % (P, sx), Vector((sx * 0.96, TC.y - 0.4, 1.95)), Vector((sx * 0.96, TC.y + 0.9, 1.95)), 0.014, BODY, GT, seg=6)
 antenna(P, "ant", Vector((0.85, TC.y + 0.25, 2.25)), 2.2, GT)
 
 # ---------------------------------------------------------------- cast mantlet + gun

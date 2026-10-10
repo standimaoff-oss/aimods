@@ -53,6 +53,7 @@ public class RealWar {
         ru.aiforge.realwar.craft.CraftRegistry.ITEMS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModEffects.EFFECTS.register(bus);
+        ru.aiforge.realwar.registry.ModParticles.PARTICLES.register(bus);     // r27: aiarsenal:vsmoke
         ModTabs.TABS.register(bus);
         ru.aiforge.realwar.worldgen.ModFeatures.FEATURES.register(bus);
         context.registerConfig(ModConfig.Type.COMMON, (IConfigSpec)RWConfig.COMMON_SPEC, "aiarsenal-realwar-common.toml");

@@ -72,8 +72,8 @@ public class WreckBlockEntity extends BlockEntity {
             }
             double x = o.getX() + 0.5 + cx + (r.nextDouble() - 0.5) * 0.6, z = o.getZ() + 0.5 + cz + (r.nextDouble() - 0.5) * 0.6;
             double yy = o.getY() + y - 0.1;
-            level.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x, yy, z, (r.nextDouble() - 0.5) * 0.01, 0.06 + r.nextDouble() * 0.03,
-                    (r.nextDouble() - 0.5) * 0.01);
+            if (r.nextInt(3) == 0) level.addAlwaysVisibleParticle(new ru.aiforge.realwar.particle.VSmokeOptions(0.16f, 0.15f, 0.14f, 0.6f, 4.5f, 180, 0.75f, 0.35f, 0.002f), true,
+                    x, yy, z, (r.nextDouble() - 0.5) * 0.01, 0.06 + r.nextDouble() * 0.03, (r.nextDouble() - 0.5) * 0.01);   // r27
             if (r.nextFloat() < 0.15f) level.addParticle(ParticleTypes.LARGE_SMOKE, x, yy, z, 0, 0.04, 0);
             if (r.nextFloat() < 0.06f) level.addParticle(ParticleTypes.FLAME, x, yy, z, 0, 0.01, 0);
         }

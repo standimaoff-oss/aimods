@@ -65,21 +65,47 @@ public final class FxSystem {
     }
 
     public static void render(PoseStack levelPose, Camera camera, float partial, Frustum frustum) {
+        VolumeFx.beginFrame();          // also keeps VolumeFx.on() current for particle providers
         if (ALL.isEmpty() || renderFailed) {
             return;
         }
+        boolean vol = VolumeFx.on();
+        PoseStack mv = RenderSystem.getModelViewStack();
+        mv.pushPose();
         try {
-            FxSystem.renderSorted(levelPose, camera, partial, frustum);
+            mv.mulPoseMatrix(levelPose.last().pose());
+            RenderSystem.applyModelViewMatrix();
+            FxSystem.renderSorted(camera, partial, frustum);
         }
         catch (Throwable t) {
-            renderFailed = true;
-            RealWar.LOGGER.error("\u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0442\u0440\u0438\u0441\u043e\u0432\u043a\u0438 \u0447\u0430\u0441\u0442\u0438\u0446 \u0432\u0437\u0440\u044b\u0432\u0430 \u2014 \u043e\u0442\u0440\u0438\u0441\u043e\u0432\u043a\u0430 \u044d\u0444\u0444\u0435\u043a\u0442\u043e\u0432 \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u0430 \u0434\u043e \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u043a\u0430", t);
+            try {
+                BufferBuilder bb = Tesselator.getInstance().getBuilder();
+                if (bb.building()) {
+                    bb.end().release();
+                }
+            }
+            catch (Throwable ignored) {
+            }
+            if (vol) {
+                VolumeFx.fail(t);             // r27: retry next frame with flat sprites
+            } else {
+                renderFailed = true;
+                RealWar.LOGGER.error("\u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0442\u0440\u0438\u0441\u043e\u0432\u043a\u0438 \u0447\u0430\u0441\u0442\u0438\u0446 \u0432\u0437\u0440\u044b\u0432\u0430 \u2014 \u043e\u0442\u0440\u0438\u0441\u043e\u0432\u043a\u0430 \u044d\u0444\u0444\u0435\u043a\u0442\u043e\u0432 \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u0430 \u0434\u043e \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u043a\u0430", t);
+            }
+            RenderSystem.enableDepthTest();
+            RenderSystem.enableCull();
+            RenderSystem.defaultBlendFunc();
             RenderSystem.depthMask((boolean)true);
             RenderSystem.disableBlend();
+            Minecraft.getInstance().gameRenderer.lightTexture().turnOffLightLayer();
+        }
+        finally {
+            mv.popPose();
+            RenderSystem.applyModelViewMatrix();
         }
     }
 
-    private static void renderSorted(PoseStack levelPose, Camera camera, float partial, Frustum frustum) {
+    private static void renderSorted(Camera camera, float partial, Frustum frustum) {
         Minecraft mc = Minecraft.getInstance();
         Vec3 cp = camera.getPosition();
         VISIBLE.clear();
@@ -98,10 +124,6 @@ public final class FxSystem {
         LightTexture lt = mc.gameRenderer.lightTexture();
         lt.turnOnLightLayer();
         RenderSystem.enableDepthTest();
-        PoseStack mv = RenderSystem.getModelViewStack();
-        mv.pushPose();
-        mv.mulPoseMatrix(levelPose.last().pose());
-        RenderSystem.applyModelViewMatrix();
         Tesselator tess = Tesselator.getInstance();
         BufferBuilder buf = tess.getBuilder();
         ParticleRenderType current = null;
@@ -119,8 +141,6 @@ public final class FxSystem {
         if (current != null) {
             current.end(tess);
         }
-        mv.popPose();
-        RenderSystem.applyModelViewMatrix();
         RenderSystem.depthMask((boolean)true);
         RenderSystem.disableBlend();
         lt.turnOffLightLayer();

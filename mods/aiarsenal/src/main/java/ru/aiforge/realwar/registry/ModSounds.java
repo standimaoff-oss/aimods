@@ -80,6 +80,14 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> RIFLE_MOSIN = ModSounds.reg("rifle_mosin");
     public static final RegistryObject<SoundEvent> RIFLE_K98 = ModSounds.reg("rifle_k98");
     public static final RegistryObject<SoundEvent> CLIP_IN = ModSounds.reg("clip_in");
+    // r27 hand grenades
+    public static final RegistryObject<SoundEvent> GRENADE_PIN = ModSounds.reg("grenade_pin");
+    public static final RegistryObject<SoundEvent> GRENADE_THROW = ModSounds.reg("grenade_throw");
+    public static final RegistryObject<SoundEvent> GRENADE_BOUNCE = ModSounds.reg("grenade_bounce");
+    public static final RegistryObject<SoundEvent> GRENADE_BLAST = ModSounds.reg("grenade_blast");
+    public static final RegistryObject<SoundEvent> FLASHBANG = ModSounds.reg("flashbang");
+    public static final RegistryObject<SoundEvent> TINNITUS = ModSounds.reg("tinnitus");
+    public static final RegistryObject<SoundEvent> SMOKE_HISS = ModSounds.reg("smoke_hiss");
 
     private ModSounds() {
     }

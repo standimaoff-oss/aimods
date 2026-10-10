@@ -264,6 +264,7 @@ public final class TrailFx {
             pp.size = size0 + (size1 - size0) * grow;
             float warm = Math.max(0.0f, 1.0f - (float)age / 7.0f);
             pp.color(Math.min(1.0f, shade + 0.18f * warm), Math.min(1.0f, shade + 0.08f * warm), shade - 0.1f * warm);
+            pp.heat = thin ? 0.0f : 0.5f * warm * warm;        // r27: exhaust-lit smoke right behind the nozzle (volumetric)
             float fadeIn = Math.min(1.0f, (float)age / 2.5f);
             pp.alpha(a0 * fadeIn * (1.0f - f) * (1.0f - f * 0.3f));
         };

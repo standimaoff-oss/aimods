@@ -490,6 +490,25 @@ public final class VehicleDamage {
         v.dmg.dirtyNow = true;
     }
 
+    /**
+     * r27: a land mine exploded under this vehicle. side = TRACK_L / TRACK_R (track or wheel row under the charge) or any
+     * other value for the hull. PMN-2 (kg below 1) only damages the track; TM-62 (7.5 kg) under a track tears it off
+     * (immobile), under the hull it wrecks the engine and both tracks, wounds the belly crew and may set the hull on fire.
+     */
+    public static void mineBlast(ServerLevel sl, VehicleEntity v, int side, double kg) {
+        if (v.dmg.dead()) return;
+        if (side == TRACK_L || side == TRACK_R) {
+            module(sl, v, side, maxHp(v, side) * (kg > 1.0 ? 1.2f : 0.45f));
+        } else if (kg > 1.0) {
+            module(sl, v, ENGINE, maxHp(v, ENGINE) * 0.6f);
+            module(sl, v, TRACK_L, maxHp(v, TRACK_L) * 0.5f);
+            module(sl, v, TRACK_R, maxHp(v, TRACK_R) * 0.5f);
+            Crew.fragments(sl, v, 0.6, 40f);
+            if (sl.random.nextDouble() < 0.35) ignite(v, 200);
+        }
+        v.dmg.dirtyNow = true;
+    }
+
     /** r21: the crew is knocked out (too few men left): the vehicle stops for good, the hull is not burning. */
     public static void knockOut(ServerLevel sl, VehicleEntity v) {
         DamageState s = v.dmg;
@@ -503,7 +522,7 @@ public final class VehicleDamage {
         notify(v, "hud.aiarsenal.rw.crew.ko");
         v.ejectPassengers();
         Vec3 c = v.position().add(0, v.spec.height() * 0.7, 0);
-        sl.sendParticles(ParticleTypes.LARGE_SMOKE, c.x, c.y, c.z, 20, 0.6, 0.4, 0.6, 0.02);
+        ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.2f, 0.19f, 0.18f, 1.0f, 3.5f, 120, 0.8f, 0.3f, 0.0015f), c.x, c.y, c.z, 5, 0.6, 0.4, 0.6, 0.02);   // r27
         if (pendingCam != null && pendingCam.target() == v.getId()) pendingCam = pendingCam.dead(true);
     }
 
@@ -545,7 +564,7 @@ public final class VehicleDamage {
             }
             case BARREL -> {
                 Vec3 p = v.localToWorld(0, v.spec.height(), v.spec.length() * 0.35);
-                sl.sendParticles(ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 12, 0.3, 0.2, 0.3, 0.03);
+                ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.3f, 0.29f, 0.27f, 0.6f, 3.0f, 70, 0.7f, 0.2f, 0.001f), p.x, p.y, p.z, 3, 0.3, 0.2, 0.3, 0.03);   // r27
                 sl.playSound(null, c.x, c.y, c.z, SoundEvents.ANVIL_BREAK, SoundSource.NEUTRAL, 2f, 0.6f);
             }
             case TURRET -> sl.playSound(null, c.x, c.y, c.z, SoundEvents.ANVIL_BREAK, SoundSource.NEUTRAL, 2f, 0.8f);
@@ -597,7 +616,7 @@ public final class VehicleDamage {
             Vec3 b = v.localToWorld(0, yp1 + 0.6, (g.yp != null ? g.yp[2] : 0) - 2.0);
             sl.sendParticles(ParticleTypes.FLAME, b.x, b.y, b.z, 80, 0.5, 0.2, 0.5, 0.35);
             sl.sendParticles(ParticleTypes.LAVA, b.x, b.y, b.z, 20, 0.5, 0.3, 0.5, 0);
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, b.x, b.y + 1, b.z, 40, 0.6, 1.5, 0.6, 0.08);
+            ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.12f, 0.11f, 0.1f, 1.0f, 4.0f, 160, 0.85f, 0.9f, 0.003f), b.x, b.y + 1, b.z, 10, 0.6, 1.5, 0.6, 0.12);   // r27: cook-off column
             sl.playSound(null, b.x, b.y, b.z, SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 4f, 1.2f);
             if (v instanceof LauncherVehicle lv) lv.setLoadedMask(0L);
             s.setBroken(AMMO, true);

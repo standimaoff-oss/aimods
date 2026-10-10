@@ -96,7 +96,7 @@ public final class ClientFx {
                     lv.addAlwaysVisibleParticle(dirt, true, x + r.nextGaussian() * 0.8, y + 0.3, z + r.nextGaussian() * 0.8,
                             r.nextGaussian() * 0.35, 0.4 + r.nextDouble() * 0.9, r.nextGaussian() * 0.35);
                 for (int i = 0; i < 26 * k; i++)
-                    lv.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x + r.nextGaussian() * pw * 0.35, y + r.nextDouble() * 2, z + r.nextGaussian() * pw * 0.35,
+                    ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.CAMPFIRE_COSY_SMOKE, x + r.nextGaussian() * pw * 0.35, y + r.nextDouble() * 2, z + r.nextGaussian() * pw * 0.35,
                             r.nextGaussian() * 0.02, 0.06 + r.nextDouble() * 0.1, r.nextGaussian() * 0.02);
                 for (int i = 0; i < 40; i++) {
                     double a = i / 40.0 * Math.PI * 2;
@@ -132,14 +132,14 @@ public final class ClientFx {
                 for (int i = 0; i < 40; i++)
                     lv.addAlwaysVisibleParticle(ParticleTypes.LAVA, true, x + r.nextGaussian() * 3, y + 0.5, z + r.nextGaussian() * 3, 0, 0, 0);
                 for (int i = 0; i < 20; i++)
-                    lv.addAlwaysVisibleParticle(ParticleTypes.LARGE_SMOKE, true, x + r.nextGaussian() * 2, y + 1, z + r.nextGaussian() * 2, 0, 0.1, 0);
+                    ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.LARGE_SMOKE, x + r.nextGaussian() * 2, y + 1, z + r.nextGaussian() * 2, 0, 0.1, 0);
             }
             case FxPacket.SMOKE -> {
                 for (int i = 0; i < 30; i++)
                     lv.addAlwaysVisibleParticle(ModRegistry.P_SMOKE_WALL.get(), true, x + r.nextGaussian() * 1.5, y + 0.8 + r.nextDouble() * 1.5, z + r.nextGaussian() * 1.5,
                             r.nextGaussian() * 0.25, 0.02 + r.nextDouble() * 0.05, r.nextGaussian() * 0.25);
                 for (int i = 0; i < 50; i++)
-                    lv.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, x + r.nextGaussian() * 2, y + 0.5, z + r.nextGaussian() * 2,
+                    ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, x + r.nextGaussian() * 2, y + 0.5, z + r.nextGaussian() * 2,
                             r.nextGaussian() * 0.08, 0.05 + r.nextDouble() * 0.05, r.nextGaussian() * 0.08);
             }
             case FxPacket.CLUSTER -> {
@@ -149,7 +149,7 @@ public final class ClientFx {
                 for (int i = 0; i < 8; i++)
                     lv.addAlwaysVisibleParticle(ModRegistry.P_BLAST_SMOKE.get(), true, x + r.nextGaussian(), y, z + r.nextGaussian(), r.nextGaussian() * 0.05, 0.02, r.nextGaussian() * 0.05);
                 for (int i = 0; i < 30; i++)
-                    lv.addAlwaysVisibleParticle(ParticleTypes.LARGE_SMOKE, true, x + r.nextGaussian(), y, z + r.nextGaussian(),
+                    ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.LARGE_SMOKE, x + r.nextGaussian(), y, z + r.nextGaussian(),
                             r.nextGaussian() * 0.15, r.nextGaussian() * 0.05, r.nextGaussian() * 0.15);
             }
             case FxPacket.BOMBLET -> {
@@ -160,7 +160,7 @@ public final class ClientFx {
                 for (int i = 0; i < 16; i++)
                     lv.addAlwaysVisibleParticle(dirt, true, x, y + 0.2, z, r.nextGaussian() * 0.25, 0.3 + r.nextDouble() * 0.5, r.nextGaussian() * 0.25);
                 for (int i = 0; i < 5; i++)
-                    lv.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x + r.nextGaussian() * 0.6, y + 0.4, z + r.nextGaussian() * 0.6, 0, 0.05, 0);
+                    ru.aiforge.realwar.client.particle.VolumeFx.vanilla(lv, ParticleTypes.CAMPFIRE_COSY_SMOKE, x + r.nextGaussian() * 0.6, y + 0.4, z + r.nextGaussian() * 0.6, 0, 0.05, 0);
             }
             default -> {
             }

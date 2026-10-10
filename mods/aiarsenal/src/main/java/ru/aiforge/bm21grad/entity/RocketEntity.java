@@ -166,8 +166,8 @@ public class RocketEntity extends Projectile {
             double f = i / (double) n;
             double x = from.x + d.x * f + back.x, y = from.y + d.y * f + back.y, z = from.z + d.z * f + back.z;
             if (burning) {
-                level().addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x, y, z,
-                        (random.nextDouble() - 0.5) * 0.03, 0.01, (random.nextDouble() - 0.5) * 0.03);
+                if (i % 2 == 0) level().addAlwaysVisibleParticle(new ru.aiforge.realwar.particle.VSmokeOptions(0.85f, 0.84f, 0.82f, 0.45f, 3.4f, 110, 0.6f, 0.45f, 0.0004f), true, x, y, z,
+                        (random.nextDouble() - 0.5) * 0.03, 0.01, (random.nextDouble() - 0.5) * 0.03);   // r27: volumetric trail
                 level().addParticle(ParticleTypes.FLAME, x, y, z, back.x * 0.05, back.y * 0.05, back.z * 0.05);
             } else if (a < 200) {
                 level().addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0.005, 0);

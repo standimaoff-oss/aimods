@@ -102,7 +102,55 @@ public class BigPuffParticle extends TextureSheetParticle {
     public record Provider(SpriteSet sprites, Kind kind) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType t, ClientLevel lv, double x, double y, double z, double vx, double vy, double vz) {
+            if (ru.aiforge.realwar.client.particle.VolumeFx.on()) {          // r27: volumetric puffs instead of flat sprites
+                volume(lv, x, y, z, vx, vy, vz, kind);
+                return null;
+            }
             return new BigPuffParticle(lv, x, y, z, vx, vy, vz, kind, sprites);
+        }
+    }
+
+    /** r27: the same three puff kinds as raymarched volumes (FxSystem / VolumeFx). */
+    static void volume(ClientLevel lv, double x, double y, double z, double vx, double vy, double vz, Kind kind) {
+        net.minecraft.util.RandomSource rnd = lv.random;
+        switch (kind) {
+            case SMOKE_WALL -> {
+                float g = 0.78f + rnd.nextFloat() * 0.16f;
+                float s0 = 2.0f + rnd.nextFloat();
+                ru.aiforge.realwar.client.particle.VolumeFx.puff(lv, x, y, z, vx, vy, vz, new ru.aiforge.realwar.particle.VSmokeOptions(
+                        g, g, g * 0.97f, s0, (3.5f + rnd.nextFloat() * 2.5f) / s0, 240 + rnd.nextInt(80), 0.85f, 0.0f, 0.0002f));
+            }
+            case FIREBALL -> {
+                int life = 12 + rnd.nextInt(9);
+                float s0 = 0.6f + rnd.nextFloat() * 0.6f;
+                float s1 = 2.2f + rnd.nextFloat() * 1.6f;
+                ru.aiforge.realwar.client.particle.FxParticle p = new ru.aiforge.realwar.client.particle.FxParticle(lv, x, y, z,
+                        ru.aiforge.realwar.client.particle.Sprites.smoke(rnd.nextInt(4)), life, false, s0);
+                p.velocity(vx, vy, vz);
+                p.fullBright = true;
+                p.heat = 1.0f;
+                p.color(0.35f, 0.22f, 0.12f);
+                p.alpha(0.95f);
+                p.motion = (pp, age) -> {
+                    float f = (float) age / (float) life;
+                    pp.translate(pp.getDeltaX(), pp.getDeltaY(), pp.getDeltaZ());
+                    pp.scaleVelocity(0.82);
+                    pp.translate(0.0, 0.0004 * age, 0.0);
+                    pp.size = Mth.lerp(1f - (1f - f) * (1f - f), s0, s1);
+                    pp.heat = Math.max(0.0f, 1.0f - f * 1.25f);
+                    pp.fullBright = pp.heat > 0.2f;
+                    pp.alpha(f < 0.6f ? 0.95f : 0.95f * (1f - (f - 0.6f) / 0.4f));
+                };
+                ru.aiforge.realwar.client.particle.FxSystem.add(p);
+            }
+            default -> {
+                float g = 0.12f + rnd.nextFloat() * 0.14f;
+                float s0 = 1.2f + rnd.nextFloat();
+                ru.aiforge.realwar.client.particle.FxParticle p = ru.aiforge.realwar.client.particle.VolumeFx.puff(lv, x, y, z, vx, vy, vz,
+                        new ru.aiforge.realwar.particle.VSmokeOptions(g * 1.05f, g, g * 0.92f, s0, (3.5f + rnd.nextFloat() * 2.5f) / s0,
+                                80 + rnd.nextInt(60), 0.9f, 0.5f, 0.00016f));
+                p.dens = 1.3f;
+            }
         }
     }
 }

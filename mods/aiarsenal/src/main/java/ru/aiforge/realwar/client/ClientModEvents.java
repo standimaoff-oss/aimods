@@ -107,6 +107,7 @@ public final class ClientModEvents {
     public static void renderers(EntityRenderersEvent.RegisterRenderers e) {
         e.registerBlockEntityRenderer((BlockEntityType)ModBlockEntities.BOMB.get(), BombRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.FALLING_BOMB.get(), FallingBombRenderer::new);
+        e.registerEntityRenderer((EntityType)ModEntities.GRENADE.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.AT_MISSILE.get(), ru.aiforge.realwar.client.render.AtMissileRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.GRAD.get(), VehicleRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.SMERCH.get(), VehicleRenderer::new);
@@ -159,6 +160,28 @@ public final class ClientModEvents {
         e.registerBlockEntityRenderer((BlockEntityType)ModS3.COMPUTER_BE.get(), MachineGlbRenderers.Computer::new);
         e.registerBlockEntityRenderer((BlockEntityType)ModS3.SIREN_BE.get(), MachineGlbRenderers.Siren::new);
         e.registerEntityRenderer((EntityType)ModEntities.SAM_MISSILE.get(), RocketRenderer::new);
+    }
+
+    /** r27: volumetric smoke shader. A compile/link error must not break the resource reload: sprites are used then. */
+    @SubscribeEvent
+    public static void shaders(net.minecraftforge.client.event.RegisterShadersEvent e) {
+        try {
+            e.registerShader(new net.minecraft.client.renderer.ShaderInstance(e.getResourceProvider(),
+                    new net.minecraft.resources.ResourceLocation("aiarsenal", "volsmoke"), ru.aiforge.realwar.client.particle.VolumeFx.FORMAT),
+                    ru.aiforge.realwar.client.particle.VolumeFx::setShader);
+        } catch (Throwable t) {
+            ru.aiforge.realwar.RealWar.LOGGER.error("r27: volumetric smoke shader failed to load - flat smoke sprites are used", t);
+            ru.aiforge.realwar.client.particle.VolumeFx.setShader(null);
+        }
+    }
+
+    /** r27: aiarsenal:vsmoke -> FxSystem volume puff (the provider adds it itself and returns null). */
+    @SubscribeEvent
+    public static void particles(net.minecraftforge.client.event.RegisterParticleProvidersEvent e) {
+        e.registerSpecial(ru.aiforge.realwar.registry.ModParticles.VSMOKE.get(), (o, lv, x, y, z, vx, vy, vz) -> {
+            ru.aiforge.realwar.client.particle.VolumeFx.puff(lv, x, y, z, vx, vy, vz, o);
+            return null;
+        });
     }
 
     @SubscribeEvent

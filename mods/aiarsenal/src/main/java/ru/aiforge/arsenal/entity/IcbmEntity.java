@@ -148,7 +148,8 @@ public class IcbmEntity extends ArsEntity {
                 if (state() == REENTRY) {
                     if (age % 10 == 0) Tickets.keep(sl, aim, 3);
                     sl.sendParticles(ParticleTypes.FLAME, getX(), getY(), getZ(), 4, 0.3, 0.3, 0.3, 0.02);
-                    sl.sendParticles(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 2, 0.4, 0.4, 0.4, 0.0);
+                    if (age % 2 == 0) ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.36f, 0.34f, 0.32f,
+                            1.0f, 3.0f, 110, 0.6f, 0.7f, 0.0f), getX(), getY(), getZ(), 1, 0.4, 0.4, 0.4, 0.0);   // r27: volumetric plasma wake
                     if (fuze == ChargeRegistry.FUZE_AIR && getY() - ground(sl, getX(), getZ()) <= burstHeight()) {
                         detonate(sl);
                         return;
@@ -188,7 +189,8 @@ public class IcbmEntity extends ArsEntity {
     private void flame(ServerLevel sl, int n) {
         Vec3 back = position().subtract(dir(getYRot(), pitch()).scale(9));
         sl.sendParticles(ParticleTypes.FLAME, back.x, back.y, back.z, n, 0.3, 0.3, 0.3, 0.05);
-        sl.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, back.x, back.y, back.z, n, 0.6, 0.6, 0.6, 0.02);
+        if (age % 3 == 0) ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.86f, 0.85f, 0.83f,
+                1.8f, 3.2f, 260, 0.8f, 0.45f, 0.0f), back.x, back.y, back.z, 1, 0.6, 0.6, 0.6, 0.02);   // r27: volumetric exhaust
     }
 
     public void detonate(ServerLevel sl) {

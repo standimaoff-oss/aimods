@@ -69,6 +69,7 @@ public final class ModNetwork {
         CHANNEL.registerMessage(id++, SelectWeaponPacket.class, SelectWeaponPacket::encode, SelectWeaponPacket::decode, SelectWeaponPacket::handle);
         CHANNEL.registerMessage(id++, GunActionPacket.class, GunActionPacket::encode, GunActionPacket::decode, GunActionPacket::handle);
         CHANNEL.registerMessage(id++, GunFxPacket.class, GunFxPacket::encode, GunFxPacket::decode, GunFxPacket::handle);
+        CHANNEL.registerMessage(id++, GrenadeFlashPacket.class, GrenadeFlashPacket::encode, GrenadeFlashPacket::decode, GrenadeFlashPacket::handle);
     }
 
     public static void sendToDimension(ServerLevel level, Object msg) {

@@ -148,6 +148,7 @@ public class MineBlock extends HorizontalDirectionalBlock implements Detonatable
     @Override
     public void entityInside(BlockState st, Level level, BlockPos pos, Entity e) {
         if (level.isClientSide || !st.getValue(ARMED) || !triggers(e)) return;
+        if (e instanceof ru.aiforge.realwar.vehicle.VehicleEntity) return;   // r27: vehicles are sensed by MineSensor (setPos movers never reach here)
         switch (this.kind) {
             case PMN2, OZM72 -> {
                 if (e.getY() < pos.getY() + 0.5) this.trigger((ServerLevel) level, pos, st, e);
@@ -158,6 +159,21 @@ public class MineBlock extends HorizontalDirectionalBlock implements Detonatable
             default -> {
             }
         }
+    }
+
+    /**
+     * r27: a PMN-2 / TM-62 goes off under a vehicle. side: DamageState.TRACK_L/R (track or wheel row) or MineSensor.HULL.
+     * PMN-2 (0.24 kg) only breaks the track it lies under; TM-62 (7.5 kg) tears the track off (immobile) or, under the
+     * hull, wrecks the engine and both tracks and sets fire. The blast itself is queued as usual and reaches the hull
+     * through the ConventionalBlast path (VehicleDamage.blastNear).
+     */
+    public void vehicleTrigger(ServerLevel level, BlockPos pos, ru.aiforge.realwar.vehicle.VehicleEntity v, int side) {
+        level.removeBlock(pos, false);
+        Vec3 c = Vec3.atBottomCenterOf(pos).add(0, 0.1, 0);
+        double kg = this.kind == Kind.TM62 ? 7.5 : 0.24;
+        level.playSound(null, c.x, c.y, c.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.6f, this.kind == Kind.TM62 ? 0.8f : 1.1f);
+        ru.aiforge.realwar.damage.VehicleDamage.mineBlast(level, v, side == ru.aiforge.realwar.field.MineSensor.HULL ? -1 : side, kg);
+        Detonations.queue(level, c, kg, this.kind == Kind.TM62 ? 0.4 : 0.3, 0, 1);
     }
 
     public void trigger(ServerLevel level, BlockPos pos, BlockState st, Entity victim) {

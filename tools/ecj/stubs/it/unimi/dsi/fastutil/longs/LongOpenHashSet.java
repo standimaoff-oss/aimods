@@ -1,0 +1,2 @@
+package it.unimi.dsi.fastutil.longs;
+public class LongOpenHashSet extends java.util.AbstractSet<Long> { public LongOpenHashSet() {} public LongOpenHashSet(int n) {} public boolean add(long k) { return true; } public boolean contains(long k) { return false; } public boolean remove(long k) { return false; } public java.util.Iterator<Long> iterator() { return null; } public int size() { return 0; } public void clear() {} public long[] toLongArray() { return null; } }

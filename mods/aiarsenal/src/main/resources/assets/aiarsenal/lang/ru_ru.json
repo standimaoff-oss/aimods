@@ -1889,5 +1889,22 @@
   "subtitles.aiarsenal.smg_mp40": "Стреляет MP 40",
   "subtitles.aiarsenal.rifle_mosin": "Выстрел винтовки Мосина",
   "subtitles.aiarsenal.rifle_k98": "Выстрел Kar98k",
-  "subtitles.aiarsenal.clip_in": "Обойма заряжена"
+  "subtitles.aiarsenal.clip_in": "Обойма заряжена",
+  "item.aiarsenal.grenade_rgd5": "РГД-5 граната",
+  "item.aiarsenal.grenade_rgd5.desc": "Осколочно-фугасная. Взрыв через 3 с. Ст. ~110 г ТНТ.",
+  "item.aiarsenal.grenade_f1": "Ф-1 граната",
+  "item.aiarsenal.grenade_f1.desc": "Оборонительная осколочная. Взрыв через 4 с, широкий разлёт осколков.",
+  "item.aiarsenal.grenade_flashbang": "Светошумовая граната",
+  "item.aiarsenal.grenade_flashbang.desc": "Взрыв через 2 с: ослепляет и оглушает (звон в ушах) в радиусе ~28 м.",
+  "item.aiarsenal.grenade_smoke_white": "Дымовая граната (белая)",
+  "item.aiarsenal.grenade_smoke_white.desc": "Через 2 с выбрасывает объёмное облако дыма (~25 с).",
+  "item.aiarsenal.grenade_smoke_red": "Дымовая граната (красная)",
+  "item.aiarsenal.grenade_smoke_red.desc": "Красный объёмный дым: сигнал / целеуказание.",
+  "item.aiarsenal.grenade_smoke_green": "Дымовая граната (зелёная)",
+  "item.aiarsenal.grenade_smoke_green.desc": "Зелёный объёмный дым: сигнал / целеуказание.",
+  "item.aiarsenal.grenade_smoke_blue": "Дымовая граната (синяя)",
+  "item.aiarsenal.grenade_smoke_blue.desc": "Синий объёмный дым: сигнал / целеуказание.",
+  "item.aiarsenal.grenade_incendiary": "Зажигательная граната",
+  "item.aiarsenal.grenade_incendiary.desc": "Через 2 с поджигает область в радиусе ~2 блока.",
+  "entity.aiarsenal.rw_grenade": "Граната"
 }

@@ -133,7 +133,7 @@ public class MissileEntity extends ArsEntity {
         Vec3 back = position().subtract(v.normalize().scale(k.width + 1.5));
         if (booster()) {
             sl.sendParticles(ParticleTypes.FLAME, back.x, back.y, back.z, 3, 0.1, 0.1, 0.1, 0.01);
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, back.x, back.y, back.z, 3, 0.2, 0.2, 0.2, 0.02);
+            // r27: the booster trail itself is client-side volumetric smoke (ArsTrails -> TrailFx); no flat large-smoke sprites
         } else if (engine() && k == Kind.HELLFIRE) {
             sl.sendParticles(ParticleTypes.FLAME, back.x, back.y, back.z, 1, 0.02, 0.02, 0.02, 0.0);
             sl.sendParticles(ParticleTypes.SMOKE, back.x, back.y, back.z, 2, 0.05, 0.05, 0.05, 0.0);

@@ -59,10 +59,152 @@ public final class ConvFx {
         Vec3 c = new Vec3(this.m.x(), this.m.y(), this.m.z());
         double d = dist = mc.player == null ? 0.0 : mc.player.getEyePosition().distanceTo(c);
         if (dist <= (Double)RWConfig.CLIENT.maxEffectDistance.get()) {
-            this.spawn(level, c);
+            if (ru.aiforge.realwar.client.particle.VolumeFx.on()) {
+                this.spawnVolumetric(level, c);       // r27
+            } else {
+                this.spawn(level, c);
+            }
         }
         this.schedule(level, mc, c, dist);
         return true;
+    }
+
+    /**
+     * r27: conventional blast with volumetric smoke: emissive fireball volumes that cool into a rising, fire-lit cloud of
+     * dark smoke, a dust skirt rolling along the ground for surface bursts, debris, and a thin haze that lingers.
+     */
+    private void spawnVolumetric(ClientLevel level, Vec3 c) {
+        float q = ((Double)RWConfig.CLIENT.particleQuality.get()).floatValue();
+        double r = Math.cbrt(this.m.massKg());
+        double x = c.x, y = c.y, z = c.z;
+        float coreSize = (float)(r * 3.4);
+        FxParticle core = new FxParticle(level, x, y, z, Sprites.glow(), 7, true, coreSize);
+        core.motion = (p, age) -> {
+            float f = (float)age / 7.0f;
+            p.size = coreSize * (0.5f + 0.5f * f);
+            p.color(1.0f, 0.85f, 0.55f);
+            p.alpha((1.0f - f) * 0.9f);
+        };
+        this.add(core);
+        // fireball: emissive volumes, white-yellow -> orange -> smoke within ~0.6 s
+        int nFire = (int)(Math.max(5.0, Math.min(24.0, 4.0 + 2.0 * r)) * (double)q);
+        for (int i = 0; i < nFire; ++i) {
+            double u = this.rnd.nextDouble() * 2.0 - 1.0, a = this.rnd.nextDouble() * Math.PI * 2.0, sn = Math.sqrt(1.0 - u * u);
+            double sp = (0.05 + 0.12 * this.rnd.nextDouble()) * Math.max(0.6, r / 4.0);
+            int life = 10 + this.rnd.nextInt(10);
+            float s0 = (float)(r * (0.30 + 0.2 * this.rnd.nextDouble())), s1 = (float)(r * (0.8 + 0.4 * this.rnd.nextDouble()));
+            FxParticle p = new FxParticle(level, x, y + r * 0.15, z, Sprites.smoke(i), life, false, s0);
+            p.velocity(sn * Math.cos(a) * sp, Math.abs(u) * sp * 0.8 + 0.04, sn * Math.sin(a) * sp);
+            p.fullBright = true;
+            p.heat = 1.0f;
+            p.dens = 1.6f;
+            p.color(0.32f, 0.22f, 0.14f);
+            p.alpha(0.95f);
+            p.motion = (pp, age) -> {
+                float f = (float)age / (float)life;
+                pp.translate(pp.getDeltaX(), pp.getDeltaY(), pp.getDeltaZ());
+                pp.scaleVelocity(0.84);
+                pp.size = s0 + (s1 - s0) * (1.0f - (1.0f - f) * (1.0f - f));
+                pp.heat = Math.max(0.0f, 1.0f - f * 1.15f);
+                pp.fullBright = pp.heat > 0.25f;
+                pp.alpha(0.95f * (f < 0.7f ? 1.0f : 1.0f - (f - 0.7f) / 0.3f));
+            };
+            this.add(p);
+        }
+        // a few additive glows for the bloom of the flash
+        for (int i = 0; i < 6; ++i) {
+            int life = 6 + this.rnd.nextInt(6);
+            float base = (float)(r * (0.8 + 0.5 * this.rnd.nextDouble()));
+            FxParticle g = new FxParticle(level, x + (this.rnd.nextDouble() - 0.5) * r * 0.5, y + r * 0.2, z + (this.rnd.nextDouble() - 0.5) * r * 0.5, Sprites.glow(), life, true, base);
+            g.motion = (pp, age) -> {
+                float f = (float)age / (float)life;
+                pp.color(1.0f, 0.7f - 0.3f * f, 0.35f - 0.25f * f);
+                pp.alpha(0.55f * (1.0f - f));
+                pp.size = base * (0.8f + 0.5f * f);
+            };
+            this.add(g);
+        }
+        // smoke: rises and widens, lit by the fire from inside at first
+        int nSmoke = (int)(Math.max(12.0, Math.min(60.0, 10.0 + 4.0 * r)) * (double)q);
+        for (int i = 0; i < nSmoke; ++i) {
+            double a = this.rnd.nextDouble() * Math.PI * 2.0;
+            double rad = this.rnd.nextDouble() * r * 0.5;
+            double vx = Math.cos(a) * 0.035 * r / 3.0, vz = Math.sin(a) * 0.035 * r / 3.0;
+            double vy = (0.08 + 0.25 * this.rnd.nextDouble()) * Math.max(0.7, r / 5.0);
+            int life = 80 + this.rnd.nextInt(120);
+            float s0 = (float)(r * (0.45 + 0.3 * this.rnd.nextDouble())), s1 = (float)(r * (1.1 + 0.6 * this.rnd.nextDouble()));
+            float shade = 0.15f + 0.17f * this.rnd.nextFloat();
+            float h0 = 0.55f + 0.3f * this.rnd.nextFloat();
+            FxParticle p = new FxParticle(level, x + Math.cos(a) * rad, y + r * 0.1, z + Math.sin(a) * rad, Sprites.smoke(i), life, false, s0);
+            p.velocity(vx, vy, vz);
+            p.dens = 1.25f;
+            p.heat = h0;
+            p.motion = (pp, age) -> {
+                float f = (float)age / (float)life;
+                pp.translate(pp.getDeltaX(), pp.getDeltaY(), pp.getDeltaZ());
+                pp.scaleVelocity(0.955);
+                pp.heat = h0 * Math.max(0.0f, 1.0f - f / 0.12f);
+                float warm = pp.heat;
+                pp.color(shade + 0.25f * warm, shade + 0.1f * warm, shade * 0.92f);
+                pp.alpha(0.8f * (f < 0.06f ? f / 0.06f : 1.0f) * (1.0f - f * f));
+                pp.size = s0 + (s1 - s0) * (float)Math.sqrt(f);
+                pp.fullBright = warm > 0.3f;
+            };
+            this.add(p);
+        }
+        BlockPos bp = BlockPos.containing((double)x, (double)(y - 0.5), (double)z);
+        BlockState below = level.getBlockState(bp);
+        for (int dy = 0; dy < 3 && below.isAir(); ++dy) {
+            below = level.getBlockState(bp.below(dy + 1));
+        }
+        if (!below.isAir()) {
+            int nDebris = (int)(Math.min(120.0, 10.0 + 6.0 * r) * (double)q);
+            for (int i = 0; i < nDebris; ++i) {
+                double a = this.rnd.nextDouble() * Math.PI * 2.0;
+                double sp = 0.15 + 0.35 * this.rnd.nextDouble() * Math.max(0.8, r / 5.0);
+                level.addParticle((ParticleOptions)new BlockParticleOption(ParticleTypes.BLOCK, below), x, y + 0.2, z, Math.cos(a) * sp, 0.25 + 0.7 * this.rnd.nextDouble() * Math.max(0.8, r / 6.0), Math.sin(a) * sp);
+            }
+        }
+        if (this.m.surface()) {
+            // dust skirt: low brown volumes pushed outwards by the shock, slowing down and spreading
+            int nDust = (int)(Math.max(8.0, Math.min(40.0, 8.0 + 2.0 * r)) * (double)q);
+            for (int i = 0; i < nDust; ++i) {
+                double a = (double)i * (Math.PI * 2 / (double)nDust) + this.rnd.nextDouble() * 0.3;
+                double sp = (0.18 + 0.12 * this.rnd.nextDouble()) * Math.max(0.8, r / 4.0);
+                int life = 50 + this.rnd.nextInt(50);
+                float s0 = (float)(0.5 + r * 0.22), s1 = s0 * (2.6f + this.rnd.nextFloat());
+                float dk = 0.85f + 0.3f * this.rnd.nextFloat();
+                FxParticle p = new FxParticle(level, x, y + 0.2 + s0 * 0.4, z, Sprites.smoke(i), life, false, s0);
+                p.velocity(Math.cos(a) * sp, 0.012, Math.sin(a) * sp);
+                p.color(0.52f * dk, 0.45f * dk, 0.36f * dk);
+                p.motion = (pp, age) -> {
+                    float f = (float)age / (float)life;
+                    pp.translate(pp.getDeltaX(), pp.getDeltaY(), pp.getDeltaZ());
+                    pp.scaleVelocity(0.92);
+                    pp.alpha(0.6f * (f < 0.05f ? f / 0.05f : 1.0f) * (1.0f - f));
+                    pp.size = s0 + (s1 - s0) * (1.0f - (1.0f - f) * (1.0f - f));
+                };
+                this.add(p);
+            }
+        }
+        // thin haze that hangs around for ~20 s and drifts
+        int nHaze = (int)(Math.max(2.0, Math.min(8.0, 1.0 + r * 0.6)) * (double)q);
+        double wa = this.rnd.nextDouble() * Math.PI * 2.0;
+        for (int i = 0; i < nHaze; ++i) {
+            int life = 300 + this.rnd.nextInt(200);
+            float s0 = (float)(r * (1.0 + 0.4 * this.rnd.nextDouble())), s1 = s0 * 2.2f;
+            FxParticle p = new FxParticle(level, x + (this.rnd.nextDouble() - 0.5) * r, y + r * (0.3 + this.rnd.nextDouble() * 0.6), z + (this.rnd.nextDouble() - 0.5) * r, Sprites.smoke(i), life, false, s0);
+            p.velocity(Math.cos(wa) * 0.02, 0.006, Math.sin(wa) * 0.02);
+            p.color(0.4f, 0.38f, 0.35f);
+            p.dens = 0.7f;
+            p.motion = (pp, age) -> {
+                float f = (float)age / (float)life;
+                pp.translate(pp.getDeltaX(), pp.getDeltaY(), pp.getDeltaZ());
+                pp.alpha(0.32f * Math.min(1.0f, f / 0.15f) * (1.0f - f));
+                pp.size = s0 + (s1 - s0) * f;
+            };
+            this.add(p);
+        }
     }
 
     private void spawn(ClientLevel level, Vec3 c) {

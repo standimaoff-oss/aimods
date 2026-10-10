@@ -376,8 +376,9 @@ public final class Firearms {
         for (int i = 0; i < 16; i++) {
             double f = 0.4 + i / 16.0 * len;
             Vec3 q = back.subtract(look.scale(f));
-            sl.sendParticles(i < 4 ? ParticleTypes.FLAME : ParticleTypes.CAMPFIRE_COSY_SMOKE, q.x, q.y, q.z, 1,
-                    0.18 * f / len, 0.18 * f / len, 0.18 * f / len, 0.01);
+            if (i < 4) sl.sendParticles(ParticleTypes.FLAME, q.x, q.y, q.z, 1, 0.18 * f / len, 0.18 * f / len, 0.18 * f / len, 0.01);
+            else if (i % 3 == 0) ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.72f, 0.7f, 0.66f, 0.35f + (float) (0.12 * f), 3.0f, 70, 0.65f, 0.0f, 0.0006f),
+                    q.x, q.y, q.z, 1, 0.18 * f / len, 0.18 * f / len, 0.18 * f / len, 0.01);   // r27: volumetric backblast
         }
         for (Entity e : sl.getEntities(p, new AABB(back, back).inflate(len))) {
             if (!(e instanceof LivingEntity le)) continue;

@@ -289,6 +289,18 @@ public final class ModItems {
     public static final RegistryObject<Item> ARTILLERY_DESIGNATOR = ITEMS.register("artillery_designator", () -> new DesignatorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TU95_VEHICLE = ITEMS.register("tu95_vehicle", () -> new AircraftItem(new Item.Properties()));
     private static final Map<AirBombType, RegistryObject<Item>> AIR_BOMBS = new EnumMap<AirBombType, RegistryObject<Item>>(AirBombType.class);
+    // r27: hand grenades (RGD-5, F-1, flash-bang, four smoke colours, incendiary)
+    private static final Map<ru.aiforge.realwar.grenade.GrenadeKind, RegistryObject<Item>> GRENADES = new EnumMap<>(ru.aiforge.realwar.grenade.GrenadeKind.class);
+
+    static {
+        for (ru.aiforge.realwar.grenade.GrenadeKind k : ru.aiforge.realwar.grenade.GrenadeKind.values()) {
+            GRENADES.put(k, ITEMS.<Item>register(k.id, () -> new ru.aiforge.realwar.grenade.GrenadeItem(k, new Item.Properties())));
+        }
+    }
+
+    public static RegistryObject<Item> grenade(ru.aiforge.realwar.grenade.GrenadeKind k) {
+        return GRENADES.get(k);
+    }
 
     private ModItems() {
     }

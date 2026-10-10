@@ -1889,5 +1889,22 @@
   "subtitles.aiarsenal.smg_mp40": "MP 40 fires",
   "subtitles.aiarsenal.rifle_mosin": "Mosin rifle fires",
   "subtitles.aiarsenal.rifle_k98": "Kar98k fires",
-  "subtitles.aiarsenal.clip_in": "Clip loaded"
+  "subtitles.aiarsenal.clip_in": "Clip loaded",
+  "item.aiarsenal.grenade_rgd5": "RGD-5 grenade",
+  "item.aiarsenal.grenade_rgd5.desc": "Fragmentation-HE. Fuse 3 s, ~110 g TNT.",
+  "item.aiarsenal.grenade_f1": "F-1 grenade",
+  "item.aiarsenal.grenade_f1.desc": "Defensive fragmentation. Fuse 4 s, wide fragment spread.",
+  "item.aiarsenal.grenade_flashbang": "Flash-bang grenade",
+  "item.aiarsenal.grenade_flashbang.desc": "Blinds and deafens (tinnitus) within ~28 m after 2 s.",
+  "item.aiarsenal.grenade_smoke_white": "Smoke grenade (white)",
+  "item.aiarsenal.grenade_smoke_white.desc": "Releases a volumetric smoke cloud (~25 s) after 2 s.",
+  "item.aiarsenal.grenade_smoke_red": "Smoke grenade (red)",
+  "item.aiarsenal.grenade_smoke_red.desc": "Red volumetric smoke: signal / marking.",
+  "item.aiarsenal.grenade_smoke_green": "Smoke grenade (green)",
+  "item.aiarsenal.grenade_smoke_green.desc": "Green volumetric smoke: signal / marking.",
+  "item.aiarsenal.grenade_smoke_blue": "Smoke grenade (blue)",
+  "item.aiarsenal.grenade_smoke_blue.desc": "Blue volumetric smoke: signal / marking.",
+  "item.aiarsenal.grenade_incendiary": "Incendiary grenade",
+  "item.aiarsenal.grenade_incendiary.desc": "Sets the area within ~2 blocks on fire after 2 s.",
+  "entity.aiarsenal.rw_grenade": "Grenade"
 }

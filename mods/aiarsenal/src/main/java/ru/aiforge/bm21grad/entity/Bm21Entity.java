@@ -328,7 +328,7 @@ public class Bm21Entity extends Entity {
         if (isDestroyed()) {
             if (random.nextInt(2) == 0) {
                 Vec3 p = toWorld((random.nextDouble() - 0.5) * 2.2, 2.2, (random.nextDouble() - 0.5) * 6);
-                level().addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, p.x, p.y, p.z, 0, 0.07, 0);
+                level().addAlwaysVisibleParticle(new ru.aiforge.realwar.particle.VSmokeOptions(0.12f, 0.11f, 0.1f, 0.8f, 4.5f, 170, 0.8f, 0.5f, 0.0025f), true, p.x, p.y, p.z, 0, 0.07, 0);   // r27
             }
             if (random.nextInt(4) == 0) {
                 Vec3 p = toWorld((random.nextDouble() - 0.5) * 2, 1.6, (random.nextDouble() - 0.5) * 5);
@@ -767,8 +767,8 @@ public class Bm21Entity extends Entity {
         // launch FX: exhaust blast behind the tube, dust around the vehicle
         Vec3 breech = m[0].subtract(m[1].scale(3.1));
         sl.sendParticles(ParticleTypes.FLAME, breech.x, breech.y, breech.z, 12, 0.25, 0.25, 0.25, 0.05);
-        sl.sendParticles(ParticleTypes.LARGE_SMOKE, breech.x, breech.y, breech.z, 10, 0.4, 0.3, 0.4, 0.06);
-        sl.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, breech.x, breech.y - 1, breech.z, 6, 1.2, 0.3, 1.2, 0.02);
+        ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.7f, 0.68f, 0.64f, 0.8f, 3.2f, 90, 0.75f, 0.5f, 0.0008f), breech.x, breech.y, breech.z, 3, 0.4, 0.3, 0.4, 0.06);   // r27
+        ru.aiforge.realwar.particle.VSmokeOptions.send(sl, new ru.aiforge.realwar.particle.VSmokeOptions(0.6f, 0.55f, 0.47f, 1.4f, 2.6f, 160, 0.6f, 0.0f, 0.0004f), breech.x, breech.y - 1, breech.z, 3, 1.2, 0.3, 1.2, 0.03);
         sl.sendParticles(ParticleTypes.POOF, getX(), getY() + 0.3, getZ(), 14, 2.5, 0.1, 3.5, 0.08);
         sl.playSound(null, m[0].x, m[0].y, m[0].z, ModRegistry.SND_LAUNCH.get(), SoundSource.HOSTILE, 8f, 0.9f + random.nextFloat() * 0.2f);
         lastFiredTube = tube;

@@ -70,6 +70,8 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<SamMissileEntity>> SAM_MISSILE = ENTITIES.register("sam_missile", () -> EntityType.Builder.of(SamMissileEntity::new, (MobCategory)MobCategory.MISC).sized(0.5f, 0.5f).clientTrackingRange(64).updateInterval(1).fireImmune().noSummon().build("sam_missile"));
     public static final RegistryObject<EntityType<AircraftEntity>> TU95 = ENTITIES.register("tu95", () -> EntityType.Builder.of(AircraftEntity::new, (MobCategory)MobCategory.MISC).sized(10.0f, 5.5f).clientTrackingRange(32).updateInterval(1).fireImmune().build("tu95"));
     public static final RegistryObject<EntityType<ru.aiforge.realwar.strike.StrikePlaneEntity>> STRIKE_PLANE = ENTITIES.register("strike_plane", () -> EntityType.Builder.<ru.aiforge.realwar.strike.StrikePlaneEntity>of(ru.aiforge.realwar.strike.StrikePlaneEntity::new, MobCategory.MISC).sized(4.0f, 2.0f).clientTrackingRange(48).updateInterval(2).fireImmune().noSummon().build("strike_plane"));
+    // r27: hand grenades
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.grenade.GrenadeEntity>> GRENADE = ENTITIES.register("rw_grenade", () -> EntityType.Builder.<ru.aiforge.realwar.grenade.GrenadeEntity>of(ru.aiforge.realwar.grenade.GrenadeEntity::new, MobCategory.MISC).sized(0.25f, 0.25f).clientTrackingRange(64).updateInterval(1).noSummon().build("rw_grenade"));
     public static final RegistryObject<EntityType<AirBombEntity>> AIR_BOMB = ENTITIES.register("air_bomb", () -> EntityType.Builder.of(AirBombEntity::new, (MobCategory)MobCategory.MISC).sized(0.6f, 0.6f).clientTrackingRange(32).updateInterval(1).fireImmune().noSummon().build("air_bomb"));
 
     private ModEntities() {

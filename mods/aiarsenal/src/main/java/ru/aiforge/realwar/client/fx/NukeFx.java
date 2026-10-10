@@ -175,6 +175,15 @@ public final class NukeFx {
         FxSystem.add(p);
     }
 
+    /** r27: volumetric puffs are far more expensive per pixel but fill space: ~1/3 of the count, 1.5x the size */
+    private static float vk() {
+        return ru.aiforge.realwar.client.particle.VolumeFx.on() ? 0.32f : 1.0f;
+    }
+
+    private static float vs() {
+        return ru.aiforge.realwar.client.particle.VolumeFx.on() ? 1.45f : 1.0f;
+    }
+
     private static float fade(int age, int life, int fadeInTicks, float outFrac) {
         float in = Math.min(1.0f, (float)age / (float)Math.max(1, fadeInTicks));
         float start = (float)life * (1.0f - outFrac);
@@ -183,6 +192,12 @@ public final class NukeFx {
     }
 
     private void mix(FxParticle p, double heat, float shade, float sr, float sg, float sb) {
+        if (p.isVolume()) {
+            // r27: volumetric cloud - smoke albedo, the fire glow is emission computed inside the volume
+            p.heat = (float)CloudModel.clamp(heat * 1.1, 0.0, 1.0);
+            p.color(sr * shade, sg * shade, sb * shade);
+            return;
+        }
         CloudModel.hotColor(heat, this.col);
         double k = CloudModel.smooth(0.05, 0.5, 1.0 - heat);
         p.color((float)((double)this.col[0] * (1.0 - k) + (double)(sr * shade) * k), (float)((double)this.col[1] * (1.0 - k) + (double)(sg * shade) * k), (float)((double)this.col[2] * (1.0 - k) + (double)(sb * shade) * k));
@@ -235,7 +250,7 @@ public final class NukeFx {
             };
             this.add(p2);
         }
-        int nFireSmoke = (int)(120.0f * this.q);
+        int nFireSmoke = (int)(120.0f * this.q * NukeFx.vk());
         int i = 0;
         while (i < nFireSmoke) {
             double u = this.rnd.nextDouble() * 2.0 - 1.0;
@@ -245,7 +260,7 @@ public final class NukeFx {
             double dy = u;
             double dz = sn * Math.sin(a);
             double rho = 0.6 + 0.6 * this.rnd.nextDouble();
-            float base = (float)(this.cloud.fireballMax * (0.35 + 0.3 * this.rnd.nextDouble()));
+            float base = (float)(this.cloud.fireballMax * (0.35 + 0.3 * this.rnd.nextDouble())) * NukeFx.vs();
             int life = 20 * (16 + this.rnd.nextInt(8));
             int idx = i++;
             FxParticle p3 = new FxParticle(level, this.bx, this.by, this.bz, Sprites.smoke(idx), life, false, base);
@@ -262,19 +277,19 @@ public final class NukeFx {
             };
             this.add(p3);
         }
-        this.spawnCap(level, (int)(1100.0f * this.q), CapKind.BODY);
-        this.spawnCap(level, (int)(900.0f * this.q), CapKind.SKIN);
+        this.spawnCap(level, (int)(1100.0f * this.q * NukeFx.vk()), CapKind.BODY);
+        this.spawnCap(level, (int)(900.0f * this.q * NukeFx.vk()), CapKind.SKIN);
         this.spawnCap(level, (int)(240.0f * this.q), CapKind.GLOW);
-        this.spawnStem(level, (int)(620.0f * this.q), false);
+        this.spawnStem(level, (int)(620.0f * this.q * NukeFx.vk()), false);
         this.spawnStem(level, (int)(110.0f * this.q), true);
-        int nSkirt = (int)((float)(surface ? 600 : 200) * this.q);
+        int nSkirt = (int)((float)(surface ? 600 : 200) * this.q * NukeFx.vk());
         float hs = (float)(H / 118.0);
         int i2 = 0;
         while (i2 < nSkirt) {
             double theta = this.rnd.nextDouble() * Math.PI * 2.0;
             double frac = this.rnd.nextDouble();
             double h = this.rnd.nextDouble() * 3.0;
-            float base = (float)((2.5 + this.rnd.nextDouble() * 4.0) * Math.max(0.6, (double)hs));
+            float base = (float)((2.5 + this.rnd.nextDouble() * 4.0) * Math.max(0.6, (double)hs)) * NukeFx.vs();
             float shade = 0.8f + 0.4f * this.rnd.nextFloat();
             int life = 20 * (16 + this.rnd.nextInt(16));
             int idx = i2++;
@@ -308,7 +323,7 @@ public final class NukeFx {
                 case BODY -> 0.45 + 0.5 * this.rnd.nextDouble();
                 case SKIN -> 0.16 + 0.26 * this.rnd.nextDouble();
                 case GLOW -> 0.45 + 0.4 * this.rnd.nextDouble();
-            }));
+            })) * (glow ? 1.0f : NukeFx.vs());
             float shade = (kind == CapKind.SKIN ? 1.0f : 0.85f) + 0.3f * this.rnd.nextFloat();
             int life = glow ? 20 * (22 + this.rnd.nextInt(14)) : 20 * (100 + this.rnd.nextInt(50));
             int idx = i;
@@ -349,7 +364,7 @@ public final class NukeFx {
             double theta = this.rnd.nextDouble() * Math.PI * 2.0;
             double jit = this.rnd.nextDouble();
             double swirl = this.rnd.nextDouble() * Math.PI * 2.0;
-            float base = (float)(this.cloud.stemR1 * (0.8 + 0.7 * this.rnd.nextDouble()));
+            float base = (float)(this.cloud.stemR1 * (0.8 + 0.7 * this.rnd.nextDouble())) * (glow ? 1.0f : NukeFx.vs());
             int life = glow ? 20 * (14 + this.rnd.nextInt(8)) : 20 * (90 + this.rnd.nextInt(50));
             int idx = i;
             FxParticle p = new FxParticle(level, this.bx, this.m.groundY(), this.bz, glow ? Sprites.glow() : Sprites.smoke(idx), life, glow, base);
@@ -410,7 +425,7 @@ public final class NukeFx {
         if ((rh = Math.sqrt(Math.max(0.0, (double)front * (double)front - this.heightBlocks * this.heightBlocks))) < 2.0) {
             return;
         }
-        int n = Math.min(60, (int)(rh * 0.9 * (double)this.q) + 4);
+        int n = Math.min(60, (int)(rh * 0.9 * (double)this.q * NukeFx.vk() * 1.5) + 4);
         for (int i = 0; i < n; ++i) {
             int iz;
             a = this.rnd.nextDouble() * Math.PI * 2.0;
@@ -427,7 +442,7 @@ public final class NukeFx {
             float cb = (float)(rgb & 0xFF) / 255.0f * 0.7f + 0.11f;
             int life = 20 + this.rnd.nextInt(25);
             double vy = 0.1 + 0.25 * (double)strength * this.rnd.nextDouble();
-            float base = 1.6f + 2.4f * strength;
+            float base = (1.6f + 2.4f * strength) * NukeFx.vs();
             int idx = i;
             FxParticle p = new FxParticle(level, x, (double)gy + 0.4, z, Sprites.smoke(idx), life, false, base);
             p.motion = (pp, age) -> {

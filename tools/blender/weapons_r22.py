@@ -1943,7 +1943,10 @@ def ppsh_body(g):
     prism(g, [(0, -44), (6, -42), (6, -168), (0, -170)], -20.5, 20.5, "Blued", 1.0)                      # butt plate
     prism(g, [(6, -42), (100, -34), (200, -26), (290, -20), (330, -20), (352, -22), (352, -56), (330, -60), (290, -64),
               (250, -72), (200, -88), (140, -112), (70, -142), (6, -168)], -20, 20, "Birch", 3.0)          # butt + wrist (comb drops to the heel)
-    prism(g, [(345, -20), (560, -20), (568, -28), (565, -42), (552, -50), (352, -50), (345, -40)], -18, 18, "Birch", 2.5)
+    # r27: the forestock was one slab through the drum (u 436-520 hit the drum top at v -50); now two pieces with a gap
+    # for the drum / feed tower, so the wood no longer clips the magazine
+    prism(g, [(345, -20), (412, -20), (412, -50), (352, -50), (345, -40)], -18, 18, "Birch", 2.5)
+    prism(g, [(540, -20), (560, -20), (568, -28), (565, -42), (552, -50), (540, -50)], -18, 18, "Birch", 2.5)
     ring_rod_loop(g, P(120, -127, 0), 7, 1.6, "Steel")                                                    # sling swivel
     box(g, 112, 128, -122, -116, -5, 5, "Steel", 0.4)
     ring_rod_loop(g, P(548, -55, 0), 6, 1.5, "Steel")
@@ -1980,7 +1983,7 @@ def ppsh_body(g):
     box(g, 807, 810, 20, 30, -1.2, 1.2, "Blued", 0.2)
     ring(g, 800, 818, 8.5, 10, "Blued", 20, 0, 26)
     # trigger guard, selector, magazine well + catch
-    box(g, 385, 446, -77, -73, -5, 5, "Blued", 0.6)
+    box(g, 385, 438, -77, -73, -5, 5, "Blued", 0.6)     # r27: shortened so the bow stays clear of the drum
     box(g, 440, 446, -73, -50, -5, 5, "Blued", 0.6)
     box(g, 385, 391, -73, -52, -5, 5, "Blued", 0.6)
     box(g, 428, 434, -56, -50, -3, 3, "Steel", 0.3)
