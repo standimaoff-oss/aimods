@@ -128,7 +128,34 @@ public enum CraftKind {
             new Load(CraftWeapon.S8, 80, 0, new float[][]{{3.0f, 1.35f, 0.30f}, {-3.0f, 1.35f, 0.30f}, {4.3f, 1.30f, -1.0f}, {-4.3f, 1.30f, -1.0f}}, null, 0f, 0f, 0f),
             new Load(CraftWeapon.KH38, 6, 0, new float[][]{{4.3f, 1.42f, -2.4f}, {-4.3f, 1.42f, -2.4f}, {5.5f, 1.42f, -3.5f}, {-5.5f, 1.42f, -3.5f}, {3.0f, 1.47f, -1.3f}, {-3.0f, 1.47f, -1.3f}}, "kh38_", 0f, 0f, 0f),
             new Load(CraftWeapon.FAB500S, 6, 0, new float[][]{{0.33f, 2.05f, -0.4f}, {-0.33f, 2.05f, -0.4f}, {0.33f, 2.05f, -4.2f}, {-0.33f, 2.05f, -4.2f}, {3.0f, 1.83f, -1.5f}, {-3.0f, 1.83f, -1.5f}}, "fab_", 0f, 0f, 0f),
-            new Load(CraftWeapon.FLARES, 96, 0, new float[][]{{0.55f, 1.55f, -7.6f}, {-0.55f, 1.55f, -7.6f}}, null, 0f, 0f, 0f));
+            new Load(CraftWeapon.FLARES, 96, 0, new float[][]{{0.55f, 1.55f, -7.6f}, {-0.55f, 1.55f, -7.6f}}, null, 0f, 0f, 0f)),
+
+    // ------------------------------------------------------------------ futuristic (r30, message 2 of 3)
+    /**
+     * Plasma-lift helicopter "Plazmolet" (r30): no propellers. Two side ducts with plasma rings give the lift;
+     * the physics reuse the Heli model with coaxial = true (no tail rotor, no torque reaction), so rotorR is the
+     * duct lift disc radius, not a blade length. Turret: 30 mm 2A42 on gun_yaw / gun_pitch, S-8 pods on the sides.
+     */
+    PLASMA_HELI("plasmaheli", Cat.HELI, 4.4f, 3.4f, 320f, "models/glb/plasma_heli.glb",
+            new float[][]{{0.45f, 1.30f, 3.20f}, {-0.45f, 1.30f, 3.20f}},
+            new Heli(9800, 1.5f, 85f, 6.2f, 1.4f, 1.4f, 6.8f, 3.4f, 4.2f, 25f, 30f, 70f, true, 6f, 1200f, 600f, 0f, 0f),
+            null,
+            new Load(CraftWeapon.GUN_2A42, 460, -1, new float[][]{{0f, 0.9f, 3.6f}}, null, 90f, -40f, 15f),
+            new Load(CraftWeapon.S8, 40, -1, new float[][]{{1.7f, 1.12f, 1.3f}, {-1.7f, 1.12f, 1.3f}}, null, 0f, 0f, 0f)),
+
+    /**
+     * Space-ship "Zvezdolet" (r30): delta plasma-jet aircraft, 14 t, 18 m span, 22 m long, two aft plasma nozzles
+     * (propR 0 = jet, power = total dry thrust N). Not piloted by the mod's space logic; it flies as a jet here.
+     * Weapons are the existing guns and rockets as placeholders for the plasma battery.
+     */
+    STARSHIP("starship", Cat.PLANE, 18f, 2.8f, 800f, "models/glb/starship.glb",
+            new float[][]{{0f, 2.00f, 4.00f}},
+            null, null,
+            new Plane(14000, 6000, 9000, 60f, 18f, 22f, 1.3f, 20f, 3.0e5f, 2, 0f, 300f, 200f, 40f, 25f, 9.0f,
+                    6f, 0, false, 0.02f, null),
+            new Load(CraftWeapon.GSH301, 150, 0, new float[][]{{0f, 2.0f, 10.8f}}, null, 0f, 0f, 0f),
+            new Load(CraftWeapon.S8, 80, 0, new float[][]{{3.0f, 1.35f, 0.30f}, {-3.0f, 1.35f, 0.30f}}, null, 0f, 0f, 0f),
+            new Load(CraftWeapon.FLARES, 96, 0, new float[][]{{0f, 1.6f, -9.0f}}, null, 0f, 0f, 0f));
 
     public enum Cat { HELI, BOAT, SUB, PLANE }
 

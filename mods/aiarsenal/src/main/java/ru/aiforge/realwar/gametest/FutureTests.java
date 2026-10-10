@@ -35,4 +35,14 @@ public final class FutureTests {
                 "r28: плазменный сгусток - снаряд с энергетическим зарядом, не кинетический");
         h.succeed();
     }
+
+    @GameTest(template = "arena", batch = "rw_future", timeoutTicks = 20)
+    public static void futureAircraftContracts(GameTestHelper h) {
+        ru.aiforge.realwar.craft.CraftKind.Heli hp = ru.aiforge.realwar.craft.CraftKind.PLASMA_HELI.heli;
+        h.assertTrue(hp != null && hp.coaxial() && hp.tailR() == 0f, "r30: плазмолёт без хвостового винта (соосная схема)");
+        h.assertTrue(ru.aiforge.realwar.craft.CraftKind.PLASMA_HELI.isHeli(), "r30: плазмолёт - вертолётный класс");
+        ru.aiforge.realwar.craft.CraftKind.Plane sp = ru.aiforge.realwar.craft.CraftKind.STARSHIP.plane;
+        h.assertTrue(sp != null && sp.jet() && sp.span() == 18f && sp.vmax() == 300f, "r30: звездолёт - реактивный, размах 18 м");
+        h.succeed();
+    }
 }

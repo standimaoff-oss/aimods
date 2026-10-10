@@ -308,6 +308,126 @@ def tank():
     return sc
 
 
+def _extrude_yz(pts, width, x0):
+    """Side profile (z, y) extruded across x in [x0, x0 + width]."""
+    from trimesh.creation import extrude_polygon
+    from shapely.geometry import Polygon
+    m = extrude_polygon(Polygon(np.array(pts)), height=width)
+    v = m.vertices.copy()
+    nv = np.stack([v[:, 2] + x0, v[:, 1], v[:, 0]], axis=1)
+    return trimesh.Trimesh(nv, m.faces, process=True).fix_normals()
+
+
+def _extrude_xz(pts, thick, y0):
+    """Plan outline (x, z) extruded upward from y0 by thickness."""
+    from trimesh.creation import extrude_polygon
+    from shapely.geometry import Polygon
+    m = extrude_polygon(Polygon(np.array(pts)), height=thick)
+    v = m.vertices.copy()
+    nv = np.stack([v[:, 0], v[:, 2] + y0, v[:, 1]], axis=1)
+    return trimesh.Trimesh(nv, m.faces, process=True).fix_normals()
+
+
+def plasma_heli():
+    """r30 'Plazmolet': plasma-lift helicopter, no propellers. Ducts with glowing plasma rings replace rotors;
+    the coaxial model in HeliEntity keeps the torque balance. Photo style: pale armour, yellow glow, blue lamps."""
+    sc = trimesh.Scene()
+    P = "plasma_heli"
+    sc.graph.update(frame_to="root", frame_from="world", matrix=np.eye(4))
+    W = mat((0.66, 0.68, 0.66), 0.5, 0.32)
+    D = mat((0.12, 0.13, 0.14), 0.5, 0.45)
+    Y = mat((1.0, 0.82, 0.10), 0.1, 0.25, (1.0, 0.80, 0.10), 2.6)
+    B = mat((0.20, 0.45, 1.0), 0.1, 0.2, (0.20, 0.55, 1.0), 2.2)
+    G = mat((0.10, 0.22, 0.30), 0.2, 0.05, (0.2, 0.7, 1.0), 0.6)
+    # fuselage: side profile (z, y) extruded across the width (+-1.05)
+    body = _extrude_yz([(4.6, 1.2), (4.1, 1.9), (2.4, 2.4), (-2.3, 2.5), (-4.3, 2.0), (-4.6, 1.5), (-2.2, 0.9),
+                        (2.0, 0.8), (3.6, 0.8)], 2.1, -1.05)
+    body.visual.material = W
+    sc.add_geometry(body, node_name=P + "_body", geom_name=P + "_body", parent_node_name="root")
+    # glass canopy and blue lamps
+    sc.add_geometry(sphere(1.0, (0.0, 1.75, 3.1), B, scale=(0.95, 0.62, 1.3)), node_name=P + "_canopy",
+                    geom_name=P + "_canopy", parent_node_name="root")
+    for sx in (1, -1):
+        sc.add_geometry(box((0.35, 0.12, 0.06), (sx * 0.7, 1.12, 4.55), B), node_name="%s_lamp%d" % (P, sx),
+                        geom_name="%s_lamp%d" % (P, sx), parent_node_name="root")
+    # plasma-lift ducts: two side pods, each ring glowing cyan (replaces the rotor discs)
+    for sx in (1, -1):
+        sc.add_geometry(cyl(0.95, 3.2, (sx * 2.2, 1.9, 0.2), "z", D, sections=28), node_name="%s_duct%d" % (P, sx),
+                        geom_name="%s_duct%d" % (P, sx), parent_node_name="root")
+        sc.add_geometry(cyl(0.80, 0.08, (sx * 2.2, 1.9, 1.80), "z", G, sections=28), node_name="%s_ring%d_f" % (P, sx),
+                        geom_name="%s_ring%d_f" % (P, sx), parent_node_name="root")
+        sc.add_geometry(cyl(0.80, 0.08, (sx * 2.2, 1.9, -1.40), "z", G, sections=28), node_name="%s_ring%d_r" % (P, sx),
+                        geom_name="%s_ring%d_r" % (P, sx), parent_node_name="root")
+        sc.add_geometry(box((0.6, 0.12, 2.6), (sx * 1.25, 1.55, 0.2), W), node_name="%s_pylon%d" % (P, sx),
+                        geom_name="%s_pylon%d" % (P, sx), parent_node_name="root")
+    # yellow underglow and cable looms
+    sc.add_geometry(box((1.8, 0.02, 4.2), (0.0, 0.05, 0.3), Y), node_name=P + "_underglow",
+                    geom_name=P + "_underglow", parent_node_name="root")
+    # tail boom with a vertical plasma fin
+    sc.add_geometry(cyl(0.45, 2.8, (0.0, 1.9, -6.4), "z", W, sections=20), node_name=P + "_boom",
+                    geom_name=P + "_boom", parent_node_name="root")
+    sc.add_geometry(box((0.10, 1.45, 1.0), (0.0, 2.9, -7.5), W), node_name=P + "_fin",
+                    geom_name=P + "_fin", parent_node_name="root")
+    sc.add_geometry(box((0.12, 0.45, 0.6), (0.0, 3.1, -7.9), Y), node_name=P + "_fin_glow",
+                    geom_name=P + "_fin_glow", parent_node_name="root")
+    # gun turret: pivots gun_yaw / gun_pitch (renderer rotates them), barrel forward along +Z
+    sc.graph.update(frame_to="gun_yaw", frame_from="root", matrix=translation_matrix([0.0, 0.8, 2.3]))
+    sc.add_geometry(sphere(0.45, (0, 0, 0), D, scale=(1.0, 0.7, 1.0)), node_name="gun_yaw_ball",
+                    geom_name="gun_yaw_ball", parent_node_name="gun_yaw")
+    sc.graph.update(frame_to="gun_pitch", frame_from="gun_yaw", matrix=np.eye(4))
+    sc.add_geometry(box((0.36, 0.30, 0.8), (0, 0, 0.2), D), node_name="gun_pitch_body",
+                    geom_name="gun_pitch_body", parent_node_name="gun_pitch")
+    for i, (xx, yy) in enumerate(((-0.08, 0.06), (0.08, 0.06), (-0.08, -0.06), (0.08, -0.06))):
+        sc.add_geometry(cyl(0.03, 1.6, (xx, yy, 1.2), "z", GR_STEEL(), sections=10), node_name="gun_barrel%d" % i,
+                        geom_name="gun_barrel%d" % i, parent_node_name="gun_pitch")
+        sc.add_geometry(cyl(0.04, 0.08, (xx, yy, 2.0), "z", Y, sections=10), node_name="gun_cap%d" % i,
+                        geom_name="gun_cap%d" % i, parent_node_name="gun_pitch")
+    return sc
+
+
+def GR_STEEL():
+    return mat((0.22, 0.25, 0.28), 0.8, 0.4)
+
+
+def starship():
+    """r30 'Zvezdolet': plasma-jet delta starship, 18 m span, 22 m long, two aft plasma nozzles, no propellers.
+    Origin at the ground under the centre of mass; the flat belly sits 0.6 m up on the skids."""
+    sc = trimesh.Scene()
+    P = "starship"
+    sc.graph.update(frame_to="root", frame_from="world", matrix=np.eye(4))
+    W = mat((0.66, 0.68, 0.66), 0.5, 0.32)
+    D = mat((0.12, 0.13, 0.14), 0.5, 0.45)
+    Y = mat((1.0, 0.82, 0.10), 0.1, 0.25, (1.0, 0.80, 0.10), 2.6)
+    B = mat((0.20, 0.45, 1.0), 0.1, 0.2, (0.20, 0.55, 1.0), 2.2)
+    # delta wing (plan outline x, z) and a lenticular body on top of it
+    wing = _extrude_xz([(0, 11.0), (9.0, -7.0), (4.2, -9.4), (0, -7.6), (-4.2, -9.4), (-9.0, -7.0)], 0.7, 0.6)
+    wing.visual.material = W
+    sc.add_geometry(wing, node_name=P + "_wing", geom_name=P + "_wing", parent_node_name="root")
+    body = _extrude_yz([(10.8, 1.25), (8.0, 1.85), (2.0, 2.25), (-6.0, 2.30), (-9.4, 2.0), (-10.8, 1.25),
+                        (-9.4, 0.95), (2.0, 0.95), (8.0, 0.95)], 2.4, -1.2)
+    body.visual.material = W
+    sc.add_geometry(body, node_name=P + "_body", geom_name=P + "_body", parent_node_name="root")
+    # canopy, plasma edge lights on the wing tips and along the leading edges
+    sc.add_geometry(sphere(1.0, (0.0, 2.25, 5.0), B, scale=(0.9, 0.55, 2.0)), node_name=P + "_canopy",
+                    geom_name=P + "_canopy", parent_node_name="root")
+    for sx in (1, -1):
+        sc.add_geometry(box((0.5, 0.18, 1.6), (sx * 8.6, 1.00, -7.0), B), node_name="%s_tip%d" % (P, sx),
+                        geom_name="%s_tip%d" % (P, sx), parent_node_name="root")
+    # two aft plasma nozzles: dark housings with yellow cores
+    for sx in (1, -1):
+        sc.add_geometry(cyl(1.05, 2.0, (sx * 2.8, 1.25, -9.6), "z", D, sections=24), node_name="%s_nozzle%d" % (P, sx),
+                        geom_name="%s_nozzle%d" % (P, sx), parent_node_name="root")
+        sc.add_geometry(cyl(0.80, 0.12, (sx * 2.8, 1.25, -10.7), "z", Y, sections=24), node_name="%s_core%d" % (P, sx),
+                        geom_name="%s_core%d" % (P, sx), parent_node_name="root")
+    # belly glow and three skids (origin on the ground)
+    sc.add_geometry(box((9.0, 0.05, 6.0), (0.0, 0.62, -1.5), Y), node_name=P + "_underglow",
+                    geom_name=P + "_underglow", parent_node_name="root")
+    for k, (xx, zz) in enumerate(((0.0, 6.5), (-2.8, -6.0), (2.8, -6.0))):
+        sc.add_geometry(box((0.22, 0.62, 0.22), (xx, 0.31, zz), D), node_name="%s_skid%d" % (P, k),
+                        geom_name="%s_skid%d" % (P, k), parent_node_name="root")
+    return sc
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     export_rifle("laser", "cyan", "laser.glb")
@@ -316,6 +436,8 @@ def main():
     cell_s.export(os.path.join(OUT, "mag_laser.glb"))
     plasma_cell("mag_plasma").export(os.path.join(OUT, "mag_plasma.glb"))
     tank().export(os.path.join(OUT, "plasma_tank.glb"))
+    plasma_heli().export(os.path.join(OUT, "plasma_heli.glb"))
+    starship().export(os.path.join(OUT, "starship.glb"))
     print("written to", OUT)
 
 

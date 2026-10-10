@@ -45,6 +45,7 @@ public final class CraftDamage {
             case HE111 -> new PlaneGeo(5.6f, 8.14f, 2.60f, -1.11f, 1.0f, new float[]{3.15f}, 3.0f);
             case PE8 -> new PlaneGeo(10.5f, 14.73f, 3.16f, -1.08f, 1.4f, new float[]{4.75f, 10.1f}, 3.6f);
             case SU57 -> new PlaneGeo(2.1f, 5.72f, 1.83f, -5.25f, 1.3f, new float[0], 5.0f);
+            case STARSHIP -> new PlaneGeo(3.0f, 7.8f, 1.0f, -7.0f, 1.2f, new float[0], 6.0f);
             default -> new PlaneGeo(2.0f, 3.5f, 1.5f, -0.6f, 0.6f, new float[0], 1.5f);
         };
     }

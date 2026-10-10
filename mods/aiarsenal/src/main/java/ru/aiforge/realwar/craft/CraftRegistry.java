@@ -31,6 +31,8 @@ public final class CraftRegistry {
     public static final RegistryObject<EntityType<PlaneEntity>> HE111 = plane(CraftKind.HE111);
     public static final RegistryObject<EntityType<PlaneEntity>> PE8 = plane(CraftKind.PE8);
     public static final RegistryObject<EntityType<PlaneEntity>> SU57 = plane(CraftKind.SU57);
+    public static final RegistryObject<EntityType<HeliEntity>> PLASMA_HELI = heli(CraftKind.PLASMA_HELI);
+    public static final RegistryObject<EntityType<PlaneEntity>> STARSHIP = plane(CraftKind.STARSHIP);
     public static final RegistryObject<EntityType<CraftOrdnance>> ORDNANCE = ENTITIES.register("craft_ordnance",
             () -> EntityType.Builder.<CraftOrdnance>of(CraftOrdnance::new, MobCategory.MISC).sized(0.3f, 0.3f)
                     .clientTrackingRange(16).updateInterval(1).fireImmune().build("craft_ordnance"));
@@ -47,6 +49,8 @@ public final class CraftRegistry {
     public static final RegistryObject<Item> HE111_ITEM = item(CraftKind.HE111, "he111_plane");
     public static final RegistryObject<Item> PE8_ITEM = item(CraftKind.PE8, "pe8_plane");
     public static final RegistryObject<Item> SU57_ITEM = item(CraftKind.SU57, "su57_plane");
+    public static final RegistryObject<Item> PLASMA_HELI_ITEM = item(CraftKind.PLASMA_HELI, "plasmaheli_vehicle");
+    public static final RegistryObject<Item> STARSHIP_ITEM = item(CraftKind.STARSHIP, "starship_plane");
     public static final RegistryObject<Item> SERVICE_KIT = ITEMS.register("craft_service_kit",
             () -> new CraftServiceKitItem(new Item.Properties().stacksTo(16)));
 
@@ -90,6 +94,8 @@ public final class CraftRegistry {
             case HE111 -> HE111.get();
             case PE8 -> PE8.get();
             case SU57 -> SU57.get();
+            case PLASMA_HELI -> PLASMA_HELI.get();
+            case STARSHIP -> STARSHIP.get();
         };
     }
 

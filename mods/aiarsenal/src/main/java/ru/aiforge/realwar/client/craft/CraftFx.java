@@ -152,6 +152,7 @@ public final class CraftFx {
             case PE8 -> new float[]{(i < 2 ? 1 : -1) * (i % 2 == 0 ? 4.75f : 10.1f), i % 2 == 0 ? 2.62f : 2.92f, i % 2 == 0 ? 6.0f : 5.4f};
             case YAK3 -> new float[]{0f, 1.62f, 2.05f};
             case SU57 -> new float[]{i == 0 ? 1.22f : -1.22f, 1.55f, -9.9f};
+            case STARSHIP -> new float[]{i == 0 ? 2.8f : -2.8f, 1.25f, -10.7f};
             default -> new float[]{0f, 1.70f, 2.25f};
         };
     }
