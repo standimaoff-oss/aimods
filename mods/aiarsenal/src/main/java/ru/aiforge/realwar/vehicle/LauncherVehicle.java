@@ -494,6 +494,78 @@ extends VehicleEntity {
 
     protected abstract void serverLaunch();
 
+    // ------------------------------------------------------------------ r28: artillery fire control (no operator)
+    /** Readiness of a battery for a remote fire mission (fire-control point). */
+    public enum MissionState { READY, FIRED, AIMING, RELOADING, NO_AMMO, NOT_DEPLOYED, OUT_OF_SECTOR, NO_CREW, NO_TARGET, DAMAGED, DEAD, UNSUPPORTED }
+
+    /** True for batteries a fire-control point may command (field guns and MLRS; direct-fire tanks are not). */
+    public boolean missionCapable() {
+        return false;
+    }
+
+    /** Ground reach in world blocks at the highest elevation. */
+    public double missionReachM() {
+        return 0.0;
+    }
+
+    /** True while a fire-control point drives this battery (the aim point then works without an operator). */
+    protected boolean missionDriven;
+
+    /** Subclass check of the mission-specific gates (ammo, deployment, sector, aim). */
+    protected MissionState missionCheck() {
+        return MissionState.UNSUPPORTED;
+    }
+
+    /** Subclass hook: fire one round / salvo with the same code path as the crew does. */
+    protected void missionShot(ServerLevel sl) {
+    }
+
+    protected void onMissionAim() {
+    }
+
+    /** Points the battery at a ground point without an operator (the gun / launcher then slews and fires itself). */
+    public void missionAim(Vec3 p) {
+        this.missionDriven = true;
+        int bx = (int)Math.floor(p.x);
+        int bz = (int)Math.floor(p.z);
+        int y = this.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, bx, bz);
+        this.entityData.set(TARGET, Optional.of(new BlockPos(bx, y, bz)));
+        this.entityData.set(AUTO, true);
+        this.onMissionAim();
+    }
+
+    public void missionRelease() {
+        this.missionDriven = false;
+        this.entityData.set(TARGET, Optional.empty());
+        this.entityData.set(AUTO, false);
+    }
+
+    /** The fire-control operator carries the shells: his inventory feeds the reloads while he stands by the point. */
+    public void missionSupply(ServerPlayer p) {
+        this.extReloader = p.getUUID();
+        this.extUntil = this.tickCount + 40;
+    }
+
+    public MissionState missionReady() {
+        if (this.dmg.dead()) {
+            return MissionState.DEAD;
+        }
+        if (!ru.aiforge.realwar.damage.Crew.ok(this, ru.aiforge.realwar.damage.Crew.GUNNER)) {
+            return MissionState.NO_CREW;
+        }
+        return this.missionCheck();
+    }
+
+    /** Fires one round if the battery is ready; returns READY-state failure otherwise. */
+    public MissionState missionFire(ServerLevel sl) {
+        MissionState s = this.missionReady();
+        if (s != MissionState.READY) {
+            return s;
+        }
+        this.missionShot(sl);
+        return MissionState.FIRED;
+    }
+
     protected void markFired(int k) {
         this.entityData.set(FIRED_TUBE, k);
         this.entityData.set(FIRED_SEQ, (this.firedSeq() + 1));

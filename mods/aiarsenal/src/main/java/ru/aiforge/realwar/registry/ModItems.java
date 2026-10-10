@@ -154,6 +154,7 @@ public final class ModItems {
     public static final RegistryObject<Item> LAMP_STREET = ModItems.blockItem("lamp_street", ModBlocks.LAMP_STREET);
     public static final RegistryObject<Item> LAMP_FLOOD = ModItems.blockItem("lamp_flood", ModBlocks.LAMP_FLOOD);
     public static final RegistryObject<Item> BEACON_RED = ModItems.blockItem("beacon_red", ModBlocks.BEACON_RED);
+    public static final RegistryObject<Item> FIRE_CONTROL = ModItems.blockItem("fire_control", ModBlocks.FIRE_CONTROL);
     public static final RegistryObject<Item> BEACON_ROTATING = ModItems.blockItem("beacon_rotating", ModBlocks.BEACON_ROTATING);
     public static final RegistryObject<Item> SEARCHLIGHT = ModItems.blockItem("searchlight", ModBlocks.SEARCHLIGHT);
     public static final RegistryObject<Item> ARMOR_PLATE = ModItems.blockItem("armor_plate", ModBlocks.ARMOR_PLATE);

@@ -79,7 +79,7 @@ extends LauncherVehicle {
     protected float[] aimTarget() {
         float[] t;
         ServerPlayer op = this.operator();
-        if (op == null) {
+        if (op == null && !(this.missionDriven && this.autoAim() && this.mapTarget() != null)) {
             return null;
         }
         if (this.autoAim()) {
@@ -131,6 +131,39 @@ extends LauncherVehicle {
         return this.outOfRange;
     }
 
+    // r28: remote MLRS missions (fire-control point)
+    @Override
+    public boolean missionCapable() {
+        return this.kind == VehicleKind.SMERCH || this.kind == VehicleKind.GRAD;
+    }
+
+    @Override
+    public double missionReachM() {
+        double k = Ballistics.scaleK();
+        double max = 0.0;
+        for (double e = Math.max(this.kind.elMin, 0.5); e <= this.kind.elMax + 1.0E-6; e += 2.5) {
+            max = Math.max(max, Ballistics.range(this.profile(), e, 0.0));
+        }
+        return max / k;
+    }
+
+    @Override
+    protected MissionState missionCheck() {
+        if (this.fireCd > 0 || this.reloadTube() >= 0) return MissionState.RELOADING;
+        if (this.loadedCount() == 0) return MissionState.NO_AMMO;
+        if (this.jack() < 0.97f || Math.abs(this.speedMs) > 0.4) return MissionState.NOT_DEPLOYED;
+        float[] t = this.aimTarget();
+        if (t == null) return MissionState.NO_TARGET;
+        if (this.outOfSector) return MissionState.OUT_OF_SECTOR;
+        if (!this.aimSettled(t)) return MissionState.AIMING;
+        return MissionState.READY;
+    }
+
+    @Override
+    protected void missionShot(ServerLevel sl) {
+        this.fireSalvo(sl);
+    }
+
     @Override
     protected void serverLaunch() {
         Level level;
@@ -139,6 +172,11 @@ extends LauncherVehicle {
             return;
         }
         ServerLevel sl = (ServerLevel)level;
+        this.fireSalvo(sl);
+    }
+
+    /** r28: one rocket of the pack (crew or fire-control driven). */
+    protected void fireSalvo(ServerLevel sl) {
         if (this.fireCd > 0) {
             return;
         }

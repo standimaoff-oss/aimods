@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "aiarsenal:block/deco_black",
+    "side": "aiarsenal:block/fort_steel",
+    "bottom": "aiarsenal:block/fort_steel",
+    "particle": "aiarsenal:block/fort_steel"
+  }
+}

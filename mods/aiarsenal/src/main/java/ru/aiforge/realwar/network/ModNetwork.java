@@ -58,6 +58,7 @@ public final class ModNetwork {
         CHANNEL.registerMessage(id++, RadarQueryPacket.class, RadarQueryPacket::encode, RadarQueryPacket::decode, RadarQueryPacket::handle);
         CHANNEL.registerMessage(id++, RadarReplyPacket.class, RadarReplyPacket::encode, RadarReplyPacket::decode, RadarReplyPacket::handle);
         CHANNEL.registerMessage(id++, RadarFirePacket.class, RadarFirePacket::encode, RadarFirePacket::decode, RadarFirePacket::handle);
+        CHANNEL.registerMessage(id++, ru.aiforge.realwar.artillery.FireControlPacket.class, ru.aiforge.realwar.artillery.FireControlPacket::encode, ru.aiforge.realwar.artillery.FireControlPacket::decode, ru.aiforge.realwar.artillery.FireControlPacket::handle);
         CHANNEL.registerMessage(id++, ru.aiforge.realwar.craft.CraftStatePacket.class, ru.aiforge.realwar.craft.CraftStatePacket::encode, ru.aiforge.realwar.craft.CraftStatePacket::decode, ru.aiforge.realwar.craft.CraftStatePacket::handle);
         CHANNEL.registerMessage(id++, ru.aiforge.realwar.craft.CraftControlPacket.class, ru.aiforge.realwar.craft.CraftControlPacket::encode, ru.aiforge.realwar.craft.CraftControlPacket::decode, ru.aiforge.realwar.craft.CraftControlPacket::handle);
         CHANNEL.registerMessage(id++, ru.aiforge.realwar.craft.CraftSnapPacket.class, ru.aiforge.realwar.craft.CraftSnapPacket::encode, ru.aiforge.realwar.craft.CraftSnapPacket::decode, ru.aiforge.realwar.craft.CraftSnapPacket::handle);

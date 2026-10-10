@@ -364,6 +364,39 @@ public class GunVehicle extends LauncherVehicle {
         super.setMapTarget(p, pos);
     }
 
+    // r28: remote artillery missions (fire-control point) - field guns only
+    @Override
+    public boolean missionCapable() {
+        return this.kind == VehicleKind.D30 || this.kind == VehicleKind.M777 || this.kind == VehicleKind.MSTA;
+    }
+
+    @Override
+    public double missionReachM() {
+        return this.rangesBlocks()[1];
+    }
+
+    @Override
+    protected void onMissionAim() {
+        this.solveTick = -100;
+    }
+
+    @Override
+    protected MissionState missionCheck() {
+        if (this.fireCd > 0 || this.reloadTube() >= 0) return MissionState.RELOADING;
+        if (!ru.aiforge.realwar.damage.VehicleDamage.canFireMain(this)) return MissionState.DAMAGED;
+        if (this.loadedCount() == 0) return MissionState.NO_AMMO;
+        float[] t = this.aimTarget();
+        if (t == null) return MissionState.NO_TARGET;
+        if (this.outOfSector) return MissionState.OUT_OF_SECTOR;
+        if (this.autoAim() && !this.aimSettled(t)) return MissionState.AIMING;
+        return MissionState.READY;
+    }
+
+    @Override
+    protected void missionShot(ServerLevel sl) {
+        this.fireMainGun(sl);
+    }
+
     @Override
     protected void onTargetAssigned(ServerPlayer p) {
         this.solveTick = -100;
@@ -475,7 +508,7 @@ public class GunVehicle extends LauncherVehicle {
     @Override
     protected float[] aimTarget() {
         ServerPlayer op = this.operator();
-        if (op == null) {
+        if (op == null && !(this.missionDriven && this.autoAim() && this.mapTarget() != null)) {
             return null;
         }
         float[] t;
@@ -783,6 +816,11 @@ public class GunVehicle extends LauncherVehicle {
             this.fireThird(sl);
             return;
         }
+        this.fireMainGun(sl);
+    }
+
+    /** r28: main-gun round with all the crew-side gates; shared by the gunner and by the fire-control point. */
+    protected void fireMainGun(ServerLevel sl) {
         if (this.fireCd > 0) {
             return;
         }
