@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -34,3 +34,11 @@ jobs:
           name: aiarsenal-jar
           path: mods/aiarsenal/build/libs/*.jar
           if-no-files-found: error
+
+      - name: Publish jar as prerelease asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="aiarsenal-arena-latest"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --prerelease --title "AI Arsenal jar (latest CI build from arena branch)" --notes "Built by .github/workflows/build-mod.yml from ${GITHUB_SHA} on ${GITHUB_REF_NAME}."
+          gh release upload "$TAG" mods/aiarsenal/build/libs/*.jar --clobber
