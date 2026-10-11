@@ -38,6 +38,7 @@ import ru.aiforge.realwar.blast.ModDamage;
 import ru.aiforge.realwar.blast.NuclearProfile;
 import ru.aiforge.realwar.blast.RadiationManager;
 import ru.aiforge.realwar.network.ModNetwork;
+import ru.aiforge.realwar.fx.VolpyroFx;
 import ru.aiforge.realwar.network.NukeEffectPacket;
 import ru.aiforge.realwar.registry.ModBlocks;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -144,6 +145,10 @@ implements BlastTask {
     }
 
     private void announce() {
+        if (VolpyroFx.available()) {
+            VolpyroFx.nuke(this.level, this.burst, this.yieldKt, (float)this.prof.maxR, (double)this.groundY);
+            return;
+        }
         ModNetwork.sendToDimension(this.level, new NukeEffectPacket(this.burst.x, this.burst.y, this.burst.z, (float)this.yieldKt, this.surface, this.seed, (float)this.prof.metersPerBlock, this.prof.maxR, this.groundY, this.craterR));
     }
 

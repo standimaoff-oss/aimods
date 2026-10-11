@@ -30,6 +30,7 @@ import ru.aiforge.realwar.blast.BlastUtil;
 import ru.aiforge.realwar.blast.ModDamage;
 import ru.aiforge.realwar.network.ConventionalEffectPacket;
 import ru.aiforge.realwar.network.ModNetwork;
+import ru.aiforge.realwar.fx.VolpyroFx;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import java.util.Arrays;
 import java.util.List;
@@ -94,7 +95,11 @@ implements BlastTask {
     public static void explode(ServerLevel level, Vec3 pos, double massKg, double frag) {
         ConventionalBlast b = new ConventionalBlast(level, pos, massKg, frag);
         double radius = 160.0 + 40.0 * Math.cbrt(massKg);
-        ModNetwork.sendNear(level, pos.x, pos.y, pos.z, radius, new ConventionalEffectPacket(pos.x, pos.y, pos.z, (float)massKg, b.surface, level.random.nextLong()));
+        if (VolpyroFx.available()) {
+            VolpyroFx.conventional(level, pos, massKg);
+        } else {
+            ModNetwork.sendNear(level, pos.x, pos.y, pos.z, radius, new ConventionalEffectPacket(pos.x, pos.y, pos.z, (float)massKg, b.surface, level.random.nextLong()));
+        }
         BlastManager.add(level, b);
     }
 
