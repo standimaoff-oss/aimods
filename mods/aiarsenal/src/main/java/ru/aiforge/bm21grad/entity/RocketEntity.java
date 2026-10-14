@@ -158,6 +158,10 @@ public class RocketEntity extends Projectile {
     }
 
     private void trail(Vec3 from, Vec3 to, int a) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(getId(), to, a < Ballistics.BURN_TICKS + 2 ? to.subtract(from) : Vec3.ZERO);
+            return;
+        }
         Vec3 d = to.subtract(from);
         Vec3 back = getDeltaMovement().normalize().scale(-1.6);
         boolean burning = a < Ballistics.BURN_TICKS + 2;

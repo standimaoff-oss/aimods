@@ -250,16 +250,16 @@ public final class CraftFx {
         if (o.tickCount < 2) return;
         switch (o.type()) {
             case VIKHR, HELLFIRE -> {
-                if (o.tickCount < 70) TrailFx.trail(level, a, b, 0.42, 0.9, true, false);
+                if (o.tickCount < 70) TrailFx.trail(level, o.getId(), a, b, 0.42, 0.9, true, false);
             }
             case S8, HYDRA -> {
-                if (o.tickCount < o.type().burn + 4) TrailFx.trail(level, a, b, 0.38, 0.7, true, false);
+                if (o.tickCount < o.type().burn + 4) TrailFx.trail(level, o.getId(), a, b, 0.38, 0.7, true, false);
             }
             case KALIBR -> {
                 if (level.getFluidState(o.blockPosition()).is(FluidTags.WATER)) {
                     if (R.nextInt(2) == 0) level.addParticle(ParticleTypes.BUBBLE_COLUMN_UP, b.x, b.y, b.z, 0, 0.3, 0);
                 } else {
-                    TrailFx.trail(level, a, b, 0.5, 1.1, true, false);
+                    TrailFx.trail(level, o.getId(), a, b, 0.5, 1.1, true, false);
                 }
             }
             case TORPEDO -> {

@@ -263,9 +263,17 @@ def volumetric(player, client_log):
     time.sleep(10)
     screenshot('14-volumetric-arsenal-nuke')
     local('clear')
+    local('budget')
+    disabled = local('off')
+    assert 'active=false' in disabled, disabled
+    command('particle aiarsenal:volume_smoke 0 -59 12 1 1 1 0.01 12 force TestPlayer')
+    time.sleep(2)
+    screenshot('15-fallback-smoke')
+    local('on')
     status = local('status')
     assert 'active=true' in status and 'volumes=0 plumes=0' in status, status
     text = client_log.read_text(errors='replace')
+    assert 'FX BUDGET PASS' in text
     assert 'VolPyro shader ready: volumetric_raymarch.fsh' in text
     assert 'VolPyro shader ready: volumetric_composite.fsh' in text
     assert 'GL renderer disabled' not in text and 'GLSL compile failed' not in text

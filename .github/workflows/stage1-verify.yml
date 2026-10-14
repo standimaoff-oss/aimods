@@ -3,6 +3,9 @@ on:
   push:
     branches: [arena/10158ad9-aimods]
   workflow_dispatch:
+defaults:
+  run:
+    shell: bash
 permissions:
   contents: read
 concurrency:

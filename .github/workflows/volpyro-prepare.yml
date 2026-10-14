@@ -2,6 +2,9 @@ name: Inspect supplied VolPyro renderer
 on:
   push:
     branches: [arena/10158ad9-aimods]
+defaults:
+  run:
+    shell: bash
 permissions:
   contents: write
 jobs:

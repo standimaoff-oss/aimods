@@ -71,11 +71,28 @@ public final class VolumetricEffects {
      * Does not spawn a bomb or modify terrain; real explosion packets are tested separately. */
     @SubscribeEvent public static void commands(RegisterClientCommandsEvent event) {
         var root = Commands.literal("arsenal_fx");
-        for (String effect : new String[]{"smoke", "blast", "nuke", "trail", "clear", "status"}) {
+        for (String effect : new String[]{"smoke", "blast", "nuke", "trail", "clear", "status", "budget", "off", "on"}) {
             root.then(Commands.literal(effect).executes(context -> {
                 Minecraft mc = Minecraft.getInstance();
                 if (mc.player == null) return 0;
                 Vec3 p = mc.player.position().add(mc.player.getLookAngle().scale(effect.equals("nuke") ? 100 : 18));
+                if (effect.equals("off") || effect.equals("on")) {
+                    ru.aiforge.arsenal.volumetric.config.VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.set(effect.equals("on"));
+                    VolumetricFxManager.clear();
+                }
+                if (effect.equals("budget")) {
+                    for (int i = 0; i < 200; i++) {
+                        VolumetricFxManager.smokePuff(p.add(i, 0, 0), 1, 5, 290);
+                        VolumetricFxManager.recordRocket(i, p, new Vec3(0.5, 1, 0));
+                        VolumetricFxManager.recordRocket(i, p.add(1, 1, 0), new Vec3(0.5, 1, 0));
+                    }
+                    int volumes = VolumetricFxManager.volumeCount(), plumes = VolumetricFxManager.plumeCount();
+                    if (volumes > ru.aiforge.arsenal.volumetric.config.VolPyroClientConfig.MAX_ACTIVE_VOLUMES.get() + 8
+                            || plumes > ru.aiforge.arsenal.volumetric.config.VolPyroClientConfig.MAX_PLUME_SEGMENTS.get())
+                        throw new IllegalStateException("Volumetric budget exceeded");
+                    AiArsenal.LOGGER.info("FX BUDGET PASS volumes={} plumes={}", volumes, plumes);
+                    VolumetricFxManager.clear();
+                }
                 if (effect.equals("clear")) VolumetricFxManager.clear();
                 else if (effect.equals("smoke")) smoke(p.x, p.y + 1, p.z, 4, 15);
                 else if (effect.equals("blast")) blast(p.x, p.y, p.z, 6, 27);
@@ -90,7 +107,7 @@ public final class VolumetricEffects {
                     VolumeGlRenderer.frameCounter(), VolumeGlRenderer.lastDrawNanos() / 1e6,
                     VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName());
                 AiArsenal.LOGGER.info("FX QA {}: {}", effect, status);
-                context.getSource().sendSuccess(Component.literal(status));
+                context.getSource().sendSuccess(() -> Component.literal(status), false);
                 return Command.SINGLE_SUCCESS;
             }));
         }
