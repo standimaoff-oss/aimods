@@ -1,0 +1,36 @@
+name: Inspect supplied VolPyro renderer
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    if: contains(github.event.head_commit.message, '[prepare-volpyro]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Extract source with official CFR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/volpyro"
+          gh release download 0.152 --repo leibnitz27/cfr --pattern cfr-0.152.jar --dir "$RUNNER_TEMP/volpyro"
+          echo "f686e8f3ded377d7bc87d216a90e9e9512df4156e75b06c655a16648ae8765b2  $RUNNER_TEMP/volpyro/cfr-0.152.jar" | sha256sum -c -
+          java -jar "$RUNNER_TEMP/volpyro/cfr-0.152.jar" 'volpyro-1.5.6-nuclear (1).jar' --outputdir "$RUNNER_TEMP/volpyro/src" --silent true
+      - name: Resolve Forge mappings
+        working-directory: mods/aiarsenal
+        run: ./gradlew createSrgToMcp --no-daemon
+      - name: Preserve only text reference (not active mod code)
+        run: |
+          python tools/inspect_volpyro.py "$RUNNER_TEMP/volpyro/src" mods/aiarsenal/build/createSrgToMcp/output.srg
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add notes/stage1/volpyro-reference
+          git commit -m '[stage1-evidence] Preserve remapped VolPyro renderer reference for port review'
+          git push origin HEAD:arena/10158ad9-aimods
