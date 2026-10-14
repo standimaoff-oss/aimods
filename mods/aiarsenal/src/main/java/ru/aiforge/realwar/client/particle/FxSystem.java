@@ -42,6 +42,7 @@ public final class FxSystem {
     }
 
     public static void add(FxParticle p) {
+        if (p.volumetricSmoke() && ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(p.px(), p.py(), p.pz(), p.size, p.lifeSeconds())) return;
         ALL.add(p);
     }
 

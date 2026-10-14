@@ -401,7 +401,7 @@ public class PlaneEntity extends CraftEntity {
         float dmg = (dv - safe) * (dv - safe) * (this.kind.plane.engines() >= 2 ? 6f : 2.4f);
         this.damage(dmg);
         if (this.level() instanceof ServerLevel sl) {
-            sl.sendParticles(net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 1, this.getZ(), 14, 1.5, 0.5, 1.5, 0.02);
+            sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), this.getX(), this.getY() + 1, this.getZ(), 14, 1.5, 0.5, 1.5, 0.02);
             sl.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, Math.min(3f, dv / 6f), 1.2f);
         }
         for (Entity e : this.getPassengers()) e.hurt(this.level().damageSources().fall(), Math.max(0, dv - 9f) * 1.6f);

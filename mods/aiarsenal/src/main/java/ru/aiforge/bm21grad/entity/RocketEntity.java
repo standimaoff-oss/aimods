@@ -166,11 +166,11 @@ public class RocketEntity extends Projectile {
             double f = i / (double) n;
             double x = from.x + d.x * f + back.x, y = from.y + d.y * f + back.y, z = from.z + d.z * f + back.z;
             if (burning) {
-                level().addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x, y, z,
+                level().addAlwaysVisibleParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), true, x, y, z,
                         (random.nextDouble() - 0.5) * 0.03, 0.01, (random.nextDouble() - 0.5) * 0.03);
                 level().addParticle(ParticleTypes.FLAME, x, y, z, back.x * 0.05, back.y * 0.05, back.z * 0.05);
             } else if (a < 200) {
-                level().addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0.005, 0);
+                level().addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), x, y, z, 0, 0.005, 0);
             }
         }
     }

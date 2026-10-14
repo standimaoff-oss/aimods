@@ -1,0 +1,99 @@
+package ru.aiforge.arsenal.volumetric.client;
+
+import com.mojang.brigadier.Command;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterClientCommandsEvent;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import ru.aiforge.arsenal.AiArsenal;
+import ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer;
+import ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager;
+
+/** One bounded, client-only adapter for all Arsenal visual emitters. Damage, radiation,
+ * ballistics and server explosions remain owned by the existing gameplay systems. */
+@Mod.EventBusSubscriber(modid = "aiarsenal", value = Dist.CLIENT)
+public final class VolumetricEffects {
+    private static ClientLevel world;
+    private VolumetricEffects() {}
+
+    private static void checkWorld() {
+        ClientLevel next = Minecraft.getInstance().level;
+        if (world != next) {
+            VolumetricFxManager.clear();
+            VolumeGlRenderer.reset();
+            world = next;
+        }
+    }
+
+    public static boolean active() {
+        checkWorld();
+        return world != null && VolumeGlRenderer.available();
+    }
+
+    public static boolean smoke(double x, double y, double z, float radius, float seconds) {
+        if (!active()) return false;
+        VolumetricFxManager.smokePuff(new Vec3(x, y, z), radius, seconds, 290f);
+        return true;
+    }
+
+    public static boolean blast(double x, double y, double z, float radius, long seed) {
+        if (!active() || !Float.isFinite(radius)) return false;
+        VolumetricFxManager.addExplosion(new Vec3(x, y, z), Math.max(1f, Math.min(radius, 30f)), seed);
+        return true;
+    }
+
+    public static boolean nuclear(double x, double y, double z, float radius, long seed) {
+        if (!active() || !Float.isFinite(radius)) return false;
+        VolumetricFxManager.addNuke(new Vec3(x, y, z), Math.max(4f, Math.min(radius, 180f)), 120f, seed, 0);
+        return true;
+    }
+
+    @SubscribeEvent public static void tick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        checkWorld();
+        if (world == null) return;
+        if (VolumeGlRenderer.available()) VolumetricFxManager.tick(world);
+        else VolumetricFxManager.clear();
+    }
+
+    @SubscribeEvent public static void render(RenderLevelStageEvent event) {
+        VolumeGlRenderer.render(event);
+    }
+
+    /** Client-only, non-destructive QA commands. Also useful for checking GPU compatibility.
+     * Does not spawn a bomb or modify terrain; real explosion packets are tested separately. */
+    @SubscribeEvent public static void commands(RegisterClientCommandsEvent event) {
+        var root = Commands.literal("arsenal_fx");
+        for (String effect : new String[]{"smoke", "blast", "nuke", "trail", "clear", "status"}) {
+            root.then(Commands.literal(effect).executes(context -> {
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.player == null) return 0;
+                Vec3 p = mc.player.position().add(mc.player.getLookAngle().scale(effect.equals("nuke") ? 100 : 18));
+                if (effect.equals("clear")) VolumetricFxManager.clear();
+                else if (effect.equals("smoke")) smoke(p.x, p.y + 1, p.z, 4, 15);
+                else if (effect.equals("blast")) blast(p.x, p.y, p.z, 6, 27);
+                else if (effect.equals("nuke")) nuclear(p.x, p.y, p.z, 20, 27);
+                else if (effect.equals("trail") && active()) {
+                    for (int i = 0; i < 20; i++)
+                        VolumetricFxManager.recordRocket(-27, p.add(i * 0.5, i * 0.7, 0), new Vec3(0.5, 0.7, 0), 1);
+                }
+                String status = String.format(java.util.Locale.ROOT,
+                    "Arsenal VolPyro: active=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s",
+                    active(), VolumetricFxManager.volumeCount(), VolumetricFxManager.plumeCount(),
+                    VolumeGlRenderer.frameCounter(), VolumeGlRenderer.lastDrawNanos() / 1e6,
+                    VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName());
+                AiArsenal.LOGGER.info("FX QA {}: {}", effect, status);
+                context.getSource().sendSuccess(Component.literal(status));
+                return Command.SINGLE_SUCCESS;
+            }));
+        }
+        event.getDispatcher().register(root);
+    }
+}

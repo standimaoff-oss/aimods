@@ -107,7 +107,7 @@ def screenshot(name):
                 image.load()
                 assert min(image.size) >= 480
                 assert sum(ImageStat.Stat(image.convert('RGB')).mean) > 20, 'black screenshot'
-            dest = OUT / 'shots' / ('review2-' + name + '.png')
+            dest = OUT / 'shots' / (os.environ.get('QA_PREFIX', 'review2') + '-' + name + '.png')
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, dest)
             print('Minecraft F2:', dest, flush=True)
@@ -144,7 +144,8 @@ renderClouds:"false"
 pauseOnLostFocus:false
 narrator:0
 soundCategory_master:0.0
-chatVisibility:2
+chatVisibility:0
+chatOpacity:0.0
 fullscreen:false
 overrideWidth:1000
 overrideHeight:700
@@ -197,8 +198,77 @@ overrideHeight:700
     time.sleep(5)
     screenshot('05-ppsh-reloaded')
     command('data get entity TestPlayer SelectedItem', 'Ammo: 71')
+    if os.environ.get('QA_VOLUMETRIC') == '1':
+        volumetric(player, client_log)
     command('stop')
     server.wait(timeout=90)
+
+
+def volumetric(player, client_log):
+    def local(effect):
+        before = client_log.stat().st_size
+        key('key', 't')
+        time.sleep(0.4)
+        key('type', '--clearmodifiers', '--delay', '35', '/arsenal_fx ' + effect)
+        key('key', 'Return')
+        end = time.monotonic() + 90
+        while time.monotonic() < end:
+            text = client_log.read_text(errors='replace')[before:]
+            if 'FX QA ' + effect + ':' in text:
+                return text
+            if player.poll() is not None:
+                raise RuntimeError('Client exited during FX QA')
+            time.sleep(1)
+        raise TimeoutError('No client confirmation for FX ' + effect)
+
+    command('clear TestPlayer')
+    # Remove the close wall from weapon QA so it cannot hide a smoke volume behind its depth.
+    command('fill -8 -60 21 8 -53 22 minecraft:air')
+    command('tp TestPlayer 0 -60 0 0 0')
+    local('clear')
+    local('smoke')
+    time.sleep(3)
+    status = local('status')
+    assert 'active=true' in status, status
+    frames = re.search(r'frames=(\d+)', status)
+    assert frames and int(frames[1]) > 0, status
+    screenshot('06-volumetric-smoke')
+    local('clear')
+    command('arsenal_visual_test blast 0 -60 18', 'Visual test sent')
+    time.sleep(1.2)
+    screenshot('07-volumetric-blast')
+    time.sleep(3)
+    screenshot('08-volumetric-blast-smoke')
+    local('clear')
+    command('arsenal_visual_test bm21 0 -60 18', 'Visual test sent')
+    time.sleep(2)
+    screenshot('09-volumetric-bm21')
+    local('clear')
+    command('arsenal_visual_test bomber 0 -60 18', 'Visual test sent')
+    time.sleep(2)
+    screenshot('10-volumetric-bomber')
+    local('clear')
+    local('trail')
+    time.sleep(1)
+    screenshot('11-volumetric-trail')
+    local('clear')
+    command('tp TestPlayer 0 -60 0 0 -12')
+    command('arsenal_visual_test nuke 0 -60 100', 'Visual test sent')
+    time.sleep(9)
+    screenshot('12-volumetric-nuke')
+    time.sleep(8)
+    screenshot('13-volumetric-nuke-late')
+    local('clear')
+    command('arsenal_visual_test legacy_nuke 0 -60 100', 'Visual test sent')
+    time.sleep(10)
+    screenshot('14-volumetric-arsenal-nuke')
+    local('clear')
+    status = local('status')
+    assert 'active=true' in status and 'volumes=0 plumes=0' in status, status
+    text = client_log.read_text(errors='replace')
+    assert 'VolPyro shader ready: volumetric_raymarch.fsh' in text
+    assert 'VolPyro shader ready: volumetric_composite.fsh' in text
+    assert 'GL renderer disabled' not in text and 'GLSL compile failed' not in text
 
 
 def cleanup():

@@ -904,7 +904,7 @@ public class GunVehicle extends LauncherVehicle {
         }
         for (int i = 0; i < 6; i++) {
             Vec3 q = breech.subtract(dir.scale(i * 0.9));
-            sl.sendParticles(net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, q.x, q.y, q.z, 3, 0.4, 0.3, 0.4, 0.02);
+            sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), q.x, q.y, q.z, 3, 0.4, 0.3, 0.4, 0.02);
         }
         sl.sendParticles(net.minecraft.core.particles.ParticleTypes.FLAME, breech.x, breech.y, breech.z, 8, 0.2, 0.2, 0.2, 0.05);
     }

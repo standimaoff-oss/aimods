@@ -357,7 +357,7 @@ public final class Firearms {
             }
             sound(p, k.sound, 3.0f, 0.95f + sl.random.nextFloat() * 0.1f);
             Vec3 m = p.getEyePosition().add(look.scale(0.9)).add(0, -0.1, 0);
-            sl.sendParticles(ParticleTypes.SMOKE, m.x, m.y, m.z, 1, 0.02, 0.02, 0.02, 0.005);
+            sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), m.x, m.y, m.z, 1, 0.02, 0.02, 0.02, 0.005);
         }
         fx(p, GunFxPacket.SHOT, FirearmItem.ammo(stack));
     }
@@ -376,7 +376,7 @@ public final class Firearms {
         for (int i = 0; i < 16; i++) {
             double f = 0.4 + i / 16.0 * len;
             Vec3 q = back.subtract(look.scale(f));
-            sl.sendParticles(i < 4 ? ParticleTypes.FLAME : ParticleTypes.CAMPFIRE_COSY_SMOKE, q.x, q.y, q.z, 1,
+            sl.sendParticles(i < 4 ? ParticleTypes.FLAME : ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), q.x, q.y, q.z, 1,
                     0.18 * f / len, 0.18 * f / len, 0.18 * f / len, 0.01);
         }
         for (Entity e : sl.getEntities(p, new AABB(back, back).inflate(len))) {
@@ -527,7 +527,7 @@ public final class Firearms {
                 if (!bs.isAir()) {
                     sl.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, bs), hitPos.x, hitPos.y, hitPos.z, 5, 0.04, 0.04, 0.04, 0.08);
                 }
-                sl.sendParticles(ParticleTypes.SMOKE, hitPos.x, hitPos.y, hitPos.z, 1, 0.03, 0.03, 0.03, 0.01);
+                sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), hitPos.x, hitPos.y, hitPos.z, 1, 0.03, 0.03, 0.03, 0.01);
                 if (bs.getSoundType() != null && sl.random.nextInt(2) == 0) {
                     sl.playSound(null, hitPos.x, hitPos.y, hitPos.z, bs.getSoundType().getHitSound(), SoundSource.BLOCKS, 0.5f, 1.4f);
                 }

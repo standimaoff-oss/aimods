@@ -26,6 +26,8 @@ public class AiArsenal {
         ru.aiforge.realwar.RealWar.init(context);
         IEventBus bus = context.getModEventBus();
         ArsenalRegistry.register(bus);
+        ru.aiforge.arsenal.volumetric.VolumetricParticles.TYPES.register(bus);
+        context.registerConfig(ModConfig.Type.CLIENT, ru.aiforge.arsenal.volumetric.config.VolPyroClientConfig.SPEC, "aiarsenal-volumetric-client.toml");
         context.registerConfig(ModConfig.Type.SERVER, ArsenalConfig.SPEC, MODID + "-arsenal-server.toml");
         bus.addListener(AiArsenal::commonSetup);
     }

@@ -192,7 +192,7 @@ public class LauncherEntity extends ArsEntity {
                 MissileEntity.create(sl, ammo, mouth, axis.scale(0.6), t, null, owner, MissileEntity.BOOST);
                 setLoaded(mask & ~(1 << i), ammo);
                 sl.playSound(null, mouth.x, mouth.y, mouth.z, ArsenalRegistry.SND_BOOSTER.get(), SoundSource.NEUTRAL, 10f, 1f);
-                sl.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, mouth.x, mouth.y, mouth.z, 30, 1.5, 1.0, 1.5, 0.05);
+                sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), mouth.x, mouth.y, mouth.z, 30, 1.5, 1.0, 1.5, 0.05);
             }
             case YARS_TEL -> {
                 Vector3f ax = new Vector3f();
@@ -204,7 +204,7 @@ public class LauncherEntity extends ArsEntity {
                 setLoaded(0, null);
                 Vec3 top = pos.add(0, 11.5, 0);
                 sl.sendParticles(ParticleTypes.EXPLOSION, top.x, top.y, top.z, 2, 0.5, 0.5, 0.5, 0);
-                sl.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos.x, getY() + 1, pos.z, 60, 4, 1, 4, 0.03);
+                sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), pos.x, getY() + 1, pos.z, 60, 4, 1, 4, 0.03);
             }
             default -> {
             }

@@ -40,7 +40,7 @@ public class SubmunitionEntity extends Projectile {
         if (level().isClientSide) {
             setPos(to.x, to.y, to.z);
             setDeltaMovement(v);
-            if (tickCount % 2 == 0) level().addParticle(ParticleTypes.SMOKE, from.x, from.y, from.z, 0, 0, 0);
+            if (tickCount % 2 == 0) level().addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), from.x, from.y, from.z, 0, 0, 0);
             return;
         }
         if (tickCount > 400) {

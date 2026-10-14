@@ -503,7 +503,7 @@ public final class VehicleDamage {
         notify(v, "hud.aiarsenal.rw.crew.ko");
         v.ejectPassengers();
         Vec3 c = v.position().add(0, v.spec.height() * 0.7, 0);
-        sl.sendParticles(ParticleTypes.LARGE_SMOKE, c.x, c.y, c.z, 20, 0.6, 0.4, 0.6, 0.02);
+        sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), c.x, c.y, c.z, 20, 0.6, 0.4, 0.6, 0.02);
         if (pendingCam != null && pendingCam.target() == v.getId()) pendingCam = pendingCam.dead(true);
     }
 
@@ -545,7 +545,7 @@ public final class VehicleDamage {
             }
             case BARREL -> {
                 Vec3 p = v.localToWorld(0, v.spec.height(), v.spec.length() * 0.35);
-                sl.sendParticles(ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 12, 0.3, 0.2, 0.3, 0.03);
+                sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), p.x, p.y, p.z, 12, 0.3, 0.2, 0.3, 0.03);
                 sl.playSound(null, c.x, c.y, c.z, SoundEvents.ANVIL_BREAK, SoundSource.NEUTRAL, 2f, 0.6f);
             }
             case TURRET -> sl.playSound(null, c.x, c.y, c.z, SoundEvents.ANVIL_BREAK, SoundSource.NEUTRAL, 2f, 0.8f);
@@ -597,7 +597,7 @@ public final class VehicleDamage {
             Vec3 b = v.localToWorld(0, yp1 + 0.6, (g.yp != null ? g.yp[2] : 0) - 2.0);
             sl.sendParticles(ParticleTypes.FLAME, b.x, b.y, b.z, 80, 0.5, 0.2, 0.5, 0.35);
             sl.sendParticles(ParticleTypes.LAVA, b.x, b.y, b.z, 20, 0.5, 0.3, 0.5, 0);
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, b.x, b.y + 1, b.z, 40, 0.6, 1.5, 0.6, 0.08);
+            sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), b.x, b.y + 1, b.z, 40, 0.6, 1.5, 0.6, 0.08);
             sl.playSound(null, b.x, b.y, b.z, SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 4f, 1.2f);
             if (v instanceof LauncherVehicle lv) lv.setLoadedMask(0L);
             s.setBroken(AMMO, true);

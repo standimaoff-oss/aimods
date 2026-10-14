@@ -93,6 +93,7 @@ public final class NukeFx {
             boolean los = h.getType() == HitResult.Type.MISS || h.getLocation().distanceTo(b) < 4 || d > 300;
             f.vis = (float) Mth.clamp(6 * f.r / Math.max(1, d), 0, 1) * (los ? 1f : 0.35f);
         }
+        ru.aiforge.arsenal.volumetric.client.VolumetricEffects.nuclear(p.x(), p.y(), p.z(), p.radius(), f.seed);
         FX.add(f);
         if (f.y - f.gy < 0.6 * f.r) ZONES.add(new Zone(f.x, f.z, 1.4f * f.r, 6000));
     }
@@ -161,6 +162,7 @@ public final class NukeFx {
     // ------------------------------------------------------------------ mushroom cloud rendering
     @SubscribeEvent
     public static void render(RenderLevelStageEvent e) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) return;
         if (e.getStage() != RenderLevelStageEvent.Stage.AFTER_WEATHER || FX.isEmpty()) return;
         Vec3 cam = e.getCamera().getPosition();
         PoseStack ps = e.getPoseStack();

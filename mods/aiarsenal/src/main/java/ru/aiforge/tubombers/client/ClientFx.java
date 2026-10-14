@@ -78,6 +78,7 @@ public final class ClientFx {
     }
 
     private static void particles(ClientLevel lv, FxPacket p) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.blast(p.x(), p.y(), p.z(), p.power(), lv.getGameTime())) return;
         RandomSource r = lv.random;
         double x = p.x(), y = p.y(), z = p.z();
         float pw = p.power();
@@ -100,7 +101,7 @@ public final class ClientFx {
                     r.nextGaussian() * 0.4 * k, 0.5 + r.nextDouble() * 1.1 * k, r.nextGaussian() * 0.4 * k);
         // dust column
         for (int i = 0; i < 34 * k; i++)
-            lv.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x + r.nextGaussian() * pw * 0.35, y + r.nextDouble() * 2 * k,
+            lv.addAlwaysVisibleParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), true, x + r.nextGaussian() * pw * 0.35, y + r.nextDouble() * 2 * k,
                     z + r.nextGaussian() * pw * 0.35, r.nextGaussian() * 0.03, 0.08 + r.nextDouble() * 0.14 * k, r.nextGaussian() * 0.03);
         // shock ring along the ground
         for (int i = 0; i < 60; i++) {
@@ -125,7 +126,7 @@ public final class ClientFx {
             lv.addAlwaysVisibleParticle(ParticleTypes.FLAME, true, x, y + 0.5, z, r.nextGaussian() * 0.4, 0.3 + r.nextDouble() * 0.6, r.nextGaussian() * 0.4);
         if (crash) {
             for (int i = 0; i < 60; i++)
-                lv.addAlwaysVisibleParticle(ParticleTypes.LARGE_SMOKE, true, x + r.nextGaussian() * 4, y + 1 + r.nextDouble() * 3, z + r.nextGaussian() * 4,
+                lv.addAlwaysVisibleParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), true, x + r.nextGaussian() * 4, y + 1 + r.nextDouble() * 3, z + r.nextGaussian() * 4,
                         0, 0.12, 0);
         }
     }

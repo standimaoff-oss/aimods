@@ -56,6 +56,10 @@ public final class TrailFx {
     }
 
     public static void rocketTick(RocketEntity e) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(e.getId(), e.position(), e.getDeltaMovement(), 1f);
+            return;
+        }
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || e.tickCount < 1) {
             return;
@@ -102,6 +106,10 @@ public final class TrailFx {
     }
 
     public static void missileTick(MissileEntity e) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(e.getId(), e.position(), e.getDeltaMovement(), 1.5f);
+            return;
+        }
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || e.tickCount < 2 || e.mode() == 2) {
             return;

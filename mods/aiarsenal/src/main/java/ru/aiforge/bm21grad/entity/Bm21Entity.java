@@ -328,7 +328,7 @@ public class Bm21Entity extends Entity {
         if (isDestroyed()) {
             if (random.nextInt(2) == 0) {
                 Vec3 p = toWorld((random.nextDouble() - 0.5) * 2.2, 2.2, (random.nextDouble() - 0.5) * 6);
-                level().addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, p.x, p.y, p.z, 0, 0.07, 0);
+                level().addAlwaysVisibleParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), true, p.x, p.y, p.z, 0, 0.07, 0);
             }
             if (random.nextInt(4) == 0) {
                 Vec3 p = toWorld((random.nextDouble() - 0.5) * 2, 1.6, (random.nextDouble() - 0.5) * 5);
@@ -339,8 +339,8 @@ public class Bm21Entity extends Entity {
         if (hasState(ST_ENGINE) && tickCount % 3 == 0) {
             Vec3 p = toWorld(-1.12, 1.64, -1.12);
             float load = Math.min(1f, Math.abs(displaySpeed()) * 2f);
-            level().addParticle(ParticleTypes.SMOKE, p.x, p.y, p.z, 0, 0.03 + load * 0.05, 0);
-            if (load > 0.5f) level().addParticle(ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 0, 0.05, 0);
+            level().addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), p.x, p.y, p.z, 0, 0.03 + load * 0.05, 0);
+            if (load > 0.5f) level().addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), p.x, p.y, p.z, 0, 0.05, 0);
         }
     }
 
@@ -767,8 +767,8 @@ public class Bm21Entity extends Entity {
         // launch FX: exhaust blast behind the tube, dust around the vehicle
         Vec3 breech = m[0].subtract(m[1].scale(3.1));
         sl.sendParticles(ParticleTypes.FLAME, breech.x, breech.y, breech.z, 12, 0.25, 0.25, 0.25, 0.05);
-        sl.sendParticles(ParticleTypes.LARGE_SMOKE, breech.x, breech.y, breech.z, 10, 0.4, 0.3, 0.4, 0.06);
-        sl.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, breech.x, breech.y - 1, breech.z, 6, 1.2, 0.3, 1.2, 0.02);
+        sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), breech.x, breech.y, breech.z, 10, 0.4, 0.3, 0.4, 0.06);
+        sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), breech.x, breech.y - 1, breech.z, 6, 1.2, 0.3, 1.2, 0.02);
         sl.sendParticles(ParticleTypes.POOF, getX(), getY() + 0.3, getZ(), 14, 2.5, 0.1, 3.5, 0.08);
         sl.playSound(null, m[0].x, m[0].y, m[0].z, ModRegistry.SND_LAUNCH.get(), SoundSource.HOSTILE, 8f, 0.9f + random.nextFloat() * 0.2f);
         lastFiredTube = tube;

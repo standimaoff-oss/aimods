@@ -102,6 +102,7 @@ public class BigPuffParticle extends TextureSheetParticle {
     public record Provider(SpriteSet sprites, Kind kind) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType t, ClientLevel lv, double x, double y, double z, double vx, double vy, double vz) {
+            if (kind != Kind.FIREBALL && ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(x, y, z, 3f, 8f)) return null;
             return new BigPuffParticle(lv, x, y, z, vx, vy, vz, kind, sprites);
         }
     }
