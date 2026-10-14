@@ -1,0 +1,183 @@
+[14Oct2026 19:26:16.172] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.4.23, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --nogui]
+[14Oct2026 19:26:16.180] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20.1 by Eclipse Adoptium; OS Linux arch amd64 version 6.8.0-1064-azure
+[14Oct2026 19:26:16.310] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file /home/runner/work/_temp/mc-runs/server/config/fml.toml is not correct. Correcting
+[14Oct2026 19:26:16.314] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[14Oct2026 19:26:16.315] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[14Oct2026 19:26:16.316] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[14Oct2026 19:26:16.316] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[14Oct2026 19:26:16.344] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[14Oct2026 19:26:16.432] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23116!/ Service=ModLauncher Env=SERVER
+[14Oct2026 19:26:16.909] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.23/103ee0ecf6e5e4a971ee1ae68384e96fd73b097f/javafmllanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[14Oct2026 19:26:16.913] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.23/2531b2da1460bc09c8ec3bf946e641de664b460d/lowcodelanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[14Oct2026 19:26:16.915] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.23/eebf4eae01f6fde63717bb38b77f9b6b1b50f8/mclanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[14Oct2026 19:26:16.918] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.23/ef56cfb608a4356c3f99dd6a4fa81ce33029bcde/fmlcore-1.20.1-47.4.23.jar is missing mods.toml file
+[14Oct2026 19:26:17.014] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[14Oct2026 19:26:19.956] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[14Oct2026 19:26:28.932] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.23, for MC 1.20.1 with MCP 20230612.114412
+[14Oct2026 19:26:28.936] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.23 Initialized
+[14Oct2026 19:26:30.438] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/mc-runs/server/config/aiarsenal-realwar-common.toml is not correct. Correcting
+[14Oct2026 19:26:30.440] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:30.441] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.enabled was corrected from null to its default, true. 
+[14Oct2026 19:26:30.442] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.metersPerBlock was corrected from null to its default, 17.5. 
+[14Oct2026 19:26:30.443] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.maxBlastRadius was corrected from null to its default, 300. 
+[14Oct2026 19:26:30.444] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.craterScale was corrected from null to its default, 1.0. 
+[14Oct2026 19:26:30.444] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.destroyBlocks was corrected from null to its default, true. 
+[14Oct2026 19:26:30.445] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.thermalIgnition was corrected from null to its default, true. 
+[14Oct2026 19:26:30.445] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.entityDamage was corrected from null to its default, true. 
+[14Oct2026 19:26:30.445] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.blastBudgetMs was corrected from null to its default, 14. 
+[14Oct2026 19:26:30.446] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.conventionalMaxRadius was corrected from null to its default, 64. 
+[14Oct2026 19:26:30.450] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:30.451] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.enabled was corrected from null to its default, true. 
+[14Oct2026 19:26:30.451] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.hourTicks was corrected from null to its default, 2400. 
+[14Oct2026 19:26:30.451] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.falloutLengthScale was corrected from null to its default, 0.35. 
+[14Oct2026 19:26:30.451] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.radioactiveItems was corrected from null to its default, true. 
+[14Oct2026 19:26:30.457] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:30.457] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.scaleK was corrected from null to its default, 25.0. 
+[14Oct2026 19:26:30.458] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarRange was corrected from null to its default, 600. 
+[14Oct2026 19:26:30.458] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarLink was corrected from null to its default, 250. 
+[14Oct2026 19:26:30.459] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.rocketsDestroyBlocks was corrected from null to its default, true. 
+[14Oct2026 19:26:30.459] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.vehicleDamage was corrected from null to its default, true. 
+[14Oct2026 19:26:30.459] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.flakRange was corrected from null to its default, 170. 
+[14Oct2026 19:26:30.469] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key worldgen was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:30.469] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key worldgen.wreckSites was corrected from null to its default, true. 
+[14Oct2026 19:26:30.469] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key worldgen.supplyCaches was corrected from null to its default, true. 
+[14Oct2026 19:26:30.501] [modloading-worker-0/INFO] [ru.aiforge.bm21grad.Bm21Grad/]: BM-21 Grad loaded: 5 rocket types
+[14Oct2026 19:26:30.507] [modloading-worker-0/INFO] [ru.aiforge.tubombers.TuBombers/]: Tu Bombers loaded
+[14Oct2026 19:26:30.512] [modloading-worker-0/INFO] [ru.aiforge.arsenal.AiArsenal/]: AI Arsenal loaded
+[14Oct2026 19:26:30.866] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[14Oct2026 19:26:31.534] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.23 Target: 47.4.28
+[14Oct2026 19:26:32.871] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[14Oct2026 19:26:32.952] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/runner/work/aimods/aimods/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar%23181!/assets/.mcassetsroot' uses unexpected schema
+[14Oct2026 19:26:32.952] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/runner/work/aimods/aimods/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar%23181!/data/.mcassetsroot' uses unexpected schema
+[14Oct2026 19:26:36.252] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 7 recipes
+[14Oct2026 19:26:36.511] [main/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1278 advancements
+[14Oct2026 19:26:37.407] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.20.1
+[14Oct2026 19:26:37.408] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[14Oct2026 19:26:37.409] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: CREATIVE
+[14Oct2026 19:26:37.410] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[14Oct2026 19:26:37.596] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on 127.0.0.1:25565
+[14Oct2026 19:26:37.633] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using epoll channel type
+[14Oct2026 19:26:38.053] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[14Oct2026 19:26:38.053] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[14Oct2026 19:26:38.054] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[14Oct2026 19:26:38.055] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[14Oct2026 19:26:38.081] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-bm21-server.toml is not correct. Correcting
+[14Oct2026 19:26:38.082] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ballistics was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.082] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ballistics.rangeScale was corrected from null to its default, 1.0. 
+[14Oct2026 19:26:38.082] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ballistics.dispersion was corrected from null to its default, 0.012. 
+[14Oct2026 19:26:38.082] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ballistics.maxGhostTicks was corrected from null to its default, 2400. 
+[14Oct2026 19:26:38.085] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key launcher was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.085] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key launcher.salvoIntervalTicks was corrected from null to its default, 10. 
+[14Oct2026 19:26:38.085] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key launcher.reloadTicksPerTube was corrected from null to its default, 40. 
+[14Oct2026 19:26:38.085] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key launcher.creativeFreeAmmo was corrected from null to its default, true. 
+[14Oct2026 19:26:38.085] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key launcher.vehicleHealth was corrected from null to its default, 300.0. 
+[14Oct2026 19:26:38.086] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key launcher.maxSpeed was corrected from null to its default, 0.9. 
+[14Oct2026 19:26:38.087] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.087] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.blockDamage was corrected from null to its default, true. 
+[14Oct2026 19:26:38.088] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.explosionScale was corrected from null to its default, 1.0. 
+[14Oct2026 19:26:38.088] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.debris was corrected from null to its default, true. 
+[14Oct2026 19:26:38.092] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/forge-server.toml is not correct. Correcting
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[14Oct2026 19:26:38.093] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[14Oct2026 19:26:38.094] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[14Oct2026 19:26:38.100] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-aviation-server.toml is not correct. Correcting
+[14Oct2026 19:26:38.102] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key flight was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.102] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key flight.speedScale was corrected from null to its default, 0.5. 
+[14Oct2026 19:26:38.102] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.103] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.blockDamage was corrected from null to its default, true. 
+[14Oct2026 19:26:38.103] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.explosionScale was corrected from null to its default, 1.0. 
+[14Oct2026 19:26:38.103] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.debris was corrected from null to its default, true. 
+[14Oct2026 19:26:38.113] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-arsenal-server.toml is not correct. Correcting
+[14Oct2026 19:26:38.114] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.114] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.blockDamage was corrected from null to its default, true. 
+[14Oct2026 19:26:38.117] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.radiusScale was corrected from null to its default, 1.0. 
+[14Oct2026 19:26:38.117] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.columnsPerTick was corrected from null to its default, 1800. 
+[14Oct2026 19:26:38.117] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.realWarBlast was corrected from null to its default, true. 
+[14Oct2026 19:26:38.117] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.falloutSeconds was corrected from null to its default, 300. 
+[14Oct2026 19:26:38.118] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key conventional was corrected from null to its default, SimpleCommentedConfig:{}. 
+[14Oct2026 19:26:38.120] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key conventional.blockDamage was corrected from null to its default, true. 
+[14Oct2026 19:26:38.120] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key conventional.realWarBlast was corrected from null to its default, true. 
+[14Oct2026 19:26:38.120] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key conventional.speedScale was corrected from null to its default, 0.5. 
+[14Oct2026 19:26:38.163] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "world"
+[14Oct2026 19:26:39.454] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[14Oct2026 19:26:41.669] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:41.681] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:41.681] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:41.682] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:41.682] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:41.955] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:42.455] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:43.294] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:43.455] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[14Oct2026 19:26:44.001] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 42%
+[14Oct2026 19:26:44.328] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 4874 ms
+[14Oct2026 19:26:44.328] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (6.251s)! For help, type "help"
+[14Oct2026 19:26:44.329] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting remote control listener
+[14Oct2026 19:26:44.332] [Server thread/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Listener started
+[14Oct2026 19:26:44.332] [Server thread/INFO] [net.minecraft.server.rcon.thread.RconThread/]: RCON running on 127.0.0.1:25575
+[14Oct2026 19:26:44.356] [Server thread/INFO] [net.minecraftforge.gametest.ForgeGameTestHooks/]: Enabled Gametest Namespaces: [aiarsenal]
+[14Oct2026 19:26:44.430] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[14Oct2026 19:27:58.333] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: TestPlayer[/127.0.0.1:49276] logged in with entity id 1 at (-6.5, -60.0, 2.5)
+[14Oct2026 19:27:58.445] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: TestPlayer joined the game
+[14Oct2026 19:28:20.836] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:20.841] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Set the time to 6000]
+[14Oct2026 19:28:20.843] [RCON Client /127.0.0.1 #2/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:20.844] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:20.847] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Gamerule doDaylightCycle is now set to: false]
+[14Oct2026 19:28:20.848] [RCON Client /127.0.0.1 #3/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:20.848] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:20.852] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Set the weather to clear]
+[14Oct2026 19:28:20.853] [RCON Client /127.0.0.1 #4/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:20.854] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:20.857] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Gamerule doWeatherCycle is now set to: false]
+[14Oct2026 19:28:20.859] [RCON Client /127.0.0.1 #5/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:20.860] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:20.863] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Gamerule doMobSpawning is now set to: false]
+[14Oct2026 19:28:20.864] [RCON Client /127.0.0.1 #6/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:20.864] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:20.882] [RCON Client /127.0.0.1 #7/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:20.884] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.001] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Successfully filled 850 block(s)]
+[14Oct2026 19:28:21.061] [RCON Client /127.0.0.1 #8/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:21.063] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.097] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Successfully filled 136 block(s)]
+[14Oct2026 19:28:21.100] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.099] [RCON Client /127.0.0.1 #9/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:21.122] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Successfully filled 9 block(s)]
+[14Oct2026 19:28:21.132] [RCON Client /127.0.0.1 #10/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:21.139] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.144] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[14Oct2026 19:28:21.147] [RCON Client /127.0.0.1 #11/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:21.148] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.168] [RCON Client /127.0.0.1 #12/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:21.169] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.183] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Replaced a slot on TestPlayer with [PPSh-41 (7.62x25 TT)]]
+[14Oct2026 19:28:21.186] [RCON Client /127.0.0.1 #13/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:21.187] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:21.218] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Gave 3 [PPSh-41 drum magazine (71 rounds)] to TestPlayer]
+[14Oct2026 19:28:21.222] [RCON Client /127.0.0.1 #14/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:38.580] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:38.589] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[14Oct2026 19:28:38.591] [RCON Client /127.0.0.1 #15/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:44.668] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:44.672] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[14Oct2026 19:28:44.674] [RCON Client /127.0.0.1 #16/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:47.294] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:47.321] [RCON Client /127.0.0.1 #17/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:58.669] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:58.673] [RCON Client /127.0.0.1 #18/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:58.674] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:58.679] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Removed 4 item(s) from player TestPlayer]
+[14Oct2026 19:28:58.685] [RCON Client /127.0.0.1 #19/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:58.691] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:58.700] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Successfully filled 145 block(s)]
+[14Oct2026 19:28:58.707] [RCON Client /127.0.0.1 #20/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[14Oct2026 19:28:58.708] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[14Oct2026 19:28:58.715] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[14Oct2026 19:28:58.716] [RCON Client /127.0.0.1 #21/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
