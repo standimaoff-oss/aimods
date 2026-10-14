@@ -33,6 +33,15 @@ class PortTests(unittest.TestCase):
             self.assertNotRegex(path.read_text(), r'ParticleTypes\.(SMOKE|LARGE_SMOKE|CAMPFIRE_COSY_SMOKE|CAMPFIRE_SIGNAL_SMOKE)\b')
             self.assertNotIn('net.minecraft.core.particles.ru.', path.read_text())
 
+    def test_qa_bridge_is_opt_in_and_clientbound(self):
+        packet = (PORT / 'VisualQaPacket.java').read_text()
+        self.assertIn('Boolean.getBoolean("aiarsenal.visualQa") && EFFECTS.contains(effect)', packet)
+        self.assertIn('readUtf(16)', packet)
+        network = (JAVA / 'arsenal/network/ArsenalNetwork.java').read_text()
+        self.assertIn('VisualQaPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT', network)
+        commands = (PORT / 'VisualTestCommand.java').read_text()
+        self.assertIn('requires(s -> s.hasPermission(2))', commands)
+
     def test_renderer_has_failure_and_resource_cleanup(self):
         text = (PORT / 'client/render/VolumeGlRenderer.java').read_text()
         self.assertIn('try (GlStateSnapshot state', text)
@@ -40,6 +49,8 @@ class PortTests(unittest.TestCase):
         self.assertIn('GL20.glDeleteProgram', text)
         self.assertIn('failed = true', text)
         self.assertIn('Math.min(16, n2)', text)
+        self.assertIn('if (list.isEmpty() && warmed) return;', text)
+        self.assertIn('warmed = false;', text)
         manager = (PORT / 'client/sim/VolumetricFxManager.java').read_text()
         self.assertIn('MAX_RENDER_VOLUMES', manager)
         self.assertIn('rocketTracks.size() >= 64', manager)

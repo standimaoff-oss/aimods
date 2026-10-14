@@ -47,6 +47,7 @@ public final class VolumeGlRenderer {
     private static int lowWidth;
     private static int lowHeight;
     private static boolean failed;
+    private static boolean warmed;
     private static boolean loggedRenderer;
     private static boolean softwareRenderer;
     private static long lastDrawNanos;
@@ -66,6 +67,8 @@ public final class VolumeGlRenderer {
             Minecraft minecraft = Minecraft.getInstance();
             if (minecraft.level != null && (renderTarget = minecraft.getMainRenderTarget()) != null && renderTarget.width > 0 && renderTarget.height > 0 && renderTarget.getDepthTextureId() > 0) {
                 list = VolumetricFxManager.snapshot();
+                // No GL queries or state capture during idle frames after the initial draw.
+                if (list.isEmpty() && warmed) return;
                 RenderSystem.assertOnRenderThread();
                 long l = System.nanoTime();
                 try (GlStateSnapshot state = new GlStateSnapshot()) {
@@ -78,14 +81,18 @@ public final class VolumeGlRenderer {
                     if (rayProgram == 0 || compositeProgram == 0 || volumeFbo == 0 || depthFbo == 0) {
                         return;
                     }
-                    // Compile/warm up when joining the world, not during the first trigger press.
-                    if (list.isEmpty()) return;
+                    // Some drivers defer compilation until glDrawArrays, not glLinkProgram.
+                    // Draw one transparent (zero-volume) pass on world entry, before any trigger press.
+                    // It is deliberately NOT counted as an actual effect frame below.
                     VolumeGlRenderer.uploadVolumes(list, renderLevelStageEvent.getCamera().getPosition());
                     VolumeGlRenderer.copyDepth(renderTarget);
                     VolumeGlRenderer.renderLowResolution(renderLevelStageEvent, list.size());
                     VolumeGlRenderer.composite(renderTarget);
-                    lastDrawNanos = System.nanoTime() - l;
-                    ++frameCounter;
+                    warmed = true;
+                    if (!list.isEmpty()) {
+                        lastDrawNanos = System.nanoTime() - l;
+                        ++frameCounter;
+                    }
                 }
                 catch (Throwable throwable) {
                     failed = true;
@@ -393,6 +400,7 @@ public final class VolumeGlRenderer {
         dataTexture = vao = vbo = rayProgram = compositeProgram = 0;
         fullWidth = fullHeight = lowWidth = lowHeight = 0;
         failed = false;
+        warmed = false;
         frameCounter = lastDrawNanos = 0;
     }
 

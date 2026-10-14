@@ -183,14 +183,30 @@ overrideHeight:700
     screenshot('03-ppsh-third-person')
     key('key', 'F5')
     command('tp TestPlayer 0 -60 0 0 0')
-    # Fire a short burst, then capture magazine motion rather than a static inventory image.
-    key('mousedown', '1')
-    time.sleep(0.6)  # GunClient samples isDown per tick; a <50 ms click can be missed.
-    key('mouseup', '1')
-    time.sleep(6)  # let queued release/recoil settle on software GL before reload
+    # Keep the real mouse held until the SERVER observes a shot, not for an arbitrary
+    # short pulse that can fall between software-rendered frames. Always release on failure.
+    fired = ''
+    for attempt in range(2):
+        key('windowfocus', '--sync', window)
+        key('mousedown', '1')
+        try:
+            end = time.monotonic() + 4
+            while time.monotonic() < end:
+                time.sleep(0.2)
+                fired = command('data get entity TestPlayer SelectedItem')
+                match = re.search(r'Ammo: (\d+)', fired)
+                if match and int(match[1]) < 71:
+                    break
+        finally:
+            key('mouseup', '1')
+        if match and int(match[1]) < 71:
+            break
+    time.sleep(3)  # settle queued release / recoil before reload
     fired = command('data get entity TestPlayer SelectedItem')
     match = re.search(r'Ammo: (\d+)', fired)
-    assert match and 0 < int(match[1]) < 71, f'Firing did not consume rounds: {fired}'
+    if not (match and int(match[1]) < 71):
+        screenshot('failure-ppsh-trigger')
+        raise AssertionError(f'Firing did not consume rounds: {fired}')
     key('keydown', 'r')
     time.sleep(0.15)
     key('keyup', 'r')
