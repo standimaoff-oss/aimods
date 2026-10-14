@@ -1,0 +1,7 @@
+test_standalone_magazine (__main__.PpshExportTests.test_standalone_magazine) ... ok
+test_weapon_drum_and_animation (__main__.PpshExportTests.test_weapon_drum_and_animation) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+OK

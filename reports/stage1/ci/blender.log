@@ -1,0 +1,25 @@
+ERROR Draco mesh compression is not available because library could not be found at /home/runner/work/aimods/aimods/4.2/python/lib/python3.11/site-packages/libextern_draco.so
+17:44:40 | INFO: Starting glTF 2.0 export
+17:44:40 | INFO: Extracting primitive: ppsh41.body
+17:44:40 | INFO: Primitives created: 4
+17:44:40 | INFO: Extracting primitive: ppsh41.bolt
+17:44:40 | INFO: Primitives created: 1
+17:44:40 | INFO: Extracting primitive: ppsh41.flash
+17:44:41 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:44:41 | INFO: Primitives created: 1
+17:44:41 | INFO: Extracting primitive: ppsh41.mag
+17:44:41 | INFO: Primitives created: 4
+17:44:41 | INFO: Extracting primitive: ppsh41.trigger
+17:44:41 | INFO: Primitives created: 1
+17:44:41 | INFO: Finished glTF 2.0 export in 0.08652639389038086 s
+
+WPN ppsh41 tris 10036 bytes 845640
+17:44:41 | INFO: Starting glTF 2.0 export
+17:44:41 | INFO: Extracting primitive: mag_ppsh
+17:44:41 | INFO: Primitives created: 4
+17:44:41 | INFO: Finished glTF 2.0 export in 0.05916309356689453 s
+Info: Total files 37 | Changed 37 | Failed 0
+
+WPN mag_ppsh tris 1160 bytes 126240
+Info: Saved "ppsh41.blend"
+PPSH_DONE
