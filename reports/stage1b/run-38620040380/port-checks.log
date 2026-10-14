@@ -1,0 +1,9 @@
+test_mod_smoke_emitters_are_routed (__main__.PortTests) ... ok
+test_no_donor_gameplay_or_unmapped_symbols (__main__.PortTests) ... ok
+test_renderer_has_failure_and_resource_cleanup (__main__.PortTests) ... ok
+test_shaders_are_extracted_from_supplied_jar (__main__.PortTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.028s
+
+OK
