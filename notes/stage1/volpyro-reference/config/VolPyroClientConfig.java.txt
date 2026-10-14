@@ -1,0 +1,46 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  net.minecraftforge.common.ForgeConfigSpec
+ *  net.minecraftforge.common.ForgeConfigSpec$BooleanValue
+ *  net.minecraftforge.common.ForgeConfigSpec$Builder
+ *  net.minecraftforge.common.ForgeConfigSpec$DoubleValue
+ *  net.minecraftforge.common.ForgeConfigSpec$EnumValue
+ *  net.minecraftforge.common.ForgeConfigSpec$IntValue
+ */
+package com.example.volpyro.config;
+
+import net.minecraftforge.common.ForgeConfigSpec;
+
+public final class VolPyroClientConfig {
+    public static final ForgeConfigSpec SPEC;
+    public static final ForgeConfigSpec.EnumValue<QualityPreset> QUALITY_PRESET;
+    public static final ForgeConfigSpec.IntValue RAYMARCH_STEPS;
+    public static final ForgeConfigSpec.DoubleValue RESOLUTION_SCALE;
+    public static final ForgeConfigSpec.BooleanValue ENABLE_VOLUMETRIC_RENDERER;
+
+    private VolPyroClientConfig() {
+    }
+
+    static {
+        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        builder.push("renderer");
+        QUALITY_PRESET = builder.defineEnum("qualityPreset", (Enum)QualityPreset.AUTO);
+        RAYMARCH_STEPS = builder.defineInRange("raymarchSteps", 24, 12, 96);
+        RESOLUTION_SCALE = builder.defineInRange("renderResolutionScale", 0.5, 0.25, 1.0);
+        ENABLE_VOLUMETRIC_RENDERER = builder.define("enableVolumetricRenderer", true);
+        builder.pop();
+        SPEC = builder.build();
+    }
+
+    public static enum QualityPreset {
+        AUTO,
+        CI_SOFTWARE,
+        MEDIUM,
+        HIGH,
+        ULTRA;
+
+    }
+}
+

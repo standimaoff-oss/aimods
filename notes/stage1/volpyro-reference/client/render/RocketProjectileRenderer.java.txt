@@ -1,0 +1,77 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  com.mojang.blaze3d.vertex.PoseStack
+ *  net.minecraft.client.Minecraft
+ *  net.minecraft.client.renderer.MultiBufferSource
+ *  net.minecraft.client.renderer.entity.EntityRenderer
+ *  net.minecraft.client.renderer.entity.EntityRendererProvider$Context
+ *  net.minecraft.client.renderer.entity.ItemRenderer
+ *  net.minecraft.client.renderer.texture.OverlayTexture
+ *  net.minecraft.client.renderer.texture.TextureAtlas
+ *  net.minecraft.resources.ResourceLocation
+ *  net.minecraft.world.entity.Entity
+ *  net.minecraft.world.item.ItemDisplayContext
+ *  net.minecraft.world.item.ItemStack
+ *  net.minecraft.world.phys.Vec3
+ *  org.joml.Quaternionf
+ */
+package com.example.volpyro.client.render;
+
+import com.example.volpyro.entity.RocketProjectileEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
+
+public class RocketProjectileRenderer
+extends EntityRenderer<RocketProjectileEntity> {
+    private ItemRenderer itemRenderer;
+
+    public RocketProjectileRenderer(EntityRendererProvider.Context context) {
+        super(context);
+        this.shadowRadius = 0.3f;
+    }
+
+    public ResourceLocation getTextureLocation(RocketProjectileEntity rocketProjectileEntity) {
+        return TextureAtlas.LOCATION_BLOCKS;
+    }
+
+    public void render(RocketProjectileEntity rocketProjectileEntity, float f, float f2, PoseStack poseStack, MultiBufferSource multiBufferSource, int n) {
+        float f3;
+        float f4;
+        Vec3 vec3;
+        poseStack.pushPose();
+        Vec3 vec32 = rocketProjectileEntity.getDeltaMovement();
+        if (vec32.lengthSqr() < 0.0025 || rocketProjectileEntity.isParked()) {
+            vec3 = rocketProjectileEntity.getAzimuth();
+            f4 = (float)Math.toDegrees(Math.atan2(vec3.x, vec3.z));
+            f3 = 0.0f;
+        } else {
+            vec3 = vec32.normalize();
+            f4 = (float)Math.toDegrees(Math.atan2(vec3.x, vec3.z));
+            float f5 = (float)Math.toDegrees(Math.asin(Math.max(-1.0, Math.min(1.0, vec3.y))));
+            f3 = 90.0f - f5;
+        }
+        poseStack.mulPose(new Quaternionf().rotationYXZ((float)Math.toRadians(f4), (float)Math.toRadians(f3), 0.0f));
+        if (this.itemRenderer == null) {
+            this.itemRenderer = Minecraft.getInstance().getItemRenderer();
+        }
+        vec3 = rocketProjectileEntity.getItem();
+        this.itemRenderer.renderStatic((ItemStack)vec3, ItemDisplayContext.GROUND, n, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, rocketProjectileEntity.level(), rocketProjectileEntity.getId());
+        poseStack.popPose();
+        super.render((Entity)rocketProjectileEntity, f, f2, poseStack, multiBufferSource, n);
+    }
+}
+
