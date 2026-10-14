@@ -4,8 +4,7 @@ on:
     branches: [arena/10158ad9-aimods]
   workflow_dispatch:
 permissions:
-  contents: write
-  actions: read
+  contents: read
 concurrency:
   group: stage1-${{ github.ref }}
   cancel-in-progress: true
@@ -52,22 +51,6 @@ jobs:
         run: |
           Xvfb :99 -screen 0 1024x768x24 -nolisten tcp > verification/logs/xvfb.log 2>&1 &
           python tools/verify_game.py client
-      - name: Save QA evidence in the working branch
-        if: success() && github.event_name == 'push'
-        run: |
-          mkdir -p reports/stage1/review2 shots/aiarsenal/stage1a-review2
-          cp verification/logs/{glb-tests,gametest,rcon,client,server}.log reports/stage1/review2/
-          cp verification/shots/*.png shots/aiarsenal/stage1a-review2/
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reports/stage1/review2 shots/aiarsenal/stage1a-review2
-          git diff --cached --quiet || git commit -m '[stage1-evidence] Record verified shooting, reload and F2 screenshots'
-          git push origin HEAD:arena/10158ad9-aimods
-      - name: Attach corrected screenshots without removing previous evidence
-        if: success() && github.event_name == 'push'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release upload stage1a-1.0.1-alpha.1 verification/shots/*.png
       - name: Upload evidence even on failure
         if: always()
         uses: actions/upload-artifact@v4
