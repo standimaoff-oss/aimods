@@ -8,7 +8,7 @@ import ru.aiforge.arsenal.AiArsenal;
 
 /** Arsenal network channel (drones, launchers, detonator, nuclear effects). */
 public final class ArsenalNetwork {
-    private static final String PROTOCOL = "1";
+    private static final String PROTOCOL = "2";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(AiArsenal.MODID, "arsenal"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals);
     private static int id;
@@ -17,6 +17,8 @@ public final class ArsenalNetwork {
     }
 
     public static void register() {
+        // Append new packet IDs below existing entries; never reorder the existing protocol.
+
         CHANNEL.messageBuilder(ControlPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(ControlPacket::encode).decoder(ControlPacket::decode).consumerMainThread(ControlPacket::handle).add();
         CHANNEL.messageBuilder(DesignatePacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
@@ -31,5 +33,9 @@ public final class ArsenalNetwork {
                 .encoder(NukeFxPacket::encode).decoder(NukeFxPacket::decode).consumerMainThread(NukeFxPacket::handle).add();
         CHANNEL.messageBuilder(ChargeListPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ChargeListPacket::encode).decoder(ChargeListPacket::decode).consumerMainThread(ChargeListPacket::handle).add();
+        CHANNEL.messageBuilder(ru.aiforge.arsenal.volumetric.VisualQaPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(ru.aiforge.arsenal.volumetric.VisualQaPacket::encode)
+                .decoder(ru.aiforge.arsenal.volumetric.VisualQaPacket::decode)
+                .consumerMainThread(ru.aiforge.arsenal.volumetric.VisualQaPacket::handle).add();
     }
 }

@@ -38,6 +38,18 @@ public final class VisualTestCommand {
                 return 1;
             })));
         }
+        var client = Commands.literal("client");
+        for (String effect : VisualQaPacket.EFFECTS) {
+            client.then(Commands.literal(effect).then(Commands.argument("player",
+                    net.minecraft.commands.arguments.EntityArgument.player()).executes(c -> {
+                var player = net.minecraft.commands.arguments.EntityArgument.getPlayer(c, "player");
+                ru.aiforge.arsenal.network.ArsenalNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player),
+                        new VisualQaPacket(effect));
+                c.getSource().sendSuccess(() -> Component.literal("Client QA sent: " + effect), false);
+                return 1;
+            })));
+        }
+        root.then(client);
         event.getDispatcher().register(root);
     }
 }

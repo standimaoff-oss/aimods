@@ -82,6 +82,9 @@ minecraft {
         }
 
         client {
+            if (System.getenv('QA_VOLUMETRIC') == '1') {
+                property 'aiarsenal.visualQa', 'true'
+            }
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
             jvmArgs '-Xmx1024M', '-XX:+UseSerialGC'

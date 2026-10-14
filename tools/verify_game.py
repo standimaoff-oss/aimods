@@ -183,11 +183,11 @@ overrideHeight:700
     screenshot('03-ppsh-third-person')
     key('key', 'F5')
     command('tp TestPlayer 0 -60 0 0 0')
-    # Fire one round, then capture magazine motion rather than a static inventory image.
+    # Fire a short burst, then capture magazine motion rather than a static inventory image.
     key('mousedown', '1')
     time.sleep(0.6)  # GunClient samples isDown per tick; a <50 ms click can be missed.
     key('mouseup', '1')
-    time.sleep(2)
+    time.sleep(6)  # let queued release/recoil settle on software GL before reload
     fired = command('data get entity TestPlayer SelectedItem')
     match = re.search(r'Ammo: (\d+)', fired)
     assert match and 0 < int(match[1]) < 71, f'Firing did not consume rounds: {fired}'
@@ -208,10 +208,8 @@ overrideHeight:700
 def volumetric(player, client_log):
     def local(effect):
         before = client_log.stat().st_size
-        key('key', 't')
-        time.sleep(0.4)
-        key('type', '--clearmodifiers', '--delay', '35', '/arsenal_fx ' + effect)
-        key('key', 'Return')
+        # Dedicated opt-in client bridge: no dependence on chat focus or dropped X11 keys.
+        command('arsenal_visual_test client ' + effect + ' TestPlayer', 'Client QA sent: ' + effect)
         end = time.monotonic() + 90
         while time.monotonic() < end:
             with client_log.open('rb') as stream:
@@ -222,6 +220,7 @@ def volumetric(player, client_log):
             if player.poll() is not None:
                 raise RuntimeError('Client exited during FX QA')
             time.sleep(1)
+        screenshot('failure-fx-' + effect)
         raise TimeoutError('No client confirmation for FX ' + effect)
 
     command('clear TestPlayer')
