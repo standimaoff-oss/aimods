@@ -6,6 +6,7 @@ Runtime is disposable; never point MC_RUNS at a player's existing world.
 """
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import signal
@@ -106,7 +107,7 @@ def screenshot(name):
                 image.load()
                 assert min(image.size) >= 480
                 assert sum(ImageStat.Stat(image.convert('RGB')).mean) > 20, 'black screenshot'
-            dest = OUT / 'shots' / (name + '.png')
+            dest = OUT / 'shots' / ('review2-' + name + '.png')
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, dest)
             print('Minecraft F2:', dest, flush=True)
@@ -134,7 +135,7 @@ onboardAccessibility:false
 skipMultiplayerWarning:true
 joinedFirstServer:true
 renderDistance:2
-simulationDistance:2
+simulationDistance:5
 maxFps:30
 guiScale:2
 fov:0.0
@@ -143,6 +144,7 @@ renderClouds:"false"
 pauseOnLostFocus:false
 narrator:0
 soundCategory_master:0.0
+chatVisibility:2
 fullscreen:false
 overrideWidth:1000
 overrideHeight:700
@@ -180,14 +182,21 @@ overrideHeight:700
     key('key', 'F5')
     command('tp TestPlayer 0 -60 0 0 0')
     # Fire one round, then capture magazine motion rather than a static inventory image.
-    key('click', '1')
+    key('mousedown', '1')
+    time.sleep(0.6)  # GunClient samples isDown per tick; a <50 ms click can be missed.
+    key('mouseup', '1')
     time.sleep(2)
-    key('key', 'r')
+    fired = command('data get entity TestPlayer SelectedItem')
+    match = re.search(r'Ammo: (\d+)', fired)
+    assert match and 0 < int(match[1]) < 71, f'Firing did not consume rounds: {fired}'
+    key('keydown', 'r')
+    time.sleep(0.15)
+    key('keyup', 'r')
     time.sleep(1)
     screenshot('04-ppsh-reload')
     time.sleep(5)
     screenshot('05-ppsh-reloaded')
-    command('data get entity TestPlayer SelectedItem', 'aiarsenal:ppsh41')
+    command('data get entity TestPlayer SelectedItem', 'Ammo: 71')
     command('stop')
     server.wait(timeout=90)
 
