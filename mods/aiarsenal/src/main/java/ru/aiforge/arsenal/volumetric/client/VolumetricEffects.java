@@ -64,6 +64,7 @@ public final class VolumetricEffects {
     }
 
     @SubscribeEvent public static void render(RenderLevelStageEvent event) {
+        checkWorld();
         VolumeGlRenderer.render(event);
     }
 

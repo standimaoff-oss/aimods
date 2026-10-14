@@ -33,7 +33,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
+        id: gradle-cache
         with:
           path: ${{ runner.temp }}/gradle-home
           key: forge-47.4.23-gradle8.8-v1
@@ -44,8 +45,14 @@ jobs:
       - name: Build mod
         working-directory: mods/aiarsenal
         run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
+      - name: Save dependency cache after a successful build
+        if: steps.gradle-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/gradle-home
+          key: forge-47.4.23-gradle8.8-v1
       - name: Run all Minecraft GameTests
-        run: python tools/verify_game.py gametest
+        run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
       - name: Install software display
         run: |
           sudo apt-get update -qq
@@ -54,7 +61,7 @@ jobs:
       - name: Real client, weapon regression and volumetric effects
         run: |
           Xvfb :99 -screen 0 1024x768x24 -nolisten tcp > verification/logs/xvfb.log 2>&1 &
-          python tools/verify_game.py client
+          python tools/verify_game.py client 2>&1 | tee verification/logs/client-driver.log
       - name: Archive build and evidence
         if: always()
         uses: actions/upload-artifact@v4

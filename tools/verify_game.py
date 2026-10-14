@@ -146,6 +146,7 @@ narrator:0
 soundCategory_master:0.0
 chatVisibility:0
 chatOpacity:0.0
+textBackgroundOpacity:0.0
 fullscreen:false
 overrideWidth:1000
 overrideHeight:700
@@ -213,7 +214,9 @@ def volumetric(player, client_log):
         key('key', 'Return')
         end = time.monotonic() + 90
         while time.monotonic() < end:
-            text = client_log.read_text(errors='replace')[before:]
+            with client_log.open('rb') as stream:
+                stream.seek(before)
+                text = stream.read().decode('utf-8', errors='replace')
             if 'FX QA ' + effect + ':' in text:
                 return text
             if player.poll() is not None:

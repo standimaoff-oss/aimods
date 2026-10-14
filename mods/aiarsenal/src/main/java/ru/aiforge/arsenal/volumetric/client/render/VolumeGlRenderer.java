@@ -64,7 +64,8 @@ public final class VolumeGlRenderer {
             RenderTarget renderTarget;
             List<VolumeInstance> list;
             Minecraft minecraft = Minecraft.getInstance();
-            if (minecraft.level != null && !(list = VolumetricFxManager.snapshot()).isEmpty() && (renderTarget = minecraft.getMainRenderTarget()) != null && renderTarget.width > 0 && renderTarget.height > 0 && renderTarget.getDepthTextureId() > 0) {
+            if (minecraft.level != null && (renderTarget = minecraft.getMainRenderTarget()) != null && renderTarget.width > 0 && renderTarget.height > 0 && renderTarget.getDepthTextureId() > 0) {
+                list = VolumetricFxManager.snapshot();
                 RenderSystem.assertOnRenderThread();
                 long l = System.nanoTime();
                 try (GlStateSnapshot state = new GlStateSnapshot()) {
@@ -77,6 +78,8 @@ public final class VolumeGlRenderer {
                     if (rayProgram == 0 || compositeProgram == 0 || volumeFbo == 0 || depthFbo == 0) {
                         return;
                     }
+                    // Compile/warm up when joining the world, not during the first trigger press.
+                    if (list.isEmpty()) return;
                     VolumeGlRenderer.uploadVolumes(list, renderLevelStageEvent.getCamera().getPosition());
                     VolumeGlRenderer.copyDepth(renderTarget);
                     VolumeGlRenderer.renderLowResolution(renderLevelStageEvent, list.size());
