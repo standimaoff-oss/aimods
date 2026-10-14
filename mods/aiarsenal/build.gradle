@@ -60,7 +60,7 @@ minecraft {
     runs {
         // applies to all the run configs below
         configureEach {
-            workingDirectory file('/home/user/.cache/mc/runs/' + name)
+            workingDirectory file((System.getenv('MC_RUNS') ?: System.getProperty('user.home') + '/.cache/mc/runs') + '/' + name)
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -109,7 +109,7 @@ minecraft {
 
         data {
             // example of overriding the workingDirectory set in configureEach above
-            workingDirectory file('/home/user/.cache/mc/runs/data')
+            workingDirectory file((System.getenv('MC_RUNS') ?: System.getProperty('user.home') + '/.cache/mc/runs') + '/data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')

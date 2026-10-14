@@ -20,10 +20,11 @@ Nodes per weapon <w>:   <w>.gun (animated root) > <w>.body, <w>.mag | <w>.round,
                         <w>.arm_r, <w>.arm_l (first person only), empties <w>.sight (eye point) and <w>.muzzle.
 Animations (glTF, 24 fps): <w>_reload, <w>_reload_empty (AK-12 / M4A1), rpg7_reload.
 """
-import bpy, bmesh, math, os
+import bpy, bmesh, math, os, sys
+from pathlib import Path
 from mathutils import Vector, Matrix, Euler
 
-ROOT = "/home/user"
+ROOT = str(Path(__file__).resolve().parents[2])
 TEX = ROOT + "/tools/blender/tex_r22"
 GLB = ROOT + "/mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb"
 D = math.radians
@@ -59,7 +60,7 @@ def mat(key, tex, rough=0.6, metal=0.0, emissive=False, clip=False, glass=None):
         m.surface_render_method = 'DITHERED'
     if glass is not None:
         b.inputs["Alpha"].default_value = glass
-        m.surface_render_method = 'BLENDED'
+        m.surface_render_method = 'DITHERED'
     m.use_backface_culling = False
     MATS[key] = m
     return m
@@ -1927,13 +1928,15 @@ def smg_reload(w, G, M, A, B, frames, frames_e, to_mag, drop=(0, 0.04, -0.36), s
 # -------------------------------------------------------------------------------------- PPSh-41
 def ppsh_mag(g):
     c_u, c_v = 478, -112
-    cylx(g, c_u, c_v, -27, 27, 75, "Blued", 40)                       # drum body (side view = circle)
-    cylx(g, c_u, c_v, -2.2, 2.2, 76.6, "Blued", 40)                   # rolled seam between cover and body
-    cylx(g, c_u, c_v, -28, 28, 62, "Blued", 36)                       # pressed steps of the cover / back
-    cylx(g, c_u, c_v, -29, 29, 36, "Blued", 28)
-    cylx(g, c_u, c_v, 29, 33, 9, "Steel", 12)                         # spring winding key (left)
-    box(g, c_u - 13, c_u + 13, c_v - 3, c_v + 3, 32, 34.5, "Steel", 0.6)
-    cylx(g, c_u + 40, c_v - 40, 27.5, 29.5, 4, "Steel", 10)          # cover latch
+    # Drum axis is PARALLEL to the bore: the circular covers face forward/back,
+    # not sideways. Keep the feed tower and top cartridge aligned with the receiver.
+    lathe(g, [(c_u - 27, 75), (c_u + 27, 75)], "Blued", 40, cv=c_v)
+    lathe(g, [(c_u - 2.2, 76.6), (c_u + 2.2, 76.6)], "Blued", 40, cv=c_v)
+    lathe(g, [(c_u - 28, 62), (c_u + 28, 62)], "Blued", 36, cv=c_v)
+    lathe(g, [(c_u - 29, 36), (c_u + 29, 36)], "Blued", 28, cv=c_v)
+    lathe(g, [(c_u - 33, 9), (c_u - 29, 9)], "Steel", 12, cv=c_v)
+    box(g, c_u - 34.5, c_u - 32, c_v - 3, c_v + 3, -13, 13, "Steel", 0.6)
+    lathe(g, [(c_u - 29.5, 4), (c_u - 27.5, 4)], "Steel", 10, cx=40, cv=c_v - 40)
     box(g, 460, 496, -46, -22, -9, 9, "Blued", 0.8)                    # feed tower into the magazine well
     box(g, 496, 499, -40, -30, -4, 4, "Steel", 0.3)                    # catch notch
     cartridge(g, 466, -25, 25, 5.0, 4.9, 4.7, 4.2, 35, 3.9, 0, 10)   # top round 7.62x25 in the lips
@@ -2279,72 +2282,86 @@ def k98k():
 
 
 
-ak = ak12()
-m4 = m4a1()
-rp = rpg7()
-t5 = t5000()
-pk = pkp()
-sg = saiga12()
-rm = r870()
-# stand-alone item models
-U0 = 433.0
-sm1 = mag_scene("MAG_AK12", ak12_mag, 433.0, None)
-sm2 = mag_scene("MAG_STANAG", stanag, 375.0, None)
-sm3 = mag_scene("MAG_T5000", t5000_mag, 490.0, None)
-sm4 = mag_scene("BOX_PKP", pkp_box, 495.0, None)
-sm5 = mag_scene("MAG_SAIGA12", saiga_mag, 474.0, None)
-sm6 = mag_scene("SHELL_12", shell_item, 400.0, None)
-ig = igla()
-sn = stinger()
-sm7 = mag_scene("IGLA_MISSILE", igla_missile, 820.0, None)
-sm8 = mag_scene("STINGER_MISSILE", stinger_missile, 690.0, None)
-pp = ppsh41()
-mp = mp40()
-mo = mosin()
-kk = k98k()
-sm9 = mag_scene("MAG_PPSH", ppsh_mag, 478.0, None)
-sm10 = mag_scene("MAG_MP40", mp40_mag, 509.0, None)
-sm11 = mag_scene("CLIP_MOSIN", mosin_clip, 520.0, None)
-sm12 = mag_scene("CLIP_K98", k98_clip, 516.0, None)
-sc = new_scene("PG7V")
-U0 = 950.0
-pg7vl("pg7v", 950, full=True)
-join_node("pg7v")
+# Small fixes must not rewrite every unrelated GLB in the repository.
+if "--only-ppsh" in sys.argv:
+    pp = ppsh41()
+    sm = mag_scene("MAG_PPSH", ppsh_mag, 478.0, None)
+    export(pp, "ppsh41")
+    export(sm, "mag_ppsh", False)
+    bpy.context.window.scene = pp
+    for scene in list(bpy.data.scenes):
+        if scene.name not in SCENES:
+            bpy.data.scenes.remove(scene)
+    os.makedirs(ROOT + "/models", exist_ok=True)
+    bpy.ops.wm.save_as_mainfile(filepath=ROOT + "/models/ppsh41.blend", compress=True)
+    print("PPSH_DONE")
+else:
+    ak = ak12()
+    m4 = m4a1()
+    rp = rpg7()
+    t5 = t5000()
+    pk = pkp()
+    sg = saiga12()
+    rm = r870()
+    # stand-alone item models
+    U0 = 433.0
+    sm1 = mag_scene("MAG_AK12", ak12_mag, 433.0, None)
+    sm2 = mag_scene("MAG_STANAG", stanag, 375.0, None)
+    sm3 = mag_scene("MAG_T5000", t5000_mag, 490.0, None)
+    sm4 = mag_scene("BOX_PKP", pkp_box, 495.0, None)
+    sm5 = mag_scene("MAG_SAIGA12", saiga_mag, 474.0, None)
+    sm6 = mag_scene("SHELL_12", shell_item, 400.0, None)
+    ig = igla()
+    sn = stinger()
+    sm7 = mag_scene("IGLA_MISSILE", igla_missile, 820.0, None)
+    sm8 = mag_scene("STINGER_MISSILE", stinger_missile, 690.0, None)
+    pp = ppsh41()
+    mp = mp40()
+    mo = mosin()
+    kk = k98k()
+    sm9 = mag_scene("MAG_PPSH", ppsh_mag, 478.0, None)
+    sm10 = mag_scene("MAG_MP40", mp40_mag, 509.0, None)
+    sm11 = mag_scene("CLIP_MOSIN", mosin_clip, 520.0, None)
+    sm12 = mag_scene("CLIP_K98", k98_clip, 516.0, None)
+    sc = new_scene("PG7V")
+    U0 = 950.0
+    pg7vl("pg7v", 950, full=True)
+    join_node("pg7v")
 
-export(ak, "ak12")
-export(m4, "m4a1")
-export(rp, "rpg7")
-export(sm1, "mag_ak12", False)
-export(sm2, "mag_stanag", False)
-export(sc, "pg7v", False)
-export(t5, "t5000")
-export(pk, "pkp")
-export(sm3, "mag_t5000", False)
-export(sm4, "box_pkp", False)
-export(sg, "saiga12")
-export(rm, "r870")
-export(sm5, "mag_saiga12", False)
-export(sm6, "shell_12", False)
-export(ig, "igla")
-export(sn, "stinger")
-export(sm7, "igla_missile", False)
-export(sm8, "stinger_missile", False)
-export(pp, "ppsh41")
-export(mp, "mp40")
-export(mo, "mosin")
-export(kk, "k98k")
-export(sm9, "mag_ppsh", False)
-export(sm10, "mag_mp40", False)
-export(sm11, "clip_mosin", False)
-export(sm12, "clip_k98", False)
+    export(ak, "ak12")
+    export(m4, "m4a1")
+    export(rp, "rpg7")
+    export(sm1, "mag_ak12", False)
+    export(sm2, "mag_stanag", False)
+    export(sc, "pg7v", False)
+    export(t5, "t5000")
+    export(pk, "pkp")
+    export(sm3, "mag_t5000", False)
+    export(sm4, "box_pkp", False)
+    export(sg, "saiga12")
+    export(rm, "r870")
+    export(sm5, "mag_saiga12", False)
+    export(sm6, "shell_12", False)
+    export(ig, "igla")
+    export(sn, "stinger")
+    export(sm7, "igla_missile", False)
+    export(sm8, "stinger_missile", False)
+    export(pp, "ppsh41")
+    export(mp, "mp40")
+    export(mo, "mosin")
+    export(kk, "k98k")
+    export(sm9, "mag_ppsh", False)
+    export(sm10, "mag_mp40", False)
+    export(sm11, "clip_mosin", False)
+    export(sm12, "clip_k98", False)
 
-for s in list(bpy.data.scenes):
-    if s.name not in SCENES:
-        bpy.data.scenes.remove(s)
-bpy.context.window.scene = SCENES["AK12"]
-for img in bpy.data.images:
-    if not img.packed_file:
-        img.pack()
-os.makedirs(ROOT + "/models", exist_ok=True)
-bpy.ops.wm.save_as_mainfile(filepath=ROOT + "/models/weapons_r22.blend", compress=True)
-print("WPN_DONE")
+    for s in list(bpy.data.scenes):
+        if s.name not in SCENES:
+            bpy.data.scenes.remove(s)
+    bpy.context.window.scene = SCENES["AK12"]
+    for img in bpy.data.images:
+        if not img.packed_file:
+            img.pack()
+    os.makedirs(ROOT + "/models", exist_ok=True)
+    bpy.ops.wm.save_as_mainfile(filepath=ROOT + "/models/weapons_r22.blend", compress=True)
+    print("WPN_DONE")
