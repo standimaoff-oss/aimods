@@ -4,12 +4,14 @@ on:
     branches: [arena/10158ad9-aimods]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+  actions: read
 concurrency:
   group: stage1-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   verify:
+    if: ${{ !contains(github.event.head_commit.message, '[deliver-stage1]') && !contains(github.event.head_commit.message, '[stage1-evidence]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     env:
@@ -61,3 +63,38 @@ jobs:
             mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb/mag_ppsh.glb
             mods/aiarsenal/build/libs/*.jar
           if-no-files-found: error
+
+  deliver:
+    if: ${{ contains(github.event.head_commit.message, '[deliver-stage1]') }}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source run provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh run view 38609122644 --json conclusion --jq .conclusion)" = success
+          test "$(gh run view 38609122644 --json headSha --jq .headSha)" = d671b04c589e47a305fc8fd98b0f8eac41f90fd7
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage1-evidence
+          run-id: 38609122644
+          github-token: ${{ github.token }}
+          path: delivery
+      - name: Save generated assets and genuine Minecraft screenshots
+        run: |
+          cp delivery/mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb/{ppsh41,mag_ppsh}.glb mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb/
+          mkdir -p models shots/aiarsenal/stage1a reports/stage1/ci
+          cp delivery/models/ppsh41.blend models/
+          cp delivery/verification/shots/*.png shots/aiarsenal/stage1a/
+          cp delivery/verification/logs/{blender,glb-tests,gametest,rcon,client,server}.log reports/stage1/ci/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add models/ppsh41.blend mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb/{ppsh41,mag_ppsh}.glb shots/aiarsenal/stage1a reports/stage1/ci
+          git commit -m '[stage1-evidence] Save Blender exports and real Minecraft QA evidence'
+          git push origin HEAD:arena/10158ad9-aimods
+      - name: Publish isolated partial preview (never overwrite existing release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create stage1a-1.0.1-alpha.1 delivery/mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.1.jar delivery/verification/shots/*.png --target "$(git rev-parse HEAD)" --prerelease --title 'Stage 1a: PPSh drum correction — partial preview' --notes 'ЧАСТИЧНОЕ обновление: только исправление барабана ППШ и конвейер проверки. Дым VolPyro, новое оружие, вкладки эпох и удаление ракет ЕЩЁ НЕ ВЫПОЛНЕНЫ. Исходники сборки d671b04; GameTests и настоящий Forge userdev-клиент прошли в https://github.com/standimaoff-oss/aimods/actions/runs/38609122644. PNG приложены без подмены рендерами. Визуальная приёмка и проверка установленного JAR отдельно от userdev ещё требуются. Forge 1.20.1 / 47.4.23, Java 17. Рекомендуется копия тестового мира, не основной мир.'

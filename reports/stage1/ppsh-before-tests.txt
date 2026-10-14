@@ -1,0 +1,28 @@
+test_standalone_magazine (__main__.PpshExportTests.test_standalone_magazine) ... FAIL
+test_weapon_drum_and_animation (__main__.PpshExportTests.test_weapon_drum_and_animation) ... FAIL
+
+======================================================================
+FAIL: test_standalone_magazine (__main__.PpshExportTests.test_standalone_magazine)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/aimods/tools/check_ppsh.py", line 77, in test_standalone_magazine
+    self.check_model('mag_ppsh.glb', 'mag_ppsh', set())
+  File "/home/user/aimods/tools/check_ppsh.py", line 53, in check_model
+    self.assertAlmostEqual(extents[0], 0.1532, delta=0.002, msg='drum must be wide across weapon')
+AssertionError: 0.06349999830126762 != 0.1532 within 0.002 delta (0.08970000169873238 difference) : drum must be wide across weapon
+
+======================================================================
+FAIL: test_weapon_drum_and_animation (__main__.PpshExportTests.test_weapon_drum_and_animation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/aimods/tools/check_ppsh.py", line 71, in test_weapon_drum_and_animation
+    doc, binary, node = self.check_model('ppsh41.glb', 'ppsh41.mag', {'ppsh41_reload', 'ppsh41_reload_empty'})
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/aimods/tools/check_ppsh.py", line 53, in check_model
+    self.assertAlmostEqual(extents[0], 0.1532, delta=0.002, msg='drum must be wide across weapon')
+AssertionError: 0.06349999830126762 != 0.1532 within 0.002 delta (0.08970000169873238 difference) : drum must be wide across weapon
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+FAILED (failures=2)

@@ -45,6 +45,9 @@
 SHA-256: `f3ca41897d0edf7bb09e55414c1d3941b1a048870818885bd2bcad06ac1428fa`.
 `git bundle verify` подтвердил целостность и отсутствие необходимых внешних prerequisites.
 Восстановление: клонировать bundle **в отдельную папку**, не поверх существующего мира/репозитория.
+На GitHub закреплена резервная точка: [backup-before-armies-20261014](https://github.com/standimaoff-oss/aimods/releases/tag/backup-before-armies-20261014).
+ZIP Source code этого prerelease содержит исходный снимок; локальный bundle не приложен
+из-за ограничения загрузки на uploads.github.com.
 Миров Minecraft в исходном checkout нет: копии пользовательских миров этот бэкап не содержит.
 
 ## Честность проверки
