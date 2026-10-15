@@ -47,6 +47,8 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = AiArsenal.MODID, value = Dist.CLIENT)
 public final class NukeFx {
     private static final int LIFE = 3000;
+    private static long shaderSafeFrames;
+    public static long shaderSafeFrames() { return shaderSafeFrames; }
     private static final RenderType SAFE_CLOUD = RenderType.entityTranslucent(
             new ResourceLocation("aiarsenal", "textures/misc/fx_white.png"));
     private record CloudVertices(VertexConsumer sink, boolean textured) {}
@@ -192,7 +194,10 @@ public final class NukeFx {
             draw(m, f, f.age + pt, cam.subtract(f.x, 0, f.z), safe);
             ps.popPose();
         }
-        if (safe) Minecraft.getInstance().renderBuffers().bufferSource().endBatch(SAFE_CLOUD);
+        if (safe) {
+            Minecraft.getInstance().renderBuffers().bufferSource().endBatch(SAFE_CLOUD);
+            shaderSafeFrames++;
+        }
         else {
             RenderSystem.depthMask(true);
             RenderSystem.enableCull();

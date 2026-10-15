@@ -15,8 +15,13 @@ def powder_cannon(row,index):
 
     def click(slot):
         state=context.qa('cannonstatus')
-        g.command(f"tp TestPlayer {state['x']} {state['y']} {state['z']-2.5} facing entity @e[type={row['id']},sort=nearest,limit=1] eyes")
+        # Explicit eye-to-hitbox aim: vanilla /tp facing uses a feet source anchor
+        # unless overridden, which previously aimed ABOVE this low cannon.
+        g.command(f"tp TestPlayer {state['x']} {state['y']} {state['z']-2.5} 0 20")
         g.key('key',str(slot));time.sleep(1)
+        aim=g.fx_action(g.LOGS/'client.log','status')
+        row.setdefault('aimChecks',[]).append(aim)
+        assert 'target='+row['id'] in aim,aim
         g.key('mousedown','3');time.sleep(.25);g.key('mouseup','3')
 
     for cycle in range(2):

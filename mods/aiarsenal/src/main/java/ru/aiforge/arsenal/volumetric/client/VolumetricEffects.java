@@ -123,11 +123,16 @@ public final class VolumetricEffects {
             for (int i = 0; i < 20; i++)
                 VolumetricFxManager.recordRocket(-27, p.add(i * 0.5, i * 0.7, 0), new Vec3(0.5, 0.7, 0), 1);
         }
+        String target = mc.hitResult instanceof net.minecraft.world.phys.EntityHitResult hit
+                ? net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(hit.getEntity().getType()).toString()
+                : mc.hitResult == null ? "none" : mc.hitResult.getType().toString();
         String status = String.format(java.util.Locale.ROOT,
-            "Arsenal VolPyro: active=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s world=%s",
+            "Arsenal VolPyro: active=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s world=%s target=%s safeParticles=%d safeCloudFrames=%d",
             active(), VolumetricFxManager.volumeCount(), VolumetricFxManager.plumeCount(),
             VolumeGlRenderer.frameCounter(), VolumeGlRenderer.lastDrawNanos() / 1e6,
-            VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName(), mc.level.dimension().location());
+            VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName(), mc.level.dimension().location(), target,
+            ru.aiforge.realwar.client.particle.FxSystem.shaderSafeParticles(),
+            ru.aiforge.arsenal.client.NukeFx.shaderSafeFrames());
         AiArsenal.LOGGER.info("FX QA {}: {}", effect, status);
         return status;
     }

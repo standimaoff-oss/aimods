@@ -21,12 +21,12 @@ def get(url):
 def install(game):
     client = game.RUNS / 'client'
     provenance = []
-    # Photon is pinned to the reported crash fixture. The other publishers' latest
-    # compatible files are resolved once and recorded with SHA-512 for reproduction.
+    # Exact publisher releases from the recorded three-pack fixture; downloaded
+    # files are verified against the publisher SHA-512 and recorded for reproduction.
     pack = os.environ.get('QA_SHADERPACK', 'photon')
     projects = {'photon': ('photon-shader', '1.3b'),
-                'complementary': ('complementary-reimagined', ''),
-                'bsl': ('bsl-shaders', '')}
+                'complementary': ('complementary-reimagined', '5.9.3'),
+                'bsl': ('bsl-shaders', '10.1.8')}
     project, fragment = projects[pack]
     for project, fragment, folder in [('oculus', '1.8.0', 'mods'),
                                        ('embeddium', '0.3.31', 'mods'),

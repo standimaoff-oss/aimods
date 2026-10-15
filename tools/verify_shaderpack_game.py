@@ -91,14 +91,15 @@ overrideHeight:600
     g.view_action(log,'view_ready')
     time.sleep(3)
     g.screenshot(PACK+'-initial')
+    reload_log_start=log.stat().st_size
     for weapon in ['ppsh41','mosin_pu','musket_1777']:
         ammo={'ppsh41':'mag_ppsh','mosin_pu':'round_762x54r','musket_1777':'paper_cartridge'}[weapon]
         g.command('clear TestPlayer')
         g.command('item replace entity TestPlayer hotbar.0 with aiarsenal:'+weapon+'{Ammo:0}')
         g.command('give TestPlayer aiarsenal:'+ammo+' 8')
         g.key('key','1');time.sleep(2)
-        # Keep Oculus defaults. This also detects the R/reload-shaders key conflict;
-        # never quietly rebind another mod merely to make this test pass.
+        # Keep Oculus defaults. Production context arbitration must prevent shader
+        # rebuilds here; never quietly rebind another mod to make this test pass.
         g.key('keydown','r');time.sleep(.3);g.key('keyup','r')
         capacity={'ppsh41':71,'mosin_pu':5,'musket_1777':1}[weapon]
         def fully_loaded():
@@ -123,15 +124,34 @@ overrideHeight:600
     row={'id':'aiarsenal:sturmtiger_vehicle','vehicleAmmo':'aiarsenal:rocket_380','drivable':True,'result':'RUNNING'}
     REPORT['actions'].append(row);save()
     sturmtiger(row);save()
+    reload_log=tail_from(log,reload_log_start)
+    assert 'Destroying pipeline' not in reload_log,'R rebuilt Oculus pipeline while reloading a weapon'
+    assert 'Shader reload key conflict:' in reload_log,'default R conflict was not exercised'
+    REPORT['weaponReloadShaderRebuilds']=0;save()
     g.command('gamemode creative TestPlayer')
     g.command('clear TestPlayer')
     g.command('tp TestPlayer 0.5 -60 0.5 0 0')
     g.view_action(log,'view_first')
+    REPORT['fallbackObservations']=[]
     for effect in ['blast','nuke','legacy_nuke']:
+        before=local('status')
         g.command('arsenal_visual_test '+effect+' 0 -60 22')
+        if effect != 'blast':
+            time.sleep(.2);g.screenshot(PACK+'-flash-'+effect)
         time.sleep(4)
         g.screenshot(PACK+'-fallback-'+effect)
+        after=local('status')
+        counter='safeCloudFrames' if effect=='legacy_nuke' else 'safeParticles'
+        old=int(re.search(counter+r'=(\d+)',before)[1]);new=int(re.search(counter+r'=(\d+)',after)[1])
+        assert new>old,{'effect':effect,'before':before,'after':after}
+        REPORT['fallbackObservations'].append(dict(effect=effect,before=before,after=after));save()
     assert status(False)==0, 'raw GL pass executed under Photon'
+    # With empty hands and no vehicle, R must still perform Oculus' own action.
+    offset=log.stat().st_size
+    g.key('keydown','r');time.sleep(.2);g.key('keyup','r')
+    wait(lambda:'Creating pipeline for dimension' in tail_from(log,offset))
+    status(False)
+    REPORT['unarmedShaderReload']='PASS';save()
     toggles=REPORT['toggles']
     for iteration in range(2):
         g.key('key','k')
@@ -172,4 +192,7 @@ if __name__=='__main__':
         raise
     finally:
         save()
+        if REPORT['result']=='FAIL' and context.CLIENT is not None and context.CLIENT.poll() is None:
+            try:g.screenshot(PACK+'-failure')
+            except Exception:pass
         g.cleanup()

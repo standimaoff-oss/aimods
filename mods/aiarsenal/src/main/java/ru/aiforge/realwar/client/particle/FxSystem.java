@@ -38,12 +38,15 @@ public final class FxSystem {
     private static final List<FxParticle> ALL = new ArrayList<FxParticle>();
     private static final List<FxParticle> VISIBLE = new ArrayList<FxParticle>();
     private static boolean renderFailed;
+    private static long shaderSafeParticles;
+    public static long shaderSafeParticles() { return shaderSafeParticles; }
 
     private FxSystem() {
     }
 
     private static void handToParticleEngine(FxParticle p) {
         p.useShaderSafeRendering();
+        shaderSafeParticles++;
         Minecraft.getInstance().particleEngine.add(p);
     }
 
