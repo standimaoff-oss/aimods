@@ -116,10 +116,14 @@ extends Entity {
 
     protected void readAdditionalSaveData(CompoundTag tag) {
         this.entityData.set(TYPE, tag.getInt("type"));
+        this.armAt = tag.contains("ArmAt") ? Math.max(0, Math.min(1200, tag.getInt("ArmAt"))) : ARM_TICKS;
+        this.tickCount = Math.max(0, Math.min(120000, tag.getInt("FuzeAge")));
     }
 
     protected void addAdditionalSaveData(CompoundTag tag) {
         tag.putInt("type", ((Integer)this.entityData.get(TYPE)).intValue());
+        tag.putInt("ArmAt", this.armAt);
+        tag.putInt("FuzeAge", this.tickCount);
     }
 
     public Packet<ClientGamePacketListener> getAddEntityPacket() {

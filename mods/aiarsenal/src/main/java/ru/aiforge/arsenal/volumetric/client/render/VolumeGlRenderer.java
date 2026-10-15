@@ -62,7 +62,7 @@ public final class VolumeGlRenderer {
     }
 
     public static void render(RenderLevelStageEvent renderLevelStageEvent) {
-        if (renderLevelStageEvent.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && !failed && ((Boolean)VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.get()).booleanValue()) {
+        if (renderLevelStageEvent.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && available()) {
             RenderTarget renderTarget;
             List<VolumeInstance> list;
             Minecraft minecraft = Minecraft.getInstance();
@@ -386,7 +386,8 @@ public final class VolumeGlRenderer {
     }
 
     public static boolean available() {
-        return !failed && VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.get();
+        return !failed && VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.get()
+                && !ShaderPackCompatibility.blocked();
     }
 
     /** Render-thread resource reload / world teardown; also permits retry after a shader fix. */
