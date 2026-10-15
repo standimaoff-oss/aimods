@@ -84,7 +84,11 @@ def missile(row,index):
         return missile_complete(row['observed'])
     wait(completed,360)
     g.command('gamemode creative TestPlayer')
-    g.command(f'tp TestPlayer {tx+20} -58 {tz-25} 40 15')
+    impacts=[e for e in row['observed'].get('entities',[]) if e['mode']==1 and e['removed']]
+    # MIRV craters are scattered around the nominal target; observe a real child
+    # endpoint instead of photographing untouched grass at the footprint centre.
+    ix,iz=(impacts[0]['x'],impacts[0]['z']) if impacts else (tx,tz)
+    g.command(f'tp TestPlayer {ix+30} -50 {iz-30} 45 25')
     time.sleep(4)
     g.screenshot('impact-'+row['id'].split(':')[1])
     g.command(f'forceload remove -16 {z-16} 32 {z+32}')
@@ -223,7 +227,10 @@ def drone(row,index):
             stop_before=client_count('REMOTE CLIENT QA STOP')
             d('reconnect');assert d()['session']
             wait(lambda:client_count(marker)>ack_before,45)
+            waiting_before=client_count('REMOTE CLIENT QA WAITING')
+            time.sleep(2)
             g.screenshot('drone-reconnect-'+row['id'].split(':')[1])
+            assert client_count('REMOTE CLIENT QA WAITING')==waiting_before, 'camera tracking lost during reconnect capture'
             key('BackSpace');wait(restored,30)
             wait(lambda:client_count('REMOTE CLIENT QA STOP')>stop_before,30)
             row['secondExit']=d()

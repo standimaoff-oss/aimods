@@ -218,6 +218,21 @@ extends Entity {
             this.discard();
             return;
         }
+        if (this.mode() != 2) {
+            double nextDistance = Math.min(this.dist(this.age + 1), this.horiz);
+            Vec3 next = new Vec3(this.start.x + this.dirX * nextDistance, this.getY(),
+                    this.start.z + this.dirZ * nextDistance);
+            if (!sl.isPositionEntityTicking(BlockPos.containing(next))) {
+                // Tickets request asynchronous readiness; they do not guarantee
+                // it this tick. Never step out of the active entity section into
+                // a FULL-but-not-ticking chunk (where our tick could disappear).
+                // Hold flight age/position, not the server or chunk-generation thread.
+                this.lastTicket = null;
+                this.keepLoaded(sl, next, new Vec3(this.dirX * this.speed * 40, 0,
+                        this.dirZ * this.speed * 40), nextDistance / this.horiz);
+                return;
+            }
+        }
         ++this.age;
         MissileType type = this.type();
         if (this.mode() == 2) {

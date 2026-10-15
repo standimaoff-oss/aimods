@@ -134,10 +134,12 @@ public final class ArsClient {
     }
 
     private static int qaAckSession = -1;
+    private static int qaReadyTicks;
 
     public static void session(SessionPacket pk) {
         Minecraft mc = Minecraft.getInstance();
         qaAckSession = -1;
+        qaReadyTicks = 0;
         if (pk.start()) {
             sessionId = pk.entityId();
             zoom = 1f;
@@ -191,11 +193,19 @@ public final class ArsClient {
         }
         Entity d = sessionEntity();
         if (d != null && mc.getCameraEntity() != d) mc.setCameraEntity(d);
-        if (d == null) return;
-        if (Boolean.getBoolean("aiarsenal.visualQa") && qaAckSession != d.getId()) {
-            qaAckSession = d.getId();
-            ru.aiforge.arsenal.AiArsenal.LOGGER.info("REMOTE CLIENT QA READY id={}", d.getId());
+        if (Boolean.getBoolean("aiarsenal.visualQa")) {
+            boolean ready = d != null && mc.getCameraEntity() == d && mc.level.hasChunkAt(d.blockPosition());
+            if (!ready) {
+                if (qaAckSession != -1)
+                    ru.aiforge.arsenal.AiArsenal.LOGGER.info("REMOTE CLIENT QA WAITING id={}", sessionId);
+                qaAckSession = -1;
+                qaReadyTicks = 0;
+            } else if (++qaReadyTicks >= 20 && qaAckSession != d.getId()) {
+                qaAckSession = d.getId();
+                ru.aiforge.arsenal.AiArsenal.LOGGER.info("REMOTE CLIENT QA READY id={}", d.getId());
+            }
         }
+        if (d == null) return;
         flightTicks++;
         if (KEY_EXIT.consumeClick()) {
             ArsenalNetwork.CHANNEL.sendToServer(new ControlPacket(-1, 0, 0, 0, 1));
