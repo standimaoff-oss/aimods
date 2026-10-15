@@ -1,0 +1,13 @@
+{
+  "source": "0d9bd4320b8149359bb1d20a713923f9bc8266de",
+  "bytes": 691699,
+  "sha256": "88554a03998e5e0c758d06768b34e37a63b5818115952fd01c3bf9452c1d2418",
+  "failures": [
+    "[22:17:26] [Server thread/ERROR] [minecraft/LogTestReporter]: mirv_children_finish_outside_player_chunks failed! stranded MIRV child age=42 pos=(14626.59978035799, 871.3967650800855, 12047.714449458426)"
+  ],
+  "totals": [
+    "[22:19:16] [Server thread/INFO] [minecraft/GameTestServer]: ========= 177 GAME TESTS COMPLETE ======================",
+    "[22:19:16] [Server thread/INFO] [minecraft/GameTestServer]: 1 required tests failed :("
+  ],
+  "scope": "Early log checkpoint only; not a workflow verdict"
+}
