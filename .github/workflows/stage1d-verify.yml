@@ -64,11 +64,16 @@ jobs:
           python tools/blender/verify_stage1c_mcp.py 2>&1 | tee verification/logs/blender-driver.log
           python tools/check_stage1c.py 2>&1 | tee verification/logs/stage1d-static.log
       - name: Build mod
+        id: build
         working-directory: mods/aiarsenal
         run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
       - name: Minecraft GameTests
         run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
+      - name: Old world ore migration and retained nuclear/drone inventory
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: python tools/verify_ore_migration.py 2>&1 | tee verification/logs/ore-migration-driver.log
       - name: Real Minecraft scopes pistols and retained weapon regression
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: python tools/verify_game.py client 2>&1 | tee verification/logs/client-driver.log
       - name: Archive evidence and JAR
         if: always()

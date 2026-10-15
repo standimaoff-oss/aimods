@@ -133,7 +133,12 @@ public final class WreckTests {
         // Previously only the cache's 9x9 area was cleared; adding a test could shift the wreck into a building.
         BlockPos c = h.absolutePos(new BlockPos(516, 0, 516));
         BlockPos cc0 = new BlockPos((c.getX() & ~15) + 8, 0, (c.getZ() & ~15) + 8);
+        // ServerLevel.getHeight on an UNLOADED column returns minBuildHeight; load both footprints first.
+        for (int offset : new int[]{0, 48})
+            for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++)
+                l.getChunk(((cc0.getX() + offset) >> 4) + dx, (cc0.getZ() >> 4) + dz);
         int top = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, cc0.getX(), cc0.getZ());
+        h.assertTrue(top > l.getMinBuildHeight() + 2, "fixture must have loaded ground, not the unloaded-column sentinel");
         for (int offset : new int[]{0, 48}) {
             BlockPos centre = cc0.offset(offset, 0, 0);
             for (BlockPos p : BlockPos.betweenClosed(centre.offset(-14, top - 2, -14), centre.offset(14, top + 12, 14)))
