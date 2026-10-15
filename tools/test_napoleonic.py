@@ -10,7 +10,7 @@ class Napoleonic(unittest.TestCase):
   signature=lambda r:sorted(json.dumps(i,sort_keys=True) for i in r['ingredients'])
   for name in NAMES:
    self.assertTrue((A/'models/item'/f'{name}.json').exists())
-   for lang in ['ru_ru','en_us']:self.assertIn('item.aiarsenal.'+name,json.loads((A/'lang'/f'{lang}.json').read_text()))
+   for lang in ['ru_ru','en_us']:self.assertIn('item.aiarsenal.'+name,json.loads((A/'lang'/f'{lang}.json').read_text()));self.assertIn('hud.aiarsenal.gun.name.'+name,json.loads((A/'lang'/f'{lang}.json').read_text()))
    self.assertEqual([k for k,v in recipes.items() if v.get('type')=='minecraft:crafting_shapeless' and signature(v)==signature(recipes[name])],[name])
  def test_models_have_packed_textures_finite_geometry_and_nodes(self):
   self.assertTrue((R/'models/napoleonic_arms.blend').exists())

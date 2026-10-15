@@ -48,6 +48,9 @@ public final class WeaponMotionTests {
         var a=running.sample(.5f,0,false,false);var b=running.sample(.5f,0,true,false);
         h.assertTrue(Math.abs(b.y()-a.y()*.12f)<.00001,"reload overrides gait");
         h.assertTrue(Math.abs(idle.sample(.5f,0,false,false).y())<.004,"no state leak to stationary player");
+        // Previous 18-degree + 11cm drop removed the entire pistol from the FOV70 frame.
+        var pistol=running.sample(.5f,0,false,true);
+        h.assertTrue(pistol.y()>-.05f && Math.abs(pistol.pitch())<9,"sprint framing stays bounded");
         h.succeed();
     }
     @GameTest(template="arena", batch="rw_motion")

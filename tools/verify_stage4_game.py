@@ -20,7 +20,7 @@ def run(g,log,window):
  def aim(x,y,z,tx,ty,tz):
   dx=tx-x;dz=tz-z;dy=ty-y-1.62
   g.command(f'tp TestPlayer {x:.3f} {y:.3f} {z:.3f} {-math.degrees(math.atan2(dx,dz)):.3f} {-math.degrees(math.atan2(dy,math.hypot(dx,dz))):.3f}')
- view('view_first');view('view_fov70');g.key('key','Escape');g.key('mouseup','3');g.key('mouseup','1')
+ g.key('mouseup','3');g.key('mouseup','1');view('view_first');view('view_fov70');view('view_ready')
  g.command('clear TestPlayer');g.command('gamemode survival TestPlayer')
  g.command('effect give TestPlayer minecraft:resistance 9999 4 true');g.command('effect give TestPlayer minecraft:saturation 9999 10 true')
  for name,supply,country in [('musket_1777','paper_cartridge','fr'),('musket_1808','paper_cartridge','ri'),('pistol_an13','pistol_cartridge','fr'),('pistol_1809','pistol_cartridge','ri')]:
@@ -45,9 +45,17 @@ def run(g,log,window):
   aim(2.2,-60,3.7,.5,-59.3,5.5);equip(charge)
   selector='@e[tag=qa_cannon,limit=1]'
   def loaded():return re.search(r'data: 0\b',g.command('data get entity '+selector+' LoadTicks'))
-  record=Recording(g,'1812-'+name,window=window);use();g.screenshot(name+'-load')
+  record=Recording(g,'1812-'+name,window=window)
+  try:
+   g.key('mousedown','3');wait(lambda:bool(re.search(r'data: [1-9]\d*\b',g.command('data get entity '+selector+' LoadTicks'))),5)
+  finally:g.key('mouseup','3')
+  g.screenshot(name+'-load')
   wait(loaded,20);g.command('item replace entity TestPlayer hotbar.0 with minecraft:flint_and_steel');time.sleep(.7)
-  g.screenshot(name+'-ready');start=log.stat().st_size;use();time.sleep(.5);g.screenshot(name+'-fire')
+  g.screenshot(name+'-ready');start=log.stat().st_size
+  try:
+   g.key('mousedown','3');wait(lambda:bool(re.search(r'data: -1\b',g.command('data get entity '+selector+' LoadTicks'))),5)
+  finally:g.key('mouseup','3')
+  time.sleep(.3);g.screenshot(name+'-fire')
   assert re.search(r'data: -1\b',g.command('data get entity '+selector+' LoadTicks')),'cannon did not fire'
   with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
   assert 'FX EMITTER profile=3' in text,'actual cannon ignition did not create volume'
@@ -57,9 +65,11 @@ def run(g,log,window):
   view(action);g.screenshot('1812-catalog-'+label);g.key('key','Escape')
  # Actual bomber bomb falls, hits terrain and routes its own impact packet; not a showcase command.
  g.command('tp TestPlayer 0.5 -60.0 0.5 0 -5');view('view_first');view('view_fov70')
- record=Recording(g,'custom-ordinary-explosion',window=window)
+ record=Recording(g,'custom-ordinary-explosion',window=window);start=log.stat().st_size
  g.command('summon aiarsenal:bomb 0.5 -55.0 16.5 {type:0,vx:0d,vy:-2d,vz:0d,scale:1f}')
  time.sleep(1.5);g.screenshot('custom-bomb-impact');time.sleep(3);g.screenshot('custom-bomb-smoke');time.sleep(3);record.stop()
+ with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
+ assert 'FX ARSENAL BLAST' in text,'actual bomb impact did not use custom explosion smoke'
  # Real turbine flags drive live engine callbacks on both bomber types, preserving their flight physics.
  for name in ['tu95ms','tu160']:
   g.command('kill @e[tag=qa_engine]');g.command('fill -35 -61 30 35 -61 65 minecraft:smooth_stone')
@@ -69,4 +79,8 @@ def run(g,log,window):
   with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
   assert 'FX EMITTER profile=4' in text,'live bomber engines did not emit'
  g.command('kill @e[tag=qa_engine]');g.command('tp TestPlayer 0.5 -60.0 0.5 0 0');g.fx_action(log,'clear')
+ # Restore only the disposable QA fixture after the real destructive bomb impact.
+ g.command('fill -12 -61 -8 12 -61 25 minecraft:smooth_stone')
+ g.command('fill -8 -60 22 8 -53 22 minecraft:white_concrete')
+ g.command('fill -1 -57 21 1 -55 21 minecraft:red_concrete')
  (g.LOGS/'stage4-gameplay.json').write_text(json.dumps({'result':'PASS','single_shot_firearms':4,'manually_loaded_cannons':2,'bombers_with_live_exhaust':2,'ordinary_explosion':'live falling FAB-250; actual impact path','screenshots':'Minecraft F2','videos':'visible X11 game window and native PulseAudio'},indent=2)+'\n')

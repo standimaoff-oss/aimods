@@ -14,3 +14,10 @@ Specs: `notes/_tz/TZ-ai-forge-mod.md`, `TZ_MODEL_VIEW_PRO_v2.0.md`.
 - Runtime: installed Forge 1.20.1/47.4.23/Java 17. Survival cartridge consumption, cannon loading/fire, actual falling-bomb impact, live bomber engines, F2 and real X11+PulseAudio recordings. Prior scope/uniform/multiplayer/motion/index regression gates retained.
 - Stage3 run 38750364719 failed because ffmpeg could not read an occluded/unmapped X11 window (zero video frames), not a passing motion release. New recording maps, moves and raises the actual window and captures its visible screen rectangle. No fabricated frames or audio normalization.
 - Static validation already passes donor-shader identity and resource recipes. Compilation, modelling and visual acceptance pending CI; do not publish merely on generation or build success.
+
+## First real run: 38755279826 (source 03c5cbb)
+- Live Blender/MCP, all static checks, build, **167 GameTests**, installed saved-world migration PASS.
+- Actual client harness failed at the first musket because it pressed Escape **after** closing menus via `view_first`, reopening the pause screen. Server correctly did not fire through the menu. F2 inspected: explicitly a failure, not accepted gameplay evidence.
+- Inspected all 8 genuine Blender viewports: recognizable wooden flintlocks, spoked artillery and brass-hilt blades. Corrected blade curvature, cannon trunnion seats, inventory-scale cannons, ammo size differentiation and HUD translations.
+- Inspected stage3 sprint F2: pistol completely outside bottom edge. Reduced sprint drop/angles and added bounded-transform regression; final real-motion verification remains required.
+- Next run checks new content first, then restores only the disposable bomb-test fixture and executes all prior regression suites.

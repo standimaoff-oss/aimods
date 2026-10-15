@@ -2049,5 +2049,18 @@
   "msg.aiarsenal.cannon.loading": "Loading: 8 seconds",
   "subtitles.aiarsenal.musket_fire": "Black powder shot",
   "subtitles.aiarsenal.flintlock_fire": "Black powder shot",
-  "subtitles.aiarsenal.powder_cannon": "Black powder shot"
+  "subtitles.aiarsenal.powder_cannon": "Black powder shot",
+  "hud.aiarsenal.gun.name.musket_1777": "1777 / An IX musket",
+  "hud.aiarsenal.gun.name.musket_1808": "infantry musket M1808",
+  "hud.aiarsenal.gun.name.pistol_an13": "An XIII pistol",
+  "hud.aiarsenal.gun.name.pistol_1809": "cavalry pistol M1809",
+  "hud.aiarsenal.gun.name.cannon_fr6": "An XI 6-pounder",
+  "hud.aiarsenal.gun.name.cannon_ri12": "M1805 12-pounder",
+  "hud.aiarsenal.gun.name.sabre_briquet": "briquet short sabre",
+  "hud.aiarsenal.gun.name.sabre_1809": "cavalry sabre",
+  "hud.aiarsenal.gun.name.paper_cartridge": "Paper musket cartridge",
+  "hud.aiarsenal.gun.name.pistol_cartridge": "Paper pistol cartridge",
+  "hud.aiarsenal.gun.name.charge_fr6": "6-pounder charge and roundshot",
+  "hud.aiarsenal.gun.name.charge_ri12": "12-pounder charge and roundshot",
+  "hud.aiarsenal.gun.name.cannonball": "Iron roundshot"
 }

@@ -2049,5 +2049,18 @@
   "msg.aiarsenal.cannon.loading": "Заряжание: 8 секунд",
   "subtitles.aiarsenal.musket_fire": "Выстрел порохового оружия",
   "subtitles.aiarsenal.flintlock_fire": "Выстрел порохового оружия",
-  "subtitles.aiarsenal.powder_cannon": "Выстрел порохового оружия"
+  "subtitles.aiarsenal.powder_cannon": "Выстрел порохового оружия",
+  "hud.aiarsenal.gun.name.musket_1777": "мушкет 1777 / An IX",
+  "hud.aiarsenal.gun.name.musket_1808": "пехотное ружьё обр. 1808",
+  "hud.aiarsenal.gun.name.pistol_an13": "пистолет An XIII",
+  "hud.aiarsenal.gun.name.pistol_1809": "кавалерийский пистолет обр. 1809",
+  "hud.aiarsenal.gun.name.cannon_fr6": "6-фунтовая пушка An XI",
+  "hud.aiarsenal.gun.name.cannon_ri12": "12-фунтовая пушка обр. 1805",
+  "hud.aiarsenal.gun.name.sabre_briquet": "тесак-брикет",
+  "hud.aiarsenal.gun.name.sabre_1809": "кавалерийская сабля",
+  "hud.aiarsenal.gun.name.paper_cartridge": "Бумажный мушкетный патрон",
+  "hud.aiarsenal.gun.name.pistol_cartridge": "Бумажный пистолетный патрон",
+  "hud.aiarsenal.gun.name.charge_fr6": "6-фунтовый заряд с ядром",
+  "hud.aiarsenal.gun.name.charge_ri12": "12-фунтовый заряд с ядром",
+  "hud.aiarsenal.gun.name.cannonball": "Чугунное ядро"
 }

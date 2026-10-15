@@ -41,10 +41,10 @@ public final class WeaponMotion {
         float side = (float)Math.sin(p), step = (float)Math.cos(p * 2), breathing = (float)Math.sin(b);
         float amp = m * (1 - .65f * c);
         return new Frame(weight * (.009f * side * amp + .025f * r),
-                weight * (.003f * breathing + .009f * step * amp - .11f * r + .018f * c),
+                weight * (.003f * breathing + .009f * step * amp - .035f * r + .018f * c),
                 weight * (.035f * r + .015f * c),
-                weight * (.5f * breathing + 1.4f * step * amp - (pistol ? 18 : 13) * r),
-                weight * (.8f * side * amp - 7 * r),
-                weight * (1.6f * side * amp + (pistol ? 20 : 12) * r));
+                weight * (.5f * breathing + 1.4f * step * amp - (pistol ? 6 : 5) * r),
+                weight * (.8f * side * amp - 5 * r),
+                weight * (1.6f * side * amp + (pistol ? 12 : 8) * r));
     }
 }

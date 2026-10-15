@@ -29,6 +29,7 @@ def main():
   for name,label in NAMES.items():
    d['item.aiarsenal.'+name]=label[i]
    d['entity.aiarsenal.'+name]=label[i]
+   d['hud.aiarsenal.gun.name.'+name]=label[i].split(' — ')[-1]
    if name.startswith(('musket','pistol_')):d['tooltip.aiarsenal.gun.'+name]=('Кремнёвый замок · 1 выстрел · дульное заряжание; игровой темп перезарядки' if i==0 else 'Flintlock · single shot · muzzle loading; gameplay reload timing')
   for key,values in {
    'itemGroup.aiarsenal.napoleonic_weapons':('1812 · Оружие','1812 · Weapons'),
@@ -64,6 +65,8 @@ def main():
   base='c96' if name.startswith('pistol') else 'mosin'
   for key,value in list(d.items()):
    if key.startswith(base+'.'):d[name+key[len(base):]]=list(value)
+  if name.startswith('cannon_'):
+   for context in ['thirdperson_righthand','thirdperson_lefthand','firstperson_righthand','firstperson_lefthand']:d[name+'.'+context]=[0,0,.05,180,0,0,.55,1]
   if name.startswith(('musket','pistol')):
    d[name+'.fp']=[.11,-.16,-.48,-3,.28 if name.startswith('pistol') else .06,0]
    for hand in ['right','left']:d[name+'.thirdperson_'+hand+'hand']=[0,-.045,.09,180,0,0,1.35 if name.startswith('pistol') else 1,0]

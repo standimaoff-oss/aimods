@@ -71,6 +71,9 @@ def cannon(name,russian):
  body=name+'.body';barrel=name+'.barrel';wood='Walnut' if russian else 'RpgGreen';length=1700 if russian else 1450
  for x in [-220,220]:
   w.prism(body,[(-1900,160),(-1850,320),(-350,960),(360,960),(360,540),(-800,320)],x-65,x+65,wood,8)
+ for x in [-220,220]:
+  w.box(body,-135,135,910,1020,x-70,x+70,wood,4)
+  w.box(body,-105,105,1000,1024,x-76,x+76,'Steel',2)
  w.box(body,-150,150,540,700,-950,950,'Walnut',6)
  w.box(body,-1500,-1340,240,350,-220,220,wood,5)
  for x in [-850,850]:
@@ -97,7 +100,12 @@ def cannon(name,russian):
 def sabre(name,russian):
  sc=w.new_scene(name.upper());w.U0=120;g=name+'.body'
  length=1000 if russian else 780
- w.prism(g,[(190,-13),(length-110,25),(length,95),(length-80,67),(190,17)],-3,3,'Steel',.3)
+  # Distributed curvature, rather than a straight blade with a hooked last segment.
+ lower=[];upper=[]
+ for i in range(13):
+  t=i/13;u=190+(length-190)*t;curve=(90 if russian else 65)*t*t;width=30*(1-.45*t)
+  lower.append((u,curve-width/2));upper.append((u,curve+width/2))
+ w.prism(g,lower+[(length,90 if russian else 65)]+list(reversed(upper)),-3,3,'ClipSteel',.3)
  w.lathe(g,[(20,0),(20,17),(40,14),(165,14),(180,21),(190,21),(190,0)],'Walnut' if russian else 'Brass',14)
  for u in range(45,165,12):w.ring(g,u,u+3,14,16,'Brass',12)
  points=[(20,0),(18,-58),(70,-79),(172,-65),(195,-22),(195,30)]
@@ -108,7 +116,7 @@ def ammo(name):
  sc=w.new_scene(name.upper());w.U0=0;g=name+'.body'
  if name=='cannonball':w.sphere(g,w.P(0,0),65,'Steel',seg=16)
  else:
-  cannon=name.startswith('charge');r=38 if cannon else 8;l=140 if cannon else 58
+  cannon=name.startswith('charge');r=(45 if name=='charge_ri12' else 38) if cannon else (7 if name=='pistol_cartridge' else 8);l=(170 if name=='charge_ri12' else 140) if cannon else (43 if name=='pistol_cartridge' else 58)
   w.lathe(g,[(0,0),(0,r*.7),(8,r),(l-8,r),(l,r*.5),(l,0)],'Paper1812',16)
   for u in [12,l-12]:w.ring(g,u,u+3,r,r+1,'Walnut',16)
  w.join_node(g);return sc
@@ -126,11 +134,17 @@ def icons(name):
  for ob in sc.objects:ob.hide_render=False
 
 def build():
+ for material in bpy.data.materials:
+  if material.node_tree:
+   for node in material.node_tree.nodes:
+    if node.type=='TEX_IMAGE':material.node_tree.nodes.active=node;break
  for name,pistol,russian in [('musket_1777',False,False),('musket_1808',False,True),('pistol_an13',True,False),('pistol_1809',True,True)]:MODELS[name]=gun(name,pistol,russian)
  for name,ru in [('cannon_fr6',False),('cannon_ri12',True)]:MODELS[name]=cannon(name,ru)
  for name,ru in [('sabre_briquet',False),('sabre_1809',True)]:MODELS[name]=sabre(name,ru)
  for name in ['paper_cartridge','pistol_cartridge','charge_fr6','charge_ri12','cannonball']:MODELS[name]=ammo(name)
  for name,sc in MODELS.items():w.export(sc,name,name.startswith(('musket','pistol_')));icons(name)
+ for sc in list(bpy.data.scenes):
+  if sc.name not in w.SCENES:bpy.data.scenes.remove(sc)
  for image in bpy.data.images:
   if not image.packed_file:image.pack()
  bpy.context.window.scene=MODELS['musket_1777'];(ROOT/'models').mkdir(exist_ok=True)

@@ -2241,23 +2241,23 @@
   ],
   "cannon_fr6.thirdperson_righthand": [
     0,
-    -0.045,
-    0.09,
+    0,
+    0.05,
     180,
     0,
     0,
-    1.15,
-    0
+    0.55,
+    1
   ],
   "cannon_fr6.thirdperson_lefthand": [
     0,
-    -0.045,
-    0.09,
+    0,
+    0.05,
     180,
     0,
     0,
-    1.15,
-    0
+    0.55,
+    1
   ],
   "cannon_fr6.gui": [
     0,
@@ -2309,23 +2309,23 @@
   ],
   "cannon_ri12.thirdperson_righthand": [
     0,
-    -0.045,
-    0.09,
+    0,
+    0.05,
     180,
     0,
     0,
-    1.15,
-    0
+    0.55,
+    1
   ],
   "cannon_ri12.thirdperson_lefthand": [
     0,
-    -0.045,
-    0.09,
+    0,
+    0.05,
     180,
     0,
     0,
-    1.15,
-    0
+    0.55,
+    1
   ],
   "cannon_ri12.gui": [
     0,
@@ -2501,6 +2501,46 @@
     0,
     0,
     0.9,
+    1
+  ],
+  "cannon_fr6.firstperson_righthand": [
+    0,
+    0,
+    0.05,
+    180,
+    0,
+    0,
+    0.55,
+    1
+  ],
+  "cannon_fr6.firstperson_lefthand": [
+    0,
+    0,
+    0.05,
+    180,
+    0,
+    0,
+    0.55,
+    1
+  ],
+  "cannon_ri12.firstperson_righthand": [
+    0,
+    0,
+    0.05,
+    180,
+    0,
+    0,
+    0.55,
+    1
+  ],
+  "cannon_ri12.firstperson_lefthand": [
+    0,
+    0,
+    0.05,
+    180,
+    0,
+    0,
+    0.55,
     1
   ]
 }
