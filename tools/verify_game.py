@@ -216,14 +216,14 @@ overrideHeight:700
     screenshot('05-ppsh-reloaded')
     command('data get entity TestPlayer SelectedItem', 'Ammo: 71')
     if os.environ.get('QA_STAGE1C') == '1':
-        ww2_weapons()
+        ww2_weapons(client_log)
     if os.environ.get('QA_VOLUMETRIC') == '1':
         volumetric(player, client_log)
     command('stop')
     server.wait(timeout=90)
 
 
-def ww2_weapons():
+def ww2_weapons(client_log):
     # Actual user input and real server health/ammo. No screenshots substituted with model renders.
     specs = [('mosin_pu', 5, 'round_762x54r'), ('k98k_zf39', 5, 'round_792x57'),
              ('c96', 10, 'clip_c96'), ('tt33', 8, 'mag_tt33')]
@@ -270,9 +270,27 @@ def ww2_weapons():
             assert ammo()==9, 'C96 must refuse a clip into a partly loaded magazine'
             key('mouseup','3')
             for left in range(8,-1,-1):
-                key('mousedown','1');time.sleep(.3);key('mouseup','1');time.sleep(.4)
+                # A software frame can exceed a short click; acknowledge every semi-auto shot.
+                key('mousedown','1')
+                try:
+                    end=time.monotonic()+6
+                    while time.monotonic()<end:
+                        time.sleep(.25)
+                        if ammo()==left:break
+                    else:raise AssertionError('C96 trigger edge not observed, expected '+str(left))
+                finally:key('mouseup','1')
+                time.sleep(2)  # release must be observed before the next rising edge
             assert ammo()==0, 'C96 empty-magazine setup must use real firing'
-        key('keydown','r');time.sleep(.2);key('keyup','r');time.sleep(.4)
+        before_log=client_log.stat().st_size
+        key('keydown','r');time.sleep(.2);key('keyup','r')
+        deadline=time.monotonic()+10
+        while time.monotonic()<deadline:
+            with client_log.open('rb') as f:
+                f.seek(before_log);fresh=f.read().decode('utf-8',errors='replace')
+            if 'WEAPON QA reload-start '+name in fresh:break
+            time.sleep(.05)
+        else:raise AssertionError(name + ': client did not acknowledge reload')
+        time.sleep(.2)
         screenshot(name + '-03-reload')
         time.sleep(7)
         expected=9 if name=='tt33' else cap

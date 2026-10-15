@@ -91,3 +91,10 @@ jobs:
           git add reports/stage1c shots/aiarsenal/stage1c models mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb
           git commit -m '[stage1-evidence] Preserve live Blender MCP models and stage1c verification'
           git push origin HEAD:arena/10158ad9-aimods
+      - name: Draft release only after all checks (manual visual review still required)
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.3.jar > verification/SHA256SUMS
+          gh release create "stage1c-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.3.jar models/weapons_stage1c.blend verification/SHA256SUMS verification/shots/*.png --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 1c: WWII weapons and ore removal — pending visual review' --notes "Source $GITHUB_SHA; live Blender MCP models and real Minecraft QA https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . 154 GameTests. Uranium registrations/worldgen removed with old-ID remapping; old-world migration not yet runtime-tested. All carrier missiles, nukes and drones preserved. Era tabs and remaining stage 1 gates are NOT complete. Forge 1.20.1 / 47.4.23 / Java 17."

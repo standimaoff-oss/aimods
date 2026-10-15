@@ -4,7 +4,8 @@ No geometry generated outside Blender; each scene gets viewport review and packe
 """
 import bpy, sys, importlib.util, os
 from pathlib import Path
-from mathutils import Vector, Quaternion
+from mathutils import Vector, Quaternion, Matrix
+import math
 ROOT=Path(__file__).resolve().parents[2]
 sys.argv.append('--library-only')
 spec=importlib.util.spec_from_file_location('weapon_library',ROOT/'tools/blender/weapons_r22.py')
@@ -91,7 +92,10 @@ def pistol(name,c96):
         w.prism(g,[(65,-14),(86,-17),(68,-122),(35,-128),(27,-115),(48,-32)],-14,14,'Walnut',2)
         for v in range(-107,-37,9):w.box(g,35+(v+107)*.18,66+(v+107)*.18,v,v+2,-14.4,14.4,'Walnut',.3)
         w.box(g,78,113,-51,-46,-5,5,'Blued',.5);w.box(g,108,114,-48,-17,-5,5,'Blued',.5)
-        w.ring(g,29,36,7,10,'Blued',16,0,5)
+        # Ring hammer bore is transverse, not parallel to the barrel (review correction).
+        hammer=w.ring(g,29,36,7,10,'Blued',16,0,5)
+        centre=w.P(32.5,5)
+        hammer.data.transform(Matrix.Translation(centre) @ Matrix.Rotation(math.pi/2,4,'Z') @ Matrix.Translation(-centre))
         w.box(b,42,123,-4,11,-11,11,'Blued',.7)
         w.box(b,45,52,9,17,-12,-2,'Blued',.2);w.box(b,45,52,9,17,2,12,'Blued',.2)
         w.box(g,299,304,6,16,-1,1,'Blued',.2)

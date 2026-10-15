@@ -66,7 +66,7 @@ public final class GunClient {
     public static boolean scoped() {
         GunKind k = held();
         boolean optic = k == GunKind.M4A1 || k != null && k.scope() || k == GunKind.RPG7 && rpgOptic;
-        return optic && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
+        return optic && !reloading && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
     }
 
     /** RPG-7: PGO-7V3 selected (B) instead of the iron sights */
@@ -228,6 +228,8 @@ public final class GunClient {
                 reloading = true;
                 reloadEmpty = fx == GunFxPacket.RELOAD_EMPTY;
                 reloadN = System.nanoTime();
+                if (Boolean.getBoolean("aiarsenal.visualQa") && k != null)
+                    ru.aiforge.arsenal.AiArsenal.LOGGER.info("WEAPON QA reload-start {}", k.id);
             }
             case GunFxPacket.LOADED, GunFxPacket.CANCEL -> reloading = false;
             default -> {

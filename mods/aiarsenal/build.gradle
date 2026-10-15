@@ -82,7 +82,7 @@ minecraft {
         }
 
         client {
-            if (System.getenv('QA_VOLUMETRIC') == '1') {
+            if (System.getenv('QA_VOLUMETRIC') == '1' || System.getenv('QA_STAGE1C') == '1') {
                 property 'aiarsenal.visualQa', 'true'
             }
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
