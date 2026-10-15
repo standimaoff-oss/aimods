@@ -22,9 +22,10 @@ class Recording:
         self.process = subprocess.Popen(['ffmpeg', '-nostdin', '-y', '-hide_banner',
             '-thread_queue_size', '1024', '-f', 'x11grab', '-framerate', '20',
             '-window_id', window, '-i', os.environ.get('DISPLAY', ':99'),
-            '-thread_queue_size', '1024', '-f', 'pulse', '-i', 'qa.monitor',
+            '-thread_queue_size', '1024', '-f', 'pulse', '-fragment_size', '4096',
+            '-sample_rate', '48000', '-i', 'qa.monitor',
             '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '24', '-pix_fmt', 'yuv420p',
-            '-threads', '1', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', str(self.path)],
+            '-threads', '1', '-vsync', '0', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', str(self.path)],
             stdout=self.log, stderr=subprocess.STDOUT, start_new_session=True)
         game.PROCESSES.append(self.process)
         self.start = time.monotonic()
@@ -56,7 +57,7 @@ class Recording:
         rms = float(np.sqrt(np.mean(samples * samples)))
         peak = float(np.max(np.abs(samples)))
         assert rms > .0001 and peak > .002, f'{self.name}: silent gameplay capture'
-        assert float(np.mean(np.abs(samples) >= .999)) < .001, 'clipped gameplay audio'
+        assert peak < .99, f'{self.name}: gameplay audio peak exceeds headroom: {peak}'
         report = {'video': self.path.name, 'duration': float(probe['format']['duration']),
                   'reload_seconds': self.reload_at, 'audio_rms': rms, 'audio_peak': peak,
                   'capture': 'X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis'}

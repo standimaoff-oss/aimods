@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Original procedural game SFX, NOT field recordings or claims of acoustic authenticity.
 C96: slightly longer/lower report + short bolt return. TT: shorter brighter report + slide return.
-Deterministic source; numpy==2.2.6, soundfile==0.13.1. Does not rewrite existing weapon sounds.
+Deterministic source; numpy==2.2.6, soundfile==0.13.1. Also leaves headroom in the legacy PPSh sample; no changes to its timing or pitch.
 """
 from pathlib import Path
 import numpy as np
@@ -33,6 +33,11 @@ def shot(seed, duration, low, decay, action_at):
 
 def main():
     folder = ROOT / 'mods/aiarsenal/src/main/resources/assets/aiarsenal/sounds'
+    legacy = folder / 'smg_ppsh.ogg'
+    data, rate = sf.read(legacy)
+    peak = np.max(np.abs(data))
+    if peak > .6:  # idempotent: do not repeatedly transcode an already safe sample
+        sf.write(legacy, data * (.48 / peak), rate, format='OGG', subtype='VORBIS')
     for name, args in [('pistol_c96', (96, .48, 750, .033, .105)),
                        ('pistol_tt33', (33, .40, 1050, .026, .085))]:
         path = folder / (name + '.ogg')

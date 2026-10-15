@@ -9,6 +9,12 @@ ASSETS = ROOT / 'mods/aiarsenal/src/main/resources/assets/aiarsenal'
 
 
 class PistolAudio(unittest.TestCase):
+    def test_legacy_ppsh_headroom(self):
+        data, rate = sf.read(ASSETS / 'sounds/smg_ppsh.ogg')
+        self.assertEqual(rate, 44100)
+        self.assertLess(float(np.max(np.abs(data))), .6)
+        self.assertGreater(float(np.sqrt(np.mean(data**2))), .02)
+
     def test_decodable_distinct_mono_sounds(self):
         signals = []
         definitions = json.loads((ASSETS / 'sounds.json').read_text())
