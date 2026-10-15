@@ -1,0 +1,15 @@
+Server String: /run/user/1001/pulse/native
+Library Protocol Version: 35
+Server Protocol Version: 35
+Is Local: yes
+Client Index: 3
+Tile Size: 65472
+User Name: runner
+Host Name: runnervmwvtoz
+Server Name: pulseaudio
+Server Version: 15.99.1
+Default Sample Specification: s16le 2ch 44100Hz
+Default Channel Map: front-left,front-right
+Default Sink: qa
+Default Source: qa.monitor
+Cookie: ecb9:0daf
