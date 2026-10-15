@@ -69,6 +69,14 @@ def fire():
     g.key('mouseup', '1')
 
 
+def fire_round(before):
+    g.key('mousedown','1')
+    try:
+        wait(lambda:number('Ammo')<before,20)
+    finally:
+        g.key('mouseup','1')
+
+
 def equip(row, nbt=''):
     g.key('mouseup', '1'); g.key('mouseup', '3')
     local('view_first')
@@ -103,8 +111,7 @@ def gun(row):
         g.key('mousedown', '3')
         time.sleep(.6)
     before = number('Ammo')
-    fire()
-    wait(lambda: number('Ammo') < before, 8)
+    fire_round(before)
     row['shot'] = 'PASS'
     g.key('mouseup', '3')
     # Exercise the full empty->reload->fire cycle again, without manufacturing Ammo.
@@ -115,16 +122,14 @@ def gun(row):
         row['repeatReload'] = 'PASS'
         if not row['manpads']:
             time.sleep(2)
-            fire()
-            wait(lambda: number('Ammo') == 0, 8)
+            fire_round(1)
             row['repeatShot'] = 'PASS'
     else:
         # Clip-fed weapons correctly reject partially-full reloads; existing logic tests
         # cover that contract. Do not call a rejected reload a successful reload.
         row['repeatReload'] = 'NOT_RUN (partial-magazine rules differ)'
         time.sleep(2)
-        before = number('Ammo'); fire()
-        wait(lambda: number('Ammo') < before, 8)
+        before = number('Ammo'); fire_round(before)
         row['repeatShot'] = 'PASS'
     g.command('gamemode creative TestPlayer')
 
@@ -260,8 +265,7 @@ overrideHeight:700
                     wait(consumed,12)
                     row['functional']='CONSUME_PASS'
                 elif row['block']:
-                    result=g.command('execute if block 0 -60 2 '+row['placedBlock']+' run say BLOCK_MATCH')
-                    assert 'BLOCK_MATCH' in result,result
+                    g.command('execute if block 0 -60 2 '+row['placedBlock'],expect='Test passed')
                     row['functional']='PLACE_PASS'
             assert player.poll() is None and server.poll() is None, 'Minecraft process exited'
             row['smoke'] = 'PASS'
@@ -320,6 +324,7 @@ overrideHeight:700
     save()
     logs = client_log.read_text(errors='replace') + reopen_log.read_text(errors='replace')
     server_text=(g.LOGS/'server.log').read_text(errors='replace') + server_log.read_text(errors='replace')
+    assert 'Failed to store chunk' not in server_text, 'chunk save failure (must not be hidden by successful archive reopening)'
     assert 'Ошибка в задаче взрыва' not in server_text, 'blast task threw an exception'
     assert 'Exception ticking' not in server_text and 'Exception in server tick loop' not in server_text
     fatal = re.findall(r'^.*(?:\[Render thread/ERROR\]|OutOfMemoryError|EXCEPTION_ACCESS_VIOLATION|GL renderer disabled|OpenGL Error|GL_INVALID).*$' ,logs,re.M)

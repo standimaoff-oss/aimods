@@ -10,6 +10,7 @@ import time
 import verify_game as g
 from install_qa_client import prepare
 from install_shaderpack_qa import install
+from qa_log import tail_from
 
 
 def wait(test, seconds=180):
@@ -60,7 +61,7 @@ overrideHeight:600
     def local(effect):
         offset=log.stat().st_size
         g.command('arsenal_visual_test client '+effect+' TestPlayer')
-        return wait(lambda: next((line for line in log.read_text(errors='replace')[offset:].splitlines()
+        return wait(lambda: next((line for line in tail_from(log,offset).splitlines()
                                   if 'FX QA '+effect+':' in line), None))
 
     def status(active):
