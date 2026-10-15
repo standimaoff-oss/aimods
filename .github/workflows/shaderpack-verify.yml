@@ -9,7 +9,8 @@ defaults:
 permissions:
   contents: write
 concurrency:
-  group: shaderpack-${{ github.ref }}
+  # Skipped/evidence pushes must never cancel the other audit still running.
+  group: shaderpack-${{ github.ref }}-${{ (contains(github.event.head_commit.message, '[shaderpack]') || github.event_name == 'workflow_dispatch') && 'active' || github.run_id }}
   cancel-in-progress: true
 jobs:
   verify:
