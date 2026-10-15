@@ -34,7 +34,12 @@ def run(g,log,window):
   start=log.stat().st_size
   try:g.key('mousedown','1');wait(lambda:ammo()==0,5)
   finally:g.key('mouseup','1')
-  time.sleep(.2);g.screenshot(name+'-powder-shot');g.key('mouseup','3')
+  def powder_received():
+   with log.open('rb') as f:f.seek(start);return 'FX EMITTER profile=2' in f.read().decode(errors='replace')
+  wait(powder_received,10)
+  # F2 is handled before rendering: let the client render the received discharge,
+  # not the last pre-shot framebuffer while RCON is already reporting Ammo=0.
+  time.sleep(1);g.screenshot(name+'-powder-shot');g.key('mouseup','3')
   with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
   assert 'FX EMITTER profile=2' in text,'actual discharge did not create powder volume'
   hp=g.command('data get entity @e[tag=qa_nap_target,limit=1] Health');match=re.search(r'data: ([0-9.]+)f',hp)
