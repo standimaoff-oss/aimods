@@ -1,0 +1,32 @@
+[
+  {
+    "file": "rcon.log",
+    "bytes": 669763,
+    "sha256": "9934561c97dc0c9cb0cca1ecd22c4e1451b9ca4dd16dbe09dfb52a8b0c7bb6df",
+    "originalCommit": "645a5ffcd03ee452d98292bfe3541efd4ea5c71d"
+  },
+  {
+    "file": "catalogue-driver.log",
+    "bytes": 2682675,
+    "sha256": "a367778367fade9fedab1883fc739e50cfcbf674b89e57895b4f118d18bea0dd",
+    "originalCommit": "645a5ffcd03ee452d98292bfe3541efd4ea5c71d"
+  },
+  {
+    "file": "gametest.log",
+    "bytes": 708617,
+    "sha256": "86350e73541b3864c22e3c47ac5b3d31e47c60f24db2b353d0826cf5f2d647d5",
+    "originalCommit": "645a5ffcd03ee452d98292bfe3541efd4ea5c71d"
+  },
+  {
+    "file": "installed-server-installer.log",
+    "bytes": 1193444,
+    "sha256": "2db7a62193b425d9b09c18e866119bed11cc84820ee25777dba8319c5c6dec9e",
+    "originalCommit": "645a5ffcd03ee452d98292bfe3541efd4ea5c71d"
+  },
+  {
+    "file": "server.log",
+    "bytes": 1817365,
+    "sha256": "6ea774dd359364c56c7764c6932dc27160872d97cd4b22bb9263b75588434cc1",
+    "originalCommit": "645a5ffcd03ee452d98292bfe3541efd4ea5c71d"
+  }
+]
