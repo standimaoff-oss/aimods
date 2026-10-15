@@ -110,6 +110,9 @@ public final class CatalogueQa {
             o.addProperty("item", BuiltInRegistries.ITEM.getKey(p.getMainHandItem().getItem()).toString());
             o.addProperty("count",p.getMainHandItem().getCount()); o.addProperty("health",p.getHealth());
             o.addProperty("using",p.isUsingItem());
+            JsonArray effects=new JsonArray();
+            for(var effect:p.getActiveEffects()) effects.add(BuiltInRegistries.MOB_EFFECT.getKey(effect.getEffect()).toString());
+            o.add("effects",effects);
             c.getSource().sendSuccess(() -> Component.literal(o.toString()),false);
             return 1;
         }));
@@ -125,6 +128,11 @@ public final class CatalogueQa {
             var p=c.getSource().getPlayerOrException();
             if(!(p.getVehicle() instanceof ru.aiforge.realwar.vehicle.GunVehicle v)) throw new IllegalStateException("not mounted");
             JsonObject o=new JsonObject();
+            o.addProperty("age",v.tickCount);o.addProperty("reloadTicks",v.reloadTicks());
+            o.addProperty("reloadTube",v.reloadTube());o.addProperty("reloadRequired",v.kind.reloadTicks);
+            o.addProperty("reloadInputFresh",v.reloadHeld(v.operatorSeat()));
+            o.addProperty("reloadInputGrace",v.reloadInputInGrace(v.operatorSeat()));
+            o.addProperty("inputAge",v.controlInputAge(v.operatorSeat()));
             o.addProperty("loaded",v.loadedCount());o.addProperty("fired",v.firedSeq());o.addProperty("engine",v.engineOn());
             o.addProperty("x",v.getX());o.addProperty("z",v.getZ());o.addProperty("hp",v.hp());
             var supply=ru.aiforge.realwar.vehicle.GunVehicle.cfg(v.kind).ammo().get();

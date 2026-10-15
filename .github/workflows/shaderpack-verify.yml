@@ -1,4 +1,4 @@
-name: Shaderpack — Oculus Embeddium Photon compatibility
+name: Shaderpacks — Photon Complementary BSL compatibility
 on:
   push:
     branches: [arena/10158ad9-aimods]
@@ -15,6 +15,10 @@ concurrency:
 jobs:
   verify:
     if: contains(github.event.head_commit.message, '[shaderpack]') || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+      matrix:
+        pack: [photon, complementary, bsl]
     runs-on: ubuntu-22.04
     timeout-minutes: 60
     env:
@@ -22,7 +26,8 @@ jobs:
       LIBGL_ALWAYS_SOFTWARE: '1'
       GALLIUM_DRIVER: llvmpipe
       ALSOFT_DRIVERS: pulse
-      QA_PREFIX: shaderpack
+      QA_SHADERPACK: ${{ matrix.pack }}
+      QA_PREFIX: shaderpack-${{ matrix.pack }}
       QA_INSTALLED: '1'
     steps:
       - uses: actions/checkout@v4
@@ -66,22 +71,22 @@ jobs:
         id: build
         working-directory: mods/aiarsenal
         run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
-      - name: Real Photon client — reload, scopes, fallbacks and pack toggling
+      - name: Real shader client — cannon and Sturmtiger reload, scopes, fallback and toggles
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: python tools/verify_shaderpack_game.py 2>&1 | tee verification/logs/shaderpack-driver.log
       - name: Archive evidence and binary
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: shaderpack-evidence
+          name: shaderpack-evidence-${{ matrix.pack }}
           path: |
             verification/
             mods/aiarsenal/build/libs/*.jar
       - name: Preserve incremental evidence even on failure
         if: always()
         run: |
-          DEST="reports/shaderpack/run-${GITHUB_RUN_ID}"
-          SHOTS="shots/aiarsenal/shaderpack/run-${GITHUB_RUN_ID}"
+          DEST="reports/shaderpack/run-${GITHUB_RUN_ID}-${{ matrix.pack }}"
+          SHOTS="shots/aiarsenal/shaderpack/run-${GITHUB_RUN_ID}-${{ matrix.pack }}"
           mkdir -p "$DEST" "$SHOTS"
           cp verification/logs/* "$DEST/"
           if [ -d verification/shots ]; then cp verification/shots/*.png "$SHOTS/"; fi
@@ -89,7 +94,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reports/shaderpack shots/aiarsenal/shaderpack
-          git commit -m '[shaderpack-evidence] Real Oculus Embeddium Photon compatibility results'
+          git commit -m '[shaderpack-evidence] Real Oculus Embeddium ${{ matrix.pack }} compatibility results'
           git fetch origin arena/10158ad9-aimods
           git rebase FETCH_HEAD
           git push origin HEAD:arena/10158ad9-aimods

@@ -2,8 +2,6 @@ package ru.aiforge.bm21grad.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import ru.aiforge.bm21grad.registry.ModRegistry;
 
-/** Persistent smoke cloud of the 9M43 rocket: dense particles, blindness inside, mobs lose their targets. */
+/** Persistent smoke cloud of the 9M43 rocket: dense visible particles; mobs lose their targets, no blindness status. */
 public class SmokeScreenEntity extends Entity {
     public static final int LIFETIME = 600;
     public static final float MAX_RADIUS = 10f;
@@ -57,7 +55,6 @@ public class SmokeScreenEntity extends Entity {
         if (tickCount % 20 == 0) {
             AABB box = new AABB(getX() - r, getY() - 2, getZ() - r, getX() + r, getY() + 6, getZ() + r);
             for (LivingEntity le : level().getEntitiesOfClass(LivingEntity.class, box, e -> e.distanceToSqr(this) < r * r + 16)) {
-                le.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 0, false, false));
                 if (le instanceof Mob m) m.setTarget(null);
             }
         }

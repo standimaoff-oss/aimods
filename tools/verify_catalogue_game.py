@@ -137,7 +137,9 @@ def gun(row):
 
 def vehicle(row):
     def state():
-        return json.loads(g.command('execute as TestPlayer run arsenal_stress vehiclestatus'))
+        observed=json.loads(g.command('execute as TestPlayer run arsenal_stress vehiclestatus'))
+        row['lastVehicleState']=observed
+        return observed
     g.command('execute as TestPlayer at @s run arsenal_stress mount',expect='MOUNTED')
     g.command('gamemode survival TestPlayer')
     g.command('effect give TestPlayer minecraft:resistance 9999 4 true')
@@ -297,6 +299,8 @@ overrideHeight:700
                 return last['removed'] and not last['activeBlasts'] and not last['legacyBusy']
             wait(complete, 240)
             row.update(last)
+            row['playerEffects']=json.loads(g.command('execute as TestPlayer run arsenal_stress playerstatus'))['effects']
+            assert not {'minecraft:blindness','minecraft:nausea'}.intersection(row['playerEffects']),row['playerEffects']
             assert last['removalReason'] == 'DISCARDED', last
             assert last['completedTasks']+last['tuDetonations']+last['arsenalDetonations']>0, 'no production detonation recorded'
             assert last['witnessDead'] or 0 <= last['witnessHealth'] < row['witnessHealthBefore'], 'bomb removed without damage to live witness'

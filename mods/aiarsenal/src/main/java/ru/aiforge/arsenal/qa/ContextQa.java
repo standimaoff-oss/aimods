@@ -181,6 +181,7 @@ public final class ContextQa {
     private static JsonObject cannonStatus() {
         require(cannon!=null,"no cannon");JsonObject o=result("cannon_status");o.addProperty("loading",cannon.loading());
         o.addProperty("charge",BuiltInRegistries.ITEM.getKey(cannon.charge()).toString());
+        o.addProperty("x",cannon.getX());o.addProperty("y",cannon.getY());o.addProperty("z",cannon.getZ());
         o.add("spawned",new Gson().toJsonTree(spawned));return o;
     }
     private static JsonObject craftStatus(ServerPlayer p) {

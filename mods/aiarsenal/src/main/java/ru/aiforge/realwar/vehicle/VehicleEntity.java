@@ -510,6 +510,16 @@ extends Entity implements ru.aiforge.realwar.damage.Damageable {
         return seat >= 0 && seat < 2 && this.reloadHeld[seat] && this.tickCount - this.inputTick[seat] <= 4;
     }
 
+    /** A short packet gap pauses an in-progress reload; it never grants input. */
+    public boolean reloadInputInGrace(int seat) {
+        return seat >= 0 && seat < 2 && this.reloadHeld[seat]
+                && controlInputAge(seat) > 4 && controlInputAge(seat) <= 20;
+    }
+
+    public int controlInputAge(int seat) {
+        return seat >= 0 && seat < 2 ? this.tickCount - this.inputTick[seat] : Integer.MAX_VALUE;
+    }
+
     public boolean isPickable() {
         return !this.isRemoved();
     }

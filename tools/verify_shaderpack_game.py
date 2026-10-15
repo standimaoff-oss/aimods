@@ -4,6 +4,8 @@ reload with R, scopes, ordinary and nuclear visual packet fallbacks. The destruc
 bomb/registry audit is separate. Software OpenGL does NOT reproduce an NVIDIA GPU.
 """
 import json
+import os
+import traceback
 import re
 import subprocess
 import time
@@ -11,6 +13,15 @@ import verify_game as g
 from install_qa_client import prepare
 from install_shaderpack_qa import install
 from qa_log import tail_from
+import verify_context_game as context
+from shaderpack_actions import powder_cannon, sturmtiger
+
+PACK=os.environ.get('QA_SHADERPACK','photon')
+REPORT={'result':'RUNNING','pack':PACK,'actions':[], 'toggles':[]}
+
+def save():
+    (g.LOGS/'shaderpack-gameplay.json').write_text(json.dumps(REPORT,indent=2)+'\n')
+
 
 
 def wait(test, seconds=180):
@@ -46,9 +57,11 @@ overrideWidth:900
 overrideHeight:600
 ''')
     cmd=prepare(g); install(g)
+    (g.RUNS/'server/user_jvm_args.txt').write_text('-Xmx2560M\n-XX:+UseSerialGC\n-Daiarsenal.stressQa=true\n')
     server,slog=g.launch('server',['bash','run.sh','nogui'],cwd=g.RUNS/'server')
     g.wait_log(server,slog,'Done (')
     player,log=g.launch('client',cmd,cwd=client)
+    context.SERVER,context.CLIENT=server,player
     g.wait_log(server,slog,'TestPlayer joined the game')
     time.sleep(15)
     window=subprocess.check_output(['xdotool','search','--name','Minecraft'],text=True).splitlines()[-1]
@@ -77,7 +90,7 @@ overrideHeight:600
     g.view_action(log,'view_first')
     g.view_action(log,'view_ready')
     time.sleep(3)
-    g.screenshot('photon-initial')
+    g.screenshot(PACK+'-initial')
     for weapon in ['ppsh41','mosin_pu','musket_1777']:
         ammo={'ppsh41':'mag_ppsh','mosin_pu':'round_762x54r','musket_1777':'paper_cartridge'}[weapon]
         g.command('clear TestPlayer')
@@ -94,9 +107,9 @@ overrideHeight:600
         wait(fully_loaded)  # scoped Mosin loads individual rounds; first round is not completion
         local('status')  # wait for the client, including any shader reload, to respond
         g.key('mousedown','3');time.sleep(3)
-        g.screenshot('photon-'+weapon+'-ads')
+        g.screenshot(PACK+'-'+weapon+'-ads')
         if weapon=='mosin_pu':
-            g.assert_scope_mask('photon-'+weapon+'-ads')
+            g.assert_scope_mask(PACK+'-'+weapon+'-ads')
         before=int(re.search(r'Ammo: (\d+)',g.command('data get entity TestPlayer SelectedItem'))[1])
         g.key('mousedown','1')
         try:
@@ -104,12 +117,22 @@ overrideHeight:600
         finally:
             g.key('mouseup','1');g.key('mouseup','3')
         time.sleep(3)
+    for index,id in enumerate(['cannon_fr6','cannon_ri12']):
+        row={'id':'aiarsenal:'+id,'result':'RUNNING'};REPORT['actions'].append(row);save()
+        powder_cannon(row,index);save()
+    row={'id':'aiarsenal:sturmtiger_vehicle','vehicleAmmo':'aiarsenal:rocket_380','drivable':True,'result':'RUNNING'}
+    REPORT['actions'].append(row);save()
+    sturmtiger(row);save()
+    g.command('gamemode creative TestPlayer')
+    g.command('clear TestPlayer')
+    g.command('tp TestPlayer 0.5 -60 0.5 0 0')
+    g.view_action(log,'view_first')
     for effect in ['blast','nuke','legacy_nuke']:
         g.command('arsenal_visual_test '+effect+' 0 -60 22')
         time.sleep(4)
-        g.screenshot('photon-fallback-'+effect)
+        g.screenshot(PACK+'-fallback-'+effect)
     assert status(False)==0, 'raw GL pass executed under Photon'
-    toggles=[]
+    toggles=REPORT['toggles']
     for iteration in range(2):
         g.key('key','k')
         wait(lambda: 'active=true' in local('status'))
@@ -117,23 +140,26 @@ overrideHeight:600
         assert 'FX UNPACK PASS' in log.read_text(errors='replace')
         local('smoke');time.sleep(3)
         assert status(True)>0, 'vanilla volumetrics did not resume when shaderpack was disabled'
-        g.screenshot('photon-disabled-'+str(iteration))
+        g.screenshot(PACK+'-disabled-'+str(iteration))
         g.key('key','k')
         wait(lambda: 'active=false' in local('status'))
         before=status(False)
         g.command('arsenal_visual_test nuke 0 -60 22');time.sleep(3)
         after=status(False)
         assert after<=before,'raw GL draws continued after enabling the pack'
-        toggles.append({'round':iteration,'framesBefore':before,'framesAfter':after})
-        g.screenshot('photon-reenabled-'+str(iteration))
+        toggles.append({'round':iteration,'framesBefore':before,'framesAfter':after});save()
+        g.screenshot(PACK+'-reenabled-'+str(iteration))
     text=log.read_text(errors='replace')
     assert player.poll() is None and server.poll() is None
     bad=re.findall(r'^.*(?:GL renderer disabled|OutOfMemoryError|EXCEPTION_ACCESS_VIOLATION|GL_INVALID|OpenGL Error).*$' ,text,re.M)
     assert not bad,'\n'.join(bad)
-    (g.LOGS/'shaderpack-gameplay.json').write_text(json.dumps({'result':'PASS','toggles':toggles,
-        'guns':['ppsh41','mosin_pu','musket_1777'],'reloadInput':'real R, Oculus defaults unchanged',
-        'fallbackPackets':['blast','nuke','legacy_nuke'],
-        'limits':'Linux llvmpipe, not Windows/NVIDIA; Photon SH_SKYLIGHT=false (32768-byte shared memory limit), default preset NOT VERIFIED; visual packets do not certify bomb physics or damage'},indent=2)+'\n')
+    effects=json.loads(g.command('execute as TestPlayer run arsenal_stress playerstatus'))['effects']
+    assert not {'minecraft:blindness','minecraft:nausea'}.intersection(effects),effects
+    REPORT.update(result='PASS',guns=['ppsh41','mosin_pu','musket_1777'],
+        reloadInput='real R, Oculus defaults unchanged; cannons use real RMB',
+        fallbackPackets=['blast','nuke','legacy_nuke'],playerEffects=effects,
+        limits='Linux llvmpipe, not Windows/NVIDIA; Photon SH_SKYLIGHT=false (32768-byte shared memory limit), other packs publisher defaults; visual packets do not certify bomb physics or damage')
+    save()
     g.command('save-all flush')
     print('SHADERPACK COMPATIBILITY PASS',flush=True)
 
@@ -141,5 +167,9 @@ overrideHeight:600
 if __name__=='__main__':
     try:
         run()
+    except BaseException as error:
+        REPORT.update(result='FAIL',error=type(error).__name__+': '+str(error),traceback=traceback.format_exc())
+        raise
     finally:
+        save()
         g.cleanup()

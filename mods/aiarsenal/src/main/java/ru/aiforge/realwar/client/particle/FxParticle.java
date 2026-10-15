@@ -48,6 +48,9 @@ extends TextureSheetParticle {
     public static final ParticleRenderType ADDITIVE;
     public static final ParticleRenderType SMOKE;
     private final boolean additive;
+    private boolean shaderSafe;
+    /** Fixed before ParticleEngine queues this particle; never change its queue key in flight. */
+    public void useShaderSafeRendering() { shaderSafe = true; }
     private final boolean volumetricSmoke;
     public boolean volumetricSmoke() { return volumetricSmoke; }
     public float lifeSeconds() { return lifetime / 20f; }
@@ -191,7 +194,7 @@ extends TextureSheetParticle {
     }
 
     public ParticleRenderType getRenderType() {
-        return this.additive ? ADDITIVE : SMOKE;
+        return shaderSafe ? ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT : this.additive ? ADDITIVE : SMOKE;
     }
 
     protected int getLightColor(float partial) {

@@ -5,6 +5,7 @@ of third-party JARs or shader packs in Git or our release. Not a hardware GPU te
 """
 import hashlib
 import json
+import os
 import io
 import re
 import zipfile
@@ -20,9 +21,16 @@ def get(url):
 def install(game):
     client = game.RUNS / 'client'
     provenance = []
+    # Photon is pinned to the reported crash fixture. The other publishers' latest
+    # compatible files are resolved once and recorded with SHA-512 for reproduction.
+    pack = os.environ.get('QA_SHADERPACK', 'photon')
+    projects = {'photon': ('photon-shader', '1.3b'),
+                'complementary': ('complementary-reimagined', ''),
+                'bsl': ('bsl-shaders', '')}
+    project, fragment = projects[pack]
     for project, fragment, folder in [('oculus', '1.8.0', 'mods'),
                                        ('embeddium', '0.3.31', 'mods'),
-                                       ('photon-shader', '1.3b', 'shaderpacks')]:
+                                       (project, fragment, 'shaderpacks')]:
         query = urlencode({'game_versions': json.dumps(['1.20.1'])})
         versions = json.loads(get('https://api.modrinth.com/v2/project/' + project + '/version?' + query))
         candidates = [(v, f) for v in versions for f in v['files']
@@ -40,6 +48,9 @@ def install(game):
             config = client / 'config/oculus.properties'
             config.parent.mkdir(parents=True, exist_ok=True)
             config.write_text('enableShaders=true\nshaderPack=' + file['filename'] + '\n')
+            if pack != 'photon':
+                provenance[-1]['options']={}
+                continue
             # llvmpipe exposes 32 KiB compute shared memory; Photon defaults need
             # 36,860 bytes for spherical-harmonic skylight. Use its public option,
             # not an edited shader. The default preset is explicitly NOT tested.

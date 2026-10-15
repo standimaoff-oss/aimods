@@ -120,18 +120,7 @@ public final class NuclearBlast {
                 ChargeRegistry.get(sl.getServer()).addFallout(sl.dimension(), new Vec3(p.x, ground, p.z), 1.4f * r * (1f - hb / (0.6f * r) * 0.5f),
                         sl.getGameTime() + secs * 20L);
         }
-        flash(sl, p, r);
         if (surface && !testNoBlocks && ArsenalConfig.NUKE_BLOCK_DAMAGE.get()) ACTIVE.add(new NuclearBlast(sl, p, r));
-    }
-
-    private static void flash(ServerLevel sl, Vec3 p, float r) {
-        for (ServerPlayer pl : sl.players()) {
-            double d = pl.getEyePosition().distanceTo(p);
-            if (d > 4 * r || pl.isSpectator()) continue;
-            HitResult h = sl.clip(new ClipContext(pl.getEyePosition(), p, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, pl));
-            if (h.getType() == HitResult.Type.MISS || h.getLocation().distanceTo(p) < 3)
-                pl.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, (int) (60 * (1 - d / (4 * r))) + 10, 0, false, false));
-        }
     }
 
     /** Overpressure, thermal pulse and knock-back on entities. */

@@ -109,6 +109,19 @@ class WiringTests(unittest.TestCase):
         self.assertLess(probe.index('PixelUnpackState.assertTightlyPacked();'),probe.index('uploadVolumes('))
         self.assertIn('hostile.assertRestored();',probe)
 
+    def test_shader_fallbacks_use_managed_buffers(self):
+        root=ROOT/'mods/aiarsenal/src/main/java'
+        system=(root/'ru/aiforge/realwar/client/particle/FxSystem.java').read_text()
+        particle=(root/'ru/aiforge/realwar/client/particle/FxParticle.java').read_text()
+        nuke=(root/'ru/aiforge/arsenal/client/NukeFx.java').read_text()
+        self.assertIn('Minecraft.getInstance().particleEngine.add(p)',system)
+        self.assertIn('if (ShaderPackCompatibility.blocked() || ALL.isEmpty()',system)
+        self.assertIn('shaderSafe ? ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT',particle)
+        self.assertIn('RenderType.entityTranslucent(',nuke)
+        self.assertIn('BufferBuilder raw = safe ? null',nuke)
+        self.assertIn('if (raw != null) BufferUploader.drawWithShader(raw.end())',nuke)
+        self.assertIn('g.fill(0, 0, w, h,',nuke) # HUD flash stays a vanilla GUI pass
+
     def test_destructive_commands_are_opt_in(self):
         text = (ROOT / 'mods/aiarsenal/src/main/java/ru/aiforge/arsenal/qa/CatalogueQa.java').read_text()
         self.assertIn('if (!Boolean.getBoolean("aiarsenal.stressQa")) return;', text)
