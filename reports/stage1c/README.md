@@ -98,8 +98,8 @@ commit `4ced8a44d9d78cc5003e143cc3927cfd80d4275c`. До удаления лок�
 У C96 после исправления курок не выглядит кольцом вдоль ствола в ADS.
 
 [Все исходные F2](../../shots/aiarsenal/stage1c/run-38702819235) ·
-[Журнал RCON](run-38702819235/rcon.log) · [Клиент](run-38702819235/client-latest.log) ·
-[Blender MCP viewport](run-38702819235/blender) · [Команды MCP](run-38702819235/mcp-commands.jsonl).
+[Журнал RCON](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1c/run-38702819235/rcon.log) · [Клиент](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1c/run-38702819235/client-latest.log) ·
+[Blender MCP viewport](run-38702819235/blender) · [Команды MCP](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1c/run-38702819235/mcp-commands.jsonl).
 
 | Оружие | Патроны в настоящем клиентском сценарии | Попадание первого ADS-выстрела |
 |---|---|---|
@@ -125,7 +125,7 @@ commit `4ced8a44d9d78cc5003e143cc3927cfd80d4275c`. До удаления лок�
 - 48 258 606 байт; SHA-256 (GitHub asset digest):
   `bb23384957c145526ccefbe8069f03188487ebe2c3751d2cb9816a7a2db091c7`.
 - Исходники сценария сборки: `fe8d087`; сохранённые модели/доказательства и release target: `a1f6f51`.
-- [Размеры, треугольники и хеши экспортированных GLB](models.json): Мосин 6296,
+- [Размеры, треугольники и хеши экспортированных GLB](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1c/models.json): Мосин 6296,
   Kar98k 6324, C96 4368, ТТ 3070 треугольников (включая скрываемые части).
   Это измерение файлов, не установленный лимит ТЗ и не гарантия FPS.
 - Перед обновлением **скопировать мир**. Обычные клиент и сервер обновить одновременно;

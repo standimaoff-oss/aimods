@@ -8,10 +8,10 @@
 
 Функциональные результаты: `CONSUME_PASS`=4, `EQUIP_PASS`=132, `FIRE_RELOAD_CYCLE_PASS`=21, `MAIN_GUN_FIRE_RELOAD_REPEAT_PASS`=18, `MELEE_HIT_PASS`=2, `NOT_VERIFIED`=160, `PLACE_PASS`=111.
 
-- [Полный runtime-каталог](catalogue-inventory.json)
-- [Пошаговые результаты, ошибки и ограничения](catalogue-gameplay.json)
-- [Происхождение исходников](provenance.txt)
-- [Установленный JAR и SHA-256](installed-provenance.json)
+- [Полный runtime-каталог](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stability/run-38813736418/catalogue-inventory.json)
+- [Пошаговые результаты, ошибки и ограничения](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stability/run-38813736418/catalogue-gameplay.json)
+- [Происхождение исходников](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stability/run-38813736418/provenance.txt)
+- [Установленный JAR и SHA-256](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stability/run-38813736418/installed-provenance.json)
 
 ## Предметы
 

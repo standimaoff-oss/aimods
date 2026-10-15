@@ -6,11 +6,11 @@
 
 | Проверка | Результат | Доказательства |
 |---|---|---|
-| Реестровый прогон | 448 общих проверок; 288 предметных действий; 14/14 свободнопадающих бомб; 448 предметов после остановки обоих JVM и повторного входа | [Отчёт](../stability/run-38813736418/REVIEW.md), [JSON](../stability/run-38813736418/catalogue-gameplay.json) |
-| Дополнительные действия | **35/35**: все 14 ракет, 11 машин/самолётов/кораблей (основное оружие/обслуживание/повтор), 2 пороховые пушки, Javelin, 4 дрона, 3 инструмента | [Разбор](../context/run-38813736464/REVIEW.md), [JSON](../context/run-38813736464/context-gameplay.json) |
-| Рецепты | 1271 проверенная сетка, 430 уникальных обычных рецептов, 58 предметов-ингредиентов | [Подробности](../context/run-38813736464/context-recipes.json) |
+| Реестровый прогон | 448 общих проверок; 288 предметных действий; 14/14 свободнопадающих бомб; 448 предметов после остановки обоих JVM и повторного входа | [Отчёт](../stability/run-38813736418/REVIEW.md), [JSON](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stability/run-38813736418/catalogue-gameplay.json) |
+| Дополнительные действия | **35/35**: все 14 ракет, 11 машин/самолётов/кораблей (основное оружие/обслуживание/повтор), 2 пороховые пушки, Javelin, 4 дрона, 3 инструмента | [Разбор](../context/run-38813736464/REVIEW.md), [JSON](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/context/run-38813736464/context-gameplay.json) |
+| Рецепты | 1271 проверенная сетка, 430 уникальных обычных рецептов, 58 предметов-ингредиентов | [Подробности](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/context/run-38813736464/context-recipes.json) |
 | Oculus/Embeddium/Photon | PASS в установленном Linux-клиенте; реальные R/ADS и два цикла переключения шейдеров | [Ограничения и визуальный разбор](../shaderpack/run-38813736609/README.md) |
-| GameTests | **176/177**, FAIL: безлюдный дальний полёт МБР | [Воспроизведение и диагностика](../gametest/run-38816603115/gametest-early.json) |
+| GameTests | **176/177**, FAIL: безлюдный дальний полёт МБР | [Воспроизведение и диагностика](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/gametest/run-38816603115/gametest-early.json) |
 
 Ни в одном из трёх установленных серверных логов нет ERROR/FATAL. Это не утверждение об отсутствии всех ошибок или об исправлении вылета на Windows/NVIDIA.
 

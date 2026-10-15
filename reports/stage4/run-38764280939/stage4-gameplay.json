@@ -1,9 +1,0 @@
-{
-  "result": "PASS",
-  "single_shot_firearms": 4,
-  "manually_loaded_cannons": 2,
-  "bombers_with_live_exhaust": 2,
-  "ordinary_explosion": "live RPG-7 projectile impacting the target wall; actual damage path",
-  "screenshots": "Minecraft F2",
-  "videos": "visible X11 game window and native PulseAudio"
-}

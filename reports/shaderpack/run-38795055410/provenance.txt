@@ -1,2 +1,0 @@
-Source: 22909b5e2e5591af5794c942becea023dfc39239
-Run: https://github.com/standimaoff-oss/aimods/actions/runs/38795055410

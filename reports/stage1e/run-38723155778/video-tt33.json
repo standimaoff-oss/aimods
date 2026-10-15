@@ -1,8 +1,0 @@
-{
-  "video": "tt33.mp4",
-  "duration": 14.05,
-  "reload_seconds": 2.9734009909999486,
-  "audio_rms": 0.006688893307000399,
-  "audio_peak": 0.33301597833633423,
-  "capture": "X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis"
-}

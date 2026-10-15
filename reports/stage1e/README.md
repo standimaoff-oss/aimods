@@ -67,10 +67,10 @@ Source `569247e3ff157472a389af38779f40dd148b52f4`, evidence `3c1f582`.
 | Перезагрузка ресурсов, Nether→Overworld, GLSL fallback/recovery | PASS |
 | Непрерывные записи | 5 видео со звуком, все peak < 0.99, не тишина |
 
-Логи: [GameTests](run-38726948046/gameTestServer-latest.log),
-[игровой сценарий](run-38726948046/client-driver.log.gz),
-[installed provenance](run-38726948046/installed-provenance.json),
-[миграция](run-38726948046/ore-migration-driver.log).
+Логи: [GameTests](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1e/run-38726948046/gameTestServer-latest.log),
+[игровой сценарий](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1e/run-38726948046/client-driver.log.gz),
+[installed provenance](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1e/run-38726948046/installed-provenance.json),
+[миграция](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1e/run-38726948046/ore-migration-driver.log).
 В клиентском логе разрешены только известные для этого QA ошибки: profile key pair
 одноразового offline-профиля и намеренно внесённая ошибка GLSL; fallback и восстановление
 проверены отдельно. Это не заявление «в логах вообще нет ERROR».
@@ -98,11 +98,11 @@ C96 третье лицо/reload, ТТ ADS, ПУ с чатом, ZF39 FOV90, об
 что просмотрен каждый кадр видео или выполнено субъективное прослушивание.
 
 - [Все F2](../../shots/aiarsenal/stage1e/run-38726948046).
-- [C96 — одноручный хват](../../shots/aiarsenal/stage1e/run-38726948046/stage1e-c96-10-third-person-aim.png).
-- [C96 — обойма](../../shots/aiarsenal/stage1e/run-38726948046/stage1e-c96-03-reload.png).
-- [ТТ-33 — ADS](../../shots/aiarsenal/stage1e/run-38726948046/stage1e-tt33-06-chat-ads.png).
-- [ПУ — маска без полосы чата](../../shots/aiarsenal/stage1e/run-38726948046/stage1e-mosin_pu-06-chat-ads.png).
-- [ZF39 — FOV90](../../shots/aiarsenal/stage1e/run-38726948046/stage1e-k98k_zf39-07-fov90.png).
+- [C96 — одноручный хват](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1e/run-38726948046/stage1e-c96-10-third-person-aim.png).
+- [C96 — обойма](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1e/run-38726948046/stage1e-c96-03-reload.png).
+- [ТТ-33 — ADS](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1e/run-38726948046/stage1e-tt33-06-chat-ads.png).
+- [ПУ — маска без полосы чата](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1e/run-38726948046/stage1e-mosin_pu-06-chat-ads.png).
+- [ZF39 — FOV90](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1e/run-38726948046/stage1e-k98k_zf39-07-fov90.png).
 - [Кадры видео, НЕ F2](run-38726948046/video-review).
 
 ## Границы и следующие этапы

@@ -1,38 +1,0 @@
-Input #0, x11grab, from ':99':
-  Duration: N/A, start: 1792062131.916437, bitrate: 262348 kb/s
-  Stream #0:0: Video: rawvideo (BGR[0] / 0x524742), bgr0, 854x480, 262348 kb/s, 20 fps, 20 tbr, 1000k tbn, 1000k tbc
-Guessed Channel Layout for Input Stream #1.0 : stereo
-Input #1, pulse, from 'qa.monitor':
-  Duration: N/A, start: 1792062132.078079, bitrate: 1536 kb/s
-  Stream #1:0: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s
-Stream mapping:
-  Stream #0:0 -> #0:0 (rawvideo (native) -> h264 (libx264))
-  Stream #1:0 -> #0:1 (pcm_s16le (native) -> aac (native))
-[swscaler @ 0x55639e1e89c0] Warning: data is not aligned! This can lead to a speed loss
-[libx264 @ 0x55639e1d8f80] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x55639e1d8f80] profile Constrained Baseline, level 3.0, 4:2:0, 8-bit
-[libx264 @ 0x55639e1d8f80] 264 - core 163 r3060 5db6aa6 - H.264/MPEG-4 AVC codec - Copyleft 2003-2021 - http://www.videolan.org/x264.html - options: cabac=0 ref=1 deblock=0:0:0 analyse=0:0 me=dia subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=1 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=0 keyint=250 keyint_min=20 scenecut=0 intra_refresh=0 rc=crf mbtree=0 crf=24.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=0
-Output #0, mp4, to '/home/runner/work/aimods/aimods/verification/videos/tt33.mp4':
-  Metadata:
-    encoder         : Lavf58.76.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 854x480, q=2-31, 20 fps, 10240 tbn
-    Metadata:
-      encoder         : Lavc58.134.100 libx264
-    Side data:
-      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
-    Metadata:
-      encoder         : Lavc58.134.100 aac
-frame=    1 fps=0.0 q=0.0 size=       0kB time=00:00:01.92 bitrate=   0.2kbits/s speed=96.9x    frame=   44 fps=0.0 q=20.0 size=       0kB time=00:00:02.10 bitrate=   0.2kbits/s dup=39 drop=0 speed=3.98x    frame=   44 fps= 43 q=20.0 size=       0kB time=00:00:02.10 bitrate=   0.2kbits/s dup=39 drop=0 speed=2.03x    frame=   44 fps= 29 q=20.0 size=       0kB time=00:00:02.10 bitrate=   0.2kbits/s dup=39 drop=0 speed=1.36x    frame=   45 fps= 22 q=18.0 size=       0kB time=00:00:03.93 bitrate=   0.1kbits/s dup=39 drop=0 speed=1.93x    frame=   81 fps= 32 q=17.0 size=     256kB time=00:00:03.95 bitrate= 531.0kbits/s dup=39 drop=37 speed=1.55x    frame=   81 fps= 27 q=17.0 size=     256kB time=00:00:03.95 bitrate= 531.0kbits/s dup=39 drop=37 speed=1.29x    frame=   81 fps= 23 q=17.0 size=     256kB time=00:00:03.95 bitrate= 531.0kbits/s dup=39 drop=37 speed=1.11x    frame=  108 fps= 27 q=23.0 size=     256kB time=00:00:05.93 bitrate= 353.2kbits/s dup=39 drop=37 speed=1.46x    frame=  121 fps= 26 q=15.0 size=     512kB time=00:00:05.95 bitrate= 705.0kbits/s dup=39 drop=37 speed= 1.3x    frame=  121 fps= 24 q=15.0 size=     512kB time=00:00:05.95 bitrate= 705.0kbits/s dup=39 drop=37 speed=1.17x    frame=  121 fps= 22 q=15.0 size=     512kB time=00:00:05.95 bitrate= 705.0kbits/s dup=39 drop=37 speed=1.06x    frame=  159 fps= 26 q=12.0 size=     512kB time=00:00:07.94 bitrate= 528.0kbits/s dup=39 drop=37 speed= 1.3x    frame=  161 fps= 24 q=13.0 size=     512kB time=00:00:07.95 bitrate= 527.6kbits/s dup=39 drop=37 speed=1.21x    frame=  161 fps= 23 q=13.0 size=     512kB time=00:00:07.95 bitrate= 527.6kbits/s dup=39 drop=37 speed=1.12x    frame=  161 fps= 21 q=13.0 size=     512kB time=00:00:07.95 bitrate= 527.6kbits/s dup=39 drop=37 speed=1.05x    frame=  201 fps= 25 q=12.0 size=     512kB time=00:00:09.95 bitrate= 421.6kbits/s dup=39 drop=37 speed=1.23x    frame=  201 fps= 23 q=12.0 size=     512kB time=00:00:09.95 bitrate= 421.6kbits/s dup=39 drop=37 speed=1.15x    frame=  201 fps= 22 q=12.0 size=     512kB time=00:00:09.95 bitrate= 421.6kbits/s dup=39 drop=37 speed=1.09x    frame=  201 fps= 21 q=12.0 size=     512kB time=00:00:09.95 bitrate= 421.6kbits/s dup=39 drop=37 speed=1.03x    frame=  241 fps= 24 q=12.0 size=     512kB time=00:00:11.95 bitrate= 351.0kbits/s dup=39 drop=37 speed=1.18x    frame=  241 fps= 23 q=12.0 size=     512kB time=00:00:11.95 bitrate= 351.0kbits/s dup=39 drop=37 speed=1.12x    frame=  241 fps= 22 q=12.0 size=     512kB time=00:00:11.95 bitrate= 351.0kbits/s dup=39 drop=37 speed=1.07x    frame=  241 fps= 21 q=12.0 size=     512kB time=00:00:11.95 bitrate= 351.0kbits/s dup=39 drop=37 speed=1.02x    frame=  281 fps= 23 q=12.0 size=     768kB time=00:00:13.95 bitrate= 451.0kbits/s dup=39 drop=37 speed=1.15x    frame=  281 fps= 22 q=12.0 size=     768kB time=00:00:13.95 bitrate= 451.0kbits/s dup=39 drop=37 speed= 1.1x    frame=  281 fps= 21 q=12.0 size=     768kB time=00:00:13.95 bitrate= 451.0kbits/s dup=39 drop=37 speed=1.06x    [mp4 @ 0x55639e1d7c40] Starting second pass: moving the moov atom to the beginning of the file
-frame=  281 fps= 20 q=12.0 Lsize=     815kB time=00:00:14.00 bitrate= 476.9kbits/s dup=39 drop=37 speed=   1x    
-video:586kB audio:219kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.187366%
-[libx264 @ 0x55639e1d8f80] frame I:2     Avg QP:15.50  size: 54387
-[libx264 @ 0x55639e1d8f80] frame P:279   Avg QP:13.43  size:  1759
-[libx264 @ 0x55639e1d8f80] mb I  I16..4: 100.0%  0.0%  0.0%
-[libx264 @ 0x55639e1d8f80] mb P  I16..4:  3.6%  0.0%  0.0%  P16..4: 12.2%  0.0%  0.0%  0.0%  0.0%    skip:84.2%
-[libx264 @ 0x55639e1d8f80] coded y,uvDC,uvAC intra: 14.3% 8.5% 4.1% inter: 4.7% 1.7% 0.4%
-[libx264 @ 0x55639e1d8f80] i16 v,h,dc,p: 71% 15%  7%  8%
-[libx264 @ 0x55639e1d8f80] i8c dc,h,v,p: 82%  9%  8%  1%
-[libx264 @ 0x55639e1d8f80] kb/s:341.38
-[aac @ 0x55639e1da480] Qavg: 164.589
-Exiting normally, received signal 2.

@@ -135,8 +135,8 @@ workflow явно задан `shell: bash` (с `-eo pipefail`). Лог сохр�
 RCON: `Ammo 71 → 69 → 60 → 71`; удержание/отпускание ЛКМ, R — настоящие X11 inputs,
 не прямое изменение Ammo. Во время эффектов: 468 кадров с непустым списком объёмов
 (прозрачный прогрев исключён), `FX BUDGET PASS volumes=32 plumes=96`, затем полная
-очистка; off/on меняет active false/true. Логи: [client](run-38625488573/client-latest.log),
-[RCON](run-38625488573/rcon.log), [GameTests](run-38625488573/gametest-driver.log).
+очистка; off/on меняет active false/true. Логи: [client](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1b/run-38625488573/client-latest.log),
+[RCON](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1b/run-38625488573/rcon.log), [GameTests](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1b/run-38625488573/gametest-driver.log).
 
 Качество кадров ограничено llvmpipe: четверть разрешения прохода, 16 шагов,
 короткая дальность мира (2 чанка). Ядерные эффекты на 100 блоках видны за краем

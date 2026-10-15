@@ -1,2 +1,0 @@
-Source commit: 6926d3d25b4fbfb97a98673a8dd6a5c85492d3db
-Run: https://github.com/standimaoff-oss/aimods/actions/runs/38624561045

@@ -21,10 +21,10 @@
 
 - [Первый прогон GitHub Actions](https://github.com/standimaoff-oss/aimods/actions/runs/38609122644):
   экспорт Blender 4.2.23 → проверка GLB → сборка Forge → GameTests → настоящий клиент.
-- [`ci/glb-tests.log`](ci/glb-tests.log): 2/2 проверки GLB.
-  [`ppsh-before-tests.txt`](ppsh-before-tests.txt): **обе проверки проваливаются
+- [`ci/glb-tests.log`](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1/ci/glb-tests.log): 2/2 проверки GLB.
+  [`ppsh-before-tests.txt`](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1/ppsh-before-tests.txt): **обе проверки проваливаются
   на исходной модели** и обнаруживают ширину 63,5 вместо 153,2 мм.
-- [`ci/gametest.log`](ci/gametest.log.gz): `All 149 required tests passed`.
+- [`ci/gametest.log`](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1/ci/gametest.log.gz): `All 149 required tests passed`.
 - Реальный Minecraft 1.20.1 / Forge 47.4.23 запускался на GitHub runner под
   Xvfb + Mesa llvmpipe, не в локальной Arena-песочнице. Клиент и сервер — userdev.
 - F2-кадры в [`shots/aiarsenal/stage1a`](../../shots/aiarsenal/stage1a), без генеративной графики.
@@ -43,13 +43,13 @@
 
 **Повторный прогон успешно завершён и кадры просмотрены.**
 [Actions 38610863375](https://github.com/standimaoff-oss/aimods/actions/runs/38610863375):
-снова 149/149 GameTests. [`review2/rcon.log`](review2/rcon.log) фиксирует
+снова 149/149 GameTests. [`review2/rcon.log`](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1/review2/rcon.log) фиксирует
 `Ammo: 62` после очереди и `Ammo: 71` после R. В повторном `client.log` нет ERROR/FATAL.
 
-- [ППШ в руках](../../shots/aiarsenal/stage1a-review2/review2-01-ppsh-first-person.png).
-- [Прицеливание](../../shots/aiarsenal/stage1a-review2/review2-02-ppsh-aim.png): реальный открытый прицел по центру экрана.
-- [Перезарядка](../../shots/aiarsenal/stage1a-review2/review2-04-ppsh-reload.png): барабан вынесен из гнезда, оружие наклонено, HUD `reloading`, 62 патрона.
-- [После перезарядки](../../shots/aiarsenal/stage1a-review2/review2-05-ppsh-reloaded.png): барабан на месте, 71 патрон.
+- [ППШ в руках](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1a-review2/review2-01-ppsh-first-person.png).
+- [Прицеливание](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1a-review2/review2-02-ppsh-aim.png): реальный открытый прицел по центру экрана.
+- [Перезарядка](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1a-review2/review2-04-ppsh-reload.png): барабан вынесен из гнезда, оружие наклонено, HUD `reloading`, 62 патрона.
+- [После перезарядки](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1a-review2/review2-05-ppsh-reloaded.png): барабан на месте, 71 патрон.
 
 Это подтверждает захваченные фазы обычной перезарядки, не полный покадровый
 просмотр всей анимации и не отдельную проверку пустой перезарядки.

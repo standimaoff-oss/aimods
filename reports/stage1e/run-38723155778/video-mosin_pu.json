@@ -1,8 +1,0 @@
-{
-  "video": "mosin_pu.mp4",
-  "duration": 14.05,
-  "reload_seconds": 2.98246016600001,
-  "audio_rms": 0.03953057900071144,
-  "audio_peak": 0.44147688150405884,
-  "capture": "X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis"
-}

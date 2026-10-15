@@ -58,11 +58,11 @@ alpha.5 как текущую сборку и не называет заверш
 - Повторно просмотрены свежие F2 обоих самолётов, порохового выстрела и ТТ при беге.
   Расширенная визуальная приёмка неизменённых моделей/анимаций описана в отчёте alpha.8.
 
-[Протокол игры](../stage4/run-38777157178/stage4-gameplay.json) ·
-[Движение и ABBA](../stage4/run-38777157178/stage3-motion.json) ·
-[Два клиента](../stage4/run-38777157178/stage2-multiplayer.json) ·
-[Миграция](../stage4/run-38777157178/migration-provenance.json) ·
-[RCON с командами и координатами](../stage4/run-38777157178/rcon.log).
+[Протокол игры](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38777157178/stage4-gameplay.json) ·
+[Движение и ABBA](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38777157178/stage3-motion.json) ·
+[Два клиента](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38777157178/stage2-multiplayer.json) ·
+[Миграция](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38777157178/migration-provenance.json) ·
+[RCON с командами и координатами](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38777157178/rcon.log).
 
 ## Скриншоты и видео
 

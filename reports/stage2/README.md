@@ -55,9 +55,9 @@ Minecraft **1.20.1**, Forge **47.4.23**, Java **17**. JAR: **49 745 703 байт
 Они остались неопубликованными draft, не выдаются как итог.
 
 Source: `7bc05a12d5d35ab92ba42b45f0fb2b8a2b04423b`. Evidence: `4ef08f3ad1aacb5c9103aea1e14f0ee6dbe4449e`.
-[Протокол установленного JAR](run-38744123986/installed-provenance.json),
-[два клиента](run-38744123986/stage2-multiplayer.json),
-[миграция](run-38744123986/migration-provenance.json).
+[Протокол установленного JAR](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage2/run-38744123986/installed-provenance.json),
+[два клиента](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage2/run-38744123986/stage2-multiplayer.json),
+[миграция](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage2/run-38744123986/migration-provenance.json).
 SHA-256 совпадает между installed client/server, миграцией и digest GitHub release asset:
 ```
 20903247f92eed0e617958d176b6c4fe88fdbd7b7faa318eae07bbd186d4ec46

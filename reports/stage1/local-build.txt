@@ -1,1 +1,0 @@
-Java 17 is required. Install a JDK or set JAVA_HOME before building.

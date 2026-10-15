@@ -76,11 +76,11 @@ Blender viewport и 24 извлечённых исходных кадра пер
 Сводные листы использовались только для просмотра; ниже ссылки на исходные F2, не монтажи.
 Метрики звука не заменяют субъективного прослушивания каждого ролика.
 
-[Игровой протокол](run-38770590840/stage4-gameplay.json) ·
-[Два клиента](run-38770590840/stage2-multiplayer.json) ·
-[Движение и ABBA](run-38770590840/stage3-motion.json) ·
-[Миграция](run-38770590840/migration-provenance.json) ·
-[Установленный JAR](run-38770590840/installed-provenance.json).
+[Игровой протокол](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38770590840/stage4-gameplay.json) ·
+[Два клиента](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38770590840/stage2-multiplayer.json) ·
+[Движение и ABBA](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38770590840/stage3-motion.json) ·
+[Миграция](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38770590840/migration-provenance.json) ·
+[Установленный JAR](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage4/run-38770590840/installed-provenance.json).
 
 В логе есть **намеренная** ошибка GLSL в проверке безопасного отключения рендера;
 она не выдаётся за штатный успешный compile. После reload рендер восстанавливается.

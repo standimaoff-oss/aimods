@@ -8,7 +8,7 @@
 ## Точная конфигурация
 
 Forge 47.4.23, Oculus 1.8.0, Embeddium 0.3.31, Photon 1.3b; Linux llvmpipe.
-[Файлы поставщиков, SHA-512 и настройка](shaderpack-provenance.json).
+[Файлы поставщиков, SHA-512 и настройка](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/shaderpack/run-38798168717/shaderpack-provenance.json).
 ZIP Photon не редактировался; публичная настройка **SH_SKYLIGHT=false** необходима из-за лимита
 32768 байт compute shared memory стенда. Стандартный пресет требует 36860 байт и здесь не запускается.
 **Это не проверка Windows/NVIDIA, аппаратного FPS или стандартного пресета Photon.**
@@ -26,7 +26,7 @@ ZIP Photon не редактировался; публичная настрой�
 - На каждом выключении Photon: три враждебных pixel-unpack состояния, настоящий upload 64×64,
   отсутствие GL-ошибки и точное восстановление состояния вызывающего кода — PASS.
 
-[Машинный результат](shaderpack-gameplay.json), [клиентский журнал](client.log).
+[Машинный результат](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/shaderpack/run-38798168717/shaderpack-gameplay.json), [клиентский журнал](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/shaderpack/run-38798168717/client.log).
 
 ## Просмотренные оригиналы F2
 

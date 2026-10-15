@@ -61,10 +61,10 @@ source `6ce22280a4621c282aae72f937d7daf9c7b31458`, evidence `02780ef`.
 | Creative UI | Оба раздела открыты в игре; реальный Forge sort order совпал с заданным |
 | Дополнительные Python-проверки | **13 PASS**: 5 оружие/данные + 5 порт VolPyro + 3 socket/RCON |
 
-Логи: [GameTests](run-38718947164/gametest-driver.log),
-[клиентский сценарий](run-38718947164/client-driver.log),
-[клиент](run-38718947164/client-latest.log),
-[Python](run-38718947164/local-python-checks.log).
+Логи: [GameTests](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1d/run-38718947164/gametest-driver.log),
+[клиентский сценарий](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1d/run-38718947164/client-driver.log),
+[клиент](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1d/run-38718947164/client-latest.log),
+[Python](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1d/run-38718947164/local-python-checks.log).
 Ошибка GLSL в конце клиентского лога **намеренно внесена opt-in тестом**, после неё проверено
 восстановление. Она не активируется у обычного игрока.
 
@@ -93,8 +93,8 @@ source `6ce22280a4621c282aae72f937d7daf9c7b31458`, evidence `02780ef`.
 | uranium_ore ×3 / deepslate_uranium_ore ×2 в сундуке | stone ×3 / deepslate ×2 |
 | rds1 ×1 / shahed136 ×1 в том же сундуке | Сохранены без смены ID/количества |
 
-[Полный сценарий](run-38718947164/ore-migration-driver.log),
-[provenance и SHA-256 архива](run-38718947164/migration-provenance.json).
+[Полный сценарий](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1d/run-38718947164/ore-migration-driver.log),
+[provenance и SHA-256 архива](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/reports/stage1d/run-38718947164/migration-provenance.json).
 Бэкап репозитория перед этапом: `/home/user/backups/aimods-before-stage1d.bundle`, проверен;
 он **не содержит пользовательского мира**.
 
@@ -107,12 +107,12 @@ shader fallback/recovery и ранняя вспышка. Остальные до
 Blender viewport не выдаётся за Minecraft.
 
 - [Вся папка F2](../../shots/aiarsenal/stage1d/run-38718947164).
-- [C96 — одноручный хват](../../shots/aiarsenal/stage1d/run-38718947164/stage1d-c96-10-third-person-aim.png).
-- [ТТ-33 — ADS со свежим чатом](../../shots/aiarsenal/stage1d/run-38718947164/stage1d-tt33-06-chat-ads.png).
-- [ПУ — чистая маска](../../shots/aiarsenal/stage1d/run-38718947164/stage1d-mosin_pu-06-chat-ads.png).
-- [ZF39 — FOV 90](../../shots/aiarsenal/stage1d/run-38718947164/stage1d-k98k_zf39-07-fov90.png).
-- [Каталог WWII](../../shots/aiarsenal/stage1d/run-38718947164/stage1d-catalog-01-ww2-weapons.png).
-- [Современная техника и дроны](../../shots/aiarsenal/stage1d/run-38718947164/stage1d-catalog-02-modern-vehicles.png).
+- [C96 — одноручный хват](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1d/run-38718947164/stage1d-c96-10-third-person-aim.png).
+- [ТТ-33 — ADS со свежим чатом](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1d/run-38718947164/stage1d-tt33-06-chat-ads.png).
+- [ПУ — чистая маска](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1d/run-38718947164/stage1d-mosin_pu-06-chat-ads.png).
+- [ZF39 — FOV 90](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1d/run-38718947164/stage1d-k98k_zf39-07-fov90.png).
+- [Каталог WWII](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1d/run-38718947164/stage1d-catalog-01-ww2-weapons.png).
+- [Современная техника и дроны](https://github.com/standimaoff-oss/aimods/blob/4be7c6b9586dd2a761bd425b75d348ab47c245b5/shots/aiarsenal/stage1d/run-38718947164/stage1d-catalog-02-modern-vehicles.png).
 
 ## Границы проверки
 
