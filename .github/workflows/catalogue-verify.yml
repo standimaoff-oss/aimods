@@ -68,6 +68,18 @@ jobs:
         run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
       - name: Minecraft GameTests
         run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
+      - name: Preserve early GameTest diagnostics
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: |
+          DEST="reports/stability/run-${GITHUB_RUN_ID}"
+          python tools/gametest_checkpoint.py verification/logs/gametest.log "$DEST" "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$DEST/gametest-early.log.gz" "$DEST/gametest-early.json"
+          git commit -m '[gametest-evidence] Early required-test diagnostics'
+          git fetch origin arena/10158ad9-aimods
+          git rebase FETCH_HEAD
+          git push origin HEAD:arena/10158ad9-aimods
       - name: Every runtime item and all free-fall bombs in installed Minecraft
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: python tools/verify_catalogue_game.py 2>&1 | tee verification/logs/catalogue-driver.log
