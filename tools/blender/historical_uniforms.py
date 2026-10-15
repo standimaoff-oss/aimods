@@ -104,11 +104,11 @@ def build_set(name):
    tube('body',(-.22,-.16,1.42),(.22,-.17,.95),.013,gold)
  else:
   for x in [-.14,.14]:
-   for z in [1.27,.98]:
+   for z in ([1.27] if su and role in ('infantry','tanker') else [1.27,.98]):
     box('body',(x,-.157,z),(.15,.032,.15),cloth,bevel=.006)
     box('body',(x,-.177,z+.052),(.157,.019,.042),cloth,bevel=.004)
     cyl('body',(x,-.191,z+.045),.009,.006,gold if su else silver,front=True)
-  for z in [.97,1.08,1.19,1.30,1.40]:cyl('body',(0,-.158,z),.009,.007,gold if su else silver,front=True)
+  for z in ([1.22,1.31,1.40] if su and role=='infantry' else [.97,1.08,1.19,1.30,1.40]):cyl('body',(0,-.158,z),.009,.007,gold if su else silver,front=True)
   if off:box('body',(0,-.18,1.17),(.035,.014,.64),leather,rot=29)
   if role=='tanker':box('body',(.04,-.18,1.22),(.035,.02,.54),cloth,rot=24)
  # Headwear distinguishes branches and epochs in silhouette, not just recolouring.
@@ -130,7 +130,14 @@ def build_set(name):
   for (x,z),(xx,zz) in zip(poly,poly[1:]):tube('head',(x,-.145,z),(xx,-.145,zz),.012,gold)
   cyl('head',(.13,-.16,2.14),.048,.01,white,front=True);cyl('head',(.13,-.17,2.14),.028,.01,red if fr else black,front=True)
  elif role=='infantry':helmet(material('helmet_de' if army.endswith('de') else 'helmet_su',(65,73,65) if not su else (79,88,57)),not su)
+ elif role=='tanker' and not su:
+  # German Panzer crew wore a black field cap in 1943–45, not a Soviet padded tanker helmet.
+  box('head',(0,0,1.98),(.53,.53,.13),black,bevel=.025)
+  box('head',(0,.015,2.055),(.46,.48,.065),black,bevel=.02)
+  box('head',(0,-.285,1.935),(.35,.16,.024),black,bevel=.012)
+  cyl('head',(0,-.276,1.995),.022,.009,silver,front=True)
  elif role in ('tanker','pilot'):
+
   helmet(leather if role=='pilot' else black,False)
   for x in [-.27,.27]:box('head',(x,.025,1.78),(.07,.23,.26),leather if role=='pilot' else black,bevel=.024)
   for x in [-.18,0,.18]:box('head',(x,.02,2.14),(.045,.38,.035),leather if role=='pilot' else black,bevel=.01)
@@ -180,5 +187,5 @@ def viewport(name):
  for area in bpy.context.screen.areas:
   if area.type=='VIEW_3D':
    area.spaces.active.shading.type='MATERIAL';area.spaces.active.shading.type='SOLID';area.spaces.active.shading.color_type='MATERIAL'
-   r=area.spaces.active.region_3d;r.view_distance=3.3;r.view_location=Vector((0,0,1.18));r.view_rotation=Quaternion((math.radians(73),0,math.radians(-22)),'XYZ') if False else __import__('mathutils').Euler((math.radians(73),0,math.radians(-22)),'XYZ').to_quaternion()
+   r=area.spaces.active.region_3d;r.view_distance=3.3;r.view_location=Vector((0,0,1.18));r.view_rotation=__import__('mathutils').Euler((math.radians(73),0,math.radians(-22)),'XYZ').to_quaternion()
    area.spaces.active.overlay.show_floor=False;area.spaces.active.overlay.show_extras=False
