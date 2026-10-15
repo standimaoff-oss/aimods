@@ -92,7 +92,16 @@ public final class CatalogueQa {
             BlockPos at = p.blockPosition().offset(0,-1,2);
             var block = p.gameMode.useItemOn(p, p.serverLevel(), p.getMainHandItem(), InteractionHand.MAIN_HAND,
                     new BlockHitResult(Vec3.atCenterOf(at).add(0,.5,0), Direction.UP, at, false));
-            c.getSource().sendSuccess(() -> Component.literal("USE air=" + air + " block=" + block + " using=" + p.isUsingItem()), false);
+            if (block == net.minecraft.world.InteractionResult.FAIL && p.getMainHandItem().getItem() instanceof BlockItem) {
+                // A wall-mounted street lamp correctly rejects the floor. Supply a
+                // wall, then exercise placement again; never set the tested block directly.
+                BlockPos wall=p.blockPosition().offset(0,0,3);
+                p.serverLevel().setBlock(wall,net.minecraft.world.level.block.Blocks.STONE.defaultBlockState(),3);
+                block=p.gameMode.useItemOn(p,p.serverLevel(),p.getMainHandItem(),InteractionHand.MAIN_HAND,
+                        new BlockHitResult(Vec3.atCenterOf(wall).add(0,0,-.5),Direction.NORTH,wall,false));
+            }
+            String outcome="USE air=" + air + " block=" + block + " using=" + p.isUsingItem();
+            c.getSource().sendSuccess(() -> Component.literal(outcome), false);
             return 1;
         }));
         root.then(Commands.literal("playerstatus").executes(c -> {

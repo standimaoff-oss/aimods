@@ -278,6 +278,8 @@ overrideHeight:700
             assert last['removalReason'] == 'DISCARDED', last
             assert last['completedTasks']+last['tuDetonations']+last['arsenalDetonations']>0, 'no production detonation recorded'
             assert last['witnessDead'] or 0 <= last['witnessHealth'] < 20, 'bomb removed without damage to live witness'
+            if name.startswith(('rw:','ars:')):
+                g.command('tp TestPlayer 0.5 -60 -200.5 0 -12')  # exterior view, not an opaque frame inside the cloud
             time.sleep(1)
             g.screenshot('bomb-' + name.lower().replace(':','-'))
             row['status'] = 'PASS'
