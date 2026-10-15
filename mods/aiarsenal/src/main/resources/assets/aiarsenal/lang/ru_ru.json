@@ -1922,5 +1922,7 @@
   "itemGroup.aiarsenal.modern_ammo": "ХВ/Современность · Боеприпасы",
   "itemGroup.aiarsenal.common_parts": "Общее · Материалы и детали",
   "itemGroup.aiarsenal.common_equipment": "Общее · Снаряжение",
-  "itemGroup.aiarsenal.common_building": "Общее · Строительство и укрепления"
+  "itemGroup.aiarsenal.common_building": "Общее · Строительство и укрепления",
+  "subtitles.aiarsenal.pistol_c96": "Выстрел Mauser C96",
+  "subtitles.aiarsenal.pistol_tt33": "Выстрел ТТ-33"
 }

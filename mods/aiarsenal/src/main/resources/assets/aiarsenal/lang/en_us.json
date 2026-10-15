@@ -1922,5 +1922,7 @@
   "itemGroup.aiarsenal.modern_ammo": "Cold War — Modern · Ammunition",
   "itemGroup.aiarsenal.common_parts": "Shared · Materials and parts",
   "itemGroup.aiarsenal.common_equipment": "Shared · Equipment",
-  "itemGroup.aiarsenal.common_building": "Shared · Building and fortification"
+  "itemGroup.aiarsenal.common_building": "Shared · Building and fortification",
+  "subtitles.aiarsenal.pistol_c96": "Mauser C96 fires",
+  "subtitles.aiarsenal.pistol_tt33": "TT-33 fires"
 }

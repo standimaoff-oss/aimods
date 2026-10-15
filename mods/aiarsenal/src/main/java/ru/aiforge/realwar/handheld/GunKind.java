@@ -35,8 +35,8 @@ public enum GunKind {
     // Append only: existing GunFxPacket ordinals must remain stable.
     MOSIN_PU("mosin_pu", "round_762x54r", 5, 30, 865, 16f, 11f, 0.055f, 0.00045f, 3.6f, 0.8f, 24, 32, 1f / 3.5f, "rifle_mosin", false),
     K98K_ZF39("k98k_zf39", "round_792x57", 5, 30, 760, 16f, 11f, 0.055f, 0.00045f, 3.4f, 0.8f, 24, 32, 0.25f, "rifle_k98", false),
-    C96("c96", "clip_c96", 10, 240, 425, 5.0f, 2.2f, 0.040f, 0.0040f, 1.5f, 0.5f, 60, 60, 0.85f, "smg_ppsh", false),
-    TT33("tt33", "mag_tt33", 8, 240, 420, 5.0f, 2.2f, 0.040f, 0.0040f, 1.4f, 0.5f, 38, 48, 0.85f, "smg_ppsh", false);
+    C96("c96", "clip_c96", 10, 240, 425, 5.0f, 2.2f, 0.040f, 0.0040f, 1.5f, 0.5f, 60, 60, 0.85f, "pistol_c96", false),
+    TT33("tt33", "mag_tt33", 8, 240, 420, 5.0f, 2.2f, 0.040f, 0.0040f, 1.4f, 0.5f, 38, 48, 0.85f, "pistol_tt33", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;

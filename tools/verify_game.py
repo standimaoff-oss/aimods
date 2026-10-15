@@ -15,6 +15,7 @@ import sys
 import time
 
 from rcon import run as rcon
+from qa_recording import Recording
 
 ROOT = Path(__file__).resolve().parents[1]
 MOD = ROOT / 'mods/aiarsenal'
@@ -35,11 +36,11 @@ def gradle(*tasks):
             '-Dorg.gradle.jvmargs=-Xmx1400m -XX:+UseSerialGC', *tasks]
 
 
-def launch(name, command):
+def launch(name, command, cwd=None):
     log = LOGS / (name + '.log')
     handle = log.open('w')
     HANDLES.append(handle)
-    process = subprocess.Popen(command, cwd=MOD, stdout=handle, stderr=subprocess.STDOUT, start_new_session=True)
+    process = subprocess.Popen(command, cwd=cwd or MOD, stdout=handle, stderr=subprocess.STDOUT, start_new_session=True)
     PROCESSES.append(process)
     return process, log
 
@@ -153,9 +154,19 @@ fullscreen:false
 overrideWidth:1000
 overrideHeight:700
 ''')
-    server, log = launch('server', gradle('runServer'))
+    if os.environ.get('QA_RECORD') == '1':
+        options = folder / 'options.txt'
+        options.write_text(options.read_text().replace('soundCategory_master:0.0', 'soundCategory_master:0.7'))
+    installed = os.environ.get('QA_INSTALLED') == '1'
+    if installed:
+        from install_qa_client import prepare
+        client_command = prepare(sys.modules[__name__])
+        server, log = launch('server', ['bash', 'run.sh', 'nogui'], cwd=RUNS/'server')
+    else:
+        client_command = gradle('runClient', '-PautoJoin=127.0.0.1:25565')
+        server, log = launch('server', gradle('runServer'))
     wait_log(server, log, 'Done (')
-    player, client_log = launch('client', gradle('runClient', '-PautoJoin=127.0.0.1:25565'))
+    player, client_log = launch('client', client_command, cwd=folder if installed else None)
     wait_log(server, log, 'TestPlayer joined the game', 900)
     wait_log(player, client_log, 'Loaded', 120)
     time.sleep(15)
@@ -187,6 +198,7 @@ overrideHeight:700
     command('tp TestPlayer 0 -60 0 0 0')
     # Keep the real mouse held until the SERVER observes a shot, not for an arbitrary
     # short pulse that can fall between software-rendered frames. Always release on failure.
+    recording = Recording(sys.modules[__name__], 'ppsh41')
     fired = ''
     for attempt in range(2):
         key('windowfocus', '--sync', window)
@@ -209,6 +221,7 @@ overrideHeight:700
     if not (match and int(match[1]) < 71):
         screenshot('failure-ppsh-trigger')
         raise AssertionError(f'Firing did not consume rounds: {fired}')
+    recording.reload()
     key('keydown', 'r')
     time.sleep(0.15)
     key('keyup', 'r')
@@ -217,6 +230,7 @@ overrideHeight:700
     time.sleep(5)
     screenshot('05-ppsh-reloaded')
     command('data get entity TestPlayer SelectedItem', 'Ammo: 71')
+    recording.stop()
     if os.environ.get('QA_STAGE1C') == '1':
         ww2_weapons(client_log)
     if os.environ.get('QA_VOLUMETRIC') == '1':
@@ -265,6 +279,7 @@ def ww2_weapons(client_log):
             screenshot(name + '-07-fov90')
             if name in ('mosin_pu','k98k_zf39'): assert_scope_mask(name + '-07-fov90')
             view_action(client_log, 'view_fov70'); time.sleep(2)
+        recording = Recording(sys.modules[__name__], name)
         before = health()
         # One semi-automatic trigger edge. Hold until the server acknowledges firing.
         key('mousedown','1')
@@ -295,6 +310,7 @@ def ww2_weapons(client_log):
                 finally:key('mouseup','1')
                 time.sleep(2)  # release must be observed before the next rising edge
             assert ammo()==0, 'C96 empty-magazine setup must use real firing'
+        recording.reload()
         before_log=client_log.stat().st_size
         key('keydown','r');time.sleep(.2);key('keyup','r')
         deadline=time.monotonic()+10
@@ -310,6 +326,7 @@ def ww2_weapons(client_log):
         expected=9 if name=='tt33' else cap
         assert ammo()==expected, name + ': reload did not finish at expected capacity'
         screenshot(name + '-04-reloaded')
+        recording.stop()
         key('mouseup','3')
         if os.environ.get('QA_STAGE1D') == '1':
             key('key','F5'); key('key','F5'); time.sleep(2)

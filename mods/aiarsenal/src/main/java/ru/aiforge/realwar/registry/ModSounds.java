@@ -81,6 +81,9 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> RIFLE_K98 = ModSounds.reg("rifle_k98");
     public static final RegistryObject<SoundEvent> CLIP_IN = ModSounds.reg("clip_in");
 
+    public static final RegistryObject<SoundEvent> PISTOL_C96 = ModSounds.reg("pistol_c96");
+    public static final RegistryObject<SoundEvent> PISTOL_TT33 = ModSounds.reg("pistol_tt33");
+
     private ModSounds() {
     }
 

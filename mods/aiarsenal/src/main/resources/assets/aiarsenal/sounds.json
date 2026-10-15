@@ -769,5 +769,23 @@
       }
     ],
     "subtitle": "subtitles.aiarsenal.clip_in"
+  },
+  "pistol_c96": {
+    "sounds": [
+      {
+        "name": "aiarsenal:pistol_c96",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.pistol_c96"
+  },
+  "pistol_tt33": {
+    "sounds": [
+      {
+        "name": "aiarsenal:pistol_tt33",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.aiarsenal.pistol_tt33"
   }
 }
