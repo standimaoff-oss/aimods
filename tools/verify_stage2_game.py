@@ -16,14 +16,21 @@ def run(g, server, server_log, client_log, main_window):
  g.command('tp TestPlayer 0 -60 0 0 0')
  for name in SETS:
   equip('TestPlayer',name)
-  view('view_front');time.sleep(1.2);g.screenshot('uniform-'+name+'-front')
-  view('view_back');time.sleep(.6);g.screenshot('uniform-'+name+'-back')
+  view('view_front');view('view_ready');time.sleep(1.2);g.screenshot('uniform-'+name+'-front')
+  view('view_back');view('view_ready');time.sleep(.6);g.screenshot('uniform-'+name+'-back')
  # The new era grids must also be reachable in the actual creative screen.
  for action, name in [('view_ww2wear','ww2'),('view_napwear','1812')]:
   view(action);g.screenshot('catalog-'+name+'-uniforms');g.key('key','Escape')
  view('view_front');g.key('keydown','Shift_L');time.sleep(1);g.screenshot('uniform-crouching');g.key('keyup','Shift_L')
  # A real resource reload with the new garment still equipped.
- view('view_front');view('view_reload');time.sleep(8);g.screenshot('uniform-resource-reload')
+ view('view_front');start=client_log.stat().st_size;view('view_reload')
+ deadline=time.monotonic()+120
+ while time.monotonic()<deadline:
+  with client_log.open('rb') as log:log.seek(start);fresh=log.read().decode('utf-8',errors='replace')
+  if 'VIEW RELOAD PASS' in fresh:break
+  time.sleep(.2)
+ else:raise AssertionError('historical uniform resource reload did not complete')
+ time.sleep(2);view('view_ready');g.screenshot('uniform-resource-reload')
  equip('TestPlayer','ww2_su_officer');view('view_first');view('view_fov70')
  for gun in ['c96','tt33']:
   g.command(f'item replace entity TestPlayer hotbar.0 with aiarsenal:{gun}'+('{Ammo:10}' if gun=='c96' else '{Ammo:8}'))
@@ -47,8 +54,8 @@ def run(g, server, server_log, client_log, main_window):
  time.sleep(8);g.command('gamemode creative Observer');g.command('clear Observer')
  g.key('windowfocus','--sync',main_window)
  view('view_first');view('view_fov45');g.command('clear TestPlayer')
- g.command('tp TestPlayer 0 -60 0 0 9')
- equip('Observer','ww2_de_officer');g.command('tp Observer 0 -60 3.3 145 0')
+ g.command('tp TestPlayer 0 -60 0 0 7')
+ equip('Observer','ww2_de_officer');g.command('tp Observer 0 -60 3.8 145 0')
  g.command('list','Observer')
  kinds=re.findall(r'^\s+\w+\("([^"]+)"',(ROOT/'mods/aiarsenal/src/main/java/ru/aiforge/realwar/handheld/GunKind.java').read_text(),re.M)
  for name in kinds:
@@ -64,7 +71,7 @@ def run(g, server, server_log, client_log, main_window):
  g.command('arsenal_visual_test client view_right Observer')
  for name in ['ww2_su_pilot','ww2_de_tanker','nap_fr_infantry','nap_ri_general']:
   equip('Observer',name);g.command('item replace entity Observer weapon.mainhand with minecraft:air')
-  g.command('tp Observer 0 -60 3.3 180 0');time.sleep(1.5);g.screenshot('remote-uniform-'+name)
+  g.command('tp Observer 0 -60 3.8 180 0');time.sleep(1.5);g.screenshot('remote-uniform-'+name)
  # Ensure the real second client did not disconnect/crash during inspection.
  assert observer.poll() is None,'second client exited'
  g.command('list','Observer')

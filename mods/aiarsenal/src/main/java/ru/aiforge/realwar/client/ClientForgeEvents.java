@@ -63,6 +63,16 @@ public final class ClientForgeEvents {
         e.getRenderer().getModel().leftArm.yScale = 1f;
         e.getRenderer().getModel().rightSleeve.yScale = 1f;
         e.getRenderer().getModel().leftSleeve.yScale = 1f;
+        var m = e.getRenderer().getModel(); var p = e.getEntity();
+        // Player skin jacket/trouser overlays can otherwise protrude through the garment.
+        if (p.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).getItem() instanceof ru.aiforge.realwar.item.UniformItem) {
+            m.jacket.visible = m.rightSleeve.visible = m.leftSleeve.visible = false;
+        }
+        if (p.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.LEGS).getItem() instanceof ru.aiforge.realwar.item.UniformItem
+                || p.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.FEET).getItem() instanceof ru.aiforge.realwar.item.UniformItem)
+            m.rightPants.visible = m.leftPants.visible = false;
+        if (p.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.HEAD).getItem() instanceof ru.aiforge.realwar.item.UniformItem)
+            m.hat.visible = false;
     }
 
     private ClientForgeEvents() {

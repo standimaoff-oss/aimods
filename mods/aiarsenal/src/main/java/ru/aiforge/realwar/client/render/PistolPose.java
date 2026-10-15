@@ -47,6 +47,6 @@ public final class PistolPose {
                 support.yRot = (float)Math.atan2(-target.x, -target.z);
                 support.zRot = 0;
                 // Vanilla has one arm bone: fit its palm to the actual foregrip, rather than a crossbow pose.
-                support.yScale = Math.min(1.8f, distance / .625f);
+                support.yScale = Math.min(1.8f, distance / .535f);
             });
 }

@@ -16,11 +16,15 @@ public final class WeaponViewQa {
         Minecraft mc = Minecraft.getInstance();
         switch (action) {
             case "view_shaderfail" -> ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer.failNextShaderForQa();
-            case "view_first" -> mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON);
-            case "view_front" -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
-            case "view_back" -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_BACK);
+            case "view_first" -> { mc.setScreen(null); mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON); }
+            case "view_front" -> { mc.setScreen(null); mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT); }
+            case "view_back" -> { mc.setScreen(null); mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_BACK); }
             case "view_left" -> { mc.options.mainHand().set(net.minecraft.world.entity.HumanoidArm.LEFT); mc.options.broadcastOptions(); }
             case "view_right" -> { mc.options.mainHand().set(net.minecraft.world.entity.HumanoidArm.RIGHT); mc.options.broadcastOptions(); }
+            case "view_ready" -> {
+                if (mc.screen != null || mc.getOverlay() != null)
+                    throw new IllegalStateException("visual capture blocked by menu/loading overlay");
+            }
             case "view_fov45" -> mc.options.fov().set(45);
             case "view_fov90" -> mc.options.fov().set(90);
             case "view_fov70" -> mc.options.fov().set(70);

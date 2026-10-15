@@ -73,17 +73,17 @@ def build_set(name):
  box('body',(0,0,1.13),(.535,.285,.75),cloth,bevel=.007)
  for sign,side in [(-1,'r'),(1,'l')]:
   x=sign*.375
-  box('arm_'+side,(x,0,1.06),(.265,.275,.75),cloth,bevel=.006)
-  box('arm_'+side,(x,-.004,.735),(.27,.28,.07),red if nap else cloth)
+  box('arm_'+side,(x,0,1.185),(.265,.275,.61),cloth,bevel=.006)
+  box('arm_'+side,(x,-.004,.90),(.27,.28,.06),red if nap else cloth)
   box('leg_'+side,(sign*.125,0,.415),(.253,.275,.67),pants,bevel=.005)
   bootheight=.36 if not off else .44
   box('boot_'+side,(sign*.125,-.015,bootheight/2),(.26,.30,bootheight),black,bevel=.012)
   box('boot_'+side,(sign*.125,-.07,.045),(.27,.39,.09),black,bevel=.016)
   box('boot_'+side,(sign*.125,-.065,.013),(.275,.40,.025),material('sole',(14,15,15)))
   # Shoulder pieces belong to the arm, not the stationary torso.
-  box('arm_'+side,(x,-.005,1.448),(.215,.19,.026),trim,bevel=.004)
-  if off:
-   for i in range(5):box('arm_'+side,(sign*.494,-.075+i*.036,1.418),(.018,.015,.065),gold)
+  box('arm_'+side,(x,-.005,1.498),(.215,.19,.026),trim,bevel=.004)
+  if off and nap:
+   for i in range(5):box('arm_'+side,(sign*.494,-.075+i*.036,1.468),(.018,.015,.065),gold)
   if nap:
    box('leg_'+side,(sign*.125,.163,.64),(.24,.045,.37),cloth,bevel=.006)
    box('leg_'+side,(sign*.125,.188,.48),(.20,.012,.045),red)
@@ -116,8 +116,8 @@ def build_set(name):
   cyl('head',(0,0,2.095),.32,.37,black,16,r2=.35)
   box('head',(0,-.27,1.928),(.44,.26,.025),black,bevel=.012)
   cyl('head',(0,-.345,2.06),.065,.012,gold,front=True)
-  cyl('head',(0,-.35,2.20),.048,.015,white if fr else gold,front=True)
-  cyl('head',(0,-.36,2.20),.033,.015,red if fr else black,front=True)
+  cyl('head',(0,-.35,2.20),.048,.015,red if fr else gold,front=True)
+  cyl('head',(0,-.36,2.20),.033,.015,white if fr else black,front=True)
   cyl('head',(0,-.37,2.20),.018,.015,material('cockade_blue',(38,66,132)) if fr else gold,front=True)
   cyl('head',(0,-.07,2.38),.055,.22,red if fr else black,r2=.032)
   for a,b in [((-.27,-.22,2.14),(0,-.35,2.0)),((0,-.35,2.0),(.27,-.22,2.14))]:tube('head',a,b,.012,white if fr else gold)
@@ -128,7 +128,8 @@ def build_set(name):
   faces=[tuple(range(n-1,-1,-1)),tuple(range(n,2*n))]+[(i,(i+1)%n,(i+1)%n+n,i+n) for i in range(n)]
   me=bpy.data.meshes.new('bicorne');me.from_pydata(vs,[],faces);me.update();o=bpy.data.objects.new('bicorne',me);bpy.context.collection.objects.link(o);finish(o,'head',black)
   for (x,z),(xx,zz) in zip(poly,poly[1:]):tube('head',(x,-.145,z),(xx,-.145,zz),.012,gold)
-  cyl('head',(.13,-.16,2.14),.048,.01,white,front=True);cyl('head',(.13,-.17,2.14),.028,.01,red if fr else black,front=True)
+  cyl('head',(.13,-.16,2.14),.048,.01,red if fr else gold,front=True);cyl('head',(.13,-.17,2.14),.033,.01,white if fr else black,front=True)
+  if fr:cyl('head',(.13,-.18,2.14),.018,.01,material('cockade_blue',(38,66,132)),front=True)
  elif role=='infantry':helmet(material('helmet_de' if army.endswith('de') else 'helmet_su',(65,73,65) if not su else (79,88,57)),not su)
  elif role=='tanker' and not su:
   # German Panzer crew wore a black field cap in 1943–45, not a Soviet padded tanker helmet.

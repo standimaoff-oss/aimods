@@ -99,17 +99,24 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
             if (set == null) continue;
             GlbAssets.Loaded lm = GlbAssets.get(modelFor(set));
             if (lm == null) continue;
-            drawPiece(lm, set, pc, pc.bone.apply(m), ps, buf, light, overlay);
+            drawPiece(lm, set, pc, pc.bone.apply(m), ps, buf, light, overlay, pl instanceof AbstractClientPlayer ap && "slim".equals(ap.getModelName()));
         }
     }
 
-    private static void drawPiece(GlbAssets.Loaded lm, String set, Piece pc, ModelPart bone, PoseStack ps, MultiBufferSource buf, int light, int overlay) {
+    private static void drawPiece(GlbAssets.Loaded lm, String set, Piece pc, ModelPart bone, PoseStack ps, MultiBufferSource buf, int light, int overlay, boolean slim) {
         int[] ns = nodes(lm, set + "." + pc.node);
         if (ns.length == 0) return;
         ps.pushPose();
         bone.translateAndRotate(ps);
+        boolean arm = pc.node.startsWith("arm_");
+        if (slim && arm) ps.translate(0, -.03125, 0);
         ps.scale(1f, -1f, -1f);
         ps.translate(-pc.px, -pc.py, -pc.pz);
+        if (slim && arm) {
+            float center = pc.node.equals("arm_r") ? -.375f : .375f;
+            float inset = pc.node.equals("arm_r") ? .03125f : -.03125f;
+            ps.translate(center + inset, 0, 0); ps.scale(.75f, 1, 1); ps.translate(-center, 0, 0);
+        }
         for (int ni : ns) GlbRenderer.renderNode(lm, ni, ps, buf, light, overlay);
         ps.popPose();
     }
@@ -138,10 +145,9 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
         arm.xRot = 0f;
         sleeve.xRot = 0f;
         arm.visible = true;
-        sleeve.visible = true;
+        sleeve.visible = false; // The uniform supplies the outer sleeve, not the skin jacket overlay.
         arm.render(ps, buf.getBuffer(RenderType.entitySolid(pl.getSkinTextureLocation())), light, OverlayTexture.NO_OVERLAY);
-        sleeve.render(ps, buf.getBuffer(RenderType.entityTranslucent(pl.getSkinTextureLocation())), light, OverlayTexture.NO_OVERLAY);
-        drawPiece(lm, set, right ? PIECES[2] : PIECES[3], arm, ps, buf, light, OverlayTexture.NO_OVERLAY);
+        drawPiece(lm, set, right ? PIECES[2] : PIECES[3], arm, ps, buf, light, OverlayTexture.NO_OVERLAY, "slim".equals(pl.getModelName()));
     }
 
     private record Piece(String node, EquipmentSlot slot, Function<HumanoidModel<?>, ModelPart> bone, float px, float py, float pz) {

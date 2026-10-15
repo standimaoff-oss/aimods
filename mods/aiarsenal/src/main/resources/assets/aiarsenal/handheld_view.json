@@ -251,7 +251,7 @@
  "ak12.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -261,7 +261,7 @@
  "ak12.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -319,7 +319,7 @@
  "m4a1.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -329,7 +329,7 @@
  "m4a1.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -387,7 +387,7 @@
  "rpg7.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -397,7 +397,7 @@
  "rpg7.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -595,7 +595,7 @@
  "t5000.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -605,7 +605,7 @@
  "t5000.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -663,7 +663,7 @@
  "pkp.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -673,7 +673,7 @@
  "pkp.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -884,7 +884,7 @@
  "saiga12.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -894,7 +894,7 @@
  "saiga12.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -952,7 +952,7 @@
  "r870.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -962,7 +962,7 @@
  "r870.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1160,7 +1160,7 @@
  "igla.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1170,7 +1170,7 @@
  "igla.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1228,7 +1228,7 @@
  "stinger.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1238,7 +1238,7 @@
  "stinger.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1306,7 +1306,7 @@
  "ppsh41.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1316,7 +1316,7 @@
  "ppsh41.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1374,7 +1374,7 @@
  "mp40.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1384,7 +1384,7 @@
  "mp40.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1442,7 +1442,7 @@
  "mosin.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1452,7 +1452,7 @@
  "mosin.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1510,7 +1510,7 @@
  "k98k.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1520,7 +1520,7 @@
  "k98k.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1858,7 +1858,7 @@
  "mosin_pu.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1868,7 +1868,7 @@
  "mosin_pu.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1926,7 +1926,7 @@
  "k98k_zf39.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -1936,7 +1936,7 @@
  "k98k_zf39.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -2002,7 +2002,7 @@
  "c96.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -2012,7 +2012,7 @@
  "c96.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -2022,7 +2022,7 @@
  "tt33.thirdperson_righthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,
@@ -2032,7 +2032,7 @@
  "tt33.thirdperson_lefthand": [
   0,
   -0.125,
-  0,
+  0.09,
   180,
   0,
   0,

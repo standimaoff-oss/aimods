@@ -1,4 +1,5 @@
 import unittest,json
+from PIL import Image
 from historical_uniforms import ROOT,SETS
 from check_ppsh import load_glb,vectors
 A=ROOT/'mods/aiarsenal/src/main/resources/assets/aiarsenal'; D=ROOT/'mods/aiarsenal/src/main/resources/data/aiarsenal'
@@ -23,9 +24,23 @@ class HistoricalUniforms(unittest.TestCase):
    for part in ['head','body','arm_r','arm_l','leg_r','leg_l','boot_r','boot_l']:
     self.assertTrue(any(n.startswith(name+'.'+part+'.') for n in names),(name,part))
    for slot in ['head','chest','legs','feet']:
-    self.assertGreater((A/'textures/item'/f'uniform_{name}_{slot}.png').stat().st_size,100)
+    icon=A/'textures/item'/f'uniform_{name}_{slot}.png'
+    self.assertGreater(icon.stat().st_size,100)
+    with Image.open(icon) as image:self.assertIsNotNone(image.getchannel('A').getbbox(),str(icon))
   self.assertGreaterEqual(len(doc.get('images',[])),16)
   for image in doc['images']:self.assertIn('bufferView',image);self.assertNotIn('uri',image)
+ def test_sleeves_leave_the_palms_exposed(self):
+  doc,blob=load_glb(A/'models/glb/historical_uniforms.glb')
+  for name in SETS:
+   for side in ['arm_r','arm_l']:
+    ys=[]
+    for n in doc['nodes']:
+     if n.get('name','').startswith(name+'.'+side+'.') and 'mesh' in n:
+      for p in doc['meshes'][n['mesh']]['primitives']:
+       ys.extend(v[1] for v in vectors(doc,blob,p['attributes']['POSITION']))
+    self.assertTrue(ys)
+    self.assertGreater(min(ys),.84,(name,side,min(ys)))
+    self.assertLess(max(ys),1.54,(name,side,max(ys)))
  def test_grip_not_inventory_normalization(self):
   table=json.loads((A/'handheld_view.json').read_text())
   for name in ['c96','tt33','ppsh41','mosin_pu','k98k_zf39','ak12','m4a1']:
