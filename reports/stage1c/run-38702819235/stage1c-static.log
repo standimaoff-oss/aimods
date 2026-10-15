@@ -1,0 +1,10 @@
+test_ammo_models_and_blend (__main__.Stage1cTests) ... ok
+test_exported_models_textures_nodes_and_animation (__main__.Stage1cTests) ... ok
+test_new_shapeless_recipes_do_not_collide (__main__.Stage1cTests) ... ok
+test_retired_data_has_no_uranium (__main__.Stage1cTests) ... ok
+test_weapons_resources (__main__.Stage1cTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.135s
+
+OK
