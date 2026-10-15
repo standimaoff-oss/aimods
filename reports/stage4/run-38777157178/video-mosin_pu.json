@@ -1,0 +1,11 @@
+{
+  "video": "mosin_pu.mp4",
+  "duration": 14.3,
+  "reload_seconds": 2.9913210960000924,
+  "audio_rms": 0.0579276941716671,
+  "audio_peak": 0.3898768723011017,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}

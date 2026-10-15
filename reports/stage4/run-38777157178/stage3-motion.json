@@ -1,0 +1,186 @@
+{
+  "result": "PASS",
+  "observations": [
+    {
+      "gun": "tt33",
+      "view": "first",
+      "mode": "idle",
+      "observed": "TestPlayer:IDLE:speed=0.0:x=0.5:z=0.5:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "first",
+      "mode": "slow",
+      "observed": "TestPlayer:SLOW:speed=0.08634360675910235:x=0.5:z=2.554750174060632:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "first",
+      "mode": "walk",
+      "observed": "TestPlayer:WALK:speed=0.2710297829140753:x=0.5:z=5.405625238608509:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "first",
+      "mode": "run",
+      "observed": "TestPlayer:SPRINT:speed=0.2809465191854317:x=0.5:z=7.144733342194217:sprint=true:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "first",
+      "mode": "crouch",
+      "observed": "TestPlayer:CROUCH:speed=0.06475773471747015:x=0.5:z=2.256921745352348:sprint=false:crouch=true:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "first",
+      "mode": "idle",
+      "observed": "TestPlayer:IDLE:speed=0.0:x=0.5:z=0.5:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "first",
+      "mode": "slow",
+      "observed": "TestPlayer:SLOW:speed=0.08634361730548257:x=0.5:z=2.6410937913661146:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "first",
+      "mode": "walk",
+      "observed": "TestPlayer:WALK:speed=0.2158588736021949:x=0.5:z=5.205157306559011:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "first",
+      "mode": "run",
+      "observed": "TestPlayer:SPRINT:speed=0.24855766360442555:x=0.5:z=6.504333279065745:sprint=true:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "first",
+      "mode": "crouch",
+      "observed": "TestPlayer:CROUCH:speed=0.06475774215401486:x=0.5:z=2.192164010634878:sprint=false:crouch=true:ground=true"
+    },
+    {
+      "gun": "mosin_pu",
+      "view": "first",
+      "mode": "idle",
+      "observed": "TestPlayer:IDLE:speed=0.0:x=0.5:z=0.5:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "mosin_pu",
+      "view": "first",
+      "mode": "slow",
+      "observed": "TestPlayer:SLOW:speed=0.08634358744338977:x=0.5:z=2.4684065673015296:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "mosin_pu",
+      "view": "first",
+      "mode": "walk",
+      "observed": "TestPlayer:WALK:speed=0.21585896204408872:x=0.5:z=5.4210162686031:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "mosin_pu",
+      "view": "first",
+      "mode": "run",
+      "observed": "TestPlayer:SPRINT:speed=0.2806166683483351:x=0.5:z=6.897321552492734:sprint=true:crouch=false:ground=true"
+    },
+    {
+      "gun": "mosin_pu",
+      "view": "first",
+      "mode": "crouch",
+      "observed": "TestPlayer:CROUCH:speed=0.0647577083515205:x=0.5:z=2.04106270865303:sprint=false:crouch=true:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "remote",
+      "mode": "idle",
+      "observed": "Observer:IDLE:speed=0.0:x=0.5:z=3.800048828125:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "remote",
+      "mode": "slow",
+      "observed": "Observer:SLOW:speed=0.086320520955385:x=0.5:z=5.336710965482586:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "remote",
+      "mode": "walk",
+      "observed": "Observer:WALK:speed=0.21573024447998834:x=0.5:z=7.857666015625:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "remote",
+      "mode": "run",
+      "observed": "Observer:SPRINT:speed=0.2805104615429954:x=0.5:z=9.355438944080074:sprint=true:crouch=false:ground=true"
+    },
+    {
+      "gun": "tt33",
+      "view": "remote",
+      "mode": "crouch",
+      "observed": "Observer:CROUCH:speed=0.05756971571180558:x=0.5:z=5.283555772569445:sprint=false:crouch=true:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "remote",
+      "mode": "idle",
+      "observed": "Observer:IDLE:speed=0.0:x=0.5:z=3.800048828125:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "remote",
+      "mode": "slow",
+      "observed": "Observer:SLOW:speed=0.08646315028256457:x=0.5:z=5.681984788487368:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "remote",
+      "mode": "walk",
+      "observed": "Observer:WALK:speed=0.21278624846393468:x=0.5:z=8.049452039930555:sprint=false:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "remote",
+      "mode": "run",
+      "observed": "Observer:SPRINT:speed=0.26891072591145837:x=0.5:z=9.261962890625:sprint=true:crouch=false:ground=true"
+    },
+    {
+      "gun": "ppsh41",
+      "view": "remote",
+      "mode": "crouch",
+      "observed": "Observer:CROUCH:speed=0.06221064814814814:x=0.5:z=5.08203125:sprint=false:crouch=true:ground=true"
+    }
+  ],
+  "render_abba": [
+    {
+      "mode": "scan",
+      "frames": "40",
+      "render_median_ms": "54.662",
+      "render_p95_ms": "78.537",
+      "interval_median_ms": "73.245"
+    },
+    {
+      "mode": "index",
+      "frames": "40",
+      "render_median_ms": "52.211",
+      "render_p95_ms": "69.070",
+      "interval_median_ms": "71.286"
+    },
+    {
+      "mode": "index",
+      "frames": "40",
+      "render_median_ms": "51.792",
+      "render_p95_ms": "60.649",
+      "interval_median_ms": "71.607"
+    },
+    {
+      "mode": "scan",
+      "frames": "40",
+      "render_median_ms": "50.187",
+      "render_p95_ms": "62.505",
+      "interval_median_ms": "67.734"
+    }
+  ],
+  "limitations": "llvmpipe, fixed scene, existing FPS cap; render event timings are not hardware GPU/FPS certification"
+}
