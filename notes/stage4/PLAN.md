@@ -29,3 +29,8 @@ Specs: `notes/_tz/TZ-ai-forge-mod.md`, `TZ_MODEL_VIEW_PRO_v2.0.md`.
 - Inspected real F2: custom pale powder volume visible at cannon muzzle, firearms/grips and reloads rendered. Corrected low sabre first-person framing and changed roundshot from the oversized default item billboard to its actual GLB. Whole-carriage recoil replaces an anachronistic sliding barrel.
 - Full suite stopped because `bomb` is deliberately `noSummon`; no bomb was spawned. Replaced faulty fixture with an actual RPG-7 shot into the wall, **not** a manually injected effect. Added live-target damage assertions for all four flintlocks and explicit loading of the disposable bomber-test chunks.
 - Rejected run's empty blast screenshots/video are NOT evidence of a successful explosion test.
+
+## Regression caught before release: 54db735
+The recoil edit accidentally joined the load-reset statements onto a `//` comment.
+The existing one-ball-per-charge GameTest correctly failed. Restored the explicit
+LOAD=-1 and RECOIL=10 statements; no test assertion was weakened.

@@ -53,7 +53,10 @@ public final class PowderCannonEntity extends Entity {
         var ball=new CannonballEntity(ModEntities.CANNONBALL.get(),level);
         ball.setOwner(owner);ball.setPos(at);ball.setDeltaMovement(dir.scale(french()?3.0:2.8));
         ball.damage=french()?28:36;level.addFreshEntity(ball);
-        setDeltaMovement(getDeltaMovement().add(-dir.x*.14,0,-dir.z*.14)); // pre-hydraulic gun: carriage rolls backentityData.set(LOAD,-1);entityData.set(RECOIL,10);
+        // Pre-hydraulic gun: the carriage, not a sliding barrel, rolls back.
+        setDeltaMovement(getDeltaMovement().add(-dir.x * .14, 0, -dir.z * .14));
+        entityData.set(LOAD, -1);
+        entityData.set(RECOIL, 10);
         level.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.CANNON.get(),at.x,at.y,at.z,0,dir.x,dir.y,dir.z,1);
         level.playSound(null,getX(),getY(),getZ(),ModSounds.POWDER_CANNON.get(),SoundSource.BLOCKS,3f,.85f);
         return true;
