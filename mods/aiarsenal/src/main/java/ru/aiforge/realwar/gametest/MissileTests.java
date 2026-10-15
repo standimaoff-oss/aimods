@@ -125,7 +125,7 @@ public final class MissileTests {
         h.runAfterDelay(1800,()-> {
             h.assertTrue(parent.isRemoved(),"MIRV parent did not separate age="+parent.tickCount+" present="+(level.getEntity(parent.getUUID())==parent)+" ticking="+level.isPositionEntityTicking(parent.blockPosition()));
             h.assertTrue(children.size()==8,"expected eight observed MIRV children: "+children.size());
-            for(var child:children)h.assertTrue(child.isRemoved(),"stranded MIRV child age="+child.tickCount+" pos="+child.position());
+            for(var child:children)h.assertTrue(child.isRemoved(),"stranded MIRV child age="+child.tickCount+" pos="+child.position()+" "+ru.aiforge.realwar.missile.MissileChunkLeases.diagnostics(child));
             h.succeed();
         });
     }
