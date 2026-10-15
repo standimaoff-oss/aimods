@@ -1,0 +1,11 @@
+{
+  "video": "engine-tu160.mp4",
+  "duration": 10.45,
+  "reload_seconds": null,
+  "audio_rms": 0.09668420255184174,
+  "audio_peak": 1.0185672044754028,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}

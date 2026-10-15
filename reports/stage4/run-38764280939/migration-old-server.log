@@ -1,0 +1,464 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Java: 17.0.20.1, JVM: 17.0.20.1+1 (Eclipse Adoptium), Arch: amd64
+
+> Task :compileJava
+[16:02:06] [main/INFO]: Writing debug log file accesstransform.log
+[16:02:06] [main/INFO]: Access Transformer processor running version 8.2.14
+[16:02:06] [main/INFO]: Command line arguments [--inJar, /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-injected.jar, --outJar, /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/resources/META-INF/accesstransformer.cfg, --atFile, /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/_atJar_4/parent_at.cfg]
+[16:02:06] [main/INFO]: Reading from /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23/forge-1.20.1-47.4.23-injected.jar
+[16:02:06] [main/INFO]: Writing to /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar
+[16:02:06] [main/INFO]: Transformer file /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/resources/META-INF/accesstransformer.cfg
+[16:02:06] [main/INFO]: Transformer file /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/_atJar_4/parent_at.cfg
+[16:02:06] [main/WARN]: Found existing output jar /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar, overwriting
+[16:02:11] [main/INFO]: JAR transformation complete /home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar
+Creating SRG -> MCP TSRG
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/strike/StrikePlaneEntity.java:32: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            this.model = new ResourceLocation("aiarsenal", path);
+                         ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/aircraft/AirBombType.java:38: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "models/glb/" + this.id + ".glb");
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/strike/StrikeManager.java:90: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            Item rds = ForgeRegistries.ITEMS.getValue(new ResourceLocation("aiarsenal", "rds1"));
+                                                      ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/vehicle/VehicleSpec.java:14: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            return new ResourceLocation("aiarsenal", "glb/yarstel.glb");   // shared with the arsenal TEL renderer (one 5 MB asset)
+                   ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/vehicle/VehicleSpec.java:16: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "models/glb/" + this.id + ".glb");
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/ordnance/AirTargets.java:28: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final TagKey<EntityType<?>> TAG = TagKey.create((ResourceKey)Registries.ENTITY_TYPE, (ResourceLocation)new ResourceLocation("aiarsenal", "air_targets"));
+                                                                                                                         ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/blast/ModDamage.java:36: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return ResourceKey.create((ResourceKey)Registries.DAMAGE_TYPE, (ResourceLocation)new ResourceLocation("aiarsenal", name));
+                                                                                         ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/gametest/VehicleTests.java:217: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            h.assertTrue(rm.byKey(new ResourceLocation("aiarsenal", id)).isPresent(), "\u0440\u0435\u0446\u0435\u043f\u0442 \u043d\u0435 \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043d: " + id);
+                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/gametest/MissileTests.java:121: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            h.assertTrue(rm.byKey(new ResourceLocation("aiarsenal", missileType.itemName())).isPresent(), "\u0440\u0435\u0446\u0435\u043f\u0442 \u043d\u0435 \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043d: " + missileType.itemName());
+                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/gametest/MissileTests.java:124: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            h.assertTrue(rm.byKey(new ResourceLocation("aiarsenal", string)).isPresent(), "\u0440\u0435\u0446\u0435\u043f\u0442 \u043d\u0435 \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043d: " + string);
+                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/missile/MissileType.java:50: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "models/glb/missile_" + this.id() + ".glb");
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/gametest/DecoTests.java:146: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            if (l.getRecipeManager().byKey(new net.minecraft.resources.ResourceLocation("aiarsenal", e.getKey())).isEmpty()) { h.fail("no recipe " + e.getKey()); return; }
+                                           ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/gametest/GunTests.java:139: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+                EntityType<?> type = net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES.getValue(new net.minecraft.resources.ResourceLocation("aiarsenal", ks[idx[0]].spec.id()));
+                                                                                                         ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/gametest/RealWarTests.java:138: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", p);
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/registry/BombType.java:32: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "models/glb/" + this.id + ".glb");
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/network/ModNetwork.java:39: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel((ResourceLocation)new ResourceLocation("aiarsenal", "realwar"), () -> "1", "1"::equals, "1"::equals);
+                                                                                                   ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/deco/CrateKind.java:31: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "crates/" + id);
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/registry/ModTabs.java:80: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+                ResourceLocation key = new ResourceLocation("aiarsenal", en.getKey());
+                                       ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/registry/ModTabs.java:109: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        DRONES = ModTabs.tab("drones", Cat.DRONES, () -> new ItemStack((ItemLike)BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal", "shahed136"))));
+                                                                                                            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/registry/ModSounds.java:88: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent((ResourceLocation)new ResourceLocation("aiarsenal", name)));
+                                                                                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/handheld/LauncherWeaponItem.java:48: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return ForgeRegistries.ITEMS.getValue(new net.minecraft.resources.ResourceLocation("aiarsenal", this.kind.ammo));
+                                              ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/handheld/Firearms.java:134: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return ForgeRegistries.ITEMS.getValue(new net.minecraft.resources.ResourceLocation("aiarsenal", k.ammo));
+                                              ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/handheld/Firearms.java:545: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        SoundEvent ev = ForgeRegistries.SOUND_EVENTS.getValue(new net.minecraft.resources.ResourceLocation("aiarsenal", name));
+                                                              ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/strike/StrikePlaneRenderer.java:58: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        if (lm == null && k == StrikePlaneEntity.Kind.SU34) lm = GlbAssets.get(new ResourceLocation("aiarsenal", "models/glb/su57.glb"));
+                                                                               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/strike/StrikePlaneRenderer.java:114: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("minecraft", "textures/misc/white.png");
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/craft/AradoRenderer.java:18: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/ar196.glb");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/craft/AradoRenderer.java:19: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/craft/CraftOrdnanceRenderer.java:18: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/craft_ordnance.glb");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/craft/CraftOrdnanceRenderer.java:19: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/craft/CraftRenderer.java:24: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/craft/CraftRenderer.java:33: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        GlbAssets.Loaded lm = GlbAssets.get(new ResourceLocation("aiarsenal", e.kind.model));
+                                            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/ActionBar.java:45: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final net.minecraft.resources.ResourceLocation SHEET = new net.minecraft.resources.ResourceLocation("aiarsenal", "textures/gui/actions.png");
+                                                                          ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/WtHud.java:597: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MAP_RL = new ResourceLocation("aiarsenal", "dynamic/wt_minimap");
+                                                   ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/particle/Sprites.java:31: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        TextureAtlasSprite sp = atlas.getSprite(new ResourceLocation("aiarsenal", name));
+                                                ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/particle/Sprites.java:33: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            sp = atlas.getSprite(new ResourceLocation("aiarsenal", "particle/" + name));
+                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/sight/Optics.java:38: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/sight/Optics.java:108: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+                        new ResourceLocation("aiarsenal", "shaders/post/" + (a == NV ? "nv" : "thermal") + ".json"));
+                        ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/fx/TrackMarks.java:37: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TRACK = new ResourceLocation("aiarsenal", "textures/fx/track_tread.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/fx/TrackMarks.java:38: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TYRE = new ResourceLocation("aiarsenal", "textures/fx/tyre_tread.png");
+                                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/HitCam.java:47: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/deco/DecoModels.java:15: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation YOKE = new ResourceLocation("aiarsenal", "block/deco_searchlight_yoke");
+                                                ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/deco/DecoModels.java:16: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation DRUM = new ResourceLocation("aiarsenal", "block/deco_searchlight_drum");
+                                                ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/deco/DecoModels.java:17: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation DRUM_OFF = new ResourceLocation("aiarsenal", "block/deco_searchlight_drum_off");
+                                                    ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/deco/DecoModels.java:18: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation REFLECTOR = new ResourceLocation("aiarsenal", "block/deco_beacon_reflector");
+                                                     ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/deco/DecoModels.java:39: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "block/" + name);
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/deco/FlagRenderer.java:31: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MESH = new ResourceLocation("aiarsenal", "models/block/deco/flag_cloth.obj");
+                                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/ModuleProps.java:27: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation RL = new ResourceLocation("aiarsenal", "models/glb/hitcam_modules.glb");
+                                              ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GlbAssets.java:73: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+                ResourceLocation id = new ResourceLocation("aiarsenal", "glb/" + path.getPath().replaceAll("[^a-z0-9_./-]", "_").replace('/', '_') + "_" + i);
+                                      ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GlbAssets.java:92: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation lp = new ResourceLocation(path.getNamespace(), p.substring(0, p.length() - 4) + "_lod1.glb");
+                              ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/VehicleRenderer.java:31: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GlbRenderer.java:37: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/MissileRenderer.java:34: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/MissileRenderer.java:35: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation RV = new ResourceLocation("aiarsenal", "models/glb/missile_rv.glb");
+                                               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/HandheldView.java:63: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            var res = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation("aiarsenal", "handheld_view.json"));
+                                                                               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AirBombRenderer.java:32: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/DamageRender.java:24: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation FX = new ResourceLocation("aiarsenal", "models/glb/damage_fx.glb");
+                                              ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/RocketRenderer.java:32: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/RocketRenderer.java:33: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation[] MODELS = new ResourceLocation[]{new ResourceLocation("aiarsenal", "models/glb/rocket_grad.glb"), new ResourceLocation("aiarsenal", "models/glb/rocket_smerch.glb"), new ResourceLocation("aiarsenal", "models/glb/sam_48n6.glb")};
+                                                                            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/RocketRenderer.java:33: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation[] MODELS = new ResourceLocation[]{new ResourceLocation("aiarsenal", "models/glb/rocket_grad.glb"), new ResourceLocation("aiarsenal", "models/glb/rocket_smerch.glb"), new ResourceLocation("aiarsenal", "models/glb/sam_48n6.glb")};
+                                                                                                                                             ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/RocketRenderer.java:33: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation[] MODELS = new ResourceLocation[]{new ResourceLocation("aiarsenal", "models/glb/rocket_grad.glb"), new ResourceLocation("aiarsenal", "models/glb/rocket_smerch.glb"), new ResourceLocation("aiarsenal", "models/glb/sam_48n6.glb")};
+                                                                                                                                                                                                                ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/RocketRenderer.java:35: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation M13 = new ResourceLocation("aiarsenal", "models/glb/rocket_m13.glb");
+                                                ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/RocketRenderer.java:36: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TOS = new ResourceLocation("aiarsenal", "models/glb/rocket_tos220.glb");
+                                                ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/UniformLayer.java:37: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/uniforms.glb");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GunRenderer.java:54: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation("aiarsenal", "models/glb/" + id + ".glb");
+               ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/FallingBombRenderer.java:32: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GlbItemRenderer.java:77: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            model = new ResourceLocation("aiarsenal", "models/glb/launch_pad_" + n + ".glb");
+                    ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GlbItemRenderer.java:86: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            model = new ResourceLocation("aiarsenal", "models/glb/" + id.getPath() + ".glb");
+                    ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/GlbItemRenderer.java:115: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation model = new ResourceLocation("aiarsenal", "models/glb/" + id + ".glb");
+                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/DebrisRenderer.java:27: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/DebrisRenderer.java:80: warning: [removal] ResourceLocation(String) in ResourceLocation has been deprecated and marked for removal
+        GlbAssets.Loaded lm = GlbAssets.get(new ResourceLocation(model));
+                                            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/LaunchPadRenderer.java:49: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation[] MODELS = new ResourceLocation[]{null, new ResourceLocation("aiarsenal", "models/glb/launch_pad_1.glb"), new ResourceLocation("aiarsenal", "models/glb/launch_pad_2.glb"), new ResourceLocation("aiarsenal", "models/glb/launch_pad_3.glb")};
+                                                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/LaunchPadRenderer.java:49: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation[] MODELS = new ResourceLocation[]{null, new ResourceLocation("aiarsenal", "models/glb/launch_pad_1.glb"), new ResourceLocation("aiarsenal", "models/glb/launch_pad_2.glb"), new ResourceLocation("aiarsenal", "models/glb/launch_pad_3.glb")};
+                                                                                                                                                    ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/LaunchPadRenderer.java:49: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation[] MODELS = new ResourceLocation[]{null, new ResourceLocation("aiarsenal", "models/glb/launch_pad_1.glb"), new ResourceLocation("aiarsenal", "models/glb/launch_pad_2.glb"), new ResourceLocation("aiarsenal", "models/glb/launch_pad_3.glb")};
+                                                                                                                                                                                                                      ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AircraftRenderer.java:37: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AircraftRenderer.java:38: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/tu95.glb");
+                                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/MachineGlbRenderers.java:40: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation COMPUTER = new ResourceLocation("aiarsenal", "models/glb/launch_computer.glb");
+                                                    ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/MachineGlbRenderers.java:41: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation SIREN = new ResourceLocation("aiarsenal", "models/glb/siren.glb");
+                                                 ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AtMissileRenderer.java:15: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation WHITE = new ResourceLocation("minecraft", "textures/misc/white.png");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AtMissileRenderer.java:17: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            new ResourceLocation("aiarsenal", "models/glb/pg7v.glb"),
+            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AtMissileRenderer.java:18: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            new ResourceLocation("aiarsenal", "models/glb/igla_missile.glb"),
+            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AtMissileRenderer.java:19: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            new ResourceLocation("aiarsenal", "models/glb/javelin_missile.glb"),
+            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AtMissileRenderer.java:20: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            new ResourceLocation("aiarsenal", "models/glb/tow_missile.glb"),
+            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/AtMissileRenderer.java:21: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            new ResourceLocation("aiarsenal", "models/glb/stinger_missile.glb")};
+            ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/client/render/HazmatLayer.java:39: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/hazmat.glb");
+                                                  ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/realwar/deco/FlagBlock.java:27: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        this.texture = new ResourceLocation("aiarsenal", "textures/entity/flag/" + flag + ".png");
+                       ^
+/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/src/main/java/ru/aiforge/arsenal/volumetric/client/render/VolumeGlRenderer.java:422: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation resourceLocation = new ResourceLocation("aiarsenal", "shaders/volpyro/" + string);
+                                            ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+86 warnings
+
+> Task :processResources
+> Task :classes
+> Task :downloadMcpConfig
+> Task :extractSrg
+> Task :createSrgToMcp
+> Task :downloadMCMeta
+> Task :downloadAssets
+> Task :extractNatives
+> Task :makeSrcDirs
+> Task :prepareRuns
+> Task :prepareRunServer
+> Task :prepareRunServerCompile
+
+> Task :runServer
+2026-10-15 16:02:57,459 main WARN Advanced terminal features are not available in this environment
+[16:02:57] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserveruserdev, --gameDir, ., --fml.forgeVersion, 47.4.23, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --nogui]
+[16:02:57] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20.1 by Eclipse Adoptium; OS Linux arch amd64 version 6.8.0-1064-azure
+[16:02:57] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /home/runner/work/_temp/arsenal-legacy-lvsleuc8/runtime/server/config/fml.toml is not correct. Correcting
+[16:02:57] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[16:02:57] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[16:02:57] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[16:02:57] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[16:02:57] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserveruserdev
+[16:02:57] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23116!/ Service=ModLauncher Env=SERVER
+[16:02:58] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.23/103ee0ecf6e5e4a971ee1ae68384e96fd73b097f/javafmllanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[16:02:58] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.23/2531b2da1460bc09c8ec3bf946e641de664b460d/lowcodelanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[16:02:58] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.23/eebf4eae01f6fde63717bb38b77f9b6b1b50f8/mclanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[16:02:58] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/gradle-home/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.23/ef56cfb608a4356c3f99dd6a4fa81ce33029bcde/fmlcore-1.20.1-47.4.23.jar is missing mods.toml file
+[16:02:58] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[16:03:01] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserveruserdev' with arguments [--gameDir, ., --nogui]
+[16:03:10] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.23, for MC 1.20.1 with MCP 20230612.114412
+[16:03:10] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.23 Initialized
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/arsenal-legacy-lvsleuc8/runtime/server/config/aiarsenal-realwar-common.toml is not correct. Correcting
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.enabled was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.metersPerBlock was corrected from null to its default, 17.5. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.maxBlastRadius was corrected from null to its default, 300. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.craterScale was corrected from null to its default, 1.0. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.destroyBlocks was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.thermalIgnition was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.entityDamage was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.blastBudgetMs was corrected from null to its default, 14. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.conventionalMaxRadius was corrected from null to its default, 64. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.enabled was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.hourTicks was corrected from null to its default, 2400. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.falloutLengthScale was corrected from null to its default, 0.35. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.radioactiveItems was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.scaleK was corrected from null to its default, 25.0. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarRange was corrected from null to its default, 600. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarLink was corrected from null to its default, 250. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.rocketsDestroyBlocks was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.vehicleDamage was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.flakRange was corrected from null to its default, 170. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key worldgen was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key worldgen.wreckSites was corrected from null to its default, true. 
+[16:03:11] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key worldgen.supplyCaches was corrected from null to its default, true. 
+[16:03:11] [modloading-worker-0/INFO] [ru.ai.bm.Bm21Grad/]: BM-21 Grad loaded: 5 rocket types
+[16:03:11] [modloading-worker-0/INFO] [ru.ai.tu.TuBombers/]: Tu Bombers loaded
+[16:03:11] [modloading-worker-0/INFO] [ru.ai.ar.AiArsenal/]: AI Arsenal loaded
+[16:03:11] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[16:03:12] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.23 Target: 47.4.28
+[16:03:13] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[16:03:13] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar%23181!/assets/.mcassetsroot' uses unexpected schema
+[16:03:13] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/_temp/arsenal-legacy-lvsleuc8/mods/aiarsenal/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.23_mapped_official_1.20.1/forge-1.20.1-47.4.23_mapped_official_1.20.1.jar%23181!/data/.mcassetsroot' uses unexpected schema
+[16:03:17] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[16:03:17] [main/INFO] [minecraft/AdvancementList]: Loaded 1278 advancements
+[16:03:18] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[16:03:18] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[16:03:18] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: CREATIVE
+[16:03:18] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[16:03:18] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:25565
+[16:03:18] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[16:03:18] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[16:03:18] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[16:03:18] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[16:03:18] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-bm21-server.toml is not correct. Correcting
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics.rangeScale was corrected from null to its default, 1.0. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics.dispersion was corrected from null to its default, 0.012. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics.maxGhostTicks was corrected from null to its default, 2400. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.salvoIntervalTicks was corrected from null to its default, 10. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.reloadTicksPerTube was corrected from null to its default, 40. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.creativeFreeAmmo was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.vehicleHealth was corrected from null to its default, 300.0. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.maxSpeed was corrected from null to its default, 0.9. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.blockDamage was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.explosionScale was corrected from null to its default, 1.0. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.debris was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-aviation-server.toml is not correct. Correcting
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key flight was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key flight.speedScale was corrected from null to its default, 0.5. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.blockDamage was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.explosionScale was corrected from null to its default, 1.0. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.debris was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/forge-server.toml is not correct. Correcting
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-arsenal-server.toml is not correct. Correcting
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.blockDamage was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.radiusScale was corrected from null to its default, 1.0. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.columnsPerTick was corrected from null to its default, 1800. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.realWarBlast was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.falloutSeconds was corrected from null to its default, 300. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional was corrected from null to its default, SimpleCommentedConfig:{}. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional.blockDamage was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional.realWarBlast was corrected from null to its default, true. 
+[16:03:18] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional.speedScale was corrected from null to its default, 0.5. 
+[16:03:18] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[16:03:20] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[16:03:22] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:22] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:22] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:22] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:22] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:22] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:23] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:23] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:24] [Worker-Main-6/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:03:24] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 4478 ms
+[16:03:24] [Server thread/INFO] [minecraft/DedicatedServer]: Done (5.919s)! For help, type "help"
+[16:03:24] [Server thread/INFO] [minecraft/DedicatedServer]: Starting remote control listener
+[16:03:24] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener started
+[16:03:24] [Server thread/INFO] [minecraft/RconThread]: RCON running on 127.0.0.1:25575
+[16:03:24] [Server thread/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: [aiarsenal]
+[16:03:24] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[16:03:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Marked chunk [0, 0] in minecraft:overworld to be force loaded]
+[16:03:25] [RCON Client /127.0.0.1 #2/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Changed the block at 0, -60, 0]
+[16:03:27] [RCON Client /127.0.0.1 #3/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Changed the block at 1, -60, 0]
+[16:03:27] [RCON Client /127.0.0.1 #4/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Changed the block at 2, -60, 0]
+[16:03:27] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:27] [RCON Client /127.0.0.1 #5/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [RCON Client /127.0.0.1 #6/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Saved the game]
+[16:03:27] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[16:03:27] [RCON Client /127.0.0.1 #7/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Stopping the server]
+[16:03:27] [RCON Client /127.0.0.1 #8/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[16:03:27] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[16:03:28] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[16:03:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[16:03:29] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[16:03:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[16:03:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[16:03:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[16:03:29] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[16:03:29] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener stopped
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 50s
+10 actionable tasks: 10 executed

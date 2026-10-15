@@ -1,0 +1,11 @@
+{
+  "video": "custom-ordinary-explosion.mp4",
+  "duration": 13.317,
+  "reload_seconds": null,
+  "audio_rms": 0.03488335385918617,
+  "audio_peak": 0.46147671341896057,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}

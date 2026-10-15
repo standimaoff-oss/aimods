@@ -1,0 +1,11 @@
+{
+  "video": "1812-cannon_ri12.mp4",
+  "duration": 23.9,
+  "reload_seconds": null,
+  "audio_rms": 0.00819068681448698,
+  "audio_peak": 0.1256483942270279,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}
