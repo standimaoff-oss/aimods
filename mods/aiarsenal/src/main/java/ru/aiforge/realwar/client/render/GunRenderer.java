@@ -101,6 +101,8 @@ public final class GunRenderer {
             GlbModel.Animation an = lm.model.animation(k.id + (k.boltAction() ? "_bolt" : "_pump"));
             if (an != null && since - 0.12f < an.duration) pose.sample(an, Math.min(since - 0.12f, an.duration - 0.001f));
         }
+        if (k == GunKind.C96) pose.hide(k.id + ".clip", !rel);
+        if (k.singleLoad()) pose.hide(k.id + ".round", !rel);
         boolean flash = since < (k.launcher() ? 0.09f : 0.045f);
         pose.hide(k.id + ".flash", !flash);
         if (flash) {
@@ -260,6 +262,8 @@ public final class GunRenderer {
             pose.hide(id + ".arm_l", true);
             pose.hide(id + ".arm_r", true);
             pose.hide(id + ".flash", true);
+            if (id.equals("c96")) pose.hide(id + ".clip", true);
+            if (id.equals("mosin_pu") || id.equals("k98k_zf39")) pose.hide(id + ".round", true);
             if (stack.getItem() instanceof FirearmItem && FirearmItem.ammo(stack) == 0 && ctx != ItemDisplayContext.GUI) pose.hide(id + ".round", true);
             pose.compute();
             GlbRenderer.render(lm, pose, ps, buf, light, OverlayTexture.NO_OVERLAY);

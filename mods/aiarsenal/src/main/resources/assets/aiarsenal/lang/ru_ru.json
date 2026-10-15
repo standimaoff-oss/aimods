@@ -1905,5 +1905,10 @@
   "tooltip.aiarsenal.gun.mosin_pu": "Мосин 91/30 с ПУ (3,5×)",
   "tooltip.aiarsenal.gun.k98k_zf39": "Kar98k с ZF39 (4×)",
   "tooltip.aiarsenal.gun.c96": "Mauser C96 (7,63×25)",
-  "tooltip.aiarsenal.gun.tt33": "ТТ-33 (7,62×25)"
+  "tooltip.aiarsenal.gun.tt33": "ТТ-33 (7,62×25)",
+  "hud.aiarsenal.gun.name.mosin_pu": "Мосин ПУ",
+  "hud.aiarsenal.gun.name.k98k_zf39": "Kar98k ZF39",
+  "hud.aiarsenal.gun.name.c96": "Mauser C96",
+  "hud.aiarsenal.gun.name.tt33": "ТТ-33",
+  "tooltip.aiarsenal.mag.tt33": "ТТ-33: 8 патронов 7,62×25"
 }

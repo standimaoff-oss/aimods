@@ -43,7 +43,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y xvfb xdotool libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
+          sudo apt-get install -y xvfb xdotool libegl1 libgl1-mesa-dri libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
           pip install pillow
           cd "$RUNNER_TEMP"
           curl --fail --retry 3 -LO https://download.blender.org/release/Blender4.2/blender-4.2.5-linux-x64.tar.xz
