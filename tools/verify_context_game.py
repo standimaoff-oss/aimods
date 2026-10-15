@@ -83,7 +83,8 @@ def missile(row,index):
         save()
         return missile_complete(row['observed'])
     wait(completed,360)
-    g.command(f'tp TestPlayer {tx+20} -25 {tz-25} 40 48')
+    g.command('gamemode creative TestPlayer')
+    g.command(f'tp TestPlayer {tx+20} -58 {tz-25} 40 15')
     time.sleep(4)
     g.screenshot('impact-'+row['id'].split(':')[1])
     g.command(f'forceload remove -16 {z-16} 32 {z+32}')
@@ -139,6 +140,8 @@ def cannon(row,index):
         assert after['loading']==-1,after
         assert sum(after['spawned'].values())==sum(before['spawned'].values())+1,after
         row['cycles'].append(dict(loaded=loaded,before=before,after=after));save()
+    g.command(f'tp TestPlayer 8000.5 -60 {500+index*128+.5} -45 10')
+    time.sleep(2)
     g.screenshot('cannon-'+row['id'].split(':')[1])
     row['method']='survival cannon item placement -> real charge consumption/160-tick load -> ignition/tool wear -> cannonball spawn; twice'
 
@@ -170,20 +173,40 @@ def javelin(row,index):
 
 def drone(row,index):
     def d(action='status'):
-        return json.loads(g.command('execute as TestPlayer at @s run arsenal_drone_context '+action))
+        text=g.command('execute as TestPlayer at @s run arsenal_drone_context '+action)
+        try:state=json.loads(text)
+        except ValueError:raise AssertionError(action+' -> '+text)
+        if action=='status':row['lastObserved']=state;save()
+        return state
     def restored():
         state=d();return (not state['session'] and state['cameraPlayer'] and state['mode']=='survival'
                          and state['originDistance']<2 and not state['dummyPresent'])
     reset_player(10000+index*512,2000)
-    row['start']=d('prepare '+row['id']);save()
+    row['placed']=d('prepare '+row['id']);save()
+    # Real players interact only after the spawned entity has been tracked. Do
+    # not send camera/remote input in the same server tick as entity creation.
+    time.sleep(3)
+    marker='REMOTE CLIENT QA READY id='+str(row['placed']['entityId'])
+    def client_count(text):return (g.LOGS/'client.log').read_text(errors='replace').count(text)
+    ack_before=client_count(marker)
+    stop_before=client_count('REMOTE CLIENT QA STOP')
+    row['start']=d('link');save()
     try:
-        g.key('keydown','space');time.sleep(1.2);g.key('keyup','space')
-        wait(lambda:d()['y']>row['start']['y']+3,90)
+        wait(lambda:client_count(marker)>ack_before,45)
+        row['clientCameraReady']='PASS'
+        g.key('keydown','space')
+        try:
+            def airborne():
+                state=d();assert state['session'], 'remote session ended before takeoff: '+str(state)
+                return state['y']>row['start']['y']+3
+            wait(airborne,90)
+        finally:g.key('keyup','space')
         row['flying']=d();g.screenshot('drone-'+row['id'].split(':')[1]);save()
         if 'fpv' in row['id']:
             key('f')
             wait(lambda:d()['removed'] and d()['completedTasks']>0 and d()['activeBlasts']==0,90)
             wait(restored,30)
+            wait(lambda:client_count('REMOTE CLIENT QA STOP')>stop_before,30)
             row['detonation']=d()
             row['method']='survival placement -> goggles link/camera -> actual Space takeoff -> F detonation -> automatic operator/camera/dummy restoration'
         else:
@@ -195,9 +218,15 @@ def drone(row,index):
                 time.sleep(2)
             wait(lambda:d()['completedTasks']>=2 and d()['activeBlasts']==0,120)
             row['fired']=d();key('BackSpace');wait(restored,30)
-            row['firstExit']=d();d('reconnect');assert d()['session']
+            wait(lambda:client_count('REMOTE CLIENT QA STOP')>stop_before,30)
+            row['firstExit']=d();ack_before=client_count(marker)
+            stop_before=client_count('REMOTE CLIENT QA STOP')
+            d('reconnect');assert d()['session']
+            wait(lambda:client_count(marker)>ack_before,45)
             g.screenshot('drone-reconnect-'+row['id'].split(':')[1])
-            key('BackSpace');wait(restored,30);row['secondExit']=d()
+            key('BackSpace');wait(restored,30)
+            wait(lambda:client_count('REMOTE CLIENT QA STOP')>stop_before,30)
+            row['secondExit']=d()
             row['method']='survival placement -> tablet link -> actual Space takeoff -> production designation -> actual F twice/projectiles/impacts -> Backspace restore -> controller reconnect -> Backspace restore'
             row['unverified']='full RTB/landing, rearming and long-range loss-of-link'
     finally:

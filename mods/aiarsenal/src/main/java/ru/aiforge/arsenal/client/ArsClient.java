@@ -133,8 +133,11 @@ public final class ArsClient {
         return p == null ? 0 : p.getXRot();
     }
 
+    private static int qaAckSession = -1;
+
     public static void session(SessionPacket pk) {
         Minecraft mc = Minecraft.getInstance();
+        qaAckSession = -1;
         if (pk.start()) {
             sessionId = pk.entityId();
             zoom = 1f;
@@ -149,6 +152,8 @@ public final class ArsClient {
             Entity e = sessionEntity();
             sessionId = -1;
             if (mc.player != null) mc.setCameraEntity(mc.player);
+            if (Boolean.getBoolean("aiarsenal.visualQa"))
+                ru.aiforge.arsenal.AiArsenal.LOGGER.info("REMOTE CLIENT QA STOP");
             if (!pk.reason().isEmpty() && !pk.reason().endsWith("session_end")) {
                 lostTicks = 40;
                 lostReason = pk.reason();
@@ -187,6 +192,10 @@ public final class ArsClient {
         Entity d = sessionEntity();
         if (d != null && mc.getCameraEntity() != d) mc.setCameraEntity(d);
         if (d == null) return;
+        if (Boolean.getBoolean("aiarsenal.visualQa") && qaAckSession != d.getId()) {
+            qaAckSession = d.getId();
+            ru.aiforge.arsenal.AiArsenal.LOGGER.info("REMOTE CLIENT QA READY id={}", d.getId());
+        }
         flightTicks++;
         if (KEY_EXIT.consumeClick()) {
             ArsenalNetwork.CHANNEL.sendToServer(new ControlPacket(-1, 0, 0, 0, 1));

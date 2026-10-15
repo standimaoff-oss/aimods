@@ -53,13 +53,17 @@ public final class DroneContextQa {
             check(drone instanceof FpvDrone || drone instanceof ReconDrone,"unsupported drone");
             Item controller=BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal",drone instanceof FpvDrone?"fpv_goggles":"tablet"));
             p.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(controller));
-            origin=p.position();tasks=BlastManager.completedBlasts;projectiles=0;
+            origin=p.position();tasks=BlastManager.completedBlasts;projectiles=0;dummy=null;
+            reply(c.getSource(),status(p));return 1;
+        })));
+        root.then(Commands.literal("link").executes(c->{
+            var p=c.getSource().getPlayerOrException();check(drone!=null && !RemoteControl.inSession(p),"requires placed drone without session");
             drone.interact(p,InteractionHand.MAIN_HAND);
             check(RemoteControl.inSession(p) && p.getCamera()==drone,"link/camera session failed");
             check(p.getMainHandItem().getOrCreateTag().hasUUID("Drone"),"controller not linked");
             dummy=RemoteControl.session(p.getUUID()).dummy();
             reply(c.getSource(),status(p));return 1;
-        })));
+        }));
         root.then(Commands.literal("status").executes(c->{reply(c.getSource(),status(c.getSource().getPlayerOrException()));return 1;}));
         root.then(Commands.literal("designate").executes(c->{
             var p=c.getSource().getPlayerOrException();check(drone instanceof ReconDrone,"not recon");
@@ -84,7 +88,7 @@ public final class DroneContextQa {
         check(drone!=null,"no drone");JsonObject o=new JsonObject();o.addProperty("session",RemoteControl.inSession(p));
         o.addProperty("cameraDrone",p.getCamera()==drone);o.addProperty("cameraPlayer",p.getCamera()==p);
         o.addProperty("mode",p.gameMode.getGameModeForPlayer().getName());o.addProperty("removed",drone.isRemoved());
-        o.addProperty("state",drone.state());o.addProperty("x",drone.getX());o.addProperty("y",drone.getY());o.addProperty("z",drone.getZ());
+        o.addProperty("entityId",drone.getId());o.addProperty("state",drone.state());o.addProperty("x",drone.getX());o.addProperty("y",drone.getY());o.addProperty("z",drone.getZ());
         o.addProperty("originDistance",p.position().distanceTo(origin));o.addProperty("dummyPresent",dummy!=null && p.serverLevel().getEntity(dummy)!=null);
         o.addProperty("ammo",drone instanceof ReconDrone r?r.ammo():0);o.addProperty("completedTasks",BlastManager.completedBlasts-tasks);
         o.addProperty("activeBlasts",BlastManager.active(p.serverLevel()));o.addProperty("projectiles",projectiles);return o;

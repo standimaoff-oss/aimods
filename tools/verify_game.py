@@ -123,6 +123,12 @@ def gametest():
     code = process.wait(timeout=1200)
     text = log.read_text(errors='replace')
     if code or 'required tests passed' not in text:
+        # Surface exact failures as Actions annotations, not only in a long log
+        # that otherwise remains inaccessible until the client audit finishes.
+        if os.environ.get('GITHUB_ACTIONS') == 'true':
+            for line in [s for s in text.splitlines() if ' failed!' in s][:20]:
+                safe = line.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+                print('::error title=Minecraft GameTest::' + safe, flush=True)
         raise RuntimeError(f'GameTests failed (exit {code})\n{text[-9000:]}')
     print('\n'.join(line for line in text.splitlines() if 'required tests' in line), flush=True)
 

@@ -305,6 +305,20 @@ extends Entity {
         return this.cruiseY;
     }
 
+    /** Called from the level clock too: a hidden/non-ticking entity cannot
+     * renew a lease from its own tick. Never advances flight or impacts. */
+    void renewChunkLease(ServerLevel level) {
+        if (isRemoved()) return;
+        if (mode() == 2) {
+            ChunkPos at = chunkPosition();
+            level.getChunkSource().addRegionTicket(TICKET, at, 3, at);
+            return;
+        }
+        lastTicket = null;
+        keepLoaded(level, position(), new Vec3(dirX * speed * 20, 0, dirZ * speed * 20),
+                horiz > 0 ? dist(age) / horiz : 0);
+    }
+
     private void keepLoaded(ServerLevel sl, Vec3 pos, Vec3 ahead, double u) {
         ChunkPos a = new ChunkPos(BlockPos.containing((double)pos.x, (double)64.0, (double)pos.z));
         if (!a.equals(this.lastTicket) || this.age % 15 == 0) {

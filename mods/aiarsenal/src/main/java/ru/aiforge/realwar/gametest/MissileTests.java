@@ -115,12 +115,15 @@ public final class MissileTests {
         MissileEntity parent=MissileEntity.launch(level,MissileType.ICBM_MIRV,start,target);
         java.util.Set<MissileEntity> children=new java.util.HashSet<>();
         h.onEachTick(()-> {
+            // Vanilla sleeps an entirely empty dimension after 300 ticks. Keep
+            // the test clock awake, without forcing any route/target chunks.
+            level.resetEmptyTime();
             for (net.minecraft.world.entity.Entity entity:level.getAllEntities())
                 if(entity instanceof MissileEntity m && m.type()==MissileType.ICBM_MIRV && m.mode()==1
                         && Math.abs(m.getZ()-origin.getZ())<300 && m.getX()>origin.getX()) children.add(m);
         });
         h.runAfterDelay(1800,()-> {
-            h.assertTrue(parent.isRemoved(),"MIRV parent did not separate");
+            h.assertTrue(parent.isRemoved(),"MIRV parent did not separate age="+parent.tickCount+" present="+(level.getEntity(parent.getUUID())==parent)+" ticking="+level.isPositionEntityTicking(parent.blockPosition()));
             h.assertTrue(children.size()==8,"expected eight observed MIRV children: "+children.size());
             for(var child:children)h.assertTrue(child.isRemoved(),"stranded MIRV child age="+child.tickCount+" pos="+child.position());
             h.succeed();

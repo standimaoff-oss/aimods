@@ -88,18 +88,27 @@ public final class RemoteControl {
         stTag.putBoolean("ShowArms", true);
         stTag.putBoolean("NoBasePlate", true);
         st.load(stTag);
-        sl.addFreshEntity(st);
         t.putUUID("Dummy", st.getUUID());
         p.getPersistentData().put(TAG, t);
+        // Register before the join event so a newly created operator is not
+        // mistaken for an orphan loaded from a previous/finished session.
+        SESSIONS.put(p.getUUID(), new Session(p.getUUID(), drone.getUUID(), drone.getId(), st.getUUID(), p.position(), sl.dimension()));
+        if (!sl.addFreshEntity(st)) {
+            SESSIONS.remove(p.getUUID());
+            p.getPersistentData().remove(TAG);
+            return;
+        }
         p.setGameMode(GameType.SPECTATOR);
         drone.operator = p.getUUID();
-        SESSIONS.put(p.getUUID(), new Session(p.getUUID(), drone.getUUID(), drone.getId(), st.getUUID(), p.position(), sl.dimension()));
         p.setCamera(drone);
         ArsenalNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> p), new SessionPacket(drone.getId(), true, ""));
     }
 
     /** Ends the session and restores the player (reason: translation key or null). */
     public static void stop(ServerPlayer p, @Nullable String reason) {
+        if (Boolean.getBoolean("aiarsenal.stressQa"))
+            ru.aiforge.arsenal.AiArsenal.LOGGER.info("REMOTE QA stop reason={} camera={} shifting={}",
+                    reason, p.getCamera().getId(), p.isShiftKeyDown());
         Session s = SESSIONS.remove(p.getUUID());
         MinecraftServer server = p.server;
         if (s != null) {
@@ -177,6 +186,11 @@ public final class RemoteControl {
             Entity hit = hitId >= 0 ? cam.level().getEntity(hitId) : null;
             c.designate(p, point, hit);
         }
+    }
+
+    /** Also checked when an operator's previously unloaded chunk returns. */
+    public static boolean activeDummy(UUID id) {
+        return SESSIONS.values().stream().anyMatch(s -> s.dummy().equals(id));
     }
 
     public static boolean isDummy(Entity e) {

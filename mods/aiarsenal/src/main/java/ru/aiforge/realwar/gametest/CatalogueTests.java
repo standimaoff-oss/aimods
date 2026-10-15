@@ -15,6 +15,18 @@ import ru.aiforge.realwar.handheld.*;
 @PrefixGameTestTemplate(false)
 public final class CatalogueTests {
     @GameTest(template="arena", batch="catalogue")
+    public static void stale_operator_dummy_rejected_when_chunk_returns(GameTestHelper h) {
+        var level=h.getLevel();var pos=h.absolutePos(new net.minecraft.core.BlockPos(2,2,2));
+        var orphan=new net.minecraft.world.entity.decoration.ArmorStand(level,pos.getX(),pos.getY(),pos.getZ());
+        orphan.addTag(ru.aiforge.arsenal.control.RemoteControl.DUMMY_TAG);
+        h.assertTrue(!level.addFreshEntity(orphan),"orphan operator must not reappear after chunk load");
+        h.assertTrue(level.getEntity(orphan.getUUID())==null,"orphan operator visible");
+        var ordinary=new net.minecraft.world.entity.decoration.ArmorStand(level,pos.getX(),pos.getY(),pos.getZ());
+        h.assertTrue(level.addFreshEntity(ordinary),"ordinary armor stands must be preserved");ordinary.discard();
+        h.succeed();
+    }
+
+    @GameTest(template="arena", batch="catalogue")
     public static void real_chunk_upgrade_does_not_mutate_pending_write_nbt(GameTestHelper h) throws Exception {
         CompoundTag pending = new CompoundTag();
         pending.putInt("DataVersion", net.minecraft.SharedConstants.getCurrentVersion().getDataVersion().getVersion());

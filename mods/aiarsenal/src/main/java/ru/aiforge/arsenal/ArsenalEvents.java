@@ -86,6 +86,16 @@ public final class ArsenalEvents {
     }
 
     @SubscribeEvent
+    public static void joined(net.minecraftforge.event.entity.EntityJoinLevelEvent e) {
+        if (!e.getLevel().isClientSide() && RemoteControl.isDummy(e.getEntity())
+                && !RemoteControl.activeDummy(e.getEntity().getUUID())) {
+            // restore() cannot find a dummy while its chunk is unloaded. Reject
+            // the orphan when it loads, including after a server restart.
+            e.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
     public static void commands(RegisterCommandsEvent e) {
         ArsenalCommand.register(e.getDispatcher());
     }
