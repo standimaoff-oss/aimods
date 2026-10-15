@@ -86,6 +86,7 @@ jobs:
           SHOTS="shots/aiarsenal/context/run-${GITHUB_RUN_ID}"
           mkdir -p "$DEST" "$SHOTS"
           cp verification/logs/* "$DEST/"
+          if [ -f "$DEST/context-gameplay.json" ]; then python tools/report_context.py "$DEST"; fi
           python - <<'PYCOMPRESS'
           import gzip,hashlib,json,os
           from pathlib import Path
