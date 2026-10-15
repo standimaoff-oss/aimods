@@ -81,6 +81,11 @@ jobs:
       - name: Every runtime item and all free-fall bombs in installed Minecraft
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: python tools/verify_catalogue_game.py 2>&1 | tee verification/logs/catalogue-driver.log
+      - name: Record built candidate checksum (not publication approval)
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: |
+          VERSION=$(sed -n 's/^mod_version=//p' mods/aiarsenal/gradle.properties)
+          sha256sum "mods/aiarsenal/build/libs/aiarsenal-${VERSION}.jar" > verification/SHA256SUMS
       - name: Archive evidence and binary
         if: always()
         uses: actions/upload-artifact@v4
@@ -106,10 +111,6 @@ jobs:
           git fetch origin arena/10158ad9-aimods
           git rebase FETCH_HEAD
           git push origin HEAD:arena/10158ad9-aimods
-      - name: Draft binary only after successful audit
-        if: success()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.11.jar > verification/SHA256SUMS
-          gh release create "stability-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.11.jar verification/SHA256SUMS --draft --prerelease --target "$GITHUB_SHA" --title 'Alpha.11 stability audit — pending review' --notes "Source $GITHUB_SHA. Registry-derived smoke checks, real mouse/R firearm actions and destructive free-fall bomb tests. This is NOT full vehicle/tool acceptance or a Windows NVIDIA crash certification."
+      # Release creation is separate from gameplay acceptance: the Actions
+      # integration cannot create releases here (HTTP 403). Upload only reviewed,
+      # hash-verified artifacts to a maintainer-created draft.

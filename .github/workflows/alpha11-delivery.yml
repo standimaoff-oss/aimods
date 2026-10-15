@@ -1,0 +1,64 @@
+name: Release — upload verified alpha.11 bytes
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+defaults:
+  run:
+    shell: bash
+jobs:
+  deliver:
+    if: contains(github.event.head_commit.message, '[upload-alpha11]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Wait for the final audit (verdict is checked separately below)
+        run: gh run watch 38818319773 --repo standimaoff-oss/aimods --interval 30
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/10158ad9-aimods
+      - name: Check every gameplay gate and identical installed hashes
+        run: |
+          DEST="reports/publication/run-${GITHUB_RUN_ID}"
+          mkdir -p "$DEST"
+          for id in 38818319821 38818319773 38818319766; do
+            gh run view "$id" --json headSha,status,conclusion,jobs > "$DEST/$id.json"
+          done
+          python tools/verify_alpha11_delivery.py "$DEST" reports > "$DEST/acceptance.json"
+      - uses: actions/download-artifact@v4
+        with:
+          name: context-evidence
+          run-id: 38818319821
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/verified-artifact
+      - name: Verify bytes and upload to the existing private draft
+        run: |
+          DEST="reports/publication/run-${GITHUB_RUN_ID}"
+          python - <<'PY'
+          import hashlib,os
+          from pathlib import Path
+          from tools.verify_alpha11_delivery import SHA256
+          jars=list((Path(os.environ['RUNNER_TEMP'])/'verified-artifact').rglob('aiarsenal-1.0.1-alpha.11.jar'))
+          assert len(jars)==1,jars
+          assert hashlib.sha256(jars[0].read_bytes()).hexdigest()==SHA256, 'artifact differs from installed tested bytes'
+          folder=Path('reports/publication')/('run-'+os.environ['GITHUB_RUN_ID'])
+          (folder/'SHA256SUMS').write_text(SHA256+'  '+jars[0].name+'\n')
+          with open(os.environ['GITHUB_ENV'],'a') as f:f.write('VERIFIED_JAR='+str(jars[0])+'\n')
+          PY
+      - name: Upload only, never publish an unreviewed release
+        run: |
+          DEST="reports/publication/run-${GITHUB_RUN_ID}"
+          gh release upload v1.0.1-alpha.11 "$VERIFIED_JAR" "$DEST/SHA256SUMS" 2>&1 | tee "$DEST/upload.log"
+          gh release view v1.0.1-alpha.11 --json tagName,isDraft,assets,url > "$DEST/release.json"
+      - name: Preserve delivery evidence even on failure
+        if: always()
+        run: |
+          DEST="reports/publication/run-${GITHUB_RUN_ID}"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python tools/publish_evidence.py "$DEST"/*
