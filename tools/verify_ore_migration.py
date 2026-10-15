@@ -35,14 +35,16 @@ def start(label, installed=False):
 def check_migrated():
     for x, block in [(0, 'stone'), (1, 'deepslate')]:
         marker = 'MIGRATED_' + block.upper()
-        game.command(f'execute if block {x} -60 0 minecraft:{block} run say {marker}', marker)
+        game.command(f'execute if block {x} -60 0 minecraft:{block}', 'Test passed')
+        print(marker,flush=True)
     for slot, item, count in [(0, 'iron_nugget', 9), (1, 'iron_ingot', 7), (2, 'stone', 3), (3, 'deepslate', 2)]:
         marker = 'MIGRATED_SLOT_' + str(slot)
         query = '{Slot:' + str(slot) + 'b,id:"minecraft:' + item + '",Count:' + str(count) + 'b}'
-        game.command('execute if data block 2 -60 0 Items[' + query + '] run say ' + marker, marker)
+        game.command('execute if data block 2 -60 0 Items[' + query + ']', 'Test passed')
+        print(marker,flush=True)
     # An unrelated retained item must survive in the SAME persisted chest, not only in a registry assertion.
-    game.command('execute if data block 2 -60 0 Items[{Slot:4b,id:"aiarsenal:rds1",Count:1b}] run say NUKE_RETAINED', 'NUKE_RETAINED')
-    game.command('execute if data block 2 -60 0 Items[{Slot:5b,id:"aiarsenal:shahed136",Count:1b}] run say DRONE_RETAINED', 'DRONE_RETAINED')
+    game.command('execute if data block 2 -60 0 Items[{Slot:4b,id:"aiarsenal:rds1",Count:1b}]', 'Test passed')
+    game.command('execute if data block 2 -60 0 Items[{Slot:5b,id:"aiarsenal:shahed136",Count:1b}]', 'Test passed')
     game.command('data get block 2 -60 0 Items')
 
 

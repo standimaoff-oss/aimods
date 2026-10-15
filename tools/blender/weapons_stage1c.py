@@ -128,7 +128,7 @@ def pistol(name,c96):
         drop=(0,.02,.13) if c96 else (0,.02,-.18)
         w.clip(anim,gun,[(0,Z,Z),(8,Z,(0,0,-24)),(total-8,Z,(0,0,-24)),(total,Z,Z)])
         w.clip(anim,m,[(0,Z,Z),(12,drop,Z),(total*.55,drop,Z),(total*.75,Z,Z),(total,Z,Z)])
-        hand_drop=(.065,.02,.085) if c96 else (.06,.02,-.16)
+        hand_drop=(.04,.02,.11) if c96 else (.04,.02,-.16)
         w.clip(anim,arm,[(0,Z,Z),(12,hand_drop,Z),(total*.55,hand_drop,Z),(total*.75,Z,Z),(total,Z,Z)])
         if c96 or anim.endswith('_empty'):
             w.clip(anim,bolt,[(0,Z,Z),(8,(0,.032,0),Z),(total-10,(0,.032,0),Z),(total-3,Z,Z),(total,Z,Z)])
