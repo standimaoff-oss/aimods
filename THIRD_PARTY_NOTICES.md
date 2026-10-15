@@ -17,3 +17,9 @@ NOT imported. Shader sources are extracted byte-for-byte from the supplied JAR.
 
 Decompiled, remapped reference text is retained under
 `notes/stage1/volpyro-reference/` for comparison, not compiled into the mod.
+
+Stage4 extension: `arsenal_smoke.glsl` is an original ellipsoidal smoke density field
+and material palette. It is composed into the ray marcher for new volume type 11
+at load time. All four supplied shader resources remain unchanged, as do the
+nuclear density functions, presets and type IDs. The custom smoke uses the donor's
+noise/lighting/integration infrastructure; no claim of an independently rewritten renderer.

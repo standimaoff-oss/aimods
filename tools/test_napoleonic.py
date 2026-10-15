@@ -34,5 +34,6 @@ class Napoleonic(unittest.TestCase):
  def test_no_shell_explosion_or_nuclear_replacement(self):
   java=R/'mods/aiarsenal/src/main/java/ru/aiforge'
   ball=(java/'realwar/napoleonic/CannonballEntity.java').read_text();self.assertNotIn('.explode(',ball);self.assertIn('damageSources().thrown',ball)
+  shader=(A/'shaders/volpyro/arsenal_smoke.glsl').read_text();self.assertIn('arsenalSmokeField',shader);self.assertIn('arsenalSmokeAlbedo',shader)
   effects=(java/'arsenal/volumetric/client/VolumetricEffects.java').read_text();self.assertIn('VolumetricFxManager.addNuke(',effects);self.assertIn('VolumetricFxManager.arsenalBlast(',effects)
 if __name__=='__main__':unittest.main(verbosity=2)

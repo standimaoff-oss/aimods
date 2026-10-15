@@ -231,7 +231,7 @@ public final class VolumetricFxManager {
                 ((VolumeInstance)object).center = ((VolumeInstance)object).center.add(((VolumeInstance)object).velocity.scale((double)f));
                 ((VolumeInstance)object).velocity = ((VolumeInstance)object).velocity.scale(0.985).add(0.0, -4.5 * (double)f, 0.0);
             }
-            if (((VolumeInstance)object).type == 1) {
+            if (((VolumeInstance)object).type == 1 || ((VolumeInstance)object).type == VolumeInstance.ARSENAL_SMOKE) {
                 VolumeInstance v = (VolumeInstance)object;
                 if (v.profile != 0) {
                     v.center = v.center.add(v.velocity.scale(f));
@@ -317,8 +317,8 @@ public final class VolumetricFxManager {
         for (int i=0;i<count;i++) {
             Vec3 at = pos.add(dir.scale(i * radius * .45));
             float size=radius*(1-i*.08f);
-            var v=new VolumeInstance(1,at,size*1.4f,profile==4?.32f:profile==1?.45f:1.25f,
-                    290f,size,0,Vec3.ZERO,0,life-i*.12f,(float)((nextKey*.6180339)%1),nextKey++);
+            var v=new VolumeInstance(VolumeInstance.ARSENAL_SMOKE,at,size*1.6f,profile==4?.32f:profile==1?.45f:1.25f,
+                    290f,size,profile,dir,0,life-i*.12f,(float)((nextKey*.6180339)%1),nextKey++);
             v.profile=profile;
             v.velocity=dir.scale(profile==3?3.2:profile==2?1.7:profile==4?1.1:.6).add(0,.18,0);
             transientVolumes.add(v);
@@ -334,8 +334,8 @@ public final class VolumetricFxManager {
             double angle=i*Math.PI/3;
             Vec3 dir=new Vec3(Math.cos(angle),.25+rng.nextDouble()*.35,Math.sin(angle));
             float size=Math.max(.65f,r*.55f);
-            var v=new VolumeInstance(1,pos.add(dir.scale(r*.2)),size*1.4f,1.1f,290,size,0,Vec3.ZERO,0,7f+r*.15f,rng.nextFloat(),nextKey++);
-            v.profile=5;v.velocity=dir.scale(1+r*.12);transientVolumes.add(v);
+            var v=new VolumeInstance(VolumeInstance.ARSENAL_SMOKE,pos.add(dir.scale(r*.2)),size*1.6f,1.1f,290,size,6,dir.normalize(),0,7f+r*.15f,rng.nextFloat(),nextKey++);
+            v.profile=6;v.velocity=dir.scale(1+r*.12);transientVolumes.add(v);
         }
         spawnDebris(pos,rng,4,3,6,1800,.6f,.8f);trimVolumes();
     }
@@ -366,7 +366,7 @@ public final class VolumetricFxManager {
     }
 
     private static void updateSmokeClearance(Level level, VolumeInstance volumeInstance) {
-        if (level != null && volumeInstance.type == 1) {
+        if (level != null && (volumeInstance.type == 1 || volumeInstance.type == VolumeInstance.ARSENAL_SMOKE)) {
             BlockPos blockPos = BlockPos.containing((double)volumeInstance.center.x, (double)(volumeInstance.center.y - 0.5), (double)volumeInstance.center.z);
             volumeInstance.expansion = obstacleCache.clearanceAbove((BlockGetter)level, blockPos, volumeInstance.maxExpansion);
         }

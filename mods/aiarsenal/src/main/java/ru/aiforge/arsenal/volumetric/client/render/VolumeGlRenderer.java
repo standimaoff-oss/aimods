@@ -437,6 +437,17 @@ public final class VolumeGlRenderer {
         try (InputStream inputStream = ((Resource)Minecraft.getInstance().getResourceManager().getResource(resourceLocation).orElseThrow()).open();){
             string2 = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         }
+        if (string.equals("volumetric_raymarch.fsh")) {
+            // Extend only a new volume type. The supplied shader files and all nuclear branches stay intact.
+            String function = "vec2 evaluateVolume(vec3 p, vec4 h0, vec4 h1, vec4 h2, vec4 h3) {";
+            String noise = "    float n=billowFbm(local*1.45";
+            String colour = "if (vtype==1) albedo=vec3(0.24,0.25,0.26);";
+            if (!string2.contains(function) || !string2.contains(noise) || !string2.contains(colour))
+                throw new IllegalStateException("Arsenal smoke extension: incompatible shader resource");
+            string2 = string2.replace(function, loadShader("arsenal_smoke.glsl") + "\n" + function)
+                .replace(noise, "    if (type == 11) return arsenalSmokeField(local,h1,h2,h3);\n" + noise)
+                .replace(colour, "if (vtype==11) albedo=arsenalSmokeAlbedo(h2.w); else " + colour);
+        }
         return string2;
     }
 

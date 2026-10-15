@@ -5,6 +5,7 @@ import net.minecraft.world.phys.Vec3;
 
 public final class VolumeInstance {
     public static final int SMOKE = 1;
+    public static final int ARSENAL_SMOKE = 11;
     public static final int EXPLOSION = 2;
     public static final int ROCKET_SEGMENT = 3;
     public static final int ROCKET_JET = 4;

@@ -21,3 +21,5 @@ Specs: `notes/_tz/TZ-ai-forge-mod.md`, `TZ_MODEL_VIEW_PRO_v2.0.md`.
 - Inspected all 8 genuine Blender viewports: recognizable wooden flintlocks, spoked artillery and brass-hilt blades. Corrected blade curvature, cannon trunnion seats, inventory-scale cannons, ammo size differentiation and HUD translations.
 - Inspected stage3 sprint F2: pistol completely outside bottom edge. Reduced sprint drop/angles and added bounded-transform regression; final real-motion verification remains required.
 - Next run checks new content first, then restores only the disposable bomb-test fixture and executes all prior regression suites.
+
+- After inspecting the first real smoke frames, replaced the custom profiles' use of the donor's vertical chimney field with an original type-11 ellipsoidal lobe field and a separate pale-powder/engine/dust/blast palette. Nuclear branches and original shader resource bytes unchanged. This extension must pass the real GLSL compile/fallback/reload gates, not just text checks.
