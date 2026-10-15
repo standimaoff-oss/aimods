@@ -1,0 +1,32 @@
+[
+  {
+    "file": "context-driver.log",
+    "bytes": 3592337,
+    "sha256": "f06b3d1d8434e4c2c7bcc4039f707dea63e960d2bac5d4ba45763a7b421e076e"
+  },
+  {
+    "file": "server.log",
+    "bytes": 565411,
+    "sha256": "e254b3a36ec23f465a5de6d14176021672eb781f384acdc0a8ab9187b09a5b5d"
+  },
+  {
+    "file": "gametest.log",
+    "bytes": 689730,
+    "sha256": "99648bcf5e6367cd7150fb3b7e03bfe8a28b285ad84384fb06839adf12dbd26d"
+  },
+  {
+    "file": "installed-server-installer.log",
+    "bytes": 1193450,
+    "sha256": "ef0518a3fde19875bec5137f45628d550e759aa7296f0064e127d751a6984cf2"
+  },
+  {
+    "file": "client.log",
+    "bytes": 348243,
+    "sha256": "19f55d6cc3ff3e286c4d9be9bdcc89fd1c805b64f71a3965616f7f913d049649"
+  },
+  {
+    "file": "rcon.log",
+    "bytes": 1587179,
+    "sha256": "3bf6c7ca8395cbafc8b79207a3d3bc3b202e00268af360fa06d22175acbae4e7"
+  }
+]
