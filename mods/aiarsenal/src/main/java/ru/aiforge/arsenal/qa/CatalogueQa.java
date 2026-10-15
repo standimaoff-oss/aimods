@@ -195,6 +195,9 @@ public final class CatalogueQa {
                     else if (!ItemStack.isSameItemSameTags(expected,barrel.getItem(i%27)) || barrel.getItem(i%27).getCount()!=1)
                         throw new IllegalStateException("world save/reopen mismatch: " + ids.get(i));
                 }
+                if (verify && ru.aiforge.arsenal.stability.ChunkTagSnapshot.copies() == 0)
+                    throw new IllegalStateException("installed chunk upgrade snapshot hook never ran after world reopen");
+                if (verify) ru.aiforge.arsenal.AiArsenal.LOGGER.info("CHUNK SNAPSHOT QA PASS copies={}", ru.aiforge.arsenal.stability.ChunkTagSnapshot.copies());
                 c.getSource().sendSuccess(() -> Component.literal((verify ? "ARCHIVE VERIFIED " : "ARCHIVE SAVED ") + ids.size()), false);
                 return ids.size();
             }));

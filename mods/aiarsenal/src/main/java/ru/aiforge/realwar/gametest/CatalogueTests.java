@@ -15,6 +15,25 @@ import ru.aiforge.realwar.handheld.*;
 @PrefixGameTestTemplate(false)
 public final class CatalogueTests {
     @GameTest(template="arena", batch="catalogue")
+    public static void real_chunk_upgrade_does_not_mutate_pending_write_nbt(GameTestHelper h) throws Exception {
+        CompoundTag pending = new CompoundTag();
+        pending.putInt("DataVersion", net.minecraft.SharedConstants.getCurrentVersion().getDataVersion().getVersion());
+        CompoundTag nested = new CompoundTag(); nested.putString("value", "saved");
+        pending.put("Nested", nested);
+        var path = java.nio.file.Files.createTempDirectory("arsenal-chunk-snapshot-");
+        try (var storage = new net.minecraft.world.level.chunk.storage.ChunkStorage(path,
+                net.minecraft.util.datafix.DataFixers.getDataFixer(), false)) {
+            CompoundTag upgraded = storage.upgradeChunkTag(h.getLevel().dimension(), h.getLevel()::getDataStorage,
+                    pending, java.util.Optional.empty());
+            h.assertTrue(upgraded != pending, "real ChunkStorage upgrade must detach the pending IO tag (coremod active)");
+            upgraded.getCompound("Nested").putString("value", "changed");
+            h.assertTrue(pending.getCompound("Nested").getString("value").equals("saved"), "nested NBT must also be detached");
+            h.assertTrue(!pending.contains("__context"), "datafix context must never leak into pending writes");
+        }
+        h.succeed();
+    }
+
+    @GameTest(template="arena", batch="catalogue")
     public static void every_registered_item_roundtrips_nbt(GameTestHelper h) {
         int count = 0;
         for (var id : BuiltInRegistries.ITEM.keySet()) if (id.getNamespace().equals("aiarsenal")) {
