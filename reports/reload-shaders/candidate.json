@@ -1,0 +1,12 @@
+{
+  "reviewed": false,
+  "source": "645a5ffcd03ee452d98292bfe3541efd4ea5c71d",
+  "sha256": null,
+  "runs": {
+    "gametest": 38825961616,
+    "catalogue": 38825961619,
+    "context": 38825961658,
+    "shader": 38825961607
+  },
+  "note": "NOT approved. Fill the installed hash and mark reviewed only after all four audits and genuine F2 visual review pass. No universal shader/GPU certification."
+}
