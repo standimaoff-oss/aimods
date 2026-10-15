@@ -65,7 +65,7 @@ public final class GunClient {
      *  the AK-12, PKP and the RPG-7 (default) aim over their iron sights with the 3D model */
     public static boolean scoped() {
         GunKind k = held();
-        boolean optic = k == GunKind.M4A1 || k == GunKind.T5000 || k == GunKind.RPG7 && rpgOptic;
+        boolean optic = k == GunKind.M4A1 || k != null && k.scope() || k == GunKind.RPG7 && rpgOptic;
         return optic && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
     }
 
@@ -321,6 +321,7 @@ public final class GunClient {
         float a = adsLerp(pt);
         if (scoped()) {
             if (k == GunKind.RPG7) pgo7(g, mc.font, w, h, mc.options.fov().get() * k.adsFov);
+            else if (k.singleLoad()) historicalScope(g, mc.font, w, h, k);
             else if (k == GunKind.T5000) riflescope(g, mc.font, w, h, mc.options.fov().get() * adsFactor(k));
             else aimpoint(g, w, h);
         } else if (a < 0.4f) {
@@ -375,6 +376,7 @@ public final class GunClient {
         if (k.manpads()) b.append(Component.translatable("hud.aiarsenal.gun.m." + k.id).getString());
         else if (k.launcher()) b.append(Component.translatable("hud.aiarsenal.gun.pg7vl").getString()).append("  \u00b7  ")
                 .append(Component.translatable(rpgOptic ? "hud.aiarsenal.gun.pgo" : "hud.aiarsenal.gun.irons").getString());
+        else if (k.singleLoad()) b.append(k.fixedMagnification()).append("×");
         else if (k.scope()) b.append(zoom()).append("\u00d7");
         else b.append(Component.translatable(auto ? "hud.aiarsenal.gun.auto" : "hud.aiarsenal.gun.semi").getString());
         b.append("  \u00b7  +").append(spare);
@@ -464,6 +466,27 @@ public final class GunClient {
             g.fill(0, y, cx - half, y + 1, col);
             g.fill(cx + half, y, w, y + 1, col);
         }
+    }
+
+    /** PU three-post reticle and ZF39 German No.1 pointed post; no modern mil-dot tree. */
+    private static void historicalScope(GuiGraphics g, Font f, int w, int h, GunKind k) {
+        int cx = w / 2, cy = h / 2, r = Math.round(h * 0.45f), ink = 0xFF090909;
+        ring(g, cx, cy, r, w, h, 0xFF080808);
+        int gap = Math.max(8, r / 7), thick = Math.max(2, r / 42);
+        g.fill(cx - r, cy - thick, cx - gap, cy + thick, ink);
+        g.fill(cx + gap, cy - thick, cx + r, cy + thick, ink);
+        if (k == GunKind.MOSIN_PU) {
+            g.fill(cx - 1, cy, cx + 1, cy + gap, ink);
+            g.fill(cx - thick, cy + gap, cx + thick, cy + r, ink);
+            g.fill(cx - gap, cy, cx + gap, cy + 1, ink);
+        } else {
+            for (int y = 0; y < gap; y++) {
+                int half = Math.max(0, thick * y / gap);
+                g.fill(cx - half, cy + y, cx + half + 1, cy + y + 1, ink);
+            }
+            g.fill(cx - thick, cy + gap, cx + thick + 1, cy + r, ink);
+        }
+        g.drawString(f, k == GunKind.MOSIN_PU ? "PU 3.5×" : "ZF39 4×", cx - 24, h - 14, 0xFFC8C2AF, false);
     }
 
     /** Aimpoint CompM4: 30 mm tube seen at the eye, 2 MOA red dot with a soft halo */

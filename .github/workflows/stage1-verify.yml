@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   verify:
-    if: ${{ !contains(github.event.head_commit.message, '[volumetric]') && !contains(github.event.head_commit.message, '[prepare-volpyro]') && !contains(github.event.head_commit.message, '[deliver-stage1]') && !contains(github.event.head_commit.message, '[stage1-evidence]') }}
+    if: ${{ !contains(github.event.head_commit.message, '[stage1c]') && !contains(github.event.head_commit.message, '[volumetric]') && !contains(github.event.head_commit.message, '[prepare-volpyro]') && !contains(github.event.head_commit.message, '[deliver-stage1]') && !contains(github.event.head_commit.message, '[stage1-evidence]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     env:

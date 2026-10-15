@@ -108,7 +108,7 @@ public final class GunRenderer {
             float fs = 0.8f + (GunClient.shotCount() * 37 % 10) * 0.05f;
             pose.scale(k.id + ".flash", fs, fs, fs);
         }
-        if (!k.launcher() && !k.manual() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -0.075f * (1f - since / 0.06f));
+        if (!k.launcher() && !k.manual() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -(k.pistol() ? 0.032f : 0.075f) * (1f - since / 0.06f));
         // spent tube: no grenade (RPG-7) / open muzzle without the seeker dome or covers (MANPADS) until the fresh tube is on
         if (k.launcher() && FirearmItem.ammo(st) == 0 && (!rel || k.manpads() && GunClient.reloadTime() < k.reload / 20f * 0.4f))
             pose.hide(k.id + ".round", true);

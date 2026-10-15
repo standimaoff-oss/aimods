@@ -159,8 +159,8 @@ public final class Firearms {
         s.reload = s.reloadTotal;
         s.trigger = false;
         s.gun = stack.getItem();
-        if (k.clipFed()) sound(p, "bolt_cycle", 0.8f, 1.1f);   // bolt opened
-        else if (!k.tube()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
+        if (k.clipFed() || k.singleLoad()) sound(p, "bolt_cycle", 0.8f, 1.1f);   // bolt opened
+        else if (!k.incrementalReload()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
         fx(p, s.reloadEmpty && !k.launcher() ? GunFxPacket.RELOAD_EMPTY : GunFxPacket.RELOAD, ammo);
         return true;
     }
@@ -176,13 +176,15 @@ public final class Firearms {
             FirearmItem.setAmmo(stack, 1);
             return;
         }
-        if (k.clipFed()) {                                      // r26: one clip = 5 rounds, the empty clip is discarded
+        if (k.clipFed()) {
+            if (ammo != 0) return;                              // fixed clip-fed magazine
+            // r26: one clip = 5 rounds, the empty clip is discarded
             if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
             else if (slot < 0 && !creative) return;
             FirearmItem.setAmmo(stack, k.cap);
             return;
         }
-        if (k.tube()) {                                         // r24: one shell into the tube (or the chamber)
+        if (k.incrementalReload()) {                                         // r24: one shell into the tube (or the chamber)
             if (ammo >= k.maxLoaded(true)) return;
             if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
             else if (slot < 0 && !creative) return;
@@ -230,16 +232,16 @@ public final class Firearms {
                 fx(p, GunFxPacket.CANCEL, FirearmItem.ammo(stack));
                 return;
             }
-            if (k.tube() && s.trigger && !s.reloadEmpty && FirearmItem.ammo(stack) > 0) {
+            if (k.incrementalReload() && s.trigger && !s.reloadEmpty && FirearmItem.ammo(stack) > 0) {
                 s.reload = 0;                                   // r24: LMB interrupts the shell-by-shell loading
                 fx(p, GunFxPacket.LOADED, FirearmItem.ammo(stack));
             } else {
             int done = s.reloadTotal - s.reload;
-            if (k.tube() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "shell_in", 0.8f, 0.95f + p.getRandom().nextFloat() * 0.1f);
-            if (k.tube() && s.reloadEmpty && done == (int) (s.reloadTotal * 0.78f)) sound(p, "pump_action", 0.8f, 1.0f);
+            if (k.incrementalReload() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "shell_in", 0.8f, 0.95f + p.getRandom().nextFloat() * 0.1f);
+            if (k.pumpAction() && s.reloadEmpty && done == (int) (s.reloadTotal * 0.78f)) sound(p, "pump_action", 0.8f, 1.0f);
             if (k.clipFed() && done == (int) (s.reloadTotal * 0.45f)) sound(p, "clip_in", 0.9f, k == GunKind.K98K ? 1.05f : 0.95f);
             if (k.clipFed() && done == (int) (s.reloadTotal * 0.80f)) sound(p, "bolt_cycle", 0.8f, 0.95f);
-            if (!k.launcher() && !k.tube() && !k.clipFed() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
+            if (!k.launcher() && !k.incrementalReload() && !k.clipFed() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
             if (k == GunKind.PKP && (done == 14 || done == (int) (s.reloadTotal * 0.80f))) sound(p, "selector", 0.9f, 0.6f);   // feed cover
             if (k.launcher() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "mag_in", 0.8f, 0.6f);
             if (s.reloadEmpty && !k.launcher() && !k.manual() && done == (int) (s.reloadTotal * (k == GunKind.PKP ? 0.86f : 0.82f))) sound(p, "bolt_rack", 0.8f, k == GunKind.PKP ? 0.8f : 1.0f);
@@ -247,7 +249,7 @@ public final class Firearms {
             if (--s.reload == 0) {
                 finishReload(p, stack, k);
                 int now = FirearmItem.ammo(stack);
-                if (k.tube() && now < k.maxLoaded(true) && (p.getAbilities().instabuild || findAmmo(p, k) >= 0)) {
+                if (k.incrementalReload() && now < k.maxLoaded(true) && (p.getAbilities().instabuild || findAmmo(p, k) >= 0)) {
                     s.reloadEmpty = false;                      // next shell
                     s.reloadTotal = k.reload;
                     s.reload = k.reload;

@@ -1889,5 +1889,21 @@
   "subtitles.aiarsenal.smg_mp40": "Стреляет MP 40",
   "subtitles.aiarsenal.rifle_mosin": "Выстрел винтовки Мосина",
   "subtitles.aiarsenal.rifle_k98": "Выстрел Kar98k",
-  "subtitles.aiarsenal.clip_in": "Обойма заряжена"
+  "subtitles.aiarsenal.clip_in": "Обойма заряжена",
+  "item.aiarsenal.mosin_pu": "Мосин 91/30 с ПУ (3,5×)",
+  "item.aiarsenal.k98k_zf39": "Kar98k с ZF39 (4×)",
+  "item.aiarsenal.c96": "Mauser C96 (7,63×25)",
+  "item.aiarsenal.tt33": "ТТ-33 (7,62×25)",
+  "item.aiarsenal.round_762x54r": "Патрон 7,62×54R",
+  "item.aiarsenal.round_792x57": "Патрон 7,92×57",
+  "item.aiarsenal.clip_c96": "Обойма C96 (10 патронов)",
+  "item.aiarsenal.mag_tt33": "Магазин ТТ-33 (8 патронов)",
+  "tooltip.aiarsenal.gun.keys_historical_scope": "ПКМ: фиксированная оптика • R: заряжать по одному патрону",
+  "tooltip.aiarsenal.round_762x54r": "Для снайперской винтовки: один патрон за цикл заряжания",
+  "tooltip.aiarsenal.round_792x57": "Для снайперской винтовки: один патрон за цикл заряжания",
+  "tooltip.aiarsenal.clip_c96": "10 патронов; заряжание только пустого магазина C96",
+  "tooltip.aiarsenal.gun.mosin_pu": "Мосин 91/30 с ПУ (3,5×)",
+  "tooltip.aiarsenal.gun.k98k_zf39": "Kar98k с ZF39 (4×)",
+  "tooltip.aiarsenal.gun.c96": "Mauser C96 (7,63×25)",
+  "tooltip.aiarsenal.gun.tt33": "ТТ-33 (7,62×25)"
 }

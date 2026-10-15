@@ -1,0 +1,13 @@
+mods/aiarsenal/src/main/resources/data/aiarsenal/forge/biome_modifier/add_ores.json
+mods/aiarsenal/src/main/resources/data/aiarsenal/loot_tables/blocks/deepslate_uranium_ore.json
+mods/aiarsenal/src/main/resources/data/aiarsenal/loot_tables/blocks/uranium_ore.json
+mods/aiarsenal/src/main/resources/data/aiarsenal/recipes/uranium_ingot_blasting.json
+mods/aiarsenal/src/main/resources/data/aiarsenal/recipes/uranium_ingot_smelting.json
+mods/aiarsenal/src/main/resources/data/aiarsenal/worldgen/configured_feature/uranium_ore.json
+mods/aiarsenal/src/main/resources/data/aiarsenal/worldgen/placed_feature/uranium_ore.json
+mods/aiarsenal/src/main/resources/data/forge/tags/blocks/ores.json
+mods/aiarsenal/src/main/resources/data/forge/tags/blocks/ores/uranium.json
+mods/aiarsenal/src/main/resources/data/forge/tags/items/ores.json
+mods/aiarsenal/src/main/resources/data/forge/tags/items/ingots/uranium.json
+mods/aiarsenal/src/main/resources/data/forge/tags/items/ores/uranium.json
+mods/aiarsenal/src/main/resources/data/forge/tags/items/raw_materials/uranium.json

@@ -1889,5 +1889,21 @@
   "subtitles.aiarsenal.smg_mp40": "MP 40 fires",
   "subtitles.aiarsenal.rifle_mosin": "Mosin rifle fires",
   "subtitles.aiarsenal.rifle_k98": "Kar98k fires",
-  "subtitles.aiarsenal.clip_in": "Clip loaded"
+  "subtitles.aiarsenal.clip_in": "Clip loaded",
+  "item.aiarsenal.mosin_pu": "Mosin 91/30 PU (3.5×)",
+  "item.aiarsenal.k98k_zf39": "Kar98k ZF39 (4×)",
+  "item.aiarsenal.c96": "Mauser C96 (7.63×25)",
+  "item.aiarsenal.tt33": "TT-33 (7.62×25)",
+  "item.aiarsenal.round_762x54r": "7.62×54R cartridge",
+  "item.aiarsenal.round_792x57": "7.92×57 cartridge",
+  "item.aiarsenal.clip_c96": "C96 stripper clip (10 rounds)",
+  "item.aiarsenal.mag_tt33": "TT-33 magazine (8 rounds)",
+  "tooltip.aiarsenal.gun.keys_historical_scope": "RMB: fixed-power scope • R: load individual cartridges",
+  "tooltip.aiarsenal.round_762x54r": "Scoped rifle: one cartridge per loading cycle",
+  "tooltip.aiarsenal.round_792x57": "Scoped rifle: one cartridge per loading cycle",
+  "tooltip.aiarsenal.clip_c96": "10 rounds; loads an empty C96 fixed magazine only",
+  "tooltip.aiarsenal.gun.mosin_pu": "Mosin 91/30 PU (3.5×)",
+  "tooltip.aiarsenal.gun.k98k_zf39": "Kar98k ZF39 (4×)",
+  "tooltip.aiarsenal.gun.c96": "Mauser C96 (7.63×25)",
+  "tooltip.aiarsenal.gun.tt33": "TT-33 (7.62×25)"
 }

@@ -29,7 +29,8 @@ TEX = ROOT + "/tools/blender/tex_r22"
 GLB = ROOT + "/mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb"
 D = math.radians
 
-bpy.ops.wm.read_factory_settings(use_empty=True)
+if "--library-only" not in sys.argv:
+    bpy.ops.wm.read_factory_settings(use_empty=True)
 MATS = {}
 
 
@@ -2283,7 +2284,9 @@ def k98k():
 
 
 # Small fixes must not rewrite every unrelated GLB in the repository.
-if "--only-ppsh" in sys.argv:
+if "--library-only" in sys.argv:
+    pass
+elif "--only-ppsh" in sys.argv:
     pp = ppsh41()
     sm = mag_scene("MAG_PPSH", ppsh_mag, 478.0, None)
     export(pp, "ppsh41")

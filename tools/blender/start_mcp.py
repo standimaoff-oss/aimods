@@ -1,7 +1,7 @@
 # Starts the Blender-MCP socket server (addon.py from ahujasid/blender-mcp) inside a live GUI session.
 import sys, importlib.util, bpy
 import os
-_p = "/home/user/.cache/blender/mcp/addon.py"
+_p = os.environ.get("BLENDER_MCP_ADDON", "/home/user/.cache/blender/mcp/addon.py")
 if not os.path.exists(_p):
     _p = "/home/user/.config/blender/5.2/scripts/addons/addon.py"
 spec = importlib.util.spec_from_file_location("blender_mcp_addon", _p)

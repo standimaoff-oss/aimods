@@ -215,10 +215,72 @@ overrideHeight:700
     time.sleep(5)
     screenshot('05-ppsh-reloaded')
     command('data get entity TestPlayer SelectedItem', 'Ammo: 71')
+    if os.environ.get('QA_STAGE1C') == '1':
+        ww2_weapons()
     if os.environ.get('QA_VOLUMETRIC') == '1':
         volumetric(player, client_log)
     command('stop')
     server.wait(timeout=90)
+
+
+def ww2_weapons():
+    # Actual user input and real server health/ammo. No screenshots substituted with model renders.
+    specs = [('mosin_pu', 5, 'round_762x54r'), ('k98k_zf39', 5, 'round_792x57'),
+             ('c96', 10, 'clip_c96'), ('tt33', 8, 'mag_tt33')]
+    command('tp TestPlayer 0 -60 0 0 0')
+    # Peaceful despawns hostile targets: enable peaceful only after the suite.
+    command('difficulty normal')
+    command('kill @e[tag=qa_target]')
+    command('summon minecraft:husk 0.5 -60 16.5 {NoAI:1b,Silent:1b,PersistenceRequired:1b,Tags:["qa_target"],Attributes:[{Name:"minecraft:generic.max_health",Base:1000d}],Health:1000f}')
+    def ammo():
+        text = command('data get entity TestPlayer SelectedItem')
+        match = re.search(r'Ammo: (\d+)', text)
+        assert match, text
+        return int(match[1])
+    def health():
+        text = command('data get entity @e[tag=qa_target,limit=1] Health')
+        match = re.search(r'data: ([0-9.]+)f', text)
+        assert match, text
+        return float(match[1])
+    for name, cap, supply in specs:
+        command('clear TestPlayer')
+        command(f'item replace entity TestPlayer hotbar.0 with aiarsenal:{name}' + '{Ammo:' + str(cap) + '}')
+        command(f'give TestPlayer aiarsenal:{supply} 32')
+        command('tp TestPlayer 0 -60 0 0 0')
+        key('key', '1');time.sleep(3)
+        screenshot(name + '-01-in-hand')
+        key('mousedown','3');time.sleep(2)
+        screenshot(name + '-02-aim')
+        before = health()
+        # One semi-automatic trigger edge. Hold until the server acknowledges firing.
+        key('mousedown','1')
+        try:
+            deadline=time.monotonic()+6
+            while time.monotonic()<deadline:
+                time.sleep(0.25)
+                if ammo()<cap:break
+            else:raise AssertionError(name + ': no shot from LMB')
+        finally:key('mouseup','1')
+        time.sleep(2)
+        assert ammo()==cap-1, name + ': semi-auto must fire once per press'
+        assert health()<before, name + ': ADS shot missed target'
+        if name=='c96':
+            # Fixed 10-round magazine: prove reload refusal, then empty it with real clicks.
+            key('key','r');time.sleep(1)
+            assert ammo()==9, 'C96 must refuse a clip into a partly loaded magazine'
+            key('mouseup','3')
+            for left in range(8,-1,-1):
+                key('mousedown','1');time.sleep(.3);key('mouseup','1');time.sleep(.4)
+            assert ammo()==0, 'C96 empty-magazine setup must use real firing'
+        key('keydown','r');time.sleep(.2);key('keyup','r');time.sleep(.4)
+        screenshot(name + '-03-reload')
+        time.sleep(7)
+        expected=9 if name=='tt33' else cap
+        assert ammo()==expected, name + ': reload did not finish at expected capacity'
+        screenshot(name + '-04-reloaded')
+        key('mouseup','3')
+    command('kill @e[tag=qa_target]')
+    command('difficulty peaceful')
 
 
 def volumetric(player, client_log):

@@ -31,7 +31,12 @@ public enum GunKind {
     PPSH41("ppsh41", "mag_ppsh", 71, 1000, 488, 5.0f, 2.5f, 0.032f, 0.0035f, 0.55f, 0.35f, 70, 84, 0.85f, "smg_ppsh", true),
     MP40("mp40", "mag_mp40", 32, 550, 400, 5.2f, 2.5f, 0.030f, 0.0030f, 0.50f, 0.30f, 50, 62, 0.85f, "smg_mp40", true),
     MOSIN("mosin", "clip_mosin", 5, 30, 865, 16f, 11f, 0.055f, 0.0006f, 3.6f, 0.8f, 50, 50, 0.75f, "rifle_mosin", false),
-    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false);
+    K98K("k98k", "clip_k98", 5, 30, 760, 16f, 11f, 0.055f, 0.0006f, 3.4f, 0.8f, 46, 46, 0.75f, "rifle_k98", false),
+    // Append only: existing GunFxPacket ordinals must remain stable.
+    MOSIN_PU("mosin_pu", "round_762x54r", 5, 30, 865, 16f, 11f, 0.055f, 0.00045f, 3.6f, 0.8f, 24, 32, 1f / 3.5f, "rifle_mosin", false),
+    K98K_ZF39("k98k_zf39", "round_792x57", 5, 30, 760, 16f, 11f, 0.055f, 0.00045f, 3.4f, 0.8f, 24, 32, 0.25f, "rifle_k98", false),
+    C96("c96", "clip_c96", 10, 240, 425, 5.0f, 2.2f, 0.040f, 0.0040f, 1.5f, 0.5f, 60, 60, 0.85f, "smg_ppsh", false),
+    TT33("tt33", "mag_tt33", 8, 240, 420, 5.0f, 2.2f, 0.040f, 0.0040f, 1.4f, 0.5f, 38, 48, 0.85f, "smg_ppsh", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;
@@ -74,17 +79,17 @@ public enum GunKind {
 
     /** manual bolt: one aimed shot, then the bolt is cycled (~1.3 s) */
     public boolean boltAction() {
-        return this == T5000 || this.clipFed();
+        return this == T5000 || this == MOSIN || this == K98K || this.singleLoad();
     }
 
     /** r26: WW2 bolt rifles charged with a 5-round stripper clip through the open action (only when empty) */
     public boolean clipFed() {
-        return this == MOSIN || this == K98K;
+        return this == MOSIN || this == K98K || this == C96;
     }
 
     /** rounds one ammo item adds (a stripper clip holds 5) */
     public int roundsPerItem() {
-        return this.clipFed() ? 5 : 1;
+        return this.clipFed() ? this.cap : 1;
     }
 
     /** r26 open-bolt submachine guns (no round stays chambered on a reload) */
@@ -99,13 +104,19 @@ public enum GunKind {
 
     /** closed-bolt guns keep a round in the chamber on a tactical reload; the belt-fed PKP fires from an open bolt */
     public boolean closedBolt() {
-        return !this.launcher() && this != PKP && !this.openBolt() && !this.clipFed();
+        return !this.launcher() && this != PKP && !this.openBolt() && !this.clipFed() && !this.singleLoad();
     }
 
     /** variable-power riflescope overlay (T-5000: 5-25x) */
     public boolean scope() {
-        return this == T5000;
+        return this == T5000 || this.singleLoad();
     }
+
+    /** Scopes obstruct stripper clips: load individual rounds into the internal magazine. */
+    public boolean singleLoad() { return this == MOSIN_PU || this == K98K_ZF39; }
+    public boolean incrementalReload() { return this.tube() || this.singleLoad(); }
+    public boolean pistol() { return this == C96 || this == TT33; }
+    public float fixedMagnification() { return this == MOSIN_PU ? 3.5f : this == K98K_ZF39 ? 4f : 1f; }
 
     /** rifles keep one round in the chamber on a tactical reload (30 + 1) */
     public int maxLoaded(boolean chambered) {
@@ -139,7 +150,7 @@ public enum GunKind {
 
     /** reloaded from loose rounds (PG-7VL grenades, 12 ga shells) instead of magazines */
     public boolean looseAmmo() {
-        return this.launcher() || this.tube() || this.clipFed();
+        return this.launcher() || this.tube() || this.clipFed() || this.singleLoad();
     }
 
     /** ticks between two semi-automatic shots */

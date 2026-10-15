@@ -255,4 +255,73 @@ public final class SmallArmsTests {
             h.succeed();
         });
     }
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void scoped_rifles_single_round_topup(GameTestHelper h) {
+        for (GunKind k : new GunKind[]{GunKind.MOSIN_PU, GunKind.K98K_ZF39}) {
+            ItemStack gun = new ItemStack(k == GunKind.MOSIN_PU ? ModItems.MOSIN_PU.get() : ModItems.K98K_ZF39.get());
+            FakePlayer p = shooter(h, gun, 0, 0, 0);
+            FirearmItem.setAmmo(gun, 3);
+            p.getInventory().add(new ItemStack(Firearms.ammoItem(k), 2));
+            h.assertTrue(Firearms.reloadAllowed(p, gun, k), "partial scoped magazine must allow topping up");
+            Firearms.finishReload(p, gun, k);
+            h.assertTrue(FirearmItem.ammo(gun) == 4, "one cycle must insert one round, not a clip");
+            Firearms.finishReload(p, gun, k);
+            h.assertTrue(FirearmItem.ammo(gun) == 5, "internal magazine capacity is five total");
+            h.assertTrue(!Firearms.reloadAllowed(p, gun, k), "no sixth round");
+            h.assertTrue(k.scope() && k.boltAction() && !k.clipFed(), "scoped bolt action with no stripper clip");
+            h.assertTrue(p.getInventory().countItem(Firearms.ammoItem(k)) == 0, "two loose rounds consumed");
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void c96_fixed_magazine_clip(GameTestHelper h) {
+        ItemStack gun = new ItemStack(ModItems.C96.get());
+        FakePlayer p = shooter(h, gun, 0, 0, 0);
+        p.getInventory().add(new ItemStack(ModItems.CLIP_C96.get(), 2));
+        FirearmItem.setAmmo(gun, 4);
+        h.assertTrue(!Firearms.reloadAllowed(p, gun, GunKind.C96), "clip requires an empty C96");
+        Firearms.finishReload(p, gun, GunKind.C96);
+        h.assertTrue(FirearmItem.ammo(gun) == 4, "cannot refill partly loaded C96 through public helper");
+        FirearmItem.setAmmo(gun, 0);
+        Firearms.finishReload(p, gun, GunKind.C96);
+        h.assertTrue(FirearmItem.ammo(gun) == 10 && p.getInventory().countItem(ModItems.CLIP_C96.get()) == 1, "one clip = ten rounds");
+        h.assertTrue(!GunKind.C96.manual() && !GunKind.C96.auto && GunKind.C96.maxLoaded(true) == 10, "C96 is semi-auto, not a bolt rifle or 10+1");
+        h.succeed();
+    }
+
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void tt33_tactical_magazine_conserves_rounds(GameTestHelper h) {
+        ItemStack gun = new ItemStack(ModItems.TT33.get());
+        FakePlayer p = shooter(h, gun, 0, 0, 0);
+        FirearmItem.setAmmo(gun, 3);
+        p.getInventory().add(MagazineItem.withRounds(ModItems.MAG_TT33.get(), 8));
+        Firearms.finishReload(p, gun, GunKind.TT33);
+        int returned = 0;
+        for (ItemStack stack : p.getInventory().items) if (stack.is(ModItems.MAG_TT33.get())) returned += MagazineItem.rounds(stack) * stack.getCount();
+        h.assertTrue(FirearmItem.ammo(gun) == 9 && returned == 2, "TT: 8+1 chambered, two old magazine rounds returned");
+        h.assertTrue(!GunKind.TT33.auto && !GunKind.TT33.manual(), "semi-automatic pistol");
+        h.succeed();
+    }
+
+    @GameTest(template = "arena", batch = "rw_small", timeoutTicks = 120)
+    public static void stage1c_all_four_fire_projectiles(GameTestHelper h) {
+        ServerLevel level = h.getLevel();
+        BlockPos o = h.absolutePos(new BlockPos(2, 1, 2));
+        for (int dz = 0; dz < 14; dz++) for (int dy = 0; dy < 4; dy++) level.setBlock(o.offset(0, dy, dz), Blocks.AIR.defaultBlockState(), 2);
+        Husk target = EntityType.HUSK.create(level);
+        target.moveTo(o.getX() + 0.5, o.getY(), o.getZ() + 10.5, 0, 0);
+        target.setNoAi(true); level.addFreshEntity(target);
+        float hp = target.getHealth();
+        for (var item : new net.minecraft.world.item.Item[]{ModItems.MOSIN_PU.get(), ModItems.K98K_ZF39.get(), ModItems.C96.get(), ModItems.TT33.get()}) {
+            ItemStack gun = new ItemStack(item); GunKind k = ((FirearmItem)item).kind;
+            FirearmItem.setAmmo(gun, k.cap);
+            FakePlayer p = shooter(h, gun, o.getX()+0.5, o.getY(), o.getZ()+0.5);
+            Firearms.fire(p, gun, k, true);
+            h.assertTrue(FirearmItem.ammo(gun) == k.cap-1, "one round consumed: " + k.id);
+        }
+        h.assertTrue(Firearms.bullets(level) >= 4, "four real projectile paths");
+        h.runAfterDelay(6, () -> { h.assertTrue(!target.isAlive() || target.getHealth() < hp, "projectiles hit target"); target.discard(); h.succeed(); });
+    }
+
 }

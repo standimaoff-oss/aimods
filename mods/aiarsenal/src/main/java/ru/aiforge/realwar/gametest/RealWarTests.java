@@ -197,7 +197,7 @@ public final class RealWarTests {
         ServerLevel level = h.getLevel();
         RecipeManager rm = level.getRecipeManager();
         RegistryAccess ra = level.registryAccess();
-        HashSet<ResourceLocation> have = new HashSet<ResourceLocation>(List.of(RealWarTests.rl("raw_uranium"), RealWarTests.rl("raw_bismuth"), RealWarTests.rl("fluorite")));
+        HashSet<ResourceLocation> have = new HashSet<ResourceLocation>();
         boolean changed = true;
         while (changed) {
             changed = false;
@@ -224,7 +224,7 @@ public final class RealWarTests {
                 changed = true;
             }
         }
-        for (String need : List.of("steel_ingot", "steel_plate", "steel_tube", "uranium_ingot", "lb_casing", "barometric_fuze", "little_boy", "rds_core", "bridgewire_detonator", "rds_casing", "rds_4", "rds1", "an602", "geiger_counter", "remote_detonator", "arming_plug", "hazmat_chestplate")) {
+        for (String need : List.of("steel_ingot", "steel_plate", "steel_tube", "lb_casing", "barometric_fuze", "little_boy", "rds_core", "bridgewire_detonator", "rds_casing", "rds_4", "rds1", "an602", "geiger_counter", "remote_detonator", "arming_plug", "hazmat_chestplate")) {
             h.assertTrue(have.contains(RealWarTests.rl(need)), "\u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u043d\u0435\u0434\u043e\u0441\u0442\u0438\u0436\u0438\u043c \u043f\u043e \u0440\u0435\u0446\u0435\u043f\u0442\u0430\u043c: " + need);
         }
         h.succeed();
@@ -641,5 +641,18 @@ public final class RealWarTests {
         }
         h.runAfterDelay(10L, () -> ((GameTestHelper)h).succeed());
     }
+    @GameTest(template="arena", batch="rw_basic")
+    public static void ores_removed_but_nukes_and_vehicle_ammo_retained(GameTestHelper h) {
+        for (String id : List.of("uranium_ore", "deepslate_uranium_ore", "raw_uranium", "uranium_ingot")) {
+            h.assertTrue(!ForgeRegistries.ITEMS.containsKey(rl(id)), "retired item still registered: " + id);
+            h.assertTrue(!ForgeRegistries.BLOCKS.containsKey(rl(id)), "retired block still registered: " + id);
+        }
+        for (String id : List.of("little_boy", "rds_4", "rds1", "an602", "mq9", "shahed136", "fpv7", "sam_48n6", "grad_rocket", "smerch_rocket", "rocket_380", "rocket_m13", "rocket_220", "kalibr", "tomahawk", "kh101", "kh55", "yars"))
+            h.assertTrue(ForgeRegistries.ITEMS.containsKey(rl(id)), "required nuke/drone/vehicle ammunition removed: " + id);
+        for (var type : ru.aiforge.realwar.missile.MissileType.values())
+            h.assertTrue(ForgeRegistries.ITEMS.containsKey(rl(type.itemName())), "launch-pad ammunition must remain: " + type);
+        h.succeed();
+    }
+
 }
 
