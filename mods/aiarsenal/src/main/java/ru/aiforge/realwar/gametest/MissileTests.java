@@ -103,31 +103,50 @@ public final class MissileTests {
         return l.getEntitiesOfClass(MissileEntity.class, new AABB(c, c).inflate(r, 4000.0, r));
     }
 
-    @GameTest(template="arena", batch="rw_mirv_remote", timeoutTicks=1850)
+    @GameTest(template="arena", batch="rw_mirv_remote", timeoutTicks=1000000)
     public static void mirv_children_finish_outside_player_chunks(GameTestHelper h) {
         ServerLevel level=h.getLevel();
         BlockPos origin=h.absolutePos(new BlockPos(4,4,4)).offset(12000,0,12000);
         int y=level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,origin.getX(),origin.getZ());
         Vec3 start=new Vec3(origin.getX()+.5,y+5,origin.getZ()+.5);
         Vec3 target=start.add(3100,-5,0);
-        // No forced chunks along the route/target: production missile tickets own
-        // loading, including after the parent is discarded during separation.
+        // GameTestServer.runAllTasks() is unthrottled: 1800 test ticks can be
+        // only 7 seconds, not 90. Async generation must get a bounded wall-clock
+        // window, without forcing the route or synchronously generating it.
+        long deadline=System.nanoTime()+java.util.concurrent.TimeUnit.SECONDS.toNanos(90);
+        int tasksBefore=ru.aiforge.realwar.blast.BlastManager.completedBlasts;
+        long blocksBefore=ru.aiforge.realwar.blast.BlastManager.totalBlocksChanged;
         MissileEntity parent=MissileEntity.launch(level,MissileType.ICBM_MIRV,start,target);
         java.util.Set<MissileEntity> children=new java.util.HashSet<>();
-        h.onEachTick(()-> {
-            // Vanilla sleeps an entirely empty dimension after 300 ticks. Keep
-            // the test clock awake, without forcing any route/target chunks.
-            level.resetEmptyTime();
-            for (net.minecraft.world.entity.Entity entity:level.getAllEntities())
-                if(entity instanceof MissileEntity m && m.type()==MissileType.ICBM_MIRV && m.mode()==1
-                        && Math.abs(m.getZ()-origin.getZ())<300 && m.getX()>origin.getX()) children.add(m);
-        });
-        h.runAfterDelay(1800,()-> {
-            h.assertTrue(parent.isRemoved(),"MIRV parent did not separate age="+parent.tickCount+" present="+(level.getEntity(parent.getUUID())==parent)+" ticking="+level.isPositionEntityTicking(parent.blockPosition()));
-            h.assertTrue(children.size()==8,"expected eight observed MIRV children: "+children.size());
-            for(var child:children)h.assertTrue(child.isRemoved(),"stranded MIRV child age="+child.tickCount+" pos="+child.position()+" "+ru.aiforge.realwar.missile.MissileChunkLeases.diagnostics(child));
-            h.succeed();
-        });
+        class Probe {
+            void tick() {
+                // Keep an empty dimension awake, not its route chunks forced.
+                level.resetEmptyTime();
+                for (net.minecraft.world.entity.Entity entity:level.getAllEntities())
+                    if(entity instanceof MissileEntity m && m.type()==MissileType.ICBM_MIRV && m.mode()==1
+                            && Math.abs(m.getZ()-origin.getZ())<300 && m.getX()>origin.getX()) children.add(m);
+                boolean finished=parent.isRemoved() && children.size()==8
+                        && children.stream().allMatch(net.minecraft.world.entity.Entity::isRemoved)
+                        && ru.aiforge.realwar.blast.BlastManager.completedBlasts>=tasksBefore+8
+                        && ru.aiforge.realwar.blast.BlastManager.active(level)==0;
+                if (finished) {
+                    // Unload != impact. Require actual destruction and discard,
+                    // not merely disappearing from the visible entity lookup.
+                    for(var child:children)h.assertTrue(child.getRemovalReason()==net.minecraft.world.entity.Entity.RemovalReason.DISCARDED,
+                            "MIRV child unloaded instead of impacting");
+                    h.assertTrue(ru.aiforge.realwar.blast.BlastManager.totalBlocksChanged>blocksBefore,"no destructive impacts");
+                    h.succeed();return;
+                }
+                if(System.nanoTime()>=deadline) {
+                    String state="parent age="+parent.tickCount+" pos="+parent.position()+" "+ru.aiforge.realwar.missile.MissileChunkLeases.diagnostics(parent);
+                    for(var child:children)if(!child.isRemoved())state+="; child age="+child.tickCount+" pos="+child.position()+" "+ru.aiforge.realwar.missile.MissileChunkLeases.diagnostics(child);
+                    h.fail("MIRV did not complete eight impacts within 90 real seconds: "+state);return;
+                }
+                // One pending callback, not a million preallocated scheduled tasks.
+                h.runAfterDelay(1,this::tick);
+            }
+        }
+        h.runAfterDelay(1,new Probe()::tick);
     }
 
     @GameTest(template="arena", batch="rw_s3")
