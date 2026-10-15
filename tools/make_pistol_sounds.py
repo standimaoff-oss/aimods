@@ -36,8 +36,8 @@ def main():
     legacy = folder / 'smg_ppsh.ogg'
     data, rate = sf.read(legacy)
     peak = np.max(np.abs(data))
-    if peak > .6:  # idempotent: do not repeatedly transcode an already safe sample
-        sf.write(legacy, data * (.48 / peak), rate, format='OGG', subtype='VORBIS')
+    if peak > .4:  # idempotent: do not repeatedly transcode an already safe sample
+        sf.write(legacy, data * (.32 / peak), rate, format='OGG', subtype='VORBIS')
     for name, args in [('pistol_c96', (96, .48, 750, .033, .105)),
                        ('pistol_tt33', (33, .40, 1050, .026, .085))]:
         path = folder / (name + '.ogg')

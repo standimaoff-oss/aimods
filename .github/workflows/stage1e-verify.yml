@@ -66,6 +66,7 @@ jobs:
           python tools/check_volumetric.py
           python -m unittest discover -s tools -p 'test_rcon.py'
           python -m unittest discover -s tools -p 'test_pistol_audio.py'
+          python -m unittest discover -s tools -p 'test_audio_capture.py'
       - name: Build release JAR
         id: build
         working-directory: mods/aiarsenal

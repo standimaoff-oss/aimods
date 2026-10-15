@@ -7,6 +7,15 @@ import subprocess
 import time
 
 
+def audio_metrics(audio):
+    """Native interleaved channels: never downmix (ffmpeg's matrix can add +3 dB)."""
+    import numpy as np
+    samples = np.frombuffer(audio, dtype='<f4')
+    assert len(samples) and np.isfinite(samples).all(), 'invalid gameplay audio'
+    return {'audio_rms': float(np.sqrt(np.mean(samples * samples))),
+            'audio_peak': float(np.max(np.abs(samples)))}
+
+
 class Recording:
     def __init__(self, game, name):
         self.game = game
@@ -50,18 +59,20 @@ class Recording:
         assert {'audio', 'video'} <= {s['codec_type'] for s in probe['streams']}
         assert float(probe['format']['duration']) > 5
         # Decode the ACTUAL game recording to verify audible, non-clipped output, not just an OGG resource.
-        import numpy as np
         audio = subprocess.check_output(['ffmpeg', '-v', 'error', '-i', str(self.path),
-            '-vn', '-ac', '1', '-ar', '22050', '-f', 'f32le', '-'])
-        samples = np.frombuffer(audio, dtype='<f4')
-        rms = float(np.sqrt(np.mean(samples * samples)))
-        peak = float(np.max(np.abs(samples)))
-        assert rms > .0001 and peak > .002, f'{self.name}: silent gameplay capture'
-        assert peak < .99, f'{self.name}: gameplay audio peak exceeds headroom: {peak}'
+            '-vn', '-f', 'f32le', '-'])
+        metrics = audio_metrics(audio)
+        audio_stream = next(s for s in probe['streams'] if s['codec_type'] == 'audio')
         report = {'video': self.path.name, 'duration': float(probe['format']['duration']),
-                  'reload_seconds': self.reload_at, 'audio_rms': rms, 'audio_peak': peak,
+                  'reload_seconds': self.reload_at, **metrics,
+                  'audio_channels': audio_stream['channels'],
+                  'audio_sample_rate': int(audio_stream['sample_rate']),
+                  'audio_measurement': 'native-rate decoded float PCM, max over all channels; no downmix/resampling',
                   'capture': 'X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis'}
         (self.game.LOGS / ('video-' + self.name + '.json')).write_text(json.dumps(report, indent=2) + '\n')
+        # Save diagnostics even on failure. Never attenuate/limit the recording to pass QA.
+        assert metrics['audio_rms'] > .0001 and metrics['audio_peak'] > .002, f'{self.name}: silent gameplay capture'
+        assert metrics['audio_peak'] < .99, f'{self.name}: gameplay audio peak exceeds headroom: {metrics}'
         if self.reload_at is not None:
             # Separate source frames for agent inspection. NOT labelled F2 screenshots.
             frames = self.game.OUT / 'video-review' / self.name
