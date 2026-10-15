@@ -28,6 +28,7 @@ public final class CatalogueQa {
     private static Entity bomb;
     private static Pig witness;
     private static long blocksBefore;
+    private static int completedBefore, tuBefore, arsenalBefore;
     private CatalogueQa() {}
 
     @SubscribeEvent public static void register(RegisterCommandsEvent event) {
@@ -35,11 +36,23 @@ public final class CatalogueQa {
         var root = Commands.literal("arsenal_stress").requires(s -> s.hasPermission(2));
         root.then(Commands.literal("catalogue").executes(c -> {
             JsonArray items = new JsonArray();
+            int gunVehicleCases=0;
             for (var id : BuiltInRegistries.ITEM.keySet().stream().filter(i -> i.getNamespace().equals("aiarsenal")).sorted().toList()) {
                 Item item = BuiltInRegistries.ITEM.get(id);
                 JsonObject row = new JsonObject();
                 row.addProperty("id", id.toString()); row.addProperty("class", item.getClass().getName());
                 row.addProperty("armor", item instanceof ArmorItem); row.addProperty("block", item instanceof BlockItem);
+                if (item instanceof ArmorItem armor) row.addProperty("armorSlot", 100 + armor.getEquipmentSlot().getIndex());
+                if (item instanceof BlockItem block) row.addProperty("placedBlock", BuiltInRegistries.BLOCK.getKey(block.getBlock()).toString());
+                row.addProperty("consumable", item.isEdible() || item instanceof ru.aiforge.realwar.field.MedicalItem);
+                row.addProperty("melee", item instanceof SwordItem);
+                if (item instanceof ru.aiforge.realwar.item.VehicleItem) {
+                    for (var k : ru.aiforge.realwar.vehicle.VehicleKind.values()) if (k.isGun() && id.getPath().equals(k.spec.id()+"_vehicle")) {
+                        gunVehicleCases++;
+                        row.addProperty("gunVehicle",true); row.addProperty("drivable",k.drivable());
+                        row.addProperty("vehicleAmmo",BuiltInRegistries.ITEM.getKey(ru.aiforge.realwar.vehicle.GunVehicle.cfg(k).ammo().get()).toString());
+                    }
+                }
                 if (item instanceof FirearmItem gun) {
                     var k = gun.kind;
                     row.addProperty("ammo", "aiarsenal:" + k.ammo); row.addProperty("capacity", k.cap);
@@ -51,6 +64,8 @@ public final class CatalogueQa {
                 row.addProperty("nbtRoundtrip", ItemStack.isSameItemSameTags(stack, ItemStack.of(stack.save(new CompoundTag()))));
                 items.add(row);
             }
+            long expectedVehicles=java.util.Arrays.stream(ru.aiforge.realwar.vehicle.VehicleKind.values()).filter(ru.aiforge.realwar.vehicle.VehicleKind::isGun).count();
+            if(gunVehicleCases!=expectedVehicles) throw new IllegalStateException("unmapped gun vehicle items: "+gunVehicleCases+"/"+expectedVehicles);
             JsonArray bombs = new JsonArray();
             for (var t : ru.aiforge.realwar.aircraft.AirBombType.values()) bombs.add("air:" + t.name());
             for (var t : ru.aiforge.tubombers.aircraft.BombType.values()) if (t.arsenal() == null) bombs.add("tu:" + t.name());
@@ -67,6 +82,10 @@ public final class CatalogueQa {
         root.then(Commands.literal("use").executes(c -> {
             ServerPlayer p = c.getSource().getPlayerOrException();
             ItemStack stack = p.getMainHandItem();
+            if (stack.getItem().isEdible() || stack.getItem() instanceof ru.aiforge.realwar.field.MedicalItem) {
+                p.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);
+                p.setHealth(8); p.getFoodData().setFoodLevel(6);
+            }
             // Live ServerPlayer, network and inventory, not a FakePlayer. Generic smoke
             // coverage only: PASS/FAIL here is an interaction result, not proof of a feature.
             var air = p.gameMode.useItem(p, p.level(), stack, InteractionHand.MAIN_HAND);
@@ -75,6 +94,34 @@ public final class CatalogueQa {
                     new BlockHitResult(Vec3.atCenterOf(at).add(0,.5,0), Direction.UP, at, false));
             c.getSource().sendSuccess(() -> Component.literal("USE air=" + air + " block=" + block + " using=" + p.isUsingItem()), false);
             return 1;
+        }));
+        root.then(Commands.literal("playerstatus").executes(c -> {
+            var p = c.getSource().getPlayerOrException();
+            JsonObject o = new JsonObject();
+            o.addProperty("item", BuiltInRegistries.ITEM.getKey(p.getMainHandItem().getItem()).toString());
+            o.addProperty("count",p.getMainHandItem().getCount()); o.addProperty("health",p.getHealth());
+            o.addProperty("using",p.isUsingItem());
+            c.getSource().sendSuccess(() -> Component.literal(o.toString()),false);
+            return 1;
+        }));
+        root.then(Commands.literal("mount").executes(c -> {
+            var p=c.getSource().getPlayerOrException();
+            var candidates=p.serverLevel().getEntitiesOfClass(ru.aiforge.realwar.vehicle.GunVehicle.class,p.getBoundingBox().inflate(64));
+            if(candidates.size()!=1) throw new IllegalStateException("expected exactly one placed gun vehicle, got "+candidates.size());
+            var v=candidates.get(0);
+            if(!v.enterSeat(p,v.operatorSeat())) throw new IllegalStateException("cannot enter operator seat");
+            c.getSource().sendSuccess(() -> Component.literal("MOUNTED "+v.kind),false); return 1;
+        }));
+        root.then(Commands.literal("vehiclestatus").executes(c -> {
+            var p=c.getSource().getPlayerOrException();
+            if(!(p.getVehicle() instanceof ru.aiforge.realwar.vehicle.GunVehicle v)) throw new IllegalStateException("not mounted");
+            JsonObject o=new JsonObject();
+            o.addProperty("loaded",v.loadedCount());o.addProperty("fired",v.firedSeq());o.addProperty("engine",v.engineOn());
+            o.addProperty("x",v.getX());o.addProperty("z",v.getZ());o.addProperty("hp",v.hp());
+            var supply=ru.aiforge.realwar.vehicle.GunVehicle.cfg(v.kind).ammo().get();
+            int count=0;for(var stack:p.getInventory().items) if(stack.is(supply)) count+=stack.getCount();
+            o.addProperty("supply",count);
+            c.getSource().sendSuccess(() -> Component.literal(o.toString()),false);return 1;
         }));
         root.then(Commands.literal("drop").then(Commands.argument("type", StringArgumentType.greedyString()).executes(c -> {
             var level = c.getSource().getLevel();
@@ -97,6 +144,9 @@ public final class CatalogueQa {
             };
             if (!key[0].equals("ars") && !level.addFreshEntity(next)) throw new IllegalStateException("bomb spawn refused");
             bomb = next; blocksBefore = BlastManager.totalBlocksChanged;
+            completedBefore = BlastManager.completedBlasts;
+            tuBefore = ru.aiforge.tubombers.fx.ImpactHandler.detonations;
+            arsenalBefore = ru.aiforge.arsenal.nuke.NuclearBlast.detonations;
             if (witness != null) witness.discard();
             witness = EntityType.PIG.create(level);
             witness.setNoAi(true); witness.setPersistenceRequired();
@@ -114,9 +164,32 @@ public final class CatalogueQa {
             o.addProperty("activeBlasts", BlastManager.active(c.getSource().getLevel()));
             o.addProperty("legacyBusy", ru.aiforge.arsenal.nuke.NuclearBlast.busy());
             o.addProperty("changedBlocks", BlastManager.totalBlocksChanged - blocksBefore);
+            o.addProperty("completedTasks", BlastManager.completedBlasts-completedBefore);
+            o.addProperty("tuDetonations",ru.aiforge.tubombers.fx.ImpactHandler.detonations-tuBefore);
+            o.addProperty("arsenalDetonations",ru.aiforge.arsenal.nuke.NuclearBlast.detonations-arsenalBefore);
             c.getSource().sendSuccess(() -> Component.literal(o.toString()), false);
             return 1;
         }));
+        for (boolean verify : new boolean[]{false, true}) {
+            root.then(Commands.literal(verify ? "archivecheck" : "archive").executes(c -> {
+                var level = c.getSource().getLevel();
+                var ids = BuiltInRegistries.ITEM.keySet().stream().filter(i -> i.getNamespace().equals("aiarsenal")).sorted().toList();
+                for (int i=0; i<ids.size(); i++) {
+                    BlockPos pos = new BlockPos(5120 + i/27, 80, 5120);
+                    level.getChunkAt(pos);
+                    if (!verify && i%27==0) level.setBlock(pos, net.minecraft.world.level.block.Blocks.BARREL.defaultBlockState(), 3);
+                    if (!(level.getBlockEntity(pos) instanceof net.minecraft.world.level.block.entity.BarrelBlockEntity barrel))
+                        throw new IllegalStateException("missing saved barrel " + pos);
+                    ItemStack expected = new ItemStack(BuiltInRegistries.ITEM.get(ids.get(i)));
+                    expected.getOrCreateTag().putString("SavedRegistryId", ids.get(i).toString());
+                    if (!verify) { barrel.setItem(i%27,expected); barrel.setChanged(); }
+                    else if (!ItemStack.isSameItemSameTags(expected,barrel.getItem(i%27)) || barrel.getItem(i%27).getCount()!=1)
+                        throw new IllegalStateException("world save/reopen mismatch: " + ids.get(i));
+                }
+                c.getSource().sendSuccess(() -> Component.literal((verify ? "ARCHIVE VERIFIED " : "ARCHIVE SAVED ") + ids.size()), false);
+                return ids.size();
+            }));
+        }
         event.getDispatcher().register(root);
     }
 }

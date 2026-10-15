@@ -24,10 +24,12 @@ import org.joml.Vector3f;
 import org.joml.Vector3fc;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL21;
 import org.lwjgl.opengl.GL30;
 
 public final class VolumeGlRenderer {
@@ -418,6 +420,46 @@ public final class VolumeGlRenderer {
             throw new IllegalStateException("GLSL compile failed: " + string2);
         }
         return n2;
+    }
+
+    /** Real GL regression: hostile inherited upload state must be normalized BEFORE
+     * touching a compact native buffer, then restored exactly for the caller. */
+    public static void verifyPixelUnpackForQa() {
+        if (!Boolean.getBoolean("aiarsenal.visualQa") || !available()) throw new IllegalStateException("QA requires an active vanilla volumetric renderer");
+        RenderSystem.assertOnRenderThread();
+        PixelUnpackState original = new PixelUnpackState();
+        int pbo = GL15.glGenBuffers();
+        try {
+            for (int mode=0;mode<3;mode++) {
+                GL15.glBindBuffer(GL21.GL_PIXEL_UNPACK_BUFFER, pbo);
+                GL15.glBufferData(GL21.GL_PIXEL_UNPACK_BUFFER, 32L, GL15.GL_STATIC_DRAW);
+                GL15.glBindBuffer(GL21.GL_PIXEL_UNPACK_BUFFER, mode==0 ? 0 : pbo);
+                GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT,8);
+                GL11.glPixelStorei(GL11.GL_UNPACK_ROW_LENGTH,mode==1 ? 0 : 256);
+                GL11.glPixelStorei(GL11.GL_UNPACK_SKIP_ROWS,mode==1 ? 0 : 7);
+                GL11.glPixelStorei(GL11.GL_UNPACK_SKIP_PIXELS,mode==1 ? 0 : 11);
+                GL11.glPixelStorei(GL11.GL_UNPACK_SWAP_BYTES,1);
+                GL11.glPixelStorei(GL11.GL_UNPACK_LSB_FIRST,1);
+                GL11.glPixelStorei(GL12.GL_UNPACK_IMAGE_HEIGHT,128);
+                GL11.glPixelStorei(GL12.GL_UNPACK_SKIP_IMAGES,2);
+                PixelUnpackState hostile = new PixelUnpackState();
+                try (GlStateSnapshot state = new GlStateSnapshot()) {
+                    // Assert BEFORE the real upload, so a regression fails in Java
+                    // instead of deliberately attempting an out-of-bounds native read.
+                    PixelUnpackState.assertTightlyPacked();
+                    if (dataTexture==0) createDataTexture();
+                    uploadVolumes(java.util.List.of(),Vec3.ZERO);
+                    int error=GL11.glGetError();
+                    if(error!=GL11.GL_NO_ERROR) throw new IllegalStateException("pixel upload GL error: "+error);
+                }
+                hostile.assertRestored();
+            }
+        } finally {
+            original.restore();
+            GL15.glDeleteBuffers(pbo);
+        }
+        original.assertRestored();
+        AiArsenal.LOGGER.info("FX UNPACK PASS cases=3 real64x64Upload=true callerStateRestored=true");
     }
 
     /** Test the REAL compiler-error/fallback path, only in an explicitly opted-in client. */

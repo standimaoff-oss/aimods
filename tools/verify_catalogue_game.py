@@ -8,6 +8,7 @@ Reports remain incremental when an individual assertion fails or the JVM crashes
 import json
 import os
 import re
+import signal
 import subprocess
 import time
 from pathlib import Path
@@ -16,14 +17,17 @@ from install_qa_client import prepare
 
 ROWS = []
 BOMBS = []
+WORLD = {}
+CAPTURED_CLASSES = set()
 REPORT = g.LOGS / 'catalogue-gameplay.json'
 
 
 def save():
-    REPORT.write_text(json.dumps({'scope': 'catalogue smoke + firearm cycles + free-fall bombs',
-        'items': ROWS, 'bombs': BOMBS,
+    REPORT.write_text(json.dumps({'scope': 'catalogue smoke + equip/place/consume/melee + firearm cycles + free-fall bombs',
+        'screenshotPolicy': 'every item' if os.environ.get('QA_ALL_F2')=='1' else 'each item class, all firearms and free-fall bombs',
+        'items': ROWS, 'bombs': BOMBS, 'worldSaveReopen': WORLD,
         'limitations': ['Generic use is not proof of all contextual tool/vehicle features.',
-            'Vehicle driving, every vehicle ammunition type, guided ordnance and remote-control cycles remain separate acceptance work.',
+            'Gun-vehicle main-round reload/fire and driving are tested; alternate shells, other vehicle families, guided ordnance and remote-control cycles remain separate acceptance work.',
             'Linux llvmpipe cannot certify the Windows NVIDIA crash is fixed.']}, indent=2) + '\n')
 
 
@@ -118,6 +122,42 @@ def gun(row):
     g.command('gamemode creative TestPlayer')
 
 
+def vehicle(row):
+    def state():
+        return json.loads(g.command('execute as TestPlayer run arsenal_stress vehiclestatus'))
+    g.command('execute as TestPlayer at @s run arsenal_stress mount',expect='MOUNTED')
+    g.command('gamemode survival TestPlayer')
+    g.command('effect give TestPlayer minecraft:resistance 9999 4 true')
+    g.command('give TestPlayer '+row['vehicleAmmo']+' 16')
+    local('view_back'); time.sleep(2)
+    initial=state();assert initial['loaded']>0,initial
+    fire();wait(lambda:state()['fired']>initial['fired'],12)
+    wait(lambda:state()['loaded']<initial['loaded'],5)
+    row['mainGunShot']='PASS'
+    g.screenshot(row['id'].split(':')[1]+'-fired')
+    g.key('keydown','r')
+    try:
+        wait(lambda:state()['loaded']==initial['loaded'],80)
+    finally:
+        g.key('keyup','r')
+    reloaded=state();assert reloaded['supply']<16,reloaded
+    row['mainGunReload']='PASS (real R, ammunition consumed)'
+    fire();wait(lambda:state()['fired']>reloaded['fired'],12)
+    row['mainGunRepeatShot']='PASS'
+    if row['drivable']:
+        if not state()['engine']:
+            input_key('h');wait(lambda:state()['engine'],8)
+        start=state();g.key('keydown','w')
+        try:
+            wait(lambda:(state()['x']-start['x'])**2+(state()['z']-start['z'])**2>.25,15)
+        finally:
+            g.key('keyup','w')
+        row['drive']='PASS (real H/W controls)'
+    else:
+        row['drive']='N/A (towed gun)'
+    row['functional']='MAIN_GUN_FIRE_RELOAD_REPEAT_PASS'
+
+
 def run():
     g.configure('server', server=True)
     client = g.RUNS / 'client'
@@ -155,10 +195,12 @@ overrideHeight:700
     window = subprocess.check_output(['xdotool','search','--name','Minecraft'], text=True).splitlines()[-1]
     g.key('windowfocus','--sync',window)
     for command in ['time set 6000','gamerule doDaylightCycle false','weather clear','gamerule doWeatherCycle false',
-                    'gamerule doMobSpawning false','gamerule keepInventory true','difficulty peaceful',
+                    'gamerule doMobSpawning false','gamerule naturalRegeneration false','gamerule keepInventory true','difficulty peaceful',
                     'gamemode creative TestPlayer','forceload add -32 -32 48 64',
                     'fill -12 -61 -8 12 -61 38 minecraft:smooth_stone','tp TestPlayer 0.5 -60 0.5 0 0']:
         g.command(command)
+    local('unpack')
+    g.wait_log(player, client_log, 'FX UNPACK PASS', 60)
     g.command('arsenal_stress catalogue', expect='CATALOGUE')
     catalogue = json.loads((g.RUNS / 'server/logs/arsenal-catalogue.json').read_text())
     (g.LOGS / 'catalogue-inventory.json').write_text(json.dumps(catalogue, indent=2) + '\n')
@@ -168,14 +210,43 @@ overrideHeight:700
         try:
             assert row['nbtRoundtrip'], row
             equip(row)
-            # Native F2 for EVERY item before consumption/equipment can empty the hand.
-            g.screenshot('item-' + row['id'].split(':')[1])
+            # Every item is held; representative class F2s avoid duplicating hundreds
+            # of identical passive-item views. QA_ALL_F2=1 captures every entry.
+            if os.environ.get('QA_ALL_F2')=='1' or row['class'] not in CAPTURED_CLASSES:
+                row['screenshot']='item-'+row['id'].split(':')[1]
+                g.screenshot(row['screenshot']); CAPTURED_CLASSES.add(row['class'])
             if 'ammo' in row:
                 gun(row)
                 row['functional'] = 'FIRE_RELOAD_CYCLE_PASS'
+            elif row['melee']:
+                g.command('summon minecraft:cow 0.5 -60 2.5 {Tags:["qa_melee"],NoAI:1b,PersistenceRequired:1b}')
+                g.command('tp TestPlayer 0.5 -60 0.5 0 15')
+                time.sleep(1); fire(); time.sleep(.5)
+                result=g.command('data get entity @e[tag=qa_melee,limit=1] Health')
+                health=re.search(r'data: ([0-9.]+)f',result)
+                assert health and float(health[1])<20,result
+                row['functional']='MELEE_HIT_PASS'
             else:
+                if row['consumable']:
+                    g.key('mousedown','3')  # prevent the real client from cancelling a timed use
                 row['genericUse'] = g.command('execute as TestPlayer at @s run arsenal_stress use', expect='USE ')
-                time.sleep(2)
+                time.sleep(.5)
+                if row.get('gunVehicle'):
+                    vehicle(row)
+                elif row['armor']:
+                    equipped=g.command('data get entity TestPlayer Inventory[{Slot:'+str(row['armorSlot'])+'b}].id')
+                    assert row['id'] in equipped,equipped
+                    row['functional']='EQUIP_PASS'
+                elif row['consumable']:
+                    def consumed():
+                        state=json.loads(g.command('execute as TestPlayer run arsenal_stress playerstatus'))
+                        return not state['using'] and (state['item']!=row['id'] or state['count']==0)
+                    wait(consumed,12)
+                    row['functional']='CONSUME_PASS'
+                elif row['block']:
+                    result=g.command('execute if block 0 -60 2 '+row['placedBlock']+' run say BLOCK_MATCH')
+                    assert 'BLOCK_MATCH' in result,result
+                    row['functional']='PLACE_PASS'
             assert player.poll() is None and server.poll() is None, 'Minecraft process exited'
             row['smoke'] = 'PASS'
         except Exception as ex:
@@ -184,7 +255,7 @@ overrideHeight:700
                 save(); raise
         finally:
             save()
-        g.key('mouseup','1'); g.key('mouseup','3'); local('view_first')
+        g.key('mouseup','1'); g.key('mouseup','3'); g.key('keyup','r'); g.key('keyup','w'); local('view_first')
         g.command('gamemode creative TestPlayer')
         g.command('ride TestPlayer dismount')
         # A fresh fixture for each item. QA never points at an existing player world.
@@ -205,6 +276,7 @@ overrideHeight:700
             wait(complete, 240)
             row.update(last)
             assert last['removalReason'] == 'DISCARDED', last
+            assert last['completedTasks']+last['tuDetonations']+last['arsenalDetonations']>0, 'no production detonation recorded'
             assert last['witnessDead'] or 0 <= last['witnessHealth'] < 20, 'bomb removed without damage to live witness'
             time.sleep(1)
             g.screenshot('bomb-' + name.lower().replace(':','-'))
@@ -215,11 +287,25 @@ overrideHeight:700
                 save(); raise
         finally:
             save()
+    g.command('arsenal_stress archive', expect='ARCHIVE SAVED')
     g.command('save-all flush', expect='Saved')
-    # Clean server stop verifies saving a heavily exercised world; restart/rejoin is
-    # deliberately a separate gate, not claimed by a successful save-all.
     g.command('stop'); server.wait(timeout=120)
+    os.killpg(player.pid, signal.SIGTERM); player.wait(timeout=45)
+    server, server_log = g.launch('server-reopen', ['bash','run.sh','nogui'], cwd=g.RUNS/'server')
+    g.wait_log(server,server_log,'Done (')
+    player, reopen_log = g.launch('client-reopen',cmd,cwd=client)
+    g.wait_log(server,server_log,'TestPlayer joined the game')
+    time.sleep(10)
+    g.command('arsenal_stress archivecheck', expect='ARCHIVE VERIFIED ' + str(len(ROWS)))
+    WORLD.update(status='PASS', archivedItems=len(ROWS), method='barrel block entities saved to region files; both JVMs stopped, world reopened, real client rejoined')
     save()
+    logs = client_log.read_text(errors='replace') + reopen_log.read_text(errors='replace')
+    server_text=(g.LOGS/'server.log').read_text(errors='replace') + server_log.read_text(errors='replace')
+    assert 'Ошибка в задаче взрыва' not in server_text, 'blast task threw an exception'
+    assert 'Exception ticking' not in server_text and 'Exception in server tick loop' not in server_text
+    fatal = re.findall(r'^.*(?:\[Render thread/ERROR\]|OutOfMemoryError|EXCEPTION_ACCESS_VIOLATION|GL renderer disabled|OpenGL Error|GL_INVALID).*$' ,logs,re.M)
+    assert not fatal, '\n'.join(fatal)
+    g.command('stop'); server.wait(timeout=120)
     failures = [r for r in ROWS if r['smoke'] != 'PASS'] + [r for r in BOMBS if r['status'] != 'PASS']
     assert not failures, json.dumps(failures, indent=2)
     print('CATALOGUE PASS', len(ROWS), 'item smoke checks;', len(BOMBS), 'real free-fall detonations', flush=True)

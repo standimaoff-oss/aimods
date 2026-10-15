@@ -8,6 +8,7 @@ import org.lwjgl.opengl.*;
 /** Preserve actual GL state. All mutations inside the pass use raw GL as well,
  * so Minecraft's cached RenderSystem state stays consistent with the restored state. */
 final class GlStateSnapshot implements AutoCloseable {
+    private final PixelUnpackState unpack = new PixelUnpackState();
     private final int program = GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
     private final int vao = GL11.glGetInteger(GL30.GL_VERTEX_ARRAY_BINDING);
     private final int buffer = GL11.glGetInteger(GL15.GL_ARRAY_BUFFER_BINDING);
@@ -28,6 +29,7 @@ final class GlStateSnapshot implements AutoCloseable {
     private final int texture0, texture1;
 
     GlStateSnapshot() {
+        PixelUnpackState.tightlyPackedClientMemory();
         GL11.glGetIntegerv(GL11.GL_VIEWPORT, viewport);
         GL11.glGetFloatv(GL11.GL_COLOR_CLEAR_VALUE, clear);
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
@@ -43,6 +45,7 @@ final class GlStateSnapshot implements AutoCloseable {
     }
 
     @Override public void close() {
+        unpack.restore();
         GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, readFbo);
         GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, drawFbo);
         GL20.glUseProgram(program);

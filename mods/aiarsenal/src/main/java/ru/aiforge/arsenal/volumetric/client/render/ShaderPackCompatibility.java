@@ -28,7 +28,7 @@ public final class ShaderPackCompatibility {
                 inUse = type.getMethod("isShaderPackInUse");
             } catch (ClassNotFoundException e) {
                 unknown = loader; // no optional dependency on vanilla; fail closed with an unknown loader API
-            } catch (ReflectiveOperationException | LinkageError e) {
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException e) {
                 unknown = true;
                 AiArsenal.LOGGER.warn("VolPyro: cannot query shaderpack API; using particle fallback", e);
             }
@@ -38,7 +38,7 @@ public final class ShaderPackCompatibility {
             try {
                 // Do not cache the answer: enabling/disabling packs in-game changes it.
                 blocked = !Boolean.FALSE.equals(inUse.invoke(api));
-            } catch (ReflectiveOperationException | LinkageError e) {
+            } catch (ReflectiveOperationException | LinkageError | RuntimeException e) {
                 unknown = blocked = true;
                 AiArsenal.LOGGER.warn("VolPyro: shaderpack query failed; using particle fallback", e);
             }

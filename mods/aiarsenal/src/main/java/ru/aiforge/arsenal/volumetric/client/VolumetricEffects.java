@@ -80,7 +80,8 @@ public final class VolumetricEffects {
      * Does not spawn a bomb or modify terrain; real explosion packets are tested separately. */
     @SubscribeEvent public static void commands(RegisterClientCommandsEvent event) {
         var root = Commands.literal("arsenal_fx");
-        for (String effect : new String[]{"smoke", "blast", "nuke", "trail", "clear", "status", "budget", "off", "on"}) {
+        for (String effect : new String[]{"smoke", "blast", "nuke", "trail", "clear", "status", "budget", "unpack", "off", "on"}) {
+            if (effect.equals("unpack") && !Boolean.getBoolean("aiarsenal.visualQa")) continue;
             root.then(Commands.literal(effect).executes(context -> {
                 String status = runVisualQa(effect);
                 context.getSource().sendSuccess(() -> Component.literal(status), false);
@@ -100,6 +101,7 @@ public final class VolumetricEffects {
             ru.aiforge.arsenal.volumetric.config.VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.set(effect.equals("on"));
             VolumetricFxManager.clear();
         }
+        if (effect.equals("unpack")) VolumeGlRenderer.verifyPixelUnpackForQa();
         if (effect.equals("budget")) {
             for (int i = 0; i < 200; i++) {
                 VolumetricFxManager.smokePuff(p.add(i, 0, 0), 1, 5, 290);
