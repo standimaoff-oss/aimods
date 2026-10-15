@@ -1,0 +1,526 @@
+2026-10-15 15:34:14,637 main WARN Advanced terminal features are not available in this environment
+[15:34:14] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.23, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[15:34:14] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20.1 by Eclipse Adoptium; OS Linux arch amd64 version 6.8.0-1064-azure
+[15:34:14] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /home/runner/work/_temp/mc-runs/server/config/fml.toml is not correct. Correcting
+[15:34:14] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[15:34:14] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[15:34:14] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[15:34:14] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[15:34:15] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[15:34:15] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/_temp/mc-runs/server/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[15:34:15] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/server/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.23/fmlcore-1.20.1-47.4.23.jar is missing mods.toml file
+[15:34:15] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/server/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.23/javafmllanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15:34:15] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/server/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.23/lowcodelanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15:34:15] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/server/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.23/mclanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15:34:15] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[15:34:17] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[15:34:26] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.23, for MC 1.20.1 with MCP 20230612.114412
+[15:34:26] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.23 Initialized
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/mc-runs/server/config/aiarsenal-realwar-common.toml is not correct. Correcting
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.enabled was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.metersPerBlock was corrected from null to its default, 17.5. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.maxBlastRadius was corrected from null to its default, 300. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.craterScale was corrected from null to its default, 1.0. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.destroyBlocks was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.thermalIgnition was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.entityDamage was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.blastBudgetMs was corrected from null to its default, 14. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.conventionalMaxRadius was corrected from null to its default, 64. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.enabled was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.hourTicks was corrected from null to its default, 2400. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.falloutLengthScale was corrected from null to its default, 0.35. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key radiation.radioactiveItems was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.scaleK was corrected from null to its default, 25.0. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarRange was corrected from null to its default, 600. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarLink was corrected from null to its default, 250. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.rocketsDestroyBlocks was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.vehicleDamage was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ordnance.flakRange was corrected from null to its default, 170. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key worldgen was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key worldgen.wreckSites was corrected from null to its default, true. 
+[15:34:27] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key worldgen.supplyCaches was corrected from null to its default, true. 
+[15:34:27] [modloading-worker-0/INFO] [ru.ai.bm.Bm21Grad/]: BM-21 Grad loaded: 5 rocket types
+[15:34:27] [modloading-worker-0/INFO] [ru.ai.tu.TuBombers/]: Tu Bombers loaded
+[15:34:27] [modloading-worker-0/INFO] [ru.ai.ar.AiArsenal/]: AI Arsenal loaded
+[15:34:27] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[15:34:28] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.23 Target: 47.4.28
+[15:34:30] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[15:34:30] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/_temp/mc-runs/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23103!/assets/.mcassetsroot' uses unexpected schema
+[15:34:30] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/_temp/mc-runs/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23103!/data/.mcassetsroot' uses unexpected schema
+[15:34:33] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[15:34:33] [main/INFO] [minecraft/AdvancementList]: Loaded 1278 advancements
+[15:34:34] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[15:34:34] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[15:34:34] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: CREATIVE
+[15:34:34] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[15:34:34] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:25565
+[15:34:34] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[15:34:34] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[15:34:34] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[15:34:34] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[15:34:34] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-bm21-server.toml is not correct. Correcting
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics.rangeScale was corrected from null to its default, 1.0. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics.dispersion was corrected from null to its default, 0.012. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ballistics.maxGhostTicks was corrected from null to its default, 2400. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.salvoIntervalTicks was corrected from null to its default, 10. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.reloadTicksPerTube was corrected from null to its default, 40. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.creativeFreeAmmo was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.vehicleHealth was corrected from null to its default, 300.0. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key launcher.maxSpeed was corrected from null to its default, 0.9. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.blockDamage was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.explosionScale was corrected from null to its default, 1.0. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.debris was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/forge-server.toml is not correct. Correcting
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-aviation-server.toml is not correct. Correcting
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key flight was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key flight.speedScale was corrected from null to its default, 0.5. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.blockDamage was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.explosionScale was corrected from null to its default, 1.0. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key effects.debris was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/aiarsenal-arsenal-server.toml is not correct. Correcting
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.blockDamage was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.radiusScale was corrected from null to its default, 1.0. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.columnsPerTick was corrected from null to its default, 1800. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.realWarBlast was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key nuclear.falloutSeconds was corrected from null to its default, 300. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional.blockDamage was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional.realWarBlast was corrected from null to its default, true. 
+[15:34:35] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key conventional.speedScale was corrected from null to its default, 0.5. 
+[15:34:35] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[15:34:36] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[15:34:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:39] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:39] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:34:40] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 24%
+[15:34:40] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 4475 ms
+[15:34:40] [Server thread/INFO] [minecraft/DedicatedServer]: Done (5.811s)! For help, type "help"
+[15:34:40] [Server thread/INFO] [minecraft/DedicatedServer]: Starting remote control listener
+[15:34:40] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener started
+[15:34:40] [Server thread/INFO] [minecraft/RconThread]: RCON running on 127.0.0.1:25575
+[15:34:40] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[15:35:35] [Server thread/INFO] [minecraft/PlayerList]: TestPlayer[/127.0.0.1:45996] logged in with entity id 1 at (0.5, -60.0, 5.5)
+[15:35:35] [Server thread/INFO] [minecraft/MinecraftServer]: TestPlayer joined the game
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Set the time to 6000]
+[15:35:56] [RCON Client /127.0.0.1 #2/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gamerule doDaylightCycle is now set to: false]
+[15:35:56] [RCON Client /127.0.0.1 #3/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Set the weather to clear]
+[15:35:56] [RCON Client /127.0.0.1 #4/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gamerule doWeatherCycle is now set to: false]
+[15:35:56] [RCON Client /127.0.0.1 #5/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gamerule doMobSpawning is now set to: false]
+[15:35:56] [RCON Client /127.0.0.1 #6/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [RCON Client /127.0.0.1 #7/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Successfully filled 850 block(s)]
+[15:35:56] [RCON Client /127.0.0.1 #8/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:57] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Successfully filled 136 block(s)]
+[15:35:57] [RCON Client /127.0.0.1 #9/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:57] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Successfully filled 9 block(s)]
+[15:35:57] [RCON Client /127.0.0.1 #10/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:57] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:35:57] [RCON Client /127.0.0.1 #11/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:57] [RCON Client /127.0.0.1 #12/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:57] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [PPSh-41 (7.62x25 TT)]]
+[15:35:57] [RCON Client /127.0.0.1 #13/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:35:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:35:57] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gave 3 [PPSh-41 drum magazine (71 rounds)] to TestPlayer]
+[15:35:57] [RCON Client /127.0.0.1 #14/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:14] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:14] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:36:14] [RCON Client /127.0.0.1 #15/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:20] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:20] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:36:20] [RCON Client /127.0.0.1 #16/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:21] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:21] [RCON Client /127.0.0.1 #17/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:24] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:24] [RCON Client /127.0.0.1 #18/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:35] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:35] [RCON Client /127.0.0.1 #19/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [RCON Client /127.0.0.1 #20/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [RCON Client /127.0.0.1 #21/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [RCON Client /127.0.0.1 #22/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Removed 4 item(s) from player TestPlayer]
+[15:36:37] [RCON Client /127.0.0.1 #23/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Set TestPlayer's game mode to Survival Mode]
+[15:36:37] [RCON Client /127.0.0.1 #24/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Applied effect Resistance to TestPlayer]
+[15:36:37] [RCON Client /127.0.0.1 #25/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Applied effect Saturation to TestPlayer]
+[15:36:37] [RCON Client /127.0.0.1 #26/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [RCON Client /127.0.0.1 #27/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:36:37] [RCON Client /127.0.0.1 #28/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Headgear — French line infantry · 1812]]
+[15:36:37] [RCON Client /127.0.0.1 #29/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Tunic — French line infantry · 1812]]
+[15:36:37] [RCON Client /127.0.0.1 #30/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Trousers — French line infantry · 1812]]
+[15:36:37] [RCON Client /127.0.0.1 #31/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Boots — French line infantry · 1812]]
+[15:36:37] [RCON Client /127.0.0.1 #32/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [France — 1777 / An IX musket]]
+[15:36:37] [RCON Client /127.0.0.1 #33/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:38] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:38] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gave 4 [Paper musket cartridge] to TestPlayer]
+[15:36:38] [RCON Client /127.0.0.1 #34/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:44] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:44] [RCON Client /127.0.0.1 #35/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:44] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:44] [RCON Client /127.0.0.1 #36/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:36:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:36:57] [RCON Client /127.0.0.1 #37/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Removed 8 item(s) from player TestPlayer]
+[15:37:01] [RCON Client /127.0.0.1 #38/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:37:01] [RCON Client /127.0.0.1 #39/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Headgear — Russian Imperial line infantry · 1812]]
+[15:37:01] [RCON Client /127.0.0.1 #40/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Tunic — Russian Imperial line infantry · 1812]]
+[15:37:01] [RCON Client /127.0.0.1 #41/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Trousers — Russian Imperial line infantry · 1812]]
+[15:37:01] [RCON Client /127.0.0.1 #42/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Boots — Russian Imperial line infantry · 1812]]
+[15:37:01] [RCON Client /127.0.0.1 #43/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:01] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Russia — infantry musket M1808]]
+[15:37:01] [RCON Client /127.0.0.1 #44/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:02] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:02] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gave 4 [Paper musket cartridge] to TestPlayer]
+[15:37:02] [RCON Client /127.0.0.1 #45/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:08] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:08] [RCON Client /127.0.0.1 #46/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:08] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:08] [RCON Client /127.0.0.1 #47/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:21] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:21] [RCON Client /127.0.0.1 #48/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Removed 8 item(s) from player TestPlayer]
+[15:37:25] [RCON Client /127.0.0.1 #49/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:37:25] [RCON Client /127.0.0.1 #50/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Headgear — French line infantry · 1812]]
+[15:37:25] [RCON Client /127.0.0.1 #51/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Tunic — French line infantry · 1812]]
+[15:37:25] [RCON Client /127.0.0.1 #52/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Trousers — French line infantry · 1812]]
+[15:37:25] [RCON Client /127.0.0.1 #53/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Boots — French line infantry · 1812]]
+[15:37:25] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:25] [RCON Client /127.0.0.1 #54/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [France — An XIII pistol]]
+[15:37:25] [RCON Client /127.0.0.1 #55/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:26] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:26] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gave 4 [Paper pistol cartridge] to TestPlayer]
+[15:37:26] [RCON Client /127.0.0.1 #56/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:32] [RCON Client /127.0.0.1 #57/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:32] [RCON Client /127.0.0.1 #58/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:45] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:45] [RCON Client /127.0.0.1 #59/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Removed 8 item(s) from player TestPlayer]
+[15:37:49] [RCON Client /127.0.0.1 #60/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:37:49] [RCON Client /127.0.0.1 #61/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Headgear — Russian Imperial line infantry · 1812]]
+[15:37:49] [RCON Client /127.0.0.1 #62/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Tunic — Russian Imperial line infantry · 1812]]
+[15:37:49] [RCON Client /127.0.0.1 #63/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Trousers — Russian Imperial line infantry · 1812]]
+[15:37:49] [RCON Client /127.0.0.1 #64/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Boots — Russian Imperial line infantry · 1812]]
+[15:37:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:49] [RCON Client /127.0.0.1 #65/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Russia — cavalry pistol M1809]]
+[15:37:49] [RCON Client /127.0.0.1 #66/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:50] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Gave 4 [Paper pistol cartridge] to TestPlayer]
+[15:37:50] [RCON Client /127.0.0.1 #67/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:56] [RCON Client /127.0.0.1 #68/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:37:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:37:56] [RCON Client /127.0.0.1 #69/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:09] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:09] [RCON Client /127.0.0.1 #70/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:13] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:13] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [France — briquet short sabre]]
+[15:38:13] [RCON Client /127.0.0.1 #71/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:16] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:16] [RCON Client /127.0.0.1 #72/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:19] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:19] [RCON Client /127.0.0.1 #73/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:19] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:19] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Russia — cavalry sabre]]
+[15:38:19] [RCON Client /127.0.0.1 #74/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:22] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:22] [RCON Client /127.0.0.1 #75/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:24] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:24] [RCON Client /127.0.0.1 #76/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:24] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:24] [RCON Client /127.0.0.1 #77/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:24] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Summoned new France — An XI 6-pounder]
+[15:38:24] [RCON Client /127.0.0.1 #78/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:24] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 2.200000, -60.000000, 3.700000]
+[15:38:24] [RCON Client /127.0.0.1 #79/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:24] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [6-pounder charge and roundshot]]
+[15:38:24] [RCON Client /127.0.0.1 #80/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:26] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:26] [RCON Client /127.0.0.1 #81/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:26] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:26] [RCON Client /127.0.0.1 #82/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:28] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:28] [RCON Client /127.0.0.1 #83/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:28] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:28] [RCON Client /127.0.0.1 #84/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:28] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:28] [RCON Client /127.0.0.1 #85/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:28] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:28] [RCON Client /127.0.0.1 #86/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:29] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:29] [RCON Client /127.0.0.1 #87/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:29] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:29] [RCON Client /127.0.0.1 #88/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:29] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:29] [RCON Client /127.0.0.1 #89/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:29] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:29] [RCON Client /127.0.0.1 #90/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:29] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:29] [RCON Client /127.0.0.1 #91/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:30] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:30] [RCON Client /127.0.0.1 #92/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:30] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:30] [RCON Client /127.0.0.1 #93/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:30] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:30] [RCON Client /127.0.0.1 #94/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:30] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:30] [RCON Client /127.0.0.1 #95/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:31] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:31] [RCON Client /127.0.0.1 #96/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:31] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:31] [RCON Client /127.0.0.1 #97/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:31] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:31] [RCON Client /127.0.0.1 #98/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:31] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:31] [RCON Client /127.0.0.1 #99/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:31] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:31] [RCON Client /127.0.0.1 #100/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:32] [RCON Client /127.0.0.1 #101/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:32] [RCON Client /127.0.0.1 #102/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:32] [RCON Client /127.0.0.1 #103/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:32] [RCON Client /127.0.0.1 #104/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:32] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:32] [RCON Client /127.0.0.1 #105/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:33] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:33] [RCON Client /127.0.0.1 #106/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:33] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:33] [RCON Client /127.0.0.1 #107/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:33] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:33] [RCON Client /127.0.0.1 #108/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:33] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:33] [RCON Client /127.0.0.1 #109/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:33] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:33] [RCON Client /127.0.0.1 #110/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:34] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:34] [RCON Client /127.0.0.1 #111/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:34] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:34] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Flint and Steel]]
+[15:38:34] [RCON Client /127.0.0.1 #112/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:37] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:37] [RCON Client /127.0.0.1 #113/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:38] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:38] [RCON Client /127.0.0.1 #114/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:41] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:41] [RCON Client /127.0.0.1 #115/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Killed France — An XI 6-pounder]
+[15:38:49] [RCON Client /127.0.0.1 #116/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Summoned new Russia — M1805 12-pounder]
+[15:38:49] [RCON Client /127.0.0.1 #117/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:49] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 2.200000, -60.000000, 3.700000]
+[15:38:50] [RCON Client /127.0.0.1 #118/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:50] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [12-pounder charge and roundshot]]
+[15:38:50] [RCON Client /127.0.0.1 #119/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:51] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:51] [RCON Client /127.0.0.1 #120/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:51] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:51] [RCON Client /127.0.0.1 #121/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:53] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:53] [RCON Client /127.0.0.1 #122/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:54] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:54] [RCON Client /127.0.0.1 #123/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:54] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:54] [RCON Client /127.0.0.1 #124/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:54] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:54] [RCON Client /127.0.0.1 #125/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:54] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:54] [RCON Client /127.0.0.1 #126/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:54] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:54] [RCON Client /127.0.0.1 #127/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:55] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:55] [RCON Client /127.0.0.1 #128/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:55] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:55] [RCON Client /127.0.0.1 #129/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:55] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:55] [RCON Client /127.0.0.1 #130/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:55] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:55] [RCON Client /127.0.0.1 #131/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:55] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:55] [RCON Client /127.0.0.1 #132/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:56] [RCON Client /127.0.0.1 #133/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:56] [RCON Client /127.0.0.1 #134/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:56] [RCON Client /127.0.0.1 #135/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:56] [RCON Client /127.0.0.1 #136/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:56] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:56] [RCON Client /127.0.0.1 #137/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:57] [RCON Client /127.0.0.1 #138/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:57] [RCON Client /127.0.0.1 #139/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:57] [RCON Client /127.0.0.1 #140/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:57] [RCON Client /127.0.0.1 #141/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:57] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:57] [RCON Client /127.0.0.1 #142/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:58] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:58] [RCON Client /127.0.0.1 #143/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:58] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:58] [RCON Client /127.0.0.1 #144/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:58] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:58] [RCON Client /127.0.0.1 #145/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:58] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:58] [RCON Client /127.0.0.1 #146/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:58] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:58] [RCON Client /127.0.0.1 #147/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:59] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:59] [RCON Client /127.0.0.1 #148/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:59] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:59] [RCON Client /127.0.0.1 #149/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:59] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:59] [RCON Client /127.0.0.1 #150/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:38:59] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:38:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Replaced a slot on TestPlayer with [Flint and Steel]]
+[15:38:59] [RCON Client /127.0.0.1 #151/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:02] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:02] [RCON Client /127.0.0.1 #152/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:05] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:05] [RCON Client /127.0.0.1 #153/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:13] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:13] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Killed Russia — M1805 12-pounder]
+[15:39:13] [RCON Client /127.0.0.1 #154/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:13] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:13] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Set TestPlayer's game mode to Creative Mode]
+[15:39:13] [RCON Client /127.0.0.1 #155/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:13] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:13] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Removed 8 item(s) from player TestPlayer]
+[15:39:13] [RCON Client /127.0.0.1 #156/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:13] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:13] [RCON Client /127.0.0.1 #157/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:16] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:16] [RCON Client /127.0.0.1 #158/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:19] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:19] [RCON Client /127.0.0.1 #159/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:21] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:21] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Teleported TestPlayer to 0.500000, -60.000000, 0.500000]
+[15:39:21] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:21] [RCON Client /127.0.0.1 #160/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:21] [RCON Client /127.0.0.1 #161/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:21] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:21] [RCON Client /127.0.0.1 #162/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:22] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:39:22] [RCON Client /127.0.0.1 #163/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:39:34] [Server thread/INFO] [minecraft/ServerGamePacketListenerImpl]: TestPlayer lost connection: Disconnected
+[15:39:34] [Server thread/INFO] [minecraft/MinecraftServer]: TestPlayer left the game
+[15:39:34] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[15:39:34] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[15:39:34] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[15:39:36] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[15:39:37] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[15:39:37] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[15:39:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[15:39:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[15:39:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[15:39:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[15:39:37] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener stopped

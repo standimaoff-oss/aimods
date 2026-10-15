@@ -1,0 +1,281 @@
+[15Oct2026 15:34:45.976] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--username, TestPlayer, --version, 1.20.1-forge-47.4.23, --gameDir, /home/runner/work/_temp/mc-runs/client, --assetsDir, /home/runner/work/_temp/mc-runs/installed/assets, --assetIndex, 5, --uuid, bb77495a-a740-3169-a238-69654c8bd2c1, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, ${clientid}, --xuid, ${auth_xuid}, --userType, msa, --versionType, release, --quickPlayMultiplayer, 127.0.0.1:25565, --launchTarget, forgeclient, --fml.forgeVersion, 47.4.23, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412]
+[15Oct2026 15:34:45.984] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20.1 by Eclipse Adoptium; OS Linux arch amd64 version 6.8.0-1064-azure
+[15Oct2026 15:34:46.125] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file /home/runner/work/_temp/mc-runs/client/config/fml.toml is not correct. Correcting
+[15Oct2026 15:34:46.127] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[15Oct2026 15:34:46.128] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[15Oct2026 15:34:46.128] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[15Oct2026 15:34:46.129] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[15Oct2026 15:34:46.198] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[15Oct2026 15:34:46.463] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[15Oct2026 15:34:46.465] [main/INFO] [EARLYDISPLAY/]: If this message is the only thing at the bottom of your log before a crash, you probably have a driver issue.
+
+Possible solutions:
+A) Make sure Minecraft is set to prefer high performance graphics in the OS and/or driver control panel
+B) Check for driver updates on the graphics brand's website
+C) Try reinstalling your graphics drivers
+D) If still not working after trying all of the above, ask for further help on the Forge forums or Discord
+
+You can safely ignore this message if the game starts up successfully.
+[15Oct2026 15:34:46.542] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.5
+[15Oct2026 15:34:46.589] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.5 got version 4.5
+[15Oct2026 15:34:46.758] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/_temp/mc-runs/installed/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2388!/ Service=ModLauncher Env=CLIENT
+[15Oct2026 15:34:46.786] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: llvmpipe (LLVM 15.0.7, 256 bits) GL version 4.5 (Core Profile) Mesa 23.2.1-1ubuntu3.1~22.04.4, Mesa
+[15Oct2026 15:34:47.427] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/installed/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.23/fmlcore-1.20.1-47.4.23.jar is missing mods.toml file
+[15Oct2026 15:34:47.430] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/installed/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.23/javafmllanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15Oct2026 15:34:47.432] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/installed/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.23/lowcodelanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15Oct2026 15:34:47.433] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/mc-runs/installed/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.23/mclanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15Oct2026 15:34:47.572] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[15Oct2026 15:34:49.845] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclient' with arguments [--version, 1.20.1-forge-47.4.23, --gameDir, /home/runner/work/_temp/mc-runs/client, --assetsDir, /home/runner/work/_temp/mc-runs/installed/assets, --uuid, bb77495a-a740-3169-a238-69654c8bd2c1, --username, TestPlayer, --assetIndex, 5, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, ${clientid}, --xuid, ${auth_xuid}, --userType, msa, --versionType, release, --quickPlayMultiplayer, 127.0.0.1:25565]
+[15Oct2026 15:34:57.595] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 188 Datafixer optimizations took 464 milliseconds
+[15Oct2026 15:35:00.389] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/runner/work/_temp/mc-runs/installed/libraries/net/minecraft/client/1.20.1-20230612.114412/client-1.20.1-20230612.114412-srg.jar%23148!/assets/.mcassetsroot' uses unexpected schema
+[15Oct2026 15:35:00.389] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/runner/work/_temp/mc-runs/installed/libraries/net/minecraft/client/1.20.1-20230612.114412/client-1.20.1-20230612.114412-srg.jar%23148!/data/.mcassetsroot' uses unexpected schema
+[15Oct2026 15:35:00.409] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[15Oct2026 15:35:00.417] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: TestPlayer
+[15Oct2026 15:35:00.635] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.1 build 7
+[15Oct2026 15:35:01.589] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.23, for MC 1.20.1 with MCP 20230612.114412
+[15Oct2026 15:35:01.599] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.23 Initialized
+[15Oct2026 15:35:05.010] [Worker-Main-1/ERROR] [net.minecraft.client.multiplayer.AccountProfileKeyPairManager/]: Failed to retrieve profile key pair
+java.io.IOException: Could not retrieve profile key pair
+	at net.minecraft.client.multiplayer.AccountProfileKeyPairManager.m_253252_(AccountProfileKeyPairManager.java:129) ~[client-1.20.1-20230612.114412-srg.jar%23148!/:?]
+	at net.minecraft.client.multiplayer.AccountProfileKeyPairManager.m_252828_(AccountProfileKeyPairManager.java:74) ~[client-1.20.1-20230612.114412-srg.jar%23148!/:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1760) ~[?:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+[15Oct2026 15:35:05.064] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources
+[15Oct2026 15:35:05.112] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/mc-runs/client/config/forge-client.toml is not correct. Correcting
+[15Oct2026 15:35:05.119] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.119] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.alwaysSetupTerrainOffThread was corrected from null to its default, false. 
+[15Oct2026 15:35:05.119] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.experimentalForgeLightPipelineEnabled was corrected from null to its default, false. 
+[15Oct2026 15:35:05.119] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.showLoadWarnings was corrected from null to its default, true. 
+[15Oct2026 15:35:05.120] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.useCombinedDepthStencilAttachment was corrected from null to its default, false. 
+[15Oct2026 15:35:05.120] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.compressLanIPv6Addresses was corrected from null to its default, true. 
+[15Oct2026 15:35:05.120] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.calculateAllNormals was corrected from null to its default, false. 
+[15Oct2026 15:35:05.120] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.stabilizeDirectionGetNearest was corrected from null to its default, true. 
+[15Oct2026 15:35:05.122] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key client.allowMipmapLowering was corrected from null to its default, false. 
+[15Oct2026 15:35:05.134] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/mc-runs/client/config/aiarsenal-realwar-client.toml is not correct. Correcting
+[15Oct2026 15:35:05.135] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.135] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.particleQuality was corrected from null to its default, 1.0. 
+[15Oct2026 15:35:05.136] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.flash was corrected from null to its default, true. 
+[15Oct2026 15:35:05.137] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.cameraShake was corrected from null to its default, true. 
+[15Oct2026 15:35:05.137] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.maxEffectDistance was corrected from null to its default, 2500.0. 
+[15Oct2026 15:35:05.138] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.geigerHud was corrected from null to its default, true. 
+[15Oct2026 15:35:05.138] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.trailQuality was corrected from null to its default, 1.0. 
+[15Oct2026 15:35:05.138] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key effects.vehicleHud was corrected from null to its default, true. 
+[15Oct2026 15:35:05.146] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/mc-runs/client/config/aiarsenal-volumetric-client.toml is not correct. Correcting
+[15Oct2026 15:35:05.147] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.147] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.qualityPreset was corrected from null to its default, AUTO. 
+[15Oct2026 15:35:05.148] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.raymarchSteps was corrected from null to its default, 24. 
+[15Oct2026 15:35:05.148] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.renderResolutionScale was corrected from null to its default, 0.5. 
+[15Oct2026 15:35:05.149] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.enableVolumetricRenderer was corrected from null to its default, true. 
+[15Oct2026 15:35:05.149] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.maxActiveVolumes was corrected from null to its default, 32. 
+[15Oct2026 15:35:05.150] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.maxPlumeSegments was corrected from null to its default, 96. 
+[15Oct2026 15:35:05.150] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key renderer.maxRenderedVolumes was corrected from null to its default, 24. 
+[15Oct2026 15:35:05.155] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/_temp/mc-runs/client/config/aiarsenal-realwar-common.toml is not correct. Correcting
+[15Oct2026 15:35:05.156] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.157] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.enabled was corrected from null to its default, true. 
+[15Oct2026 15:35:05.157] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.metersPerBlock was corrected from null to its default, 17.5. 
+[15Oct2026 15:35:05.158] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.maxBlastRadius was corrected from null to its default, 300. 
+[15Oct2026 15:35:05.158] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.craterScale was corrected from null to its default, 1.0. 
+[15Oct2026 15:35:05.159] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.destroyBlocks was corrected from null to its default, true. 
+[15Oct2026 15:35:05.159] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.thermalIgnition was corrected from null to its default, true. 
+[15Oct2026 15:35:05.160] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.entityDamage was corrected from null to its default, true. 
+[15Oct2026 15:35:05.160] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.blastBudgetMs was corrected from null to its default, 14. 
+[15Oct2026 15:35:05.161] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key nuclear.conventionalMaxRadius was corrected from null to its default, 64. 
+[15Oct2026 15:35:05.165] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.166] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.enabled was corrected from null to its default, true. 
+[15Oct2026 15:35:05.166] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.hourTicks was corrected from null to its default, 2400. 
+[15Oct2026 15:35:05.166] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.falloutLengthScale was corrected from null to its default, 0.35. 
+[15Oct2026 15:35:05.167] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key radiation.radioactiveItems was corrected from null to its default, true. 
+[15Oct2026 15:35:05.171] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.172] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.scaleK was corrected from null to its default, 25.0. 
+[15Oct2026 15:35:05.172] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarRange was corrected from null to its default, 600. 
+[15Oct2026 15:35:05.172] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.radarLink was corrected from null to its default, 250. 
+[15Oct2026 15:35:05.173] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.rocketsDestroyBlocks was corrected from null to its default, true. 
+[15Oct2026 15:35:05.173] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.vehicleDamage was corrected from null to its default, true. 
+[15Oct2026 15:35:05.173] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ordnance.flakRange was corrected from null to its default, 170. 
+[15Oct2026 15:35:05.178] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key worldgen was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15Oct2026 15:35:05.179] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key worldgen.wreckSites was corrected from null to its default, true. 
+[15Oct2026 15:35:05.180] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key worldgen.supplyCaches was corrected from null to its default, true. 
+[15Oct2026 15:35:05.938] [Worker-Main-1/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.0.06.hex, loading
+[15Oct2026 15:35:06.899] [Worker-Main-1/INFO] [ru.aiforge.bm21grad.Bm21Grad/]: BM-21 Grad loaded: 5 rocket types
+[15Oct2026 15:35:06.903] [Worker-Main-1/INFO] [ru.aiforge.tubombers.TuBombers/]: Tu Bombers loaded
+[15Oct2026 15:35:06.906] [Worker-Main-1/INFO] [ru.aiforge.arsenal.AiArsenal/]: AI Arsenal loaded
+[15Oct2026 15:35:06.965] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[15Oct2026 15:35:07.586] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.23 Target: 47.4.28
+[15Oct2026 15:35:30.833] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[15Oct2026 15:35:30.834] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[15Oct2026 15:35:30.868] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device Null Output
+[15Oct2026 15:35:30.869] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[15Oct2026 15:35:31.201] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[15Oct2026 15:35:31.251] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[15Oct2026 15:35:31.252] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[15Oct2026 15:35:31.253] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[15Oct2026 15:35:31.255] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[15Oct2026 15:35:31.283] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[15Oct2026 15:35:31.290] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[15Oct2026 15:35:31.290] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[15Oct2026 15:35:31.295] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[15Oct2026 15:35:31.570] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[15Oct2026 15:35:31.804] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x0 minecraft:textures/atlas/particles.png-atlas
+[15Oct2026 15:35:31.806] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[15Oct2026 15:35:31.806] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[15Oct2026 15:35:32.002] [Worker-Main-1/ERROR] [net.minecraft.client.multiplayer.AccountProfileKeyPairManager/]: Failed to retrieve profile key pair
+java.io.IOException: Could not retrieve profile key pair
+	at net.minecraft.client.multiplayer.AccountProfileKeyPairManager.m_253252_(AccountProfileKeyPairManager.java:129) ~[client-1.20.1-20230612.114412-srg.jar%23148!/:?]
+	at net.minecraft.client.multiplayer.AccountProfileKeyPairManager.m_252828_(AccountProfileKeyPairManager.java:74) ~[client-1.20.1-20230612.114412-srg.jar%23148!/:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1760) ~[?:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+[15Oct2026 15:35:32.006] [Render thread/INFO] [net.minecraft.client.gui.screens.ConnectScreen/]: Connecting to 127.0.0.1, 25565
+[15Oct2026 15:35:35.681] [Netty Epoll Client IO #0/INFO] [net.minecraftforge.network.NetworkHooks/]: Connected to a modded server.
+[15Oct2026 15:35:39.983] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 2 advancements
+[15Oct2026 15:35:40.610] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VolPyro OpenGL renderer: llvmpipe (LLVM 15.0.7, 256 bits) (software=true)
+[15Oct2026 15:35:41.857] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VolPyro shader ready: volumetric_raymarch.fsh
+[15Oct2026 15:35:41.862] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VolPyro shader ready: volumetric_composite.fsh
+[15Oct2026 15:35:57.426] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/ppsh41.glb: 18920 вершин, 10036 треугольников, 11 узлов, 2 анимаций
+[15Oct2026 15:35:57.819] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/mag_ppsh.glb: 1562 вершин, 1160 треугольников, 1 узлов, 0 анимаций
+[15Oct2026 15:36:05.484] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.05.png
+[15Oct2026 15:36:12.525] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.12.png
+[15Oct2026 15:36:18.678] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.18.png
+[15Oct2026 15:36:21.631] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=1 pos=0.5,-58.47999999523163,1.45
+[15Oct2026 15:36:21.849] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=1 pos=0.5,-58.47999999523163,1.45
+[15Oct2026 15:36:21.849] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=1 pos=0.5,-58.47999999523163,1.45
+[15Oct2026 15:36:21.850] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=1 pos=0.5,-58.47999999523163,1.45
+[15Oct2026 15:36:24.909] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: WEAPON QA reload-start ppsh41
+[15Oct2026 15:36:26.111] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.26.png
+[15Oct2026 15:36:33.144] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.33.png
+[15Oct2026 15:36:37.240] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_first PASS
+[15Oct2026 15:36:37.370] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_fov70 PASS
+[15Oct2026 15:36:37.470] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_ready PASS
+[15Oct2026 15:36:37.598] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Ваш режим игры изменён на Режим выживания
+[15Oct2026 15:36:37.824] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/historical_uniforms.glb: 49714 вершин, 25280 треугольников, 721 узлов, 0 анимаций
+[15Oct2026 15:36:37.891] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/musket_1777.glb: 3616 вершин, 2296 треугольников, 12 узлов, 2 анимаций
+[15Oct2026 15:36:39.314] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.39.png
+[15Oct2026 15:36:42.365] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.42.png
+[15Oct2026 15:36:44.417] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=2 pos=0.5,-58.47999999523163,1.85
+[15Oct2026 15:36:46.171] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.45.png
+[15Oct2026 15:36:48.958] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: WEAPON QA reload-start musket_1777
+[15Oct2026 15:36:50.572] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.50.png
+[15Oct2026 15:36:55.626] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.55.png
+[15Oct2026 15:36:57.695] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.36.57.png
+[15Oct2026 15:37:01.705] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/musket_1808.glb: 3616 вершин, 2296 треугольников, 12 узлов, 2 анимаций
+[15Oct2026 15:37:03.214] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.03.png
+[15Oct2026 15:37:06.309] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.06.png
+[15Oct2026 15:37:08.327] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=2 pos=0.5,-58.47999999523163,1.85
+[15Oct2026 15:37:10.018] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.09.png
+[15Oct2026 15:37:12.802] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: WEAPON QA reload-start musket_1808
+[15Oct2026 15:37:14.446] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.14.png
+[15Oct2026 15:37:19.573] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.19.png
+[15Oct2026 15:37:21.600] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.21.png
+[15Oct2026 15:37:25.638] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/pistol_an13.glb: 2908 вершин, 1724 треугольников, 12 узлов, 2 анимаций
+[15Oct2026 15:37:27.179] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.27.png
+[15Oct2026 15:37:30.233] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.30.png
+[15Oct2026 15:37:32.278] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=2 pos=0.5,-58.47999999523163,1.1
+[15Oct2026 15:37:34.245] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.33.png
+[15Oct2026 15:37:37.070] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: WEAPON QA reload-start pistol_an13
+[15Oct2026 15:37:38.745] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.38.png
+[15Oct2026 15:37:43.535] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.43.png
+[15Oct2026 15:37:45.584] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.45.png
+[15Oct2026 15:37:49.734] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/pistol_1809.glb: 2908 вершин, 1724 треугольников, 12 узлов, 2 анимаций
+[15Oct2026 15:37:51.318] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.51.png
+[15Oct2026 15:37:54.307] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.54.png
+[15Oct2026 15:37:56.367] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=2 pos=0.5,-58.47999999523163,1.1
+[15Oct2026 15:37:58.305] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.37.57.png
+[15Oct2026 15:38:01.183] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: WEAPON QA reload-start pistol_1809
+[15Oct2026 15:38:02.926] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.02.png
+[15Oct2026 15:38:07.589] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.07.png
+[15Oct2026 15:38:09.663] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.09.png
+[15Oct2026 15:38:13.494] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/sabre_briquet.glb: 2170 вершин, 1648 треугольников, 1 узлов, 0 анимаций
+[15Oct2026 15:38:14.250] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.14.png
+[15Oct2026 15:38:16.266] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_front PASS
+[15Oct2026 15:38:16.466] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.16.png
+[15Oct2026 15:38:19.407] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_first PASS
+[15Oct2026 15:38:19.525] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/sabre_1809.glb: 2170 вершин, 1648 треугольников, 1 узлов, 0 анимаций
+[15Oct2026 15:38:20.286] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.20.png
+[15Oct2026 15:38:22.297] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_front PASS
+[15Oct2026 15:38:22.467] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.22.png
+[15Oct2026 15:38:24.443] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_first PASS
+[15Oct2026 15:38:24.628] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/cannon_fr6.glb: 9506 вершин, 6736 треугольников, 4 узлов, 0 анимаций
+[15Oct2026 15:38:26.412] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.26.png
+[15Oct2026 15:38:34.983] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.34.png
+[15Oct2026 15:38:37.945] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=3 pos=-0.4954959750175476,-58.95,6.554271253943443
+[15Oct2026 15:38:38.790] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=5 pos=-15.24491951744545,-60.0,22.174518490748504
+[15Oct2026 15:38:39.248] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.38.png
+[15Oct2026 15:38:43.925] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.43.png
+[15Oct2026 15:38:50.039] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/cannon_ri12.glb: 9506 вершин, 6736 треугольников, 4 узлов, 0 анимаций
+[15Oct2026 15:38:51.978] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.38.51.png
+[15Oct2026 15:39:00.367] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.00.png
+[15Oct2026 15:39:02.367] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=3 pos=-0.6671332120895386,-58.95,6.736042159795761
+[15Oct2026 15:39:03.006] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: FX EMITTER profile=5 pos=-14.433261851688911,-60.0,21.314939580813814
+[15Oct2026 15:39:03.401] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.03.png
+[15Oct2026 15:39:08.069] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.07.png
+[15Oct2026 15:39:13.251] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Ваш режим игры изменён на Творческий режим
+[15Oct2026 15:39:13.791] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ORDER PASS [ww2_weapons, ww2_vehicles, ww2_clothing, ww2_ammo, modern_weapons, modern_vehicles, modern_clothing, modern_ammo, napoleonic_weapons, napoleonic_vehicles, napoleonic_clothing, napoleonic_ammo, common_parts, common_equipment, common_building]
+[15Oct2026 15:39:13.792] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_weapons items=8
+[15Oct2026 15:39:13.793] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_vehicles items=16
+[15Oct2026 15:39:13.793] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_clothing items=40
+[15Oct2026 15:39:13.794] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_ammo items=25
+[15Oct2026 15:39:13.794] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_weapons items=21
+[15Oct2026 15:39:13.794] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_vehicles items=36
+[15Oct2026 15:39:13.794] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_clothing items=68
+[15Oct2026 15:39:13.795] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_ammo items=54
+[15Oct2026 15:39:13.795] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_weapons items=6
+[15Oct2026 15:39:13.795] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_vehicles items=2
+[15Oct2026 15:39:13.796] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_clothing items=24
+[15Oct2026 15:39:13.796] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_ammo items=5
+[15Oct2026 15:39:13.796] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_parts items=33
+[15Oct2026 15:39:13.796] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_equipment items=9
+[15Oct2026 15:39:13.797] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_building items=103
+[15Oct2026 15:39:13.797] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_naparms PASS
+[15Oct2026 15:39:13.968] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/mosin_pu.glb: 10088 вершин, 6296 треугольников, 12 узлов, 3 анимаций
+[15Oct2026 15:39:13.999] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/ak12.glb: 38959 вершин, 20446 треугольников, 11 узлов, 2 анимаций
+[15Oct2026 15:39:14.021] [Render thread/INFO] [ru.aiforge.realwar.client.render.GlbAssets/]: [realwar] GLB aiarsenal:models/glb/mag_ak12.glb: 5938 вершин, 3154 треугольников, 1 узлов, 0 анимаций
+[15Oct2026 15:39:14.183] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.14.png
+[15Oct2026 15:39:16.966] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ORDER PASS [ww2_weapons, ww2_vehicles, ww2_clothing, ww2_ammo, modern_weapons, modern_vehicles, modern_clothing, modern_ammo, napoleonic_weapons, napoleonic_vehicles, napoleonic_clothing, napoleonic_ammo, common_parts, common_equipment, common_building]
+[15Oct2026 15:39:16.967] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_weapons items=8
+[15Oct2026 15:39:16.967] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_vehicles items=16
+[15Oct2026 15:39:16.968] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_clothing items=40
+[15Oct2026 15:39:16.968] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_ammo items=25
+[15Oct2026 15:39:16.968] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_weapons items=21
+[15Oct2026 15:39:16.969] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_vehicles items=36
+[15Oct2026 15:39:16.969] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_clothing items=68
+[15Oct2026 15:39:16.969] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_ammo items=54
+[15Oct2026 15:39:16.969] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_weapons items=6
+[15Oct2026 15:39:16.970] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_vehicles items=2
+[15Oct2026 15:39:16.970] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_clothing items=24
+[15Oct2026 15:39:16.970] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_ammo items=5
+[15Oct2026 15:39:16.971] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_parts items=33
+[15Oct2026 15:39:16.971] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_equipment items=9
+[15Oct2026 15:39:16.972] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_building items=103
+[15Oct2026 15:39:16.972] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_napguns PASS
+[15Oct2026 15:39:17.210] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.17.png
+[15Oct2026 15:39:19.137] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ORDER PASS [ww2_weapons, ww2_vehicles, ww2_clothing, ww2_ammo, modern_weapons, modern_vehicles, modern_clothing, modern_ammo, napoleonic_weapons, napoleonic_vehicles, napoleonic_clothing, napoleonic_ammo, common_parts, common_equipment, common_building]
+[15Oct2026 15:39:19.137] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_weapons items=8
+[15Oct2026 15:39:19.137] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_vehicles items=16
+[15Oct2026 15:39:19.138] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_clothing items=40
+[15Oct2026 15:39:19.138] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB ww2_ammo items=25
+[15Oct2026 15:39:19.138] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_weapons items=21
+[15Oct2026 15:39:19.138] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_vehicles items=36
+[15Oct2026 15:39:19.139] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_clothing items=68
+[15Oct2026 15:39:19.139] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB modern_ammo items=54
+[15Oct2026 15:39:19.139] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_weapons items=6
+[15Oct2026 15:39:19.139] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_vehicles items=2
+[15Oct2026 15:39:19.139] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_clothing items=24
+[15Oct2026 15:39:19.140] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB napoleonic_ammo items=5
+[15Oct2026 15:39:19.140] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_parts items=33
+[15Oct2026 15:39:19.140] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_equipment items=9
+[15Oct2026 15:39:19.140] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW TAB common_building items=103
+[15Oct2026 15:39:19.140] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_napammo PASS
+[15Oct2026 15:39:19.285] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.19.png
+[15Oct2026 15:39:21.317] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_first PASS
+[15Oct2026 15:39:21.418] [Render thread/INFO] [ru.aiforge.arsenal.AiArsenal/]: VIEW QA view_fov70 PASS
+[15Oct2026 15:39:23.839] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.23.png
+[15Oct2026 15:39:28.874] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Снимок экрана сохранён как 2026-10-15_15.39.28.png

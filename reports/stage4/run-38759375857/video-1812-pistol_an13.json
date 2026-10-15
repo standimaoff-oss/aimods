@@ -1,0 +1,11 @@
+{
+  "video": "1812-pistol_an13.mp4",
+  "duration": 20.937,
+  "reload_seconds": 9.83249925500013,
+  "audio_rms": 0.035878997296094894,
+  "audio_peak": 0.24622757732868195,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}

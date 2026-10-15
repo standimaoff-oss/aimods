@@ -1,0 +1,11 @@
+{
+  "video": "ppsh41.mp4",
+  "duration": 13.55,
+  "reload_seconds": 4.017691532999947,
+  "audio_rms": 0.022590098902583122,
+  "audio_peak": 0.27889978885650635,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}
