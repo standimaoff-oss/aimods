@@ -20,6 +20,7 @@ def render(folder):
     functions=Counter(rows.get(id,{}).get('functional','NOT_VERIFIED') for id in ids)
     lines=['# Реестр и результаты проверки', '',
         '**Это журнал проверенных действий, а не заявление, что все функции мода завершены.**', '',
+        'Итог процесса (не только отдельных действий): `'+json.dumps(result.get('runOutcome', {'status':'NOT_RECORDED — см. итог CI'}),ensure_ascii=False)+'`.','',
         f'Живой реестр: **{len(ids)} предметов**. Общий smoke: '+', '.join(f'{k}={v}' for k,v in sorted(counts.items()))+'.', '',
         'Функциональные результаты: '+', '.join(f'`{k}`={v}' for k,v in sorted(functions.items()))+'.', '',
         '- [Полный runtime-каталог](catalogue-inventory.json)',

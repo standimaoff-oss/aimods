@@ -28,3 +28,15 @@ class LedgerTests(unittest.TestCase):
             self.fixture(folder,[{'id':'aiarsenal:a'},{'id':'aiarsenal:a'}])
             with self.assertRaises(AssertionError):
                 render(folder)
+
+    def test_global_failure_is_not_hidden_by_green_items(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)
+            self.fixture(folder,[{'id':'aiarsenal:a','smoke':'PASS'},{'id':'aiarsenal:b','smoke':'PASS'}])
+            path=folder/'catalogue-gameplay.json';result=json.loads(path.read_text())
+            result['runOutcome']={'status':'FAIL','error':'Failed to store chunk'}
+            path.write_text(json.dumps(result))
+            text=render(folder)
+            self.assertIn('PASS=2',text)
+            self.assertIn('"status": "FAIL"',text)
+            self.assertIn('Failed to store chunk',text)

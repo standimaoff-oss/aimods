@@ -18,6 +18,7 @@ from install_qa_client import prepare
 ROWS = []
 BOMBS = []
 WORLD = {}
+RUN_OUTCOME = {'status': 'RUNNING'}
 CAPTURED_CLASSES = set()
 REPORT = g.LOGS / 'catalogue-gameplay.json'
 
@@ -25,7 +26,7 @@ REPORT = g.LOGS / 'catalogue-gameplay.json'
 def save():
     REPORT.write_text(json.dumps({'scope': 'catalogue smoke + equip/place/consume/melee + firearm cycles + free-fall bombs',
         'screenshotPolicy': 'every item' if os.environ.get('QA_ALL_F2')=='1' else 'each item class, all firearms and free-fall bombs',
-        'items': ROWS, 'bombs': BOMBS, 'worldSaveReopen': WORLD,
+        'items': ROWS, 'bombs': BOMBS, 'worldSaveReopen': WORLD, 'runOutcome': RUN_OUTCOME,
         'limitations': ['Generic use is not proof of all contextual tool/vehicle features.',
             'Gun-vehicle main-round reload/fire and driving are tested; alternate shells, other vehicle families, guided ordnance and remote-control cycles remain separate acceptance work.',
             'Linux llvmpipe cannot certify the Windows NVIDIA crash is fixed.']}, indent=2) + '\n')
@@ -338,6 +339,10 @@ overrideHeight:700
 if __name__ == '__main__':
     try:
         run()
+        RUN_OUTCOME.update(status='PASS')
+    except BaseException as error:
+        RUN_OUTCOME.update(status='FAIL', error=type(error).__name__+': '+str(error))
+        raise
     finally:
         save()
         g.cleanup()
