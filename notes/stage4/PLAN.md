@@ -44,3 +44,6 @@ LOAD=-1 and RECOIL=10 statements; no test assertion was weakened.
 - New run must pass the entire suite and visual review before publication. The prior stage4-gameplay.json alone was insufficient evidence of live engines; the missing aircraft in actual F2 captures rejected it.
 
 - F2 powder-shot captures also exposed a capture race: the server had consumed the cartridge while F2 still saved the preceding ADS framebuffer. Await the actual client powder-emitter receipt and one second of rendering before F2; retain continuous unedited video.
+
+## Accepted runtime and visual review — 38770590840
+Source db0e1cf, evidence 66f5806: full CI SUCCESS, 27 Python tests, 168 GameTests, migration, 25 local/remote motion observations, 212 F2 and 17 native-audio MP4s. Reviewed genuine powder discharge, both armies' weapons/cannons, live bombers, visible TT-33 sprint, scopes, remote grips, locomotion, eight MCP viewports and 24 reload source frames. Audio gates unchanged and all passed. ABBA does not establish a meaningful GPU/FPS speedup; exact measured values and limitations recorded in reports/stage4/README.md. Public alpha.6 retained.
