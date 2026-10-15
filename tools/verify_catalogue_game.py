@@ -50,6 +50,13 @@ def number(key):
     return int(match[1]) if match else 0
 
 
+def entity_health(selector):
+    result=g.command('data get entity '+selector+' Health')
+    match=re.search(r'data: ([0-9.]+)f',result)
+    assert match, result
+    return float(match[1])
+
+
 def input_key(key):
     g.key('keydown', key)
     time.sleep(.3)
@@ -131,7 +138,15 @@ def vehicle(row):
     g.command('give TestPlayer '+row['vehicleAmmo']+' 16')
     local('view_back'); time.sleep(2)
     initial=state();assert initial['loaded']>0,initial
-    fire();wait(lambda:state()['fired']>initial['fired'],12)
+    def fire_until(previous):
+        # A click during the production cooldown is correctly ignored. Hold LMB
+        # until a real discharge, without overriding cooldown or loaded state.
+        g.key('mousedown','1')
+        try:
+            wait(lambda:state()['fired']>previous,20)
+        finally:
+            g.key('mouseup','1')
+    fire_until(initial['fired'])
     wait(lambda:state()['loaded']<initial['loaded'],5)
     row['mainGunShot']='PASS'
     g.screenshot(row['id'].split(':')[1]+'-fired')
@@ -142,7 +157,7 @@ def vehicle(row):
         g.key('keyup','r')
     reloaded=state();assert reloaded['supply']<16,reloaded
     row['mainGunReload']='PASS (real R, ammunition consumed)'
-    fire();wait(lambda:state()['fired']>reloaded['fired'],12)
+    fire_until(reloaded['fired'])
     row['mainGunRepeatShot']='PASS'
     if row['drivable']:
         if not state()['engine']:
@@ -221,10 +236,11 @@ overrideHeight:700
             elif row['melee']:
                 g.command('summon minecraft:cow 0.5 -60 2.5 {Tags:["qa_melee"],NoAI:1b,PersistenceRequired:1b}')
                 g.command('tp TestPlayer 0.5 -60 0.5 0 15')
-                time.sleep(1); fire(); time.sleep(.5)
-                result=g.command('data get entity @e[tag=qa_melee,limit=1] Health')
-                health=re.search(r'data: ([0-9.]+)f',result)
-                assert health and float(health[1])<20,result
+                time.sleep(1)
+                row['targetHealthBefore']=entity_health('@e[tag=qa_melee,limit=1]')
+                fire(); time.sleep(.5)
+                row['targetHealthAfter']=entity_health('@e[tag=qa_melee,limit=1]')
+                assert 0 <= row['targetHealthAfter'] < row['targetHealthBefore'], row
                 row['functional']='MELEE_HIT_PASS'
             else:
                 if row['consumable']:
@@ -269,6 +285,7 @@ overrideHeight:700
             g.command('tp TestPlayer 0.5 -60 0.5 0 -10')
             g.command('fill -16 -61 -16 16 -61 48 minecraft:smooth_stone')
             g.command('execute as TestPlayer at @s run arsenal_stress drop ' + name, expect='DROPPED')
+            row['witnessHealthBefore']=entity_health('@e[type=minecraft:pig,limit=1]')
             last = {}
             def complete():
                 last.update(json.loads(g.command('arsenal_stress bombstatus')))
@@ -277,7 +294,7 @@ overrideHeight:700
             row.update(last)
             assert last['removalReason'] == 'DISCARDED', last
             assert last['completedTasks']+last['tuDetonations']+last['arsenalDetonations']>0, 'no production detonation recorded'
-            assert last['witnessDead'] or 0 <= last['witnessHealth'] < 20, 'bomb removed without damage to live witness'
+            assert last['witnessDead'] or 0 <= last['witnessHealth'] < row['witnessHealthBefore'], 'bomb removed without damage to live witness'
             if name.startswith(('rw:','ars:')):
                 g.command('tp TestPlayer 0.5 -60 -200.5 0 -12')  # exterior view, not an opaque frame inside the cloud
             time.sleep(1)
