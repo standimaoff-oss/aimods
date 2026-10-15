@@ -1,0 +1,72 @@
+{
+  "mosin_pu": {
+    "bytes": 543436,
+    "sha256": "3a2392347f164ad3f6b199c2815694aa06f80514f912358d34f159ca34480e4c",
+    "nodes": 12,
+    "triangles": 6296,
+    "animations": [
+      "mosin_pu_reload",
+      "mosin_pu_reload_empty",
+      "mosin_pu_bolt"
+    ]
+  },
+  "k98k_zf39": {
+    "bytes": 540112,
+    "sha256": "27f366a4d0e00a5afb5c385f73e5ef027a5a8775f72f50eaf06d8a77dd5806b9",
+    "nodes": 12,
+    "triangles": 6324,
+    "animations": [
+      "k98k_zf39_reload",
+      "k98k_zf39_reload_empty",
+      "k98k_zf39_bolt"
+    ]
+  },
+  "c96": {
+    "bytes": 416868,
+    "sha256": "04c17a91a91df65c98d040ee27fb1efcc7ededcef45b01dc0c8977006d3f9712",
+    "nodes": 11,
+    "triangles": 4368,
+    "animations": [
+      "c96_reload",
+      "c96_reload_empty"
+    ]
+  },
+  "tt33": {
+    "bytes": 285444,
+    "sha256": "54814deffad7637fecc1366802cc605a51d6628ec7df084dc207986462e597af",
+    "nodes": 11,
+    "triangles": 3070,
+    "animations": [
+      "tt33_reload",
+      "tt33_reload_empty"
+    ]
+  },
+  "round_762x54r": {
+    "bytes": 43964,
+    "sha256": "eff103e16d354671e49d19b710585073b924230d4cb2520b93d84ae869926f34",
+    "nodes": 1,
+    "triangles": 236,
+    "animations": []
+  },
+  "round_792x57": {
+    "bytes": 43960,
+    "sha256": "a8fae7039c1b2e49b107a4f6b53b66c81ec95c746f048dbc4528a5eefaa3050f",
+    "nodes": 1,
+    "triangles": 236,
+    "animations": []
+  },
+  "clip_c96": {
+    "bytes": 133336,
+    "sha256": "e032c20093ad28d42635133038df0a2ff4cdfa271c2656417d168d2721972a11",
+    "nodes": 1,
+    "triangles": 2068,
+    "animations": []
+  },
+  "mag_tt33": {
+    "bytes": 52648,
+    "sha256": "295b162189dfd0e5e8dc4905b85170fbc607f78e04eb6049d938cbb07e2e52f7",
+    "nodes": 1,
+    "triangles": 356,
+    "animations": []
+  }
+}
