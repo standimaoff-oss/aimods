@@ -1,0 +1,4 @@
+GHOST: failed to initialize display for back-end(s): ['WAYLAND', 'X11']
+  'WAYLAND': unable to connect to display!
+  'X11': unable to open a display!
+GHOST: unable to initialize, exiting!
