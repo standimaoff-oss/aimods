@@ -1,0 +1,485 @@
+{
+  "scope": "contextual launchpad/craft/cannon/Javelin audit",
+  "expectedCases": 35,
+  "cases": [
+    {
+      "id": "aiarsenal:missile_tactical_he",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_he",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 804.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 246,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "f2a8efba-b67a-4a7b-97a1-5f578e91742c",
+            "mode": 0,
+            "age": 109,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 804.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_tactical_kinetic",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_kinetic",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 1444.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 2,
+        "changedBlocks": 118,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "5d69c1d5-9ef8-4be9-b76b-7c307e17c0a6",
+            "mode": 0,
+            "age": 109,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 1444.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 2
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_tactical_mirv",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_mirv",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 2084.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 4,
+        "removed": 4,
+        "warheads": 3,
+        "activeBlasts": 0,
+        "completedTasks": 3,
+        "changedBlocks": 324,
+        "expectedEntities": 4,
+        "entities": [
+          {
+            "uuid": "db639a58-6cfd-4920-9efe-e81728a74ece",
+            "mode": 0,
+            "age": 67,
+            "removed": true,
+            "x": 127.5,
+            "y": -7.521513026052115,
+            "z": 2084.5,
+            "present": false
+          },
+          {
+            "uuid": "dddf5488-e19a-403d-a56c-54e31ab125be",
+            "mode": 1,
+            "age": 33,
+            "removed": true,
+            "x": 274.8623309281598,
+            "y": -60.0,
+            "z": 2092.1087004647516,
+            "present": false
+          },
+          {
+            "uuid": "0f1be905-ed74-42e0-8b9a-e2fe3dbe369e",
+            "mode": 1,
+            "age": 26,
+            "removed": true,
+            "x": 244.26054405003742,
+            "y": -60.0,
+            "z": 2095.6796046037307,
+            "present": false
+          },
+          {
+            "uuid": "9a59dae6-d56a-49e9-9db6-178f815c37a1",
+            "mode": 1,
+            "age": 26,
+            "removed": true,
+            "x": 241.894946852725,
+            "y": -60.0,
+            "z": 2061.696416311288,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_tactical_thermobaric",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_thermobaric",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 2724.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 421,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "61e3bee8-de1f-4fc9-a50e-f92ba2e84487",
+            "mode": 0,
+            "age": 109,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 2724.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_he",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_he",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 3364.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 544,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "b3ddf992-6413-4a91-a37f-a468710d985f",
+            "mode": 0,
+            "age": 240,
+            "removed": true,
+            "x": 904.0,
+            "y": -60.0,
+            "z": 3364.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_kinetic",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_kinetic",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 4004.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 2,
+        "changedBlocks": 283,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "04963167-cf33-47af-bdbf-4c5557b47f25",
+            "mode": 0,
+            "age": 240,
+            "removed": true,
+            "x": 904.0,
+            "y": -60.0,
+            "z": 4004.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 2
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_mirv",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_mirv",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 4644.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 7,
+        "removed": 7,
+        "warheads": 6,
+        "activeBlasts": 0,
+        "completedTasks": 6,
+        "changedBlocks": 1281,
+        "expectedEntities": 7,
+        "entities": [
+          {
+            "uuid": "2ed36f6a-28fc-4d6a-b62f-f27cc1116313",
+            "mode": 0,
+            "age": 140,
+            "removed": true,
+            "x": 450.4999310969832,
+            "y": 189.35946297324608,
+            "z": 4644.752224732427,
+            "present": false
+          },
+          {
+            "uuid": "b2733c49-0abd-4874-ba4b-5f2b34c75d5c",
+            "mode": 1,
+            "age": 73,
+            "removed": true,
+            "x": 941.2473499724231,
+            "y": -60.0,
+            "z": 4661.218903956995,
+            "present": false
+          },
+          {
+            "uuid": "a2e3cef6-d736-4a87-9eb7-b1e46fd2fadb",
+            "mode": 1,
+            "age": 69,
+            "removed": true,
+            "x": 910.9500885101098,
+            "y": -60.0,
+            "z": 4670.858617105341,
+            "present": false
+          },
+          {
+            "uuid": "a7899fe5-2771-4878-8a31-f9347a730122",
+            "mode": 1,
+            "age": 62,
+            "removed": true,
+            "x": 864.5407050217029,
+            "y": -60.0,
+            "z": 4672.403845779272,
+            "present": false
+          },
+          {
+            "uuid": "dce6faf8-84d0-4dee-90df-8099fd32d45d",
+            "mode": 1,
+            "age": 59,
+            "removed": true,
+            "x": 848.7914572977,
+            "y": -60.0,
+            "z": 4623.075273281927,
+            "present": false
+          },
+          {
+            "uuid": "4e201d11-b72f-462d-b15d-42b2406c9caa",
+            "mode": 1,
+            "age": 65,
+            "removed": true,
+            "x": 885.102199204558,
+            "y": -60.0,
+            "z": 4601.069620851031,
+            "present": false
+          },
+          {
+            "uuid": "a91487df-2bc4-4da3-ab67-ff70062218b0",
+            "mode": 1,
+            "age": 70,
+            "removed": true,
+            "x": 918.345453562392,
+            "y": -60.0,
+            "z": 4624.03009675585,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_penetrator",
+      "status": "RUNNING",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_penetrator",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 5284.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 0,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 0,
+        "changedBlocks": 0,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "77faed50-cc3b-432c-9894-7750a2307424",
+            "mode": 0,
+            "age": 167,
+            "removed": false,
+            "x": 576.4999116092612,
+            "y": 165.97870645982076,
+            "z": 5284.682146878971,
+            "present": true
+          }
+        ],
+        "minimumTasks": 1
+      }
+    }
+  ],
+  "runOutcome": {
+    "status": "RUNNING"
+  },
+  "worldSaveReopen": {
+    "status": "NOT_RUN"
+  },
+  "limitations": [
+    "Not complete acceptance of all 448 items or all craft weapons/flight modes.",
+    "Linux llvmpipe, not Windows NVIDIA/Oculus certification."
+  ],
+  "inventory": {
+    "action": "inventory",
+    "missiles": [
+      "missile_tactical_he",
+      "missile_tactical_kinetic",
+      "missile_tactical_mirv",
+      "missile_tactical_thermobaric",
+      "missile_operational_he",
+      "missile_operational_kinetic",
+      "missile_operational_mirv",
+      "missile_operational_penetrator",
+      "missile_cruise_he",
+      "missile_cruise_cluster",
+      "missile_icbm_he",
+      "missile_icbm_kinetic",
+      "missile_icbm_mirv",
+      "missile_icbm_mirv_heavy"
+    ],
+    "craft": [
+      {
+        "id": "aiarsenal:ah64_vehicle",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:bf109_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:bismarck_ship",
+        "air": false,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:cb90_boat",
+        "air": false,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:he111_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:ka52_vehicle",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:pe8_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:raptor_boat",
+        "air": false,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:su57_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:sub636_vehicle",
+        "air": false,
+        "sub": true
+      },
+      {
+        "id": "aiarsenal:yak3_plane",
+        "air": true,
+        "sub": false
+      }
+    ]
+  }
+}
