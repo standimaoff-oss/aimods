@@ -62,6 +62,12 @@ def run(g, server, server_log, client_log, main_window):
   g.command(f'item replace entity Observer weapon.mainhand with aiarsenal:{name}'+'{Ammo:1}')
   g.command('data get entity Observer SelectedItem',f'aiarsenal:{name}')
   time.sleep(1.6);g.screenshot('remote-'+name+'-grip')
+ # Profile views distinguish actual size/hand contact from front-view foreshortening.
+ g.command('tp Observer 0 -60 3.8 90 0')
+ for name in ['c96','tt33','ppsh41','mosin_pu']:
+  g.command(f'item replace entity Observer weapon.mainhand with aiarsenal:{name}'+'{Ammo:1}')
+  time.sleep(1.6);g.screenshot('remote-'+name+'-side-grip')
+ g.command('tp Observer 0 -60 3.8 145 0')
  # Left-handed remote profile travels through real client settings packets.
  windows=g.subprocess.check_output(['xdotool','search','--name','Minecraft'],text=True).splitlines()
  guest_window=next(w for w in reversed(windows) if w!=main_window)
