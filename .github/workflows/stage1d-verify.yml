@@ -45,7 +45,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y xvfb xdotool libegl1 libgl1-mesa-dri libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
+          sudo apt-get install -y xvfb xdotool x11-utils libegl1 libgl1-mesa-dri libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
           pip install pillow
           cd "$RUNNER_TEMP"
           curl --fail --retry 3 -LO https://download.blender.org/release/Blender4.2/blender-4.2.5-linux-x64.tar.xz
@@ -58,6 +58,14 @@ jobs:
       - name: Live Blender MCP modelling and viewport capture
         run: |
           Xvfb :99 -screen 0 1400x1000x24 -nolisten tcp > verification/logs/xvfb.log 2>&1 &
+          # Xvfb forks before its X11 socket is ready; never race Blender against display startup.
+          python - <<'PYDISPLAY'
+          import subprocess,time
+          end=time.monotonic()+30
+          while subprocess.run(['xdpyinfo','-display',':99'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:
+              if time.monotonic()>end: raise RuntimeError('X11 display did not become ready')
+              time.sleep(.1)
+          PYDISPLAY
           blender --factory-startup --python tools/blender/start_mcp.py > verification/logs/blender-gui.log 2>&1 &
           BLENDER_PID=$!
           trap 'kill "$BLENDER_PID" 2>/dev/null || true' EXIT
