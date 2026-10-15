@@ -1,0 +1,236 @@
+{
+  "result": "FAIL",
+  "pack": "photon",
+  "actions": [
+    {
+      "id": "aiarsenal:cannon_fr6",
+      "result": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_fr6",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 504.5,
+        "spawned": {
+          "aiarsenal:cannon_fr6": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 150,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.24895846486095,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "chargeRemaining": "Found 1 matching item(s) on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 1}}\n"
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 156,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.3923031318461,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 2
+            }
+          },
+          "chargeRemaining": "No items were found on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 2}}\n"
+        }
+      ],
+      "aimChecks": [
+        "[23:46:02] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0",
+        "[23:46:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0",
+        "[23:46:18] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0",
+        "[23:46:28] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0"
+      ],
+      "method": "real RMB charge / real 160-tick load / real RMB ignition, ammunition and tool wear asserted, repeated twice"
+    },
+    {
+      "id": "aiarsenal:cannon_ri12",
+      "result": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_ri12",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 632.5,
+        "spawned": {
+          "aiarsenal:cannon_ri12": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 154,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.0882918823719,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "chargeRemaining": "Found 1 matching item(s) on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 1}}\n"
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 155,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.3351772358499,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 2
+            }
+          },
+          "chargeRemaining": "No items were found on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 2}}\n"
+        }
+      ],
+      "aimChecks": [
+        "[23:46:34] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0",
+        "[23:46:45] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0",
+        "[23:46:50] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0",
+        "[23:47:01] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0"
+      ],
+      "method": "real RMB charge / real 160-tick load / real RMB ignition, ammunition and tool wear asserted, repeated twice"
+    },
+    {
+      "id": "aiarsenal:sturmtiger_vehicle",
+      "vehicleAmmo": "aiarsenal:rocket_380",
+      "drivable": true,
+      "result": "RUNNING",
+      "lastVehicleState": {
+        "age": 700,
+        "reloadTicks": 0,
+        "reloadTube": -1,
+        "reloadRequired": 400,
+        "reloadInputFresh": false,
+        "reloadInputGrace": false,
+        "inputAge": 557,
+        "loaded": 0,
+        "fired": 1,
+        "engine": false,
+        "x": 0.5,
+        "z": 2.5,
+        "hp": 600.0,
+        "supply": 16
+      },
+      "mainGunShot": "PASS"
+    }
+  ],
+  "toggles": [],
+  "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 189, in <module>\n    run()\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 126, in run\n    sturmtiger(row);save()\n  File \"/home/runner/work/aimods/aimods/tools/shaderpack_actions.py\", line 50, in sturmtiger\n    catalogue.vehicle(row)\n  File \"/home/runner/work/aimods/aimods/tools/verify_catalogue_game.py\", line 163, in vehicle\n    wait(lambda:state()['loaded']==initial['loaded'],80)\n  File \"/home/runner/work/aimods/aimods/tools/verify_catalogue_game.py\", line 38, in wait\n    if test():\n  File \"/home/runner/work/aimods/aimods/tools/verify_catalogue_game.py\", line 163, in <lambda>\n    wait(lambda:state()['loaded']==initial['loaded'],80)\n  File \"/home/runner/work/aimods/aimods/tools/verify_catalogue_game.py\", line 140, in state\n    observed=json.loads(g.command('execute as TestPlayer run arsenal_stress vehiclestatus'))\n  File \"/usr/lib/python3.10/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n  File \"/usr/lib/python3.10/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n  File \"/usr/lib/python3.10/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"
+}
