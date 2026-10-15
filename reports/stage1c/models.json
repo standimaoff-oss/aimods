@@ -1,7 +1,7 @@
 {
   "mosin_pu": {
     "bytes": 543436,
-    "sha256": "3a2392347f164ad3f6b199c2815694aa06f80514f912358d34f159ca34480e4c",
+    "sha256": "8b88e287c124737b46be4b6ed80a6359768ab6715283eb27292b937f705fda11",
     "nodes": 12,
     "triangles": 6296,
     "animations": [
@@ -12,7 +12,7 @@
   },
   "k98k_zf39": {
     "bytes": 540112,
-    "sha256": "27f366a4d0e00a5afb5c385f73e5ef027a5a8775f72f50eaf06d8a77dd5806b9",
+    "sha256": "35ba98d0599767f9ae9f293b3f1f9abf2db434b4c766f9c5112c82a8990984ef",
     "nodes": 12,
     "triangles": 6324,
     "animations": [
