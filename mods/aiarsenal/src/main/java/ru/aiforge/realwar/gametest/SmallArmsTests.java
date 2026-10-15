@@ -324,4 +324,35 @@ public final class SmallArmsTests {
         h.runAfterDelay(6, () -> { h.assertTrue(!target.isAlive() || target.getHealth() < hp, "projectiles hit target"); target.discard(); h.succeed(); });
     }
 
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void stage1c_crafting_is_unambiguous(GameTestHelper h) {
+        var level = h.getLevel();
+        var manager = level.getRecipeManager();
+        var player = shooter(h, ItemStack.EMPTY, 0, 0, 0);
+        for (String name : new String[]{"mosin_pu", "k98k_zf39", "c96", "tt33",
+                "round_762x54r", "round_792x57", "clip_c96", "mag_tt33"}) {
+            var id = new net.minecraft.resources.ResourceLocation("aiarsenal", name);
+            var recipe = manager.byKey(id).orElseThrow();
+            var grid = new net.minecraft.world.inventory.TransientCraftingContainer(
+                    new net.minecraft.world.inventory.CraftingMenu(0, player.getInventory()), 3, 3);
+            for (int i = 0; i < recipe.getIngredients().size(); i++) {
+                grid.setItem(i, recipe.getIngredients().get(i).getItems()[0].copy());
+            }
+            var matches = manager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING)
+                    .stream().filter(candidate -> candidate.matches(grid, level)).toList();
+            h.assertTrue(matches.size() == 1, "ambiguous crafting for " + name + ": " + matches.size());
+            h.assertTrue(matches.get(0).getId().equals(id), "wrong recipe selected for " + name);
+            var output = matches.get(0).assemble(grid, level.registryAccess());
+            h.assertTrue(output.is(net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(id)),
+                    "wrong output for " + name);
+        }
+        var tooltip = new java.util.ArrayList<net.minecraft.network.chat.Component>();
+        ModItems.C96.get().appendHoverText(new ItemStack(ModItems.C96.get()), level, tooltip,
+                net.minecraft.world.item.TooltipFlag.NORMAL);
+        h.assertTrue(tooltip.stream().anyMatch(line -> line.getContents() instanceof
+                net.minecraft.network.chat.contents.TranslatableContents key &&
+                key.getKey().equals("tooltip.aiarsenal.gun.keys_c96")), "C96 is not a manual bolt rifle");
+        h.succeed();
+    }
+
 }

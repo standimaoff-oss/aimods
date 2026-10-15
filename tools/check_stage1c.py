@@ -11,6 +11,13 @@ class Stage1cTests(unittest.TestCase):
    self.assertNotIn('uranium',p.read_text(),str(p))
   for p in ['forge/biome_modifier/add_ores.json','worldgen/placed_feature/uranium_ore.json']:
    self.assertFalse((D/'aiarsenal'/p).exists())
+ def test_new_shapeless_recipes_do_not_collide(self):
+  recipes={p.stem:json.loads(p.read_text()) for p in (D/'aiarsenal/recipes').glob('*.json')}
+  signature=lambda r:tuple(sorted(json.dumps(x,sort_keys=True) for x in r['ingredients']))
+  for name in NAMES+['round_762x54r','round_792x57','clip_c96','mag_tt33']:
+   recipe=recipes[name];self.assertEqual(recipe['type'],'minecraft:crafting_shapeless')
+   matching=[other for other,r in recipes.items() if r.get('type')==recipe['type'] and signature(r)==signature(recipe)]
+   self.assertEqual(matching,[name],f'ambiguous recipe: {name}: {matching}')
  def test_weapons_resources(self):
   for lang in ['ru_ru','en_us']:
    labels=json.loads((A/'lang'/f'{lang}.json').read_text())

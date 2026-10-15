@@ -10,6 +10,12 @@
     },
     {
       "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:gunpowder"
     }
   ],
   "result": {
