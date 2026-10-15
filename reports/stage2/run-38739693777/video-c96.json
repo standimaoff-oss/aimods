@@ -1,0 +1,11 @@
+{
+  "video": "c96.mp4",
+  "duration": 41.1,
+  "reload_seconds": 27.53224082299994,
+  "audio_rms": 0.053171753883361816,
+  "audio_peak": 0.3952361047267914,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis"
+}
