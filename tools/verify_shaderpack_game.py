@@ -86,10 +86,16 @@ overrideHeight:600
         # Keep Oculus defaults. This also detects the R/reload-shaders key conflict;
         # never quietly rebind another mod merely to make this test pass.
         g.key('keydown','r');time.sleep(.3);g.key('keyup','r')
-        wait(lambda: re.search(r'Ammo: [1-9]',g.command('data get entity TestPlayer SelectedItem')))
+        capacity={'ppsh41':71,'mosin_pu':5,'musket_1777':1}[weapon]
+        def fully_loaded():
+            match=re.search(r'Ammo: (\d+)',g.command('data get entity TestPlayer SelectedItem'))
+            return match and int(match[1])==capacity
+        wait(fully_loaded)  # scoped Mosin loads individual rounds; first round is not completion
         local('status')  # wait for the client, including any shader reload, to respond
         g.key('mousedown','3');time.sleep(3)
         g.screenshot('photon-'+weapon+'-ads')
+        if weapon=='mosin_pu':
+            g.assert_scope_mask('photon-'+weapon+'-ads')
         before=int(re.search(r'Ammo: (\d+)',g.command('data get entity TestPlayer SelectedItem'))[1])
         g.key('mousedown','1')
         try:
