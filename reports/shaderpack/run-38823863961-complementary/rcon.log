@@ -1,0 +1,316 @@
+> time set 6000
+Set the time to 6000
+
+> gamerule doDaylightCycle false
+Gamerule doDaylightCycle is now set to: false
+
+> gamerule doMobSpawning false
+Gamerule doMobSpawning is now set to: false
+
+> gamemode creative TestPlayer
+
+> fill -12 -61 -8 12 -61 30 minecraft:smooth_stone
+Successfully filled 975 block(s)
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:ppsh41{Ammo:0}
+Replaced a slot on TestPlayer with [PPSh-41 (7.62x25 TT)]
+
+> give TestPlayer aiarsenal:mag_ppsh 8
+Gave 8 [PPSh-41 drum magazine (71 rounds)] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 69}}
+
+> clear TestPlayer
+Removed 9 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:0}
+Replaced a slot on TestPlayer with [Mosin 91/30 PU (3.5×)]
+
+> give TestPlayer aiarsenal:round_762x54r 8
+Gave 8 [7.62×54R cartridge] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 3}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> clear TestPlayer
+Removed 9 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:musket_1777{Ammo:0}
+Replaced a slot on TestPlayer with [France — 1777 / An IX musket]
+
+> give TestPlayer aiarsenal:paper_cartridge 8
+Gave 8 [Paper musket cartridge] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 1}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> gamemode creative TestPlayer
+
+> tp TestPlayer 8000.5 -60 500.5 0 0
+Teleported TestPlayer to 8000.500000, -60.000000, 500.500000
+
+> clear TestPlayer
+Removed 9 item(s) from player TestPlayer
+
+> effect give TestPlayer minecraft:resistance 99999 4 true
+Applied effect Resistance to TestPlayer
+
+> effect give TestPlayer minecraft:night_vision 99999 0 true
+Applied effect Night Vision to TestPlayer
+
+> gamemode survival TestPlayer
+Set TestPlayer's game mode to Survival Mode
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> execute as TestPlayer at @s run arsenal_context preparecannon aiarsenal:cannon_fr6
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:charge_fr6 2
+Replaced a slot on TestPlayer with [6-pounder charge and roundshot]
+
+> item replace entity TestPlayer hotbar.1 with minecraft:flint_and_steel
+Replaced a slot on TestPlayer with [Flint and Steel]
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> tp TestPlayer 8004.5 -60.0 502.0 facing entity @e[type=aiarsenal:cannon_fr6,sort=nearest,limit=1] eyes
+Teleported TestPlayer to 8004.500000, -60.000000, 502.000000
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
