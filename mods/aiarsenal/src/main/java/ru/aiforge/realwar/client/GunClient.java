@@ -331,7 +331,9 @@ public final class GunClient {
 
     @SubscribeEvent
     public static void scopeOverlays(net.minecraftforge.client.event.RenderGuiOverlayEvent.Pre e) {
-        if (!scoped()) return;
+        // Iron-sight ADS needs the same clean view as an optical sight; restore chat outside ADS.
+        var mc = Minecraft.getInstance();
+        if (held() == null || !mc.options.getCameraType().isFirstPerson() || adsLerp(mc.getFrameTime()) < 0.4f) return;
         var id = e.getOverlay().id();
         if (id.equals(net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.CHAT_PANEL.id())
                 || id.equals(net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.ITEM_NAME.id())) e.setCanceled(true);

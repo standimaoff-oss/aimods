@@ -71,6 +71,8 @@ jobs:
           trap 'kill "$BLENDER_PID" 2>/dev/null || true' EXIT
           python tools/blender/verify_stage1c_mcp.py 2>&1 | tee verification/logs/blender-driver.log
           python tools/check_stage1c.py 2>&1 | tee verification/logs/stage1d-static.log
+      - name: RCON protocol regression
+        run: python -m unittest discover -s tools -p test_rcon.py
       - name: Build mod
         id: build
         working-directory: mods/aiarsenal
@@ -104,7 +106,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add reports/stage1d shots/aiarsenal/stage1d models mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb
-          git commit -m '[stage1-evidence] Preserve live Blender MCP models and stage1c verification'
+          git commit -m '[stage1-evidence] Preserve live Blender MCP models and stage1d verification'
           git push origin HEAD:arena/10158ad9-aimods
       - name: Draft release only after all checks (manual visual review still required)
         if: success()
@@ -112,4 +114,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.4.jar > verification/SHA256SUMS
-          gh release create "stage1d-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.4.jar models/weapons_stage1c.blend verification/SHA256SUMS verification/shots/*.png --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 1d: grips optics and eras — pending visual review' --notes "Source $GITHUB_SHA; live Blender MCP models and real Minecraft QA https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . GameTests + real Minecraft weapon/optics/catalog/lifecycle/VolPyro regression. Uranium registrations/worldgen removed with old-ID remapping; old-world migration not yet runtime-tested. All carrier missiles, nukes and drones preserved. Era catalog implemented; old-world migration and hardware/audio gates remain. Forge 1.20.1 / 47.4.23 / Java 17."
+          gh release create "stage1d-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.4.jar models/weapons_stage1c.blend verification/SHA256SUMS verification/shots/*.png --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 1d: grips optics and eras — pending visual review' --notes "Source $GITHUB_SHA; live Blender MCP models and real Minecraft QA https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . GameTests + real Minecraft weapon/optics/catalog/lifecycle/VolPyro regression. Uranium registrations/worldgen removed with old-ID remapping; installed Forge server migration and second reopen verified. All carrier missiles, nukes and drones preserved. Era catalog implemented; manual screenshot review, installed-client and hardware/audio gates remain. Forge 1.20.1 / 47.4.23 / Java 17."

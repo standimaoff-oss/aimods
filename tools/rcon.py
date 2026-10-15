@@ -51,9 +51,16 @@ def run(host, port, password, command, timeout):
                     raise PermissionError("auth failed")
                 break
         s.sendall(_pkt(2, EXEC, command))
-        # multi-packet answers: send an empty marker packet; the server replies to it after the real answer
-        s.sendall(_pkt(3, RESPONSE, ""))
+        # Minecraft rejects two requests coalesced in one TCP read. Wait for the first
+        # command response BEFORE sending a marker (even an empty answer is a response).
         parts = []
+        while True:
+            rid, kind, body = _read(s)
+            if rid == 2:
+                parts.append(body)
+                break
+        # Any remaining response chunks precede the marker's answer on this connection.
+        s.sendall(_pkt(3, RESPONSE, ""))
         while True:
             rid, kind, body = _read(s)
             if rid == 3:

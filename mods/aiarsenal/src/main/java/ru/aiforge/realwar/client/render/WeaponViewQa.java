@@ -20,8 +20,10 @@ public final class WeaponViewQa {
             case "view_fov70" -> mc.options.fov().set(70);
             case "view_scale3" -> { mc.options.guiScale().set(3); mc.resizeDisplay(); }
             case "view_scale2" -> { mc.options.guiScale().set(2); mc.resizeDisplay(); }
-            case "view_reload" -> mc.reloadResourcePacks().thenRun(() -> mc.execute(() ->
-                    AiArsenal.LOGGER.info("VIEW RELOAD PASS")));
+            case "view_reload" -> mc.reloadResourcePacks().whenComplete((unused, error) -> mc.execute(() -> {
+                if (error == null) AiArsenal.LOGGER.info("VIEW RELOAD PASS");
+                else AiArsenal.LOGGER.error("VIEW RELOAD FAILED", error);
+            }));
             case "view_tabs", "view_modern" -> {
                 var screen = new CreativeModeInventoryScreen(mc.player, mc.player.connection.enabledFeatures(),
                         mc.options.operatorItemsTab().get());
@@ -31,11 +33,13 @@ public final class WeaponViewQa {
                 // selectTab is private in vanilla; discover by its sole CreativeModeTab parameter, not an obfuscated name.
                 try {
                     var methods = java.util.Arrays.stream(CreativeModeInventoryScreen.class.getDeclaredMethods())
-                            .filter(m -> m.getParameterCount() == 1 && m.getParameterTypes()[0] == CreativeModeTab.class
+                            .filter(m -> !m.isSynthetic() && m.getParameterCount() == 1 && m.getParameterTypes()[0] == CreativeModeTab.class
                                     && m.getReturnType() == void.class).toList();
                     if (methods.size() != 1) throw new IllegalStateException("ambiguous selectTab: " + methods);
                     methods.get(0).setAccessible(true);
                     methods.get(0).invoke(screen, tab);
+                    // Rebuild Forge's page selection around the selected tab, not just its item grid.
+                    screen.resize(mc, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
                 } catch (ReflectiveOperationException ex) { throw new IllegalStateException(ex); }
                 for (var id : ModTabs.SECTIONS) AiArsenal.LOGGER.info("VIEW TAB {} items={}", id, ModTabs.content(id).size());
             }

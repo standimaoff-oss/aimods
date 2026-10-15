@@ -87,7 +87,8 @@ minecraft {
             }
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
-            jvmArgs '-Xmx1024M', '-XX:+UseSerialGC'
+            // Resource reload temporarily retains both old and newly baked vanilla/mod models.
+            jvmArgs '-Xmx2048M', '-XX:+UseSerialGC'
             property 'fml.earlyprogresswindow', 'false'
             property 'fml.earlyWindowControl', 'false'
             args '--username', 'TestPlayer'

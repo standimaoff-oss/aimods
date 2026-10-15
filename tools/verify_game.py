@@ -130,7 +130,9 @@ def client():
     configure('server', server=True)
     folder = RUNS / 'client'
     folder.mkdir(parents=True, exist_ok=True)
-    (folder / 'options.txt').write_text('''tutorialStep:none
+    (folder / 'options.txt').write_text('''version:3465
+lang:ru_ru
+tutorialStep:none
 onboardAccessibility:false
 skipMultiplayerWarning:true
 joinedFirstServer:true
@@ -458,6 +460,10 @@ def volumetric(player, client_log):
     frames = re.search(r'frames=(\d+)', status)
     assert frames and int(frames[1]) > 0, status
     screenshot('06-volumetric-smoke')
+    local('clear')
+    command('arsenal_visual_test blast 0 -60 18', 'Visual test sent')
+    time.sleep(.15)
+    screenshot('07a-volumetric-blast-early')
     local('clear')
     command('arsenal_visual_test blast 0 -60 18', 'Visual test sent')
     time.sleep(1.2)
