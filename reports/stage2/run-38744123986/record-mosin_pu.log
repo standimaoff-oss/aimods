@@ -1,0 +1,44 @@
+Input #0, x11grab, from ':99':
+  Duration: N/A, start: 1792072251.484835, bitrate: 262348 kb/s
+  Stream #0:0: Video: rawvideo (BGR[0] / 0x524742), bgr0, 854x480, 262348 kb/s, 20 fps, 19.83 tbr, 1000k tbn, 1000k tbc
+Guessed Channel Layout for Input Stream #1.0 : stereo
+Input #1, pulse, from 'qa.monitor':
+  Duration: N/A, start: 1792072251.654608, bitrate: 1536 kb/s
+  Stream #1:0: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> h264 (libx264))
+  Stream #1:0 -> #0:1 (pcm_s16le (native) -> aac (native))
+[swscaler @ 0x563c3bee66c0] Warning: data is not aligned! This can lead to a speed loss
+[libx264 @ 0x563c3bed6ec0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[libx264 @ 0x563c3bed6ec0] profile Constrained Baseline, level 3.0, 4:2:0, 8-bit
+[libx264 @ 0x563c3bed6ec0] 264 - core 163 r3060 5db6aa6 - H.264/MPEG-4 AVC codec - Copyleft 2003-2021 - http://www.videolan.org/x264.html - options: cabac=0 ref=1 deblock=0:0:0 analyse=0:0 me=dia subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=1 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=0 keyint=250 keyint_min=19 scenecut=0 intra_refresh=0 rc=crf mbtree=0 crf=24.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=0
+Output #0, mp4, to '/home/runner/work/aimods/aimods/verification/videos/mosin_pu.mp4':
+  Metadata:
+    encoder         : Lavf58.76.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 854x480, q=2-31, 19.83 fps, 15232 tbn
+    Metadata:
+      encoder         : Lavc58.134.100 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+    Metadata:
+      encoder         : Lavc58.134.100 aac
+frame=    1 fps=0.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=   12 fps=0.0 q=13.0 size=       0kB time=00:00:00.50 bitrate=   0.8kbits/s speed=0.939x    frame=   22 fps= 21 q=12.0 size=       0kB time=00:00:01.00 bitrate=   0.4kbits/s speed=0.968x    frame=   32 fps= 21 q=14.0 size=       0kB time=00:00:01.51 bitrate=   0.3kbits/s speed=0.978x    frame=   42 fps= 20 q=17.0 size=       0kB time=00:00:02.01 bitrate=   0.2kbits/s speed=0.981x    frame=   52 fps= 20 q=17.0 size=       0kB time=00:00:02.52 bitrate=   0.2kbits/s speed=0.985x    [libx264 @ 0x563c3bed6ec0] non-strictly-monotonic PTS
+[mp4 @ 0x563c3bed5c40] Non-monotonous DTS in output stream 0:0; previous: 45312, current: 45312; changing to 45313. This may result in incorrect timestamps in the output file.
+frame=   63 fps= 21 q=17.0 size=     256kB time=00:00:03.02 bitrate= 693.3kbits/s speed=0.985x    frame=   73 fps= 20 q=14.0 size=     256kB time=00:00:03.52 bitrate= 594.3kbits/s speed=0.988x    frame=   83 fps= 20 q=24.0 size=     256kB time=00:00:04.03 bitrate= 520.0kbits/s speed=0.989x    frame=   93 fps= 20 q=13.0 size=     256kB time=00:00:04.53 bitrate= 462.2kbits/s speed=0.989x    frame=  103 fps= 20 q=13.0 size=     256kB time=00:00:05.04 bitrate= 416.0kbits/s speed=0.99x    frame=  113 fps= 20 q=13.0 size=     256kB time=00:00:05.54 bitrate= 378.2kbits/s speed=0.991x    frame=  123 fps= 20 q=13.0 size=     512kB time=00:00:06.05 bitrate= 693.3kbits/s speed=0.992x    frame=  133 fps= 20 q=13.0 size=     512kB time=00:00:06.55 bitrate= 640.0kbits/s speed=0.992x    frame=  143 fps= 20 q=12.0 size=     512kB time=00:00:07.05 bitrate= 594.2kbits/s speed=0.992x    frame=  153 fps= 20 q=13.0 size=     512kB time=00:00:07.57 bitrate= 553.8kbits/s speed=0.994x    frame=  163 fps= 20 q=13.0 size=     512kB time=00:00:08.06 bitrate= 520.0kbits/s speed=0.993x    frame=  174 fps= 20 q=13.0 size=     512kB time=00:00:08.62 bitrate= 486.5kbits/s speed=0.999x    [libx264 @ 0x563c3bed6ec0] non-strictly-monotonic PTS
+[mp4 @ 0x563c3bed5c40] Non-monotonous DTS in output stream 0:0; previous: 136704, current: 136704; changing to 136705. This may result in incorrect timestamps in the output file.
+frame=  184 fps= 20 q=13.0 size=     512kB time=00:00:09.08 bitrate= 461.5kbits/s speed=0.994x    frame=  194 fps= 20 q=13.0 size=     512kB time=00:00:09.57 bitrate= 437.9kbits/s speed=0.992x    frame=  205 fps= 20 q=13.0 size=     512kB time=00:00:10.13 bitrate= 413.9kbits/s speed=0.997x    frame=  215 fps= 20 q=13.0 size=     512kB time=00:00:10.63 bitrate= 394.3kbits/s speed=0.997x    frame=  225 fps= 20 q=13.0 size=     512kB time=00:00:11.14 bitrate= 376.4kbits/s speed=0.997x    frame=  235 fps= 20 q=13.0 size=     512kB time=00:00:11.64 bitrate= 360.1kbits/s speed=0.998x    frame=  244 fps= 20 q=12.0 size=     512kB time=00:00:12.11 bitrate= 346.1kbits/s speed=0.995x    frame=  255 fps= 20 q=17.0 size=     512kB time=00:00:12.65 bitrate= 331.5kbits/s speed=0.997x    frame=  265 fps= 20 q=13.0 size=     512kB time=00:00:13.15 bitrate= 318.8kbits/s speed=0.997x    frame=  275 fps= 20 q=13.0 size=     512kB time=00:00:13.66 bitrate= 307.0kbits/s speed=0.997x    frame=  285 fps= 20 q=13.0 size=     512kB time=00:00:14.16 bitrate= 296.1kbits/s speed=0.997x    frame=  295 fps= 20 q=13.0 size=     512kB time=00:00:14.67 bitrate= 285.9kbits/s speed=0.997x    [libx264 @ 0x563c3bed6ec0] non-strictly-monotonic PTS
+[mp4 @ 0x563c3bed5c40] Non-monotonous DTS in output stream 0:0; previous: 228096, current: 228096; changing to 228097. This may result in incorrect timestamps in the output file.
+frame=  306 fps= 20 q=13.0 size=     512kB time=00:00:15.17 bitrate= 276.4kbits/s speed=0.997x    [mp4 @ 0x563c3bed5c40] Starting second pass: moving the moov atom to the beginning of the file
+frame=  313 fps= 20 q=13.0 Lsize=     785kB time=00:00:15.57 bitrate= 412.6kbits/s speed=0.997x    
+video:529kB audio:245kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.456875%
+[libx264 @ 0x563c3bed6ec0] frame I:2     Avg QP:15.50  size: 22784
+[libx264 @ 0x563c3bed6ec0] frame P:311   Avg QP:13.90  size:  1593
+[libx264 @ 0x563c3bed6ec0] mb I  I16..4: 100.0%  0.0%  0.0%
+[libx264 @ 0x563c3bed6ec0] mb P  I16..4:  2.6%  0.0%  0.0%  P16..4:  8.4%  0.0%  0.0%  0.0%  0.0%    skip:89.0%
+[libx264 @ 0x563c3bed6ec0] coded y,uvDC,uvAC intra: 22.7% 17.8% 8.2% inter: 3.4% 2.1% 0.8%
+[libx264 @ 0x563c3bed6ec0] i16 v,h,dc,p: 56% 23%  7% 14%
+[libx264 @ 0x563c3bed6ec0] i8c dc,h,v,p: 73% 13% 12%  1%
+[libx264 @ 0x563c3bed6ec0] kb/s:276.88
+[aac @ 0x563c3bed8b00] Qavg: 159.845
+Exiting normally, received signal 2.

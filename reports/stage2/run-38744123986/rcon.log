@@ -1,0 +1,1290 @@
+> forceload add 0 0
+Marked chunk [0, 0] in minecraft:overworld to be force loaded
+
+> setblock 0 -60 0 aiarsenal:uranium_ore
+Changed the block at 0, -60, 0
+
+> setblock 1 -60 0 aiarsenal:deepslate_uranium_ore
+Changed the block at 1, -60, 0
+
+> setblock 2 -60 0 minecraft:chest{Items:[{Slot:0b,id:"aiarsenal:raw_uranium",Count:9b},{Slot:1b,id:"aiarsenal:uranium_ingot",Count:7b},{Slot:2b,id:"aiarsenal:uranium_ore",Count:3b},{Slot:3b,id:"aiarsenal:deepslate_uranium_ore",Count:2b},{Slot:4b,id:"aiarsenal:rds1",Count:1b},{Slot:5b,id:"aiarsenal:shahed136",Count:1b}]}
+Changed the block at 2, -60, 0
+
+> data get block 2 -60 0 Items
+2, -60, 0 has the following block data: [{Slot: 0b, id: "aiarsenal:raw_uranium", Count: 9b}, {Slot: 1b, id: "aiarsenal:uranium_ingot", Count: 7b}, {Slot: 2b, id: "aiarsenal:uranium_ore", Count: 3b}, {Slot: 3b, id: "aiarsenal:deepslate_uranium_ore", Count: 2b}, {Slot: 4b, id: "aiarsenal:rds1", Count: 1b}, {Slot: 5b, id: "aiarsenal:shahed136", Count: 1b}]
+
+> save-all flush
+Saving the game (this may take a moment!)
+Saved the game
+
+> stop
+Stopping the server
+
+> forceload add 0 0
+No chunks were marked for force loading
+
+> execute if block 0 -60 0 minecraft:stone
+Test passed
+
+> execute if block 1 -60 0 minecraft:deepslate
+Test passed
+
+> execute if data block 2 -60 0 Items[{Slot:0b,id:"minecraft:iron_nugget",Count:9b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:1b,id:"minecraft:iron_ingot",Count:7b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:2b,id:"minecraft:stone",Count:3b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:3b,id:"minecraft:deepslate",Count:2b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:4b,id:"aiarsenal:rds1",Count:1b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:5b,id:"aiarsenal:shahed136",Count:1b}]
+Test passed, count: 1
+
+> data get block 2 -60 0 Items
+2, -60, 0 has the following block data: [{Slot: 0b, id: "minecraft:iron_nugget", Count: 9b}, {Slot: 1b, id: "minecraft:iron_ingot", Count: 7b}, {Slot: 2b, id: "minecraft:stone", Count: 3b}, {Slot: 3b, id: "minecraft:deepslate", Count: 2b}, {Slot: 4b, id: "aiarsenal:rds1", Count: 1b}, {Slot: 5b, id: "aiarsenal:shahed136", Count: 1b}]
+
+> save-all flush
+Saving the game (this may take a moment!)
+Saved the game
+
+> stop
+Stopping the server
+
+> forceload add 0 0
+No chunks were marked for force loading
+
+> execute if block 0 -60 0 minecraft:stone
+Test passed
+
+> execute if block 1 -60 0 minecraft:deepslate
+Test passed
+
+> execute if data block 2 -60 0 Items[{Slot:0b,id:"minecraft:iron_nugget",Count:9b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:1b,id:"minecraft:iron_ingot",Count:7b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:2b,id:"minecraft:stone",Count:3b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:3b,id:"minecraft:deepslate",Count:2b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:4b,id:"aiarsenal:rds1",Count:1b}]
+Test passed, count: 1
+
+> execute if data block 2 -60 0 Items[{Slot:5b,id:"aiarsenal:shahed136",Count:1b}]
+Test passed, count: 1
+
+> data get block 2 -60 0 Items
+2, -60, 0 has the following block data: [{Slot: 0b, id: "minecraft:iron_nugget", Count: 9b}, {Slot: 1b, id: "minecraft:iron_ingot", Count: 7b}, {Slot: 2b, id: "minecraft:stone", Count: 3b}, {Slot: 3b, id: "minecraft:deepslate", Count: 2b}, {Slot: 4b, id: "aiarsenal:rds1", Count: 1b}, {Slot: 5b, id: "aiarsenal:shahed136", Count: 1b}]
+
+> save-all flush
+Saving the game (this may take a moment!)
+Saved the game
+
+> stop
+Stopping the server
+
+> time set 6000
+Set the time to 6000
+
+> gamerule doDaylightCycle false
+Gamerule doDaylightCycle is now set to: false
+
+> weather clear
+Set the weather to clear
+
+> gamerule doWeatherCycle false
+Gamerule doWeatherCycle is now set to: false
+
+> gamerule doMobSpawning false
+Gamerule doMobSpawning is now set to: false
+
+> gamemode creative TestPlayer
+
+> fill -12 -61 -8 12 -61 25 minecraft:smooth_stone
+Successfully filled 850 block(s)
+
+> fill -8 -60 22 8 -53 22 minecraft:white_concrete
+Successfully filled 136 block(s)
+
+> fill -1 -57 21 1 -55 21 minecraft:red_concrete
+Successfully filled 9 block(s)
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:ppsh41{Ammo:71}
+Replaced a slot on TestPlayer with [PPSh-41 (7.62x25 TT)]
+
+> give TestPlayer aiarsenal:mag_ppsh 3
+Gave 3 [PPSh-41 drum magazine (71 rounds)] to TestPlayer
+
+> tp TestPlayer 0 -60 0 25 5
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 69}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 60}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> difficulty normal
+The difficulty has been set to Normal
+
+> kill @e[tag=qa_target]
+No entity was found
+
+> summon minecraft:husk 0.5 -60 16.5 {NoAI:1b,Silent:1b,PersistenceRequired:1b,Tags:["qa_target"],Attributes:[{Name:"minecraft:generic.max_health",Base:1000d}],Health:1000f}
+Summoned new Husk
+
+> clear TestPlayer
+Removed 4 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:5}
+Replaced a slot on TestPlayer with [Mosin 91/30 PU (3.5×)]
+
+> give TestPlayer aiarsenal:round_762x54r 32
+Gave 32 [7.62×54R cartridge] to TestPlayer
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> tellraw TestPlayer {"text":"Scope/chat depth regression: this must not cover the optic"}
+
+> arsenal_visual_test client view_fov90 TestPlayer
+Client QA sent: view_fov90
+
+> arsenal_visual_test client view_fov70 TestPlayer
+Client QA sent: view_fov70
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 1000.0f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 968.512f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> clear TestPlayer
+Removed 33 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:k98k_zf39{Ammo:5}
+Replaced a slot on TestPlayer with [Kar98k ZF39 (4×)]
+
+> give TestPlayer aiarsenal:round_792x57 32
+Gave 32 [7.92×57 cartridge] to TestPlayer
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> tellraw TestPlayer {"text":"Scope/chat depth regression: this must not cover the optic"}
+
+> arsenal_visual_test client view_fov90 TestPlayer
+Client QA sent: view_fov90
+
+> arsenal_visual_test client view_fov70 TestPlayer
+Client QA sent: view_fov70
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 968.512f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:k98k_zf39", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:k98k_zf39", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 942.6903f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:k98k_zf39", Count: 1b, tag: {Ammo: 5}}
+
+> clear TestPlayer
+Removed 33 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:c96{Ammo:10}
+Replaced a slot on TestPlayer with [Mauser C96 (7.63×25)]
+
+> give TestPlayer aiarsenal:clip_c96 32
+Gave 32 [C96 stripper clip (10 rounds)] to TestPlayer
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> tellraw TestPlayer {"text":"Scope/chat depth regression: this must not cover the optic"}
+
+> arsenal_visual_test client view_fov90 TestPlayer
+Client QA sent: view_fov90
+
+> arsenal_visual_test client view_fov70 TestPlayer
+Client QA sent: view_fov70
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 942.6903f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 9}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 9}}
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 938.2623f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 9}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 9}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 8}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 8}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 7}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 7}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 7}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 6}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 6}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 3}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 3}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 3}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 3}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 10}}
+
+> clear TestPlayer
+Removed 33 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:tt33{Ammo:8}
+Replaced a slot on TestPlayer with [TT-33 (7.62×25)]
+
+> give TestPlayer aiarsenal:mag_tt33 32
+Gave 32 [TT-33 magazine (8 rounds)] to TestPlayer
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> tellraw TestPlayer {"text":"Scope/chat depth regression: this must not cover the optic"}
+
+> arsenal_visual_test client view_fov90 TestPlayer
+Client QA sent: view_fov90
+
+> arsenal_visual_test client view_fov70 TestPlayer
+Client QA sent: view_fov70
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 911.69446f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:tt33", Count: 1b, tag: {Ammo: 7}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:tt33", Count: 1b, tag: {Ammo: 7}}
+
+> data get entity @e[tag=qa_target,limit=1] Health
+Husk has the following entity data: 907.2665f
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:tt33", Count: 1b, tag: {Ammo: 9}}
+
+> kill @e[tag=qa_target]
+Killed Husk
+
+> difficulty peaceful
+The difficulty has been set to Peaceful
+
+> clear TestPlayer
+Removed 33 item(s) from player TestPlayer
+
+> fill -8 -60 21 8 -53 22 minecraft:air
+Successfully filled 145 block(s)
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test blast 0 -60 18
+Visual test sent: blast (no damage)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test blast 0 -60 18
+Visual test sent: blast (no damage)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test bm21 0 -60 18
+Visual test sent: bm21 (no damage)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test bomber 0 -60 18
+Visual test sent: bomber (no damage)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client trail TestPlayer
+Client QA sent: trail
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> tp TestPlayer 0 -60 0 0 -12
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> arsenal_visual_test nuke 0 -60 100
+Visual test sent: nuke (no damage)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test legacy_nuke 0 -60 100
+Visual test sent: legacy_nuke (no damage)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client budget TestPlayer
+Client QA sent: budget
+
+> arsenal_visual_test client off TestPlayer
+Client QA sent: off
+
+> particle aiarsenal:volume_smoke 0 -59 12 1 1 1 0.01 12 force TestPlayer
+Displaying particle aiarsenal:volume_smoke
+
+> arsenal_visual_test client on TestPlayer
+Client QA sent: on
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:5}
+Replaced a slot on TestPlayer with [Mosin 91/30 PU (3.5×)]
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> arsenal_visual_test client view_scale3 TestPlayer
+Client QA sent: view_scale3
+
+> arsenal_visual_test client view_scale2 TestPlayer
+Client QA sent: view_scale2
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client view_reload TestPlayer
+Client QA sent: view_reload
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute in minecraft:the_nether run tp TestPlayer 0 100 0
+Teleported TestPlayer to 0.500000, 100.000000, 0.500000
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute in minecraft:overworld run tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client view_shaderfail TestPlayer
+Client QA sent: view_shaderfail
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> particle aiarsenal:volume_smoke 0 -59 10 1 1 1 0.01 12 force TestPlayer
+Displaying particle aiarsenal:volume_smoke
+
+> arsenal_visual_test client view_reload TestPlayer
+Client QA sent: view_reload
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client view_tabs TestPlayer
+Client QA sent: view_tabs
+
+> arsenal_visual_test client view_modern TestPlayer
+Client QA sent: view_modern
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> arsenal_visual_test client view_fov45 TestPlayer
+Client QA sent: view_fov45
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> tp TestPlayer 0 -60 0 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_su_infantry_head
+Replaced a slot on TestPlayer with [Headgear — Soviet infantry · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_su_infantry_chest
+Replaced a slot on TestPlayer with [Tunic — Soviet infantry · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_su_infantry_legs
+Replaced a slot on TestPlayer with [Trousers — Soviet infantry · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_su_infantry_feet
+Replaced a slot on TestPlayer with [Boots — Soviet infantry · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_su_infantry_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_infantry_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_infantry_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_infantry_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_su_officer_head
+Replaced a slot on TestPlayer with [Headgear — Soviet officer · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_su_officer_chest
+Replaced a slot on TestPlayer with [Tunic — Soviet officer · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_su_officer_legs
+Replaced a slot on TestPlayer with [Trousers — Soviet officer · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_su_officer_feet
+Replaced a slot on TestPlayer with [Boots — Soviet officer · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_su_officer_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_officer_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_officer_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_officer_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_su_tanker_head
+Replaced a slot on TestPlayer with [Headgear — Soviet tank crew · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_su_tanker_chest
+Replaced a slot on TestPlayer with [Tunic — Soviet tank crew · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_su_tanker_legs
+Replaced a slot on TestPlayer with [Trousers — Soviet tank crew · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_su_tanker_feet
+Replaced a slot on TestPlayer with [Boots — Soviet tank crew · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_su_tanker_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_tanker_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_tanker_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_tanker_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_su_pilot_head
+Replaced a slot on TestPlayer with [Headgear — Soviet pilot · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_su_pilot_chest
+Replaced a slot on TestPlayer with [Tunic — Soviet pilot · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_su_pilot_legs
+Replaced a slot on TestPlayer with [Trousers — Soviet pilot · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_su_pilot_feet
+Replaced a slot on TestPlayer with [Boots — Soviet pilot · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_su_pilot_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_pilot_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_pilot_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_pilot_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_su_general_head
+Replaced a slot on TestPlayer with [Headgear — Soviet general · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_su_general_chest
+Replaced a slot on TestPlayer with [Tunic — Soviet general · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_su_general_legs
+Replaced a slot on TestPlayer with [Trousers — Soviet general · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_su_general_feet
+Replaced a slot on TestPlayer with [Boots — Soviet general · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_su_general_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_general_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_general_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_general_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_de_infantry_head
+Replaced a slot on TestPlayer with [Headgear — German infantry · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_de_infantry_chest
+Replaced a slot on TestPlayer with [Tunic — German infantry · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_de_infantry_legs
+Replaced a slot on TestPlayer with [Trousers — German infantry · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_de_infantry_feet
+Replaced a slot on TestPlayer with [Boots — German infantry · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_infantry_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_infantry_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_infantry_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_infantry_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_de_officer_head
+Replaced a slot on TestPlayer with [Headgear — German officer · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_de_officer_chest
+Replaced a slot on TestPlayer with [Tunic — German officer · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_de_officer_legs
+Replaced a slot on TestPlayer with [Trousers — German officer · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_de_officer_feet
+Replaced a slot on TestPlayer with [Boots — German officer · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_officer_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_officer_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_officer_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_officer_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_de_tanker_head
+Replaced a slot on TestPlayer with [Headgear — German tank crew · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_de_tanker_chest
+Replaced a slot on TestPlayer with [Tunic — German tank crew · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_de_tanker_legs
+Replaced a slot on TestPlayer with [Trousers — German tank crew · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_de_tanker_feet
+Replaced a slot on TestPlayer with [Boots — German tank crew · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_tanker_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_tanker_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_tanker_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_tanker_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_de_pilot_head
+Replaced a slot on TestPlayer with [Headgear — German pilot · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_de_pilot_chest
+Replaced a slot on TestPlayer with [Tunic — German pilot · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_de_pilot_legs
+Replaced a slot on TestPlayer with [Trousers — German pilot · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_de_pilot_feet
+Replaced a slot on TestPlayer with [Boots — German pilot · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_pilot_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_pilot_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_pilot_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_pilot_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_de_general_head
+Replaced a slot on TestPlayer with [Headgear — German general · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_de_general_chest
+Replaced a slot on TestPlayer with [Tunic — German general · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_de_general_legs
+Replaced a slot on TestPlayer with [Trousers — German general · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_de_general_feet
+Replaced a slot on TestPlayer with [Boots — German general · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_general_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_general_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_general_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_general_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_nap_fr_infantry_head
+Replaced a slot on TestPlayer with [Headgear — French line infantry · 1812]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_nap_fr_infantry_chest
+Replaced a slot on TestPlayer with [Tunic — French line infantry · 1812]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_nap_fr_infantry_legs
+Replaced a slot on TestPlayer with [Trousers — French line infantry · 1812]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_nap_fr_infantry_feet
+Replaced a slot on TestPlayer with [Boots — French line infantry · 1812]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_fr_infantry_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_fr_infantry_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_fr_infantry_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_fr_infantry_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_nap_fr_officer_head
+Replaced a slot on TestPlayer with [Headgear — French officer · 1812]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_nap_fr_officer_chest
+Replaced a slot on TestPlayer with [Tunic — French officer · 1812]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_nap_fr_officer_legs
+Replaced a slot on TestPlayer with [Trousers — French officer · 1812]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_nap_fr_officer_feet
+Replaced a slot on TestPlayer with [Boots — French officer · 1812]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_fr_officer_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_fr_officer_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_fr_officer_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_fr_officer_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_nap_fr_general_head
+Replaced a slot on TestPlayer with [Headgear — French general · 1812]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_nap_fr_general_chest
+Replaced a slot on TestPlayer with [Tunic — French general · 1812]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_nap_fr_general_legs
+Replaced a slot on TestPlayer with [Trousers — French general · 1812]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_nap_fr_general_feet
+Replaced a slot on TestPlayer with [Boots — French general · 1812]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_fr_general_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_fr_general_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_fr_general_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_fr_general_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_nap_ri_infantry_head
+Replaced a slot on TestPlayer with [Headgear — Russian Imperial line infantry · 1812]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_nap_ri_infantry_chest
+Replaced a slot on TestPlayer with [Tunic — Russian Imperial line infantry · 1812]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_nap_ri_infantry_legs
+Replaced a slot on TestPlayer with [Trousers — Russian Imperial line infantry · 1812]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_nap_ri_infantry_feet
+Replaced a slot on TestPlayer with [Boots — Russian Imperial line infantry · 1812]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_ri_infantry_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_ri_infantry_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_ri_infantry_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_ri_infantry_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_nap_ri_officer_head
+Replaced a slot on TestPlayer with [Headgear — Russian Imperial officer · 1812]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_nap_ri_officer_chest
+Replaced a slot on TestPlayer with [Tunic — Russian Imperial officer · 1812]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_nap_ri_officer_legs
+Replaced a slot on TestPlayer with [Trousers — Russian Imperial officer · 1812]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_nap_ri_officer_feet
+Replaced a slot on TestPlayer with [Boots — Russian Imperial officer · 1812]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_ri_officer_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_ri_officer_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_ri_officer_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_ri_officer_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_nap_ri_general_head
+Replaced a slot on TestPlayer with [Headgear — Russian Imperial general · 1812]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_nap_ri_general_chest
+Replaced a slot on TestPlayer with [Tunic — Russian Imperial general · 1812]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_nap_ri_general_legs
+Replaced a slot on TestPlayer with [Trousers — Russian Imperial general · 1812]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_nap_ri_general_feet
+Replaced a slot on TestPlayer with [Boots — Russian Imperial general · 1812]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_ri_general_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_ri_general_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_ri_general_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_ri_general_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client view_ww2wear TestPlayer
+Client QA sent: view_ww2wear
+
+> arsenal_visual_test client view_napwear TestPlayer
+Client QA sent: view_napwear
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_front TestPlayer
+Client QA sent: view_front
+
+> arsenal_visual_test client view_reload TestPlayer
+Client QA sent: view_reload
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> item replace entity TestPlayer armor.head with aiarsenal:uniform_ww2_su_officer_head
+Replaced a slot on TestPlayer with [Headgear — Soviet officer · 1943–45]
+
+> item replace entity TestPlayer armor.chest with aiarsenal:uniform_ww2_su_officer_chest
+Replaced a slot on TestPlayer with [Tunic — Soviet officer · 1943–45]
+
+> item replace entity TestPlayer armor.legs with aiarsenal:uniform_ww2_su_officer_legs
+Replaced a slot on TestPlayer with [Trousers — Soviet officer · 1943–45]
+
+> item replace entity TestPlayer armor.feet with aiarsenal:uniform_ww2_su_officer_feet
+Replaced a slot on TestPlayer with [Boots — Soviet officer · 1943–45]
+
+> data get entity TestPlayer Inventory
+TestPlayer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_su_officer_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_officer_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_officer_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_officer_head", Count: 1b, tag: {Damage: 0}}]
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> arsenal_visual_test client view_fov70 TestPlayer
+Client QA sent: view_fov70
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:c96{Ammo:10}
+Replaced a slot on TestPlayer with [Mauser C96 (7.63×25)]
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:tt33{Ammo:8}
+Replaced a slot on TestPlayer with [TT-33 (7.62×25)]
+
+> gamemode creative Observer
+
+> clear Observer
+No items were found on player Observer
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> arsenal_visual_test client view_fov45 TestPlayer
+Client QA sent: view_fov45
+
+> clear TestPlayer
+Removed 5 item(s) from player TestPlayer
+
+> tp TestPlayer 0 -60 0 0 7
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> item replace entity Observer armor.head with aiarsenal:uniform_ww2_de_officer_head
+Replaced a slot on Observer with [Headgear — German officer · 1943–45]
+
+> item replace entity Observer armor.chest with aiarsenal:uniform_ww2_de_officer_chest
+Replaced a slot on Observer with [Tunic — German officer · 1943–45]
+
+> item replace entity Observer armor.legs with aiarsenal:uniform_ww2_de_officer_legs
+Replaced a slot on Observer with [Trousers — German officer · 1943–45]
+
+> item replace entity Observer armor.feet with aiarsenal:uniform_ww2_de_officer_feet
+Replaced a slot on Observer with [Boots — German officer · 1943–45]
+
+> data get entity Observer Inventory
+Observer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_officer_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_officer_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_officer_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_officer_head", Count: 1b, tag: {Damage: 0}}]
+
+> tp Observer 0 -60 3.8 145 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> list
+There are 2 of a max of 20 players online: TestPlayer, Observer
+
+> item replace entity Observer weapon.mainhand with aiarsenal:ak12{Ammo:1}
+Replaced a slot on Observer with [AK-12 (6P70)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:m4a1{Ammo:1}
+Replaced a slot on Observer with [M4A1 + Aimpoint CompM4]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:m4a1", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:rpg7{Ammo:1}
+Replaced a slot on Observer with [RPG-7V2 + PGO-7V3]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:rpg7", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:t5000{Ammo:1}
+Replaced a slot on Observer with [ORSIS T-5000M (.338 Lapua Magnum)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:t5000", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:pkp{Ammo:1}
+Replaced a slot on Observer with [PKP Pecheneg (6P41)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:pkp", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:saiga12{Ammo:1}
+Replaced a slot on Observer with [Saiga-12K isp. 030 (12/76)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:saiga12", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:r870{Ammo:1}
+Replaced a slot on Observer with [Remington 870 Police Magnum (12 ga)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:r870", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:igla{Ammo:1}
+Replaced a slot on Observer with [9K338 Igla-S MANPADS]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:igla", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:stinger{Ammo:1}
+Replaced a slot on Observer with [FIM-92 Stinger MANPADS]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:stinger", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:ppsh41{Ammo:1}
+Replaced a slot on Observer with [PPSh-41 (7.62x25 TT)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:mp40{Ammo:1}
+Replaced a slot on Observer with [MP 40 (9x19 Parabellum)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:mp40", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:mosin{Ammo:1}
+Replaced a slot on Observer with [Mosin rifle mod. 1891/30 (7.62x54R)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:mosin", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:k98k{Ammo:1}
+Replaced a slot on Observer with [Karabiner 98k (7.92x57 Mauser)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:k98k", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:mosin_pu{Ammo:1}
+Replaced a slot on Observer with [Mosin 91/30 PU (3.5×)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:k98k_zf39{Ammo:1}
+Replaced a slot on Observer with [Kar98k ZF39 (4×)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:k98k_zf39", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:c96{Ammo:1}
+Replaced a slot on Observer with [Mauser C96 (7.63×25)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:c96", Count: 1b, tag: {Ammo: 1}}
+
+> item replace entity Observer weapon.mainhand with aiarsenal:tt33{Ammo:1}
+Replaced a slot on Observer with [TT-33 (7.62×25)]
+
+> data get entity Observer SelectedItem
+Observer has the following entity data: {id: "aiarsenal:tt33", Count: 1b, tag: {Ammo: 1}}
+
+> tp Observer 0 -60 3.8 90 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> item replace entity Observer weapon.mainhand with aiarsenal:c96{Ammo:1}
+Replaced a slot on Observer with [Mauser C96 (7.63×25)]
+
+> item replace entity Observer weapon.mainhand with aiarsenal:tt33{Ammo:1}
+Replaced a slot on Observer with [TT-33 (7.62×25)]
+
+> item replace entity Observer weapon.mainhand with aiarsenal:ppsh41{Ammo:1}
+Replaced a slot on Observer with [PPSh-41 (7.62x25 TT)]
+
+> item replace entity Observer weapon.mainhand with aiarsenal:mosin_pu{Ammo:1}
+Replaced a slot on Observer with [Mosin 91/30 PU (3.5×)]
+
+> tp Observer 0 -60 3.8 145 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> arsenal_visual_test client view_left Observer
+Client QA sent: view_left
+
+> item replace entity Observer weapon.mainhand with aiarsenal:tt33{Ammo:8}
+Replaced a slot on Observer with [TT-33 (7.62×25)]
+
+> arsenal_visual_test client view_right Observer
+Client QA sent: view_right
+
+> item replace entity Observer armor.head with aiarsenal:uniform_ww2_su_pilot_head
+Replaced a slot on Observer with [Headgear — Soviet pilot · 1943–45]
+
+> item replace entity Observer armor.chest with aiarsenal:uniform_ww2_su_pilot_chest
+Replaced a slot on Observer with [Tunic — Soviet pilot · 1943–45]
+
+> item replace entity Observer armor.legs with aiarsenal:uniform_ww2_su_pilot_legs
+Replaced a slot on Observer with [Trousers — Soviet pilot · 1943–45]
+
+> item replace entity Observer armor.feet with aiarsenal:uniform_ww2_su_pilot_feet
+Replaced a slot on Observer with [Boots — Soviet pilot · 1943–45]
+
+> data get entity Observer Inventory
+Observer has the following entity data: [{Slot: 0b, id: "aiarsenal:tt33", Count: 1b, tag: {Ammo: 8}}, {Slot: 100b, id: "aiarsenal:uniform_ww2_su_pilot_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_su_pilot_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_su_pilot_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_su_pilot_head", Count: 1b, tag: {Damage: 0}}]
+
+> item replace entity Observer weapon.mainhand with minecraft:air
+Replaced a slot on Observer with [Air]
+
+> tp Observer 0 -60 3.8 180 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> item replace entity Observer armor.head with aiarsenal:uniform_ww2_de_tanker_head
+Replaced a slot on Observer with [Headgear — German tank crew · 1943–45]
+
+> item replace entity Observer armor.chest with aiarsenal:uniform_ww2_de_tanker_chest
+Replaced a slot on Observer with [Tunic — German tank crew · 1943–45]
+
+> item replace entity Observer armor.legs with aiarsenal:uniform_ww2_de_tanker_legs
+Replaced a slot on Observer with [Trousers — German tank crew · 1943–45]
+
+> item replace entity Observer armor.feet with aiarsenal:uniform_ww2_de_tanker_feet
+Replaced a slot on Observer with [Boots — German tank crew · 1943–45]
+
+> data get entity Observer Inventory
+Observer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_ww2_de_tanker_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_ww2_de_tanker_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_ww2_de_tanker_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_ww2_de_tanker_head", Count: 1b, tag: {Damage: 0}}]
+
+> item replace entity Observer weapon.mainhand with minecraft:air
+Replaced a slot on Observer with [Air]
+
+> tp Observer 0 -60 3.8 180 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> item replace entity Observer armor.head with aiarsenal:uniform_nap_fr_infantry_head
+Replaced a slot on Observer with [Headgear — French line infantry · 1812]
+
+> item replace entity Observer armor.chest with aiarsenal:uniform_nap_fr_infantry_chest
+Replaced a slot on Observer with [Tunic — French line infantry · 1812]
+
+> item replace entity Observer armor.legs with aiarsenal:uniform_nap_fr_infantry_legs
+Replaced a slot on Observer with [Trousers — French line infantry · 1812]
+
+> item replace entity Observer armor.feet with aiarsenal:uniform_nap_fr_infantry_feet
+Replaced a slot on Observer with [Boots — French line infantry · 1812]
+
+> data get entity Observer Inventory
+Observer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_fr_infantry_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_fr_infantry_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_fr_infantry_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_fr_infantry_head", Count: 1b, tag: {Damage: 0}}]
+
+> item replace entity Observer weapon.mainhand with minecraft:air
+Replaced a slot on Observer with [Air]
+
+> tp Observer 0 -60 3.8 180 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> item replace entity Observer armor.head with aiarsenal:uniform_nap_ri_general_head
+Replaced a slot on Observer with [Headgear — Russian Imperial general · 1812]
+
+> item replace entity Observer armor.chest with aiarsenal:uniform_nap_ri_general_chest
+Replaced a slot on Observer with [Tunic — Russian Imperial general · 1812]
+
+> item replace entity Observer armor.legs with aiarsenal:uniform_nap_ri_general_legs
+Replaced a slot on Observer with [Trousers — Russian Imperial general · 1812]
+
+> item replace entity Observer armor.feet with aiarsenal:uniform_nap_ri_general_feet
+Replaced a slot on Observer with [Boots — Russian Imperial general · 1812]
+
+> data get entity Observer Inventory
+Observer has the following entity data: [{Slot: 100b, id: "aiarsenal:uniform_nap_ri_general_feet", Count: 1b, tag: {Damage: 0}}, {Slot: 101b, id: "aiarsenal:uniform_nap_ri_general_legs", Count: 1b, tag: {Damage: 0}}, {Slot: 102b, id: "aiarsenal:uniform_nap_ri_general_chest", Count: 1b, tag: {Damage: 0}}, {Slot: 103b, id: "aiarsenal:uniform_nap_ri_general_head", Count: 1b, tag: {Damage: 0}}]
+
+> item replace entity Observer weapon.mainhand with minecraft:air
+Replaced a slot on Observer with [Air]
+
+> tp Observer 0 -60 3.8 180 0
+Teleported Observer to 0.500000, -60.000000, 3.800000
+
+> list
+There are 2 of a max of 20 players online: TestPlayer, Observer
+
+> stop
+Stopping the server
+
