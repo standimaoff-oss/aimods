@@ -1,0 +1,9 @@
+{
+  "baseline": "4ced8a44d9d78cc5003e143cc3927cfd80d4275c",
+  "current": "db0e1cfbac91c9bfe6bfb5f1d2607f1baa7efa01",
+  "backup_sha256": "cbd517a90e846b223d43119af1599c227cb97317ff769059967fa522edff6553",
+  "installed_jar": "aiarsenal-1.0.1-alpha.8.jar",
+  "installed_jar_sha256": "08dde5cf9b082444968a19ee4def60b6dd6e0b363548bda85ac2efb74ef2abb3",
+  "forge_installer_sha1": "ed31ce02ac69176f34353235cb2508d5a0f1e088",
+  "result": "PASS: upgrade and second reopen; blocks + item counts + retained nuclear/drone items"
+}

@@ -1,0 +1,11 @@
+{
+  "video": "motion-tt33.mp4",
+  "duration": 40.65,
+  "reload_seconds": 30.652892828000176,
+  "audio_rms": 0.006269596982747316,
+  "audio_peak": 0.30372461676597595,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}

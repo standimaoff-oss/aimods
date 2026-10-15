@@ -1,0 +1,11 @@
+{
+  "video": "1812-musket_1808.mp4",
+  "duration": 21.65,
+  "reload_seconds": 11.587976721000018,
+  "audio_rms": 0.013807167299091816,
+  "audio_peak": 0.13435962796211243,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}
