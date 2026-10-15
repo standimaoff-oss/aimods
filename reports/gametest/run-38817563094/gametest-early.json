@@ -1,0 +1,13 @@
+{
+  "source": "1926857210476ace7663c34e24770d2d36c04dca",
+  "bytes": 691856,
+  "sha256": "6dc9fa064349e2aea618296b4c80a9ddf29aa177848a1d01da9af2a597e6d434",
+  "failures": [
+    "[22:32:36] [Server thread/ERROR] [minecraft/LogTestReporter]: mirv_children_finish_outside_player_chunks failed! MIRV parent did not separate age=1020 present=true ticking=true"
+  ],
+  "totals": [
+    "[22:33:26] [Server thread/INFO] [minecraft/GameTestServer]: ========= 177 GAME TESTS COMPLETE ======================",
+    "[22:33:26] [Server thread/INFO] [minecraft/GameTestServer]: 1 required tests failed :("
+  ],
+  "scope": "Early log checkpoint only; not a workflow verdict"
+}
