@@ -1,0 +1,780 @@
+> time set 6000
+Set the time to 6000
+
+> gamerule doDaylightCycle false
+Gamerule doDaylightCycle is now set to: false
+
+> weather clear
+Set the weather to clear
+
+> gamerule doWeatherCycle false
+Gamerule doWeatherCycle is now set to: false
+
+> gamerule doMobSpawning false
+Gamerule doMobSpawning is now set to: false
+
+> gamerule naturalRegeneration false
+Gamerule naturalRegeneration is now set to: false
+
+> gamerule keepInventory true
+Gamerule keepInventory is now set to: true
+
+> difficulty peaceful
+The difficulty did not change; it is already set to peaceful
+
+> gamemode creative TestPlayer
+
+> forceload add -32 -32 48 64
+Marked [-2, -2] chunks in minecraft:overworld from [-2, -2] to [3, 4] to be force loaded
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+Successfully filled 1175 block(s)
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> arsenal_visual_test client unpack TestPlayer
+Client QA sent: unpack
+
+> arsenal_stress catalogue
+CATALOGUE items=448 freeFallBombs=14
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:abrams_vehicle
+Replaced a slot on TestPlayer with [M1A2 SEPv3 Abrams]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute as TestPlayer at @s run arsenal_stress mount
+MOUNTED ABRAMS
+
+> gamemode survival TestPlayer
+Set TestPlayer's game mode to Survival Mode
+
+> effect give TestPlayer minecraft:resistance 9999 4 true
+Applied effect Resistance to TestPlayer
+
+> give TestPlayer aiarsenal:shells_120 16
+Gave 16 [120 mm tank rounds] to TestPlayer
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":46,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":1,"loaded":34,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":49,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":4,"loaded":34,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":62,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":0,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":64,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":2,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":136,"reloadTicks":0,"reloadTube":0,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":146,"reloadTicks":5,"reloadTube":0,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":158,"reloadTicks":13,"reloadTube":0,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":1,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":168,"reloadTicks":21,"reloadTube":0,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":176,"reloadTicks":27,"reloadTube":0,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":1,"loaded":33,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":187,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":34,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":188,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":34,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":189,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":0,"loaded":34,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":197,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":1,"loaded":33,"fired":2,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":198,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":2,"loaded":33,"fired":2,"engine":false,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":206,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":6,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":207,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":7,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":207,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":7,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":208,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":8,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":217,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":2,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":2.692499542849729,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":218,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":0,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":2.8184986929294467,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":227,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":3,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":3.4659871785211807,"hp":650.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":229,"reloadTicks":0,"reloadTube":-1,"reloadRequired":30,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":2,"loaded":33,"fired":2,"engine":true,"x":0.5,"z":3.6374821011899283,"hp":650.0,"supply":15}
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+Set TestPlayer's game mode to Creative Mode
+
+> ride TestPlayer dismount
+TestPlayer stopped riding M1A2 SEPv3 Abrams
+
+> kill @e[type=!minecraft:player]
+Killed 13 entities
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 16 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:ah64_vehicle
+Replaced a slot on TestPlayer with [AH-64D Apache]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=PASS using=false
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+Killed 20 entities
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:ak12
+Replaced a slot on TestPlayer with [AK-12 (6P70)]
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:ak12{Ammo:0}
+Replaced a slot on TestPlayer with [AK-12 (6P70)]
+
+> gamemode survival TestPlayer
+Set TestPlayer's game mode to Survival Mode
+
+> effect give TestPlayer minecraft:resistance 9999 4 true
+Applied effect Resistance to TestPlayer
+
+> give TestPlayer aiarsenal:mag_ak12 16
+Gave 16 [6L31 Magazine (5.45x39)] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 30}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 31}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 31}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 27}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 24}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 24}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ak12", Count: 1b, tag: {Ammo: 20}}
+
+> gamemode creative TestPlayer
+Set TestPlayer's game mode to Creative Mode
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 17 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:an602
+Replaced a slot on TestPlayer with [AN602 "Tsar Bomba"]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+Killed Nuclear Bomb
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:arming_plug
+Replaced a slot on TestPlayer with [Arming Plug]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=PASS using=false
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate
+Replaced a slot on TestPlayer with [Armour plate]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_balkenkreuz
+Replaced a slot on TestPlayer with [Armour plate: Balkenkreuz]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_balkenkreuz
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_hazard
+Replaced a slot on TestPlayer with [Armour plate (hazard stripes)]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_hazard
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_roundel
+Replaced a slot on TestPlayer with [Armour plate: RAF roundel]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_roundel
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_star_red
+Replaced a slot on TestPlayer with [Armour plate: red star]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_star_red
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_us_star
+Replaced a slot on TestPlayer with [Armour plate: US star]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_us_star
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_vdv
+Replaced a slot on TestPlayer with [Armour plate: VDV emblem]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_vdv
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armor_plate_vmf
+Replaced a slot on TestPlayer with [Armour plate: Navy anchor]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute if block 0 -60 2 aiarsenal:armor_plate_vmf
+Test passed
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+Successfully filled 1 block(s)
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:armored_cab
+Replaced a slot on TestPlayer with [Armoured cab]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=PASS using=false
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:artillery_designator
+Replaced a slot on TestPlayer with [Artillery designator]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=PASS using=false
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:bandage
+Replaced a slot on TestPlayer with [Bandage]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=CONSUME block=PASS using=true
+
+> execute as TestPlayer run arsenal_stress playerstatus
+{"item":"aiarsenal:bandage","count":1,"health":8.0,"using":true,"effects":["minecraft:resistance"]}
+
+> execute as TestPlayer run arsenal_stress playerstatus
+{"item":"aiarsenal:bandage","count":1,"health":8.0,"using":true,"effects":["minecraft:resistance"]}
+
+> execute as TestPlayer run arsenal_stress playerstatus
+{"item":"minecraft:air","count":0,"health":11.0,"using":false,"effects":["minecraft:resistance"]}
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> gamemode creative TestPlayer
+Set TestPlayer's game mode to Creative Mode
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> kill @e[type=!minecraft:player]
+No entity was found
+
+> fill -10 -60 -6 10 -46 35 minecraft:air
+No blocks were filled
+
+> fill -12 -61 -8 12 -61 38 minecraft:smooth_stone
+No blocks were filled
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:barbed_wire
+Replaced a slot on TestPlayer with [Barbed Wire Fence]
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
