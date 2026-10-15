@@ -163,6 +163,63 @@ def javelin(row,index):
     row['method']='actual RMB hold -> seeker lock -> release -> ammunition consumed -> target killed; twice'
 
 
+def drone(row,index):
+    def d(action='status'):
+        return json.loads(g.command('execute as TestPlayer at @s run arsenal_drone_context '+action))
+    def restored():
+        state=d();return (not state['session'] and state['cameraPlayer'] and state['mode']=='survival'
+                         and state['originDistance']<2 and not state['dummyPresent'])
+    reset_player(10000+index*512,2000)
+    row['start']=d('prepare '+row['id']);save()
+    try:
+        g.key('keydown','space');time.sleep(1.2);g.key('keyup','space')
+        wait(lambda:d()['y']>row['start']['y']+3,90)
+        row['flying']=d();g.screenshot('drone-'+row['id'].split(':')[1]);save()
+        if 'fpv' in row['id']:
+            key('f')
+            wait(lambda:d()['removed'] and d()['completedTasks']>0 and d()['activeBlasts']==0,90)
+            wait(restored,30)
+            row['detonation']=d()
+            row['method']='survival placement -> goggles link/camera -> actual Space takeoff -> F detonation -> automatic operator/camera/dummy restoration'
+        else:
+            wait(lambda:d()['state']==2,90)
+            row['designation']=d('designate')
+            for n in range(2):
+                before=d();key('f')
+                wait(lambda:d()['ammo']<before['ammo'] and d()['projectiles']>before['projectiles'],30)
+                time.sleep(2)
+            wait(lambda:d()['completedTasks']>=2 and d()['activeBlasts']==0,120)
+            row['fired']=d();key('BackSpace');wait(restored,30)
+            row['firstExit']=d();d('reconnect');assert d()['session']
+            g.screenshot('drone-reconnect-'+row['id'].split(':')[1])
+            key('BackSpace');wait(restored,30);row['secondExit']=d()
+            row['method']='survival placement -> tablet link -> actual Space takeoff -> production designation -> actual F twice/projectiles/impacts -> Backspace restore -> controller reconnect -> Backspace restore'
+            row['unverified']='full RTB/landing, rearming and long-range loss-of-link'
+    finally:
+        g.key('keyup','space')
+        g.command('execute as TestPlayer run arsenal_drone_context cleanup')
+
+
+def tool(row,index):
+    def t(action):return json.loads(g.command('execute as TestPlayer at @s run arsenal_tool_context '+action))
+    reset_player(13000+index*128,2000)
+    if index==0:
+        row['start']=t('trench')
+        wait(lambda:t('trenchstatus')['floors']==5 and t('trenchstatus')['open']==5 and t('trenchstatus')['pending']==0,30)
+        row['result']=t('trenchstatus');assert row['result']['toolDamage']>0
+        row['method']='production two-point tool interactions -> five actual dug cells and duckboard floors -> durability loss'
+    elif index==1:
+        row['result']=t('arming');assert row['result']['armedThenDisarmed'] and row['result']['plugCount']==1
+        row['method']='survival RDS-4 item placement -> production arming plug interaction -> armed -> disarmed'
+    else:
+        row['start']=t('ied');wait(lambda:t('iedstatus')['armed'],30)
+        g.key('mousedown','3');time.sleep(.6);g.key('mouseup','3')
+        wait(lambda:not t('iedstatus')['present'] and t('iedstatus')['completedTasks']>0 and t('iedstatus')['changedBlocks']>0 and t('iedstatus')['activeBlasts']==0,60)
+        row['result']=t('iedstatus')
+        row['method']='survival IED placement -> production sneak-link -> actual arming delay -> real RMB remote trigger -> completed destructive blast'
+    g.screenshot('tool-'+row['id'].split(':')[1])
+
+
 def run():
     global SERVER,CLIENT
     g.configure('server',server=True)
@@ -203,7 +260,9 @@ overrideHeight:700
     cases=([(dict(id='aiarsenal:'+id),missile,i) for i,id in enumerate(inventory['missiles'])]+
            [(dict(row),craft,i) for i,row in enumerate(inventory['craft'])]+
            [(dict(id='aiarsenal:'+id),cannon,i) for i,id in enumerate(['cannon_fr6','cannon_ri12'])]+
-           [(dict(id='aiarsenal:javelin'),javelin,0)])
+           [(dict(id='aiarsenal:javelin'),javelin,0)]+
+           [(dict(id='aiarsenal:'+id),drone,i) for i,id in enumerate(['fpv7','fpv10','mq9','orion'])]+
+           [(dict(id='aiarsenal:'+id),tool,i) for i,id in enumerate(['entrenching_tool','arming_plug','remote_detonator'])])
     REPORT['expectedCases']=len(cases);save()
     for row,action,index in cases:
         row['status']='RUNNING';REPORT['cases'].append(row);save()
@@ -216,6 +275,10 @@ overrideHeight:700
             if SERVER.poll() is not None or CLIENT.poll() is not None:raise
         finally:
             g.key('mouseup','1');g.key('mouseup','3');save()
+    REPORT['recipes']=json.loads(g.command('execute as TestPlayer run arsenal_tool_context recipes'))
+    recipe_file=g.RUNS/'server/logs/context-recipes.json'
+    (g.LOGS/'context-recipes.json').write_bytes(recipe_file.read_bytes());save()
+    assert REPORT['recipes']['status']=='PASS', REPORT['recipes']
     g.command('arsenal_stress catalogue',expect='CATALOGUE')
     g.command('arsenal_stress archive',expect='ARCHIVE SAVED')
     g.command('save-all flush',expect='Saved');g.command('stop');SERVER.wait(timeout=120)
