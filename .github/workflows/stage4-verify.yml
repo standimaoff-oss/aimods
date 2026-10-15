@@ -133,5 +133,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.8.jar > verification/SHA256SUMS
-          gh release create "stage4-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.8.jar verification/SHA256SUMS models/napoleonic_arms.blend verification/videos/*.mp4 --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 4: France and Russia 1812, custom smoke — pending review' --notes "Source $GITHUB_SHA. Real installed Forge client/server, 168 GameTests, saved-world migration, continuous X11+PulseAudio captures. Manual visual review required. Software GPU only; no hardware FPS claim."
+          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.9.jar > verification/SHA256SUMS
+          gh release create "stage4-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.9.jar verification/SHA256SUMS models/napoleonic_arms.blend verification/videos/*.mp4 --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 4: France and Russia 1812, custom smoke — pending review' --notes "Source $GITHUB_SHA. Real installed Forge client/server, 170 GameTests, saved-world migration, continuous X11+PulseAudio captures. Manual visual review required. Software GPU only; no hardware FPS claim."

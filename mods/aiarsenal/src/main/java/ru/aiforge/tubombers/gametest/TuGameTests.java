@@ -35,6 +35,68 @@ public final class TuGameTests {
     private TuGameTests() {
     }
 
+    private static BomberEntity loadedAt(GameTestHelper h, AircraftType type, Vec3 at) {
+        var tag = new net.minecraft.nbt.CompoundTag();
+        tag.putString("id", "aiarsenal:" + type.id);
+        tag.putFloat("qx", 0); tag.putFloat("qy", -.38268343f);
+        tag.putFloat("qz", 0); tag.putFloat("qw", .9238795f);
+        tag.putDouble("vx", -2); tag.putDouble("vz", 2);
+        tag.putFloat("throttle", .35f); tag.putFloat("thrust", .35f);
+        tag.putFloat("health", 100); tag.putInt("flags", BomberEntity.F_ENGINES);
+        // Exactly the vanilla summon order: NBT first, requested location afterward.
+        return (BomberEntity) EntityType.loadEntityRecursive(tag, h.getLevel(), e -> {
+            e.moveTo(at.x, at.y, at.z, 0, 0);
+            return e;
+        });
+    }
+
+    @GameTest(template = T)
+    public static void summonUsesFinalPositionBeforePhysics(GameTestHelper h) {
+        var pos = h.absolutePos(new BlockPos(4, 80, 4));
+        var at = Vec3.atCenterOf(pos);
+        for (AircraftType type : AircraftType.values()) {
+            BomberEntity b = loadedAt(h, type, at);
+            h.assertTrue(b != null, "loaded " + type.id);
+            try {
+                b.tick();
+                h.assertTrue(!b.isRemoved() && !b.isDestroyed(), "summoned aircraft remains alive");
+                h.assertTrue(b.position().distanceTo(at) < 1, "physics must start at summon location, not NBT origin");
+                h.assertTrue(Math.abs(b.st.x - b.getX()) < .0001 && Math.abs(b.st.y - b.getY()) < .0001,
+                        "entity and flight state agree after the first tick");
+                h.assertTrue(Math.abs(b.health() - 100) < .001 && Math.abs(b.in.throttle - .35f) < .001,
+                        "position reconciliation cannot reset health or controls");
+                h.assertTrue(Math.abs(b.st.yawDeg() - 45) < 2 && b.st.vel.length() > 1,
+                        "saved attitude and velocity retained");
+            } finally { b.discard(); }
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = T)
+    public static void saveReloadRetainsFlightStateAfterPositionSync(GameTestHelper h) {
+        var at = Vec3.atCenterOf(h.absolutePos(new BlockPos(4, 80, 4)));
+        for (AircraftType type : AircraftType.values()) {
+            BomberEntity original = loadedAt(h, type, at);
+            original.tick();
+            var saved = new net.minecraft.nbt.CompoundTag();
+            original.saveWithoutId(saved);
+            saved.putString("id", "aiarsenal:" + type.id);
+            var expected = original.position();
+            var attitude = new org.joml.Quaternionf(original.st.q);
+            original.discard();
+            var copy = (BomberEntity) EntityType.loadEntityRecursive(saved, h.getLevel(), e -> e);
+            h.assertTrue(copy != null, "reload " + type.id);
+            try {
+                copy.tick();
+                h.assertTrue(copy.position().distanceTo(expected) < 1, "saved world location retained");
+                h.assertTrue(Math.abs(copy.st.q.dot(attitude)) > .99f, "saved attitude retained");
+                h.assertTrue(Math.abs(copy.health() - 100) < .001 && Math.abs(copy.in.throttle - .35f) < .001,
+                        "saved health and throttle retained");
+            } finally { copy.discard(); }
+        }
+        h.succeed();
+    }
+
     /** flat ground at y = 64 everywhere */
     private static final FlightModel.Env FLAT = new FlightModel.Env() {
         @Override

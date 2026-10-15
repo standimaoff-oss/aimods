@@ -88,14 +88,15 @@ def run(g,log,window):
  # Real turbine flags drive live engine callbacks on both bomber types, preserving their flight physics.
  for name in ['tu95ms','tu160']:
   g.command('kill @e[tag=qa_engine]');g.command('fill -35 -61 16 35 -61 80 minecraft:smooth_stone')
-  # Use the actual item-placement initialization. Vanilla /summon sets the requested
-  # coordinates AFTER reading NBT; the old fixture initialized flight state at (0,0,0).
-  g.command(f'execute positioned 0.5 -60 48.5 rotated 0 0 run tubombers spawn {name}', 'spawned')
-  g.command(f'tag @e[type=aiarsenal:{name},limit=1] add qa_engine')
-  g.command('execute positioned 0.5 -60 48.5 run tubombers set throttle 0.2', 'set throttle')
+  # Exercise vanilla summon again: production now reconciles its final location
+  # before the first physics step, rather than relying on the placement-command path.
+  g.command(f'summon aiarsenal:{name} 0.5 -60.0 48.5 '+'{Tags:["qa_engine"],flags:84,qx:0f,qy:0f,qz:0f,qw:1f,throttle:0.2f,thrust:0.2f,ground:1b}', 'Summoned')
   aim(16.5,-60,24.5,0.5,-56,41.5);start=log.stat().st_size
   record=Recording(g,'engine-'+name,window=window);time.sleep(5)
   state=g.command('data get entity @e[tag=qa_engine,limit=1]');assert 'No entity' not in state,state
+  pos=g.command('data get entity @e[tag=qa_engine,limit=1] Pos')
+  xyz=re.search(r'data: \[([-0-9.Ee]+)d, ([-0-9.Ee]+)d, ([-0-9.Ee]+)d\]',pos)
+  assert xyz and abs(float(xyz[1])-.5)<2 and abs(float(xyz[2])+60)<2 and abs(float(xyz[3])-48.5)<2, 'bomber moved away from its spawn: '+pos
   health=re.search(r'health: ([0-9.]+)f',state);assert health and float(health[1])>0,state
   flags=re.search(r'flags: (\d+)',state);assert flags and int(flags[1])&4 and not int(flags[1])&32,state
   g.screenshot('engine-'+name+'-exhaust');time.sleep(2);record.stop()
