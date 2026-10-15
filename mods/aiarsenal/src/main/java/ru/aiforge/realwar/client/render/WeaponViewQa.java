@@ -41,6 +41,11 @@ public final class WeaponViewQa {
                     // Rebuild Forge's page selection around the selected tab, not just its item grid.
                     screen.resize(mc, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
                 } catch (ReflectiveOperationException ex) { throw new IllegalStateException(ex); }
+                var order = net.minecraftforge.common.CreativeModeTabRegistry.getSortedCreativeModeTabs().stream()
+                        .map(BuiltInRegistries.CREATIVE_MODE_TAB::getKey)
+                        .filter(id -> id.getNamespace().equals("aiarsenal")).map(ResourceLocation::getPath).toList();
+                if (!order.equals(ModTabs.SECTIONS)) throw new IllegalStateException("era tab order: " + order);
+                AiArsenal.LOGGER.info("VIEW TAB ORDER PASS {}", order);
                 for (var id : ModTabs.SECTIONS) AiArsenal.LOGGER.info("VIEW TAB {} items={}", id, ModTabs.content(id).size());
             }
             default -> throw new IllegalArgumentException(action);

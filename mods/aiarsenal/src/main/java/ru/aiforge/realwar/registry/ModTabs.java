@@ -103,10 +103,16 @@ public final class ModTabs {
     }
 
     private static void section(String id, String icon) {
-        TABS.register(id, () -> CreativeModeTab.builder()
-                .title(Component.translatable("itemGroup.aiarsenal." + id))
-                .icon(() -> new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal", icon))))
-                .displayItems((params, out) -> content(id).forEach(out::accept)).build());
+        TABS.register(id, () -> {
+            var builder = CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.aiarsenal." + id))
+                    .icon(() -> new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal", icon))))
+                    .displayItems((params, out) -> content(id).forEach(out::accept));
+            // Forge otherwise sorts our IDs alphabetically, leaving WWII weapons on a separate page.
+            int index = SECTIONS.indexOf(id);
+            if (index > 0) builder.withTabsBefore(new ResourceLocation("aiarsenal", SECTIONS.get(index - 1)));
+            return builder.build();
+        });
     }
 
     static {

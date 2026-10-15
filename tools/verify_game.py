@@ -148,7 +148,7 @@ narrator:0
 soundCategory_master:0.0
 chatVisibility:0
 chatOpacity:0.0
-textBackgroundOpacity:0.0
+textBackgroundOpacity:0.5
 fullscreen:false
 overrideWidth:1000
 overrideHeight:700
@@ -424,9 +424,9 @@ def view_lifecycle(client_log, window):
     assert int(re.search(r'frames=(\d+)',fx_action(client_log,'status'))[1])>0
     print('LIFECYCLE PASS resize resources dimension-change shader-failure recovery',flush=True)
     fx_action(client_log,'clear')
-    view_action(client_log,'view_tabs');time.sleep(3);screenshot('catalog-01-ww2-weapons')
+    view_action(client_log,'view_tabs');key('mousemove','--window',window,'20','20');time.sleep(3);screenshot('catalog-01-ww2-weapons')
     key('key','Escape');time.sleep(1)
-    view_action(client_log,'view_modern');time.sleep(3);screenshot('catalog-02-modern-vehicles')
+    view_action(client_log,'view_modern');key('mousemove','--window',window,'20','20');time.sleep(3);screenshot('catalog-02-modern-vehicles')
     key('key','Escape');time.sleep(1)
 
 
