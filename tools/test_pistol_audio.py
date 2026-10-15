@@ -15,6 +15,13 @@ class PistolAudio(unittest.TestCase):
         self.assertLess(float(np.max(np.abs(data))), .22)
         self.assertGreater(float(np.sqrt(np.mean(data**2))), .02)
 
+    def test_ppsh_packet_burst_mix_headroom(self):
+        data, _ = sf.read(ASSETS / 'sounds/smg_ppsh.ogg')
+        sample = json.loads((ASSETS / 'sounds.json').read_text())['smg_ppsh']['sounds'][0]
+        # Eight coincident voices at full master volume, including the server's 3x gain.
+        self.assertLess(float(np.max(np.abs(data))) * 3 * sample['volume'] * 8, .85)
+        self.assertGreaterEqual(sample['attenuation_distance'], 48)
+
     def test_decodable_distinct_mono_sounds(self):
         signals = []
         definitions = json.loads((ASSETS / 'sounds.json').read_text())

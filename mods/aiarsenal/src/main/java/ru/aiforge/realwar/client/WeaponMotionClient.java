@@ -22,6 +22,8 @@ public final class WeaponMotionClient {
     private static Object level;
     private static final class Track {
         final WeaponMotion motion = new WeaponMotion();
+        final ru.aiforge.realwar.animation.MovementSpeedWindow remoteSpeed = new ru.aiforge.realwar.animation.MovementSpeedWindow();
+        double measuredSpeed;
         double x, z;
         Object weapon;
         Track(Player p) { x = p.getX(); z = p.getZ(); weapon = p.getMainHandItem().getItem(); }
@@ -51,7 +53,8 @@ public final class WeaponMotionClient {
             if (t == null || t.weapon != p.getMainHandItem().getItem()) { t = new Track(p); STATES.put(p, t); }
             double speed = Math.hypot(p.getX() - t.x, p.getZ() - t.z);
             t.x = p.getX(); t.z = p.getZ();
-            t.motion.tick(speed > 1 ? 0 : speed, p.isSprinting(), p.isCrouching(), p.onGround());
+            t.measuredSpeed = p == mc.player ? (speed > 1 ? 0 : speed) : t.remoteSpeed.tick(speed);
+            t.motion.tick(t.measuredSpeed, p.isSprinting(), p.isCrouching(), p.onGround());
         }
     }
     public static WeaponMotion.Frame frame(LivingEntity e, float pt, float ads, boolean reload, boolean pistol) {
@@ -61,6 +64,7 @@ public final class WeaponMotionClient {
     public static String status(Player p) {
         Track t = STATES.get(p);
         return p.getGameProfile().getName() + ":" + (t == null ? "NONE" : t.motion.mode())
+                + ":speed=" + (t == null ? 0 : t.measuredSpeed) + ":x=" + p.getX() + ":z=" + p.getZ()
                 + ":sprint=" + p.isSprinting() + ":crouch=" + p.isCrouching() + ":ground=" + p.onGround();
     }
 }

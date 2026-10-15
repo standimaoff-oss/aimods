@@ -15,6 +15,22 @@ public final class WeaponMotionTests {
         return m;
     }
     @GameTest(template="arena", batch="rw_motion")
+    public static void remote_packet_gaps_do_not_reset_walking(GameTestHelper h) {
+        var speed = new ru.aiforge.realwar.animation.MovementSpeedWindow();
+        var motion = new WeaponMotion();
+        // 10 Hz remote rendering/network bursts on a 20 Hz client tick loop.
+        for (int i=0;i<40;i++) {
+            motion.tick(speed.tick(i % 2 == 0 ? .43 : 0), false, false, true);
+            if (i>=8) h.assertTrue(motion.mode()==WeaponMotion.Mode.WALK,"walk survives inter-packet zero ticks");
+        }
+        for (int i=0;i<16;i++) motion.tick(speed.tick(i % 2 == 0 ? .172 : 0),false,false,true);
+        h.assertTrue(motion.mode()==WeaponMotion.Mode.SLOW,"slow walk stays distinct");
+        for (int i=0;i<8;i++) motion.tick(speed.tick(0),false,false,true);
+        h.assertTrue(motion.mode()==WeaponMotion.Mode.IDLE,"stop settles within 400 ms");
+        h.assertTrue(speed.tick(50)==0 && speed.tick(Double.NaN)==0,"teleport/malformed sample clears history");
+        h.succeed();
+    }
+    @GameTest(template="arena", batch="rw_motion")
     public static void five_states_and_airborne(GameTestHelper h) {
         h.assertTrue(settled(0,false,false).mode()==WeaponMotion.Mode.IDLE,"standing");
         h.assertTrue(settled(.06,false,false).mode()==WeaponMotion.Mode.SLOW,"slow walk");

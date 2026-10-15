@@ -729,6 +729,8 @@
     "sounds": [
       {
         "name": "aiarsenal:smg_ppsh",
+        "volume": 0.18,
+        "attenuation_distance": 64,
         "stream": false
       }
     ],

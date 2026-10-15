@@ -34,3 +34,11 @@ Specs: `notes/_tz/TZ-ai-forge-mod.md`, `TZ_MODEL_VIEW_PRO_v2.0.md`.
 The recoil edit accidentally joined the load-reset statements onto a `//` comment.
 The existing one-ball-per-charge GameTest correctly failed. Restored the explicit
 LOAD=-1 and RECOIL=10 statements; no test assertion was weakened.
+
+## Runtime review of 38764280939 — rejected, not published
+- Build, 26 Python checks, 167 GameTests and saved-world migration passed. All four flintlocks damaged live husks; both cannons loaded/fired and the RPG produced an actual destructive impact with original smoke. Those seven recordings passed native audio gates.
+- Remote WALK sampled a zero-displacement interpolation tick as IDLE. Added an eight-tick displacement window for remote players only, with a GameTest for packet gaps, slow walking, stopping and teleport reset; no forced animation state or relaxed expected state.
+- TT-33 sprint still showed only a sliver in the F2 frame. Raised the sprint pose and changed its pitch upward rather than just reducing the previous downward angle.
+- Both bomber screenshots were invalid: vanilla summon applied position after NBT initialized the separate flight state at the origin, so the aircraft fell and crashed. Replaced that fixture with the existing `/tubombers spawn` item-placement initialization and added live health/engine/destroyed-state checks before capture and an existence check afterward. No physics or damage bypass.
+- The two crash recordings and the burst-fired walking PPSh recording clipped. Bomber crash recordings must be replaced, not normalized. Added PPSh sound-definition headroom for eight coincident packet-delivered voices at full master volume, preserving audible range, with a source-mix test. Native recording/audio thresholds are unchanged.
+- New run must pass the entire suite and visual review before publication. The prior stage4-gameplay.json alone was insufficient evidence of live engines; the missing aircraft in actual F2 captures rejected it.
