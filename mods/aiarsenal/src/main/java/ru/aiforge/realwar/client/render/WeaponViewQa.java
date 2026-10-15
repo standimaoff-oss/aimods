@@ -15,6 +15,7 @@ public final class WeaponViewQa {
         if (!Boolean.getBoolean("aiarsenal.visualQa")) return "disabled";
         Minecraft mc = Minecraft.getInstance();
         switch (action) {
+            case "view_shaderfail" -> ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer.failNextShaderForQa();
             case "view_fov90" -> mc.options.fov().set(90);
             case "view_fov70" -> mc.options.fov().set(70);
             case "view_scale3" -> { mc.options.guiScale().set(3); mc.resizeDisplay(); }

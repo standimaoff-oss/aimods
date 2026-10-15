@@ -47,6 +47,7 @@ public final class VolumeGlRenderer {
     private static int lowWidth;
     private static int lowHeight;
     private static boolean failed;
+    private static boolean qaFailNextShader;
     private static boolean warmed;
     private static boolean loggedRenderer;
     private static boolean softwareRenderer;
@@ -400,6 +401,7 @@ public final class VolumeGlRenderer {
         dataTexture = vao = vbo = rayProgram = compositeProgram = 0;
         fullWidth = fullHeight = lowWidth = lowHeight = 0;
         failed = false;
+        qaFailNextShader = false;
         warmed = false;
         frameCounter = lastDrawNanos = 0;
     }
@@ -417,7 +419,19 @@ public final class VolumeGlRenderer {
         return n2;
     }
 
+    /** Test the REAL compiler-error/fallback path, only in an explicitly opted-in client. */
+    public static void failNextShaderForQa() {
+        if (!Boolean.getBoolean("aiarsenal.visualQa")) throw new IllegalStateException("QA is disabled");
+        reset();
+        qaFailNextShader = true;
+        AiArsenal.LOGGER.info("VIEW QA forcing one shader compiler failure");
+    }
+
     private static String loadShader(String string) throws Exception {
+        if (qaFailNextShader) {
+            qaFailNextShader = false;
+            return "#version 150\nthis is intentionally invalid GLSL for opt-in QA;";
+        }
         String string2;
         ResourceLocation resourceLocation = new ResourceLocation("aiarsenal", "shaders/volpyro/" + string);
         try (InputStream inputStream = ((Resource)Minecraft.getInstance().getResourceManager().getResource(resourceLocation).orElseThrow()).open();){

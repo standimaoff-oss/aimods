@@ -114,10 +114,10 @@ public final class VolumetricEffects {
                 VolumetricFxManager.recordRocket(-27, p.add(i * 0.5, i * 0.7, 0), new Vec3(0.5, 0.7, 0), 1);
         }
         String status = String.format(java.util.Locale.ROOT,
-            "Arsenal VolPyro: active=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s",
+            "Arsenal VolPyro: active=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s world=%s",
             active(), VolumetricFxManager.volumeCount(), VolumetricFxManager.plumeCount(),
             VolumeGlRenderer.frameCounter(), VolumeGlRenderer.lastDrawNanos() / 1e6,
-            VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName());
+            VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName(), mc.level.dimension().location());
         AiArsenal.LOGGER.info("FX QA {}: {}", effect, status);
         return status;
     }

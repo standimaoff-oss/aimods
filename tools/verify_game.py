@@ -312,6 +312,9 @@ def ww2_weapons(client_log):
         if os.environ.get('QA_STAGE1D') == '1':
             key('key','F5'); key('key','F5'); time.sleep(2)
             screenshot(name + '-08-third-person')
+            key('mousedown','3');time.sleep(2)
+            screenshot(name + '-10-third-person-aim')
+            key('mouseup','3')
             key('key','F5')
             key('mousedown','3'); key('keydown','w'); time.sleep(.8)
             screenshot(name + '-09-moving-ads')
@@ -344,6 +347,33 @@ def assert_scope_mask(name):
     print(f'OPTIC MASK PASS {name} black={fraction:.3f}',flush=True)
 
 
+def fx_action(client_log, action):
+    start=client_log.stat().st_size
+    command('arsenal_visual_test client '+action+' TestPlayer', 'Client QA sent: '+action)
+    deadline=time.monotonic()+120
+    while time.monotonic()<deadline:
+        with client_log.open('rb') as f:
+            f.seek(start); fresh=f.read().decode('utf-8',errors='replace')
+        lines=[line for line in fresh.splitlines() if 'FX QA '+action+':' in line]
+        if lines:
+            print(lines[-1],flush=True)
+            return lines[-1]
+        time.sleep(.1)
+    raise AssertionError('Missing FX QA acknowledgment: '+action)
+
+
+def reload_resources(client_log):
+    start=client_log.stat().st_size
+    view_action(client_log,'view_reload')
+    end=time.monotonic()+180
+    while time.monotonic()<end:
+        with client_log.open('rb') as f:
+            f.seek(start);fresh=f.read().decode('utf-8',errors='replace')
+        if 'VIEW RELOAD PASS' in fresh:return
+        time.sleep(.5)
+    raise AssertionError('resource reload did not complete')
+
+
 def view_lifecycle(client_log, window):
     command('clear TestPlayer')
     command('item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:5}')
@@ -359,19 +389,39 @@ def view_lifecycle(client_log, window):
     key('mousedown','3');time.sleep(2)
     screenshot('lifecycle-02-resize');assert_scope_mask('lifecycle-02-resize')
     key('mouseup','3')
-    start=client_log.stat().st_size
-    view_action(client_log,'view_reload')
-    end=time.monotonic()+180
-    while time.monotonic()<end:
-        with client_log.open('rb') as f:
-            f.seek(start);fresh=f.read().decode('utf-8',errors='replace')
-        if 'VIEW RELOAD PASS' in fresh:break
-        time.sleep(.5)
-    else:raise AssertionError('resource reload did not complete')
+    fx_action(client_log,'smoke');time.sleep(2)
+    screenshot('lifecycle-02b-fx-resize')
+    assert int(re.search(r'frames=(\d+)',fx_action(client_log,'status'))[1])>0
+    reload_resources(client_log)
     time.sleep(3)
     key('mousedown','3');time.sleep(2)
     screenshot('lifecycle-03-resource-reload');assert_scope_mask('lifecycle-03-resource-reload')
     key('mouseup','3')
+    fx_action(client_log,'smoke');time.sleep(2)
+    screenshot('lifecycle-03b-fx-resource-reload')
+    assert int(re.search(r'frames=(\d+)',fx_action(client_log,'status'))[1])>0
+    # Exercise actual ClientLevel replacement, not just manually clearing the manager.
+    command('execute in minecraft:the_nether run tp TestPlayer 0 100 0')
+    time.sleep(10)
+    status=fx_action(client_log,'status')
+    assert 'world=minecraft:the_nether' in status and 'volumes=0 plumes=0' in status,status
+    command('execute in minecraft:overworld run tp TestPlayer 0 -60 0 0 0')
+    time.sleep(10)
+    status=fx_action(client_log,'status')
+    assert 'world=minecraft:overworld' in status and 'volumes=0 plumes=0' in status,status
+    screenshot('lifecycle-04-world-return')
+    # Deliberately fail a real GLSL compilation. Test fallback, then resource-reload recovery.
+    view_action(client_log,'view_shaderfail');time.sleep(4)
+    status=fx_action(client_log,'status');assert 'active=false' in status,status
+    command('particle aiarsenal:volume_smoke 0 -59 10 1 1 1 0.01 12 force TestPlayer')
+    time.sleep(1);screenshot('lifecycle-05-shader-fallback')
+    reload_resources(client_log);time.sleep(3)
+    status=fx_action(client_log,'status');assert 'active=true' in status,status
+    fx_action(client_log,'smoke');time.sleep(3)
+    screenshot('lifecycle-06-shader-recovered')
+    assert int(re.search(r'frames=(\d+)',fx_action(client_log,'status'))[1])>0
+    print('LIFECYCLE PASS resize resources dimension-change shader-failure recovery',flush=True)
+    fx_action(client_log,'clear')
     view_action(client_log,'view_tabs');time.sleep(3);screenshot('catalog-01-ww2-weapons')
     key('key','Escape');time.sleep(1)
     view_action(client_log,'view_modern');time.sleep(3);screenshot('catalog-02-modern-vehicles')

@@ -33,6 +33,7 @@ import ru.aiforge.realwar.network.ModNetwork;
 @Mod.EventBusSubscriber(modid = "aiarsenal", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class GunClient {
     private static float ads, adsPrev;
+    private static GunKind lastHeld;
     private static boolean trig, aim, rPrev, bPrev;
     private static long shotN = Long.MIN_VALUE / 2, lastFrameN, reloadN;
     private static float pendP, pendY, debt, debtY;
@@ -66,7 +67,7 @@ public final class GunClient {
     public static boolean scoped() {
         GunKind k = held();
         boolean optic = k == GunKind.M4A1 || k != null && k.scope() || k == GunKind.RPG7 && rpgOptic;
-        return optic && !reloading && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
+        return optic && Minecraft.getInstance().options.getCameraType().isFirstPerson() && !reloading && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
     }
 
     /** RPG-7: PGO-7V3 selected (B) instead of the iron sights */
@@ -122,7 +123,7 @@ public final class GunClient {
     // ------------------------------------------------------------------ input
 
     private static void send(int a) {
-        ModNetwork.CHANNEL.sendToServer(new GunActionPacket(a));
+        if (Minecraft.getInstance().getConnection() != null) ModNetwork.CHANNEL.sendToServer(new GunActionPacket(a));
     }
 
     @SubscribeEvent
@@ -140,6 +141,16 @@ public final class GunClient {
         }
         adsPrev = ads;
         GunKind k = held();
+        if (k != lastHeld) {
+            if (trig) send(Firearms.TRIGGER_UP);
+            if (aim) send(Firearms.AIM_OFF);
+            trig = aim = false;
+            ads = adsPrev = 0f;
+            reloading = false;
+            shotN = Long.MIN_VALUE / 2;
+            pendP = pendY = debt = debtY = 0f;
+            lastHeld = k;
+        }
         boolean ok = p != null && k != null && mc.screen == null && p.getVehicle() == null && !p.isSpectator();
         if (!ok) {
             if (trig) send(Firearms.TRIGGER_UP);
@@ -307,6 +318,7 @@ public final class GunClient {
 
     @SubscribeEvent
     public static void fov(ComputeFovModifierEvent e) {
+        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) return;
         GunKind k = held();
         if (k == null) return;
         float a = adsLerp(Minecraft.getInstance().getFrameTime());
@@ -339,6 +351,8 @@ public final class GunClient {
             else if (k.singleLoad()) historicalScope(g, mc.font, w, h, k);
             else if (k == GunKind.T5000) riflescope(g, mc.font, w, h, mc.options.fov().get() * adsFactor(k));
             else aimpoint(g, w, h);
+        } else if (!mc.options.getCameraType().isFirstPerson()) {
+            hipCross(g, w, h, k, p, 1f);
         } else if (a < 0.4f) {
             hipCross(g, w, h, k, p, 1f - a / 0.4f);
         }

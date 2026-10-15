@@ -100,7 +100,7 @@ def pistol(name,c96):
         w.box(b,45,52,9,17,-12,-2,'Blued',.2);w.box(b,45,52,9,17,2,12,'Blued',.2)
         w.box(g,299,304,6,16,-1,1,'Blued',.2)
         c96_clip(name+'.clip');ammo='clip';origin=w.P(150,-20)
-        grip=w.P(51,-78);support=w.P(117,-45);sight=w.P(42,15)
+        grip=w.P(51,-78);support=w.P(117,-45);sight=w.P(42,16)
     else:
         # TT-33: 196 mm slide, 116 mm barrel, short exposed hammer, narrow 8-round grip.
         w.box(g,22,176,-21,-8,-14,14,'Blued',1)
