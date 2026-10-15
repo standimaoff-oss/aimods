@@ -24,7 +24,7 @@
 - [`ci/glb-tests.log`](ci/glb-tests.log): 2/2 проверки GLB.
   [`ppsh-before-tests.txt`](ppsh-before-tests.txt): **обе проверки проваливаются
   на исходной модели** и обнаруживают ширину 63,5 вместо 153,2 мм.
-- [`ci/gametest.log`](ci/gametest.log): `All 149 required tests passed`.
+- [`ci/gametest.log`](ci/gametest.log.gz): `All 149 required tests passed`.
 - Реальный Minecraft 1.20.1 / Forge 47.4.23 запускался на GitHub runner под
   Xvfb + Mesa llvmpipe, не в локальной Arena-песочнице. Клиент и сервер — userdev.
 - F2-кадры в [`shots/aiarsenal/stage1a`](../../shots/aiarsenal/stage1a), без генеративной графики.

@@ -68,7 +68,7 @@ Source `569247e3ff157472a389af38779f40dd148b52f4`, evidence `3c1f582`.
 | Непрерывные записи | 5 видео со звуком, все peak < 0.99, не тишина |
 
 Логи: [GameTests](run-38726948046/gameTestServer-latest.log),
-[игровой сценарий](run-38726948046/client-driver.log),
+[игровой сценарий](run-38726948046/client-driver.log.gz),
 [installed provenance](run-38726948046/installed-provenance.json),
 [миграция](run-38726948046/ore-migration-driver.log).
 В клиентском логе разрешены только известные для этого QA ошибки: profile key pair
