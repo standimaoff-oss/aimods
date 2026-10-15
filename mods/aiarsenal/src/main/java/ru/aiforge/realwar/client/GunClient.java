@@ -223,11 +223,6 @@ public final class GunClient {
                 shotN = System.nanoTime();
                 shotCount++;
                 if (k != null && k.boltAction()) ads = adsPrev = 0f;
-                var shooter = Minecraft.getInstance().player;
-                if (shooter != null) {
-                    Vec3 muzzle = shooter.getEyePosition().add(shooter.getLookAngle().scale(0.8)).add(0, -0.1, 0);
-                    ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(muzzle.x, muzzle.y, muzzle.z, 0.22f, 0.8f);
-                }
                 if (k != null) {
                     float m = (ads > 0.5f ? 0.65f : 1f);
                     Player p = Minecraft.getInstance().player;

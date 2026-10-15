@@ -1,0 +1,72 @@
+"""Installed Minecraft: actual LMB/R/interaction, server ammo/NBT, F2, continuous audio/video.
+No command directly spawns the new shot/exhaust/blast particles. Disposable QA world only.
+"""
+import time,re,json,math
+from qa_recording import Recording
+
+def run(g,log,window):
+ def view(action):g.view_action(log,action)
+ def wait(predicate,seconds=18):
+  end=time.monotonic()+seconds
+  while time.monotonic()<end:
+   if predicate():return
+   time.sleep(.2)
+  raise AssertionError('Stage4 server state did not reach expected result')
+ def ammo():
+  text=g.command('data get entity TestPlayer SelectedItem');m=re.search(r'Ammo: (\d+)',text)
+  return int(m[1]) if m else 0
+ def use():g.key('mousedown','3');time.sleep(.35);g.key('mouseup','3')
+ def equip(name,nbt=''):g.command('item replace entity TestPlayer hotbar.0 with aiarsenal:'+name+nbt);g.key('key','1');time.sleep(.7)
+ def aim(x,y,z,tx,ty,tz):
+  dx=tx-x;dz=tz-z;dy=ty-y-1.62
+  g.command(f'tp TestPlayer {x:.3f} {y:.3f} {z:.3f} {-math.degrees(math.atan2(dx,dz)):.3f} {-math.degrees(math.atan2(dy,math.hypot(dx,dz))):.3f}')
+ view('view_first');view('view_fov70');g.key('key','Escape');g.key('mouseup','3');g.key('mouseup','1')
+ g.command('clear TestPlayer');g.command('gamemode survival TestPlayer')
+ g.command('effect give TestPlayer minecraft:resistance 9999 4 true');g.command('effect give TestPlayer minecraft:saturation 9999 10 true')
+ for name,supply,country in [('musket_1777','paper_cartridge','fr'),('musket_1808','paper_cartridge','ri'),('pistol_an13','pistol_cartridge','fr'),('pistol_1809','pistol_cartridge','ri')]:
+  g.command('clear TestPlayer');g.command('tp TestPlayer 0.5 -60.0 0.5 0 0')
+  for slot in ['head','chest','legs','feet']:g.command(f'item replace entity TestPlayer armor.{slot} with aiarsenal:uniform_nap_{country}_infantry_{slot}')
+  equip(name,'{Ammo:1}');g.command('give TestPlayer aiarsenal:'+supply+' 4')
+  record=Recording(g,'1812-'+name,window=window)
+  g.screenshot(name+'-hip');g.key('mousedown','3');time.sleep(1);g.screenshot(name+'-ads')
+  start=log.stat().st_size
+  try:g.key('mousedown','1');wait(lambda:ammo()==0,5)
+  finally:g.key('mouseup','1')
+  time.sleep(.2);g.screenshot(name+'-powder-shot');g.key('mouseup','3')
+  with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
+  assert 'FX EMITTER profile=2' in text,'actual discharge did not create powder volume'
+  time.sleep(.5);record.reload();g.key('keydown','r');time.sleep(.3);g.key('keyup','r')
+  time.sleep(1.4);g.screenshot(name+'-loading-paper');time.sleep(2.4);g.screenshot(name+'-ramrod')
+  wait(lambda:ammo()==1,15);g.screenshot(name+'-ready');record.stop()
+ for name in ['sabre_briquet','sabre_1809']:
+  equip(name);g.screenshot(name+'-hand');view('view_front');g.screenshot(name+'-third');view('view_first')
+ for name,charge in [('cannon_fr6','charge_fr6'),('cannon_ri12','charge_ri12')]:
+  g.command('kill @e[tag=qa_cannon]');g.command(f'summon aiarsenal:{name} 0.5 -60.0 5.5 '+'{Tags:["qa_cannon"],Rotation:[0f,0f]}')
+  aim(2.2,-60,3.7,.5,-59.3,5.5);equip(charge)
+  selector='@e[tag=qa_cannon,limit=1]'
+  def loaded():return re.search(r'data: 0\b',g.command('data get entity '+selector+' LoadTicks'))
+  record=Recording(g,'1812-'+name,window=window);use();g.screenshot(name+'-load')
+  wait(loaded,20);g.command('item replace entity TestPlayer hotbar.0 with minecraft:flint_and_steel');time.sleep(.7)
+  g.screenshot(name+'-ready');start=log.stat().st_size;use();time.sleep(.5);g.screenshot(name+'-fire')
+  assert re.search(r'data: -1\b',g.command('data get entity '+selector+' LoadTicks')),'cannon did not fire'
+  with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
+  assert 'FX EMITTER profile=3' in text,'actual cannon ignition did not create volume'
+  time.sleep(2);g.screenshot(name+'-smoke');time.sleep(3);record.stop()
+ g.command('kill @e[tag=qa_cannon]');g.command('gamemode creative TestPlayer');g.command('clear TestPlayer')
+ for action,label in [('view_naparms','weapons'),('view_napguns','artillery'),('view_napammo','ammo')]:
+  view(action);g.screenshot('1812-catalog-'+label);g.key('key','Escape')
+ # Actual bomber bomb falls, hits terrain and routes its own impact packet; not a showcase command.
+ g.command('tp TestPlayer 0.5 -60.0 0.5 0 -5');view('view_first');view('view_fov70')
+ record=Recording(g,'custom-ordinary-explosion',window=window)
+ g.command('summon aiarsenal:bomb 0.5 -55.0 16.5 {type:0,vx:0d,vy:-2d,vz:0d,scale:1f}')
+ time.sleep(1.5);g.screenshot('custom-bomb-impact');time.sleep(3);g.screenshot('custom-bomb-smoke');time.sleep(3);record.stop()
+ # Real turbine flags drive live engine callbacks on both bomber types, preserving their flight physics.
+ for name in ['tu95ms','tu160']:
+  g.command('kill @e[tag=qa_engine]');g.command('fill -35 -61 30 35 -61 65 minecraft:smooth_stone')
+  g.command(f'summon aiarsenal:{name} 0.5 -60.0 48.5 '+'{Tags:["qa_engine"],flags:84,qx:0f,qy:0f,qz:0f,qw:1f,throttle:0.2f,thrust:0.2f,ground:1b}')
+  aim(16.5,-56,24.5,0.5,-56,41.5);start=log.stat().st_size
+  record=Recording(g,'engine-'+name,window=window);time.sleep(5);g.screenshot('engine-'+name+'-exhaust');time.sleep(2);record.stop()
+  with log.open('rb') as f:f.seek(start);text=f.read().decode(errors='replace')
+  assert 'FX EMITTER profile=4' in text,'live bomber engines did not emit'
+ g.command('kill @e[tag=qa_engine]');g.command('tp TestPlayer 0.5 -60.0 0.5 0 0');g.fx_action(log,'clear')
+ (g.LOGS/'stage4-gameplay.json').write_text(json.dumps({'result':'PASS','single_shot_firearms':4,'manually_loaded_cannons':2,'bombers_with_live_exhaust':2,'ordinary_explosion':'live falling FAB-250; actual impact path','screenshots':'Minecraft F2','videos':'visible X11 game window and native PulseAudio'},indent=2)+'\n')

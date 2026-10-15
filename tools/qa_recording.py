@@ -30,9 +30,19 @@ class Recording:
         self.path = folder / (name + '.mp4')
         self.log = (game.LOGS / ('record-' + name + '.log')).open('w')
         window = window or subprocess.check_output(['xdotool', 'search', '--name', 'Minecraft'], text=True).splitlines()[-1]
+        # XGetImage(window) fails for an unmapped/occluded GLFW window after opening a second client.
+        # Capture the actual visible X11 rectangle instead; bring it fully onto the virtual screen first.
+        game.key('windowmap', window)
+        game.key('windowmove', window, '0', '0')
+        game.key('windowraise', window)
+        game.key('windowfocus', '--sync', window)
+        geometry = dict(line.split('=', 1) for line in subprocess.check_output(
+            ['xdotool', 'getwindowgeometry', '--shell', window], text=True).splitlines())
+        size = geometry['WIDTH'] + 'x' + geometry['HEIGHT']
+        display = os.environ.get('DISPLAY', ':99') + '+' + geometry['X'] + ',' + geometry['Y']
         self.process = subprocess.Popen(['ffmpeg', '-nostdin', '-y', '-hide_banner',
             '-thread_queue_size', '1024', '-f', 'x11grab', '-framerate', '20',
-            '-window_id', window, '-i', os.environ.get('DISPLAY', ':99'),
+            '-video_size', size, '-i', display,
             '-thread_queue_size', '1024', '-f', 'pulse', '-fragment_size', '4096',
             '-sample_rate', '48000', '-i', 'qa.monitor',
             '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '24', '-pix_fmt', 'yuv420p',
@@ -70,7 +80,7 @@ class Recording:
                   'audio_channels': audio_stream['channels'],
                   'audio_sample_rate': int(audio_stream['sample_rate']),
                   'audio_measurement': 'native-rate decoded float PCM, max over all channels; no downmix/resampling',
-                  'capture': 'X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis'}
+                  'capture': 'Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis'}
         (self.game.LOGS / ('video-' + self.name + '.json')).write_text(json.dumps(report, indent=2) + '\n')
         # Save diagnostics even on failure. Never attenuate/limit the recording to pass QA.
         passed = metrics['audio_rms'] > .0001 and .002 < metrics['audio_peak'] < .99

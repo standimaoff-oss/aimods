@@ -72,6 +72,10 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<ru.aiforge.realwar.strike.StrikePlaneEntity>> STRIKE_PLANE = ENTITIES.register("strike_plane", () -> EntityType.Builder.<ru.aiforge.realwar.strike.StrikePlaneEntity>of(ru.aiforge.realwar.strike.StrikePlaneEntity::new, MobCategory.MISC).sized(4.0f, 2.0f).clientTrackingRange(48).updateInterval(2).fireImmune().noSummon().build("strike_plane"));
     public static final RegistryObject<EntityType<AirBombEntity>> AIR_BOMB = ENTITIES.register("air_bomb", () -> EntityType.Builder.of(AirBombEntity::new, (MobCategory)MobCategory.MISC).sized(0.6f, 0.6f).clientTrackingRange(32).updateInterval(1).fireImmune().noSummon().build("air_bomb"));
 
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.napoleonic.PowderCannonEntity>> CANNON_FR6 = ENTITIES.register("cannon_fr6", () -> EntityType.Builder.<ru.aiforge.realwar.napoleonic.PowderCannonEntity>of(ru.aiforge.realwar.napoleonic.PowderCannonEntity::new, MobCategory.MISC).sized(1.8f,1.5f).clientTrackingRange(48).updateInterval(2).build("cannon_fr6"));
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.napoleonic.PowderCannonEntity>> CANNON_RI12 = ENTITIES.register("cannon_ri12", () -> EntityType.Builder.<ru.aiforge.realwar.napoleonic.PowderCannonEntity>of(ru.aiforge.realwar.napoleonic.PowderCannonEntity::new, MobCategory.MISC).sized(1.9f,1.6f).clientTrackingRange(48).updateInterval(2).build("cannon_ri12"));
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.napoleonic.CannonballEntity>> CANNONBALL = ENTITIES.register("cannonball", () -> EntityType.Builder.<ru.aiforge.realwar.napoleonic.CannonballEntity>of(ru.aiforge.realwar.napoleonic.CannonballEntity::new, MobCategory.MISC).sized(.18f,.18f).clientTrackingRange(64).updateInterval(1).build("cannonball"));
+
     private ModEntities() {
     }
 

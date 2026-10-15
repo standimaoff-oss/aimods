@@ -43,9 +43,16 @@ public final class VolumetricEffects {
         return true;
     }
 
+    public static boolean profile(double x,double y,double z,double vx,double vy,double vz,int profile) {
+        if (!active()) return false;
+        VolumetricFxManager.arsenalSmoke(new Vec3(x,y,z),new Vec3(vx,vy,vz),profile);
+        if(Boolean.getBoolean("aiarsenal.visualQa")) AiArsenal.LOGGER.info("FX EMITTER profile={} pos={},{},{}",profile,x,y,z);
+        return true;
+    }
+
     public static boolean blast(double x, double y, double z, float radius, long seed) {
         if (!active() || !Float.isFinite(radius)) return false;
-        VolumetricFxManager.addExplosion(new Vec3(x, y, z), Math.max(1f, Math.min(radius, 30f)), seed);
+        VolumetricFxManager.arsenalBlast(new Vec3(x, y, z), Math.max(1f, Math.min(radius, 30f)), seed);
         return true;
     }
 

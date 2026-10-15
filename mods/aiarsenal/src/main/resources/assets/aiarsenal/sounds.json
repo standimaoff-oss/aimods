@@ -787,5 +787,43 @@
       }
     ],
     "subtitle": "subtitles.aiarsenal.pistol_tt33"
+  },
+  "musket_fire": {
+    "subtitle": "subtitles.aiarsenal.musket_fire",
+    "sounds": [
+      {
+        "name": "aiarsenal:musket_fire"
+      }
+    ]
+  },
+  "flintlock_fire": {
+    "subtitle": "subtitles.aiarsenal.flintlock_fire",
+    "sounds": [
+      {
+        "name": "aiarsenal:flintlock_fire"
+      }
+    ]
+  },
+  "powder_cannon": {
+    "subtitle": "subtitles.aiarsenal.powder_cannon",
+    "sounds": [
+      {
+        "name": "aiarsenal:powder_cannon"
+      }
+    ]
+  },
+  "paper_load": {
+    "sounds": [
+      {
+        "name": "aiarsenal:paper_load"
+      }
+    ]
+  },
+  "ramrod": {
+    "sounds": [
+      {
+        "name": "aiarsenal:ramrod"
+      }
+    ]
   }
 }

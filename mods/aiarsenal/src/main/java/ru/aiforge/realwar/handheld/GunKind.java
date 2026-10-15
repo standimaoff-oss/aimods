@@ -36,7 +36,11 @@ public enum GunKind {
     MOSIN_PU("mosin_pu", "round_762x54r", 5, 30, 865, 16f, 11f, 0.055f, 0.00045f, 3.6f, 0.8f, 24, 32, 1f / 3.5f, "rifle_mosin", false),
     K98K_ZF39("k98k_zf39", "round_792x57", 5, 30, 760, 16f, 11f, 0.055f, 0.00045f, 3.4f, 0.8f, 24, 32, 0.25f, "rifle_k98", false),
     C96("c96", "clip_c96", 10, 240, 425, 5.0f, 2.2f, 0.040f, 0.0040f, 1.5f, 0.5f, 60, 60, 0.85f, "pistol_c96", false),
-    TT33("tt33", "mag_tt33", 8, 240, 420, 5.0f, 2.2f, 0.040f, 0.0040f, 1.4f, 0.5f, 38, 48, 0.85f, "pistol_tt33", false);
+    TT33("tt33", "mag_tt33", 8, 240, 420, 5.0f, 2.2f, 0.040f, 0.0040f, 1.4f, 0.5f, 38, 48, 0.85f, "pistol_tt33", false),
+    MUSKET_1777("musket_1777", "paper_cartridge", 1, 3, 420, 18f, 2.0f, .085f, .012f, 4.0f, 1.1f, 160, 160, .82f, "musket_fire", false),
+    MUSKET_1808("musket_1808", "paper_cartridge", 1, 3, 400, 18f, 2.0f, .085f, .013f, 4.0f, 1.1f, 160, 160, .82f, "musket_fire", false),
+    PISTOL_AN13("pistol_an13", "pistol_cartridge", 1, 4, 240, 11f, 1f, .10f, .025f, 3.0f, 1.0f, 120, 120, .88f, "flintlock_fire", false),
+    PISTOL_1809("pistol_1809", "pistol_cartridge", 1, 4, 230, 11f, 1f, .10f, .025f, 3.0f, 1.0f, 120, 120, .88f, "flintlock_fire", false);
 
     public final String id, ammo, sound;
     public final int cap, rpm, reload, reloadEmpty;
@@ -104,7 +108,7 @@ public enum GunKind {
 
     /** closed-bolt guns keep a round in the chamber on a tactical reload; the belt-fed PKP fires from an open bolt */
     public boolean closedBolt() {
-        return !this.launcher() && this != PKP && !this.openBolt() && !this.clipFed() && !this.singleLoad();
+        return !this.flintlock() && !this.launcher() && this != PKP && !this.openBolt() && !this.clipFed() && !this.singleLoad();
     }
 
     /** variable-power riflescope overlay (T-5000: 5-25x) */
@@ -115,7 +119,8 @@ public enum GunKind {
     /** Scopes obstruct stripper clips: load individual rounds into the internal magazine. */
     public boolean singleLoad() { return this == MOSIN_PU || this == K98K_ZF39; }
     public boolean incrementalReload() { return this.tube() || this.singleLoad(); }
-    public boolean pistol() { return this == C96 || this == TT33; }
+    public boolean pistol() { return this == C96 || this == TT33 || this == PISTOL_AN13 || this == PISTOL_1809; }
+    public boolean flintlock() { return this == MUSKET_1777 || this == MUSKET_1808 || this == PISTOL_AN13 || this == PISTOL_1809; }
     public float fixedMagnification() { return this == MOSIN_PU ? 3.5f : this == K98K_ZF39 ? 4f : 1f; }
 
     /** rifles keep one round in the chamber on a tactical reload (30 + 1) */
@@ -150,7 +155,7 @@ public enum GunKind {
 
     /** reloaded from loose rounds (PG-7VL grenades, 12 ga shells) instead of magazines */
     public boolean looseAmmo() {
-        return this.launcher() || this.tube() || this.clipFed() || this.singleLoad();
+        return this.flintlock() || this.launcher() || this.tube() || this.clipFed() || this.singleLoad();
     }
 
     /** ticks between two semi-automatic shots */

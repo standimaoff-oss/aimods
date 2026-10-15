@@ -110,6 +110,13 @@ public final class GunRenderer {
             GlbModel.Animation an = lm.model.animation(k.id + (k.boltAction() ? "_bolt" : "_pump"));
             if (an != null && since - 0.12f < an.duration) pose.sample(an, Math.min(since - 0.12f, an.duration - 0.001f));
         }
+        if (k.flintlock()) {
+            float progress = GunClient.reloadTime() / (k.reload / 20f);
+            pose.hide(k.id + ".charge", !rel || progress < .15f || progress > .43f);
+            pose.hide(k.id + ".ramrod", !rel || progress < .43f || progress > .9f);
+            pose.hide(k.id + ".rod_stowed", rel && progress >= .43f && progress <= .9f);
+            if (!rel && since < .25f) pose.rotate(k.id + ".cock", -.7f * (1 - since / .25f), 1, 0, 0);
+        }
         if (k == GunKind.C96) pose.hide(k.id + ".clip", !rel);
         if (k.singleLoad()) pose.hide(k.id + ".round", !rel);
         boolean flash = since < (k.launcher() ? 0.09f : 0.045f);
@@ -119,7 +126,7 @@ public final class GunRenderer {
             float fs = 0.8f + (GunClient.shotCount() * 37 % 10) * 0.05f;
             pose.scale(k.id + ".flash", fs, fs, fs);
         }
-        if (!k.launcher() && !k.manual() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -(k.pistol() ? 0.032f : 0.075f) * (1f - since / 0.06f));
+        if (!k.launcher() && !k.manual() && !k.flintlock() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -(k.pistol() ? 0.032f : 0.075f) * (1f - since / 0.06f));
         // spent tube: no grenade (RPG-7) / open muzzle without the seeker dome or covers (MANPADS) until the fresh tube is on
         if (k.launcher() && FirearmItem.ammo(st) == 0 && (!rel || k.manpads() && GunClient.reloadTime() < k.reload / 20f * 0.4f))
             pose.hide(k.id + ".round", true);
@@ -289,6 +296,8 @@ public final class GunRenderer {
             pose.hide(id + ".arm_l", true);
             pose.hide(id + ".arm_r", true);
             pose.hide(id + ".flash", true);
+            pose.hide(id + ".ramrod", true);
+            pose.hide(id + ".charge", true);
             if (id.equals("c96")) pose.hide(id + ".clip", true);
             if (id.equals("mosin_pu") || id.equals("k98k_zf39")) pose.hide(id + ".round", true);
             if (stack.getItem() instanceof FirearmItem && FirearmItem.ammo(stack) == 0 && ctx != ItemDisplayContext.GUI) pose.hide(id + ".round", true);

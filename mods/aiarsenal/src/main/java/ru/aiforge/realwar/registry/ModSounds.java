@@ -84,6 +84,12 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> PISTOL_C96 = ModSounds.reg("pistol_c96");
     public static final RegistryObject<SoundEvent> PISTOL_TT33 = ModSounds.reg("pistol_tt33");
 
+    public static final RegistryObject<SoundEvent> MUSKET_FIRE = reg("musket_fire");
+    public static final RegistryObject<SoundEvent> FLINTLOCK_FIRE = reg("flintlock_fire");
+    public static final RegistryObject<SoundEvent> POWDER_CANNON = reg("powder_cannon");
+    public static final RegistryObject<SoundEvent> PAPER_LOAD = ModSounds.reg("paper_load");
+    public static final RegistryObject<SoundEvent> RAMROD = ModSounds.reg("ramrod");
+
     private ModSounds() {
     }
 

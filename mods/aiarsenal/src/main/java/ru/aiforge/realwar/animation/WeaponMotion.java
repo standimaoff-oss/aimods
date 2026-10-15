@@ -25,7 +25,7 @@ public final class WeaponMotion {
         move = smooth(move, moving ? (float)Math.min(1, speed / .22) : 0);
         run = smooth(run, mode == Mode.SPRINT ? 1 : 0);
         crouch = smooth(crouch, sneaking ? 1 : 0);
-        phase += moving ? speed * 8.5 : 0;
+        phase += moving ? speed * 3.0 : 0;
         breath += .085;
         // Rebase both ends together, preserving interpolation through the cycle boundary.
         if (phase > Math.PI * 2) { phase -= Math.PI * 2; oldPhase -= Math.PI * 2; }

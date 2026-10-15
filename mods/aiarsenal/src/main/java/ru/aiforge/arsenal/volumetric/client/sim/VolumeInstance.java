@@ -9,6 +9,8 @@ public final class VolumeInstance {
     public static final int ROCKET_SEGMENT = 3;
     public static final int ROCKET_JET = 4;
     public static final int DEBRIS = 5;
+    /** Arsenal-only smoke profile; zero keeps donor nuclear and legacy simulation unchanged. */
+    public int profile;
     public final int type;
     public Vec3 center;
     public float boundRadius;

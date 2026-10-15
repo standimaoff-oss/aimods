@@ -105,6 +105,9 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void renderers(EntityRenderersEvent.RegisterRenderers e) {
+        e.registerEntityRenderer(ModEntities.CANNON_FR6.get(), ru.aiforge.realwar.client.render.PowderCannonRenderer::new);
+        e.registerEntityRenderer(ModEntities.CANNON_RI12.get(), ru.aiforge.realwar.client.render.PowderCannonRenderer::new);
+        e.registerEntityRenderer(ModEntities.CANNONBALL.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         e.registerBlockEntityRenderer((BlockEntityType)ModBlockEntities.BOMB.get(), BombRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.FALLING_BOMB.get(), FallingBombRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.AT_MISSILE.get(), ru.aiforge.realwar.client.render.AtMissileRenderer::new);

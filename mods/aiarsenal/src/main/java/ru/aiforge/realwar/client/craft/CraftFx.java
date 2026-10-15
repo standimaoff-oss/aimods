@@ -78,7 +78,8 @@ public final class CraftFx {
         if (h.engineOn() && R.nextInt(3) == 0) {
             for (int s = -1; s <= 1; s += 2) {
                 Vec3 ex = h.localToWorld(s * 0.95, 2.55, h.kind == CraftKind.AH64 ? -0.4 : -0.9);
-                level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), ex.x, ex.y, ex.z, 0, 0.02, 0);
+                Vec3 back = h.localToWorld(0,0,-1).subtract(h.localToWorld(0,0,0)).scale(.1);
+                level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get(), ex.x, ex.y, ex.z, back.x, back.y, back.z);
             }
         }
         if (h.hp() < h.kind.hp * 0.3f) {
@@ -104,7 +105,7 @@ public final class CraftFx {
                 if (p.abVis > 0.5f && R.nextInt(2) == 0)
                     level.addParticle(ParticleTypes.FLAME, nz.x, nz.y, nz.z, back.x * 0.5, back.y * 0.5, back.z * 0.5);
                 if (p.engineOn() && p.aux > 0.3f && R.nextInt(3) == 0)
-                    level.addParticle(ParticleTypes.WHITE_ASH, nz.x, nz.y, nz.z, back.x, back.y, back.z);
+                    level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get(), nz.x, nz.y, nz.z, back.x, back.y, back.z);
                 if (p.aux > 0.5f && p.agl < 6 && R.nextInt(2) == 0) {
                     Vec3 g = p.localToWorld(e[0], 0.1, e[2] - 4.0);
                     BlockState st = level.getBlockState(below(g));
@@ -116,7 +117,7 @@ public final class CraftFx {
             if (p.engineOn() && R.nextInt(p.aux < 0.35f ? 1 : 4) == 0) {
                 for (int s = -1; s <= 1; s += 2) {
                     Vec3 ex = p.localToWorld(e[0] + s * (n == 1 ? 0.42 : 0.55), e[1] + 0.05, e[2] - (n == 1 ? 1.0 : 1.3));
-                    level.addParticle(p.aux < 0.35f ? ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get() : ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), ex.x, ex.y, ex.z,
+                    level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get(), ex.x, ex.y, ex.z,
                             -bas[0].x * 0.1 + bas[2].x * s * 0.05, 0.02, -bas[0].z * 0.1 + bas[2].z * s * 0.05);
                 }
             }

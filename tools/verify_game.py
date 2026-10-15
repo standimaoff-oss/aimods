@@ -237,6 +237,9 @@ overrideHeight:700
         volumetric(player, client_log)
     if os.environ.get('QA_STAGE1D') == '1':
         view_lifecycle(client_log, window)
+    if os.environ.get('QA_STAGE4') == '1':
+        from verify_stage4_game import run as napoleonic_run
+        napoleonic_run(sys.modules[__name__], client_log, window)
     if os.environ.get('QA_STAGE2') == '1':
         from verify_stage2_game import run
         run(sys.modules[__name__], server, log, client_log, window)

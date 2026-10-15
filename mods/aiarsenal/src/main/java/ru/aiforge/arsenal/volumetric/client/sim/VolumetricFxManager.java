@@ -232,7 +232,13 @@ public final class VolumetricFxManager {
                 ((VolumeInstance)object).velocity = ((VolumeInstance)object).velocity.scale(0.985).add(0.0, -4.5 * (double)f, 0.0);
             }
             if (((VolumeInstance)object).type == 1) {
-                VolumetricFxManager.updateSmokeClearance(level, (VolumeInstance)object);
+                VolumeInstance v = (VolumeInstance)object;
+                if (v.profile != 0) {
+                    v.center = v.center.add(v.velocity.scale(f));
+                    v.velocity = v.velocity.scale(.94).add(.003, .012, 0);
+                }
+                VolumetricFxManager.updateSmokeClearance(level, v);
+                if (v.profile != 0) v.expansion *= .25f + .75f * Math.min(1, v.age / Math.min(1.4f,v.lifetime));
             }
             if (!(((VolumeInstance)object).age >= ((VolumeInstance)object).lifetime)) continue;
             iterator.remove();
@@ -296,6 +302,42 @@ public final class VolumetricFxManager {
             Math.max(290f, Math.min(6000f, heat)), radius, 0, Vec3.ZERO, 0,
             Math.max(0.25f, Math.min(30f, seconds)), seed, nextKey++));
         trimVolumes();
+    }
+
+    /** Original Arsenal emitters on the donor's volume renderer, not copies of its explosion presets. */
+    public static synchronized void arsenalSmoke(Vec3 pos, Vec3 direction, int profile) {
+        if (!Double.isFinite(pos.lengthSqr()) || !Double.isFinite(direction.lengthSqr())) return;
+        Vec3 dir = direction.lengthSqr() > .0001 ? direction.normalize() : new Vec3(0, .2, 1).normalize();
+        int count = profile == 3 ? 5 : profile == 2 ? 3 : profile == 5 ? 3 : 1;
+        float radius = profile == 3 ? 2.1f : profile == 2 ? .95f : profile == 4 ? .42f : profile == 5 ? .8f : .24f;
+        float life = profile == 3 ? 8f : profile == 2 ? 5.5f : profile == 4 ? 2.4f : profile == 5 ? 3f : .65f;
+        // Coalesce high-rate exhaust locally, but never suppress the first powder discharge.
+        if(profile==4) for(var v:transientVolumes)
+            if(v.profile==4 && v.age<.15 && v.center.distanceToSqr(pos)<.09)return;
+        for (int i=0;i<count;i++) {
+            Vec3 at = pos.add(dir.scale(i * radius * .45));
+            float size=radius*(1-i*.08f);
+            var v=new VolumeInstance(1,at,size*1.4f,profile==4?.32f:profile==1?.45f:1.25f,
+                    290f,size,0,Vec3.ZERO,0,life-i*.12f,(float)((nextKey*.6180339)%1),nextKey++);
+            v.profile=profile;
+            v.velocity=dir.scale(profile==3?3.2:profile==2?1.7:profile==4?1.1:.6).add(0,.18,0);
+            transientVolumes.add(v);
+        }
+        trimVolumes();
+    }
+
+    public static synchronized void arsenalBlast(Vec3 pos,float radius,long seed) {
+        float r=Math.max(1,Math.min(30,radius));
+        transientVolumes.add(new VolumeInstance(2,pos,r*1.8f,1,4800,r*.75f,0,Vec3.ZERO,0,3.2f,(float)(seed&65535)/65535,nextKey++));
+        Random rng=new Random(seed);
+        for(int i=0;i<6;i++) {
+            double angle=i*Math.PI/3;
+            Vec3 dir=new Vec3(Math.cos(angle),.25+rng.nextDouble()*.35,Math.sin(angle));
+            float size=Math.max(.65f,r*.55f);
+            var v=new VolumeInstance(1,pos.add(dir.scale(r*.2)),size*1.4f,1.1f,290,size,0,Vec3.ZERO,0,7f+r*.15f,rng.nextFloat(),nextKey++);
+            v.profile=5;v.velocity=dir.scale(1+r*.12);transientVolumes.add(v);
+        }
+        spawnDebris(pos,rng,4,3,6,1800,.6f,.8f);trimVolumes();
     }
 
     public static synchronized void clear() {

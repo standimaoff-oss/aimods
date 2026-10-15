@@ -160,7 +160,7 @@ public final class Firearms {
         s.trigger = false;
         s.gun = stack.getItem();
         if (k.clipFed() || k.singleLoad()) sound(p, "bolt_cycle", 0.8f, 1.1f);   // bolt opened
-        else if (!k.incrementalReload()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
+        else if (!k.incrementalReload() && !k.flintlock()) sound(p, "mag_out", 0.7f, k.launcher() ? 0.7f : 1.0f);
         fx(p, s.reloadEmpty && !k.launcher() ? GunFxPacket.RELOAD_EMPTY : GunFxPacket.RELOAD, ammo);
         return true;
     }
@@ -170,7 +170,8 @@ public final class Firearms {
         int ammo = FirearmItem.ammo(stack);
         boolean creative = p.getAbilities().instabuild;
         int slot = findAmmo(p, k);
-        if (k.launcher()) {
+        if (k.flintlock() && ammo > 0) return;
+        if (k.launcher() || k.flintlock()) {
             if (slot >= 0 && !creative) p.getInventory().getItem(slot).shrink(1);
             else if (slot < 0 && !creative) return;
             FirearmItem.setAmmo(stack, 1);
@@ -237,14 +238,19 @@ public final class Firearms {
                 fx(p, GunFxPacket.LOADED, FirearmItem.ammo(stack));
             } else {
             int done = s.reloadTotal - s.reload;
+            if (k.flintlock()) {
+                if (done == (int)(s.reloadTotal * .25f)) sound(p, "paper_load", .65f, 1f);
+                if (done == (int)(s.reloadTotal * .58f) || done == (int)(s.reloadTotal * .78f)) sound(p, "ramrod", .65f, 1f);
+                if (done == (int)(s.reloadTotal * .94f)) sound(p, "dry_fire", .5f, .8f);
+            }
             if (k.incrementalReload() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "shell_in", 0.8f, 0.95f + p.getRandom().nextFloat() * 0.1f);
             if (k.pumpAction() && s.reloadEmpty && done == (int) (s.reloadTotal * 0.78f)) sound(p, "pump_action", 0.8f, 1.0f);
             if (k.clipFed() && done == (int) (s.reloadTotal * 0.45f)) sound(p, "clip_in", 0.9f, k == GunKind.K98K ? 1.05f : 0.95f);
             if (k.clipFed() && done == (int) (s.reloadTotal * 0.80f)) sound(p, "bolt_cycle", 0.8f, 0.95f);
-            if (!k.launcher() && !k.incrementalReload() && !k.clipFed() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
+            if (!k.launcher() && !k.incrementalReload() && !k.clipFed() && !k.flintlock() && done == (int) (s.reloadTotal * 0.55f)) sound(p, "mag_in", 0.8f, k == GunKind.PKP ? 0.75f : 1.0f);
             if (k == GunKind.PKP && (done == 14 || done == (int) (s.reloadTotal * 0.80f))) sound(p, "selector", 0.9f, 0.6f);   // feed cover
             if (k.launcher() && done == (int) (s.reloadTotal * 0.6f)) sound(p, "mag_in", 0.8f, 0.6f);
-            if (s.reloadEmpty && !k.launcher() && !k.manual() && done == (int) (s.reloadTotal * (k == GunKind.PKP ? 0.86f : 0.82f))) sound(p, "bolt_rack", 0.8f, k == GunKind.PKP ? 0.8f : 1.0f);
+            if (s.reloadEmpty && !k.launcher() && !k.manual() && !k.flintlock() && done == (int) (s.reloadTotal * (k == GunKind.PKP ? 0.86f : 0.82f))) sound(p, "bolt_rack", 0.8f, k == GunKind.PKP ? 0.8f : 1.0f);
             if (s.reloadEmpty && k.boltAction() && !k.clipFed() && done == (int) (s.reloadTotal * 0.68f)) sound(p, "bolt_cycle", 0.8f, 1.0f);
             if (--s.reload == 0) {
                 finishReload(p, stack, k);
@@ -358,8 +364,11 @@ public final class Firearms {
                 if (l.size() < 4000) l.add(b);
             }
             sound(p, k.sound, 3.0f, 0.95f + sl.random.nextFloat() * 0.1f);
-            Vec3 m = p.getEyePosition().add(look.scale(0.9)).add(0, -0.1, 0);
-            sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), m.x, m.y, m.z, 1, 0.02, 0.02, 0.02, 0.005);
+            // Server-owned, directional emitter; all tracking clients see the same shot. No duplicate local puff.
+            Vec3 m = p.getEyePosition().add(look.scale(k.flintlock() && !k.pistol() ? 1.35 : k.pistol() ? .60 : .95)).add(0, -.10, 0);
+            var smoke = k.flintlock() ? ru.aiforge.arsenal.volumetric.VolumetricParticles.POWDER.get()
+                    : ru.aiforge.arsenal.volumetric.VolumetricParticles.MUZZLE.get();
+            sl.sendParticles(smoke, m.x, m.y, m.z, 0, look.x, look.y, look.z, 1);
         }
         fx(p, GunFxPacket.SHOT, FirearmItem.ammo(stack));
     }

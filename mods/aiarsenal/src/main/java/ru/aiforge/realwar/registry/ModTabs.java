@@ -63,7 +63,7 @@ public final class ModTabs {
     public static final java.util.List<String> SECTIONS = java.util.List.of(
             "ww2_weapons", "ww2_vehicles", "ww2_clothing", "ww2_ammo",
             "modern_weapons", "modern_vehicles", "modern_clothing", "modern_ammo",
-            "napoleonic_clothing", "common_parts", "common_equipment", "common_building");
+            "napoleonic_weapons", "napoleonic_vehicles", "napoleonic_clothing", "napoleonic_ammo", "common_parts", "common_equipment", "common_building");
     private static final Set<String> WW2 = Set.of(
             "ppsh41", "mp40", "mosin", "k98k", "mosin_pu", "k98k_zf39", "c96", "tt33",
             "mag_ppsh", "mag_mp40", "clip_mosin", "clip_k98", "round_762x54r", "round_792x57", "clip_c96", "mag_tt33",
@@ -72,6 +72,7 @@ public final class ModTabs {
             "bf109_plane", "yak3_plane", "he111_plane", "pe8_plane", "little_boy",
             "shells_20", "shells_75", "shells_88", "shells_85", "shells_107", "shells_128", "shells_280",
             "rocket_380", "rocket_m13", "sc250", "sc1000", "fab250sv", "fab1000", "fab5000");
+    private static final Set<String> NAPOLEONIC = Set.of("musket_1777", "musket_1808", "pistol_an13", "pistol_1809", "sabre_briquet", "sabre_1809", "cannon_fr6", "cannon_ri12", "paper_cartridge", "pistol_cartridge", "charge_fr6", "charge_ri12", "cannonball");
     private static final Set<String> SHARED_AMMO = Set.of("shells_122", "shells_152"); // IS-2/KV-2 AND D-30/Msta
     private static final Set<String> NUCLEAR_PARTS = Set.of("lb_casing", "rds_core", "rds_casing", "cordite", "bridgewire_detonator");
 
@@ -85,7 +86,7 @@ public final class ModTabs {
         if (c == Cat.PROTECTION) return name.startsWith("hazmat_") ? "modern_clothing" : "common_equipment";
         if (c == Cat.UNIFORMS && name.startsWith("uniform_nap_")) return "napoleonic_clothing";
         if (c == Cat.UNIFORMS && name.startsWith("uniform_ww2_")) return "ww2_clothing";
-        String era = WW2.contains(name) ? "ww2_" : "modern_";
+        String era = NAPOLEONIC.contains(name) ? "napoleonic_" : WW2.contains(name) ? "ww2_" : "modern_";
         if (c == Cat.UNIFORMS) return era + "clothing";
         if (c == Cat.VEHICLES || c == Cat.DRONES && !Set.of("tablet", "fpv_goggles").contains(name)) return era + "vehicles";
         if (c == Cat.AMMO || c == Cat.NUCLEAR && Set.of("yars", "rds1", "an602", "little_boy", "rds_4").contains(name)
@@ -142,7 +143,9 @@ public final class ModTabs {
         for (String set : ru.aiforge.realwar.item.UniformItem.SETS)
             for (String sl : new String[]{"head", "chest", "legs", "feet"}) ModTabs.put(Cat.UNIFORMS, "uniform_" + set + "_" + sl);
         for (var gun : ru.aiforge.realwar.handheld.GunKind.values()) put(Cat.AMMO, gun.ammo);
-        put(Cat.AMMO, "javelin_missile");
+        put(Cat.AMMO, "javelin_missile", "charge_fr6", "charge_ri12", "cannonball");
+        put(Cat.WEAPONS, "musket_1777", "musket_1808", "pistol_an13", "pistol_1809", "sabre_briquet", "sabre_1809");
+        put(Cat.VEHICLES, "cannon_fr6", "cannon_ri12");
         section("ww2_weapons", "mosin_pu");
         section("ww2_vehicles", "t34_vehicle");
         // Genuine 1943–45 garments; do not classify the old Cold War tank uniform as WWII.
@@ -152,6 +155,9 @@ public final class ModTabs {
         section("modern_vehicles", "t90m_vehicle");
         section("modern_clothing", "uniform_ru_private_head");
         section("modern_ammo", "mag_ak12");
+        section("napoleonic_weapons", "musket_1777");
+        section("napoleonic_vehicles", "cannon_fr6");
+        section("napoleonic_ammo", "paper_cartridge");
         section("napoleonic_clothing", "uniform_nap_fr_infantry_head");
         section("common_parts", "steel_plate");
         section("common_equipment", "first_aid_kit");
