@@ -18,6 +18,10 @@ def run(g, server, server_log, client_log, main_window):
   equip('TestPlayer',name)
   view('view_front');time.sleep(1.2);g.screenshot('uniform-'+name+'-front')
   view('view_back');time.sleep(.6);g.screenshot('uniform-'+name+'-back')
+ # The new era grids must also be reachable in the actual creative screen.
+ for action, name in [('view_ww2wear','ww2'),('view_napwear','1812')]:
+  view(action);g.screenshot('catalog-'+name+'-uniforms');g.key('key','Escape')
+ view('view_front');g.key('keydown','Shift_L');time.sleep(1);g.screenshot('uniform-crouching');g.key('keyup','Shift_L')
  # A real resource reload with the new garment still equipped.
  view('view_front');view('view_reload');time.sleep(8);g.screenshot('uniform-resource-reload')
  equip('TestPlayer','ww2_su_officer');view('view_first');view('view_fov70')

@@ -19,6 +19,8 @@ def audio_metrics(audio):
 class Recording:
     def __init__(self, game, name):
         self.game = game
+        if not hasattr(game, "AUDIO_FAILURES"):
+            game.AUDIO_FAILURES = []
         self.name = name
         self.process = None
         if os.environ.get('QA_RECORD') != '1':
@@ -71,8 +73,11 @@ class Recording:
                   'capture': 'X11 Minecraft window + PulseAudio qa.monitor; continuous, not frame synthesis'}
         (self.game.LOGS / ('video-' + self.name + '.json')).write_text(json.dumps(report, indent=2) + '\n')
         # Save diagnostics even on failure. Never attenuate/limit the recording to pass QA.
-        assert metrics['audio_rms'] > .0001 and metrics['audio_peak'] > .002, f'{self.name}: silent gameplay capture'
-        assert metrics['audio_peak'] < .99, f'{self.name}: gameplay audio peak exceeds headroom: {metrics}'
+        passed = metrics['audio_rms'] > .0001 and .002 < metrics['audio_peak'] < .99
+        if not passed:
+            self.game.AUDIO_FAILURES.append((self.name, metrics))
+        # Defer the failure until ALL visual checks are captured; the final client gate still fails.
+
         if self.reload_at is not None:
             # Separate source frames for agent inspection. NOT labelled F2 screenshots.
             frames = self.game.OUT / 'video-review' / self.name
@@ -80,4 +85,4 @@ class Recording:
             for i, offset in enumerate((.15, .6, 1.1, 1.7, 2.3, 3.2)):
                 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', str(self.reload_at + offset),
                     '-i', str(self.path), '-frames:v', '1', str(frames / f'{i+1:02}.png')], check=True)
-        print('CONTINUOUS VIDEO/AUDIO PASS', report, flush=True)
+        print('CONTINUOUS VIDEO/AUDIO ' + ('PASS' if passed else 'FAIL'), report, flush=True)

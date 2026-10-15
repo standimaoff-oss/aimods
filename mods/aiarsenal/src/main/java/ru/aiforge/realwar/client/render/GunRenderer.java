@@ -196,6 +196,10 @@ public final class GunRenderer {
         float ax = armP.x, ay = armP.y, az = armP.z, rx = armP.xRot, ry = armP.yRot, rz = armP.zRot;
         float sx = sleeve.x, sy = sleeve.y, sz = sleeve.z, srx = sleeve.xRot, sry = sleeve.yRot, srz = sleeve.zRot;
         boolean sv = sleeve.visible;
+        float asx = armP.xScale, asy = armP.yScale, asz = armP.zScale;
+        float ssx = sleeve.xScale, ssy = sleeve.yScale, ssz = sleeve.zScale;
+        armP.xScale = armP.yScale = armP.zScale = 1f;
+        sleeve.xScale = sleeve.yScale = sleeve.zScale = 1f;
         armP.setPos(0, 0, 0);
         armP.setRotation(0, 0, 0);
         sleeve.setPos(0, 0, 0);
@@ -210,6 +214,8 @@ public final class GunRenderer {
         sleeve.setPos(sx, sy, sz);
         sleeve.setRotation(srx, sry, srz);
         sleeve.visible = sv;
+        armP.xScale = asx; armP.yScale = asy; armP.zScale = asz;
+        sleeve.xScale = ssx; sleeve.yScale = ssy; sleeve.zScale = ssz;
         ps.popPose();
     }
 

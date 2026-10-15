@@ -49,16 +49,19 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
             new Piece("boot_r", EquipmentSlot.FEET, m -> m.rightLeg, -0.119f, 0.75f, 0f),
             new Piece("boot_l", EquipmentSlot.FEET, m -> m.leftLeg, 0.119f, 0.75f, 0f)};
     /** node indices per "set.piece", rebuilt when the model is reloaded */
-    private static Object indexedFor;
-    private static final Map<String, int[]> NODES = new HashMap<>();
+    private record NodeIndex(Object model, Map<String, int[]> nodes) {}
+    // At most one current index per asset. Mixed historical/modern outfits must not rebuild
+    // the entire node table on every arm/leg, nor retain every model across resource reloads.
+    private static final Map<ResourceLocation, NodeIndex> INDICES = new HashMap<>();
 
     public UniformLayer(RenderLayerParent<T, M> parent) {
         super(parent);
     }
 
     private static int[] nodes(GlbAssets.Loaded lm, String key) {
-        if (indexedFor != lm) {
-            NODES.clear();
+        ResourceLocation asset = modelFor(key.substring(0, key.indexOf('.')));
+        NodeIndex index = INDICES.get(asset);
+        if (index == null || index.model() != lm) {
             Map<String, List<Integer>> tmp = new HashMap<>();
             for (int i = 0; i < lm.model.nodes.size(); i++) {
                 String n = lm.model.nodes.get(i).name;
@@ -67,10 +70,12 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
                 if (p.length < 2) continue;
                 tmp.computeIfAbsent(p[0] + "." + p[1], k -> new ArrayList<>()).add(i);
             }
-            tmp.forEach((k, v) -> NODES.put(k, v.stream().mapToInt(Integer::intValue).toArray()));
-            indexedFor = lm;
+            Map<String, int[]> nodes = new HashMap<>();
+            tmp.forEach((k, v) -> nodes.put(k, v.stream().mapToInt(Integer::intValue).toArray()));
+            index = new NodeIndex(lm, nodes);
+            INDICES.put(asset, index);
         }
-        return NODES.getOrDefault(key, new int[0]);
+        return index.nodes().getOrDefault(key, new int[0]);
     }
 
     private static String setOf(ItemStack st) {
@@ -124,6 +129,8 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
         PoseStack ps = e.getPoseStack();
         MultiBufferSource buf = e.getMultiBufferSource();
         int light = e.getPackedLight();
+        m.rightArm.yScale = m.leftArm.yScale = m.rightSleeve.yScale = m.leftSleeve.yScale = 1f;
+        m.rightArmPose = m.leftArmPose = HumanoidModel.ArmPose.EMPTY;
         m.attackTime = 0f;
         m.crouching = false;
         m.swimAmount = 0f;

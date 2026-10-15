@@ -242,6 +242,7 @@ overrideHeight:700
         run(sys.modules[__name__], server, log, client_log, window)
     command('stop')
     server.wait(timeout=90)
+    assert not getattr(sys.modules[__name__], "AUDIO_FAILURES", []), str(getattr(sys.modules[__name__], "AUDIO_FAILURES", []))
 
 
 def ww2_weapons(client_log):
