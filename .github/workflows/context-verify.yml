@@ -109,3 +109,12 @@ jobs:
           git fetch origin arena/10158ad9-aimods
           git rebase FETCH_HEAD
           git push origin HEAD:arena/10158ad9-aimods
+      - name: Draft binary after successful contextual audit
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(sed -n 's/^mod_version=//p' mods/aiarsenal/gradle.properties)
+          JAR="mods/aiarsenal/build/libs/aiarsenal-${VERSION}.jar"
+          sha256sum "$JAR" > verification/SHA256SUMS
+          gh release create "context-${GITHUB_RUN_ID}" "$JAR" verification/SHA256SUMS --draft --prerelease --target "$GITHUB_SHA" --title "${VERSION} — contextual audit, pending review" --notes "Source $GITHUB_SHA. Requires review of contextual evidence. Not certification of all 448 items or Windows NVIDIA stability."

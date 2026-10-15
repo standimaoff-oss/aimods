@@ -101,5 +101,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.10.jar > verification/SHA256SUMS
-          gh release create "stability-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.10.jar verification/SHA256SUMS --draft --prerelease --target "$GITHUB_SHA" --title 'Alpha.10 stability audit — pending review' --notes "Source $GITHUB_SHA. Registry-derived smoke checks, real mouse/R firearm actions and destructive free-fall bomb tests. This is NOT full vehicle/tool acceptance or a Windows NVIDIA crash certification."
+          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.11.jar > verification/SHA256SUMS
+          gh release create "stability-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.11.jar verification/SHA256SUMS --draft --prerelease --target "$GITHUB_SHA" --title 'Alpha.11 stability audit — pending review' --notes "Source $GITHUB_SHA. Registry-derived smoke checks, real mouse/R firearm actions and destructive free-fall bomb tests. This is NOT full vehicle/tool acceptance or a Windows NVIDIA crash certification."

@@ -108,6 +108,9 @@ extends Entity {
         e.entityData.set(DATA_TYPE, type.ordinal());
         e.entityData.set(DATA_MODE, 0);
         e.setupPath(pos, target, type.cls.speed, type.cls.boostTicks, type.totalMassKg());
+        // Acquire a bounded ticking corridor before publishing a new projectile.
+        // A child must not depend on the soon-discarded parent's player/tickets.
+        e.keepLoaded(level, pos, target.subtract(pos).normalize().scale(type.cls.speed * 40.0), 0.0);
         level.addFreshEntity((Entity)e);
         return e;
     }
@@ -118,6 +121,9 @@ extends Entity {
         e.entityData.set(DATA_MODE, 1);
         e.setupPath(pos, target, type.cls.speed * 1.5, 1.0, type.massKg);
         e.separated = true;
+        // Acquire a bounded ticking corridor before publishing a new projectile.
+        // A child must not depend on the soon-discarded parent's player/tickets.
+        e.keepLoaded(level, pos, target.subtract(pos).normalize().scale(type.cls.speed * 40.0), 0.0);
         level.addFreshEntity((Entity)e);
         return e;
     }
@@ -303,10 +309,20 @@ extends Entity {
         ChunkPos a = new ChunkPos(BlockPos.containing((double)pos.x, (double)64.0, (double)pos.z));
         if (!a.equals(this.lastTicket) || this.age % 15 == 0) {
             this.lastTicket = a;
-            sl.getChunkSource().addRegionTicket(TICKET, a, 2, a);
-            ChunkPos b = new ChunkPos(BlockPos.containing((double)(pos.x + ahead.x), (double)64.0, (double)(pos.z + ahead.z)));
-            if (!b.equals(a)) {
-                sl.getChunkSource().addRegionTicket(TICKET, b, 2, b);
+            // Two isolated tickets (current and 40 ticks ahead) left a gap.
+            // Fast MIRV children could enter a non-entity-ticking edge chunk and
+            // stop forever, so their own refresh callback would never run again.
+            // Prewarm the intervening corridor, including a ticking neighbour.
+            // At most 13 centres, temporary 60-tick tickets; no permanent forced
+            // chunks and no synchronous getChunk()/generation in the flight tick.
+            Vec3 lead = new Vec3(ahead.x, 0, ahead.z);
+            double length = lead.length();
+            if (length > 192.0) { lead = lead.scale(192.0 / length); length = 192.0; }
+            int steps = Math.max(1, (int)Math.ceil(length / 16.0));
+            for (int i = 0; i <= steps; i++) {
+                Vec3 point = pos.add(lead.scale((double)i / steps));
+                ChunkPos b = new ChunkPos(BlockPos.containing(point.x, 64.0, point.z));
+                sl.getChunkSource().addRegionTicket(TICKET, b, 3, b);
             }
         }
         if (this.age % 20 == 1 && (u > 0.6 || this.horiz < 900.0)) {
@@ -385,7 +401,7 @@ extends Entity {
         ++this.hiddenTicks;
         ChunkPos a = new ChunkPos(BlockPos.containing((Position)this.detonatePos));
         if (this.hiddenTicks % 10 == 1) {
-            sl.getChunkSource().addRegionTicket(TICKET, a, 2, a);
+            sl.getChunkSource().addRegionTicket(TICKET, a, 3, a);
         }
         if (type.warhead == MissileType.Warhead.CLUSTER) {
             Warheads.clusterTick(sl, type, this.detonatePos, this.hiddenTicks, this.massKg / (double)type.warheads);

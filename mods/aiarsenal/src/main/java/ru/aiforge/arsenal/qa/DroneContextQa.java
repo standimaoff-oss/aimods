@@ -36,7 +36,7 @@ public final class DroneContextQa {
     @SubscribeEvent public static void register(RegisterCommandsEvent event) {
         if(!Boolean.getBoolean("aiarsenal.stressQa"))return;
         var root=Commands.literal("arsenal_drone_context").requires(s->s.hasPermission(2));
-        root.then(Commands.literal("prepare").then(Commands.argument("id",StringArgumentType.word()).executes(c->{
+        root.then(Commands.literal("prepare").then(Commands.argument("id",StringArgumentType.greedyString()).executes(c->{
             var p=c.getSource().getPlayerOrException();var l=p.serverLevel();
             check(!p.getAbilities().instabuild && !RemoteControl.inSession(p),"requires survival and no existing session");
             if(drone!=null)drone.discard();

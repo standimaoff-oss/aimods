@@ -105,13 +105,20 @@ public final class Warheads {
         return new Vec3(pos.x, (double)(y - Math.max(1, depth - 1)) + 1.5, pos.z);
     }
 
+    /** Spread the declared payload over the release window without rounding it
+     * into one extra submunition per late hidden tick (48 previously became 50). */
+    public static int clusterReleases(int tick, int payload) {
+        if (tick <= 0 || tick > 45 || payload <= 0) return 0;
+        return (int)((long)tick * payload / 45 - (long)(tick - 1) * payload / 45);
+    }
+
     public static void clusterTick(ServerLevel sl, MissileType type, Vec3 center, int tick, double bombKg) {
         RandomSource rnd = sl.random;
         if (tick == 1) {
             sl.playSound(null, center.x, center.y, center.z, (SoundEvent)ModSounds.BLAST_SMALL.get(), SoundSource.HOSTILE, 3.0f, 1.4f);
             sl.sendParticles((ParticleOptions)ParticleTypes.FIREWORK, center.x, center.y + 30.0, center.z, 40, 3.0, 3.0, 3.0, 0.15);
         }
-        int per = Math.max(1, type.warheads / 45);
+        int per = clusterReleases(tick, type.warheads);
         for (int i = 0; i < per; ++i) {
             double a = rnd.nextDouble() * Math.PI * 2.0;
             double r = Math.sqrt(rnd.nextDouble()) * type.footprint;

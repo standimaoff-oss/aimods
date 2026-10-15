@@ -89,7 +89,7 @@ public final class ContextQa {
             }
             o.add("missiles",ms);o.add("craft",cs);say(c.getSource(),o);return 1;
         }));
-        root.then(Commands.literal("preparemissile").then(Commands.argument("id",StringArgumentType.word()).executes(c->{
+        root.then(Commands.literal("preparemissile").then(Commands.argument("id",StringArgumentType.greedyString()).executes(c->{
             var p=c.getSource().getPlayerOrException();var l=p.serverLevel();reset();
             require(!p.getAbilities().instabuild,"survival required for consumption checks");
             Item ammo=item("aiarsenal:"+StringArgumentType.getString(c,"id"));
@@ -107,6 +107,11 @@ public final class ContextQa {
             JsonObject o=result("missile_loading");o.addProperty("id",missileType.itemName());o.addProperty("remainingAmmo",1);
             o.addProperty("targetX",target.x);o.addProperty("targetZ",target.z);say(c.getSource(),o);return 1;
         })));
+        root.then(Commands.literal("abortmissiles").executes(c->{
+            JsonObject o=result("failed_case_cleanup");int n=0;
+            for(var m:missiles)if(!m.isRemoved()){m.discard();n++;}
+            o.addProperty("aborted",n);say(c.getSource(),o);return 1;
+        }));
         root.then(Commands.literal("launchmissile").executes(c->{
             require(pad!=null && pad.ready(),"pad not ready");
             require(pad.scheduleLaunch(target,0),"launch rejected");say(c.getSource(),result("launch_scheduled"));return 1;
@@ -119,10 +124,10 @@ public final class ContextQa {
             o.addProperty("completedTasks",BlastManager.completedBlasts-tasksBefore);
             o.addProperty("changedBlocks",BlastManager.totalBlocksChanged-blocksBefore);
             o.addProperty("expectedEntities",missileType==null?0:missileType.cls!=MissileType.Cls.CRUISE && missileType.warheads>1?1+missileType.warheads:1);
-            JsonArray entities=new JsonArray();for(var m:missiles) {JsonObject e=new JsonObject();e.addProperty("uuid",m.getUUID().toString());e.addProperty("mode",m.mode());e.addProperty("age",m.tickCount);e.addProperty("removed",m.isRemoved());e.addProperty("x",m.getX());e.addProperty("y",m.getY());entities.add(e);}o.add("entities",entities);
+            JsonArray entities=new JsonArray();for(var m:missiles) {JsonObject e=new JsonObject();e.addProperty("uuid",m.getUUID().toString());e.addProperty("mode",m.mode());e.addProperty("age",m.tickCount);e.addProperty("removed",m.isRemoved());e.addProperty("x",m.getX());e.addProperty("y",m.getY());e.addProperty("z",m.getZ());e.addProperty("present",c.getSource().getLevel().getEntity(m.getUUID())==m);entities.add(e);}o.add("entities",entities);
             say(c.getSource(),o);return 1;
         }));
-        root.then(Commands.literal("preparecraft").then(Commands.argument("id",StringArgumentType.word()).executes(c->{
+        root.then(Commands.literal("preparecraft").then(Commands.argument("id",StringArgumentType.greedyString()).executes(c->{
             var p=c.getSource().getPlayerOrException();var l=p.serverLevel();reset();
             require(!p.getAbilities().instabuild,"survival required");
             Item i=item(StringArgumentType.getString(c,"id"));require(i instanceof CraftItem,"not craft item");
@@ -147,7 +152,7 @@ public final class ContextQa {
             require(p.getMainHandItem().getCount()==1,"service kit not consumed exactly once");
             JsonObject o=craftStatus(p);o.addProperty("kitsRemaining",1);say(c.getSource(),o);return 1;
         }));
-        root.then(Commands.literal("preparecannon").then(Commands.argument("id",StringArgumentType.word()).executes(c->{
+        root.then(Commands.literal("preparecannon").then(Commands.argument("id",StringArgumentType.greedyString()).executes(c->{
             var p=c.getSource().getPlayerOrException();var l=p.serverLevel();reset();
             require(!p.getAbilities().instabuild,"survival required");
             if(cannon!=null)cannon.discard();Item i=item(StringArgumentType.getString(c,"id"));require(i instanceof CannonItem,"not cannon");

@@ -78,10 +78,13 @@ def missile(row,index):
     g.command(f'tp TestPlayer {tx+75} 30 {tz-90} 40 30')
     def completed():
         row['observed']=qa('missilestatus')
-        row['observed']['minimumTasks']=2 if row['id'].endswith('_kinetic') else 1
+        row['observed']['minimumTasks']=48 if row['id'].endswith('_cluster') else 2 if row['id'].endswith('_kinetic') else 1
+        if row['id'].endswith('_cluster'): assert row['observed']['completedTasks']<=48, row['observed']
         save()
         return missile_complete(row['observed'])
     wait(completed,360)
+    g.command(f'tp TestPlayer {tx+20} -25 {tz-25} 40 48')
+    time.sleep(4)
     g.screenshot('impact-'+row['id'].split(':')[1])
     g.command(f'forceload remove -16 {z-16} 32 {z+32}')
     row['method']='survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish'
@@ -158,7 +161,7 @@ def javelin(row,index):
             text=g.command('clear TestPlayer aiarsenal:javelin_missile 0')
             return ('Found 1 matching' in text) if n==0 else ('No items were found' in text)
         wait(consumed,20)
-        wait(lambda:'CONTEXT_TARGET_GONE' in g.command(f'execute unless entity @e[tag={tag}] run say CONTEXT_TARGET_GONE'),45)
+        wait(lambda:'Test passed' in g.command(f'execute unless entity @e[tag={tag}]'),45)
         row['cycles'].append(dict(lock=100,remainingAmmo=1-n,targetGone=True));save()
         time.sleep(2)
     g.screenshot('javelin-repeat')
@@ -276,7 +279,10 @@ overrideHeight:700
             print('CONTEXT FAIL',row['id'],repr(error),flush=True)
             if SERVER.poll() is not None or CLIENT.poll() is not None:raise
         finally:
-            g.key('mouseup','1');g.key('mouseup','3');save()
+            g.key('mouseup','1');g.key('mouseup','3')
+            if action is missile and row['status']=='FAIL' and SERVER.poll() is None:
+                row['failedCaseCleanup']=qa('abortmissiles')
+            save()
     REPORT['recipes']=json.loads(g.command('execute as TestPlayer run arsenal_tool_context recipes'))
     recipe_file=g.RUNS/'server/logs/context-recipes.json'
     (g.LOGS/'context-recipes.json').write_bytes(recipe_file.read_bytes());save()
