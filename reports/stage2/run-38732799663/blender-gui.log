@@ -1,0 +1,31 @@
+Info: Total files 16 | Changed 16 | Failed 0
+Saved: '/home/runner/work/aimods/aimods/mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_ww2_su_infantry_head.png'
+Time: 00:00.46 (Saving: 00:00.07)
+
+Saved: '/home/runner/work/aimods/aimods/mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_ww2_su_infantry_chest.png'
+Time: 00:00.03 (Saving: 00:00.00)
+
+Saved: '/home/runner/work/aimods/aimods/mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_ww2_su_infantry_legs.png'
+Time: 00:00.02 (Saving: 00:00.00)
+
+Saved: '/home/runner/work/aimods/aimods/mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_ww2_su_infantry_feet.png'
+Time: 00:00.02 (Saving: 00:00.00)
+
+Traceback (most recent call last):
+  File "/home/runner/work/_temp/addon.py", line 2248, in execute_code
+    exec(code, namespace)
+  File "<string>", line 2, in <module>
+  File "/home/runner/work/aimods/aimods/tools/blender/historical_uniforms.py", line 189, in viewport
+    area.spaces.active.shading.type='MATERIAL';area.spaces.active.shading.type='SOLID';area.spaces.active.shading.color_type='MATERIAL'
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: bpy_struct: item.attr = val: enum "MATERIAL" not found in ('WIREFRAME', 'SOLID', 'RENDERED')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/_temp/addon.py", line 1577, in _execute_command_internal
+    result = handler(**params)
+             ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/_temp/addon.py", line 2258, in execute_code
+    raise Exception(
+Exception: {"exception_type": "TypeError", "message": "bpy_struct: item.attr = val: enum \"MATERIAL\" not found in ('WIREFRAME', 'SOLID', 'RENDERED')", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/_temp/addon.py\", line 2248, in execute_code\n    exec(code, namespace)\n  File \"<string>\", line 2, in <module>\n  File \"/home/runner/work/aimods/aimods/tools/blender/historical_uniforms.py\", line 189, in viewport\n    area.spaces.active.shading.type='MATERIAL';area.spaces.active.shading.type='SOLID';area.spaces.active.shading.color_type='MATERIAL'\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: bpy_struct: item.attr = val: enum \"MATERIAL\" not found in ('WIREFRAME', 'SOLID', 'RENDERED')\n"}
