@@ -30,7 +30,7 @@ def gun(name,pistol=False,russian=False):
    w.ring(g,u,u+22,20,24,'Brass' if russian else 'Steel',16,0,-5)
   w.box(g,0,14,-148,-60,-26,26,'Brass',1)
   for u in [680,length-200]:w.ring_rod_loop(g,w.P(u,-37),17,3,'Steel','x',12)
-  grip=w.P(360,-57);support=w.P(820,-28)
+  grip=w.P(360,-57);support=w.P(820,-45)
  # Flintlock: external lock plate, S-shaped cock with clamped flint, frizzen and pan on the right.
  lock=145 if pistol else 480
  w.prism(g,[(lock-75,-18),(lock+55,-18),(lock+65,8),(lock-65,12)],-28,-24,'Steel',.6)

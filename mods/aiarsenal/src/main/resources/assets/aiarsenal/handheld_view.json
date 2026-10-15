@@ -2542,5 +2542,45 @@
     0,
     0.55,
     1
+  ],
+  "sabre_briquet.firstperson_righthand": [
+    -0.25,
+    0.22,
+    -0.12,
+    200,
+    -55,
+    0,
+    0.9,
+    0
+  ],
+  "sabre_briquet.firstperson_lefthand": [
+    0.25,
+    0.22,
+    -0.12,
+    160,
+    -55,
+    0,
+    0.9,
+    0
+  ],
+  "sabre_1809.firstperson_righthand": [
+    -0.25,
+    0.22,
+    -0.12,
+    200,
+    -55,
+    0,
+    0.9,
+    0
+  ],
+  "sabre_1809.firstperson_lefthand": [
+    0.25,
+    0.22,
+    -0.12,
+    160,
+    -55,
+    0,
+    0.9,
+    0
   ]
 }

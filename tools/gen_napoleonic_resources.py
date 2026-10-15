@@ -65,6 +65,9 @@ def main():
   base='c96' if name.startswith('pistol') else 'mosin'
   for key,value in list(d.items()):
    if key.startswith(base+'.'):d[name+key[len(base):]]=list(value)
+  if name.startswith('sabre_'):
+   d[name+'.firstperson_righthand']=[-.25,.22,-.12,200,-55,0,.9,0]
+   d[name+'.firstperson_lefthand']=[.25,.22,-.12,160,-55,0,.9,0]
   if name.startswith('cannon_'):
    for context in ['thirdperson_righthand','thirdperson_lefthand','firstperson_righthand','firstperson_lefthand']:d[name+'.'+context]=[0,0,.05,180,0,0,.55,1]
   if name.startswith(('musket','pistol')):

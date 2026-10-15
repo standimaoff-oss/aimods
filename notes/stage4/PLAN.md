@@ -23,3 +23,9 @@ Specs: `notes/_tz/TZ-ai-forge-mod.md`, `TZ_MODEL_VIEW_PRO_v2.0.md`.
 - Next run checks new content first, then restores only the disposable bomb-test fixture and executes all prior regression suites.
 
 - After inspecting the first real smoke frames, replaced the custom profiles' use of the donor's vertical chimney field with an original type-11 ellipsoidal lobe field and a separate pale-powder/engine/dust/blast palette. Nuclear branches and original shader resource bytes unchanged. This extension must pass the real GLSL compile/fallback/reload gates, not just text checks.
+
+## Real run 38759375857 (46a6870)
+- Build, all 167 GameTests, migration PASS. All four flintlocks fired and reloaded using actual mouse/R inputs, both cannons loaded for 160 server ticks and fired actual roundshot. All six continuous weapon videos passed native-channel audio checks.
+- Inspected real F2: custom pale powder volume visible at cannon muzzle, firearms/grips and reloads rendered. Corrected low sabre first-person framing and changed roundshot from the oversized default item billboard to its actual GLB. Whole-carriage recoil replaces an anachronistic sliding barrel.
+- Full suite stopped because `bomb` is deliberately `noSummon`; no bomb was spawned. Replaced faulty fixture with an actual RPG-7 shot into the wall, **not** a manually injected effect. Added live-target damage assertions for all four flintlocks and explicit loading of the disposable bomber-test chunks.
+- Rejected run's empty blast screenshots/video are NOT evidence of a successful explosion test.
