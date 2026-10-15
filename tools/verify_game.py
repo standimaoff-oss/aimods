@@ -381,6 +381,8 @@ def view_lifecycle(client_log, window):
     command('item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:5}')
     command('tp TestPlayer 0 -60 0 0 0')
     key('key','1');time.sleep(2)
+    # Minecraft clamps scale 3 to 2 at the default 854x480: enlarge BEFORE testing it.
+    key('windowsize',window,'1000','740');time.sleep(3)
     view_action(client_log,'view_scale3')
     key('mousedown','3');time.sleep(2)
     screenshot('lifecycle-01-scale3');assert_scope_mask('lifecycle-01-scale3')

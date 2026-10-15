@@ -18,7 +18,11 @@ public final class WeaponViewQa {
             case "view_shaderfail" -> ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer.failNextShaderForQa();
             case "view_fov90" -> mc.options.fov().set(90);
             case "view_fov70" -> mc.options.fov().set(70);
-            case "view_scale3" -> { mc.options.guiScale().set(3); mc.resizeDisplay(); }
+            case "view_scale3" -> {
+                mc.options.guiScale().set(3); mc.resizeDisplay();
+                if (mc.getWindow().getGuiScale() != 3) throw new IllegalStateException("effective GUI scale is not 3");
+                AiArsenal.LOGGER.info("VIEW EFFECTIVE GUI SCALE 3 PASS");
+            }
             case "view_scale2" -> { mc.options.guiScale().set(2); mc.resizeDisplay(); }
             case "view_reload" -> mc.reloadResourcePacks().whenComplete((unused, error) -> mc.execute(() -> {
                 if (error == null) AiArsenal.LOGGER.info("VIEW RELOAD PASS");
