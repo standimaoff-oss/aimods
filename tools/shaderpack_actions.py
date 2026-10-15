@@ -19,9 +19,13 @@ def powder_cannon(row,index):
         # unless overridden, which previously aimed ABOVE this low cannon.
         g.command(f"tp TestPlayer {state['x']} {state['y']} {state['z']-2.5} 0 20")
         g.key('key',str(slot));time.sleep(1)
-        aim=g.fx_action(g.LOGS/'client.log','status')
-        row.setdefault('aimChecks',[]).append(aim)
-        assert 'target='+row['id'] in aim,aim
+        # A real teleport may take several seconds to deliver/render its chunks.
+        # Never click until the actual client raycast sees the expected cannon.
+        def aimed():
+            aim=g.fx_action(g.LOGS/'client.log','status')
+            row.setdefault('aimChecks',[]).append(aim)
+            return 'target='+row['id'] in aim
+        context.wait(aimed,60)
         g.key('mousedown','3');time.sleep(.25);g.key('mouseup','3')
 
     for cycle in range(2):

@@ -27,7 +27,8 @@ class ReloadKeyGuardTest(unittest.TestCase):
           'net/minecraftforge/api/distmarker/Dist.java':'package net.minecraftforge.api.distmarker; public enum Dist { CLIENT }',
           'net/minecraftforge/client/event/InputEvent.java':'''package net.minecraftforge.client.event;
             public class InputEvent {public record Key(int getKey,int getScanCode,int getAction) {}}''',
-          'net/minecraftforge/eventbus/api/SubscribeEvent.java':'package net.minecraftforge.eventbus.api; public @interface SubscribeEvent {}',
+          'net/minecraftforge/eventbus/api/EventPriority.java':'package net.minecraftforge.eventbus.api; public enum EventPriority { HIGHEST,NORMAL }',
+          'net/minecraftforge/eventbus/api/SubscribeEvent.java':'package net.minecraftforge.eventbus.api; @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) public @interface SubscribeEvent {EventPriority priority() default EventPriority.NORMAL;}',
           'net/minecraftforge/fml/common/Mod.java':'''package net.minecraftforge.fml.common;
             public @interface Mod {public @interface EventBusSubscriber {String modid();net.minecraftforge.api.distmarker.Dist value();}}''',
           'ru/aiforge/realwar/vehicle/LauncherVehicle.java':'package ru.aiforge.realwar.vehicle; public class LauncherVehicle {}',
@@ -42,7 +43,10 @@ class ReloadKeyGuardTest(unittest.TestCase):
             public class TestGuard {
               static void expect(boolean v){if(!v)throw new AssertionError();}
               static void press(int key,int action){ShaderReloadKeyGuard.key(new InputEvent.Key(key,0,action));}
-              public static void main(String[] args){
+              public static void main(String[] args) throws Exception {
+                expect(ShaderReloadKeyGuard.class.getMethod("key",InputEvent.Key.class)
+                    .getAnnotation(net.minecraftforge.eventbus.api.SubscribeEvent.class).priority()
+                    ==net.minecraftforge.eventbus.api.EventPriority.HIGHEST);
                 var mc=Minecraft.getInstance();var shader=new KeyMapping("iris.keybind.reload",82);
                 var other=new KeyMapping("other.mod",82);var own=VehicleClient.KEY_RELOAD;
                 mc.options.keyMappings=new KeyMapping[]{shader,other,own};

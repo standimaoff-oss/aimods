@@ -171,7 +171,7 @@ overrideHeight:600
         g.screenshot(PACK+'-reenabled-'+str(iteration))
     text=log.read_text(errors='replace')
     assert player.poll() is None and server.poll() is None
-    bad=re.findall(r'^.*(?:GL renderer disabled|OutOfMemoryError|EXCEPTION_ACCESS_VIOLATION|GL_INVALID|OpenGL Error).*$' ,text,re.M)
+    bad=re.findall(r'^.*(?:\[Render thread/ERROR\]|GL renderer disabled|OutOfMemoryError|EXCEPTION_ACCESS_VIOLATION|GL_INVALID|OpenGL Error).*$' ,text,re.M)
     assert not bad,'\n'.join(bad)
     effects=json.loads(g.command('execute as TestPlayer run arsenal_stress playerstatus'))['effects']
     assert not {'minecraft:blindness','minecraft:nausea'}.intersection(effects),effects
@@ -189,6 +189,8 @@ if __name__=='__main__':
         run()
     except BaseException as error:
         REPORT.update(result='FAIL',error=type(error).__name__+': '+str(error),traceback=traceback.format_exc())
+        for row in REPORT['actions']:
+            if row.get('result')=='RUNNING':row.update(result='FAIL',error=REPORT['error'])
         raise
     finally:
         save()
