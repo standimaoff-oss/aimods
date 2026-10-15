@@ -103,7 +103,7 @@ jobs:
           printf 'Source: %s\nRun: https://github.com/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > "$DEST/provenance.txt"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reports/stage2 shots/aiarsenal/stage2
+          git add reports/stage3 shots/aiarsenal/stage3
           for path in models/historical_uniforms.blend mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb/historical_uniforms.glb mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_ww2* mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_nap*; do
             if [ -e "$path" ]; then git add "$path"; fi
           done

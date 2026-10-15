@@ -20,6 +20,7 @@ def run(g,log,observer_log,window):
  g.key('windowfocus','--sync',window)
  release();view('view_first');view('view_fov70');g.command('gamemode survival TestPlayer')
  g.command('effect give TestPlayer minecraft:saturation 9999 10 true')
+ g.command('effect give TestPlayer minecraft:resistance 9999 4 true')
  for slot in ['head','chest','legs','feet']:
   g.command(f'item replace entity TestPlayer armor.{slot} with aiarsenal:uniform_ww2_su_officer_{slot}')
  for gun,ammo in [('tt33',8),('ppsh41',71),('mosin_pu',5)]:
