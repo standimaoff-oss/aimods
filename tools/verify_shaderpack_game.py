@@ -121,7 +121,7 @@ overrideHeight:600
     (g.LOGS/'shaderpack-gameplay.json').write_text(json.dumps({'result':'PASS','toggles':toggles,
         'guns':['ppsh41','mosin_pu','musket_1777'],'reloadInput':'real R, Oculus defaults unchanged',
         'fallbackPackets':['blast','nuke','legacy_nuke'],
-        'limits':'Linux llvmpipe, not Windows/NVIDIA; visual packets do not certify bomb physics or damage'},indent=2)+'\n')
+        'limits':'Linux llvmpipe, not Windows/NVIDIA; Photon SH_SKYLIGHT=false (32768-byte shared memory limit), default preset NOT VERIFIED; visual packets do not certify bomb physics or damage'},indent=2)+'\n')
     g.command('save-all flush')
     print('SHADERPACK COMPATIBILITY PASS',flush=True)
 

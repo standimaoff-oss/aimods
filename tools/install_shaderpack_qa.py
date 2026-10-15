@@ -5,6 +5,9 @@ of third-party JARs or shader packs in Git or our release. Not a hardware GPU te
 """
 import hashlib
 import json
+import io
+import re
+import zipfile
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -37,4 +40,16 @@ def install(game):
             config = client / 'config/oculus.properties'
             config.parent.mkdir(parents=True, exist_ok=True)
             config.write_text('enableShaders=true\nshaderPack=' + file['filename'] + '\n')
+            # llvmpipe exposes 32 KiB compute shared memory; Photon defaults need
+            # 36,860 bytes for spherical-harmonic skylight. Use its public option,
+            # not an edited shader. The default preset is explicitly NOT tested.
+            with zipfile.ZipFile(io.BytesIO(data)) as pack:
+                props=next(name for name in pack.namelist() if name.endswith('shaders/shaders.properties'))
+                assert re.search(r'program\.world0/deferred4_a\.enabled\s*=\s*SH_SKYLIGHT\b',pack.read(props).decode())
+            options='SH_SKYLIGHT=false\n'
+            (dest.parent/(dest.name+'.txt')).write_text(options)
+            (game.LOGS/'photon-settings.txt').write_text(options)
+            provenance[-1]['options']={'SH_SKYLIGHT':False}
+            provenance[-1]['optionReason']='llvmpipe 32768-byte compute shared memory limit; default Photon preset NOT VERIFIED'
+
     (game.LOGS / 'shaderpack-provenance.json').write_text(json.dumps(provenance, indent=2) + '\n')
