@@ -121,3 +121,19 @@ options.txt значение 0.0 стало действительно проз�
 Window.getGuiScale()==3; затем отдельный resize до 1100×760 на scale 2.
 Ручная отмена промежуточного 38718767066 недоступна текущей GitHub integration (403);
 новый push использует штатный cancel-in-progress workflow. Это не релизный кандидат.
+
+
+## Итоговый кандидат принят по перечисленным проверкам
+`38718947164` SUCCESS, source `6ce2228`, evidence `02780ef`: 156/156 GameTests, полная
+installed-server миграция с повторным открытием, 7 mask checks с фоном чата 0.5,
+настоящий effective GUI scale 3, оба Forge TAB ORDER PASS, полный FX/lifecycle PASS.
+62 F2 сохранены; 18 ключевых итоговых кадров просмотрены вручную, включая оба каталога,
+одноручные пистолеты, оптику/движение/FOV, reload и shader fallback/recovery.
+13 дополнительных Python-проверок PASS; лог добавлен в итоговый каталог reports.
+JAR 48 268 481 байт, SHA256 `eb8a06f8370e803bdf58aa048a5984884fb0cfe4db90eceac7e9804219acea22`;
+GitHub asset 643520683 совпадает с хешем установленного в migration QA файла.
+Итоговые ссылки/границы проверки: `reports/stage1d/README.md`. Прежний зелёный draft
+38716020029 не выдаётся вместо финального кандидата. Аппаратное GPU/audio и установленный
+клиентский JAR не объявляются проверенными; PR остаётся draft, main не сливался.
+
+Опубликован prerelease `stage1d-38718947164` (alpha.4), не draft.

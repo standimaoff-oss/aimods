@@ -1,0 +1,25 @@
+test_ammo_models_and_blend (__main__.Stage1cTests.test_ammo_models_and_blend) ... ok
+test_exported_models_textures_nodes_and_animation (__main__.Stage1cTests.test_exported_models_textures_nodes_and_animation) ... ok
+test_new_shapeless_recipes_do_not_collide (__main__.Stage1cTests.test_new_shapeless_recipes_do_not_collide) ... ok
+test_retired_data_has_no_uranium (__main__.Stage1cTests.test_retired_data_has_no_uranium) ... ok
+test_weapons_resources (__main__.Stage1cTests.test_weapons_resources) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.049s
+
+OK
+test_mod_smoke_emitters_are_routed (__main__.PortTests.test_mod_smoke_emitters_are_routed) ... ok
+test_no_donor_gameplay_or_unmapped_symbols (__main__.PortTests.test_no_donor_gameplay_or_unmapped_symbols) ... ok
+test_qa_bridge_is_opt_in_and_clientbound (__main__.PortTests.test_qa_bridge_is_opt_in_and_clientbound) ... ok
+test_renderer_has_failure_and_resource_cleanup (__main__.PortTests.test_renderer_has_failure_and_resource_cleanup) ... ok
+test_shaders_are_extracted_from_supplied_jar (__main__.PortTests.test_shaders_are_extracted_from_supplied_jar) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.022s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.156s
+
+OK
