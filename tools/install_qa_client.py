@@ -9,10 +9,30 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import time
 import uuid
 
 FORGE = '1.20.1-47.4.23'
 INSTALLER_SHA1 = 'ed31ce02ac69176f34353235cb2508d5a0f1e088'
+
+
+def install_server(installer, server, log_path):
+    cmd=['java','-jar',str(installer),'--installServer',str(server)]
+    with log_path.open('w') as log:
+        for attempt in range(1,4):
+            log.write(f'\nForge server installation attempt {attempt}/3\n');log.flush()
+            offset=log_path.stat().st_size
+            result=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT,timeout=900)
+            log.flush()
+            if result.returncode==0:
+                return
+            with log_path.open('rb') as fresh:
+                fresh.seek(offset); text=fresh.read().decode(errors='replace')
+            if attempt==3 or 'These libraries failed to download' not in text:
+                raise subprocess.CalledProcessError(result.returncode,cmd)
+            # Retry only the failed distribution download; Forge still validates
+            # every cached/downloaded checksum. Never retry gameplay assertions.
+            time.sleep(2)
 
 
 def prepare(game):
@@ -42,9 +62,7 @@ def prepare(game):
                     f'https://maven.minecraftforge.net/net/minecraftforge/forge/{FORGE}/forge-{FORGE}-installer.jar',
                     '-o', str(installer)], check=True)
     assert hashlib.sha1(installer.read_bytes()).hexdigest() == INSTALLER_SHA1
-    with (game.LOGS / 'installed-server-installer.log').open('w') as log:
-        subprocess.run(['java', '-jar', str(installer), '--installServer', str(server)],
-                       stdout=log, stderr=subprocess.STDOUT, check=True, timeout=900)
+    install_server(installer, server, game.LOGS / 'installed-server-installer.log')
     (server / 'user_jvm_args.txt').write_text('-Xmx1024M\n-XX:+UseSerialGC\n')
     # Java UUID.nameUUIDFromBytes for the disposable offline TestPlayer, not an account token.
     offline_id = uuid.UUID(bytes=hashlib.md5(b'OfflinePlayer:TestPlayer').digest(), version=3)
