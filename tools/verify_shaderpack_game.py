@@ -71,6 +71,11 @@ overrideHeight:600
     status(False)
     assert 'reason=active-shaderpack' in log.read_text(errors='replace'), 'pack failed to compile / API not detected'
     assert status(False)==0, 'raw volumetric draw ran with an active pack'
+    # Pack compilation can outlast ReceivingLevelScreen. An acknowledged FX
+    # packet alone does not mean gameplay input is enabled; verify the UI too.
+    g.view_action(log,'view_first')
+    g.view_action(log,'view_ready')
+    time.sleep(3)
     g.screenshot('photon-initial')
     for weapon in ['ppsh41','mosin_pu','musket_1777']:
         ammo={'ppsh41':'mag_ppsh','mosin_pu':'round_762x54r','musket_1777':'paper_cartridge'}[weapon]
