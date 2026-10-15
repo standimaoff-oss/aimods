@@ -84,6 +84,7 @@ public final class VolumetricEffects {
 
     /** Shared by the local command and the explicitly opt-in automation bridge. */
     public static String runVisualQa(String effect) {
+        if (effect.startsWith("view_")) return ru.aiforge.realwar.client.render.WeaponViewQa.run(effect);
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return "No player";
         Vec3 p = mc.player.position().add(mc.player.getLookAngle().scale(effect.equals("nuke") ? 100 : 18));

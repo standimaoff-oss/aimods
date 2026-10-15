@@ -1911,5 +1911,16 @@
   "hud.aiarsenal.gun.name.c96": "Mauser C96",
   "hud.aiarsenal.gun.name.tt33": "ТТ-33",
   "tooltip.aiarsenal.mag.tt33": "ТТ-33: 8 патронов 7,62×25",
-  "tooltip.aiarsenal.gun.keys_c96": "ЛКМ — одиночный выстрел, ПКМ — прицел, R — обойма (только в пустой магазин)"
+  "tooltip.aiarsenal.gun.keys_c96": "ЛКМ — одиночный выстрел, ПКМ — прицел, R — обойма (только в пустой магазин)",
+  "itemGroup.aiarsenal.ww2_weapons": "Вторая мировая · Оружие",
+  "itemGroup.aiarsenal.ww2_vehicles": "Вторая мировая · Техника",
+  "itemGroup.aiarsenal.ww2_clothing": "Вторая мировая · Форма",
+  "itemGroup.aiarsenal.ww2_ammo": "Вторая мировая · Боеприпасы",
+  "itemGroup.aiarsenal.modern_weapons": "Холодная война — современность · Оружие",
+  "itemGroup.aiarsenal.modern_vehicles": "Холодная война — современность · Техника и дроны",
+  "itemGroup.aiarsenal.modern_clothing": "Холодная война — современность · Форма",
+  "itemGroup.aiarsenal.modern_ammo": "Холодная война — современность · Боеприпасы",
+  "itemGroup.aiarsenal.common_parts": "Общее · Материалы и детали",
+  "itemGroup.aiarsenal.common_equipment": "Общее · Снаряжение",
+  "itemGroup.aiarsenal.common_building": "Общее · Строительство и укрепления"
 }

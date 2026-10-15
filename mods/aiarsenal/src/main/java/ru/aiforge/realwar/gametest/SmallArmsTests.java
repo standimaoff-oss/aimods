@@ -355,4 +355,29 @@ public final class SmallArmsTests {
         h.succeed();
     }
 
+    @GameTest(template = "arena", batch = "rw_small")
+    public static void era_catalog_is_complete_and_separates_ammunition(GameTestHelper h) {
+        var tabs = ru.aiforge.realwar.registry.ModTabs.SECTIONS;
+        var all = new java.util.HashSet<net.minecraft.world.item.Item>();
+        for (var section : tabs) {
+            var items = ru.aiforge.realwar.registry.ModTabs.content(section);
+            h.assertTrue(new java.util.HashSet<>(items).size() == items.size(), "duplicate in " + section);
+            all.addAll(items);
+        }
+        for (var key : net.minecraft.core.registries.BuiltInRegistries.ITEM.keySet()) {
+            if (key.getNamespace().equals("aiarsenal")) h.assertTrue(
+                    all.contains(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(key)), "unreachable item: " + key);
+        }
+        h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("ww2_weapons").contains(ModItems.C96.get()), "C96 WWII");
+        h.assertTrue(!ru.aiforge.realwar.registry.ModTabs.content("ww2_weapons").contains(ModItems.CLIP_C96.get()), "ammo in separate tab");
+        h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("ww2_ammo").contains(ModItems.CLIP_C96.get()), "C96 clip reachable");
+        h.assertTrue(!ru.aiforge.realwar.registry.ModTabs.content("ww2_weapons").contains(ModItems.AK12.get()), "no modern guns in WWII");
+        h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("ww2_clothing").isEmpty(), "do not pass Cold War uniforms off as WWII");
+        for (String era : new String[]{"ww2_ammo", "modern_ammo"}) {
+            h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content(era).contains(ModItems.SHELLS_122.get()), "shared 122mm " + era);
+            h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content(era).contains(ModItems.SHELLS_152.get()), "shared 152mm " + era);
+        }
+        h.succeed();
+    }
+
 }

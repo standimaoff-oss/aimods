@@ -219,6 +219,8 @@ overrideHeight:700
         ww2_weapons(client_log)
     if os.environ.get('QA_VOLUMETRIC') == '1':
         volumetric(player, client_log)
+    if os.environ.get('QA_STAGE1D') == '1':
+        view_lifecycle(client_log, window)
     command('stop')
     server.wait(timeout=90)
 
@@ -251,6 +253,16 @@ def ww2_weapons(client_log):
         screenshot(name + '-01-in-hand')
         key('mousedown','3');time.sleep(2)
         screenshot(name + '-02-aim')
+        if os.environ.get('QA_STAGE1D') == '1':
+            # A fresh chat background MUST NOT punch a rectangular hole through the optical mask.
+            command('tellraw TestPlayer {"text":"Scope/chat depth regression: this must not cover the optic"}')
+            time.sleep(.6)
+            screenshot(name + '-06-chat-ads')
+            if name in ('mosin_pu','k98k_zf39'): assert_scope_mask(name + '-06-chat-ads')
+            view_action(client_log, 'view_fov90'); time.sleep(2)
+            screenshot(name + '-07-fov90')
+            if name in ('mosin_pu','k98k_zf39'): assert_scope_mask(name + '-07-fov90')
+            view_action(client_log, 'view_fov70'); time.sleep(2)
         before = health()
         # One semi-automatic trigger edge. Hold until the server acknowledges firing.
         key('mousedown','1')
@@ -297,8 +309,73 @@ def ww2_weapons(client_log):
         assert ammo()==expected, name + ': reload did not finish at expected capacity'
         screenshot(name + '-04-reloaded')
         key('mouseup','3')
+        if os.environ.get('QA_STAGE1D') == '1':
+            key('key','F5'); key('key','F5'); time.sleep(2)
+            screenshot(name + '-08-third-person')
+            key('key','F5')
+            key('mousedown','3'); key('keydown','w'); time.sleep(.8)
+            screenshot(name + '-09-moving-ads')
+            key('keyup','w'); key('mouseup','3')
     command('kill @e[tag=qa_target]')
     command('difficulty peaceful')
+
+
+def view_action(client_log, action):
+    start=client_log.stat().st_size
+    command('arsenal_visual_test client '+action+' TestPlayer', 'Client QA sent: '+action)
+    deadline=time.monotonic()+120
+    while time.monotonic()<deadline:
+        with client_log.open('rb') as f:
+            f.seek(start); fresh=f.read().decode('utf-8',errors='replace')
+        if 'VIEW QA '+action+' PASS' in fresh:return
+        time.sleep(.1)
+    raise AssertionError('Missing view QA acknowledgment: '+action)
+
+
+def assert_scope_mask(name):
+    from PIL import Image
+    image=Image.open(OUT/'shots'/(os.environ.get('QA_PREFIX','stage1')+'-'+name+'.png')).convert('RGB')
+    w,h=image.size
+    # Outside the optic, above the weapon HUD: the old chat strip made this gray instead of black.
+    box=image.crop((int(w*.03),int(h*.76),int(w*.18),int(h*.81)))
+    pixels=list(box.getdata())
+    fraction=sum(max(pixel)<20 for pixel in pixels)/len(pixels)
+    assert fraction>.98, f'{name}: chat/depth cutout in optic mask: black fraction {fraction}'
+    print(f'OPTIC MASK PASS {name} black={fraction:.3f}',flush=True)
+
+
+def view_lifecycle(client_log, window):
+    command('clear TestPlayer')
+    command('item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:5}')
+    command('tp TestPlayer 0 -60 0 0 0')
+    key('key','1');time.sleep(2)
+    view_action(client_log,'view_scale3')
+    key('mousedown','3');time.sleep(2)
+    screenshot('lifecycle-01-scale3');assert_scope_mask('lifecycle-01-scale3')
+    key('mouseup','3')
+    view_action(client_log,'view_scale2')
+    # Actual framebuffer resize, not an edited screenshot.
+    key('windowsize',window,'1100','760');time.sleep(3)
+    key('mousedown','3');time.sleep(2)
+    screenshot('lifecycle-02-resize');assert_scope_mask('lifecycle-02-resize')
+    key('mouseup','3')
+    start=client_log.stat().st_size
+    view_action(client_log,'view_reload')
+    end=time.monotonic()+180
+    while time.monotonic()<end:
+        with client_log.open('rb') as f:
+            f.seek(start);fresh=f.read().decode('utf-8',errors='replace')
+        if 'VIEW RELOAD PASS' in fresh:break
+        time.sleep(.5)
+    else:raise AssertionError('resource reload did not complete')
+    time.sleep(3)
+    key('mousedown','3');time.sleep(2)
+    screenshot('lifecycle-03-resource-reload');assert_scope_mask('lifecycle-03-resource-reload')
+    key('mouseup','3')
+    view_action(client_log,'view_tabs');time.sleep(3);screenshot('catalog-01-ww2-weapons')
+    key('key','Escape');time.sleep(1)
+    view_action(client_log,'view_modern');time.sleep(3);screenshot('catalog-02-modern-vehicles')
+    key('key','Escape');time.sleep(1)
 
 
 def volumetric(player, client_log):

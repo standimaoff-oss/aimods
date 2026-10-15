@@ -63,7 +63,7 @@ public final class GunRenderer {
         if (p == null || p.getVehicle() != null) return;
         ItemStack st = p.getMainHandItem();
         if (!(st.getItem() instanceof FirearmItem g)) return;
-        e.setCanceled(true);                                    // two-handed: the off hand holds the handguard
+        e.setCanceled(true); // custom firearm hands; pistol support hand is used only during reload
         if (e.getHand() != InteractionHand.MAIN_HAND || GunClient.scoped()) return;
         GunKind k = g.kind;
         GlbAssets.Loaded lm = GlbAssets.get(glb(k.id));
@@ -84,6 +84,10 @@ public final class GunRenderer {
         float kick = Math.max(0f, 1f - since / kickT);
         kick = kick * kick;
         PoseStack ps = e.getPoseStack();
+        ps.pushPose();
+        // Remove vanilla hand bob/sway as ADS settles. It must not move the sights off the camera ray.
+        ps.last().pose().lerp(new Matrix4f(), a);
+        ps.last().normal().set(new org.joml.Matrix3f(ps.last().pose()).invert().transpose());
         Matrix4f base = new Matrix4f(ps.last().pose());
         ps.pushPose();
         ps.translate(tx, ty - 0.55f * e.getEquipProgress(), tz + (k.launcher() ? 0.09f : 0.035f) * kick * (1f - 0.5f * a));
@@ -121,8 +125,9 @@ public final class GunRenderer {
         Vector3f hl = anchor(lm, pose, ps, base, k.id + ".arm_l");
         ps.popPose();
         int armLight = e.getPackedLight();
-        if (hr != null) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hr, true);
-        if (hl != null) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hl, false);
+        if (hr != null) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hr, true, k.pistol() ? 0.82f : 1f);
+        if (hl != null && (!k.pistol() || rel)) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hl, false, k.pistol() ? 0.82f : 1f);
+        ps.popPose();
     }
 
     // ------------------------------------------------------------------ vanilla arms
@@ -149,7 +154,7 @@ public final class GunRenderer {
      * shoulder to the grip, the hand's palm faces the weapon (inwards / up), the arm is stretched along its length only
      * so that it always reaches back to the shoulder outside the screen.
      */
-    private static void arm(Minecraft mc, LocalPlayer p, PoseStack ps, MultiBufferSource buf, int light, Vector3f hand, boolean right) {
+    private static void arm(Minecraft mc, LocalPlayer p, PoseStack ps, MultiBufferSource buf, int light, Vector3f hand, boolean right, float widthScale) {
         if (!(mc.getEntityRenderDispatcher().getRenderer(p) instanceof net.minecraft.client.renderer.entity.player.PlayerRenderer pr)) return;
         net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer> m = pr.getModel();
         boolean slim = "slim".equals(p.getModelName());
@@ -157,7 +162,7 @@ public final class GunRenderer {
         net.minecraft.client.model.geom.ModelPart sleeve = right ? m.rightSleeve : m.leftSleeve;
         // live-tunable "arms" = [width, rShX, rShY, rShZ, lShX, lShY, lShZ, gripPx] (handheld_view.json)
         float[] t = HandheldView.raw("arms");
-        float armW = t != null && t.length >= 8 ? t[0] : ARM_W;
+        float armW = (t != null && t.length >= 8 ? t[0] : ARM_W) * widthScale;
         Vector3f sh = t != null && t.length >= 8 ? (right ? new Vector3f(t[1], t[2], t[3]) : new Vector3f(t[4], t[5], t[6])) : right ? SHOULDER_R : SHOULDER_L;
         float grip = t != null && t.length >= 8 ? t[7] : 9.6f;
         // the support hand holds the handguard from below: its arm axis runs under the anchor (palm up, fingers around)
@@ -258,6 +263,11 @@ public final class GunRenderer {
             float[] b = bounds(model, lm);
             ps.pushPose();
             HandheldView.apply(ps, v, b);
+            if (stack.getItem() instanceof FirearmItem firearm && firearm.kind.pistol()
+                    && (ctx == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND || ctx == ItemDisplayContext.THIRD_PERSON_LEFT_HAND)) {
+                float[] grip = node(lm, id + ".arm_r");
+                ps.translate(-grip[0], -grip[1], -grip[2]);
+            }
             Pose pose = lm.scratch();
             pose.hide(id + ".arm_l", true);
             pose.hide(id + ".arm_r", true);

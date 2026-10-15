@@ -1911,5 +1911,16 @@
   "hud.aiarsenal.gun.name.c96": "Mauser C96",
   "hud.aiarsenal.gun.name.tt33": "TT-33",
   "tooltip.aiarsenal.mag.tt33": "TT-33: 8 rounds of 7.62×25",
-  "tooltip.aiarsenal.gun.keys_c96": "LMB — semi-auto fire, RMB — aim, R — stripper clip (empty magazine only)"
+  "tooltip.aiarsenal.gun.keys_c96": "LMB — semi-auto fire, RMB — aim, R — stripper clip (empty magazine only)",
+  "itemGroup.aiarsenal.ww2_weapons": "WWII · Weapons",
+  "itemGroup.aiarsenal.ww2_vehicles": "WWII · Vehicles",
+  "itemGroup.aiarsenal.ww2_clothing": "WWII · Clothing",
+  "itemGroup.aiarsenal.ww2_ammo": "WWII · Ammunition",
+  "itemGroup.aiarsenal.modern_weapons": "Cold War — Modern · Weapons",
+  "itemGroup.aiarsenal.modern_vehicles": "Cold War — Modern · Vehicles and drones",
+  "itemGroup.aiarsenal.modern_clothing": "Cold War — Modern · Clothing",
+  "itemGroup.aiarsenal.modern_ammo": "Cold War — Modern · Ammunition",
+  "itemGroup.aiarsenal.common_parts": "Shared · Materials and parts",
+  "itemGroup.aiarsenal.common_equipment": "Shared · Equipment",
+  "itemGroup.aiarsenal.common_building": "Shared · Building and fortification"
 }

@@ -159,7 +159,7 @@ public final class GunClient {
             aim = a;
             send(a ? Firearms.AIM_ON : Firearms.AIM_OFF);
         }
-        float target = aim && !reloading && !p.isSprinting() ? 1f : 0f;
+        float target = aim && !reloading && !(k.boltAction() && sinceShot() < 1.25f) && !p.isSprinting() ? 1f : 0f;
         float sp = k.launcher() ? 0.14f : 0.24f;
         ads += Math.max(-sp, Math.min(sp, target - ads));
         boolean r = VehicleClient.KEY_RELOAD.isDown(), rc = false, bc = false;
@@ -211,6 +211,7 @@ public final class GunClient {
             case GunFxPacket.SHOT -> {
                 shotN = System.nanoTime();
                 shotCount++;
+                if (k != null && k.boltAction()) ads = adsPrev = 0f;
                 var shooter = Minecraft.getInstance().player;
                 if (shooter != null) {
                     Vec3 muzzle = shooter.getEyePosition().add(shooter.getLookAngle().scale(0.8)).add(0, -0.1, 0);
@@ -226,6 +227,7 @@ public final class GunClient {
             }
             case GunFxPacket.RELOAD, GunFxPacket.RELOAD_EMPTY -> {
                 reloading = true;
+                ads = adsPrev = 0f; // never show an enlarged hip/reload model through residual scope zoom
                 reloadEmpty = fx == GunFxPacket.RELOAD_EMPTY;
                 reloadN = System.nanoTime();
                 if (Boolean.getBoolean("aiarsenal.visualQa") && k != null)
@@ -315,11 +317,22 @@ public final class GunClient {
 
     // ------------------------------------------------------------------ HUD
 
+    @SubscribeEvent
+    public static void scopeOverlays(net.minecraftforge.client.event.RenderGuiOverlayEvent.Pre e) {
+        if (!scoped()) return;
+        var id = e.getOverlay().id();
+        if (id.equals(net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.CHAT_PANEL.id())
+                || id.equals(net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.ITEM_NAME.id())) e.setCanceled(true);
+    }
+
     public static void render(ForgeGui gui, GuiGraphics g, float pt, int w, int h) {
         Minecraft mc = Minecraft.getInstance();
         Player p = mc.player;
         GunKind k = held();
         if (p == null || k == null || mc.options.hideGui || p.getVehicle() != null) return;
+        g.flush();
+        g.pose().pushPose();
+        g.pose().translate(0, 0, 400); // above chat depth, including the compact ammo panel
         float a = adsLerp(pt);
         if (scoped()) {
             if (k == GunKind.RPG7) pgo7(g, mc.font, w, h, mc.options.fov().get() * k.adsFov);
@@ -331,6 +344,8 @@ public final class GunClient {
         }
         if (k.manpads() && a > 0.5f && !reloading && FirearmItem.ammo(p.getMainHandItem()) > 0) seeker(g, mc.font, p, k, w, h, pt);
         panel(g, mc.font, p, k, w, h);
+        g.flush();
+        g.pose().popPose();
     }
 
     private static void hipCross(GuiGraphics g, int w, int h, GunKind k, Player p, float alpha) {

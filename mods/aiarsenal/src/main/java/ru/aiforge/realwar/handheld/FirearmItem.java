@@ -108,7 +108,8 @@ public class FirearmItem extends Item {
 
             @Override
             public net.minecraft.client.model.HumanoidModel.ArmPose getArmPose(LivingEntity e, InteractionHand hand, ItemStack st) {
-                return net.minecraft.client.model.HumanoidModel.ArmPose.CROSSBOW_HOLD;
+                return kind.pistol() ? ru.aiforge.realwar.client.render.PistolPose.HOLD
+                        : net.minecraft.client.model.HumanoidModel.ArmPose.CROSSBOW_HOLD;
             }
         });
     }

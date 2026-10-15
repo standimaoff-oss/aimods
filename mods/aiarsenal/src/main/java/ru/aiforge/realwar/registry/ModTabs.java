@@ -42,18 +42,6 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModTabs {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create((ResourceKey)Registries.CREATIVE_MODE_TAB, (String)"aiarsenal");
     private static final Map<String, Cat> MAP = new java.util.LinkedHashMap<String, Cat>();
-    public static final RegistryObject<CreativeModeTab> NUCLEAR;
-    public static final RegistryObject<CreativeModeTab> MISSILES;
-    public static final RegistryObject<CreativeModeTab> VEHICLES;
-    public static final RegistryObject<CreativeModeTab> DRONES;
-    public static final RegistryObject<CreativeModeTab> AMMO;
-    public static final RegistryObject<CreativeModeTab> PARTS;
-    public static final RegistryObject<CreativeModeTab> INDUSTRY;
-    public static final RegistryObject<CreativeModeTab> PROTECTION;
-    public static final RegistryObject<CreativeModeTab> FORTIFICATION;
-    public static final RegistryObject<CreativeModeTab> WEAPONS;
-    public static final RegistryObject<CreativeModeTab> BUILDING;
-    public static final RegistryObject<CreativeModeTab> UNIFORMS;
 
     private ModTabs() {
     }
@@ -72,16 +60,53 @@ public final class ModTabs {
         return new HashSet<String>(MAP.keySet());
     }
 
-    private static RegistryObject<CreativeModeTab> tab(String id, Cat cat, Supplier<ItemStack> icon) {
-        return TABS.register(id, () -> CreativeModeTab.builder().title((Component)Component.translatable((String)("itemGroup.aiarsenal." + id))).icon(icon).displayItems((params, out) -> {
-            ArrayList<Item> list = new ArrayList<Item>();
-            for (Map.Entry<String, Cat> en : MAP.entrySet()) {
-                if (en.getValue() != cat) continue;
-                ResourceLocation key = new ResourceLocation("aiarsenal", en.getKey());
-                if (BuiltInRegistries.ITEM.containsKey(key)) list.add((Item)BuiltInRegistries.ITEM.get(key));
-            }
-            list.forEach(arg_0 -> ((CreativeModeTab.Output)out).accept(arg_0));
-        }).build());
+    public static final java.util.List<String> SECTIONS = java.util.List.of(
+            "ww2_weapons", "ww2_vehicles", "ww2_clothing", "ww2_ammo",
+            "modern_weapons", "modern_vehicles", "modern_clothing", "modern_ammo",
+            "common_parts", "common_equipment", "common_building");
+    private static final Set<String> WW2 = Set.of(
+            "ppsh41", "mp40", "mosin", "k98k", "mosin_pu", "k98k_zf39", "c96", "tt33",
+            "mag_ppsh", "mag_mp40", "clip_mosin", "clip_k98", "round_762x54r", "round_792x57", "clip_c96", "mag_tt33",
+            "pz2_vehicle", "pz4_vehicle", "tiger_vehicle", "sturmtiger_vehicle", "maus_vehicle", "ratte_vehicle",
+            "t34_vehicle", "kv2_vehicle", "is2_vehicle", "kv5_vehicle", "bm13_vehicle", "bismarck_ship",
+            "bf109_plane", "yak3_plane", "he111_plane", "pe8_plane", "little_boy",
+            "shells_20", "shells_75", "shells_88", "shells_85", "shells_107", "shells_128", "shells_280",
+            "rocket_380", "rocket_m13", "sc250", "sc1000", "fab250sv", "fab1000", "fab5000");
+    private static final Set<String> SHARED_AMMO = Set.of("shells_122", "shells_152"); // IS-2/KV-2 AND D-30/Msta
+    private static final Set<String> NUCLEAR_PARTS = Set.of("lb_casing", "rds_core", "rds_casing", "cordite", "bridgewire_detonator");
+
+    /** Primary section; a genuinely shared vehicle calibre can also appear in the other era. */
+    public static String sectionOf(String name) {
+        Cat c = MAP.get(name);
+        if (c == null) return null;
+        if (NUCLEAR_PARTS.contains(name) || c == Cat.PARTS || c == Cat.INDUSTRY) return "common_parts";
+        if (c == Cat.BUILDING || c == Cat.FORTIFICATION) return "common_building";
+        if (name.equals("craft_service_kit")) return "common_equipment";
+        if (c == Cat.PROTECTION) return name.startsWith("hazmat_") ? "modern_clothing" : "common_equipment";
+        String era = WW2.contains(name) ? "ww2_" : "modern_";
+        if (c == Cat.UNIFORMS) return era + "clothing";
+        if (c == Cat.VEHICLES || c == Cat.DRONES && !Set.of("tablet", "fpv_goggles").contains(name)) return era + "vehicles";
+        if (c == Cat.AMMO || c == Cat.NUCLEAR && Set.of("yars", "rds1", "an602", "little_boy", "rds_4").contains(name)
+                || c == Cat.MISSILES && (name.startsWith("missile_") || Set.of("kh101", "kh55", "kalibr", "tomahawk").contains(name)))
+            return era + "ammo";
+        return era + "weapons";
+    }
+
+    public static java.util.List<Item> content(String section) {
+        java.util.List<Item> result = new ArrayList<>();
+        for (String name : MAP.keySet()) {
+            if (!section.equals(sectionOf(name)) && !(section.equals("ww2_ammo") && SHARED_AMMO.contains(name))) continue;
+            ResourceLocation key = new ResourceLocation("aiarsenal", name);
+            if (BuiltInRegistries.ITEM.containsKey(key)) result.add(BuiltInRegistries.ITEM.get(key));
+        }
+        return java.util.List.copyOf(result);
+    }
+
+    private static void section(String id, String icon) {
+        TABS.register(id, () -> CreativeModeTab.builder()
+                .title(Component.translatable("itemGroup.aiarsenal." + id))
+                .icon(() -> new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal", icon))))
+                .displayItems((params, out) -> content(id).forEach(out::accept)).build());
     }
 
     static {
@@ -106,20 +131,23 @@ public final class ModTabs {
         // <<< r17
         ModTabs.put(Cat.WEAPONS, "ak12", "mag_ak12", "m4a1", "mag_stanag", "t5000", "mag_t5000", "pkp", "box_pkp", "saiga12", "mag_saiga12", "r870", "shell_12", "rpg7", "pg7v", "igla", "igla_missile", "stinger", "stinger_missile", "javelin", "javelin_missile", "ppsh41", "mag_ppsh", "mp40", "mag_mp40", "mosin", "clip_mosin", "k98k", "clip_k98");
         ModTabs.put(Cat.WEAPONS, "mosin_pu", "k98k_zf39", "c96", "tt33", "round_762x54r", "round_792x57", "clip_c96", "mag_tt33");
-        VEHICLES = ModTabs.tab("vehicles", Cat.VEHICLES, () -> new ItemStack((ItemLike)ModItems.GRAD_VEHICLE.get()));
-        DRONES = ModTabs.tab("drones", Cat.DRONES, () -> new ItemStack((ItemLike)BuiltInRegistries.ITEM.get(new ResourceLocation("aiarsenal", "shahed136"))));
-        NUCLEAR = ModTabs.tab("nuclear", Cat.NUCLEAR, () -> new ItemStack((ItemLike)ModItems.LITTLE_BOY.get()));
-        MISSILES = ModTabs.tab("missiles", Cat.MISSILES, () -> new ItemStack((ItemLike)ModS3.missileItem(MissileType.ICBM_MIRV).get()));
-        AMMO = ModTabs.tab("ammo", Cat.AMMO, () -> new ItemStack((ItemLike)ModItems.GRAD_ROCKET.get()));
-        PARTS = ModTabs.tab("parts", Cat.PARTS, () -> new ItemStack((ItemLike)ModItems.DIESEL_ENGINE.get()));
-        INDUSTRY = ModTabs.tab("industry", Cat.INDUSTRY, () -> new ItemStack((ItemLike)ModItems.STEEL_INGOT.get()));
-        PROTECTION = ModTabs.tab("protection", Cat.PROTECTION, () -> new ItemStack((ItemLike)ModItems.GEIGER_COUNTER.get()));
-        WEAPONS = ModTabs.tab("weapons", Cat.WEAPONS, () -> new ItemStack((ItemLike)ModItems.RPG7.get()));
-        BUILDING = ModTabs.tab("building", Cat.BUILDING, () -> new ItemStack((ItemLike)ModItems.SEARCHLIGHT.get()));
         for (String set : ru.aiforge.realwar.item.UniformItem.SETS)
             for (String sl : new String[]{"head", "chest", "legs", "feet"}) ModTabs.put(Cat.UNIFORMS, "uniform_" + set + "_" + sl);
-        UNIFORMS = ModTabs.tab("uniforms", Cat.UNIFORMS, () -> new ItemStack((ItemLike)ModItems.UNIFORMS.get("uniform_ru_general_head").get()));
-        FORTIFICATION = ModTabs.tab("fortification", Cat.FORTIFICATION, () -> new ItemStack((ItemLike)ModItems.CZECH_HEDGEHOG.get()));
+        for (var gun : ru.aiforge.realwar.handheld.GunKind.values()) put(Cat.AMMO, gun.ammo);
+        put(Cat.AMMO, "javelin_missile");
+        section("ww2_weapons", "mosin_pu");
+        section("ww2_vehicles", "t34_vehicle");
+        // Registered extension point, hidden by vanilla until genuine WWII clothing is added in stage 2.
+        section("ww2_clothing", "uniform_su_tanker_head");
+        section("ww2_ammo", "mag_ppsh");
+        section("modern_weapons", "ak12");
+        section("modern_vehicles", "t90m_vehicle");
+        section("modern_clothing", "uniform_ru_private_head");
+        section("modern_ammo", "mag_ak12");
+        section("common_parts", "steel_plate");
+        section("common_equipment", "first_aid_kit");
+        section("common_building", "sandbags");
+
     }
 
     public static enum Cat {

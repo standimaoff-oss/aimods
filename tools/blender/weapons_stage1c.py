@@ -66,7 +66,7 @@ def sniper(name,pu):
         w.clip(anim,bolt,[(0,Z,Z),(f(4),Z,(0,65,0)),(f(8),(0,.09,0),(0,65,0)),(f(21),(0,.09,0),(0,65,0)),(f(25),Z,(0,65,0)),(total,Z,Z)])
         # One cartridge approached from the right side, never a stripper clip through the optic.
         w.clip(anim,round_,[(0,Z,Z),(f(5),(-.06,0,.04),Z),(f(14),(-.035,0,.025),Z),(f(20),Z,Z),(total,Z,Z)])
-        w.clip(anim,arm,[(0,Z,Z),(f(5),(-.04,-.10,.10),Z),(f(20),(-.02,-.12,.05),Z),(total,Z,Z)])
+        w.clip(anim,arm,[(0,Z,Z),(f(5),(-.09,-.10,.06),Z),(f(20),(-.07,-.12,.035),Z),(total,Z,Z)])
     return sc
 
 
@@ -128,7 +128,8 @@ def pistol(name,c96):
         drop=(0,.02,.13) if c96 else (0,.02,-.18)
         w.clip(anim,gun,[(0,Z,Z),(8,Z,(0,0,-24)),(total-8,Z,(0,0,-24)),(total,Z,Z)])
         w.clip(anim,m,[(0,Z,Z),(12,drop,Z),(total*.55,drop,Z),(total*.75,Z,Z),(total,Z,Z)])
-        w.clip(anim,arm,[(0,Z,Z),(12,drop,Z),(total*.55,drop,Z),(total*.75,Z,Z),(total,Z,Z)])
+        hand_drop=(.065,.02,.085) if c96 else (.06,.02,-.16)
+        w.clip(anim,arm,[(0,Z,Z),(12,hand_drop,Z),(total*.55,hand_drop,Z),(total*.75,Z,Z),(total,Z,Z)])
         if c96 or anim.endswith('_empty'):
             w.clip(anim,bolt,[(0,Z,Z),(8,(0,.032,0),Z),(total-10,(0,.032,0),Z),(total-3,Z,Z),(total,Z,Z)])
     return sc
