@@ -3,7 +3,8 @@
 def missile_complete(s):
     return (s['expectedEntities'] > 0 and s['spawned'] == s['expectedEntities']
             and s['removed'] == s['spawned'] and s['activeBlasts'] == 0
-            and s['completedTasks'] > 0 and s['changedBlocks'] > 0)
+            and s['completedTasks'] >= max(1, s['expectedEntities'] - 1, s.get('minimumTasks', 1))
+            and s['changedBlocks'] > 0)
 
 
 def craft_fired(before, after):

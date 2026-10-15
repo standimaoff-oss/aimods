@@ -77,7 +77,9 @@ def missile(row,index):
     # Observe the target, outside the blast; do not touch projectile positions.
     g.command(f'tp TestPlayer {tx+75} 30 {tz-90} 40 30')
     def completed():
-        row['observed']=qa('missilestatus');save()
+        row['observed']=qa('missilestatus')
+        row['observed']['minimumTasks']=2 if row['id'].endswith('_kinetic') else 1
+        save()
         return missile_complete(row['observed'])
     wait(completed,360)
     g.screenshot('impact-'+row['id'].split(':')[1])

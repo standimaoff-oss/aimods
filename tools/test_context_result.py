@@ -5,7 +5,7 @@ class ContextResultTest(unittest.TestCase):
     def test_missile_requires_all_warheads_and_real_effects(self):
         good=dict(expectedEntities=9,spawned=9,removed=9,activeBlasts=0,completedTasks=8,changedBlocks=100)
         self.assertTrue(missile_complete(good))
-        for key,value in [('spawned',1),('removed',8),('activeBlasts',1),('completedTasks',0),('changedBlocks',0),('expectedEntities',0)]:
+        for key,value in [('spawned',1),('removed',8),('activeBlasts',1),('completedTasks',0),('completedTasks',7),('changedBlocks',0),('expectedEntities',0)]:
             self.assertFalse(missile_complete(dict(good,**{key:value})),key)
 
     def test_craft_consumption_is_not_a_projectile(self):
