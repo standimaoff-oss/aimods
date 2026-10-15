@@ -1,0 +1,28 @@
+{
+  "result": "FAIL",
+  "pack": "complementary",
+  "actions": [
+    {
+      "id": "aiarsenal:cannon_fr6",
+      "result": "RUNNING",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_fr6",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 504.5,
+        "spawned": {
+          "aiarsenal:cannon_fr6": 1
+        }
+      },
+      "cycles": [],
+      "aimChecks": [
+        "[23:47:22] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=0 safeCloudFrames=0"
+      ]
+    }
+  ],
+  "toggles": [],
+  "error": "AssertionError: [23:47:22] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=0 safeCloudFrames=0",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 189, in <module>\n    run()\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 123, in run\n    powder_cannon(row,index);save()\n  File \"/home/runner/work/aimods/aimods/tools/shaderpack_actions.py\", line 28, in powder_cannon\n    click(1)\n  File \"/home/runner/work/aimods/aimods/tools/shaderpack_actions.py\", line 24, in click\n    assert 'target='+row['id'] in aim,aim\nAssertionError: [23:47:22] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=0 safeCloudFrames=0\n"
+}
