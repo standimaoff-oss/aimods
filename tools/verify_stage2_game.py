@@ -84,4 +84,7 @@ def run(g, server, server_log, client_log, main_window):
  (g.LOGS/'stage2-multiplayer.json').write_text(json.dumps({'result':'PASS','real_clients':['TestPlayer','Observer'],
   'uniform_sets':list(SETS),'remote_firearms':kinds,'left_handed_remote':'tt33',
   'same_server':'installed Forge dedicated server; loopback QA only'},indent=2)+'\n')
+ if os.environ.get('QA_STAGE3')=='1':
+  from verify_stage3_game import run as motion_run
+  motion_run(g,client_log,observer_log,main_window)
  print('STAGE2 PASS: 16 full wearable sets, resource reload, pistol sleeves, real second-client firearm views',flush=True)

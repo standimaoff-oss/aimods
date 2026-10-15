@@ -90,6 +90,11 @@ public final class GunRenderer {
         ps.last().normal().set(new org.joml.Matrix3f(ps.last().pose()).invert().transpose());
         Matrix4f base = new Matrix4f(ps.last().pose());
         ps.pushPose();
+        var motion = ru.aiforge.realwar.client.WeaponMotionClient.frame(p, pt, a, GunClient.reloading(), k.pistol());
+        ps.translate(motion.x(), motion.y(), motion.z());
+        ps.mulPose(Axis.XP.rotationDegrees(motion.pitch()));
+        ps.mulPose(Axis.YP.rotationDegrees(motion.yaw()));
+        ps.mulPose(Axis.ZP.rotationDegrees(motion.roll()));
         ps.translate(tx, ty - 0.55f * e.getEquipProgress() * (1f - a), tz + (k.launcher() ? 0.09f : 0.035f) * kick * (1f - 0.5f * a));
         ps.mulPose(Axis.ZP.rotationDegrees(fp[3] * (1f - a)));
         ps.mulPose(Axis.XP.rotationDegrees((k.launcher() ? 5f : 2.2f) * kick * (1f - 0.55f * a)));

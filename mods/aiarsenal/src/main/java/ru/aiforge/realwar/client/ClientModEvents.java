@@ -183,6 +183,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void keys(RegisterKeyMappingsEvent e) {
+        e.register(WeaponMotionClient.SLOW);
         e.register(VehicleClient.KEY_RELOAD);
         e.register(VehicleClient.KEY_LOCK);
         e.register(VehicleClient.KEY_ENGINE);

@@ -17,7 +17,7 @@ def audio_metrics(audio):
 
 
 class Recording:
-    def __init__(self, game, name):
+    def __init__(self, game, name, window=None):
         self.game = game
         if not hasattr(game, "AUDIO_FAILURES"):
             game.AUDIO_FAILURES = []
@@ -29,7 +29,7 @@ class Recording:
         folder.mkdir(parents=True, exist_ok=True)
         self.path = folder / (name + '.mp4')
         self.log = (game.LOGS / ('record-' + name + '.log')).open('w')
-        window = subprocess.check_output(['xdotool', 'search', '--name', 'Minecraft'], text=True).splitlines()[-1]
+        window = window or subprocess.check_output(['xdotool', 'search', '--name', 'Minecraft'], text=True).splitlines()[-1]
         self.process = subprocess.Popen(['ffmpeg', '-nostdin', '-y', '-hide_banner',
             '-thread_queue_size', '1024', '-f', 'x11grab', '-framerate', '20',
             '-window_id', window, '-i', os.environ.get('DISPLAY', ':99'),

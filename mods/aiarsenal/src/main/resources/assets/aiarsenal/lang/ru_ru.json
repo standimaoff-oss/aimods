@@ -2005,5 +2005,6 @@
   "item.aiarsenal.uniform_nap_ri_general_legs": "Брюки — Российская империя · генерал · 1812",
   "item.aiarsenal.uniform_nap_ri_general_feet": "Сапоги — Российская империя · генерал · 1812",
   "tooltip.aiarsenal.uniform.nap_ri_general": "Российская империя · генерал · 1812 · историческая стилизация, не бронежилет",
-  "itemGroup.aiarsenal.napoleonic_clothing": "1812 · Форма"
+  "itemGroup.aiarsenal.napoleonic_clothing": "1812 · Форма",
+  "key.aiarsenal.slow_walk": "Медленная ходьба с оружием (удерживать)"
 }

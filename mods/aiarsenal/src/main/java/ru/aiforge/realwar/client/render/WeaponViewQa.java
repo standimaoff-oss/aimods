@@ -15,6 +15,21 @@ public final class WeaponViewQa {
         if (!Boolean.getBoolean("aiarsenal.visualQa")) return "disabled";
         Minecraft mc = Minecraft.getInstance();
         switch (action) {
+            case "view_index" -> AiArsenal.LOGGER.info(GlbRenderer.qaIndex());
+            case "view_perf_old" -> FrameTimingQa.start(true);
+            case "view_perf_new" -> FrameTimingQa.start(false);
+            case "view_perf_end" -> FrameTimingQa.stop();
+            case "view_motion" -> {
+                if (mc.level != null) for (var player : mc.level.players())
+                    AiArsenal.LOGGER.info("MOTION QA {}", ru.aiforge.realwar.client.WeaponMotionClient.status(player));
+            }
+            case "view_move_idle", "view_move_walk", "view_move_slow", "view_move_run", "view_move_crouch" -> {
+                mc.setScreen(null);
+                mc.options.keyUp.setDown(!action.equals("view_move_idle"));
+                mc.options.keySprint.setDown(action.equals("view_move_run"));
+                mc.options.keyShift.setDown(action.equals("view_move_crouch"));
+                ru.aiforge.realwar.client.WeaponMotionClient.SLOW.setDown(action.equals("view_move_slow"));
+            }
             case "view_shaderfail" -> ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer.failNextShaderForQa();
             case "view_first" -> { mc.setScreen(null); mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON); }
             case "view_front" -> { mc.setScreen(null); mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT); }

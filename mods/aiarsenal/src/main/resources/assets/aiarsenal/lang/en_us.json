@@ -2005,5 +2005,6 @@
   "item.aiarsenal.uniform_nap_ri_general_legs": "Trousers — Russian Imperial general · 1812",
   "item.aiarsenal.uniform_nap_ri_general_feet": "Boots — Russian Imperial general · 1812",
   "tooltip.aiarsenal.uniform.nap_ri_general": "Russian Imperial general · 1812 · historical stylization, not ballistic armour",
-  "itemGroup.aiarsenal.napoleonic_clothing": "1812 · Uniforms"
+  "itemGroup.aiarsenal.napoleonic_clothing": "1812 · Uniforms",
+  "key.aiarsenal.slow_walk": "Slow walk with weapon (hold)"
 }

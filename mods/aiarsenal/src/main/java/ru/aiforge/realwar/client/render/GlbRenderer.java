@@ -84,7 +84,9 @@ public final class GlbRenderer {
         }
     }
 
+    private record NodeDraw(RenderType type, Item item) {}
     static final class Baked {
+        NodeDraw[][] byNode;
         Batch[] batches;
         Matrix4f[] m4;
         Matrix3f[] m3;
@@ -148,6 +150,14 @@ public final class GlbRenderer {
             bk.m4[i] = new Matrix4f();
             bk.m3[i] = new Matrix3f();
         }
+        // Build once, owned by the loaded asset: O(primitives), released with the asset on F3+T.
+        // Preserve opaque/translucent batch order exactly; do not copy vertex arrays.
+        List<List<NodeDraw>> nodes = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) nodes.add(new ArrayList<>());
+        for (Batch batch : bk.batches) for (Item item : batch.items)
+            nodes.get(item.node).add(new NodeDraw(batch.type, item));
+        bk.byNode = new NodeDraw[n][];
+        for (int i = 0; i < n; i++) bk.byNode[i] = nodes.get(i).toArray(new NodeDraw[0]);
         bk.vertices = verts;
         return bk;
     }
@@ -326,14 +336,51 @@ public final class GlbRenderer {
         PoseStack.Pose last = ps.last();
         boolean special = XRAY > 0f || FLAT;
         if (special) colour(-1);
-        for (Batch b : bk.batches) {
-            for (Item it : b.items) {
-                if (it.node != ni) continue;
-                VertexConsumer vc = XRAY > 0f ? buffers.getBuffer(RenderType.entityTranslucentCull(WHITE))
-                        : FLAT ? buffers.getBuffer(RenderType.entityCutoutNoCull(WHITE)) : buffers.getBuffer(b.type);
-                emit(vc, it, last.pose(), last.normal(), light, overlay);
+        if (qaScan) {
+            // Opt-in A/B reference path; unreachable on normal clients.
+            for (Batch batch : bk.batches) for (Item it : batch.items) {
+                if (it.node == ni) emitNode(batch.type, it, last, buffers, light, overlay);
+            }
+        } else {
+            for (NodeDraw draw : bk.byNode[ni]) emitNode(draw.type, draw.item, last, buffers, light, overlay);
+        }
+    }
+
+    private static void emitNode(RenderType type, Item it, PoseStack.Pose last, MultiBufferSource buffers, int light, int overlay) {
+        VertexConsumer vc = XRAY > 0f ? buffers.getBuffer(RenderType.entityTranslucentCull(WHITE))
+                : FLAT ? buffers.getBuffer(RenderType.entityCutoutNoCull(WHITE)) : buffers.getBuffer(type);
+        emit(vc, it, last.pose(), last.normal(), light, overlay);
+    }
+
+    private static boolean qaScan;
+    public static void qaReference(boolean enabled) {
+        if (!Boolean.getBoolean("aiarsenal.visualQa")) throw new IllegalStateException("QA disabled");
+        qaScan = enabled;
+    }
+
+    /** Exact identity/order equivalence on actual baked models, not estimates of triangles or FPS. */
+    public static String qaIndex() {
+        if (!Boolean.getBoolean("aiarsenal.visualQa")) throw new IllegalStateException("QA disabled");
+        long oldVisits = 0, newVisits = 0;
+        int assets = 0;
+        for (String asset : new String[]{"historical_uniforms", "uniforms", "tt33", "ppsh41", "t90m"}) {
+            var lm = GlbAssets.get(new ResourceLocation("aiarsenal", "models/glb/" + asset + ".glb"));
+            if (lm == null) throw new IllegalStateException("missing benchmark model " + asset);
+            Baked bk = baked(lm, lm); assets++;
+            for (int node = 0; node < bk.byNode.length; node++) {
+                int index = 0;
+                for (Batch batch : bk.batches) for (Item it : batch.items) {
+                    oldVisits++;
+                    if (it.node != node) continue;
+                    NodeDraw draw = bk.byNode[node][index++];
+                    if (draw.item != it || draw.type != batch.type) throw new IllegalStateException("node index changed draw order");
+                }
+                if (index != bk.byNode[node].length) throw new IllegalStateException("lost primitive");
+                newVisits += index;
             }
         }
+        if (newVisits <= 0 || oldVisits <= newVisits) throw new IllegalStateException("no reduction");
+        return "INDEX PASS assets=" + assets + " scanVisits=" + oldVisits + " indexedVisits=" + newVisits;
     }
 
     /** XRAY / FLAT colour of world node wi (-1 = untinted). */

@@ -11,12 +11,25 @@ import ru.aiforge.realwar.handheld.FirearmItem;
 /** Common player poses: no local-player ADS state, so remote players use the same grip. */
 public final class PistolPose {
     private PistolPose() {}
+    private static void locomotion(net.minecraft.client.model.geom.ModelPart hand,
+                                   net.minecraft.world.entity.LivingEntity entity, HumanoidArm arm, boolean pistol) {
+        var mc = net.minecraft.client.Minecraft.getInstance();
+        boolean local = entity == mc.player;
+        var f = ru.aiforge.realwar.client.WeaponMotionClient.frame(entity, mc.getFrameTime(),
+                local ? ru.aiforge.realwar.client.GunClient.adsLerp(mc.getFrameTime()) : 0,
+                local && ru.aiforge.realwar.client.GunClient.reloading(), pistol);
+        float sign = arm == HumanoidArm.RIGHT ? 1 : -1;
+        hand.xRot -= (float)Math.toRadians(f.pitch());
+        hand.yRot += (float)Math.toRadians(f.yaw() * sign);
+        hand.zRot += (float)Math.toRadians(f.roll() * sign * .5f);
+    }
     public static final HumanoidModel.ArmPose HOLD = HumanoidModel.ArmPose.create("AIARSENAL_PISTOL", false,
             (model, entity, arm) -> {
                 var hand = arm == HumanoidArm.RIGHT ? model.rightArm : model.leftArm;
                 hand.xRot = -(float)Math.PI / 2f + model.head.xRot;
                 hand.yRot = model.head.yRot;
                 hand.zRot = 0;
+                locomotion(hand, entity, arm, true);
             });
     public static final HumanoidModel.ArmPose LONG_GUN = HumanoidModel.ArmPose.create("AIARSENAL_LONG_GUN", true,
             (model, entity, arm) -> {
@@ -26,6 +39,7 @@ public final class PistolPose {
                 main.xRot = -(float)Math.PI / 2f + model.head.xRot;
                 main.yRot = model.head.yRot;
                 main.zRot = 0;
+                locomotion(main, entity, arm, false);
                 if (!(entity.getMainHandItem().getItem() instanceof FirearmItem gun)) return;
                 var lm = GlbAssets.get(GunRenderer.glb(gun.kind.id));
                 if (lm == null) return;
