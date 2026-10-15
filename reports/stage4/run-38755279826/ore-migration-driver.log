@@ -1,0 +1,86 @@
+From https://github.com/standimaoff-oss/aimods
+ * branch            4ced8a44d9d78cc5003e143cc3927cfd80d4275c -> FETCH_HEAD
+forceload add 0 0 -> Marked chunk [0, 0] in minecraft:overworld to be force loaded
+
+setblock 0 -60 0 aiarsenal:uranium_ore -> Changed the block at 0, -60, 0
+
+setblock 1 -60 0 aiarsenal:deepslate_uranium_ore -> Changed the block at 1, -60, 0
+
+setblock 2 -60 0 minecraft:chest{Items:[{Slot:0b,id:"aiarsenal:raw_uranium",Count:9b},{Slot:1b,id:"aiarsenal:uranium_ingot",Count:7b},{Slot:2b,id:"aiarsenal:uranium_ore",Count:3b},{Slot:3b,id:"aiarsenal:deepslate_uranium_ore",Count:2b},{Slot:4b,id:"aiarsenal:rds1",Count:1b},{Slot:5b,id:"aiarsenal:shahed136",Count:1b}]} -> Changed the block at 2, -60, 0
+
+data get block 2 -60 0 Items -> 2, -60, 0 has the following block data: [{Slot: 0b, id: "aiarsenal:raw_uranium", Count: 9b}, {Slot: 1b, id: "aiarsenal:uranium_ingot", Count: 7b}, {Slot: 2b, id: "aiarsenal:uranium_ore", Count: 3b}, {Slot: 3b, id: "aiarsenal:deepslate_uranium_ore", Count: 2b}, {Slot: 4b, id: "aiarsenal:rds1", Count: 1b}, {Slot: 5b, id: "aiarsenal:shahed136", Count: 1b}]
+
+save-all flush -> Saving the game (this may take a moment!)
+Saved the game
+
+stop -> Stopping the server
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 8629k  100 8629k    0     0  18.2M      0 --:--:-- --:--:-- --:--:-- 18.3M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    40  100    40    0     0    242      0 --:--:-- --:--:-- --:--:--   243
+forceload add 0 0 -> No chunks were marked for force loading
+
+execute if block 0 -60 0 minecraft:stone -> Test passed
+
+MIGRATED_STONE
+execute if block 1 -60 0 minecraft:deepslate -> Test passed
+
+MIGRATED_DEEPSLATE
+execute if data block 2 -60 0 Items[{Slot:0b,id:"minecraft:iron_nugget",Count:9b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_0
+execute if data block 2 -60 0 Items[{Slot:1b,id:"minecraft:iron_ingot",Count:7b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_1
+execute if data block 2 -60 0 Items[{Slot:2b,id:"minecraft:stone",Count:3b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_2
+execute if data block 2 -60 0 Items[{Slot:3b,id:"minecraft:deepslate",Count:2b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_3
+execute if data block 2 -60 0 Items[{Slot:4b,id:"aiarsenal:rds1",Count:1b}] -> Test passed, count: 1
+
+execute if data block 2 -60 0 Items[{Slot:5b,id:"aiarsenal:shahed136",Count:1b}] -> Test passed, count: 1
+
+data get block 2 -60 0 Items -> 2, -60, 0 has the following block data: [{Slot: 0b, id: "minecraft:iron_nugget", Count: 9b}, {Slot: 1b, id: "minecraft:iron_ingot", Count: 7b}, {Slot: 2b, id: "minecraft:stone", Count: 3b}, {Slot: 3b, id: "minecraft:deepslate", Count: 2b}, {Slot: 4b, id: "aiarsenal:rds1", Count: 1b}, {Slot: 5b, id: "aiarsenal:shahed136", Count: 1b}]
+
+save-all flush -> Saving the game (this may take a moment!)
+Saved the game
+
+stop -> Stopping the server
+
+forceload add 0 0 -> No chunks were marked for force loading
+
+execute if block 0 -60 0 minecraft:stone -> Test passed
+
+MIGRATED_STONE
+execute if block 1 -60 0 minecraft:deepslate -> Test passed
+
+MIGRATED_DEEPSLATE
+execute if data block 2 -60 0 Items[{Slot:0b,id:"minecraft:iron_nugget",Count:9b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_0
+execute if data block 2 -60 0 Items[{Slot:1b,id:"minecraft:iron_ingot",Count:7b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_1
+execute if data block 2 -60 0 Items[{Slot:2b,id:"minecraft:stone",Count:3b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_2
+execute if data block 2 -60 0 Items[{Slot:3b,id:"minecraft:deepslate",Count:2b}] -> Test passed, count: 1
+
+MIGRATED_SLOT_3
+execute if data block 2 -60 0 Items[{Slot:4b,id:"aiarsenal:rds1",Count:1b}] -> Test passed, count: 1
+
+execute if data block 2 -60 0 Items[{Slot:5b,id:"aiarsenal:shahed136",Count:1b}] -> Test passed, count: 1
+
+data get block 2 -60 0 Items -> 2, -60, 0 has the following block data: [{Slot: 0b, id: "minecraft:iron_nugget", Count: 9b}, {Slot: 1b, id: "minecraft:iron_ingot", Count: 7b}, {Slot: 2b, id: "minecraft:stone", Count: 3b}, {Slot: 3b, id: "minecraft:deepslate", Count: 2b}, {Slot: 4b, id: "aiarsenal:rds1", Count: 1b}, {Slot: 5b, id: "aiarsenal:shahed136", Count: 1b}]
+
+save-all flush -> Saving the game (this may take a moment!)
+Saved the game
+
+stop -> Stopping the server
+
+OLD WORLD MIGRATION PASS — installed release JAR, real saved chunks and chest, then a second server restart

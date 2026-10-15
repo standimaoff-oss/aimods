@@ -1,0 +1,207 @@
+2026-10-15 15:01:51,671 main WARN Advanced terminal features are not available in this environment
+[15:01:51] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.23, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[15:01:51] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.20.1 by Eclipse Adoptium; OS Linux arch amd64 version 6.8.0-1064-azure
+[15:01:52] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[15:01:52] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[15:01:52] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.23/fmlcore-1.20.1-47.4.23.jar is missing mods.toml file
+[15:01:52] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.23/javafmllanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15:01:52] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.23/lowcodelanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15:01:52] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.23/mclanguage-1.20.1-47.4.23.jar is missing mods.toml file
+[15:01:52] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[15:01:54] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[15:02:02] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.23, for MC 1.20.1 with MCP 20230612.114412
+[15:02:02] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.23 Initialized
+[15:02:03] [modloading-worker-0/INFO] [ru.ai.bm.Bm21Grad/]: BM-21 Grad loaded: 5 rocket types
+[15:02:03] [modloading-worker-0/INFO] [ru.ai.tu.TuBombers/]: Tu Bombers loaded
+[15:02:03] [modloading-worker-0/INFO] [ru.ai.ar.AiArsenal/]: AI Arsenal loaded
+[15:02:04] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[15:02:06] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.23 Target: 47.4.28
+[15:02:06] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[15:02:06] [main/WARN] [ne.mi.co.ForgeHooks/WP]: The following mods have version differences that were not resolved:
+aiarsenal (version 1.0.1-alpha.2 -> 1.0.1-alpha.8)
+Things may not work well.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:block: The object Block{minecraft:deepslate} has been registered twice for the same name minecraft:deepslate.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registered object did not get ID it asked for. Name: minecraft:deepslate Expected: 1004 Got: 970
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:block: The object Block{minecraft:stone} has been registered twice for the same name minecraft:stone.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registered object did not get ID it asked for. Name: minecraft:stone Expected: 1003 Got: 1
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: The object deepslate has been registered twice for the same name minecraft:deepslate.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registered object did not get ID it asked for. Name: minecraft:deepslate Expected: 1322 Got: 8
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: The object iron_nugget has been registered twice for the same name minecraft:iron_nugget.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registered object did not get ID it asked for. Name: minecraft:iron_nugget Expected: 1319 Got: 1119
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: The object iron_ingot has been registered twice for the same name minecraft:iron_ingot.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registered object did not get ID it asked for. Name: minecraft:iron_ingot Expected: 1320 Got: 770
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: The object stone has been registered twice for the same name minecraft:stone.
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registered object did not get ID it asked for. Name: minecraft:stone Expected: 1321 Got: 1
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:musket_1777 Expected: 1295 Got: 1319
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:musket_1808 Expected: 1296 Got: 1320
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:pistol_an13 Expected: 1297 Got: 1321
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:pistol_1809 Expected: 1298 Got: 1322
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:paper_cartridge Expected: 1299 Got: 1622
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:pistol_cartridge Expected: 1300 Got: 1623
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:charge_fr6 Expected: 1301 Got: 1624
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:charge_ri12 Expected: 1302 Got: 1625
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:cannonball Expected: 1303 Got: 1626
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:sabre_briquet Expected: 1304 Got: 1627
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:sabre_1809 Expected: 1305 Got: 1628
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:cannon_fr6 Expected: 1306 Got: 1629
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:cannon_ri12 Expected: 1307 Got: 1630
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:mosin_pu Expected: 1318 Got: 1631
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:k98k_zf39 Expected: 1319 Got: 1632
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:c96 Expected: 1320 Got: 1633
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:tt33 Expected: 1321 Got: 1634
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:round_762x54r Expected: 1322 Got: 1635
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:round_792x57 Expected: 1323 Got: 1636
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:clip_c96 Expected: 1324 Got: 1637
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:mag_tt33 Expected: 1325 Got: 1638
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_infantry_head Expected: 1591 Got: 1639
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_infantry_chest Expected: 1592 Got: 1640
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_infantry_legs Expected: 1593 Got: 1641
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_infantry_feet Expected: 1594 Got: 1642
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_officer_head Expected: 1595 Got: 1643
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_officer_chest Expected: 1596 Got: 1644
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_officer_legs Expected: 1597 Got: 1645
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_officer_feet Expected: 1598 Got: 1646
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_tanker_head Expected: 1599 Got: 1647
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_tanker_chest Expected: 1600 Got: 1648
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_tanker_legs Expected: 1601 Got: 1649
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_tanker_feet Expected: 1602 Got: 1650
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_pilot_head Expected: 1603 Got: 1651
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_pilot_chest Expected: 1604 Got: 1652
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_pilot_legs Expected: 1605 Got: 1653
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_pilot_feet Expected: 1606 Got: 1654
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_general_head Expected: 1607 Got: 1655
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_general_chest Expected: 1608 Got: 1656
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_general_legs Expected: 1609 Got: 1657
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_su_general_feet Expected: 1610 Got: 1658
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_infantry_head Expected: 1611 Got: 1659
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_infantry_chest Expected: 1612 Got: 1660
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_infantry_legs Expected: 1613 Got: 1661
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_infantry_feet Expected: 1614 Got: 1662
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_officer_head Expected: 1615 Got: 1663
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_officer_chest Expected: 1616 Got: 1664
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_officer_legs Expected: 1617 Got: 1665
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_officer_feet Expected: 1618 Got: 1666
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_tanker_head Expected: 1619 Got: 1667
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_tanker_chest Expected: 1620 Got: 1668
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_tanker_legs Expected: 1621 Got: 1669
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_tanker_feet Expected: 1622 Got: 1670
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_pilot_head Expected: 1623 Got: 1671
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_pilot_chest Expected: 1624 Got: 1672
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_pilot_legs Expected: 1625 Got: 1673
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_pilot_feet Expected: 1626 Got: 1674
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_general_head Expected: 1627 Got: 1675
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_general_chest Expected: 1628 Got: 1676
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_general_legs Expected: 1629 Got: 1677
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_ww2_de_general_feet Expected: 1630 Got: 1678
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_infantry_head Expected: 1631 Got: 1679
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_infantry_chest Expected: 1632 Got: 1680
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_infantry_legs Expected: 1633 Got: 1681
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_infantry_feet Expected: 1634 Got: 1682
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_officer_head Expected: 1635 Got: 1683
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_officer_chest Expected: 1636 Got: 1684
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_officer_legs Expected: 1637 Got: 1685
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_officer_feet Expected: 1638 Got: 1686
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_general_head Expected: 1639 Got: 1687
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_general_chest Expected: 1640 Got: 1688
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_general_legs Expected: 1641 Got: 1689
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_fr_general_feet Expected: 1642 Got: 1690
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_infantry_head Expected: 1643 Got: 1691
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_infantry_chest Expected: 1644 Got: 1692
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_infantry_legs Expected: 1645 Got: 1693
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_infantry_feet Expected: 1646 Got: 1694
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_officer_head Expected: 1647 Got: 1695
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_officer_chest Expected: 1648 Got: 1696
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_officer_legs Expected: 1649 Got: 1697
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_officer_feet Expected: 1650 Got: 1698
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_general_head Expected: 1651 Got: 1699
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_general_chest Expected: 1652 Got: 1700
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_general_legs Expected: 1653 Got: 1701
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:item: Object did not get ID it asked for. Name: aiarsenal:uniform_nap_ri_general_feet Expected: 1654 Got: 1702
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:pistol_c96 Expected: 1549 Got: 1563
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:pistol_tt33 Expected: 1550 Got: 1564
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:musket_fire Expected: 1551 Got: 1565
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:flintlock_fire Expected: 1552 Got: 1566
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:powder_cannon Expected: 1553 Got: 1567
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:paper_load Expected: 1554 Got: 1568
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:sound_event: Object did not get ID it asked for. Name: aiarsenal:ramrod Expected: 1555 Got: 1569
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:entity_type: Object did not get ID it asked for. Name: aiarsenal:cannon_fr6 Expected: 168 Got: 188
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:entity_type: Object did not get ID it asked for. Name: aiarsenal:cannon_ri12 Expected: 169 Got: 189
+[15:02:06] [main/WARN] [ne.mi.re.ForgeRegistry/REGISTRIES]: Registry minecraft:entity_type: Object did not get ID it asked for. Name: aiarsenal:cannonball Expected: 170 Got: 190
+[15:02:07] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23103!/assets/.mcassetsroot' uses unexpected schema
+[15:02:07] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/_temp/arsenal-legacy-xg8q4jlc/runtime/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23103!/data/.mcassetsroot' uses unexpected schema
+[15:02:10] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[15:02:10] [main/INFO] [minecraft/AdvancementList]: Loaded 1278 advancements
+[15:02:11] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[15:02:11] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[15:02:11] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: CREATIVE
+[15:02:11] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[15:02:11] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:25565
+[15:02:11] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[15:02:11] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[15:02:11] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[15:02:11] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[15:02:11] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[15:02:11] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[15:02:11] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:18] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:18] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[15:02:19] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 7575 ms
+[15:02:19] [Server thread/INFO] [minecraft/DedicatedServer]: Done (7.924s)! For help, type "help"
+[15:02:19] [Server thread/INFO] [minecraft/DedicatedServer]: Starting remote control listener
+[15:02:19] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener started
+[15:02:19] [Server thread/INFO] [minecraft/RconThread]: RCON running on 127.0.0.1:25575
+[15:02:19] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[15:02:20] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:20] [RCON Client /127.0.0.1 #2/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:22] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #3/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #4/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #5/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #6/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #7/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #8/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #9/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #10/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [RCON Client /127.0.0.1 #11/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Saved the game]
+[15:02:23] [RCON Client /127.0.0.1 #12/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Stopping the server]
+[15:02:23] [RCON Client /127.0.0.1 #13/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[15:02:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[15:02:24] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[15:02:24] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener stopped

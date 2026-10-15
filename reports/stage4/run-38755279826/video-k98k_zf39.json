@@ -1,0 +1,11 @@
+{
+  "video": "k98k_zf39.mp4",
+  "duration": 14.35,
+  "reload_seconds": 2.997607744999982,
+  "audio_rms": 0.04832782968878746,
+  "audio_peak": 0.41168469190597534,
+  "audio_channels": 2,
+  "audio_sample_rate": 48000,
+  "audio_measurement": "native-rate decoded float PCM, max over all channels; no downmix/resampling",
+  "capture": "Visible X11 Minecraft window rectangle + PulseAudio qa.monitor; continuous, not frame synthesis"
+}
