@@ -1,0 +1,11 @@
+{
+  "source": "27a32e9e7072f4d79c2c4d0c601a20b288e6efc9",
+  "bytes": 724216,
+  "sha256": "f241b3f30977642d4094ab86a9b34daead7f1feb8cfbe83fc44fae79c99da4e5",
+  "failures": [],
+  "totals": [
+    "[23:37:51] [Server thread/INFO] [minecraft/GameTestServer]: ========= 182 GAME TESTS COMPLETE ======================",
+    "[23:37:51] [Server thread/INFO] [minecraft/GameTestServer]: All 182 required tests passed :)"
+  ],
+  "scope": "Early log checkpoint only; not a workflow verdict"
+}
