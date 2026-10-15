@@ -63,7 +63,7 @@ public final class ModTabs {
     public static final java.util.List<String> SECTIONS = java.util.List.of(
             "ww2_weapons", "ww2_vehicles", "ww2_clothing", "ww2_ammo",
             "modern_weapons", "modern_vehicles", "modern_clothing", "modern_ammo",
-            "common_parts", "common_equipment", "common_building");
+            "napoleonic_clothing", "common_parts", "common_equipment", "common_building");
     private static final Set<String> WW2 = Set.of(
             "ppsh41", "mp40", "mosin", "k98k", "mosin_pu", "k98k_zf39", "c96", "tt33",
             "mag_ppsh", "mag_mp40", "clip_mosin", "clip_k98", "round_762x54r", "round_792x57", "clip_c96", "mag_tt33",
@@ -83,6 +83,8 @@ public final class ModTabs {
         if (c == Cat.BUILDING || c == Cat.FORTIFICATION) return "common_building";
         if (name.equals("craft_service_kit")) return "common_equipment";
         if (c == Cat.PROTECTION) return name.startsWith("hazmat_") ? "modern_clothing" : "common_equipment";
+        if (c == Cat.UNIFORMS && name.startsWith("uniform_nap_")) return "napoleonic_clothing";
+        if (c == Cat.UNIFORMS && name.startsWith("uniform_ww2_")) return "ww2_clothing";
         String era = WW2.contains(name) ? "ww2_" : "modern_";
         if (c == Cat.UNIFORMS) return era + "clothing";
         if (c == Cat.VEHICLES || c == Cat.DRONES && !Set.of("tablet", "fpv_goggles").contains(name)) return era + "vehicles";
@@ -143,13 +145,14 @@ public final class ModTabs {
         put(Cat.AMMO, "javelin_missile");
         section("ww2_weapons", "mosin_pu");
         section("ww2_vehicles", "t34_vehicle");
-        // Registered extension point, hidden by vanilla until genuine WWII clothing is added in stage 2.
-        section("ww2_clothing", "uniform_su_tanker_head");
+        // Genuine 1943–45 garments; do not classify the old Cold War tank uniform as WWII.
+        section("ww2_clothing", "uniform_ww2_su_infantry_head");
         section("ww2_ammo", "mag_ppsh");
         section("modern_weapons", "ak12");
         section("modern_vehicles", "t90m_vehicle");
         section("modern_clothing", "uniform_ru_private_head");
         section("modern_ammo", "mag_ak12");
+        section("napoleonic_clothing", "uniform_nap_fr_infantry_head");
         section("common_parts", "steel_plate");
         section("common_equipment", "first_aid_kit");
         section("common_building", "sandbags");

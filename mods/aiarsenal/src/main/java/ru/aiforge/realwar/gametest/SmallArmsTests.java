@@ -372,7 +372,10 @@ public final class SmallArmsTests {
         h.assertTrue(!ru.aiforge.realwar.registry.ModTabs.content("ww2_weapons").contains(ModItems.CLIP_C96.get()), "ammo in separate tab");
         h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("ww2_ammo").contains(ModItems.CLIP_C96.get()), "C96 clip reachable");
         h.assertTrue(!ru.aiforge.realwar.registry.ModTabs.content("ww2_weapons").contains(ModItems.AK12.get()), "no modern guns in WWII");
-        h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("ww2_clothing").isEmpty(), "do not pass Cold War uniforms off as WWII");
+        h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("ww2_clothing").size() == 40, "ten genuine WWII sets");
+        h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content("napoleonic_clothing").size() == 24, "six 1812 sets");
+        h.assertTrue(!ru.aiforge.realwar.registry.ModTabs.content("ww2_clothing").contains(
+            ModItems.UNIFORMS.get("uniform_su_tanker_head").get()), "Cold War tanker remains modern");
         for (String era : new String[]{"ww2_ammo", "modern_ammo"}) {
             h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content(era).contains(ModItems.SHELLS_122.get()), "shared 122mm " + era);
             h.assertTrue(ru.aiforge.realwar.registry.ModTabs.content(era).contains(ModItems.SHELLS_152.get()), "shared 152mm " + era);

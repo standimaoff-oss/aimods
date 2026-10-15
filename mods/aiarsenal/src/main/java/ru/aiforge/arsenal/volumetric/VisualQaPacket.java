@@ -12,8 +12,8 @@ import net.minecraftforge.network.NetworkEvent;
  * including attempts to change their local renderer settings. */
 public record VisualQaPacket(String effect) {
     public static final Set<String> EFFECTS = Set.of("smoke", "blast", "nuke", "trail",
-            "clear", "status", "budget", "off", "on", "view_fov90", "view_fov70",
-            "view_shaderfail", "view_scale3", "view_scale2", "view_reload", "view_tabs", "view_modern");
+            "clear", "status", "budget", "off", "on", "view_fov90", "view_fov70", "view_fov45",
+            "view_shaderfail", "view_scale3", "view_scale2", "view_reload", "view_tabs", "view_modern", "view_ww2wear", "view_napwear", "view_first", "view_front", "view_back", "view_left", "view_right");
 
     public void encode(FriendlyByteBuf buf) { buf.writeUtf(effect, 16); }
     public static VisualQaPacket decode(FriendlyByteBuf buf) { return new VisualQaPacket(buf.readUtf(16)); }

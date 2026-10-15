@@ -35,6 +35,10 @@ import ru.aiforge.realwar.item.UniformItem;
  */
 public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     private static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/uniforms.glb");
+    private static final ResourceLocation HISTORICAL = new ResourceLocation("aiarsenal", "models/glb/historical_uniforms.glb");
+    private static ResourceLocation modelFor(String set) {
+        return ru.aiforge.realwar.item.HistoricalUniforms.contains(set) ? HISTORICAL : MODEL;
+    }
     private static final Piece[] PIECES = {
             new Piece("head", EquipmentSlot.HEAD, m -> m.head, 0f, 1.5f, 0f),
             new Piece("body", EquipmentSlot.CHEST, m -> m.body, 0f, 1.5f, 0f),
@@ -83,13 +87,13 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
             any |= sets[s.getIndex()] != null;
         }
         if (!any) return;
-        GlbAssets.Loaded lm = GlbAssets.get(MODEL);
-        if (lm == null) return;
         M m = this.getParentModel();
         int overlay = LivingEntityRenderer.getOverlayCoords(pl, 0f);
         for (Piece pc : PIECES) {
             String set = sets[pc.slot.getIndex()];
             if (set == null) continue;
+            GlbAssets.Loaded lm = GlbAssets.get(modelFor(set));
+            if (lm == null) continue;
             drawPiece(lm, set, pc, pc.bone.apply(m), ps, buf, light, overlay);
         }
     }
@@ -110,7 +114,7 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
         AbstractClientPlayer pl = e.getPlayer();
         String set = setOf(pl.getItemBySlot(EquipmentSlot.CHEST));
         if (set == null) return;
-        GlbAssets.Loaded lm = GlbAssets.get(MODEL);
+        GlbAssets.Loaded lm = GlbAssets.get(modelFor(set));
         if (lm == null) return;
         if (!(Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(pl) instanceof PlayerRenderer pr)) return;
         e.setCanceled(true);

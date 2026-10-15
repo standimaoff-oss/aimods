@@ -16,6 +16,12 @@ public final class WeaponViewQa {
         Minecraft mc = Minecraft.getInstance();
         switch (action) {
             case "view_shaderfail" -> ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer.failNextShaderForQa();
+            case "view_first" -> mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON);
+            case "view_front" -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
+            case "view_back" -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_BACK);
+            case "view_left" -> { mc.options.mainHand().set(net.minecraft.world.entity.HumanoidArm.LEFT); mc.options.broadcastOptions(); }
+            case "view_right" -> { mc.options.mainHand().set(net.minecraft.world.entity.HumanoidArm.RIGHT); mc.options.broadcastOptions(); }
+            case "view_fov45" -> mc.options.fov().set(45);
             case "view_fov90" -> mc.options.fov().set(90);
             case "view_fov70" -> mc.options.fov().set(70);
             case "view_scale3" -> {
@@ -28,11 +34,16 @@ public final class WeaponViewQa {
                 if (error == null) AiArsenal.LOGGER.info("VIEW RELOAD PASS");
                 else AiArsenal.LOGGER.error("VIEW RELOAD FAILED", error);
             }));
-            case "view_tabs", "view_modern" -> {
+            case "view_tabs", "view_modern", "view_ww2wear", "view_napwear" -> {
                 var screen = new CreativeModeInventoryScreen(mc.player, mc.player.connection.enabledFeatures(),
                         mc.options.operatorItemsTab().get());
                 mc.setScreen(screen);
-                String section = action.equals("view_tabs") ? "ww2_weapons" : "modern_vehicles";
+                String section = switch (action) {
+                    case "view_tabs" -> "ww2_weapons";
+                    case "view_ww2wear" -> "ww2_clothing";
+                    case "view_napwear" -> "napoleonic_clothing";
+                    default -> "modern_vehicles";
+                };
                 CreativeModeTab tab = BuiltInRegistries.CREATIVE_MODE_TAB.get(new ResourceLocation("aiarsenal", section));
                 // selectTab is private in vanilla; discover by its sole CreativeModeTab parameter, not an obfuscated name.
                 try {

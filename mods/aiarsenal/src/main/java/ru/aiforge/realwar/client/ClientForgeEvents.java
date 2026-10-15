@@ -57,6 +57,14 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid="aiarsenal", value={Dist.CLIENT})
 public final class ClientForgeEvents {
+    @net.minecraftforge.eventbus.api.SubscribeEvent
+    public static void resetWeaponArmScale(net.minecraftforge.client.event.RenderPlayerEvent.Pre e) {
+        e.getRenderer().getModel().rightArm.yScale = 1f;
+        e.getRenderer().getModel().leftArm.yScale = 1f;
+        e.getRenderer().getModel().rightSleeve.yScale = 1f;
+        e.getRenderer().getModel().leftSleeve.yScale = 1f;
+    }
+
     private ClientForgeEvents() {
     }
 

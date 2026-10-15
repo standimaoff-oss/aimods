@@ -103,6 +103,7 @@ public class FirearmItem extends Item {
         // Register during Item construction, BEFORE HumanoidModel builds its enum-switch lookup table.
         // Lazy creation on the first pistol render expands the enum too late and crashes poseRightArm.
         var pistolPose = ru.aiforge.realwar.client.render.PistolPose.HOLD;
+        var longGunPose = ru.aiforge.realwar.client.render.PistolPose.LONG_GUN;
         c.accept(new IClientItemExtensions() {
             @Override
             public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -112,7 +113,7 @@ public class FirearmItem extends Item {
             @Override
             public net.minecraft.client.model.HumanoidModel.ArmPose getArmPose(LivingEntity e, InteractionHand hand, ItemStack st) {
                 return kind.pistol() ? pistolPose
-                        : net.minecraft.client.model.HumanoidModel.ArmPose.CROSSBOW_HOLD;
+                        : longGunPose;
             }
         });
     }

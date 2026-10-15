@@ -19,10 +19,12 @@ import net.minecraft.world.level.Level;
 public class UniformItem extends ArmorItem {
     /** RF: private, sergeant, captain, colonel, colonel general; US Army: PV2, SGT, CPT, COL, GEN; r19: Soviet Afghanistan +
      *  tank crew, US Vietnam + Desert Storm, Russian VDV + VKS pilot (all field kit). */
-    public static final String[] SETS = {"ru_private", "ru_sergeant", "ru_captain", "ru_colonel", "ru_general",
+    private static final String[] MODERN_SETS = {"ru_private", "ru_sergeant", "ru_captain", "ru_colonel", "ru_general",
             "us_private", "us_sergeant", "us_captain", "us_colonel", "us_general",
             // r19: eras and branches
             "su_afghan", "su_tanker", "us_vietnam", "us_desert", "ru_vdv", "ru_pilot"};
+    public static final String[] SETS = java.util.stream.Stream.concat(
+            java.util.Arrays.stream(MODERN_SETS), java.util.Arrays.stream(HistoricalUniforms.SETS)).toArray(String[]::new);
     public final String set;
 
     public UniformItem(String set, ArmorItem.Type type, Properties props) {

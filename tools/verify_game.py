@@ -237,6 +237,9 @@ overrideHeight:700
         volumetric(player, client_log)
     if os.environ.get('QA_STAGE1D') == '1':
         view_lifecycle(client_log, window)
+    if os.environ.get('QA_STAGE2') == '1':
+        from verify_stage2_game import run
+        run(sys.modules[__name__], server, log, client_log, window)
     command('stop')
     server.wait(timeout=90)
 
@@ -540,7 +543,7 @@ def cleanup():
                 process.wait(timeout=10)
     for handle in HANDLES:
         handle.close()
-    for kind in ('server', 'client', 'gameTestServer'):
+    for kind in ('server', 'client', 'observer', 'gameTestServer'):
         path = RUNS / kind / 'logs/latest.log'
         if path.exists():
             shutil.copy2(path, LOGS / (kind + '-latest.log'))

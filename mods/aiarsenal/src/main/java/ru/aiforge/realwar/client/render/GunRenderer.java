@@ -155,6 +155,12 @@ public final class GunRenderer {
      * so that it always reaches back to the shoulder outside the screen.
      */
     private static void arm(Minecraft mc, LocalPlayer p, PoseStack ps, MultiBufferSource buf, int light, Vector3f hand, boolean right, float widthScale) {
+        if ((p.getMainHandItem().getItem() instanceof FirearmItem f && f.kind.pistol())
+                || (p.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).getItem() instanceof ru.aiforge.realwar.item.UniformItem u
+                    && ru.aiforge.realwar.item.HistoricalUniforms.contains(u.set))) {
+            FirstPersonArms.draw(p, ps, buf, light, hand, right);
+            return;
+        }
         if (!(mc.getEntityRenderDispatcher().getRenderer(p) instanceof net.minecraft.client.renderer.entity.player.PlayerRenderer pr)) return;
         net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer> m = pr.getModel();
         boolean slim = "slim".equals(p.getModelName());
@@ -263,7 +269,7 @@ public final class GunRenderer {
             float[] b = bounds(model, lm);
             ps.pushPose();
             HandheldView.apply(ps, v, b);
-            if (stack.getItem() instanceof FirearmItem firearm && firearm.kind.pistol()
+            if (stack.getItem() instanceof FirearmItem
                     && (ctx == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND || ctx == ItemDisplayContext.THIRD_PERSON_LEFT_HAND)) {
                 float[] grip = node(lm, id + ".arm_r");
                 ps.translate(-grip[0], -grip[1], -grip[2]);
