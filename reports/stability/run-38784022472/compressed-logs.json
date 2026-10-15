@@ -1,0 +1,32 @@
+[
+  {
+    "original": "catalogue-driver.log",
+    "archive": "catalogue-driver.log.gz",
+    "bytes": 2566985,
+    "sha256": "17ad19af1051ebb8edb39db3aef0fd3b187397c44ddcbf4b7f3a02de965591ae"
+  },
+  {
+    "original": "gametest.log",
+    "archive": "gametest.log.gz",
+    "bytes": 665324,
+    "sha256": "41b2a632bf1f77e6597eb02a41fdbc21e3b62c12d7180b70e6dafd4fa46bfc8d"
+  },
+  {
+    "original": "installed-server-installer.log",
+    "archive": "installed-server-installer.log.gz",
+    "bytes": 1193408,
+    "sha256": "bbbe7cbaa791d3a60ba2d25532b7c135eb28715f4b380ffed52de05f35f1944c"
+  },
+  {
+    "original": "server-latest.log",
+    "archive": "server-latest.log.gz",
+    "bytes": 2087003,
+    "sha256": "c882b310a52f869ce66cfc42e09259eb6d4eb2c33c4ee419fa87e1244df4e046"
+  },
+  {
+    "original": "server.log",
+    "archive": "server.log.gz",
+    "bytes": 1563755,
+    "sha256": "2c76ffcb4938de609be5245dacc9bac11a554fbb09d99e53cb697421bb0140ed"
+  }
+]
