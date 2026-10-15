@@ -1,0 +1,25 @@
+{
+  "result": "FAIL",
+  "pack": "photon",
+  "actions": [
+    {
+      "id": "aiarsenal:cannon_fr6",
+      "result": "RUNNING",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_fr6",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 504.5,
+        "spawned": {
+          "aiarsenal:cannon_fr6": 1
+        }
+      },
+      "cycles": []
+    }
+  ],
+  "toggles": [],
+  "error": "AssertionError: context action timed out",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 169, in <module>\n    run()\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 122, in run\n    powder_cannon(row,index);save()\n  File \"/home/runner/work/aimods/aimods/tools/shaderpack_actions.py\", line 24, in powder_cannon\n    context.wait(lambda:context.qa('cannonstatus')['loading']>0,15)\n  File \"/home/runner/work/aimods/aimods/tools/verify_context_game.py\", line 38, in wait\n    raise AssertionError('context action timed out')\nAssertionError: context action timed out\n"
+}
