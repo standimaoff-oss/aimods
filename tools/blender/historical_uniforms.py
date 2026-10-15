@@ -186,6 +186,6 @@ def viewport(name):
  for ob in bpy.context.scene.objects:ob.hide_set(not ob.name.startswith(name+'.'))
  for area in bpy.context.screen.areas:
   if area.type=='VIEW_3D':
-   area.spaces.active.shading.type='MATERIAL';area.spaces.active.shading.type='SOLID';area.spaces.active.shading.color_type='MATERIAL'
+   area.spaces.active.shading.type='SOLID';area.spaces.active.shading.color_type='MATERIAL'
    r=area.spaces.active.region_3d;r.view_distance=3.3;r.view_location=Vector((0,0,1.18));r.view_rotation=__import__('mathutils').Euler((math.radians(73),0,math.radians(-22)),'XYZ').to_quaternion()
    area.spaces.active.overlay.show_floor=False;area.spaces.active.overlay.show_extras=False

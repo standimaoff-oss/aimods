@@ -2,7 +2,7 @@
 
 Заказ: выполнить в одном ответе WWII СССР/Германия, Наполеоновские Франция/РИ,
 исправить пистолеты и вид оружия у своего/другого игрока. Бэкап до изменений:
-`/home/user/backups/stage2/before-uniforms.bundle`, git bundle verify PASS.
+`/home/user/.cache/backups/stage2/before-uniforms.bundle`, git bundle verify PASS.
 
 Принятые ориентиры: WWII 1943–45; наполеоновская линейная пехота/офицеры/генералы около 1812.
 Не обещается воспроизведение всех полков и всех годов. 16 комплектов × 4 слота:
@@ -19,3 +19,9 @@
 Проверка: полный установленный клиент, GameTests, все комплекты, реальный второй
 клиент на том же сервере для remote-player (не манекен вместо сетевого игрока).
 Hardware GPU/FPS не заявляются, main не сливается автоматически.
+
+Постоянная резервная точка: https://github.com/standimaoff-oss/aimods/releases/tag/backup-before-stage2-20261015 .
+Полный bundle 100 МБ оставлен в cache, чтобы не переполнить snapshot; SHA/инструкция сохранены в backups/stage2.
+
+Первый model QA 38732799663: GLB/packed blend построены в живом MCP; найден несовместимый
+режим viewport MATERIAL у Workbench. Убран лишний переход, используется SOLID + material colors.
