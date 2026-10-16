@@ -55,7 +55,11 @@ overrideHeight:800
         "gamerule doMobSpawning false",
         "gamemode creative TestPlayer",
         "fill -32 -61 -32 32 -61 40 minecraft:grass_block",
-        "tp TestPlayer -10 -59 1 -35 4",
+        "fill -4 -61 4 4 -61 26 minecraft:coarse_dirt",
+        "place feature minecraft:oak -17 -60 30",
+        "place feature minecraft:oak 17 -60 29",
+        "place feature minecraft:spruce 22 -60 36",
+        "tp TestPlayer -6 -59 11 -50 2",
         "clear TestPlayer",
     ]:
         game.command(cmd)
@@ -75,17 +79,16 @@ overrideHeight:800
         "tp TestPlayer 0 -60 0 0 0",
     ]:
         game.command(cmd)
+    selected = game.command("data get entity TestPlayer SelectedItem")
+    if "aiarsenal:gewehr98" not in selected:
+        raise AssertionError(f"Gewehr 98 is not selected: {selected}")
     game.key("key", "1")
     time.sleep(4)
-    game.key("key", "F1")
-    time.sleep(1)
     game.screenshot("gewehr98-first-person")
     game.key("mousedown", "3")
     time.sleep(2)
     game.screenshot("gewehr98-aim")
     game.key("mouseup", "3")
-    game.key("key", "F1")
-    time.sleep(1)
 
     if client.poll() is not None or server.poll() is not None:
         raise RuntimeError("Minecraft exited during preview capture")
