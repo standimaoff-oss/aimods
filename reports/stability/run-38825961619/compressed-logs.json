@@ -1,0 +1,26 @@
+[
+  {
+    "file": "catalogue-driver.log",
+    "bytes": 2178024,
+    "sha256": "5d74f3cea5bbb3e58c123f596a0dd73820f122a5c60ca64f306f993eeca45af1",
+    "sourceCommit": "1c9e5ee01b4614db007bee58f6b4f8b2a8a81142"
+  },
+  {
+    "file": "gametest.log",
+    "bytes": 718236,
+    "sha256": "030dda2325f819938068e6387b417207ed33279f67a1ff8d0476a377166b5c0f",
+    "sourceCommit": "1c9e5ee01b4614db007bee58f6b4f8b2a8a81142"
+  },
+  {
+    "file": "installed-server-installer.log",
+    "bytes": 1193450,
+    "sha256": "f138f35dcb0a7705a456cf8283531f42d8012e3209ae51d684c50b3d256d77cf",
+    "sourceCommit": "1c9e5ee01b4614db007bee58f6b4f8b2a8a81142"
+  },
+  {
+    "file": "server.log",
+    "bytes": 511871,
+    "sha256": "94f3a68dbd0e9661f0730f526d4b5debf3db97749324c3762ec0487ab6185e18",
+    "sourceCommit": "1c9e5ee01b4614db007bee58f6b4f8b2a8a81142"
+  }
+]
