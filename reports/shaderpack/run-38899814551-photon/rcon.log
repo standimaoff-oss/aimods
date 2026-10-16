@@ -1,0 +1,2213 @@
+> time set 6000
+Set the time to 6000
+
+> gamerule doDaylightCycle false
+Gamerule doDaylightCycle is now set to: false
+
+> gamerule doMobSpawning false
+Gamerule doMobSpawning is now set to: false
+
+> gamemode creative TestPlayer
+
+> fill -12 -61 -8 12 -61 30 minecraft:smooth_stone
+Successfully filled 975 block(s)
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> arsenal_visual_test client view_ready TestPlayer
+Client QA sent: view_ready
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> fill -8 -60 7 8 -52 7 minecraft:stone
+Successfully filled 153 block(s)
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> fill -8 -60 7 8 -52 7 minecraft:air
+Successfully filled 153 block(s)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client provider_smoke TestPlayer
+Client QA sent: provider_smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client provider_muzzle TestPlayer
+Client QA sent: provider_muzzle
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client provider_powder TestPlayer
+Client QA sent: provider_powder
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client provider_cannon TestPlayer
+Client QA sent: provider_cannon
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client provider_exhaust TestPlayer
+Client QA sent: provider_exhaust
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client provider_impact TestPlayer
+Client QA sent: provider_impact
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client fxsystem_smoke TestPlayer
+Client QA sent: fxsystem_smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client blast TestPlayer
+Client QA sent: blast
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client nuke TestPlayer
+Client QA sent: nuke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client trail TestPlayer
+Client QA sent: trail
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> clear TestPlayer
+No items were found on player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:ppsh41{Ammo:0}
+Replaced a slot on TestPlayer with [PPSh-41 (7.62x25 TT)]
+
+> give TestPlayer aiarsenal:mag_ppsh 8
+Gave 8 [PPSh-41 drum magazine (71 rounds)] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 71}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:ppsh41", Count: 1b, tag: {Ammo: 65}}
+
+> clear TestPlayer
+Removed 9 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:mosin_pu{Ammo:0}
+Replaced a slot on TestPlayer with [Mosin 91/30 PU (3.5×)]
+
+> give TestPlayer aiarsenal:round_762x54r 8
+Gave 8 [7.62×54R cartridge] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 3}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 5}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:mosin_pu", Count: 1b, tag: {Ammo: 4}}
+
+> clear TestPlayer
+Removed 9 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:musket_1777{Ammo:0}
+Replaced a slot on TestPlayer with [France — 1777 / An IX musket]
+
+> give TestPlayer aiarsenal:paper_cartridge 8
+Gave 8 [Paper musket cartridge] to TestPlayer
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 1}}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:musket_1777", Count: 1b, tag: {Ammo: 0}}
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> gamemode creative TestPlayer
+
+> tp TestPlayer 8000.5 -60 500.5 0 0
+Teleported TestPlayer to 8000.500000, -60.000000, 500.500000
+
+> clear TestPlayer
+Removed 9 item(s) from player TestPlayer
+
+> effect give TestPlayer minecraft:resistance 99999 4 true
+Applied effect Resistance to TestPlayer
+
+> effect give TestPlayer minecraft:night_vision 99999 0 true
+Applied effect Night Vision to TestPlayer
+
+> gamemode survival TestPlayer
+Set TestPlayer's game mode to Survival Mode
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> execute as TestPlayer at @s run arsenal_context preparecannon aiarsenal:cannon_fr6
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:charge_fr6 2
+Replaced a slot on TestPlayer with [6-pounder charge and roundshot]
+
+> item replace entity TestPlayer hotbar.1 with minecraft:flint_and_steel
+Replaced a slot on TestPlayer with [Flint and Steel]
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> tp TestPlayer 8004.5 -60.0 502.0 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 502.000000
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":160,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":160,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> clear TestPlayer aiarsenal:charge_fr6 0
+Found 1 matching item(s) on player TestPlayer
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":159,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":149,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":139,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":129,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":119,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":109,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":98,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":88,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":78,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":68,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":58,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":48,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":38,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":28,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":17,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":7,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> tp TestPlayer 8004.5 -60.0 502.0 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 502.000000
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":504.5,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "minecraft:flint_and_steel", Count: 1b, tag: {Damage: 1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> tp TestPlayer 8004.5 -60.0 501.30401124947423 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 501.304011
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":157,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":156,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> clear TestPlayer aiarsenal:charge_fr6 0
+No items were found on player TestPlayer
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":156,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":146,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":136,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":126,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":116,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":105,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":95,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":85,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":75,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":65,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":55,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":45,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":34,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":24,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":14,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":4,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> tp TestPlayer 8004.5 -60.0 501.30401124947423 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 501.304011
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.80401124947423,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.25291594561565,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":2}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_fr6","x":8004.5,"y":-60.0,"z":503.25291594561565,"spawned":{"aiarsenal:cannon_fr6":1,"aiarsenal:cannonball":2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "minecraft:flint_and_steel", Count: 1b, tag: {Damage: 2}}
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> gamemode creative TestPlayer
+Set TestPlayer's game mode to Creative Mode
+
+> tp TestPlayer 8000.5 -60 628.5 0 0
+Teleported TestPlayer to 8000.500000, -60.000000, 628.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> effect give TestPlayer minecraft:resistance 99999 4 true
+Applied effect Resistance to TestPlayer
+
+> effect give TestPlayer minecraft:night_vision 99999 0 true
+Applied effect Night Vision to TestPlayer
+
+> gamemode survival TestPlayer
+Set TestPlayer's game mode to Survival Mode
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> execute as TestPlayer at @s run arsenal_context preparecannon aiarsenal:cannon_ri12
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:charge_ri12 2
+Replaced a slot on TestPlayer with [12-pounder charge and roundshot]
+
+> item replace entity TestPlayer hotbar.1 with minecraft:flint_and_steel
+Replaced a slot on TestPlayer with [Flint and Steel]
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> tp TestPlayer 8004.5 -60.0 630.0 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 630.000000
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":159,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":159,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> clear TestPlayer aiarsenal:charge_ri12 0
+Found 1 matching item(s) on player TestPlayer
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":159,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":149,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":139,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":129,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":119,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":109,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":98,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":88,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":78,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":68,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":58,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":48,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":38,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":28,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":18,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":7,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> tp TestPlayer 8004.5 -60.0 630.0 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 630.000000
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":632.5,"spawned":{"aiarsenal:cannon_ri12":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8962574703913,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8962574703913,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "minecraft:flint_and_steel", Count: 1b, tag: {Damage: 1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> tp TestPlayer 8004.5 -60.0 629.3040112494741 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 629.304011
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":154,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":154,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> clear TestPlayer aiarsenal:charge_ri12 0
+No items were found on player TestPlayer
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":154,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":144,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":133,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":123,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":113,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":103,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":93,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":83,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":72,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":62,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":52,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":42,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":32,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":22,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":12,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> tp TestPlayer 8004.5 -60.0 629.3040112494741 0 20
+Teleported TestPlayer to 8004.500000, -60.000000, 629.304011
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":0,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.8040112494741,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":1}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.1815497062654,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":2}}
+
+> execute as TestPlayer at @s run arsenal_context cannonstatus
+{"action":"cannon_status","loading":-1,"charge":"aiarsenal:charge_ri12","x":8004.5,"y":-60.0,"z":631.1815497062654,"spawned":{"aiarsenal:cannon_ri12":1,"aiarsenal:cannonball":2}}
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "minecraft:flint_and_steel", Count: 1b, tag: {Damage: 2}}
+
+> gamemode creative TestPlayer
+Set TestPlayer's game mode to Creative Mode
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> ride TestPlayer dismount
+TestPlayer is not riding any vehicle
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> clear TestPlayer
+Removed 1 item(s) from player TestPlayer
+
+> item replace entity TestPlayer hotbar.0 with aiarsenal:sturmtiger_vehicle
+Replaced a slot on TestPlayer with [Sturmtiger]
+
+> data get entity TestPlayer SelectedItem
+Found no elements matching SelectedItem
+
+> data get entity TestPlayer SelectedItem
+Found no elements matching SelectedItem
+
+> data get entity TestPlayer SelectedItem
+TestPlayer has the following entity data: {id: "aiarsenal:sturmtiger_vehicle", Count: 1b}
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer at @s run arsenal_stress use
+USE air=PASS block=CONSUME using=false
+
+> execute as TestPlayer at @s run arsenal_stress mount
+MOUNTED STURMTIGER
+
+> gamemode survival TestPlayer
+Set TestPlayer's game mode to Survival Mode
+
+> effect give TestPlayer minecraft:resistance 9999 4 true
+Unable to apply this effect (target is either immune to effects, or has something stronger)
+
+> give TestPlayer aiarsenal:rocket_380 16
+Gave 16 [38 cm RW 61 rocket mortar round] to TestPlayer
+
+> arsenal_visual_test client view_back TestPlayer
+Client QA sent: view_back
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":37,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":1,"loaded":1,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":41,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":5,"loaded":1,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":62,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":26,"loaded":1,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":64,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":28,"loaded":1,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":82,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":0,"loaded":1,"fired":0,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":94,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":96,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":14,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":181,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":190,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":201,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":32,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":208,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":218,"reloadTicks":3,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":10,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":226,"reloadTicks":3,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":235,"reloadTicks":3,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":244,"reloadTicks":3,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":36,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":255,"reloadTicks":7,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":5,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":262,"reloadTicks":7,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":271,"reloadTicks":7,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":282,"reloadTicks":7,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":32,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":289,"reloadTicks":7,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":298,"reloadTicks":11,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":307,"reloadTicks":11,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":316,"reloadTicks":11,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":325,"reloadTicks":11,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":36,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":334,"reloadTicks":15,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":346,"reloadTicks":15,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":355,"reloadTicks":15,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":364,"reloadTicks":15,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":36,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":373,"reloadTicks":21,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":382,"reloadTicks":21,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":391,"reloadTicks":21,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":400,"reloadTicks":21,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":31,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":410,"reloadTicks":25,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":418,"reloadTicks":25,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":427,"reloadTicks":25,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":436,"reloadTicks":25,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":445,"reloadTicks":25,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":39,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":454,"reloadTicks":30,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":465,"reloadTicks":30,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":472,"reloadTicks":30,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":483,"reloadTicks":32,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":492,"reloadTicks":34,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":499,"reloadTicks":34,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":508,"reloadTicks":34,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":517,"reloadTicks":34,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":36,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":529,"reloadTicks":38,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":538,"reloadTicks":38,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":547,"reloadTicks":38,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":558,"reloadTicks":42,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":8,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":565,"reloadTicks":42,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":574,"reloadTicks":42,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":583,"reloadTicks":42,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":33,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":594,"reloadTicks":46,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":8,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":601,"reloadTicks":46,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":610,"reloadTicks":46,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":621,"reloadTicks":49,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":628,"reloadTicks":51,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":638,"reloadTicks":51,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":19,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":646,"reloadTicks":51,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":655,"reloadTicks":52,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":1,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":667,"reloadTicks":55,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":676,"reloadTicks":55,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":686,"reloadTicks":55,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":32,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":694,"reloadTicks":59,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":703,"reloadTicks":59,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":712,"reloadTicks":59,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":723,"reloadTicks":61,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":730,"reloadTicks":63,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":739,"reloadTicks":63,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":748,"reloadTicks":63,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":757,"reloadTicks":63,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":766,"reloadTicks":67,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":775,"reloadTicks":67,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":784,"reloadTicks":67,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":793,"reloadTicks":70,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":802,"reloadTicks":71,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":811,"reloadTicks":71,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":820,"reloadTicks":71,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":829,"reloadTicks":76,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":8,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":840,"reloadTicks":76,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":19,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":847,"reloadTicks":76,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":26,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":856,"reloadTicks":79,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":867,"reloadTicks":80,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":14,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":874,"reloadTicks":80,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":883,"reloadTicks":80,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":892,"reloadTicks":86,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":901,"reloadTicks":86,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":910,"reloadTicks":86,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":919,"reloadTicks":87,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":1,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":931,"reloadTicks":90,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":940,"reloadTicks":90,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":951,"reloadTicks":94,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":5,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":960,"reloadTicks":94,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":14,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":967,"reloadTicks":94,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":978,"reloadTicks":97,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":987,"reloadTicks":101,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":996,"reloadTicks":101,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1003,"reloadTicks":101,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1012,"reloadTicks":101,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":34,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1018,"reloadTicks":101,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1027,"reloadTicks":105,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1039,"reloadTicks":105,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1048,"reloadTicks":105,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1057,"reloadTicks":109,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1066,"reloadTicks":109,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1076,"reloadTicks":109,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":28,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1084,"reloadTicks":112,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1095,"reloadTicks":113,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":14,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1102,"reloadTicks":113,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1111,"reloadTicks":113,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1120,"reloadTicks":117,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1130,"reloadTicks":117,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":19,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1138,"reloadTicks":117,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1147,"reloadTicks":123,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1156,"reloadTicks":123,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1165,"reloadTicks":123,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1174,"reloadTicks":124,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1185,"reloadTicks":128,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1192,"reloadTicks":128,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1201,"reloadTicks":128,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1210,"reloadTicks":128,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":36,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1219,"reloadTicks":133,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1228,"reloadTicks":133,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1239,"reloadTicks":133,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":26,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1246,"reloadTicks":133,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1255,"reloadTicks":137,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1264,"reloadTicks":137,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1273,"reloadTicks":137,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1282,"reloadTicks":141,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1293,"reloadTicks":141,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":17,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1302,"reloadTicks":141,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":26,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1309,"reloadTicks":141,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1318,"reloadTicks":145,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1327,"reloadTicks":145,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1338,"reloadTicks":145,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":29,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1347,"reloadTicks":148,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1356,"reloadTicks":150,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1363,"reloadTicks":150,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1372,"reloadTicks":150,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1381,"reloadTicks":154,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1390,"reloadTicks":154,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1401,"reloadTicks":154,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1408,"reloadTicks":154,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1419,"reloadTicks":158,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1428,"reloadTicks":158,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":20,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1435,"reloadTicks":158,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1444,"reloadTicks":162,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1453,"reloadTicks":163,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1462,"reloadTicks":163,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1473,"reloadTicks":165,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1480,"reloadTicks":167,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1489,"reloadTicks":167,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1500,"reloadTicks":167,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":29,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1509,"reloadTicks":171,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":8,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1518,"reloadTicks":171,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":17,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1525,"reloadTicks":171,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1534,"reloadTicks":175,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1546,"reloadTicks":175,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1555,"reloadTicks":175,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1564,"reloadTicks":178,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1573,"reloadTicks":179,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1582,"reloadTicks":179,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1591,"reloadTicks":179,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1600,"reloadTicks":182,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1612,"reloadTicks":183,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1621,"reloadTicks":183,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1630,"reloadTicks":183,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":33,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1639,"reloadTicks":187,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1648,"reloadTicks":187,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1657,"reloadTicks":187,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1668,"reloadTicks":190,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1675,"reloadTicks":192,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1684,"reloadTicks":192,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1695,"reloadTicks":194,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1702,"reloadTicks":198,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1711,"reloadTicks":198,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1720,"reloadTicks":198,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1729,"reloadTicks":201,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1738,"reloadTicks":202,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1747,"reloadTicks":202,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1756,"reloadTicks":202,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1762,"reloadTicks":205,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1774,"reloadTicks":206,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1783,"reloadTicks":206,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1792,"reloadTicks":206,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1801,"reloadTicks":210,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1810,"reloadTicks":210,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1819,"reloadTicks":210,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1828,"reloadTicks":211,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":1,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1837,"reloadTicks":214,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":10,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1846,"reloadTicks":214,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":19,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1855,"reloadTicks":214,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":28,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1864,"reloadTicks":218,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1875,"reloadTicks":218,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1882,"reloadTicks":218,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1891,"reloadTicks":222,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1900,"reloadTicks":223,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1909,"reloadTicks":223,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1918,"reloadTicks":226,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1927,"reloadTicks":230,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1936,"reloadTicks":230,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1945,"reloadTicks":230,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1954,"reloadTicks":235,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1963,"reloadTicks":235,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1972,"reloadTicks":235,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1981,"reloadTicks":237,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1990,"reloadTicks":239,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":1999,"reloadTicks":239,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":20,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2008,"reloadTicks":239,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":29,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2018,"reloadTicks":243,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":10,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2026,"reloadTicks":243,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2035,"reloadTicks":243,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2044,"reloadTicks":247,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":4,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2053,"reloadTicks":247,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2062,"reloadTicks":247,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2071,"reloadTicks":247,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":31,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2077,"reloadTicks":250,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2089,"reloadTicks":251,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2098,"reloadTicks":251,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2108,"reloadTicks":251,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2116,"reloadTicks":256,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2125,"reloadTicks":256,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2134,"reloadTicks":256,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2143,"reloadTicks":259,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2152,"reloadTicks":260,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2161,"reloadTicks":260,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2170,"reloadTicks":260,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2179,"reloadTicks":264,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2191,"reloadTicks":264,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2200,"reloadTicks":264,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2211,"reloadTicks":268,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2218,"reloadTicks":268,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2227,"reloadTicks":268,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2236,"reloadTicks":268,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":31,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2245,"reloadTicks":272,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2256,"reloadTicks":272,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":17,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2265,"reloadTicks":272,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":26,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2274,"reloadTicks":276,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":5,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2283,"reloadTicks":276,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":14,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2292,"reloadTicks":276,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":23,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2299,"reloadTicks":276,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2310,"reloadTicks":280,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2319,"reloadTicks":280,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":20,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2326,"reloadTicks":280,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2334,"reloadTicks":284,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":5,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2344,"reloadTicks":284,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2353,"reloadTicks":284,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2364,"reloadTicks":288,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2371,"reloadTicks":289,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":10,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2381,"reloadTicks":289,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":20,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2389,"reloadTicks":289,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":28,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2398,"reloadTicks":293,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2409,"reloadTicks":293,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":17,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2418,"reloadTicks":293,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":26,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2425,"reloadTicks":297,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2437,"reloadTicks":297,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2446,"reloadTicks":297,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2457,"reloadTicks":302,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":5,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2464,"reloadTicks":302,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2473,"reloadTicks":302,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2482,"reloadTicks":302,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2491,"reloadTicks":306,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2500,"reloadTicks":306,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2509,"reloadTicks":306,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2518,"reloadTicks":311,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2527,"reloadTicks":311,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2536,"reloadTicks":311,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2545,"reloadTicks":311,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2557,"reloadTicks":315,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2566,"reloadTicks":315,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2576,"reloadTicks":315,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2584,"reloadTicks":320,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2593,"reloadTicks":320,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2603,"reloadTicks":320,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":26,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2611,"reloadTicks":323,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2622,"reloadTicks":324,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":14,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2629,"reloadTicks":324,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2638,"reloadTicks":324,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2647,"reloadTicks":328,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2653,"reloadTicks":328,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2673,"reloadTicks":331,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2682,"reloadTicks":332,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2689,"reloadTicks":332,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":19,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2698,"reloadTicks":332,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":28,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2707,"reloadTicks":336,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2716,"reloadTicks":336,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2725,"reloadTicks":336,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2734,"reloadTicks":339,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2740,"reloadTicks":340,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2754,"reloadTicks":340,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":23,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2761,"reloadTicks":340,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2770,"reloadTicks":346,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2779,"reloadTicks":346,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2788,"reloadTicks":346,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":25,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2798,"reloadTicks":350,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":5,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2806,"reloadTicks":350,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":13,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2815,"reloadTicks":350,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":22,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2824,"reloadTicks":350,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":31,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2833,"reloadTicks":354,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2845,"reloadTicks":354,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2854,"reloadTicks":354,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2863,"reloadTicks":358,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2874,"reloadTicks":358,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":20,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2881,"reloadTicks":358,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2890,"reloadTicks":361,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2899,"reloadTicks":362,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2908,"reloadTicks":362,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2919,"reloadTicks":363,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2926,"reloadTicks":367,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":7,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2935,"reloadTicks":367,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":16,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2946,"reloadTicks":367,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2953,"reloadTicks":371,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2965,"reloadTicks":371,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":18,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2974,"reloadTicks":371,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":27,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2983,"reloadTicks":375,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":2992,"reloadTicks":375,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3001,"reloadTicks":375,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3010,"reloadTicks":376,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":1,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3018,"reloadTicks":379,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":9,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3029,"reloadTicks":379,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":20,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3037,"reloadTicks":379,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":28,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3046,"reloadTicks":384,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3057,"reloadTicks":384,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":17,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3064,"reloadTicks":384,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3073,"reloadTicks":387,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":true,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3082,"reloadTicks":388,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3091,"reloadTicks":388,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3100,"reloadTicks":388,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3109,"reloadTicks":392,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3120,"reloadTicks":392,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":17,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3127,"reloadTicks":392,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3136,"reloadTicks":392,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":33,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3145,"reloadTicks":397,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3154,"reloadTicks":397,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":15,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3163,"reloadTicks":397,"reloadTube":0,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":24,"loaded":0,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":16}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3175,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":6,"loaded":1,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3180,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":11,"loaded":1,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3181,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":12,"loaded":1,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3190,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":21,"loaded":1,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3199,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":true,"inputAge":30,"loaded":1,"fired":1,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3208,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":6,"loaded":0,"fired":2,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3210,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":8,"loaded":0,"fired":2,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3217,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":15,"loaded":0,"fired":2,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3228,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":26,"loaded":0,"fired":2,"engine":false,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3235,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3237,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":5,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3242,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":10,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3242,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":10,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3250,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":18,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3252,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":20,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3261,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":29,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3262,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":30,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.5,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3268,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":0,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3270,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":2,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3280,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":12,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3280,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":12,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3289,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":21,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3290,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":22,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3298,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":30,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3300,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":32,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.589999901648943,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3309,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":3,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3310,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":4,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3319,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":13,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3321,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":15,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3328,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":22,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3329,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":23,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3337,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":31,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3339,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":33,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":2.879998006293421,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3346,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":6,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":3.3699891448634713,"hp":600.0,"supply":15}
+
+> execute as TestPlayer run arsenal_stress vehiclestatus
+{"age":3348,"reloadTicks":0,"reloadTube":-1,"reloadRequired":400,"reloadInputFresh":false,"reloadInputGrace":false,"inputAge":8,"loaded":0,"fired":2,"engine":true,"x":0.5,"z":3.3699891448634713,"hp":600.0,"supply":15}
+
+> ride TestPlayer dismount
+TestPlayer stopped riding Sturmtiger
+
+> kill @e[type=aiarsenal:sturmtiger]
+Killed Sturmtiger
+
+> gamemode creative TestPlayer
+Set TestPlayer's game mode to Creative Mode
+
+> clear TestPlayer
+Removed 16 item(s) from player TestPlayer
+
+> tp TestPlayer 0.5 -60 0.5 0 0
+Teleported TestPlayer to 0.500000, -60.000000, 0.500000
+
+> arsenal_visual_test client view_first TestPlayer
+Client QA sent: view_first
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test blast 0 -60 22
+Visual test sent: blast (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test nuke 0 -60 22
+Visual test sent: nuke (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test legacy_nuke 0 -60 22
+Visual test sent: legacy_nuke (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test bm21 0 -60 22
+Visual test sent: bm21 (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test bomber 0 -60 22
+Visual test sent: bomber (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client unpack TestPlayer
+Client QA sent: unpack
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client off TestPlayer
+Client QA sent: off
+
+> arsenal_visual_test client fxsystem_smoke TestPlayer
+Client QA sent: fxsystem_smoke
+
+> arsenal_visual_test client on TestPlayer
+Client QA sent: on
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test nuke 0 -60 22
+Visual test sent: nuke (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client unpack TestPlayer
+Client QA sent: unpack
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test nuke 0 -60 22
+Visual test sent: nuke (no damage)
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client clear TestPlayer
+Client QA sent: clear
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client probe_off TestPlayer
+Client QA sent: probe_off
+
+> arsenal_visual_test client fxsystem_smoke TestPlayer
+Client QA sent: fxsystem_smoke
+
+> arsenal_visual_test client provider_smoke TestPlayer
+Client QA sent: provider_smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> arsenal_visual_test client probe_on TestPlayer
+Client QA sent: probe_on
+
+> arsenal_visual_test client smoke TestPlayer
+Client QA sent: smoke
+
+> arsenal_visual_test client status TestPlayer
+Client QA sent: status
+
+> execute as TestPlayer run arsenal_stress playerstatus
+{"item":"minecraft:air","count":0,"health":20.0,"using":false,"effects":["minecraft:resistance","minecraft:night_vision"]}
+
+> save-all flush
+Saving the game (this may take a moment!)
+Saved the game
+

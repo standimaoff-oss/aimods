@@ -1,0 +1,557 @@
+{
+  "result": "PASS",
+  "pack": "photon",
+  "actions": [
+    {
+      "id": "aiarsenal:cannon_fr6",
+      "result": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_fr6",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 504.5,
+        "spawned": {
+          "aiarsenal:cannon_fr6": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 160,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "chargeRemaining": "Found 1 matching item(s) on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 1}}\n"
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 156,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.25291594561565,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 2
+            }
+          },
+          "chargeRemaining": "No items were found on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 2}}\n"
+        }
+      ],
+      "aimChecks": [
+        "[12:29:37] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=3 plumes=0 frames=77 draw=403.26ms tick=0.012ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:29:38] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=3 plumes=0 frames=77 draw=403.26ms tick=0.004ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:29:49] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=0 frames=77 draw=403.26ms tick=0.001ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:29:54] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=80 draw=164.04ms tick=0.006ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:30:04] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=90 draw=174.10ms tick=0.006ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+      ],
+      "method": "real RMB charge / real 160-tick load / real RMB ignition, ammunition and tool wear asserted, repeated twice"
+    },
+    {
+      "id": "aiarsenal:cannon_ri12",
+      "result": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_ri12",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 632.5,
+        "spawned": {
+          "aiarsenal:cannon_ri12": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 159,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8962574703913,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "chargeRemaining": "Found 1 matching item(s) on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 1}}\n"
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 154,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.1815497062654,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 2
+            }
+          },
+          "chargeRemaining": "No items were found on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 2}}\n"
+        }
+      ],
+      "aimChecks": [
+        "[12:30:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=97 draw=15.06ms tick=0.004ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:30:23] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=0 frames=107 draw=15.35ms tick=0.001ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:30:30] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=111 draw=154.89ms tick=0.005ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+        "[12:30:41] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=122 draw=160.43ms tick=0.003ms renderer=software world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+      ],
+      "method": "real RMB charge / real 160-tick load / real RMB ignition, ammunition and tool wear asserted, repeated twice"
+    },
+    {
+      "id": "aiarsenal:sturmtiger_vehicle",
+      "vehicleAmmo": "aiarsenal:rocket_380",
+      "drivable": true,
+      "result": "PASS",
+      "lastVehicleState": {
+        "age": 3348,
+        "reloadTicks": 0,
+        "reloadTube": -1,
+        "reloadRequired": 400,
+        "reloadInputFresh": false,
+        "reloadInputGrace": false,
+        "inputAge": 8,
+        "loaded": 0,
+        "fired": 2,
+        "engine": true,
+        "x": 0.5,
+        "z": 3.3699891448634713,
+        "hp": 600.0,
+        "supply": 15
+      },
+      "mainGunShot": "PASS",
+      "reloadTimeBudgetSeconds": 540.0,
+      "reloadWallSeconds": 149.939,
+      "mainGunReload": "PASS (real R, ammunition consumed)",
+      "mainGunRepeatShot": "PASS",
+      "drive": "PASS (real H/W controls)",
+      "functional": "MAIN_GUN_FIRE_RELOAD_REPEAT_PASS"
+    }
+  ],
+  "toggles": [
+    {
+      "round": 0,
+      "disabledFrames": 195,
+      "reenabledFramesBefore": 281,
+      "reenabledFramesAfter": 282,
+      "reenabledVolumes": 2
+    },
+    {
+      "round": 1,
+      "disabledFrames": 302,
+      "reenabledFramesBefore": 377,
+      "reenabledFramesAfter": 379,
+      "reenabledVolumes": 2
+    }
+  ],
+  "depthOcclusion": {
+    "open": {
+      "meanRgbDelta": 40.55556278370486,
+      "changedFraction": 0.7627396131494493,
+      "region": [
+        213,
+        48,
+        640,
+        264
+      ]
+    },
+    "wall": {
+      "meanRgbDelta": 1.657831856905271,
+      "changedFraction": 0.003319417574585073,
+      "region": [
+        213,
+        48,
+        640,
+        278
+      ]
+    },
+    "openFrames": 1,
+    "wallFrames": 9,
+    "screenshots": [
+      "photon-probe-open-baseline",
+      "photon-probe-open-volume",
+      "photon-probe-wall-baseline",
+      "photon-probe-wall-volume"
+    ]
+  },
+  "raymarchObservations": [
+    {
+      "effect": "provider_smoke",
+      "framesBefore": 17,
+      "framesAfter": 18,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-01-provider_smoke",
+      "ack": "[12:27:04] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_smoke: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=17 draw=43.73ms tick=0.003ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:05] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=18 draw=20.31ms tick=0.006ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "provider_muzzle",
+      "framesBefore": 24,
+      "framesAfter": 25,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-02-provider_muzzle",
+      "ack": "[12:27:12] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_muzzle: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=24 draw=21.15ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=25 draw=14.63ms tick=0.010ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "provider_powder",
+      "framesBefore": 25,
+      "framesAfter": 26,
+      "volumesAfterEmit": 3,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-03-provider_powder",
+      "ack": "[12:27:20] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_powder: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=3 plumes=0 frames=25 draw=14.63ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:21] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=3 plumes=0 frames=26 draw=25.19ms tick=0.004ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "provider_cannon",
+      "framesBefore": 31,
+      "framesAfter": 33,
+      "volumesAfterEmit": 5,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-04-provider_cannon",
+      "ack": "[12:27:28] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_cannon: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=31 draw=22.59ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:30] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=5 plumes=0 frames=33 draw=59.79ms tick=0.006ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "provider_exhaust",
+      "framesBefore": 38,
+      "framesAfter": 39,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-05-provider_exhaust",
+      "ack": "[12:27:36] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_exhaust: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=38 draw=57.76ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:37] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=39 draw=16.25ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "provider_impact",
+      "framesBefore": 42,
+      "framesAfter": 43,
+      "volumesAfterEmit": 3,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-06-provider_impact",
+      "ack": "[12:27:45] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_impact: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=3 plumes=0 frames=42 draw=15.81ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:46] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=3 plumes=0 frames=43 draw=20.42ms tick=0.004ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "fxsystem_smoke",
+      "framesBefore": 48,
+      "framesAfter": 49,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-07-fxsystem_smoke",
+      "ack": "[12:27:53] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA fxsystem_smoke: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=48 draw=17.92ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:27:54] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=49 draw=17.76ms tick=0.003ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "smoke",
+      "framesBefore": 53,
+      "framesAfter": 54,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-08-smoke",
+      "ack": "[12:27:59] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA smoke: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=53 draw=16.70ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:28:00] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=54 draw=43.07ms tick=0.003ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "blast",
+      "framesBefore": 59,
+      "framesAfter": 60,
+      "volumesAfterEmit": 11,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-09-blast",
+      "ack": "[12:28:07] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA blast: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=59 draw=42.45ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:28:08] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=60 draw=211.33ms tick=0.010ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "nuke",
+      "framesBefore": 64,
+      "framesAfter": 65,
+      "volumesAfterEmit": 2,
+      "plumesAfterEmit": 0,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-10-nuke",
+      "ack": "[12:28:14] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA nuke: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=2 plumes=0 frames=64 draw=211.82ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:28:15] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=2 plumes=0 frames=65 draw=301.60ms tick=0.037ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "trail",
+      "framesBefore": 68,
+      "framesAfter": 69,
+      "volumesAfterEmit": 0,
+      "plumesAfterEmit": 22,
+      "safeParticles": 0,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-11-trail",
+      "ack": "[12:28:22] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA trail: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=22 frames=68 draw=496.86ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:28:23] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=2 frames=69 draw=237.90ms tick=0.003ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "smoke",
+      "framesBefore": 182,
+      "framesAfter": 195,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 2,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-12-smoke",
+      "ack": "[12:34:37] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA smoke: Arsenal VolPyro: active=true backend=raymarch packBlocked=false probe=false lastStage=minecraft:after_particles volumes=1 plumes=0 frames=182 draw=112.20ms tick=0.003ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:34:38] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=raymarch packBlocked=false probe=false lastStage=minecraft:after_particles volumes=1 plumes=0 frames=195 draw=49.58ms tick=0.005ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "smoke",
+      "framesBefore": 289,
+      "framesAfter": 302,
+      "volumesAfterEmit": 1,
+      "plumesAfterEmit": 0,
+      "safeParticles": 2,
+      "providerFallbackParticles": 0,
+      "screenshot": "photon-raymarch-13-smoke",
+      "ack": "[12:35:11] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA smoke: Arsenal VolPyro: active=true backend=raymarch packBlocked=false probe=false lastStage=minecraft:after_particles volumes=1 plumes=0 frames=289 draw=336.07ms tick=0.005ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:35:12] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=raymarch packBlocked=false probe=false lastStage=minecraft:after_particles volumes=1 plumes=0 frames=302 draw=46.85ms tick=0.003ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    }
+  ],
+  "weaponReloadShaderRebuilds": 0,
+  "packetRaymarchObservations": [
+    {
+      "effect": "blast",
+      "framesBefore": 147,
+      "framesAfter": 148,
+      "volumes": 11,
+      "plumes": 0,
+      "screenshot": "photon-raymarch-packet-blast",
+      "ack": "[12:33:43] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=0 frames=147 draw=80.07ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:33:44] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=148 draw=92.82ms tick=0.005ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "nuke",
+      "framesBefore": 152,
+      "framesAfter": 155,
+      "volumes": 2,
+      "plumes": 0,
+      "screenshot": "photon-raymarch-packet-nuke",
+      "ack": "[12:33:49] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=0 frames=152 draw=91.25ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:33:54] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=2 plumes=0 frames=155 draw=557.99ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "legacy_nuke",
+      "framesBefore": 159,
+      "framesAfter": 162,
+      "volumes": 2,
+      "plumes": 0,
+      "screenshot": "photon-raymarch-packet-legacy_nuke",
+      "ack": "[12:34:02] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=2 plumes=0 frames=159 draw=341.61ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:34:07] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=2 plumes=0 frames=162 draw=560.57ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "bm21",
+      "framesBefore": 165,
+      "framesAfter": 166,
+      "volumes": 11,
+      "plumes": 0,
+      "screenshot": "photon-raymarch-packet-bm21",
+      "ack": "[12:34:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=165 draw=361.51ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:34:14] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=166 draw=135.04ms tick=0.004ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "bomber",
+      "framesBefore": 170,
+      "framesAfter": 171,
+      "volumes": 11,
+      "plumes": 0,
+      "screenshot": "photon-raymarch-packet-bomber",
+      "ack": "[12:34:20] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=170 draw=127.97ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+      "after": "[12:34:21] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=11 plumes=0 frames=171 draw=134.57ms tick=0.005ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    }
+  ],
+  "flashObservations": [
+    {
+      "effect": "nuke",
+      "clientAck": "[12:33:49] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=0 frames=152 draw=91.25ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    },
+    {
+      "effect": "legacy_nuke",
+      "clientAck": "[12:34:02] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=2 plumes=0 frames=159 draw=341.61ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0"
+    }
+  ],
+  "unarmedShaderReload": "PASS",
+  "midEffectSmokeRebind": {
+    "result": "PASS",
+    "rendererOffQueued": "[12:34:46] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA fxsystem_smoke: Arsenal VolPyro: active=false backend=disabled packBlocked=false probe=false lastStage=minecraft:after_particles volumes=0 plumes=0 frames=274 draw=54.76ms tick=0.000ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+    "rendererOnBeforePack": "[12:34:47] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA on: Arsenal VolPyro: active=true backend=raymarch packBlocked=false probe=false lastStage=minecraft:after_particles volumes=0 plumes=0 frames=274 draw=54.76ms tick=0.000ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+    "afterPackEnable": "[12:34:56] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=276 draw=23.89ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+    "screenshot": "photon-toggle-smoke-to-volume"
+  },
+  "failClosedRuntime": {
+    "withProbeDisabled": "[12:35:34] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA probe_off: Arsenal VolPyro: active=false backend=particle-fallback packBlocked=true probe=false lastStage=minecraft:after_level volumes=0 plumes=0 frames=382 draw=369.54ms tick=0.001ms renderer=software world=minecraft:overworld target=MISS safeParticles=2 providerFallbackParticles=0 safeCloudFrames=0",
+    "fxSystemFallback": "[12:35:35] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA fxsystem_smoke: Arsenal VolPyro: active=false backend=particle-fallback packBlocked=true probe=false lastStage=minecraft:after_level volumes=0 plumes=0 frames=382 draw=369.54ms tick=0.000ms renderer=software world=minecraft:overworld target=MISS safeParticles=3 providerFallbackParticles=0 safeCloudFrames=1",
+    "particleProviderFallback": "[12:35:37] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA provider_smoke: Arsenal VolPyro: active=false backend=particle-fallback packBlocked=true probe=false lastStage=minecraft:after_level volumes=0 plumes=0 frames=382 draw=369.54ms tick=0.000ms renderer=software world=minecraft:overworld target=MISS safeParticles=3 providerFallbackParticles=1 safeCloudFrames=2",
+    "noDrawAfter2s": "[12:35:39] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false backend=particle-fallback packBlocked=true probe=false lastStage=minecraft:after_level volumes=0 plumes=0 frames=382 draw=369.54ms tick=0.000ms renderer=software world=minecraft:overworld target=MISS safeParticles=3 providerFallbackParticles=1 safeCloudFrames=5",
+    "probeRestored": "[12:35:40] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA probe_on: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=0 plumes=0 frames=382 draw=369.54ms tick=0.000ms renderer=software world=minecraft:overworld target=MISS safeParticles=3 providerFallbackParticles=1 safeCloudFrames=6",
+    "afterLevelDrawRestored": "[12:35:42] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=383 draw=41.28ms tick=0.002ms renderer=software world=minecraft:overworld target=MISS safeParticles=3 providerFallbackParticles=1 safeCloudFrames=6"
+  },
+  "thirdPartyDiagnostics": [
+    "[12:25:12] [Render thread/ERROR] [Embeddium-MixinTaintDetector/]: Mod mixin into Embeddium internals detected. This instance is now tainted. The Embeddium team does not provide any guarantee of support for issues encountered while such mods are installed."
+  ],
+  "shaderpackRaymarchProbe": "PASS",
+  "productionShaderpackRenderer": "still fail-closed; probe is QA-only",
+  "postCompositeHook": "Forge 1.20.1 GameRenderer AFTER_LEVEL dispatch; Iris finalizeLevelRendering runs before LevelRenderer returns",
+  "framebufferDepth": "main RenderTarget copied at AFTER_LEVEL; required open-air visibility and wall-occlusion pixel tests",
+  "testedShaderpack": "photon",
+  "raymarchPackets": [
+    "blast",
+    "nuke",
+    "legacy_nuke",
+    "bm21",
+    "bomber"
+  ],
+  "particleProviders": [
+    "smoke",
+    "muzzle",
+    "powder",
+    "cannon",
+    "exhaust",
+    "impact"
+  ],
+  "guns": [
+    "ppsh41",
+    "mosin_pu",
+    "musket_1777"
+  ],
+  "reloadInput": "real R, Oculus defaults unchanged; cannons use real RMB",
+  "playerEffects": [
+    "minecraft:resistance",
+    "minecraft:night_vision"
+  ],
+  "limits": "Linux llvmpipe only, not Windows/NVIDIA; Photon SH_SKYLIGHT=false (32768-byte shared memory limit), other packs publisher defaults; this QA-only raw-GL probe does not certify production Iris/Oculus integration, all GPUs/pack versions, or bomb physics/damage"
+}
