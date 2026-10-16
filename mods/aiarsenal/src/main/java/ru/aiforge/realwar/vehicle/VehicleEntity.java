@@ -510,10 +510,13 @@ extends Entity implements ru.aiforge.realwar.damage.Damageable {
         return seat >= 0 && seat < 2 && this.reloadHeld[seat] && this.tickCount - this.inputTick[seat] <= 4;
     }
 
-    /** A short packet gap pauses an in-progress reload; it never grants input. */
+    // A measured software-GL client delivered input in 2-second bursts. Keep the
+    // operation, not the input permission, across a bounded render/GC stall.
+    public static final int RELOAD_INPUT_GRACE_TICKS = 100;
+    /** A packet gap pauses an in-progress reload; it never grants input. */
     public boolean reloadInputInGrace(int seat) {
         return seat >= 0 && seat < 2 && this.reloadHeld[seat]
-                && controlInputAge(seat) > 4 && controlInputAge(seat) <= 20;
+                && controlInputAge(seat) > 4 && controlInputAge(seat) <= RELOAD_INPUT_GRACE_TICKS;
     }
 
     public int controlInputAge(int seat) {

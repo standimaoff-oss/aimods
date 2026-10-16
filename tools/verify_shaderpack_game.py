@@ -13,6 +13,7 @@ import verify_game as g
 from install_qa_client import prepare
 from install_shaderpack_qa import install
 from qa_log import tail_from
+from shader_log import scan
 import verify_context_game as context
 from shaderpack_actions import powder_cannon, sturmtiger
 
@@ -173,7 +174,8 @@ overrideHeight:600
         g.screenshot(PACK+'-reenabled-'+str(iteration))
     text=log.read_text(errors='replace')
     assert player.poll() is None and server.poll() is None
-    bad=re.findall(r'^.*(?:\[Render thread/ERROR\]|GL renderer disabled|OutOfMemoryError|EXCEPTION_ACCESS_VIOLATION|GL_INVALID|OpenGL Error).*$' ,text,re.M)
+    bad,diagnostics=scan(text)
+    REPORT['thirdPartyDiagnostics']=diagnostics
     assert not bad,'\n'.join(bad)
     effects=json.loads(g.command('execute as TestPlayer run arsenal_stress playerstatus'))['effects']
     assert not {'minecraft:blindness','minecraft:nausea'}.intersection(effects),effects

@@ -70,7 +70,7 @@ def verify(candidate,metadata,root):
     ctx=Path('context')/f"run-{c['runs']['context']}"
     gt=load(Path('gametest')/f"run-{c['runs']['gametest']}",'gametest-early.json')
     assert gt['source']==c['source'] and not gt['failures']
-    assert any('All 182 required tests passed' in line for line in gt['totals'])
+    assert any('All 183 required tests passed' in line for line in gt['totals'])
     folders=[cat,ctx]+[Path('shaderpack')/f"run-{c['runs']['shader']}-{p}" for p in sorted(PACKS)]
     for folder in folders:
         assert load(folder,'installed-provenance.json')['sha256']==c['sha256'],'different installed bytes'

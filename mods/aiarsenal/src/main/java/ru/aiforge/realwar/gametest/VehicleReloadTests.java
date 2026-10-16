@@ -47,17 +47,28 @@ public final class VehicleReloadTests {
             r.gun.discard();h.succeed();
         });
     }
-    @GameTest(template="arena",batch="reload_network",timeoutTicks=100)
+    @GameTest(template="arena",batch="reload_network",timeoutTicks=160)
     public static void lost_reload_input_pauses_then_cancels(GameTestHelper h) {
         Rig r=rig(h);
         h.onEachTick(()->{h.getLevel().resetEmptyTime();if(r.gun.tickCount<25)input(r,true);});
         int[] held={-1};
         h.runAfterDelay(35,()->{held[0]=r.gun.reloadTicks();h.assertTrue(held[0]>0,"short gap erased progress");});
-        h.runAfterDelay(39,()->h.assertTrue(r.gun.reloadTicks()==held[0],"progress advanced without fresh input"));
-        h.runAfterDelay(60,()->{
+        h.runAfterDelay(90,()->h.assertTrue(r.gun.reloadTicks()==held[0],"progress advanced without fresh input"));
+        h.runAfterDelay(130,()->{
             h.assertTrue(r.gun.reloadTube()<0 && r.gun.reloadTicks()==0,"long silence did not cancel");
             h.assertTrue(r.player.getInventory().getItem(1).getCount()==2,"silence consumed ammunition");
             r.gun.discard();h.succeed();
         });
     }
+    @GameTest(template="arena",batch="reload_network",timeoutTicks=4500)
+    public static void measured_two_second_input_bursts_do_not_reset_long_reload(GameTestHelper h) {
+        Rig r=rig(h);
+        h.onEachTick(()->{h.getLevel().resetEmptyTime();if(r.gun.tickCount%40==0)input(r,true);});
+        h.runAfterDelay(4300,()->{
+            h.assertTrue(r.gun.loadedCount()==1,"measured 40-tick gaps still reset the long reload");
+            h.assertTrue(r.player.getInventory().getItem(1).getCount()==1,"consume exactly one rocket");
+            h.assertTrue(r.gun.firedSeq()==0,"reload must never fire");r.gun.discard();h.succeed();
+        });
+    }
+
 }

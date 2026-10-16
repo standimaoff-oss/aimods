@@ -160,11 +160,14 @@ def vehicle(row):
     wait(lambda:state()['loaded']<initial['loaded'],5)
     row['mainGunShot']='PASS'
     g.screenshot(row['id'].split(':')[1]+'-fired')
+    row['reloadTimeBudgetSeconds']=max(80,initial['reloadRequired']/20*12+30)
+    reload_started=time.monotonic()
     g.key('keydown','r')
     try:
-        wait(lambda:state()['loaded']==initial['loaded'],80)
+        wait(lambda:state()['loaded']==initial['loaded'],row['reloadTimeBudgetSeconds'])
     finally:
         g.key('keyup','r')
+    row['reloadWallSeconds']=round(time.monotonic()-reload_started,3)
     reloaded=state();assert reloaded['supply']<16,reloaded
     row['mainGunReload']='PASS (real R, ammunition consumed)'
     fire_until(reloaded['fired'])

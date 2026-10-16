@@ -438,7 +438,7 @@ extends VehicleEntity {
         }
         // Client render stalls / packet jitter must not erase a 20-second
         // loading operation every 200 ms. Do NOT advance or consume ammunition
-        // during the gap. Explicit key release, dismount or >1s silence cancels.
+        // during the gap. Explicit key release, dismount or >5s silence cancels.
         if (rp == null && op != null && this.reloadInputInGrace(this.operatorSeat())
                 && this.mayReload() && this.hasAmmo(op)) return;
         if (rp == null || !this.mayReload() || !this.hasAmmo(rp)) {
