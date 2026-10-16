@@ -1,0 +1,32 @@
+[
+  {
+    "file": "installed-server-installer.log",
+    "bytes": 1193446,
+    "sha256": "0bde070c17fff939e60f413ef6bd336006a5c84a81787dc261284d95ce288ef1",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  },
+  {
+    "file": "rcon.log",
+    "bytes": 303126,
+    "sha256": "ade418b567b006e57a37903587752380064a3f0755653e40c27235b5e8836bc5",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  },
+  {
+    "file": "server-latest.log",
+    "bytes": 400326,
+    "sha256": "9e9469afc65a981e31bde822feb218366f9492aee75626c32b50088897c9ba0b",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  },
+  {
+    "file": "server.log",
+    "bytes": 298954,
+    "sha256": "d08bb7e0c82d7796024c206a053da567836f3a23e42f64b2f6274f2c40a848e1",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  },
+  {
+    "file": "shaderpack-driver.log",
+    "bytes": 2305702,
+    "sha256": "afd4022e24170facbc6c180bf9e57dc4d4c91bcc6a05e19e9b935ed9371f9742",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  }
+]

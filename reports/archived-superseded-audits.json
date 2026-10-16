@@ -1,0 +1,495 @@
+{
+  "backupCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf",
+  "files": [
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-disabled-0.png",
+      "bytes": 255781,
+      "sha256": "86701b1f0af937d4917db82613ac72fa80180a0ef5a7b3761cfbfb436e1d0411"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-disabled-1.png",
+      "bytes": 273535,
+      "sha256": "b7988a6af5978bd3ec31ffeaa3eb276bbab1e5aeca168cbb3f632523e099fe2c"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-fallback-blast.png",
+      "bytes": 586652,
+      "sha256": "1d55454eaa62a417337b28cd414d28c7ee9eaf5e49fceea1379184c962c0ae67"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-fallback-legacy_nuke.png",
+      "bytes": 557886,
+      "sha256": "91859088aa2e28d4afc209d7f6640f838b1d5cbb4a4b9a3b8a801defe39f8de0"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-fallback-nuke.png",
+      "bytes": 504984,
+      "sha256": "e77d39c7c5f59a9f7fe968c1b88a51ae84d4ee220ea2a7bbc80e88c881d9e292"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-flash-legacy_nuke.png",
+      "bytes": 563762,
+      "sha256": "ec401c11921aeaa5bab29a7a95c49055f8f2216fcd741e58492aece8f7d5d52f"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-flash-nuke.png",
+      "bytes": 583229,
+      "sha256": "4a34f33eb9310e8a1978f7b13d3b85b482e7d4132378375a2ceec310d109b43a"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-initial.png",
+      "bytes": 605467,
+      "sha256": "ce33d091398364a0034a7e91311bf9ad8d2a3d9276106378d0de784595fa6628"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-mosin_pu-ads.png",
+      "bytes": 181130,
+      "sha256": "a5b7f0225c04afc0afdba6b02a9231fef39b38e05618fa75f9a7d28d4e3d8634"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-musket_1777-ads.png",
+      "bytes": 614436,
+      "sha256": "72617fbd9b497cbfd0e40233c8419eb9c6e382a0fc93ae8b4fb17e094a297e86"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-ppsh41-ads.png",
+      "bytes": 597340,
+      "sha256": "262b636de5758d4feb7f87227d17a58dddd82532e65784a80f161b898fa9988c"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-reenabled-0.png",
+      "bytes": 463189,
+      "sha256": "397a196ebbb12c231677e9bc08aea938375d2922245fa59e7c16a464d13b12f6"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-bsl-reenabled-1.png",
+      "bytes": 480255,
+      "sha256": "34e8f5100b288b08288db3ee377ea5cda2e9888c600ed771cbf97444a38b64c0"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-cannon_fr6-real-rmb-cycle-0.png",
+      "bytes": 709283,
+      "sha256": "46ef74a27f14aa9dd9887721f18aca3a9beda75768f9ccce3505333f66bef75e"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-cannon_fr6-real-rmb-cycle-1.png",
+      "bytes": 712538,
+      "sha256": "a53fa6bf20b6ebad3a1bac0d578e412a7e831bf3072c2b5960eb31ae8035ce56"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-cannon_ri12-real-rmb-cycle-0.png",
+      "bytes": 697549,
+      "sha256": "55574d49c6b88ab2d69784759b82a40e055d8eb2732b86376b510a4f8dfb9a94"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-cannon_ri12-real-rmb-cycle-1.png",
+      "bytes": 708668,
+      "sha256": "4e80617e732931bcf662f77ec1adcd0627ac46e621c1633c1d0125fc3b61b85b"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-sturmtiger-real-reload-repeat.png",
+      "bytes": 545615,
+      "sha256": "0e4deeb373283e95c62b6d64a0a8c6a02f47d69adfef670c45f99e0996c08f45"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-bsl/shaderpack-bsl-sturmtiger_vehicle-fired.png",
+      "bytes": 454584,
+      "sha256": "67419befd5eb998804fe471c4bf2b3888132c621cb3302b91e141bea2d1995ee"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-cannon_fr6-real-rmb-cycle-0.png",
+      "bytes": 876596,
+      "sha256": "b39a6bc5024c0898b079b9d43e16764d188adca264b297cd435bce89e81bbd2a"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-cannon_fr6-real-rmb-cycle-1.png",
+      "bytes": 865093,
+      "sha256": "fc4a9f3918b4c244b4846683ebf6f88dddb8d7a3b9953a6643da3a8b615064dd"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-cannon_ri12-real-rmb-cycle-0.png",
+      "bytes": 866015,
+      "sha256": "e8369a737d6a5e9fc5bb4c3d1f1359d942423a332213fb83edeee64dba4a5e2f"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-cannon_ri12-real-rmb-cycle-1.png",
+      "bytes": 863409,
+      "sha256": "967400ee8641392adc4d9dfa8a27ec38e6245d6f827a185e53f9ddaba1e54134"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-complementary-failure.png",
+      "bytes": 741925,
+      "sha256": "fa8d6b271ba9e1538cfff4ca6400329612b78bef190d57068f66f7184469609b"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-complementary-initial.png",
+      "bytes": 685904,
+      "sha256": "67f5b3c234ab97f9a846308325e86ce2d2f3af4de594720206d8599b69bb2a54"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-complementary-mosin_pu-ads.png",
+      "bytes": 294942,
+      "sha256": "27365a13957324fa856706ed65cdb9822f03e994f1df71c70fc472dc90b6e3bf"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-complementary-musket_1777-ads.png",
+      "bytes": 819607,
+      "sha256": "35f59b216d8c1fdb61a15cc84f91a4702da75b692ab78dbf7c7c8fc175cbe267"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-complementary-ppsh41-ads.png",
+      "bytes": 781322,
+      "sha256": "8769fd8f6dfdd5bd2c78d0e7ab37a587686c73bcb5521369806b7504f58bfa7c"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-complementary/shaderpack-complementary-sturmtiger_vehicle-fired.png",
+      "bytes": 663682,
+      "sha256": "0f7e28f505b67610023c66c96e3be4b3da230406312bf999a2fac774a6c7f2cf"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-disabled-0.png",
+      "bytes": 265781,
+      "sha256": "4b3c0b58b5b50cd2acfd66ff46f77ae37a5554671735719b779ec92b4f566623"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-cannon_fr6-real-rmb-cycle-0.png",
+      "bytes": 972511,
+      "sha256": "fbd2185d002561f3fac2e165d72afc32880bf5d9bdbf2a0c461e11c49afc76e7"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-cannon_fr6-real-rmb-cycle-1.png",
+      "bytes": 970167,
+      "sha256": "0a04dc69e56589b8f4434fa41b35d26cd44749b9a3e248ef8d252d6b05b300e1"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-cannon_ri12-real-rmb-cycle-0.png",
+      "bytes": 942864,
+      "sha256": "bbf3e15d17719df84c06b5762bfd93ed651e5a411e07ec3b56f28d3323437a50"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-cannon_ri12-real-rmb-cycle-1.png",
+      "bytes": 937197,
+      "sha256": "95ba1fb89b77ddcf3f07065a8bbc29438559365e25ee7e93858922aa9eadf2e6"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-disabled-1.png",
+      "bytes": 272032,
+      "sha256": "98ed25ae184bbd567c11b33a61fcb4754042a9e7f8928f6df6276a482b21bbe9"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-fallback-blast.png",
+      "bytes": 877643,
+      "sha256": "7a73b41969aa8f6b3f61dd6116842b41ab8a6f2d3a6e89f7ddd1dd81ceed6473"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-fallback-legacy_nuke.png",
+      "bytes": 670290,
+      "sha256": "16d6e7da0f25dfdba489634a83b25e3b12b95f2f1413e3028d1daa2e14838247"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-fallback-nuke.png",
+      "bytes": 703865,
+      "sha256": "381dfd28d540b415f27552ecb68d84be7f3c22f455c35739a56c71a13dd91017"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-flash-legacy_nuke.png",
+      "bytes": 869354,
+      "sha256": "721be4d8ceeefdbee7307478b4860dd77b086e3f0bc9881fb45eb1de25275322"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-flash-nuke.png",
+      "bytes": 865771,
+      "sha256": "26c80efd14c10427787152be042fd1e438e33d864e226fa92c4e341b0159623c"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-initial.png",
+      "bytes": 744611,
+      "sha256": "1816d8c703149f0bcc038838f75eb90f66685b7c42a0d1c322738592af55e390"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-mosin_pu-ads.png",
+      "bytes": 293877,
+      "sha256": "331ccd424e37fd0806496efcdb0bf210bee8ab01e5cee556b2ef371bc5d8b14c"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-musket_1777-ads.png",
+      "bytes": 939617,
+      "sha256": "da33f4d5770ff11446998b286cc2d89f4cc000a5eba417487bf992b27d625a93"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-ppsh41-ads.png",
+      "bytes": 914766,
+      "sha256": "3d96560412a39835f8de1f343d5fb8903f8001e4a0970b14258d72c25f708f40"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-reenabled-0.png",
+      "bytes": 711233,
+      "sha256": "e89e52178dccb0d4b0632afff1821959f1ccb42912a938e8f4547e9d4ba5f928"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-photon-reenabled-1.png",
+      "bytes": 680062,
+      "sha256": "11e2c7db07f4d8d1b8f0bbc544e88601810365e29cffa1d8fd25824ac10440ba"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-sturmtiger-real-reload-repeat.png",
+      "bytes": 837435,
+      "sha256": "681724543ffb0f3bd9424ea8a03a3d8d35d2f4a082e71ac6825c4014b47de5cd"
+    },
+    {
+      "path": "shots/aiarsenal/shaderpack/run-38827795868-photon/shaderpack-photon-sturmtiger_vehicle-fired.png",
+      "bytes": 693218,
+      "sha256": "da4b3f5aa87a7a6ea35f0411d17c9a8be4b62cd62e254b9634244e31b216c905"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-cannon-cannon_fr6.png",
+      "bytes": 247920,
+      "sha256": "d514a4c97ecb56bac2f53d6d7fa0ac206e109e879abe2fc7cb4c70d4dd31dedd"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-cannon-cannon_ri12.png",
+      "bytes": 251330,
+      "sha256": "a7b90e9a8b3eb933f8cb120147e5ee135a39a541e2517ac2c03b4144c540f34b"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-ah64_vehicle.png",
+      "bytes": 280203,
+      "sha256": "6a7c8a6cc445e2b992bcb25c7b5ee6b43214bfccec26013baa7b047721abeb05"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-bf109_plane.png",
+      "bytes": 184889,
+      "sha256": "f98bb82c8a85d01d83bf51ec1dce4c2f4f5686ddd0dd234e8688b6564d8ad021"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-cb90_boat.png",
+      "bytes": 180751,
+      "sha256": "976e2d58a89439404f288ba192d0ac7ae99306b36a6f7e3489c6122890b97484"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-he111_plane.png",
+      "bytes": 209162,
+      "sha256": "d0238763ec4a54fb9804b5ac10b2b6463a9896420189861e9cf53037dd517140"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-ka52_vehicle.png",
+      "bytes": 271250,
+      "sha256": "68e2e1f04c8a1c971ba3a4439573b6afce11368034d9654c61c94b1ba601709b"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-pe8_plane.png",
+      "bytes": 235993,
+      "sha256": "896fe7dee698357cb27b141fcbea25ac75297e46f225241fcb80f4f62a308576"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-raptor_boat.png",
+      "bytes": 175588,
+      "sha256": "dcefe5de83730203c0604e8463a44e91b5afe7e885253d2121f6e1c18fa51698"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-su57_plane.png",
+      "bytes": 245011,
+      "sha256": "8b744929d4422b093e423940cb28ba59d84e70177fff19bf358f74eb9e774f17"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-sub636_vehicle.png",
+      "bytes": 32600,
+      "sha256": "9a9374510f4bed7604c3b23d3c4cce56bc902f5339288fa4333886e54117129c"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-craft-yak3_plane.png",
+      "bytes": 187700,
+      "sha256": "ca793cb4d0f25803a2aa168d315b4e42213eb480383fef8223b810c9c78dd34b"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-drone-fpv10.png",
+      "bytes": 90033,
+      "sha256": "d205a37a92598d6bc4c64555c8fbb17f42a34a529625cb354adb63e98ff557ca"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-drone-fpv7.png",
+      "bytes": 74651,
+      "sha256": "27907ad45755c94600d3c9d9ede5b74191afc89201f9441876b2c930307bcfb3"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-drone-mq9.png",
+      "bytes": 25191,
+      "sha256": "6b43e9364206edb67741e3475aa67e1dba72d1e3b481e4ae56c444158ee73625"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-drone-orion.png",
+      "bytes": 25457,
+      "sha256": "63e20395daf664150e240dbdca0ff0ac967a089205c72c3af5b4456016e11dcb"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-drone-reconnect-mq9.png",
+      "bytes": 25732,
+      "sha256": "37a9c7d4e01e02521e8f6b401849684d8abe810c12b4dc0ea73b134f41ea7df8"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-drone-reconnect-orion.png",
+      "bytes": 26019,
+      "sha256": "71b3f01402917d41801a252048111c5dd64a3c4c0d89da316254ff41e257f7bb"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_cruise_cluster.png",
+      "bytes": 362622,
+      "sha256": "2d27502d07a5289159203b8284adafaf838155e83003e9a03278c9d6448f7720"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_cruise_he.png",
+      "bytes": 353432,
+      "sha256": "d7a76d55b3bb2f87dce6de4911789d4be43a4013c6d498de74ba9a63b5013d97"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_icbm_he.png",
+      "bytes": 450164,
+      "sha256": "47913a6f4e59d8dfa96fc5eecb43c961a2e9a170515bff2985635522ba40da34"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_icbm_kinetic.png",
+      "bytes": 421039,
+      "sha256": "60b9ba2d5482e15832a5c57caa5027201922c45fd13c4e13460499d0f28c3405"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_icbm_mirv.png",
+      "bytes": 391341,
+      "sha256": "6fc87cccf6591902dbb75aefc74b275a45ba39bc3876230c08f1130d81bc74f0"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_icbm_mirv_heavy.png",
+      "bytes": 424860,
+      "sha256": "308e31e3c9f4ee3bb975325f4ec9dde9ed459869d7c858af6972f064a1c2a6e0"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_operational_he.png",
+      "bytes": 369762,
+      "sha256": "371550a87b69dcf5dd698f0e74696c7e7794698cfb34c46ad7f340b7cf5175f1"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_operational_kinetic.png",
+      "bytes": 359136,
+      "sha256": "70d0a7a33443c6fa8daeb01f1f964ce4d3ae0161e84c1e1faed86afa037d96a6"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_operational_mirv.png",
+      "bytes": 420416,
+      "sha256": "68df75fa127feed85ad6369c8bf915d2e6da28dc4bc94598ffd2417a577c6df8"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_operational_penetrator.png",
+      "bytes": 374554,
+      "sha256": "fa8b12add7f477d8b4d8c2f75648a8a6e477788aceb3ecf7f6cd671b653befbb"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_tactical_he.png",
+      "bytes": 354533,
+      "sha256": "b95f9cb01cc474615dffadf7eaf218ae26ae7adbb77d6f720d7552b9c077de46"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_tactical_kinetic.png",
+      "bytes": 346970,
+      "sha256": "eaa26f871a3b5777a4bc1431ac09361630cc705629bb27cbcc63c61f0a0a97bd"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_tactical_mirv.png",
+      "bytes": 367640,
+      "sha256": "e848eb11a27371b2efe3708475f388a9271a0f16f3783f0bce3c3c85b2e1b0cf"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-impact-missile_tactical_thermobaric.png",
+      "bytes": 359889,
+      "sha256": "7ad4acbbee21b4f4c63b2aa843d8264bf28445570c023a7671be831f2b096916"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-javelin-repeat.png",
+      "bytes": 136869,
+      "sha256": "249d1d609b41e1adb67492eeb4ab8d2574cfbb3a54c5ce58cf08c6dad706b8fd"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_cruise_cluster.png",
+      "bytes": 208908,
+      "sha256": "6af887aa2c106c9577c2146faf33886e372435b0f6df8e4640c0219d9ef5677f"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_cruise_he.png",
+      "bytes": 221023,
+      "sha256": "1a89255c31cc444e4ae49daefb6af2a047f51c88aea4301d5a287130da20cefe"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_icbm_he.png",
+      "bytes": 210991,
+      "sha256": "08258d3120e429f41fb931c84a119cca72eb29a6abc6feebaebc6b3edffdb4f8"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_icbm_kinetic.png",
+      "bytes": 205713,
+      "sha256": "2c357bfe567fb1a013086c31a51cd84480ec5c1c5d14c4e41b60fe40b37926db"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_icbm_mirv.png",
+      "bytes": 209937,
+      "sha256": "4b36ada39b73cdba25006fa642555f48c2c0e737436efc85e72ff3ec7297c91c"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_icbm_mirv_heavy.png",
+      "bytes": 212089,
+      "sha256": "f01a0bfaf115b5a503a833355cf699ad84673b997bec1aecd23d6b63a84caadb"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_operational_he.png",
+      "bytes": 201751,
+      "sha256": "de6dd79a3433c1de47ed3ff7dfd2a875525b5454f9852f91e8a489c387007f1c"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_operational_kinetic.png",
+      "bytes": 207401,
+      "sha256": "3ec277966cbfae75e09df38f78303c4bd9f50aa4bacb73749311b13425cb19fd"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_operational_mirv.png",
+      "bytes": 203793,
+      "sha256": "16c515dbd7771e30eca88f6f9cfbe597d4a0e3d1a39eeea83fd118028c33cb50"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_operational_penetrator.png",
+      "bytes": 129974,
+      "sha256": "aac40515c962610844cc82cc8dba3edc0a60cf4dba703c0c0e50ac53cd3091ec"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_tactical_he.png",
+      "bytes": 248234,
+      "sha256": "86ea2ee12948fb5d50ccfdd91e44453dbb93ebe96ed36ff14e2fb2088b63a11f"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_tactical_kinetic.png",
+      "bytes": 139688,
+      "sha256": "425c2687f009b3565a6a211e3772da572850efd2c9c07d781e6dd376f6ac099e"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_tactical_mirv.png",
+      "bytes": 202639,
+      "sha256": "d06747a9e6d2e7a11c8ea590af030bfee3a895370c78071711619f8b0868be7e"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-launch-missile_tactical_thermobaric.png",
+      "bytes": 221558,
+      "sha256": "863eaa25cdedb0ff6dfeb3d364af5469e68ff4c4ca656d9c4de41dd50ef68f38"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-tool-arming_plug.png",
+      "bytes": 100896,
+      "sha256": "fc625e506af7668e55e69c77ea34dbad6a7605405908d45046a266d92bef1d6b"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-tool-entrenching_tool.png",
+      "bytes": 114243,
+      "sha256": "7f57d6023b99801e0addeeaf1c5df973e991dbb8484b9e1959ef0fa3b616e5c6"
+    },
+    {
+      "path": "shots/aiarsenal/context/run-38827795718/context-tool-remote_detonator.png",
+      "bytes": 115340,
+      "sha256": "86827ca076a2407b08b9c870016c4fec323717b27564e2e8eee262716ab892d9"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "file": "installed-server-installer.log",
+    "bytes": 1193443,
+    "sha256": "a58b51c87d1439729c4b88574fdf12918b974b1463db01eb01257f2227d10e49",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  },
+  {
+    "file": "shaderpack-driver.log",
+    "bytes": 2135945,
+    "sha256": "d2207c8e4b0cd628aa9e3fedae15281e24d0683279fec5dd4bfc8ecaecfd5477",
+    "sourceCommit": "4d8ac5b5c3ae72a7bb42cada4014dacc5ad750bf"
+  }
+]

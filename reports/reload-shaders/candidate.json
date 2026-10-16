@@ -5,11 +5,12 @@
   "runs": {
     "gametest": 38827795879,
     "catalogue": 38827795987,
-    "context": 38827795718,
+    "context": 38831208110,
     "shader": 38829581137
   },
   "note": "NOT approved. Hash observed in the three 38827795868 clients, not yet accepted across all audits. QA-only shader rerun must have identical complete mod/build tree and installed bytes. Visual flash review and all runtime gates remain mandatory.",
   "auditSources": {
-    "shader": "3444a19e3a9542fb469e9e80c3b906f10295e3ca"
+    "shader": "3444a19e3a9542fb469e9e80c3b906f10295e3ca",
+    "context": "37ff398667a510e5b38b17aedf12f24f3ef3db00"
   }
 }

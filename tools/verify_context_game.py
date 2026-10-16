@@ -125,7 +125,7 @@ def craft(row,index):
             # are laid latches even without a discharge. Retry REAL clicks,
             # not ammo/turret/cooldown writes; still require ammo + projectile.
             from qa_clicks import click_until
-            attempts=click_until(g.key,fired,lambda:local('view_ready'),75)
+            attempts=click_until(g.key,fired,lambda:g.view_action(g.LOGS/'client.log','view_ready'),75)
         else:
             g.key('mousedown','1')
             try:wait(fired,75)
