@@ -119,7 +119,7 @@ overrideHeight:600
         if effect=='trail': assert plume_count>0,ack
         else: assert volume_count>0,ack
         after=wait(lambda: (lambda line: line if frames(line)>start else None)(status(pack_blocked)),120)
-        expected_stage='AFTER_LEVEL' if pack_blocked else 'AFTER_PARTICLES'
+        expected_stage='minecraft:after_level' if pack_blocked else 'minecraft:after_particles'
         assert 'lastStage='+expected_stage in after,after
         ordinal=len(REPORT.get('raymarchObservations',[]))+1
         screenshot_name=PACK+'-raymarch-'+f'{ordinal:02d}-'+effect
@@ -151,7 +151,7 @@ overrideHeight:600
     open_ack=local('smoke')
     assert int(re.search(r'volumes=(\d+)',open_ack)[1])>0,open_ack
     open_after=wait(lambda: (lambda line: line if frames(line)>start else None)(status(True)),120)
-    assert 'lastStage=AFTER_LEVEL' in open_after,open_after
+    assert 'lastStage=minecraft:after_level' in open_after,open_after
     g.screenshot(PACK+'-probe-open-volume')
     open_diff=image_diff(PACK+'-probe-open-baseline',PACK+'-probe-open-volume')
     assert open_diff['meanRgbDelta']>0.5 and open_diff['changedFraction']>0.01,open_diff
@@ -163,7 +163,7 @@ overrideHeight:600
     wall_ack=local('smoke')
     assert int(re.search(r'volumes=(\d+)',wall_ack)[1])>0,wall_ack
     wall_after=wait(lambda: (lambda line: line if frames(line)>start else None)(status(True)),120)
-    assert 'lastStage=AFTER_LEVEL' in wall_after,wall_after
+    assert 'lastStage=minecraft:after_level' in wall_after,wall_after
     g.screenshot(PACK+'-probe-wall-volume')
     wall_diff=image_diff(PACK+'-probe-wall-baseline',PACK+'-probe-wall-volume')
     assert wall_diff['meanRgbDelta']<1.5 and wall_diff['changedFraction']<0.03,wall_diff
@@ -252,7 +252,7 @@ overrideHeight:600
             REPORT.setdefault('flashObservations',[]).append(dict(effect=effect,clientAck=ack))
             save()
         after=wait(lambda: (lambda line: line if frames(line)>start else None)(status(True)),120)
-        assert 'lastStage=AFTER_LEVEL' in after,after
+        assert 'lastStage=minecraft:after_level' in after,after
         volume_count=int(re.search(r'volumes=(\d+)',after)[1])
         plume_count=int(re.search(r'plumes=(\d+)',after)[1])
         assert volume_count>0 or plume_count>0,{'effect':effect,'after':after}
@@ -296,7 +296,7 @@ overrideHeight:600
                 and int(re.search(r'volumes=(\d+)',line)[1])>0
                 and frames(line)>0 and frames(line)!=start else None)(local('status')),120)
             assert 'backend=shaderpack-raymarch-probe' in transition,transition
-            assert 'lastStage=AFTER_LEVEL' in transition,transition
+            assert 'lastStage=minecraft:after_level' in transition,transition
             assert int(re.search(r'safeParticles=(\d+)',transition)[1])==safe_before,transition
             REPORT['midEffectSmokeRebind']={'result':'PASS','rendererOffQueued':queued,
                 'rendererOnBeforePack':enabled,'afterPackEnable':transition,
@@ -340,7 +340,7 @@ overrideHeight:600
     smoke_ack=local('smoke')
     assert int(re.search(r'volumes=(\d+)',smoke_ack)[1])>0,smoke_ack
     restored_draw=wait(lambda: (lambda line: line if frames(line)>start else None)(status(True)),120)
-    assert 'lastStage=AFTER_LEVEL' in restored_draw,restored_draw
+    assert 'lastStage=minecraft:after_level' in restored_draw,restored_draw
     REPORT['failClosedRuntime']={'withProbeDisabled':disabled_probe,
         'fxSystemFallback':fallback_fx,'particleProviderFallback':fallback_provider,
         'noDrawAfter2s':fail_closed_after,'probeRestored':restored_probe,
