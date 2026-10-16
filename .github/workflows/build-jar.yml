@@ -1,5 +1,8 @@
 name: Build AI Arsenal JAR
 on:
+  push:
+    branches:
+      - arena/10158ad9-aimods
   workflow_dispatch:
 permissions:
   contents: read
@@ -8,6 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build-jar]') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 40
     steps:
