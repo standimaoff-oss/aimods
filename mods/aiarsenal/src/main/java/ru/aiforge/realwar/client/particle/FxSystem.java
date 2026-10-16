@@ -51,14 +51,11 @@ public final class FxSystem {
     }
 
     public static void add(FxParticle p) {
-        // Route volumetric smoke before the shader-safe particle fallback. Otherwise every
-        // active Oculus/Iris pack turns these clouds into camera-facing atlas quads.
-        if (p.volumetricSmoke() && ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(
-                p.px(), p.py(), p.pz(), p.size, p.lifeSeconds())) return;
         if (ShaderPackCompatibility.blocked()) {
             handToParticleEngine(p);
             return;
         }
+        if (p.volumetricSmoke() && ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(p.px(), p.py(), p.pz(), p.size, p.lifeSeconds())) return;
         ALL.add(p);
     }
 
@@ -73,13 +70,9 @@ public final class FxSystem {
 
     public static void tick() {
         if (ShaderPackCompatibility.blocked()) {
-            // Transfer ownership exactly once when a pack is enabled mid-effect. Preserve
-            // smoke as a 3D volume when that backend is available; only non-volume FX are
-            // handed to Minecraft's shader-safe particle renderer.
-            for (FxParticle p : ALL) {
-                if (!p.volumetricSmoke() || !ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(
-                        p.px(), p.py(), p.pz(), p.size, p.lifeSeconds())) handToParticleEngine(p);
-            }
+            // Transfer ownership exactly once when a pack is enabled mid-effect.
+            // The vanilla engine now owns both ticking and rendering.
+            for (FxParticle p : ALL) handToParticleEngine(p);
             ALL.clear();VISIBLE.clear();
             return;
         }

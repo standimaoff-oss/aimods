@@ -1,4 +1,4 @@
-name: Shaderpacks — QA-only raymarch probe (Photon, Complementary, BSL)
+name: Shaderpacks — Photon Complementary BSL compatibility
 on:
   push:
     branches: [arena/10158ad9-aimods]
@@ -29,7 +29,6 @@ jobs:
       QA_SHADERPACK: ${{ matrix.pack }}
       QA_PREFIX: shaderpack-${{ matrix.pack }}
       QA_INSTALLED: '1'
-      QA_SHADERPACK_VOLUME_PROBE: '1'
     steps:
       - uses: actions/checkout@v4
       - name: Isolate disposable runtime
@@ -72,7 +71,7 @@ jobs:
         id: build
         working-directory: mods/aiarsenal
         run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
-      - name: Real shader client — QA-only raymarch probe, smoke, depth and toggles
+      - name: Real shader client — cannon and Sturmtiger reload, scopes, fallback and toggles
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: python tools/verify_shaderpack_game.py 2>&1 | tee verification/logs/shaderpack-driver.log
       - name: Archive evidence and binary

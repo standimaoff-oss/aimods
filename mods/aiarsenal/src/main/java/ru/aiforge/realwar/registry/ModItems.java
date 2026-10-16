@@ -92,6 +92,8 @@ public final class ModItems {
     public static final RegistryObject<Item> CLIP_MOSIN = ITEMS.register("clip_mosin", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_mosin"));
     public static final RegistryObject<Item> K98K = ITEMS.register("k98k", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.K98K, new Item.Properties()));
     public static final RegistryObject<Item> CLIP_K98 = ITEMS.register("clip_k98", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_k98"));
+    // WWI: Gewehr 98 uses the same five-round 7.92x57 Mauser stripper clip as the later Kar98k.
+    public static final RegistryObject<Item> GEWEHR98 = ITEMS.register("gewehr98", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.GEWEHR98, new Item.Properties()));
     public static final RegistryObject<Item> JAVELIN_MISSILE = ITEMS.register("javelin_missile", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.JAVELIN, new Item.Properties()));
     public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new GeigerCounterItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> POTASSIUM_IODIDE = ITEMS.register("potassium_iodide", () -> new PotassiumIodideItem(new Item.Properties().stacksTo(16).food(new FoodProperties.Builder().nutrition(0).saturationMod(0.0f).alwaysEat().build())));
@@ -260,7 +262,10 @@ public final class ModItems {
     public static final RegistryObject<Item> BRADLEY_VEHICLE = ITEMS.register("bradley_vehicle", () -> new VehicleItem(VehicleKind.BRADLEY, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TOS1A_VEHICLE = ITEMS.register("tos1a_vehicle", () -> new VehicleItem(VehicleKind.TOS1A, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> URAL_VEHICLE = ITEMS.register("ural_vehicle", () -> new VehicleItem(VehicleKind.URAL, new Item.Properties().stacksTo(1)));
+    // WWI Mark I item is appended with the model and double-sponson simulation.
+    public static final RegistryObject<Item> MARK_I_VEHICLE = ITEMS.register("mark_i_vehicle", () -> new VehicleItem(VehicleKind.MARK_I, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SHELLS_20 = ModItems.item("shells_20", 0.0, 16);
+    public static final RegistryObject<Item> SHELLS_57 = ModItems.item("shells_57", 0.0, 8);
     public static final RegistryObject<Item> SHELLS_75 = ModItems.item("shells_75", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_88 = ModItems.item("shells_88", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_85 = ModItems.item("shells_85", 0.0, 16);
@@ -357,6 +362,7 @@ public final class ModItems {
             case BRADLEY -> BRADLEY_VEHICLE;
             case TOS1A -> TOS1A_VEHICLE;
             case URAL -> URAL_VEHICLE;
+            case MARK_I -> MARK_I_VEHICLE;
         };
     }
 

@@ -6,7 +6,6 @@ All Minecraft runtime files stay in MC_RUNS (outside the repository in CI).
 """
 import hashlib
 import json
-import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -71,8 +70,6 @@ def prepare(game):
                'executablePath': 'java', 'gameDirectory': str(client),
                'quickPlayMultiplayer': '127.0.0.1:25565',
                'jvmArguments': ['-Xmx2048M', '-XX:+UseSerialGC', '-Daiarsenal.visualQa=true',
-                                *(['-Daiarsenal.shaderpackVolumeProbe=true']
-                                  if os.environ.get('QA_SHADERPACK_VOLUME_PROBE') == '1' else []),
                                 '-Dfml.earlyprogresswindow=false', '-Dfml.earlyWindowControl=false']}
     cmd = command.get_minecraft_command(version, root, options)
     assert 'forgeclientuserdev' not in ' '.join(cmd)
@@ -81,7 +78,6 @@ def prepare(game):
               'jar': jar.name, 'sha256': digest, 'client_mods': str(client / 'mods'),
               'server_mods': str(server / 'mods'), 'launch_target': 'forgeclient',
               'classpath_kind': 'installed release libraries; no Gradle source sets',
-              'shaderpack_volume_probe': os.environ.get('QA_SHADERPACK_VOLUME_PROBE') == '1',
               'installer_sha1': INSTALLER_SHA1}
     (game.LOGS / 'installed-provenance.json').write_text(json.dumps(report, indent=2) + '\n')
     # Contains only a dummy offline token; retain the exact invocation for packaging diagnosis.

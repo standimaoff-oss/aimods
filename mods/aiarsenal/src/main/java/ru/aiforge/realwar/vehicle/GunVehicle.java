@@ -170,6 +170,10 @@ public class GunVehicle extends LauncherVehicle {
             // TOS-1A: T-72A running gear (same as the T-90M), 24 x 220 mm thermobaric rockets
             case TOS1A -> new Cfg(Ballistics.Profile.TOS220, null, false, 0.0f,
                     1.395f, 0.375f, 0.33f, 0.28f, 0.115f, 6, 3, TOS_PITCH, 30.0f, 0.6f, 0.5f, () -> ModItems.ROCKET_220.get(), null, false, false);
+            // WWI Mark I Male: two independently loaded QF 6-pdr sponsons; a single trigger fires every loaded mount.
+            case MARK_I -> new Cfg(Ballistics.Profile.QF6_HE, Ballistics.Profile.QF6_AP, false, 0.14f,
+                    2.34f, 0.305f, 0.385f, 0.385f, 0.115f, 6, 3, 0.29533399f, 45.0f, 0.45f, 0.35f,
+                    () -> ModItems.SHELLS_57.get(), null, false, false);
             default -> throw new IllegalArgumentException("not a gun vehicle: " + k);
         };
     }
@@ -335,6 +339,7 @@ public class GunVehicle extends LauncherVehicle {
     // all main-gun rounds leave the same barrel (the magazine bits are just ready rounds)
     @Override
     public float[] muzzleLocal(int k) {
+        if (this.kind == VehicleKind.MARK_I) return new float[]{k == 0 ? -1.41f : 1.41f, 1.22f, 0.0f};
         if (this.perTube()) return this.spec.tubes()[Mth.clamp(k, 0, this.spec.tubes().length - 1)];
         return this.spec.tubes()[this.cfg.alternate ? Math.floorMod(k, 2) : 0];   // Ratte: twin 28 cm (r11: fired together as a salvo)
     }
@@ -345,6 +350,14 @@ public class GunVehicle extends LauncherVehicle {
     }
 
     public Vec3 tubeWorld(int tube) {
+        if (this.kind == VehicleKind.MARK_I) {
+            // Each cannon pivots about its own sponson trunnion; only its muzzle follows the shared aim line.
+            Matrix4d localAim = new Matrix4d().rotateY(Math.toRadians(this.az())).rotateX(-Math.toRadians(this.el()));
+            Vector3d muzzle = localAim.transformPosition(new Vector3d(0.0, 0.0, this.kind.tubeLen));
+            muzzle.add(tube == 0 ? -1.41 : 1.41, 1.22, 0.0);
+            Vector3d world = this.bodyFrame().transformPosition(muzzle);
+            return new Vec3(world.x, world.y, world.z);
+        }
         float[] q = this.spec.tubes()[Mth.clamp(tube, 0, this.spec.tubes().length - 1)];
         Vector3d v = this.pitchFrame(this.az(), this.el()).transformPosition(new Vector3d(q[0], q[1], q[2]));
         return new Vec3(v.x, v.y, v.z);
@@ -807,9 +820,10 @@ public class GunVehicle extends LauncherVehicle {
         }
         Ballistics.Profile prof = this.profile();
         int k = this.firstLoaded();
-        Vec3 muzzle = this.tubeWorld(this.perTube() ? k : 0);
         Vec3 dir = this.launchDir();
+        Vec3 muzzle;
         if (this.perTube()) {
+            muzzle = this.tubeWorld(k);
             // r12 TOS-1A: unguided 220 mm rocket (motor + smoke trail), salvo pattern of the real launcher
             double rs = 0.006;
             Vec3 rd = dir.add(sl.random.nextGaussian() * rs, sl.random.nextGaussian() * rs * 0.6, sl.random.nextGaussian() * rs).normalize();
@@ -822,17 +836,37 @@ public class GunVehicle extends LauncherVehicle {
         }
         double sig = this.kind.artillery() ? 0.0016 : (this.kind.ww2() ? 0.0007 : 0.0004);
         Vec3 d = dir.add(sl.random.nextGaussian() * sig, sl.random.nextGaussian() * sig * 0.6, sl.random.nextGaussian() * sig).normalize();
-        ShellEntity.fire(sl, prof, muzzle.add(d.scale(0.2)), d, this.getId());
-        this.markFired(k);
-        if (this.cfg.alternate) {
-            // r11: twin mount (Ratte 2 x 28 cm SK C/34) - both barrels fire as one salvo, then both reload
-            int k2 = this.firstLoaded();
-            if (k2 >= 0) {
-                Vec3 m2 = this.tubeWorld(1);
+        if (this.kind == VehicleKind.MARK_I) {
+            int second = -1;
+            for (int slot = 0; slot < this.kind.magazine; ++slot) {
+                if (slot != k && this.isLoaded(slot)) { second = slot; break; }
+            }
+            Vec3 m0 = this.tubeWorld(k);
+            ShellEntity.fire(sl, prof, m0.add(d.scale(0.2)), d, this.getId());
+            if (second >= 0) {
                 Vec3 d2 = dir.add(sl.random.nextGaussian() * sig, sl.random.nextGaussian() * sig * 0.6, sl.random.nextGaussian() * sig).normalize();
-                ShellEntity.fire(sl, prof, m2.add(d2.scale(0.2)), d2, this.getId());
-                this.markFired(k2);
-                muzzle = muzzle.add(m2).scale(0.5);
+                Vec3 m1 = this.tubeWorld(second);
+                ShellEntity.fire(sl, prof, m1.add(d2.scale(0.2)), d2, this.getId());
+                this.markFiredPair(k, second);
+                muzzle = m0.add(m1).scale(0.5);
+            } else {
+                this.markFired(k);
+                muzzle = m0;
+            }
+        } else {
+            muzzle = this.tubeWorld(0);
+            ShellEntity.fire(sl, prof, muzzle.add(d.scale(0.2)), d, this.getId());
+            this.markFired(k);
+            if (this.cfg.alternate) {
+                // r11: twin mount (Ratte 2 x 28 cm SK C/34) - both barrels fire as one salvo, then both reload
+                int k2 = this.firstLoaded();
+                if (k2 >= 0) {
+                    Vec3 m2 = this.tubeWorld(1);
+                    Vec3 d2 = dir.add(sl.random.nextGaussian() * sig, sl.random.nextGaussian() * sig * 0.6, sl.random.nextGaussian() * sig).normalize();
+                    ShellEntity.fire(sl, prof, m2.add(d2.scale(0.2)), d2, this.getId());
+                    this.markFired(k2);
+                    muzzle = muzzle.add(m2).scale(0.5);
+                }
             }
         }
         this.fireCd = this.kind.fireInterval;
@@ -849,7 +883,10 @@ public class GunVehicle extends LauncherVehicle {
         }
         sl.playSound(null, muzzle.x, muzzle.y, muzzle.z, (this.kind.artillery() ? ModSounds.CANNON_HOWITZER : ModSounds.CANNON_TANK).get(),
                 SoundSource.NEUTRAL, big ? 20.0f : 10.0f, (this.kind == VehicleKind.BMP3 ? 1.25f : 0.95f) + sl.random.nextFloat() * 0.1f);
-        this.muzzleBlast(sl, muzzle, d);
+        if (this.kind == VehicleKind.MARK_I && this.firedTube() == -2) {
+            this.muzzleBlast(sl, this.tubeWorld(0), dir);
+            this.muzzleBlast(sl, this.tubeWorld(1), dir);
+        } else this.muzzleBlast(sl, muzzle, d);
     }
 
     /** Maus: the coaxial 7.5 cm KwK 44 L/36.5 - own ready rounds (refilled with [R] from the racks) and own loader cycle. */
@@ -1028,6 +1065,7 @@ public class GunVehicle extends LauncherVehicle {
     @Override
     protected void launcherPose(Pose pose, float pt) {
         pose.translate("barrel", 0.0f, 0.0f, -this.cfg.recoil * Math.min(1.0f, this.kick * 1.15f));
+        if (this.kind == VehicleKind.MARK_I) pose.translate("barrel_left", 0.0f, 0.0f, -this.cfg.recoil * Math.min(1.0f, this.kick * 1.15f));
         if (this.perTube()) {
             for (int k = 0; k < this.kind.magazine; k++) pose.hide("rkt_" + k, !this.isLoaded(k) && k != this.reloadTube());
         }

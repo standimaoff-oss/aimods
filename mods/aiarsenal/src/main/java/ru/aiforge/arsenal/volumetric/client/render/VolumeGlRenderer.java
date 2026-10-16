@@ -55,27 +55,6 @@ public final class VolumeGlRenderer {
     private static boolean softwareRenderer;
     private static long lastDrawNanos;
     private static long frameCounter;
-    private static RenderLevelStageEvent.Stage lastDrawStage;
-
-    /** Test-only bypass for a shaderpack pass experiment. Never enabled by the released client. */
-    private static boolean shaderpackVolumeProbeEnabled() {
-        return Boolean.getBoolean("aiarsenal.visualQa")
-                && Boolean.getBoolean("aiarsenal.shaderpackVolumeProbe");
-    }
-
-    public static String backendName() {
-        if (!VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.get()) return "disabled";
-        if (failed) return "failed";
-        return ShaderPackCompatibility.blocked()
-                ? (shaderpackVolumeProbeEnabled() ? "shaderpack-raymarch-probe" : "particle-fallback")
-                : "raymarch";
-    }
-
-    public static boolean shaderpackVolumeProbe() {
-        return shaderpackVolumeProbeEnabled() && ShaderPackCompatibility.blocked();
-    }
-
-    public static RenderLevelStageEvent.Stage lastDrawStage() { return lastDrawStage; }
     private static final FloatBuffer DATA_BUFFER;
     private static final int GL12_GL_CLAMP_TO_EDGE = 33071;
     private static final int ARRAY_BUFFER = 34962;
@@ -85,13 +64,7 @@ public final class VolumeGlRenderer {
     }
 
     public static void render(RenderLevelStageEvent renderLevelStageEvent) {
-        // Forge dispatches AFTER_LEVEL from GameRenderer after LevelRenderer returns.
-        // Oculus finalizes its composite inside that return path, so the QA-only probe
-        // runs here; ordinary rendering keeps the established AFTER_PARTICLES stage.
-        boolean shaderpackProbe = shaderpackVolumeProbeEnabled() && ShaderPackCompatibility.blocked();
-        RenderLevelStageEvent.Stage expectedStage = shaderpackProbe
-                ? RenderLevelStageEvent.Stage.AFTER_LEVEL : RenderLevelStageEvent.Stage.AFTER_PARTICLES;
-        if (renderLevelStageEvent.getStage() == expectedStage && available()) {
+        if (renderLevelStageEvent.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && available()) {
             RenderTarget renderTarget;
             List<VolumeInstance> list;
             Minecraft minecraft = Minecraft.getInstance();
@@ -122,7 +95,6 @@ public final class VolumeGlRenderer {
                     if (!list.isEmpty()) {
                         lastDrawNanos = System.nanoTime() - l;
                         ++frameCounter;
-                        lastDrawStage = renderLevelStageEvent.getStage();
                     }
                 }
                 catch (Throwable throwable) {
@@ -416,11 +388,8 @@ public final class VolumeGlRenderer {
     }
 
     public static boolean available() {
-        if (failed || !VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.get()) return false;
-        boolean blocked = ShaderPackCompatibility.blocked();
-        // Production remains fail-closed. The exception exists only in a local/CI QA launch
-        // so the exact raw-GL path can be stressed before deciding whether to support it.
-        return !blocked || shaderpackVolumeProbeEnabled();
+        return !failed && VolPyroClientConfig.ENABLE_VOLUMETRIC_RENDERER.get()
+                && !ShaderPackCompatibility.blocked();
     }
 
     /** Render-thread resource reload / world teardown; also permits retry after a shader fix. */
@@ -438,7 +407,6 @@ public final class VolumeGlRenderer {
         qaFailNextShader = false;
         warmed = false;
         frameCounter = lastDrawNanos = 0;
-        lastDrawStage = null;
     }
 
     private static int compile(int n, String string) {

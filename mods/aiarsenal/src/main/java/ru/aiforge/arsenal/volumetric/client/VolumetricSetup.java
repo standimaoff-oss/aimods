@@ -14,16 +14,7 @@ import ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer;
 
 @Mod.EventBusSubscriber(modid = "aiarsenal", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class VolumetricSetup {
-    private static long shaderFallbackParticles;
     private VolumetricSetup() {}
-
-    public static long shaderFallbackParticles() { return shaderFallbackParticles; }
-
-    private static void fallbackSmoke(double x, double y, double z, double vx, double vy, double vz) {
-        shaderFallbackParticles++;
-        Minecraft.getInstance().particleEngine.createParticle(
-                ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y, z, vx, vy, vz);
-    }
 
     @SubscribeEvent public static void particles(RegisterParticleProvidersEvent event) {
         var types=java.util.List.of(VolumetricParticles.MUZZLE,VolumetricParticles.POWDER,VolumetricParticles.CANNON,VolumetricParticles.EXHAUST,VolumetricParticles.IMPACT);
@@ -31,13 +22,13 @@ public final class VolumetricSetup {
             final int profile=i+1;
             event.registerSpecial(types.get(i).get(),(type,level,x,y,z,vx,vy,vz)->{
                 if(!VolumetricEffects.profile(x,y,z,vx,vy,vz,profile))
-                    fallbackSmoke(x,y,z,vx*.08,vy*.08,vz*.08);
+                    Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,x,y,z,vx*.08,vy*.08,vz*.08);
                 return null;
             });
         }
         event.registerSpecial(VolumetricParticles.SMOKE.get(), (type, level, x, y, z, vx, vy, vz) -> {
             if (!VolumetricEffects.smoke(x, y, z, 1.6f, 5f))
-                fallbackSmoke(x, y, z, vx, vy, vz);
+                Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y, z, vx, vy, vz);
             return null;
         });
     }

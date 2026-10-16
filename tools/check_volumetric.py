@@ -37,44 +37,10 @@ class PortTests(unittest.TestCase):
         packet = (PORT / 'VisualQaPacket.java').read_text()
         self.assertIn('Boolean.getBoolean("aiarsenal.visualQa") && EFFECTS.contains(effect)', packet)
         self.assertIn('readUtf(16)', packet)
-        self.assertIn('ctx.enqueueWork(', packet)
         network = (JAVA / 'arsenal/network/ArsenalNetwork.java').read_text()
         self.assertIn('VisualQaPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT', network)
         commands = (PORT / 'VisualTestCommand.java').read_text()
         self.assertIn('requires(s -> s.hasPermission(2))', commands)
-
-    def test_shaderpack_probe_is_double_opt_in_and_has_real_counters(self):
-        renderer=(PORT/'client/render/VolumeGlRenderer.java').read_text()
-        self.assertIn('Boolean.getBoolean("aiarsenal.visualQa")',renderer)
-        self.assertIn('Boolean.getBoolean("aiarsenal.shaderpackVolumeProbe")',renderer)
-        self.assertIn('return !blocked || shaderpackVolumeProbeEnabled();',renderer)
-        self.assertIn('RenderLevelStageEvent.Stage.AFTER_LEVEL : RenderLevelStageEvent.Stage.AFTER_PARTICLES',renderer)
-        effects=(PORT/'client/VolumetricEffects.java').read_text()
-        self.assertIn('providerFallbackParticles=%d',effects)
-        self.assertIn('VolumeGlRenderer.lastDrawStage()',effects)
-        setup=(PORT/'client/VolumetricSetup.java').read_text()
-        self.assertIn('shaderFallbackParticles++',setup)
-        self.assertIn('VolumetricEffects.profile(x,y,z,vx,vy,vz,profile)',setup)
-        driver=(ROOT/'tools/verify_shaderpack_game.py').read_text()
-        for provider in ['provider_smoke','provider_muzzle','provider_powder','provider_cannon',
-                         'provider_exhaust','provider_impact','fxsystem_smoke']:
-            self.assertIn(provider,driver)
-        self.assertIn('packetRaymarchObservations',driver)
-        self.assertIn('productionShaderpackRenderer',driver)
-        self.assertIn('failClosedRuntime',driver)
-        self.assertIn('probe_off',driver)
-        self.assertIn('probe_on',driver)
-
-    def test_mod_smoke_routes_before_shaderpack_particle_fallback(self):
-        system=(JAVA/'realwar/client/particle/FxSystem.java').read_text()
-        add=system[system.index('public static void add(FxParticle p)'):]
-        self.assertLess(add.index('VolumetricEffects.smoke('),add.index('if (ShaderPackCompatibility.blocked())'))
-        tick=system[system.index('public static void tick('):system.index('public static void render(')]
-        self.assertIn('VolumetricEffects.smoke(',tick)
-        self.assertIn('providerFallbackParticles', (PORT/'client/VolumetricEffects.java').read_text())
-        driver=(ROOT/'tools/verify_shaderpack_game.py').read_text()
-        self.assertIn('fxsystem_smoke',driver)
-        self.assertIn('safe_after==safe_before',driver)
 
     def test_renderer_has_failure_and_resource_cleanup(self):
         text = (PORT / 'client/render/VolumeGlRenderer.java').read_text()

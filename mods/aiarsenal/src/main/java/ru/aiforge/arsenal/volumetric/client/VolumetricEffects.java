@@ -14,7 +14,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import ru.aiforge.arsenal.AiArsenal;
 import ru.aiforge.arsenal.volumetric.client.render.VolumeGlRenderer;
-import ru.aiforge.arsenal.volumetric.client.render.ShaderPackCompatibility;
 import ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager;
 
 /** One bounded, client-only adapter for all Arsenal visual emitters. Damage, radiation,
@@ -95,8 +94,6 @@ public final class VolumetricEffects {
     /** Shared by the local command and the explicitly opt-in automation bridge. */
     public static String runVisualQa(String effect) {
         if (effect.startsWith("view_")) return ru.aiforge.realwar.client.render.WeaponViewQa.run(effect);
-        if (effect.equals("probe_off")) System.clearProperty("aiarsenal.shaderpackVolumeProbe");
-        else if (effect.equals("probe_on")) System.setProperty("aiarsenal.shaderpackVolumeProbe", "true");
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return "No player";
         Vec3 p = mc.player.position().add(mc.player.getLookAngle().scale(effect.equals("nuke") ? 100 : 18));
@@ -118,47 +115,23 @@ public final class VolumetricEffects {
             AiArsenal.LOGGER.info("FX BUDGET PASS volumes={} plumes={}", volumes, plumes);
             VolumetricFxManager.clear();
         }
-        if (effect.equals("clear")) {
-            VolumetricFxManager.clear();
-            ru.aiforge.realwar.client.particle.FxSystem.clear();
-        } else if (effect.equals("smoke")) {
-            smoke(p.x, p.y + 1, p.z, 4, 15);
-        } else if (effect.equals("fxsystem_smoke")) {
-            var particle = new ru.aiforge.realwar.client.particle.FxParticle(
-                    mc.level, p.x, p.y + 1, p.z,
-                    ru.aiforge.realwar.client.particle.Sprites.smoke(0), 400, false, 0.8f);
-            ru.aiforge.realwar.client.particle.FxSystem.add(particle);
-        } else if (effect.equals("blast")) {
-            blast(p.x, p.y, p.z, 6, 27);
-        } else if (effect.equals("nuke")) {
-            nuclear(p.x, p.y, p.z, 20, 27);
-        } else if (effect.equals("trail") && active()) {
+        if (effect.equals("clear")) VolumetricFxManager.clear();
+        else if (effect.equals("smoke")) smoke(p.x, p.y + 1, p.z, 4, 15);
+        else if (effect.equals("blast")) blast(p.x, p.y, p.z, 6, 27);
+        else if (effect.equals("nuke")) nuclear(p.x, p.y, p.z, 20, 27);
+        else if (effect.equals("trail") && active()) {
             for (int i = 0; i < 20; i++)
                 VolumetricFxManager.recordRocket(-27, p.add(i * 0.5, i * 0.7, 0), new Vec3(0.5, 0.7, 0), 1);
-        } else if (effect.startsWith("provider_")) {
-            var type = switch (effect) {
-                case "provider_smoke" -> ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get();
-                case "provider_muzzle" -> ru.aiforge.arsenal.volumetric.VolumetricParticles.MUZZLE.get();
-                case "provider_powder" -> ru.aiforge.arsenal.volumetric.VolumetricParticles.POWDER.get();
-                case "provider_cannon" -> ru.aiforge.arsenal.volumetric.VolumetricParticles.CANNON.get();
-                case "provider_exhaust" -> ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get();
-                case "provider_impact" -> ru.aiforge.arsenal.volumetric.VolumetricParticles.IMPACT.get();
-                default -> throw new IllegalArgumentException("unknown provider QA case: " + effect);
-            };
-            mc.level.addParticle(type, p.x, p.y + 1, p.z, 0.08, 0.12, -0.03);
         }
         String target = mc.hitResult instanceof net.minecraft.world.phys.EntityHitResult hit
                 ? net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(hit.getEntity().getType()).toString()
                 : mc.hitResult == null ? "none" : mc.hitResult.getType().toString();
         String status = String.format(java.util.Locale.ROOT,
-            "Arsenal VolPyro: active=%s backend=%s packBlocked=%s probe=%s lastStage=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s world=%s target=%s safeParticles=%d providerFallbackParticles=%d safeCloudFrames=%d",
-            active(), VolumeGlRenderer.backendName(), ShaderPackCompatibility.blocked(),
-            VolumeGlRenderer.shaderpackVolumeProbe(), VolumeGlRenderer.lastDrawStage(),
-            VolumetricFxManager.volumeCount(), VolumetricFxManager.plumeCount(),
+            "Arsenal VolPyro: active=%s volumes=%d plumes=%d frames=%d draw=%.2fms tick=%.3fms renderer=%s world=%s target=%s safeParticles=%d safeCloudFrames=%d",
+            active(), VolumetricFxManager.volumeCount(), VolumetricFxManager.plumeCount(),
             VolumeGlRenderer.frameCounter(), VolumeGlRenderer.lastDrawNanos() / 1e6,
             VolumetricFxManager.lastTickMs(), VolumeGlRenderer.rendererName(), mc.level.dimension().location(), target,
             ru.aiforge.realwar.client.particle.FxSystem.shaderSafeParticles(),
-            VolumetricSetup.shaderFallbackParticles(),
             ru.aiforge.arsenal.client.NukeFx.shaderSafeFrames());
         AiArsenal.LOGGER.info("FX QA {}: {}", effect, status);
         return status;

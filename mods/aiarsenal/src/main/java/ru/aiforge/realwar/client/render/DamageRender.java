@@ -59,8 +59,13 @@ public final class DamageRender {
         GlbModel m = pose.model();
         if (s.broken(TRACK_L)) for (int i : matching(m, ".*_link_L_\\d+")) pose.hideIdx(i, true);
         if (s.broken(TRACK_R)) for (int i : matching(m, ".*_link_R_\\d+")) pose.hideIdx(i, true);
-        if (s.broken(TURRET_GONE)) pose.hide("launcher_yaw", true);
-        else if (s.broken(BARREL)) pose.scale("barrel", 1f, 1f, 0.5f);
+        if (s.broken(TURRET_GONE)) {
+            pose.hide("launcher_yaw", true);
+            if (v.kind == ru.aiforge.realwar.vehicle.VehicleKind.MARK_I) pose.hide("launcher_yaw_left", true);
+        } else if (s.broken(BARREL)) {
+            pose.scale("barrel", 1f, 1f, 0.5f);
+            if (v.kind == ru.aiforge.realwar.vehicle.VehicleKind.MARK_I) pose.scale("barrel_left", 1f, 1f, 0.5f);
+        }
     }
 
     public static void craft(CraftEntity c, Pose pose) {
