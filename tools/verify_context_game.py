@@ -115,13 +115,22 @@ def craft(row,index):
         before=qa('craftstatus');assert before['selected']>=0,before
         assert before['loads'][before['selected']]['ammo']>0,before
         latest={}
-        g.key('mousedown','1')
-        try:
-            def fired():
-                latest.update(qa('craftstatus'));return craft_fired(before,latest)
-            wait(fired,75)
-        finally:g.key('mouseup','1')
-        return {'before':before,'after':latest}
+        def fired():
+            latest.update(qa('craftstatus'))
+            row['lastCraftState']=dict(latest)
+            return craft_fired(before,latest)
+        attempts=1
+        if row['id']=='aiarsenal:bismarck_ship':
+            # Main battery is semiautomatic: an early click before the mounts
+            # are laid latches even without a discharge. Retry REAL clicks,
+            # not ammo/turret/cooldown writes; still require ammo + projectile.
+            from qa_clicks import click_until
+            attempts=click_until(g.key,fired,lambda:local('view_ready'),75)
+        else:
+            g.key('mousedown','1')
+            try:wait(fired,75)
+            finally:g.key('mouseup','1')
+        return {'before':before,'after':latest,'mouseDownAttempts':attempts}
     row['firstShot']=shoot();save()
     row['service']=qa('servicecraft')
     slot=row['firstShot']['before']['selected']
