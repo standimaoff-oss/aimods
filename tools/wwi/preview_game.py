@@ -106,5 +106,19 @@ def subprocess_window():
 if __name__ == "__main__":
     try:
         run()
+    except Exception as exc:
+        message = str(exc).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+        print(f"::error title=Preview capture::{message}", flush=True)
+        for path in sorted(game.LOGS.glob("*.log")):
+            lines = path.read_text(errors="replace").splitlines()[-25:]
+            if not lines:
+                continue
+            tail = "\n".join(lines)
+            print(f"::group::Preview diagnostics: {path.name}", flush=True)
+            print(tail, flush=True)
+            print("::endgroup::", flush=True)
+            safe_tail = tail[-3500:].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+            print(f"::error title={path.name} diagnostic tail::{safe_tail}", flush=True)
+        raise
     finally:
         game.cleanup()
