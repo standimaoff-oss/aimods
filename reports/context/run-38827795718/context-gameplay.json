@@ -1,0 +1,3866 @@
+{
+  "scope": "contextual launchpad/craft/cannon/Javelin audit",
+  "expectedCases": 35,
+  "cases": [
+    {
+      "id": "aiarsenal:missile_tactical_he",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_he",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 804.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 247,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "8fabcf62-6c28-4c4b-ab76-56ffdcaa2ccc",
+            "mode": 0,
+            "age": 109,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 804.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_tactical_kinetic",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_kinetic",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 1444.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 2,
+        "changedBlocks": 118,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "c2181fd8-e3cd-4614-a19a-2af61565d640",
+            "mode": 0,
+            "age": 109,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 1444.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 2
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_tactical_mirv",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_mirv",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 2084.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 4,
+        "removed": 4,
+        "warheads": 3,
+        "activeBlasts": 0,
+        "completedTasks": 3,
+        "changedBlocks": 314,
+        "expectedEntities": 4,
+        "entities": [
+          {
+            "uuid": "d3208b7d-e267-41f1-94fe-8d9c5661ccd6",
+            "mode": 0,
+            "age": 67,
+            "removed": true,
+            "x": 127.5,
+            "y": -7.521513026052115,
+            "z": 2084.5,
+            "present": false
+          },
+          {
+            "uuid": "7c4068cb-08e6-407b-b19e-78c68819facb",
+            "mode": 1,
+            "age": 33,
+            "removed": true,
+            "x": 274.43060216068784,
+            "y": -60.0,
+            "z": 2084.9638097242005,
+            "present": false
+          },
+          {
+            "uuid": "2c60dcf0-13c1-4995-b9c0-0efc384f6549",
+            "mode": 1,
+            "age": 26,
+            "removed": true,
+            "x": 244.10895891655136,
+            "y": -60.0,
+            "z": 2098.1003190657843,
+            "present": false
+          },
+          {
+            "uuid": "3f91dbb8-5be2-4438-be34-c25f6598e21e",
+            "mode": 1,
+            "age": 27,
+            "removed": true,
+            "x": 246.85898226932719,
+            "y": -60.0,
+            "z": 2068.4063706278284,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_tactical_thermobaric",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_tactical_thermobaric",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 2724.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 420,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "72dc557a-edac-46f9-a58d-47297aaa5562",
+            "mode": 0,
+            "age": 109,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 2724.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_he",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_he",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 3364.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 545,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "9496c927-152a-435d-86f4-27a02630b6e3",
+            "mode": 0,
+            "age": 240,
+            "removed": true,
+            "x": 904.0,
+            "y": -60.0,
+            "z": 3364.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_kinetic",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_kinetic",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 4004.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 2,
+        "changedBlocks": 283,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "34eb21b8-6068-4614-986c-197f7a333618",
+            "mode": 0,
+            "age": 240,
+            "removed": true,
+            "x": 904.0,
+            "y": -60.0,
+            "z": 4004.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 2
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_mirv",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_mirv",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 4644.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 7,
+        "removed": 7,
+        "warheads": 6,
+        "activeBlasts": 0,
+        "completedTasks": 6,
+        "changedBlocks": 1314,
+        "expectedEntities": 7,
+        "entities": [
+          {
+            "uuid": "ef4328e3-196d-46e6-8ecf-cc24756c47e8",
+            "mode": 0,
+            "age": 140,
+            "removed": true,
+            "x": 450.4999310969832,
+            "y": 189.35946297324608,
+            "z": 4644.752224732427,
+            "present": false
+          },
+          {
+            "uuid": "8dbbc324-7a72-49bc-b604-f755c12319ab",
+            "mode": 1,
+            "age": 72,
+            "removed": true,
+            "x": 933.2681952982547,
+            "y": -60.0,
+            "z": 4649.650351185442,
+            "present": false
+          },
+          {
+            "uuid": "1ae5f911-6723-4c1b-aa46-1904fc0fd625",
+            "mode": 1,
+            "age": 70,
+            "removed": true,
+            "x": 917.103792847646,
+            "y": -60.0,
+            "z": 4700.035650509323,
+            "present": false
+          },
+          {
+            "uuid": "2e3784a1-05a8-432a-8aea-74354faf65a9",
+            "mode": 1,
+            "age": 61,
+            "removed": true,
+            "x": 860.3073351541432,
+            "y": -60.0,
+            "z": 4671.5754219107575,
+            "present": false
+          },
+          {
+            "uuid": "6774713c-5a8f-4469-b70e-b569c8bd5cbb",
+            "mode": 1,
+            "age": 63,
+            "removed": true,
+            "x": 873.4286994058114,
+            "y": -60.0,
+            "z": 4638.593033664142,
+            "present": false
+          },
+          {
+            "uuid": "dc7c9bd2-15f1-4b66-8973-37b6b269a8d7",
+            "mode": 1,
+            "age": 67,
+            "removed": true,
+            "x": 903.0309973809536,
+            "y": -60.0,
+            "z": 4620.161552014536,
+            "present": false
+          },
+          {
+            "uuid": "c71116bd-40c8-4648-87ab-24a99db6baf6",
+            "mode": 1,
+            "age": 71,
+            "removed": true,
+            "x": 925.1803411131964,
+            "y": -60.0,
+            "z": 4629.792957300317,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_operational_penetrator",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_operational_penetrator",
+        "remainingAmmo": 1,
+        "targetX": 904.0,
+        "targetZ": 5284.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 532,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "705b014c-9d84-4a3d-b4a7-58748e3f1a39",
+            "mode": 2,
+            "age": 254,
+            "removed": true,
+            "x": 904.0,
+            "y": -60.5,
+            "z": 5284.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_cruise_he",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_cruise_he",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 5924.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 221,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "6e41e668-5549-4948-97ec-c846137c602b",
+            "mode": 0,
+            "age": 152,
+            "removed": true,
+            "x": 254.0,
+            "y": -60.0,
+            "z": 5924.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_cruise_cluster",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_cruise_cluster",
+        "remainingAmmo": 1,
+        "targetX": 254.0,
+        "targetZ": 6564.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 48,
+        "changedBlocks": 366,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "f43edf3a-8209-4411-8c5a-c8b92ef66bdf",
+            "mode": 2,
+            "age": 202,
+            "removed": true,
+            "x": 254.0,
+            "y": -25.0,
+            "z": 6564.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 48
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_icbm_he",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_icbm_he",
+        "remainingAmmo": 1,
+        "targetX": 3104.0,
+        "targetZ": 7204.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 1,
+        "changedBlocks": 1592,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "d2c1fb15-0723-4f20-9ce4-55bfda41e2fb",
+            "mode": 0,
+            "age": 552,
+            "removed": true,
+            "x": 3104.0,
+            "y": -60.0,
+            "z": 7204.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_icbm_kinetic",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_icbm_kinetic",
+        "remainingAmmo": 1,
+        "targetX": 3104.0,
+        "targetZ": 7844.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 1,
+        "removed": 1,
+        "warheads": 0,
+        "activeBlasts": 0,
+        "completedTasks": 2,
+        "changedBlocks": 906,
+        "expectedEntities": 1,
+        "entities": [
+          {
+            "uuid": "7ea52527-9f35-4423-98e6-d323cb8e4781",
+            "mode": 0,
+            "age": 552,
+            "removed": true,
+            "x": 3104.0,
+            "y": -60.0,
+            "z": 7844.5,
+            "present": false
+          }
+        ],
+        "minimumTasks": 2
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_icbm_mirv",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_icbm_mirv",
+        "remainingAmmo": 1,
+        "targetX": 3104.0,
+        "targetZ": 8484.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 9,
+        "removed": 9,
+        "warheads": 8,
+        "activeBlasts": 0,
+        "completedTasks": 8,
+        "changedBlocks": 3754,
+        "expectedEntities": 9,
+        "entities": [
+          {
+            "uuid": "101f8c76-9591-4aff-a593-5592de730b81",
+            "mode": 0,
+            "age": 314,
+            "removed": true,
+            "x": 1552.4999194329832,
+            "y": 950.0122857929582,
+            "z": 8485.00072618382,
+            "present": false
+          },
+          {
+            "uuid": "edb2e060-fbec-4d36-abb8-5ec1e9e2d9ed",
+            "mode": 1,
+            "age": 174,
+            "removed": true,
+            "x": 3249.4602005275274,
+            "y": -60.0,
+            "z": 8510.310387718097,
+            "present": false
+          },
+          {
+            "uuid": "af959a26-6651-4bfc-9fbf-e6fc84b9fa2e",
+            "mode": 1,
+            "age": 165,
+            "removed": true,
+            "x": 3151.679295215344,
+            "y": -60.0,
+            "z": 8593.17007640923,
+            "present": false
+          },
+          {
+            "uuid": "c95a49db-ea83-4c76-a0c1-ffa849251cf1",
+            "mode": 1,
+            "age": 157,
+            "removed": true,
+            "x": 3076.0655094704307,
+            "y": -60.0,
+            "z": 8567.575273674654,
+            "present": false
+          },
+          {
+            "uuid": "0aebdef2-2d3e-46c7-b8be-246cb07860fa",
+            "mode": 1,
+            "age": 149,
+            "removed": true,
+            "x": 2998.746795711713,
+            "y": -60.0,
+            "z": 8586.162912107831,
+            "present": false
+          },
+          {
+            "uuid": "4d24eae3-bccc-4e14-8db4-6fa27c04ab54",
+            "mode": 1,
+            "age": 145,
+            "removed": true,
+            "x": 2963.5246478024283,
+            "y": -60.0,
+            "z": 8471.524413847896,
+            "present": false
+          },
+          {
+            "uuid": "3db28484-99b0-4fa7-aa95-110012e7406f",
+            "mode": 1,
+            "age": 152,
+            "removed": true,
+            "x": 3024.0786054943947,
+            "y": -60.0,
+            "z": 8395.046661762066,
+            "present": false
+          },
+          {
+            "uuid": "8b3bd481-4886-4a9d-8075-3a1b14a00dcb",
+            "mode": 1,
+            "age": 163,
+            "removed": true,
+            "x": 3136.804311937967,
+            "y": -60.0,
+            "z": 8345.614989275055,
+            "present": false
+          },
+          {
+            "uuid": "82e2511c-02fd-4a60-b71d-3df92d3e941e",
+            "mode": 1,
+            "age": 167,
+            "removed": true,
+            "x": 3180.9547157908205,
+            "y": -60.0,
+            "z": 8439.440671191769,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:missile_icbm_mirv_heavy",
+      "status": "PASS",
+      "load": {
+        "action": "missile_loading",
+        "id": "missile_icbm_mirv_heavy",
+        "remainingAmmo": 1,
+        "targetX": 3104.0,
+        "targetZ": 9124.5
+      },
+      "ready": "PASS",
+      "launch": "PASS",
+      "observed": {
+        "action": "missile_status",
+        "pad": "EMPTY",
+        "spawned": 9,
+        "removed": 9,
+        "warheads": 8,
+        "activeBlasts": 0,
+        "completedTasks": 8,
+        "changedBlocks": 6650,
+        "expectedEntities": 9,
+        "entities": [
+          {
+            "uuid": "9cfd52cb-a5a2-49d9-a5e9-2878ebf7b46b",
+            "mode": 0,
+            "age": 314,
+            "removed": true,
+            "x": 1552.4999194329832,
+            "y": 950.0122857929582,
+            "z": 9125.00072618382,
+            "present": false
+          },
+          {
+            "uuid": "c839872b-00d8-4838-98d0-fa3aa0819ae2",
+            "mode": 1,
+            "age": 201,
+            "removed": true,
+            "x": 3318.0595737440462,
+            "y": -60.0,
+            "z": 9150.207419767268,
+            "present": false
+          },
+          {
+            "uuid": "951563fc-fa68-44a5-a1d4-396c1c58bbdb",
+            "mode": 1,
+            "age": 197,
+            "removed": true,
+            "x": 3156.123094137604,
+            "y": -60.0,
+            "z": 9222.526077025736,
+            "present": false
+          },
+          {
+            "uuid": "adc5e7e5-2b30-4701-998d-1b36be6f7000",
+            "mode": 1,
+            "age": 189,
+            "removed": true,
+            "x": 3023.2677508875604,
+            "y": -60.0,
+            "z": 9276.130541545828,
+            "present": false
+          },
+          {
+            "uuid": "62f97198-230a-4e11-aa34-0a5232e3a12c",
+            "mode": 1,
+            "age": 175,
+            "removed": true,
+            "x": 2937.8086337488344,
+            "y": -60.0,
+            "z": 9211.094668272915,
+            "present": false
+          },
+          {
+            "uuid": "a71fe7fd-4c8c-4830-a7e4-6d395fc6f65a",
+            "mode": 1,
+            "age": 167,
+            "removed": true,
+            "x": 2986.2901771091124,
+            "y": -60.0,
+            "z": 9112.997394159367,
+            "present": false
+          },
+          {
+            "uuid": "e925f937-ad38-41d0-8920-ee61ef233068",
+            "mode": 1,
+            "age": 172,
+            "removed": true,
+            "x": 3031.569974518091,
+            "y": -60.0,
+            "z": 9051.51054515338,
+            "present": false
+          },
+          {
+            "uuid": "0ad1d4a3-0407-431b-bdbd-1a370b884a18",
+            "mode": 1,
+            "age": 195,
+            "removed": true,
+            "x": 3108.06867749021,
+            "y": -60.0,
+            "z": 8956.04017845384,
+            "present": false
+          },
+          {
+            "uuid": "799866d8-096a-4de9-95d9-26ce87ccf84e",
+            "mode": 1,
+            "age": 206,
+            "removed": true,
+            "x": 3292.519879489003,
+            "y": -60.0,
+            "z": 9032.544413788537,
+            "present": false
+          }
+        ],
+        "minimumTasks": 1
+      },
+      "method": "survival pad item placement -> consume missile -> real 150-tick load -> schedule -> flight/warheads -> destructive jobs finish"
+    },
+    {
+      "id": "aiarsenal:ah64_vehicle",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "ah64",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 5000.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 270.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "m230",
+            "ammo": 1200,
+            "usable": true
+          },
+          {
+            "weapon": "hellfire",
+            "ammo": 8,
+            "usable": true
+          },
+          {
+            "weapon": "hydra",
+            "ammo": 38,
+            "usable": true
+          },
+          {
+            "weapon": "flares",
+            "ammo": 60,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:ah64": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "ah64",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5000.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 270.0,
+          "fuel": 0.9999596,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "m230",
+              "ammo": 1200,
+              "usable": true
+            },
+            {
+              "weapon": "hellfire",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "hydra",
+              "ammo": 38,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 60,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ah64": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "ah64",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5000.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 270.0,
+          "fuel": 0.99989223,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "m230",
+              "ammo": 1195,
+              "usable": true
+            },
+            {
+              "weapon": "hellfire",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "hydra",
+              "ammo": 38,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 60,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ah64": 1,
+            "aiarsenal:rw_shell": 5
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "ah64",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 5000.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 270.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "m230",
+            "ammo": 1200,
+            "usable": true
+          },
+          {
+            "weapon": "hellfire",
+            "ammo": 8,
+            "usable": true
+          },
+          {
+            "weapon": "hydra",
+            "ammo": 38,
+            "usable": true
+          },
+          {
+            "weapon": "flares",
+            "ammo": 60,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:ah64": 1,
+          "aiarsenal:rw_shell": 5
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "ah64",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5000.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 270.0,
+          "fuel": 0.99972385,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "m230",
+              "ammo": 1198,
+              "usable": true
+            },
+            {
+              "weapon": "hellfire",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "hydra",
+              "ammo": 38,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 60,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ah64": 1,
+            "aiarsenal:rw_shell": 7
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "ah64",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5000.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 270.0,
+          "fuel": 0.9996565,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "m230",
+              "ammo": 1193,
+              "usable": true
+            },
+            {
+              "weapon": "hellfire",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "hydra",
+              "ammo": 38,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 60,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ah64": 1,
+            "aiarsenal:rw_shell": 12
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:bf109_plane",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "bf109",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 5192.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 150.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "mg151",
+            "ammo": 150,
+            "usable": true
+          },
+          {
+            "weapon": "mg131",
+            "ammo": 600,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:bf109": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "bf109",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5192.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 150.0,
+          "fuel": 0.9999633,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mg151",
+              "ammo": 150,
+              "usable": true
+            },
+            {
+              "weapon": "mg131",
+              "ammo": 600,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:bf109": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "bf109",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5192.5,
+          "y": -60.0,
+          "z": 0.5024534741905708,
+          "hp": 150.0,
+          "fuel": 0.9998715,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mg151",
+              "ammo": 145,
+              "usable": true
+            },
+            {
+              "weapon": "mg131",
+              "ammo": 600,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:bf109": 1,
+            "aiarsenal:rw_shell": 5
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "bf109",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 5192.5,
+        "y": -60.0,
+        "z": 0.5024534741905708,
+        "hp": 150.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "mg151",
+            "ammo": 150,
+            "usable": true
+          },
+          {
+            "weapon": "mg131",
+            "ammo": 600,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:bf109": 1,
+          "aiarsenal:rw_shell": 5
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "bf109",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5192.5,
+          "y": -60.0,
+          "z": 0.6724063913050413,
+          "hp": 150.0,
+          "fuel": 0.99963284,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mg151",
+              "ammo": 149,
+              "usable": true
+            },
+            {
+              "weapon": "mg131",
+              "ammo": 600,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:bf109": 1,
+            "aiarsenal:rw_shell": 6
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "bf109",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5192.5,
+          "y": -60.0,
+          "z": 0.7928140167412895,
+          "hp": 150.0,
+          "fuel": 0.99954104,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mg151",
+              "ammo": 144,
+              "usable": true
+            },
+            {
+              "weapon": "mg131",
+              "ammo": 600,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:bf109": 1,
+            "aiarsenal:rw_shell": 11
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:bismarck_ship",
+      "air": false,
+      "sub": false,
+      "status": "FAIL",
+      "placed": {
+        "action": "craft_status",
+        "kind": "bismarck",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 5384.5,
+        "y": -59.29999923706055,
+        "z": 0.5,
+        "hp": 12000.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "sk38_ap",
+            "ammo": 472,
+            "usable": true
+          },
+          {
+            "weapon": "sk38_he",
+            "ammo": 468,
+            "usable": true
+          },
+          {
+            "weapon": "sk15",
+            "ammo": 1800,
+            "usable": true
+          },
+          {
+            "weapon": "flak105",
+            "ammo": 6400,
+            "usable": false
+          },
+          {
+            "weapon": "flak37",
+            "ammo": 32000,
+            "usable": false
+          },
+          {
+            "weapon": "flak20",
+            "ammo": 40000,
+            "usable": false
+          },
+          {
+            "weapon": "arado",
+            "ammo": 4,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:bismarck": 1
+        }
+      },
+      "engine": "PASS",
+      "error": "AssertionError('context action timed out')",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aimods/aimods/tools/verify_context_game.py\", line 311, in run\n    action(row,index);row['status']='PASS'\n  File \"/home/runner/work/aimods/aimods/tools/verify_context_game.py\", line 125, in craft\n    row['firstShot']=shoot();save()\n  File \"/home/runner/work/aimods/aimods/tools/verify_context_game.py\", line 122, in shoot\n    wait(fired,75)\n  File \"/home/runner/work/aimods/aimods/tools/verify_context_game.py\", line 38, in wait\n    raise AssertionError('context action timed out')\nAssertionError: context action timed out\n"
+    },
+    {
+      "id": "aiarsenal:cb90_boat",
+      "air": false,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "cb90",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 5576.5,
+        "y": -50.79999923706055,
+        "z": 0.5,
+        "hp": 280.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "m2",
+            "ammo": 1000,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:cb90": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "cb90",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5576.499835991302,
+          "y": -50.97437565241249,
+          "z": 0.5015010214253308,
+          "hp": 280.0,
+          "fuel": 0.99999124,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "m2",
+              "ammo": 1000,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:cb90": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "cb90",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5576.499779727016,
+          "y": -50.94691869125633,
+          "z": 0.5018543721789757,
+          "hp": 280.0,
+          "fuel": 0.9999591,
+          "selected": 0,
+          "bulletsAlive": 5,
+          "loads": [
+            {
+              "weapon": "m2",
+              "ammo": 995,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:cb90": 1
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "cb90",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 5576.499779727016,
+        "y": -50.94691869125633,
+        "z": 0.5018543721789757,
+        "hp": 280.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 5,
+        "loads": [
+          {
+            "weapon": "m2",
+            "ammo": 1000,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:cb90": 1
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "cb90",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5576.499567231785,
+          "y": -50.90663445838631,
+          "z": 0.502911950429196,
+          "hp": 280.0,
+          "fuel": 0.9998832,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "m2",
+              "ammo": 1000,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:cb90": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "cb90",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5576.49951254224,
+          "y": -50.919210766517914,
+          "z": 0.5032234362298105,
+          "hp": 280.0,
+          "fuel": 0.99985397,
+          "selected": 0,
+          "bulletsAlive": 5,
+          "loads": [
+            {
+              "weapon": "m2",
+              "ammo": 995,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:cb90": 1
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:he111_plane",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "he111",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 5768.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 900.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "mgff",
+            "ammo": 180,
+            "usable": true
+          },
+          {
+            "weapon": "sc250",
+            "ammo": 8,
+            "usable": true
+          },
+          {
+            "weapon": "sc1000",
+            "ammo": 0,
+            "usable": true
+          },
+          {
+            "weapon": "gunners",
+            "ammo": 3000,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:he111": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "he111",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5768.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 900.0,
+          "fuel": 0.9999827,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mgff",
+              "ammo": 180,
+              "usable": true
+            },
+            {
+              "weapon": "sc250",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "sc1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 3000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:he111": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "he111",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5768.5,
+          "y": -60.0,
+          "z": 0.5007129885483513,
+          "hp": 900.0,
+          "fuel": 0.99994814,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mgff",
+              "ammo": 176,
+              "usable": true
+            },
+            {
+              "weapon": "sc250",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "sc1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 3000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:he111": 1,
+            "aiarsenal:rw_shell": 4
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "he111",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 5768.5,
+        "y": -60.0,
+        "z": 0.5007129885483513,
+        "hp": 900.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "mgff",
+            "ammo": 180,
+            "usable": true
+          },
+          {
+            "weapon": "sc250",
+            "ammo": 8,
+            "usable": true
+          },
+          {
+            "weapon": "sc1000",
+            "ammo": 0,
+            "usable": true
+          },
+          {
+            "weapon": "gunners",
+            "ammo": 3000,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:he111": 1,
+          "aiarsenal:rw_shell": 4
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "he111",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5768.5,
+          "y": -60.0,
+          "z": 0.5059439484353954,
+          "hp": 900.0,
+          "fuel": 0.9998617,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mgff",
+              "ammo": 180,
+              "usable": true
+            },
+            {
+              "weapon": "sc250",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "sc1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 3000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:he111": 1,
+            "aiarsenal:rw_shell": 4
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "he111",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5768.5,
+          "y": -60.0,
+          "z": 0.5059439484353954,
+          "hp": 900.0,
+          "fuel": 0.99982715,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "mgff",
+              "ammo": 177,
+              "usable": true
+            },
+            {
+              "weapon": "sc250",
+              "ammo": 8,
+              "usable": true
+            },
+            {
+              "weapon": "sc1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 3000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:he111": 1,
+            "aiarsenal:rw_shell": 7
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:ka52_vehicle",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "ka52",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 5960.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 300.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "2a42",
+            "ammo": 460,
+            "usable": true
+          },
+          {
+            "weapon": "vikhr",
+            "ammo": 12,
+            "usable": true
+          },
+          {
+            "weapon": "s8",
+            "ammo": 40,
+            "usable": true
+          },
+          {
+            "weapon": "flares",
+            "ammo": 64,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:ka52": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "ka52",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5960.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 300.0,
+          "fuel": 0.99998087,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "2a42",
+              "ammo": 460,
+              "usable": true
+            },
+            {
+              "weapon": "vikhr",
+              "ammo": 12,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 64,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ka52": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "ka52",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5960.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 300.0,
+          "fuel": 0.9999171,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "2a42",
+              "ammo": 455,
+              "usable": true
+            },
+            {
+              "weapon": "vikhr",
+              "ammo": 12,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 64,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ka52": 1,
+            "aiarsenal:rw_shell": 5
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "ka52",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 5960.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 300.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "2a42",
+            "ammo": 460,
+            "usable": true
+          },
+          {
+            "weapon": "vikhr",
+            "ammo": 12,
+            "usable": true
+          },
+          {
+            "weapon": "s8",
+            "ammo": 40,
+            "usable": true
+          },
+          {
+            "weapon": "flares",
+            "ammo": 64,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:ka52": 1,
+          "aiarsenal:rw_shell": 5
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "ka52",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5960.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 300.0,
+          "fuel": 0.9997449,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "2a42",
+              "ammo": 460,
+              "usable": true
+            },
+            {
+              "weapon": "vikhr",
+              "ammo": 12,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 64,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ka52": 1,
+            "aiarsenal:rw_shell": 5
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "ka52",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 5960.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 300.0,
+          "fuel": 0.9996811,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "2a42",
+              "ammo": 455,
+              "usable": true
+            },
+            {
+              "weapon": "vikhr",
+              "ammo": 12,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 64,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:ka52": 1,
+            "aiarsenal:rw_shell": 10
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:pe8_plane",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "pe8",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 6152.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 1500.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "fab250sv",
+            "ammo": 16,
+            "usable": true
+          },
+          {
+            "weapon": "fab1000",
+            "ammo": 0,
+            "usable": true
+          },
+          {
+            "weapon": "fab5000w",
+            "ammo": 0,
+            "usable": true
+          },
+          {
+            "weapon": "gunners",
+            "ammo": 6000,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:pe8": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "pe8",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6152.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 1500.0,
+          "fuel": 0.99999,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "fab250sv",
+              "ammo": 16,
+              "usable": true
+            },
+            {
+              "weapon": "fab1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "fab5000w",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 6000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:pe8": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "pe8",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6152.5,
+          "y": -60.0,
+          "z": 0.5003513374507921,
+          "hp": 1500.0,
+          "fuel": 0.99996495,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "fab250sv",
+              "ammo": 13,
+              "usable": true
+            },
+            {
+              "weapon": "fab1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "fab5000w",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 6000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:air_bomb": 3,
+            "aiarsenal:pe8": 1
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "pe8",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 6152.5,
+        "y": -60.0,
+        "z": 0.5003513374507921,
+        "hp": 1500.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "fab250sv",
+            "ammo": 16,
+            "usable": true
+          },
+          {
+            "weapon": "fab1000",
+            "ammo": 0,
+            "usable": true
+          },
+          {
+            "weapon": "fab5000w",
+            "ammo": 0,
+            "usable": true
+          },
+          {
+            "weapon": "gunners",
+            "ammo": 6000,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:air_bomb": 3,
+          "aiarsenal:pe8": 1
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "pe8",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6152.5,
+          "y": -60.0,
+          "z": 0.5065778397264658,
+          "hp": 1500.0,
+          "fuel": 0.99989986,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "fab250sv",
+              "ammo": 16,
+              "usable": true
+            },
+            {
+              "weapon": "fab1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "fab5000w",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 6000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:air_bomb": 3,
+            "aiarsenal:pe8": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "pe8",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6152.5,
+          "y": -60.0,
+          "z": 0.5065778397264658,
+          "hp": 1500.0,
+          "fuel": 0.99987483,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "fab250sv",
+              "ammo": 13,
+              "usable": true
+            },
+            {
+              "weapon": "fab1000",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "fab5000w",
+              "ammo": 0,
+              "usable": true
+            },
+            {
+              "weapon": "gunners",
+              "ammo": 6000,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:air_bomb": 6,
+            "aiarsenal:pe8": 1
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:raptor_boat",
+      "air": false,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "raptor",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 6344.5,
+        "y": -50.900001525878906,
+        "z": 0.5,
+        "hp": 300.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "kpv",
+            "ammo": 900,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:raptor": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "raptor",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6344.4999615211345,
+          "y": -51.068148067717495,
+          "z": 0.5010931942132216,
+          "hp": 300.0,
+          "fuel": 0.9999883,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "kpv",
+              "ammo": 900,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:raptor": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "raptor",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6344.499947545821,
+          "y": -51.063606959400296,
+          "z": 0.5012413623039594,
+          "hp": 300.0,
+          "fuel": 0.9999591,
+          "selected": 0,
+          "bulletsAlive": 5,
+          "loads": [
+            {
+              "weapon": "kpv",
+              "ammo": 895,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:raptor": 1
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "raptor",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 6344.499947545821,
+        "y": -51.063606959400296,
+        "z": 0.5012413623039594,
+        "hp": 300.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 5,
+        "loads": [
+          {
+            "weapon": "kpv",
+            "ammo": 900,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:raptor": 1
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "raptor",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6344.49979195109,
+          "y": -50.9957376451709,
+          "z": 0.5020960669458945,
+          "hp": 300.0,
+          "fuel": 0.9998832,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "kpv",
+              "ammo": 899,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:raptor": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "raptor",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6344.499767460117,
+          "y": -50.996774477835174,
+          "z": 0.502190439742632,
+          "hp": 300.0,
+          "fuel": 0.99985397,
+          "selected": 0,
+          "bulletsAlive": 5,
+          "loads": [
+            {
+              "weapon": "kpv",
+              "ammo": 894,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:raptor": 1
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:su57_plane",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "su57",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 6536.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 420.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "gsh301",
+            "ammo": 150,
+            "usable": true
+          },
+          {
+            "weapon": "s8",
+            "ammo": 40,
+            "usable": true
+          },
+          {
+            "weapon": "kh38",
+            "ammo": 2,
+            "usable": true
+          },
+          {
+            "weapon": "fab500s",
+            "ammo": 2,
+            "usable": true
+          },
+          {
+            "weapon": "flares",
+            "ammo": 96,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:su57": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "su57",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6536.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 420.0,
+          "fuel": 0.99996364,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "gsh301",
+              "ammo": 150,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "kh38",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "fab500s",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 96,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:su57": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "su57",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6536.5,
+          "y": -60.0,
+          "z": 0.5016373951439752,
+          "hp": 420.0,
+          "fuel": 0.99988365,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "gsh301",
+              "ammo": 140,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "kh38",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "fab500s",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 96,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:rw_shell": 10,
+            "aiarsenal:su57": 1
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "su57",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 6536.5,
+        "y": -60.0,
+        "z": 0.5016373951439752,
+        "hp": 420.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "gsh301",
+            "ammo": 150,
+            "usable": true
+          },
+          {
+            "weapon": "s8",
+            "ammo": 40,
+            "usable": true
+          },
+          {
+            "weapon": "kh38",
+            "ammo": 2,
+            "usable": true
+          },
+          {
+            "weapon": "fab500s",
+            "ammo": 2,
+            "usable": true
+          },
+          {
+            "weapon": "flares",
+            "ammo": 96,
+            "usable": false
+          }
+        ],
+        "spawned": {
+          "aiarsenal:rw_shell": 10,
+          "aiarsenal:su57": 1
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "su57",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6536.5,
+          "y": -60.0,
+          "z": 0.6053821926640944,
+          "hp": 420.0,
+          "fuel": 0.9997091,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "gsh301",
+              "ammo": 150,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "kh38",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "fab500s",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 96,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:rw_shell": 10,
+            "aiarsenal:su57": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "su57",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6536.5,
+          "y": -60.0,
+          "z": 0.6956191050620008,
+          "hp": 420.0,
+          "fuel": 0.9996364,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "gsh301",
+              "ammo": 140,
+              "usable": true
+            },
+            {
+              "weapon": "s8",
+              "ammo": 40,
+              "usable": true
+            },
+            {
+              "weapon": "kh38",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "fab500s",
+              "ammo": 2,
+              "usable": true
+            },
+            {
+              "weapon": "flares",
+              "ammo": 96,
+              "usable": false
+            }
+          ],
+          "spawned": {
+            "aiarsenal:rw_shell": 20,
+            "aiarsenal:su57": 1
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:sub636_vehicle",
+      "air": false,
+      "sub": true,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "sub636",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 6728.5,
+        "y": -56.20000076293945,
+        "z": 0.5,
+        "hp": 1600.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "torpedo",
+            "ammo": 18,
+            "usable": true
+          },
+          {
+            "weapon": "kalibr",
+            "ammo": 4,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:sub636": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "sub636",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6728.5,
+          "y": -55.90375958955447,
+          "z": 0.4999939872053759,
+          "hp": 1600.0,
+          "fuel": 0.999993,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "torpedo",
+              "ammo": 18,
+              "usable": true
+            },
+            {
+              "weapon": "kalibr",
+              "ammo": 4,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:sub636": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "sub636",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6728.5,
+          "y": -55.92740888068578,
+          "z": 0.499992442764888,
+          "hp": 1600.0,
+          "fuel": 0.9999698,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "torpedo",
+              "ammo": 17,
+              "usable": true
+            },
+            {
+              "weapon": "kalibr",
+              "ammo": 4,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:craft_ordnance": 1,
+            "aiarsenal:sub636": 1
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "sub636",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 6728.5,
+        "y": -55.92740888068578,
+        "z": 0.499992442764888,
+        "hp": 1600.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "torpedo",
+            "ammo": 18,
+            "usable": true
+          },
+          {
+            "weapon": "kalibr",
+            "ammo": 4,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:craft_ordnance": 1,
+          "aiarsenal:sub636": 1
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "sub636",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6728.5,
+          "y": -55.957078991681534,
+          "z": 0.49998799427790647,
+          "hp": 1600.0,
+          "fuel": 0.999907,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "torpedo",
+              "ammo": 18,
+              "usable": true
+            },
+            {
+              "weapon": "kalibr",
+              "ammo": 4,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:craft_ordnance": 1,
+            "aiarsenal:sub636": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "sub636",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6728.5,
+          "y": -55.94557781679463,
+          "z": 0.499985147698629,
+          "hp": 1600.0,
+          "fuel": 0.9998605,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "torpedo",
+              "ammo": 17,
+              "usable": true
+            },
+            {
+              "weapon": "kalibr",
+              "ammo": 4,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:craft_ordnance": 2,
+            "aiarsenal:sub636": 1
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:yak3_plane",
+      "air": true,
+      "sub": false,
+      "status": "PASS",
+      "placed": {
+        "action": "craft_status",
+        "kind": "yak3",
+        "riding": true,
+        "alive": true,
+        "engine": false,
+        "x": 6920.5,
+        "y": -60.0,
+        "z": 0.5,
+        "hp": 135.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "shvak",
+            "ammo": 120,
+            "usable": true
+          },
+          {
+            "weapon": "ubs",
+            "ammo": 300,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:yak3": 1
+        }
+      },
+      "engine": "PASS",
+      "firstShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "yak3",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6920.5,
+          "y": -60.0,
+          "z": 0.5,
+          "hp": 135.0,
+          "fuel": 0.99996424,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "shvak",
+              "ammo": 120,
+              "usable": true
+            },
+            {
+              "weapon": "ubs",
+              "ammo": 300,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:yak3": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "yak3",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6920.5,
+          "y": -60.0,
+          "z": 0.5036006328974414,
+          "hp": 135.0,
+          "fuel": 0.99987483,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "shvak",
+              "ammo": 115,
+              "usable": true
+            },
+            {
+              "weapon": "ubs",
+              "ammo": 300,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:rw_shell": 5,
+            "aiarsenal:yak3": 1
+          }
+        }
+      },
+      "service": {
+        "action": "craft_status",
+        "kind": "yak3",
+        "riding": true,
+        "alive": true,
+        "engine": true,
+        "x": 6920.5,
+        "y": -60.0,
+        "z": 0.5036006328974414,
+        "hp": 135.0,
+        "fuel": 1.0,
+        "selected": 0,
+        "bulletsAlive": 0,
+        "loads": [
+          {
+            "weapon": "shvak",
+            "ammo": 120,
+            "usable": true
+          },
+          {
+            "weapon": "ubs",
+            "ammo": 300,
+            "usable": true
+          }
+        ],
+        "spawned": {
+          "aiarsenal:rw_shell": 5,
+          "aiarsenal:yak3": 1
+        },
+        "kitsRemaining": 1
+      },
+      "repeatShot": {
+        "before": {
+          "action": "craft_status",
+          "kind": "yak3",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6920.5,
+          "y": -60.0,
+          "z": 0.7007336169476073,
+          "hp": 135.0,
+          "fuel": 0.9996424,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "shvak",
+              "ammo": 119,
+              "usable": true
+            },
+            {
+              "weapon": "ubs",
+              "ammo": 300,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:rw_shell": 6,
+            "aiarsenal:yak3": 1
+          }
+        },
+        "after": {
+          "action": "craft_status",
+          "kind": "yak3",
+          "riding": true,
+          "alive": true,
+          "engine": true,
+          "x": 6920.5,
+          "y": -60.0,
+          "z": 0.834237340605513,
+          "hp": 135.0,
+          "fuel": 0.99955297,
+          "selected": 0,
+          "bulletsAlive": 0,
+          "loads": [
+            {
+              "weapon": "shvak",
+              "ammo": 114,
+              "usable": true
+            },
+            {
+              "weapon": "ubs",
+              "ammo": 300,
+              "usable": true
+            }
+          ],
+          "spawned": {
+            "aiarsenal:rw_shell": 11,
+            "aiarsenal:yak3": 1
+          }
+        }
+      },
+      "method": "survival item placement/boarding; real H and LMB; production service-kit interaction; real repeat LMB plus projectile/bullet proof",
+      "unverified": "other weapon slots, full flight/navigation, defensive AI, alternate presets, GUI servicing"
+    },
+    {
+      "id": "aiarsenal:cannon_fr6",
+      "status": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_fr6",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 504.5,
+        "spawned": {
+          "aiarsenal:cannon_fr6": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 160,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          }
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 160,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 2
+            }
+          }
+        }
+      ],
+      "method": "survival cannon item placement -> real charge consumption/160-tick load -> ignition/tool wear -> cannonball spawn; twice"
+    },
+    {
+      "id": "aiarsenal:cannon_ri12",
+      "status": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_ri12",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 632.5,
+        "spawned": {
+          "aiarsenal:cannon_ri12": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 160,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          }
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 160,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 2
+            }
+          }
+        }
+      ],
+      "method": "survival cannon item placement -> real charge consumption/160-tick load -> ignition/tool wear -> cannonball spawn; twice"
+    },
+    {
+      "id": "aiarsenal:javelin",
+      "status": "PASS",
+      "cycles": [
+        {
+          "lock": 100,
+          "remainingAmmo": 1,
+          "targetGone": true
+        },
+        {
+          "lock": 100,
+          "remainingAmmo": 0,
+          "targetGone": true
+        }
+      ],
+      "method": "actual RMB hold -> seeker lock -> release -> ammunition consumed -> target killed; twice"
+    },
+    {
+      "id": "aiarsenal:fpv7",
+      "status": "PASS",
+      "placed": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 174,
+        "state": 0,
+        "x": 10004.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 0,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "start": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 174,
+        "state": 0,
+        "x": 10004.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 5.656854249492381,
+        "dummyPresent": true,
+        "ammo": 0,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "clientCameraReady": "PASS",
+      "lastObserved": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": true,
+        "entityId": 174,
+        "state": 1,
+        "x": 10004.5,
+        "y": -19.144822135704963,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 0,
+        "completedTasks": 1,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "flying": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 174,
+        "state": 1,
+        "x": 10004.5,
+        "y": -53.13196832957156,
+        "z": 2004.5,
+        "originDistance": 8.431582999817488,
+        "dummyPresent": true,
+        "ammo": 0,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "detonation": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": true,
+        "entityId": 174,
+        "state": 1,
+        "x": 10004.5,
+        "y": -19.144822135704963,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 0,
+        "completedTasks": 1,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "method": "survival placement -> goggles link/camera -> actual Space takeoff -> F detonation -> automatic operator/camera/dummy restoration"
+    },
+    {
+      "id": "aiarsenal:fpv10",
+      "status": "PASS",
+      "placed": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 176,
+        "state": 0,
+        "x": 10516.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 0,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "start": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 176,
+        "state": 0,
+        "x": 10516.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 5.656854249492381,
+        "dummyPresent": true,
+        "ammo": 0,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "clientCameraReady": "PASS",
+      "lastObserved": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": true,
+        "entityId": 176,
+        "state": 1,
+        "x": 10516.5,
+        "y": -22.293266069232867,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 0,
+        "completedTasks": 1,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "flying": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 176,
+        "state": 1,
+        "x": 10516.5,
+        "y": -56.12954656667022,
+        "z": 2004.5,
+        "originDistance": 6.643518018937249,
+        "dummyPresent": true,
+        "ammo": 0,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "detonation": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": true,
+        "entityId": 176,
+        "state": 1,
+        "x": 10516.5,
+        "y": -22.293266069232867,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 0,
+        "completedTasks": 1,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "method": "survival placement -> goggles link/camera -> actual Space takeoff -> F detonation -> automatic operator/camera/dummy restoration"
+    },
+    {
+      "id": "aiarsenal:mq9",
+      "status": "PASS",
+      "placed": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 180,
+        "state": 0,
+        "x": 11028.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 8,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "start": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 180,
+        "state": 0,
+        "x": 11028.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 5.656854249492381,
+        "dummyPresent": true,
+        "ammo": 8,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "clientCameraReady": "PASS",
+      "lastObserved": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 180,
+        "state": 2,
+        "x": 11090.562301907545,
+        "y": 27.430271972265665,
+        "z": 2082.5262818323586,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 6,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "flying": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 180,
+        "state": 1,
+        "x": 11028.5,
+        "y": -56.970123102122166,
+        "z": 2117.0119906279233,
+        "originDistance": 114.62252128214661,
+        "dummyPresent": true,
+        "ammo": 8,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "designation": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 180,
+        "state": 2,
+        "x": 11025.35187332245,
+        "y": -35.15053789685756,
+        "z": 2269.021927437546,
+        "originDistance": 267.6190080677875,
+        "dummyPresent": false,
+        "ammo": 8,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "fired": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 180,
+        "state": 2,
+        "x": 10933.564364433536,
+        "y": -4.338037896857535,
+        "z": 2183.430030964342,
+        "originDistance": 213.39733168769064,
+        "dummyPresent": false,
+        "ammo": 6,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "firstExit": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 180,
+        "state": 2,
+        "x": 10932.502117319042,
+        "y": -2.163037896857536,
+        "z": 2170.4258961815954,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 6,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "secondExit": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 180,
+        "state": 2,
+        "x": 11090.562301907545,
+        "y": 27.430271972265665,
+        "z": 2082.5262818323586,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 6,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "method": "survival placement -> tablet link -> actual Space takeoff -> production designation -> actual F twice/projectiles/impacts -> Backspace restore -> controller reconnect -> Backspace restore",
+      "unverified": "full RTB/landing, rearming and long-range loss-of-link"
+    },
+    {
+      "id": "aiarsenal:orion",
+      "status": "PASS",
+      "placed": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 187,
+        "state": 0,
+        "x": 11540.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 4,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "start": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 187,
+        "state": 0,
+        "x": 11540.5,
+        "y": -60.0,
+        "z": 2004.5,
+        "originDistance": 5.656854249492381,
+        "dummyPresent": true,
+        "ammo": 4,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "clientCameraReady": "PASS",
+      "lastObserved": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 187,
+        "state": 2,
+        "x": 11563.697650120908,
+        "y": 16.450280128500452,
+        "z": 2050.0246085387794,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 2,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "flying": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 187,
+        "state": 1,
+        "x": 11540.5,
+        "y": -55.99823329117757,
+        "z": 2090.3576774051576,
+        "originDistance": 88.64346546693304,
+        "dummyPresent": true,
+        "ammo": 4,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "designation": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 187,
+        "state": 2,
+        "x": 11538.473619609853,
+        "y": -36.049719871499576,
+        "z": 2230.2103254483122,
+        "originDistance": 229.64471291272181,
+        "dummyPresent": false,
+        "ammo": 4,
+        "completedTasks": 0,
+        "activeBlasts": 0,
+        "projectiles": 0
+      },
+      "fired": {
+        "session": true,
+        "cameraDrone": true,
+        "cameraPlayer": false,
+        "mode": "spectator",
+        "removed": false,
+        "entityId": 187,
+        "state": 2,
+        "x": 11467.576720317269,
+        "y": -9.916386538166185,
+        "z": 2139.0137346992783,
+        "originDistance": 163.6537035583082,
+        "dummyPresent": false,
+        "ammo": 2,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "firstExit": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 187,
+        "state": 2,
+        "x": 11466.898386680934,
+        "y": -8.749719871499522,
+        "z": 2132.047696151185,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 2,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "secondExit": {
+        "session": false,
+        "cameraDrone": false,
+        "cameraPlayer": true,
+        "mode": "survival",
+        "removed": false,
+        "entityId": 187,
+        "state": 2,
+        "x": 11563.697650120908,
+        "y": 16.450280128500452,
+        "z": 2050.0246085387794,
+        "originDistance": 0.0,
+        "dummyPresent": false,
+        "ammo": 2,
+        "completedTasks": 2,
+        "activeBlasts": 0,
+        "projectiles": 2
+      },
+      "method": "survival placement -> tablet link -> actual Space takeoff -> production designation -> actual F twice/projectiles/impacts -> Backspace restore -> controller reconnect -> Backspace restore",
+      "unverified": "full RTB/landing, rearming and long-range loss-of-link"
+    },
+    {
+      "id": "aiarsenal:entrenching_tool",
+      "status": "PASS",
+      "start": {
+        "floors": 0,
+        "open": 0,
+        "pending": 1,
+        "toolDamage": 2
+      },
+      "result": {
+        "floors": 5,
+        "open": 5,
+        "pending": 0,
+        "toolDamage": 2
+      },
+      "method": "production two-point tool interactions -> five actual dug cells and duckboard floors -> durability loss"
+    },
+    {
+      "id": "aiarsenal:arming_plug",
+      "status": "PASS",
+      "result": {
+        "armedThenDisarmed": true,
+        "plugCount": 1
+      },
+      "method": "survival RDS-4 item placement -> production arming plug interaction -> armed -> disarmed"
+    },
+    {
+      "id": "aiarsenal:remote_detonator",
+      "status": "PASS",
+      "start": {
+        "present": true,
+        "armed": false,
+        "completedTasks": 0,
+        "changedBlocks": 0,
+        "activeBlasts": 0
+      },
+      "result": {
+        "present": false,
+        "armed": false,
+        "completedTasks": 1,
+        "changedBlocks": 2,
+        "activeBlasts": 0
+      },
+      "method": "survival IED placement -> production sneak-link -> actual arming delay -> real RMB remote trigger -> completed destructive blast"
+    }
+  ],
+  "runOutcome": {
+    "status": "FAIL",
+    "error": "AssertionError('one or more contextual cases failed')"
+  },
+  "worldSaveReopen": {
+    "status": "PASS",
+    "archivedItems": 448
+  },
+  "limitations": [
+    "Not complete acceptance of all 448 items or all craft weapons/flight modes.",
+    "Linux llvmpipe, not Windows NVIDIA/Oculus certification."
+  ],
+  "inventory": {
+    "action": "inventory",
+    "missiles": [
+      "missile_tactical_he",
+      "missile_tactical_kinetic",
+      "missile_tactical_mirv",
+      "missile_tactical_thermobaric",
+      "missile_operational_he",
+      "missile_operational_kinetic",
+      "missile_operational_mirv",
+      "missile_operational_penetrator",
+      "missile_cruise_he",
+      "missile_cruise_cluster",
+      "missile_icbm_he",
+      "missile_icbm_kinetic",
+      "missile_icbm_mirv",
+      "missile_icbm_mirv_heavy"
+    ],
+    "craft": [
+      {
+        "id": "aiarsenal:ah64_vehicle",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:bf109_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:bismarck_ship",
+        "air": false,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:cb90_boat",
+        "air": false,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:he111_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:ka52_vehicle",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:pe8_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:raptor_boat",
+        "air": false,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:su57_plane",
+        "air": true,
+        "sub": false
+      },
+      {
+        "id": "aiarsenal:sub636_vehicle",
+        "air": false,
+        "sub": true
+      },
+      {
+        "id": "aiarsenal:yak3_plane",
+        "air": true,
+        "sub": false
+      }
+    ]
+  },
+  "recipes": {
+    "status": "PASS",
+    "cases": 1271,
+    "ingredientItems": 58
+  }
+}
