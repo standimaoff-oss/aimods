@@ -4,6 +4,14 @@ Forge content mod for Minecraft 1.20.1. Adds vehicles, firearms, artillery, airc
 
 **Version:** `1.0.1-alpha.11` · **Minecraft:** `1.20.1` · **Forge:** `47.4.23` · **Java:** `17`
 
+## In-game previews
+
+Unedited F2 screenshots from a real 1.20.1 client in a disposable preview world. The simple test-world setting is intentional; these images show the in-game models and are not a claim of full gameplay verification.
+
+![British Mark I in Minecraft](previews/mark-i.png)
+
+![Gewehr 98 in first person](previews/gewehr98.png)
+
 ## Content
 
 - British Mark I tank, Gewehr 98 rifle and 57 mm ammunition.

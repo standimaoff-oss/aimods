@@ -46,7 +46,11 @@ overrideHeight:800
     time.sleep(12)
 
     window = subprocess_window()
+    game.key("windowsize", window, "1280", "800")
+    game.key("windowmove", window, "0", "0")
+    game.key("windowraise", window)
     game.key("windowfocus", "--sync", window)
+    time.sleep(2)
     for cmd in [
         "time set 6000",
         "gamerule doDaylightCycle false",
