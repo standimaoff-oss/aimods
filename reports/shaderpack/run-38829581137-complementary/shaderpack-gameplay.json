@@ -1,0 +1,301 @@
+{
+  "result": "PASS",
+  "pack": "complementary",
+  "actions": [
+    {
+      "id": "aiarsenal:cannon_fr6",
+      "result": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_fr6",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 504.5,
+        "spawned": {
+          "aiarsenal:cannon_fr6": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 153,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 504.5,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.87753845679146,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "chargeRemaining": "Found 1 matching item(s) on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 1}}\n"
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 149,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.80401124947423,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_fr6",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 503.46371050184126,
+            "spawned": {
+              "aiarsenal:cannon_fr6": 1,
+              "aiarsenal:cannonball": 2
+            }
+          },
+          "chargeRemaining": "No items were found on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 2}}\n"
+        }
+      ],
+      "aimChecks": [
+        "[00:36:42] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=0 safeCloudFrames=0",
+        "[00:36:44] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0",
+        "[00:36:57] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0",
+        "[00:37:10] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0",
+        "[00:37:24] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_fr6 safeParticles=0 safeCloudFrames=0"
+      ],
+      "method": "real RMB charge / real 160-tick load / real RMB ignition, ammunition and tool wear asserted, repeated twice"
+    },
+    {
+      "id": "aiarsenal:cannon_ri12",
+      "result": "PASS",
+      "placed": {
+        "action": "cannon_status",
+        "loading": -1,
+        "charge": "aiarsenal:charge_ri12",
+        "x": 8004.5,
+        "y": -60.0,
+        "z": 632.5,
+        "spawned": {
+          "aiarsenal:cannon_ri12": 1
+        }
+      },
+      "cycles": [
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 151,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.5,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 632.0311659863758,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "chargeRemaining": "Found 1 matching item(s) on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 1}}\n"
+        },
+        {
+          "loaded": {
+            "action": "cannon_status",
+            "loading": 158,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "before": {
+            "action": "cannon_status",
+            "loading": 0,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.8040112494741,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 1
+            }
+          },
+          "after": {
+            "action": "cannon_status",
+            "loading": -1,
+            "charge": "aiarsenal:charge_ri12",
+            "x": 8004.5,
+            "y": -60.0,
+            "z": 631.4637105018411,
+            "spawned": {
+              "aiarsenal:cannon_ri12": 1,
+              "aiarsenal:cannonball": 2
+            }
+          },
+          "chargeRemaining": "No items were found on player TestPlayer\n",
+          "tool": "TestPlayer has the following entity data: {id: \"minecraft:flint_and_steel\", Count: 1b, tag: {Damage: 2}}\n"
+        }
+      ],
+      "aimChecks": [
+        "[00:37:36] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=0 safeCloudFrames=0",
+        "[00:37:38] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0",
+        "[00:37:50] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0",
+        "[00:38:01] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0",
+        "[00:38:15] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=aiarsenal:cannon_ri12 safeParticles=0 safeCloudFrames=0"
+      ],
+      "method": "real RMB charge / real 160-tick load / real RMB ignition, ammunition and tool wear asserted, repeated twice"
+    },
+    {
+      "id": "aiarsenal:sturmtiger_vehicle",
+      "vehicleAmmo": "aiarsenal:rocket_380",
+      "drivable": true,
+      "result": "PASS",
+      "lastVehicleState": {
+        "age": 8749,
+        "reloadTicks": 0,
+        "reloadTube": -1,
+        "reloadRequired": 400,
+        "reloadInputFresh": false,
+        "reloadInputGrace": false,
+        "inputAge": 9,
+        "loaded": 0,
+        "fired": 2,
+        "engine": true,
+        "x": 0.5,
+        "z": 3.3699891448634713,
+        "hp": 600.0,
+        "supply": 15
+      },
+      "mainGunShot": "PASS",
+      "reloadTimeBudgetSeconds": 540.0,
+      "reloadWallSeconds": 404.469,
+      "mainGunReload": "PASS (real R, ammunition consumed)",
+      "mainGunRepeatShot": "PASS",
+      "drive": "PASS (real H/W controls)",
+      "functional": "MAIN_GUN_FIRE_RELOAD_REPEAT_PASS"
+    }
+  ],
+  "toggles": [
+    {
+      "round": 0,
+      "framesBefore": 51,
+      "framesAfter": 51
+    },
+    {
+      "round": 1,
+      "framesBefore": 80,
+      "framesAfter": 80
+    }
+  ],
+  "weaponReloadShaderRebuilds": 0,
+  "fallbackObservations": [
+    {
+      "effect": "blast",
+      "before": "[00:45:55] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=360 safeCloudFrames=0",
+      "after": "[00:46:08] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=498 safeCloudFrames=0"
+    },
+    {
+      "effect": "nuke",
+      "before": "[00:46:11] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=498 safeCloudFrames=0",
+      "after": "[00:46:31] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=7730 safeCloudFrames=0"
+    },
+    {
+      "effect": "legacy_nuke",
+      "before": "[00:46:36] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=8550 safeCloudFrames=0",
+      "after": "[00:47:00] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=9210 safeCloudFrames=3"
+    }
+  ],
+  "flashObservations": [
+    {
+      "effect": "nuke",
+      "clientAck": "[00:46:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=498 safeCloudFrames=0"
+    },
+    {
+      "effect": "legacy_nuke",
+      "clientAck": "[00:46:42] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=false volumes=0 plumes=0 frames=0 draw=0.00ms tick=0.000ms renderer=hardware/unknown world=minecraft:overworld target=MISS safeParticles=9150 safeCloudFrames=0"
+    }
+  ],
+  "unarmedShaderReload": "PASS",
+  "thirdPartyDiagnostics": [
+    "[00:33:48] [Render thread/ERROR] [Embeddium-MixinTaintDetector/]: Mod mixin into Embeddium internals detected. This instance is now tainted. The Embeddium team does not provide any guarantee of support for issues encountered while such mods are installed."
+  ],
+  "guns": [
+    "ppsh41",
+    "mosin_pu",
+    "musket_1777"
+  ],
+  "reloadInput": "real R, Oculus defaults unchanged; cannons use real RMB",
+  "fallbackPackets": [
+    "blast",
+    "nuke",
+    "legacy_nuke"
+  ],
+  "playerEffects": [
+    "minecraft:resistance",
+    "minecraft:night_vision"
+  ],
+  "limits": "Linux llvmpipe, not Windows/NVIDIA; Photon SH_SKYLIGHT=false (32768-byte shared memory limit), other packs publisher defaults; visual packets do not certify bomb physics or damage"
+}
