@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "sha256": "af5cf3ac5179cc63307a01e2cf68952f5e2c1a4736e9498d556bc2855282e615",
+  "bytes": 51824559,
+  "assetId": "RA_kwDOU7jSVs4mfRiP",
+  "url": "https://github.com/standimaoff-oss/aimods/releases/download/v1.0.1-alpha.11/aiarsenal-1.0.1-alpha.11.jar",
+  "method": "Downloaded uploaded draft asset and hashed it; published the same immutable asset ID without replacement."
+}
