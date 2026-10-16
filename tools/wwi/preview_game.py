@@ -56,9 +56,6 @@ overrideHeight:800
         "gamemode creative TestPlayer",
         "fill -32 -61 -32 32 -61 40 minecraft:grass_block",
         "fill -4 -61 4 4 -61 26 minecraft:coarse_dirt",
-        "place feature minecraft:oak -17 -60 30",
-        "place feature minecraft:oak 17 -60 29",
-        "place feature minecraft:spruce 22 -60 36",
         "tp TestPlayer -6 -59 11 -50 2",
         "clear TestPlayer",
     ]:
@@ -85,10 +82,6 @@ overrideHeight:800
     game.key("key", "1")
     time.sleep(4)
     game.screenshot("gewehr98-first-person")
-    game.key("mousedown", "3")
-    time.sleep(2)
-    game.screenshot("gewehr98-aim")
-    game.key("mouseup", "3")
 
     if client.poll() is not None or server.poll() is not None:
         raise RuntimeError("Minecraft exited during preview capture")

@@ -1,4 +1,4 @@
-name: Capture World War I gameplay previews
+name: Capture World War I in-game previews
 on:
   push:
     branches:
@@ -57,7 +57,7 @@ jobs:
           mkdir -p previews
           cp verification/shots/public-preview-mark-i-exterior.png previews/mark-i.png
           cp verification/shots/public-preview-gewehr98-first-person.png previews/gewehr98.png
-          cp verification/shots/public-preview-gewehr98-aim.png previews/gewehr98-aim.png
+          rm -f previews/gewehr98-aim.png
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
@@ -68,7 +68,7 @@ jobs:
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add previews/mark-i.png previews/gewehr98.png previews/gewehr98-aim.png
+          git add -A previews/
           if ! git diff --cached --quiet; then
             git commit -m '[preview-assets] [stage1-evidence] Publish authentic in-game preview images'
             git push origin HEAD:arena/10158ad9-aimods

@@ -1919,6 +1919,7 @@
   "hud.aiarsenal.gun.name.k98k_zf39": "Kar98k ZF39",
   "hud.aiarsenal.gun.name.c96": "Mauser C96",
   "hud.aiarsenal.gun.name.tt33": "ТТ-33",
+  "hud.aiarsenal.gun.name.gewehr98": "Gewehr 98",
   "tooltip.aiarsenal.mag.tt33": "ТТ-33: 8 патронов 7,62×25",
   "tooltip.aiarsenal.gun.keys_c96": "ЛКМ — одиночный выстрел, ПКМ — прицел, R — обойма (только в пустой магазин)",
   "itemGroup.aiarsenal.wwi_weapons": "Первая мировая · Оружие",
