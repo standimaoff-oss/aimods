@@ -55,16 +55,14 @@ overrideHeight:800
         "gamerule doMobSpawning false",
         "gamemode creative TestPlayer",
         "fill -32 -61 -32 32 -61 40 minecraft:grass_block",
-        "summon aiarsenal:mark_i 0 -60 16 {PersistenceRequired:1b}",
         "tp TestPlayer -10 -59 1 -35 4",
         "clear TestPlayer",
     ]:
         game.command(cmd)
-    spawned = game.command(
-        "execute if entity @e[type=aiarsenal:mark_i,limit=1] run say PREVIEW_MARK_I_SPAWNED"
+    game.command(
+        "summon aiarsenal:mark_i 0 -60 16 {PersistenceRequired:1b}",
+        "Summoned new entity.aiarsenal.mark_i",
     )
-    if "PREVIEW_MARK_I_SPAWNED" not in spawned:
-        raise AssertionError(f"Mark I did not spawn: {spawned}")
     time.sleep(5)
     game.key("key", "F1")  # remove HUD for a clean, unaltered in-game view
     time.sleep(2)
