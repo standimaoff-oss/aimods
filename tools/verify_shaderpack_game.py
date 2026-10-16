@@ -91,7 +91,7 @@ overrideHeight:600
     def frames(line):
         return int(re.search(r'frames=(\d+)',line)[1])
 
-    def image_diff(first, second):
+    def image_diff(first, second, relative_region=(.25,.2,.75,.78)):
         from PIL import Image, ImageChops
         folder=g.OUT/'shots'
         prefix=os.environ.get('QA_PREFIX','review2')
@@ -99,7 +99,8 @@ overrideHeight:600
         b=Image.open(folder/(prefix+'-'+second+'.png')).convert('RGB')
         assert a.size==b.size,(a.size,b.size)
         w,h=a.size
-        box=(int(w*.25),int(h*.2),int(w*.75),int(h*.78))
+        box=(int(w*relative_region[0]),int(h*relative_region[1]),
+             int(w*relative_region[2]),int(h*relative_region[3]))
         difference=ImageChops.difference(a.crop(box),b.crop(box))
         pixels=list(difference.getdata())
         mean=sum(sum(pixel) for pixel in pixels)/(3*len(pixels))
@@ -153,7 +154,7 @@ overrideHeight:600
     open_after=wait(lambda: (lambda line: line if frames(line)>start else None)(status(True)),120)
     assert 'lastStage=minecraft:after_level' in open_after,open_after
     g.screenshot(PACK+'-probe-open-volume')
-    open_diff=image_diff(PACK+'-probe-open-baseline',PACK+'-probe-open-volume')
+    open_diff=image_diff(PACK+'-probe-open-baseline',PACK+'-probe-open-volume',(.25,.1,.75,.55))
     assert open_diff['meanRgbDelta']>0.5 and open_diff['changedFraction']>0.01,open_diff
 
     g.command('fill -8 -60 7 8 -52 7 minecraft:stone');time.sleep(2)
@@ -165,8 +166,10 @@ overrideHeight:600
     wall_after=wait(lambda: (lambda line: line if frames(line)>start else None)(status(True)),120)
     assert 'lastStage=minecraft:after_level' in wall_after,wall_after
     g.screenshot(PACK+'-probe-wall-volume')
-    wall_diff=image_diff(PACK+'-probe-wall-baseline',PACK+'-probe-wall-volume')
-    assert wall_diff['meanRgbDelta']<1.5 and wall_diff['changedFraction']<0.03,wall_diff
+    wall_diff=image_diff(PACK+'-probe-wall-baseline',PACK+'-probe-wall-volume',(.25,.1,.75,.58))
+    # Keep the crop strictly on the wall: shaderpacks may animate pixels in the
+    # sky, the floor or the player's idle arm between F2 frames.
+    assert wall_diff['meanRgbDelta']<2.5 and wall_diff['changedFraction']<0.015,wall_diff
     g.command('fill -8 -60 7 8 -52 7 minecraft:air');time.sleep(2)
     REPORT['depthOcclusion']={'open':open_diff,'wall':wall_diff,
         'openFrames':frames(open_after),'wallFrames':frames(wall_after),
