@@ -1,0 +1,58 @@
+name: Recover retained Photon evidence
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+defaults:
+  run:
+    shell: bash
+jobs:
+  recover:
+    if: contains(github.event.head_commit.message, '[recover-shader]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check original audit identity
+        run: |
+          gh run view 38825961607 --json headSha,status,conclusion > "$RUNNER_TEMP/original-run.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          run=json.loads((Path(os.environ['RUNNER_TEMP'])/'original-run.json').read_text())
+          assert run['headSha']=='645a5ffcd03ee452d98292bfe3541efd4ea5c71d' and run['status']=='completed'
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: shaderpack-evidence-photon
+          run-id: 38825961607
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/recovered
+      - name: Preserve original evidence, not a relabelled pass
+        run: |
+          DEST="reports/shaderpack/run-38825961607-photon"
+          SHOTS="shots/aiarsenal/shaderpack/run-38825961607-photon"
+          mkdir -p "$DEST" "$SHOTS"
+          cp "$RUNNER_TEMP/recovered/verification/logs/"* "$DEST/"
+          cp "$RUNNER_TEMP/recovered/verification/shots/"*.png "$SHOTS/"
+          printf 'Source: 645a5ffcd03ee452d98292bfe3541efd4ea5c71d\nRun: https://github.com/standimaoff-oss/aimods/actions/runs/38825961607\nRecovered from original uploaded artifact 12015248251 after evidence-push race.\n' > "$DEST/provenance.txt"
+          python - <<'PY'
+          import gzip,hashlib,json
+          from pathlib import Path
+          folder=Path('reports/shaderpack/run-38825961607-photon');records=[]
+          for p in folder.glob('*.log'):
+              if p.stat().st_size<250000:continue
+              raw=p.read_bytes();dest=p.with_suffix('.log.gz');dest.write_bytes(gzip.compress(raw,mtime=0))
+              assert gzip.decompress(dest.read_bytes())==raw
+              records.append(dict(file=p.name,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),artifact=12015248251))
+              p.unlink()
+          (folder/'compressed-logs.json').write_text(json.dumps(records,indent=2)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python tools/publish_evidence.py "$DEST" "$SHOTS"

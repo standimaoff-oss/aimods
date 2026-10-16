@@ -50,7 +50,8 @@ def powder_cannon(row,index):
 def sturmtiger(row):
     g.command('gamemode creative TestPlayer')
     catalogue.equip(row)
-    g.command('execute as TestPlayer at @s run arsenal_stress use',expect='USE ')
+    g.fx_action(g.LOGS/'client.log','status') # acknowledge queued client inventory/teleport packets
+    g.command('execute as TestPlayer at @s run arsenal_stress use',expect='block=CONSUME')
     catalogue.vehicle(row)
     g.screenshot('sturmtiger-real-reload-repeat')
     g.command('ride TestPlayer dismount')

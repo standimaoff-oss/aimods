@@ -22,7 +22,9 @@ class PublishEvidenceTest(unittest.TestCase):
             (repo/'source.txt').write_text('unstaged change\n')
             staged=git('diff','--cached');dirty=git('diff')
             (repo/'reports').mkdir();(repo/'reports/test.json').write_text('{"result":"FAIL"}\n')
-            first=publish(['reports/test.json'],repo)
+            (repo/'shots/aiarsenal/run-test').mkdir(parents=True)
+            (repo/'shots/aiarsenal/run-test/frame.png').write_bytes(b'fixture')
+            first=publish(['reports/test.json','shots/aiarsenal/run-test'],repo)
             self.assertEqual(git('rev-parse','HEAD'),head)
             self.assertEqual(git('diff','--cached'),staged)
             self.assertEqual(git('diff'),dirty)
@@ -30,7 +32,7 @@ class PublishEvidenceTest(unittest.TestCase):
             self.assertEqual(git('--git-dir='+str(remote),'show',BRANCH+':reports/test.json'),'{"result":"FAIL"}')
             self.assertEqual(publish(['reports/test.json'],repo),first)
 
-    def test_only_report_files_allowed(self):
+    def test_only_evidence_files_allowed(self):
         with tempfile.TemporaryDirectory() as temp:
             repo=Path(temp);(repo/'source.java').write_text('source')
             for paths in [[],['source.java'],['../outside']]:

@@ -86,7 +86,9 @@ def equip(row, nbt=''):
     g.command('clear TestPlayer')
     g.command('item replace entity TestPlayer hotbar.0 with ' + row['id'] + nbt)
     g.key('key', '1')
-    time.sleep(.8)
+    # Real key delivery can lag behind a cross-world teleport on software GL.
+    # Do not invoke use/useOn on the previous hotbar slot.
+    wait(lambda: row['id'] in g.command('data get entity TestPlayer SelectedItem'),30)
 
 
 def gun(row):

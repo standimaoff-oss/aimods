@@ -98,6 +98,8 @@ overrideHeight:600
         g.command('item replace entity TestPlayer hotbar.0 with aiarsenal:'+weapon+'{Ammo:0}')
         g.command('give TestPlayer aiarsenal:'+ammo+' 8')
         g.key('key','1');time.sleep(2)
+        wait(lambda: 'aiarsenal:'+weapon in g.command('data get entity TestPlayer SelectedItem'),30)
+        local('status') # client packet barrier before a real R; no shader rebind
         # Keep Oculus defaults. Production context arbitration must prevent shader
         # rebuilds here; never quietly rebind another mod to make this test pass.
         g.key('keydown','r');time.sleep(.3);g.key('keyup','r')
@@ -189,6 +191,8 @@ if __name__=='__main__':
         run()
     except BaseException as error:
         REPORT.update(result='FAIL',error=type(error).__name__+': '+str(error),traceback=traceback.format_exc())
+        if os.environ.get('GITHUB_ACTIONS')=='true':
+            print('::error title=Shaderpack gameplay::'+REPORT['error'].replace('%','%25').replace('\n','%0A').replace('\r','%0D'),flush=True)
         for row in REPORT['actions']:
             if row.get('result')=='RUNNING':row.update(result='FAIL',error=REPORT['error'])
         raise
