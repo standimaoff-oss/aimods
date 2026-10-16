@@ -160,7 +160,10 @@ def vehicle(row):
     wait(lambda:state()['loaded']<initial['loaded'],5)
     row['mainGunShot']='PASS'
     g.screenshot(row['id'].split(':')[1]+'-fired')
-    row['reloadTimeBudgetSeconds']=max(80,initial['reloadRequired']/20*12+30)
+    # Complementary/llvmpipe measured 369/400 active ticks in 270s, with
+    # no resets and input gaps up to 72 server ticks. Allow slower wall time,
+    # never substitute a timeout extension for an actual loaded/ammo assertion.
+    row['reloadTimeBudgetSeconds']=max(80,initial['reloadRequired']/20*24+60)
     reload_started=time.monotonic()
     g.key('keydown','r')
     try:

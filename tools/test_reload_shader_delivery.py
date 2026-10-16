@@ -3,7 +3,8 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from verify_reload_shader_delivery import check_run,check_shader,verify,RUNTIME,PACKS
+from unittest.mock import patch
+from verify_reload_shader_delivery import check_run,check_shader,verify,RUNTIME,PACKS,audit_sources
 
 SOURCE='a'*40
 
@@ -63,3 +64,29 @@ class MatrixDeliveryTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             p=Path(folder)/'candidate.json';p.write_text(json.dumps(dict(reviewed=False)))
             with self.assertRaisesRegex(AssertionError,'review'):verify(p,folder,folder)
+
+
+class AuditSourcesTest(unittest.TestCase):
+    def candidate(self):
+        return dict(source=SOURCE,runs=dict(gametest=1,catalogue=2,context=3,shader=4),
+                    auditSources=dict(shader='b'*40))
+
+    @patch('verify_reload_shader_delivery.subprocess.check_output',return_value='same-tree\n')
+    def test_qa_only_retest_keeps_all_build_inputs(self,git):
+        sources=audit_sources(self.candidate())
+        self.assertEqual(sources['shader'],'b'*40)
+        self.assertEqual(sources['catalogue'],SOURCE)
+        for call in git.call_args_list:
+            self.assertEqual(call.args[0][:2],['git','rev-parse'])
+            self.assertTrue(call.args[0][2].endswith(':mods/aiarsenal'))
+
+    @patch('verify_reload_shader_delivery.subprocess.check_output')
+    def test_any_changed_build_input_is_rejected(self,git):
+        git.side_effect=lambda cmd,**kw:'new-tree' if cmd[2].startswith('b'*40) else 'old-tree'
+        with self.assertRaisesRegex(AssertionError,'mod/build tree'):audit_sources(self.candidate())
+
+    def test_unknown_kind_or_invalid_commit_is_rejected(self):
+        c=self.candidate();c['auditSources']['unreviewed']='b'*40
+        with self.assertRaisesRegex(AssertionError,'unknown audit'):audit_sources(c)
+        c=self.candidate();c['source']='HEAD'
+        with self.assertRaisesRegex(AssertionError,'invalid audit'):audit_sources(c)

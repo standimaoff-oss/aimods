@@ -8,6 +8,7 @@ import re
 from collections import Counter
 from pathlib import Path
 import sys
+import subprocess
 
 PACKS={'photon','complementary','bsl'}
 RUNTIME={
@@ -15,6 +16,24 @@ RUNTIME={
  'context':'Contextual launchpad, craft, cannon and Javelin actions in installed Minecraft',
  'shader':'Real shader client — cannon and Sturmtiger reload, scopes, fallback and toggles',
 }
+
+def audit_sources(candidate):
+    """QA-only reruns may differ in commit, never in the complete mod/build tree.
+    Exact installed JAR equality is checked separately for every runtime below.
+    Git tree IDs include Gradle files, resources and vendored build inputs, not
+    merely Java files. Missing history fails closed (delivery fetches history).
+    """
+    overrides=candidate.get('auditSources',{})
+    assert set(overrides)<=set(candidate['runs']),'unknown audit source'
+    sources={kind:overrides.get(kind,candidate['source']) for kind in candidate['runs']}
+    def tree(source):
+        assert re.fullmatch('[0-9a-f]{40}',source),'invalid audit source'
+        return subprocess.check_output(['git','rev-parse',source+':mods/aiarsenal'],text=True).strip()
+    expected=tree(candidate['source'])
+    for source in set(sources.values()):
+        assert tree(source)==expected,'QA rerun changed the mod/build tree'
+    return sources
+
 
 def check_run(data,source,kind):
     assert data['headSha']==source,'wrong source'
@@ -64,17 +83,18 @@ def verify(candidate,metadata,root):
     assert re.fullmatch('[0-9a-f]{40}',c['source'])
     assert re.fullmatch('[0-9a-f]{64}',c['sha256'] or ''),'no reviewed installed hash'
     assert set(c['runs'])=={'gametest','catalogue','context','shader'}
-    for kind,run in c['runs'].items():check_run(json.loads((metadata/f'{run}.json').read_text()),c['source'],kind)
+    sources=audit_sources(c)
+    for kind,run in c['runs'].items():check_run(json.loads((metadata/f'{run}.json').read_text()),sources[kind],kind)
     def load(folder,file):return json.loads((root/folder/file).read_text())
     cat=Path('stability')/f"run-{c['runs']['catalogue']}"
     ctx=Path('context')/f"run-{c['runs']['context']}"
     gt=load(Path('gametest')/f"run-{c['runs']['gametest']}",'gametest-early.json')
-    assert gt['source']==c['source'] and not gt['failures']
+    assert gt['source']==sources['gametest'] and not gt['failures']
     assert any('All 183 required tests passed' in line for line in gt['totals'])
-    folders=[cat,ctx]+[Path('shaderpack')/f"run-{c['runs']['shader']}-{p}" for p in sorted(PACKS)]
-    for folder in folders:
+    folders=[(cat,'catalogue'),(ctx,'context')]+[(Path('shaderpack')/f"run-{c['runs']['shader']}-{p}",'shader') for p in sorted(PACKS)]
+    for folder,kind in folders:
         assert load(folder,'installed-provenance.json')['sha256']==c['sha256'],'different installed bytes'
-        assert c['source'] in (root/folder/'provenance.txt').read_text(),'wrong evidence provenance'
+        assert sources[kind] in (root/folder/'provenance.txt').read_text(),'wrong evidence provenance'
     catalogue=load(cat,'catalogue-gameplay.json');inventory=load(cat,'catalogue-inventory.json')
     context=load(ctx,'context-gameplay.json')
     assert catalogue['runOutcome']['status']=='PASS' and context['runOutcome']['status']=='PASS'
@@ -91,7 +111,7 @@ def verify(candidate,metadata,root):
     for report in (context,catalogue):
         assert report['worldSaveReopen']['status']=='PASS' and report['worldSaveReopen']['archivedItems']==448
     for pack in PACKS:check_shader(load(Path('shaderpack')/f"run-{c['runs']['shader']}-{pack}",'shaderpack-gameplay.json'),pack)
-    return dict(source=c['source'],sha256=c['sha256'],runs=c['runs'],result='ACCEPTED_FOR_SCOPED_BETA',
+    return dict(source=c['source'],auditSources=sources,sha256=c['sha256'],runs=c['runs'],result='ACCEPTED_FOR_SCOPED_BETA',
         limits='Not full functional acceptance of every mode of 448 items. Linux llvmpipe, not Windows/NVIDIA; Photon SH_SKYLIGHT=false. Three specific packs, not all shaderpacks.')
 
 if __name__=='__main__':
