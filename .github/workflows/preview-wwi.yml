@@ -17,7 +17,6 @@ jobs:
       DISPLAY: ':99'
       LIBGL_ALWAYS_SOFTWARE: '1'
       GALLIUM_DRIVER: llvmpipe
-      MC_RUNS: ${{ runner.temp }}/mc-runs
       QA_PREFIX: public-preview
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +49,8 @@ jobs:
           pactl set-default-sink qa
           pactl set-default-source qa.monitor
       - name: Capture real Minecraft F2 images
+        env:
+          MC_RUNS: ${{ runner.temp }}/mc-runs
         run: python tools/wwi/preview_game.py
       - name: Publish only the curated preview images
         run: |
