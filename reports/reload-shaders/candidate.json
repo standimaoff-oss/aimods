@@ -1,5 +1,5 @@
 {
-  "reviewed": false,
+  "reviewed": true,
   "source": "71dd4b6c9394f3c426421f3ab15d2b920f99b95d",
   "sha256": "af5cf3ac5179cc63307a01e2cf68952f5e2c1a4736e9498d556bc2855282e615",
   "runs": {
@@ -8,9 +8,14 @@
     "context": 38831208110,
     "shader": 38829581137
   },
-  "note": "NOT approved. Hash observed in the three 38827795868 clients, not yet accepted across all audits. QA-only shader rerun must have identical complete mod/build tree and installed bytes. Visual flash review and all runtime gates remain mandatory.",
+  "note": "Approved only for a scoped experimental beta after four successful audits and manual shader/reload/optic F2 review. Not full functional/visual acceptance of all 448 items; not Windows/NVIDIA or universal shader certification.",
   "auditSources": {
     "shader": "3444a19e3a9542fb469e9e80c3b906f10295e3ca",
     "context": "37ff398667a510e5b38b17aedf12f24f3ef3db00"
-  }
+  },
+  "reviewLimits": [
+    "Bismarck and MQ9 context screenshots show HUD/sky, not a verified external model/camera view.",
+    "Bismarck passed both shots on attempt 1 in the repeat; the earlier isolated failure cause is not conclusively established.",
+    "Shader timings are llvmpipe measurements; Photon SH_SKYLIGHT=false."
+  ]
 }

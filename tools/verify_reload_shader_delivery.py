@@ -115,6 +115,7 @@ def verify(candidate,metadata,root):
         assert report['worldSaveReopen']['status']=='PASS' and report['worldSaveReopen']['archivedItems']==448
     for pack in PACKS:check_shader(load(Path('shaderpack')/f"run-{c['runs']['shader']}-{pack}",'shaderpack-gameplay.json'),pack)
     return dict(source=c['source'],auditSources=sources,sha256=c['sha256'],runs=c['runs'],result='ACCEPTED_FOR_SCOPED_BETA',
+        reviewLimits=c.get('reviewLimits',[]),
         limits='Not full functional acceptance of every mode of 448 items. Linux llvmpipe, not Windows/NVIDIA; Photon SH_SKYLIGHT=false. Three specific packs, not all shaderpacks.')
 
 if __name__=='__main__':
