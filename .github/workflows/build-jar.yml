@@ -26,14 +26,12 @@ jobs:
             mods/aiarsenal/gradle/wrapper/gradle-wrapper.properties
       - name: Build mod JAR
         working-directory: mods/aiarsenal
-        run: |
-          mkdir -p ../../verification/logs
-          set -o pipefail
-          ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
+        run: ./gradlew build --no-daemon --stacktrace
       - name: Record artifact checksums and source revision
         if: success()
         working-directory: mods/aiarsenal
         run: |
+          mkdir -p ../../verification
           shopt -s nullglob
           jars=(build/libs/*.jar)
           if (( ${#jars[@]} == 0 )); then
@@ -42,14 +40,13 @@ jobs:
           fi
           sha256sum "${jars[@]}" > ../../verification/SHA256SUMS
           printf 'Commit: %s\nWorkflow run: %s\n' "$GITHUB_SHA" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > ../../verification/provenance.txt
-      - name: Upload JAR and build diagnostics
+      - name: Upload JAR and checksum
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: aiarsenal-jar-${{ github.run_number }}
           path: |
             mods/aiarsenal/build/libs/*.jar
-            verification/logs/build.log
             verification/SHA256SUMS
             verification/provenance.txt
           if-no-files-found: warn

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Static port checks; NOT a replacement for real client rendering tests."""
 from pathlib import Path
+import hashlib
 import re
 import unittest
-import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 JAVA = ROOT / 'mods/aiarsenal/src/main/java/ru/aiforge'
@@ -11,12 +11,18 @@ PORT = JAVA / 'arsenal/volumetric'
 SHADERS = ROOT / 'mods/aiarsenal/src/main/resources/assets/aiarsenal/shaders/volpyro'
 
 class PortTests(unittest.TestCase):
-    def test_shaders_are_extracted_from_supplied_jar(self):
-        with zipfile.ZipFile(ROOT / 'volpyro-1.5.6-nuclear (1).jar') as jar:
-            files = [name for name in jar.namelist() if '/shaders/core/' in name and name.endswith(('.fsh', '.vsh'))]
-            self.assertEqual(len(files), 4)
-            for name in files:
-                self.assertEqual((SHADERS / Path(name).name).read_bytes(), jar.read(name))
+    def test_upstream_shader_bytes_match_recorded_hashes(self):
+        # The original third-party JAR is intentionally not redistributed.
+        # These digests pin the four upstream shader files documented in THIRD_PARTY_NOTICES.md.
+        expected = {
+            'volumetric_composite.fsh': 'eafb1d54026164bbbe3995e35307aae3372b2ee6a7b68300602510e1ae4a54fa',
+            'volumetric_composite.vsh': 'c5f9acc8397881538769ee9fe8b4af7d99e3aee3ef761644887e717985c3879a',
+            'volumetric_raymarch.fsh': '643b7b99956505e6180fe2e3974781ea0d6a788208e76340a292b2440317b43a',
+            'volumetric_raymarch.vsh': 'c5f9acc8397881538769ee9fe8b4af7d99e3aee3ef761644887e717985c3879a',
+        }
+        for name, digest in expected.items():
+            with self.subTest(shader=name):
+                self.assertEqual(hashlib.sha256((SHADERS / name).read_bytes()).hexdigest(), digest)
 
     def test_no_donor_gameplay_or_unmapped_symbols(self):
         for path in PORT.rglob('*.java'):

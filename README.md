@@ -1,48 +1,45 @@
-# aimods — AI Arsenal (Forge 1.20.1)
+# AI Arsenal
 
-## Текущая выдача — alpha.9 · 15.10.2026
+Forge content mod for Minecraft 1.20.1. Adds vehicles, firearms, artillery, aircraft and equipment from several historical periods.
 
-**[Скачать aiarsenal-1.0.1-alpha.9.jar](https://github.com/standimaoff-oss/aimods/releases/download/stage4-38777157178/aiarsenal-1.0.1-alpha.9.jar)**
-Minecraft **1.20.1** · Forge **47.4.23** · Java **17**.
+**Version:** `1.0.1-alpha.11` · **Minecraft:** `1.20.1` · **Forge:** `47.4.23` · **Java:** `17`
 
-- Современная техника и авиация, стрелковое оружие и оружие WWII, исправленные прицелы/хват.
-- СССР и Германия WWII, Франция и Российская империя около 1812: 16 новых комплектов формы, старые комплекты сохранены.
-- Французские и русские мушкеты, кремнёвые пистолеты, сабли, 6- и 12-фунтовые пушки с ручным заряжанием.
-- Собственный объёмный дым выстрелов, обычных взрывов и двигателей на основе рендера VolPyro; готовые ядерные эффекты сохранены.
-- Idle / медленный шаг / ходьба / бег / приседание, ADS и перезарядка, реальные удалённые игроки.
-- В alpha.9 исправлена позиция бомбардировщика после vanilla summon/load с сохранением полётного состояния.
+## Content
 
-Ядерное оружие, дроны и боеприпасы действующих носителей/ПВО не удалены.
+- British Mark I tank, Gewehr 98 rifle and 57 mm ammunition.
+- WWII and modern firearms, vehicles, aircraft, artillery and equipment.
+- French and Russian Empire weapons and artillery inspired by 1812.
+- In-game smoke and visual effects.
 
-**[Отчёт alpha.9, скриншоты и видео](reports/alpha9/README.md)** ·
-[Управление](notes/stage4/CONTROLS.md) ·
-[Релиз: JAR, 17 MP4, Blender](https://github.com/standimaoff-oss/aimods/releases/tag/stage4-38777157178) ·
-[CI — SUCCESS](https://github.com/standimaoff-oss/aimods/actions/runs/38777157178).
+The item and entity IDs are part of existing worlds; avoid installing two versions of the mod at once. Back up worlds before updating.
 
-27 Python-тестов, **170/170 GameTests**, миграция старого мира с повторным открытием,
-два установленных Forge-клиента, 212 F2. Исправленные сцены просмотрены вручную.
-Проверка на llvmpipe не доказывает прирост аппаратного FPS. Танковый референс
-заказчика не найден; переработка по нему не заявляется.
+## Install
 
-### Установка
-1. Сделать резервную копию мира.
-2. Заменить старый JAR на клиенте и сервере; не устанавливать две версии одновременно.
-3. Отдельный VolPyro не нужен.
+1. Install Minecraft 1.20.1 and Forge 47.4.23 with Java 17.
+2. Put the built `aiarsenal-*.jar` in the `mods` folder on the client and server.
+3. Remove older AI Arsenal JARs from that folder.
 
-### Исходники и проверка
-- `mods/aiarsenal/` — исходники; `mods/aiarsenal/src/main/resources/` — GLB, текстуры, звуки и данные.
-- `tools/` — Blender/MCP, генераторы ресурсов и проверочные сценарии.
-- `notes/_tz/` — ТЗ; `reports/` — результаты с происхождением JAR и игровыми материалами.
-- Сборка: `cd mods/aiarsenal && ./gradlew build` (Java 17).
-- Текущий полный сценарий: `.github/workflows/stage4-verify.yml`, в том числе ручной `workflow_dispatch`.
-  Создаёт только draft после всех автоматических проверок; публикация — после просмотра кадров.
-  Кэши и одноразовые тестовые миры хранятся вне исходников, пользовательские миры не перезаписываются.
+The latest CI build is available from [GitHub Actions](https://github.com/standimaoff-oss/aimods/actions). Open the successful **Build AI Arsenal JAR** run and download its `aiarsenal-jar-*` artifact.
 
-### История принятых этапов
-- [Alpha.5: прицелы, пистолеты, удаление урана, миграция](reports/stage1e/README.md).
-- [Alpha.6: форма четырёх армий и хват](reports/stage2/README.md).
-- [Alpha.8: Франция/РИ 1812, объёмный дым и движения](reports/stage4/README.md).
-- [Alpha.9: закрыт дефект загрузки самолётов](reports/alpha9/README.md).
+## Build from source
 
-Прежние публичные релизы сохранены. Исторические workflow и отчёты относятся к своим
-версиям; для текущей сборки используйте указанный выше stage4-сценарий.
+```bash
+cd mods/aiarsenal
+./gradlew build --no-daemon
+```
+
+On Windows, run `gradlew.bat build --no-daemon` from `mods\aiarsenal`. The resulting JAR is in `mods/aiarsenal/build/libs/`.
+
+## Controls
+
+See [controls and operation](docs/controls.md).
+
+## Third-party notices
+
+See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for external asset and license acknowledgements.
+
+---
+
+### Кратко
+
+Мод для Forge 1.20.1: техника, стрелковое оружие, артиллерия, авиация и снаряжение разных эпох. Mark I, Gewehr 98 и 57-мм боеприпасы входят в текущую ветку.

@@ -1,25 +1,31 @@
-# VolPyro volumetric effects
+# Third-party notices
 
-The files under `ru/aiforge/arsenal/volumetric/` and
-`assets/aiarsenal/shaders/volpyro/` are adapted from the user-supplied
-`volpyro-1.5.6-nuclear (1).jar`, version 1.5.6, authors **VolPyro Contributors**.
-Its `META-INF/mods.toml` declares the **MIT** license. No separate copyright or
-license-text entry was present in the supplied archive. The existing authorship
-and license declaration are preserved here; no ownership of the donor work is claimed.
+## VolPyro volumetric renderer — MIT
 
-SHA-256 of donor JAR:
-`48a015439cf4ac955cd0aec65ecfef488a09381246e17bb9ea6a687160d1bd3c`.
+The VolPyro 1.5.6 Forge metadata names **VolPyro Contributors** as authors and declares the **MIT** license. The original JAR and decompiled reference source are not redistributed in this repository. The four upstream shader files under `assets/aiarsenal/shaders/volpyro/` are retained byte-for-byte; their SHA-256 digests are pinned by `tools/check_volumetric.py`.
 
-Port changes: namespace/Forge mappings, resource lifecycle and OpenGL state safety,
-bounded caches/queues and effect priorities, adapters to AI Arsenal's existing
-visual events. Donor items, blocks, recipes, entities and server damage logic are
-NOT imported. Shader sources are extracted byte-for-byte from the supplied JAR.
+The port changes the namespace and Forge integration, adds resource-lifecycle and OpenGL-state handling, bounds caches and queues, and routes effects through this mod's visual-event system. Donor items, blocks, recipes, entities, and server-side damage logic are not imported. `arsenal_smoke.glsl` is an additional, original smoke field and material palette.
 
-Decompiled, remapped reference text is retained under
-`notes/stage1/volpyro-reference/` for comparison, not compiled into the mod.
+The supplied archive declared MIT in `META-INF/mods.toml` but did not include a separate license file or copyright year. The standard MIT license text is reproduced below; no ownership of VolPyro work is claimed.
 
-Stage4 extension: `arsenal_smoke.glsl` is an original ellipsoidal smoke density field
-and material palette. It is composed into the ray marcher for new volume type 11
-at load time. All four supplied shader resources remain unchanged, as do the
-nuclear density functions, presets and type IDs. The custom smoke uses the donor's
-noise/lighting/integration infrastructure; no claim of an independently rewritten renderer.
+### MIT License
+
+Copyright (c) VolPyro Contributors (year not specified upstream)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

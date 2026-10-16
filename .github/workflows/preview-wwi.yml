@@ -1,0 +1,86 @@
+name: Capture World War I gameplay previews
+on:
+  push:
+    branches:
+      - arena/10158ad9-aimods
+permissions:
+  contents: write
+concurrency:
+  group: preview-wwi-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  preview:
+    if: contains(github.event.head_commit.message, '[preview]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    env:
+      DISPLAY: ':99'
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      GALLIUM_DRIVER: llvmpipe
+      MC_RUNS: ${{ runner.temp }}/mc-runs
+      QA_PREFIX: public-preview
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+          cache-dependency-path: |
+            mods/aiarsenal/**/*.gradle*
+            mods/aiarsenal/gradle/wrapper/gradle-wrapper.properties
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install software display and image validation
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb xdotool x11-utils pulseaudio libegl1 libgl1 libgl1-mesa-dri libopenal1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
+          python -m pip install pillow
+          Xvfb :99 -screen 0 1400x1000x24 -nolisten tcp > "$RUNNER_TEMP/xvfb.log" 2>&1 &
+          python - <<'PY'
+          import subprocess,time
+          end=time.monotonic()+30
+          while subprocess.run(['xdpyinfo','-display',':99'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:
+              if time.monotonic()>end: raise RuntimeError('Xvfb did not become ready')
+              time.sleep(.2)
+          PY
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=qa rate=48000
+          pactl set-default-sink qa
+          pactl set-default-source qa.monitor
+      - name: Capture real Minecraft F2 images
+        run: python tools/wwi/preview_game.py
+      - name: Publish only the curated preview images
+        run: |
+          mkdir -p previews
+          cp verification/shots/public-preview-mark-i-exterior.png previews/mark-i.png
+          cp verification/shots/public-preview-gewehr98-first-person.png previews/gewehr98.png
+          cp verification/shots/public-preview-gewehr98-aim.png previews/gewehr98-aim.png
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          for path in sorted(Path('previews').glob('*.png')):
+              with Image.open(path) as image:
+                  image.verify()
+              print(f'{path}: {path.stat().st_size} bytes')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add previews/mark-i.png previews/gewehr98.png previews/gewehr98-aim.png
+          if ! git diff --cached --quiet; then
+            git commit -m '[preview-assets] [stage1-evidence] Publish authentic in-game preview images'
+            git push origin HEAD:arena/10158ad9-aimods
+          else
+            echo 'Preview images are unchanged; no commit needed.'
+          fi
+      - name: Upload preview images only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wwi-gameplay-previews-${{ github.run_number }}
+          path: |
+            verification/shots/public-preview-*.png
+            previews/*.png
+          if-no-files-found: warn
+          retention-days: 30

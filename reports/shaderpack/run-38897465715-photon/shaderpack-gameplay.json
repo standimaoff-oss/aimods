@@ -1,8 +1,0 @@
-{
-  "result": "FAIL",
-  "pack": "photon",
-  "actions": [],
-  "toggles": [],
-  "error": "AssertionError: [12:05:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=2 draw=32.47ms tick=0.012ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0",
-  "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 373, in <module>\n    run()\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 154, in run\n    assert 'lastStage=AFTER_LEVEL' in open_after,open_after\nAssertionError: [12:05:13] [Render thread/INFO] [ru.ai.ar.AiArsenal/]: FX QA status: Arsenal VolPyro: active=true backend=shaderpack-raymarch-probe packBlocked=true probe=true lastStage=minecraft:after_level volumes=1 plumes=0 frames=2 draw=32.47ms tick=0.012ms renderer=software world=minecraft:overworld target=MISS safeParticles=0 providerFallbackParticles=0 safeCloudFrames=0\n"
-}

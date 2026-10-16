@@ -1,8 +1,0 @@
-{
-  "result": "FAIL",
-  "pack": "complementary",
-  "actions": [],
-  "toggles": [],
-  "error": "AssertionError: {'meanRgbDelta': 8.434920447716769, 'changedFraction': 0.07048506393948073, 'region': [213, 96, 640, 374]}",
-  "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 373, in <module>\n    run()\n  File \"/home/runner/work/aimods/aimods/tools/verify_shaderpack_game.py\", line 169, in run\n    assert wall_diff['meanRgbDelta']<1.5 and wall_diff['changedFraction']<0.03,wall_diff\nAssertionError: {'meanRgbDelta': 8.434920447716769, 'changedFraction': 0.07048506393948073, 'region': [213, 96, 640, 374]}\n"
-}
