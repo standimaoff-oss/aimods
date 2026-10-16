@@ -40,11 +40,11 @@
 
 ### Просмотренные оригинальные F2
 
-- [Мосин ПУ / Photon](../../shots/aiarsenal/shaderpack/run-38823863961-photon/shaderpack-photon-photon-mosin_pu-ads.png):
+- [Мосин ПУ / Photon](https://github.com/standimaoff-oss/aimods/blob/3444a19e3a9542fb469e9e80c3b906f10295e3ca/shots/aiarsenal/shaderpack/run-38823863961-photon/shaderpack-photon-photon-mosin_pu-ads.png):
   круглая маска и сетка есть, прежней светлой полосы снаружи маски не видно.
-- [Мушкет / Complementary](../../shots/aiarsenal/shaderpack/run-38823863961-complementary/shaderpack-complementary-complementary-musket_1777-ads.png):
+- [Мушкет / Complementary](https://github.com/standimaoff-oss/aimods/blob/3444a19e3a9542fb469e9e80c3b906f10295e3ca/shots/aiarsenal/shaderpack/run-38823863961-complementary/shaderpack-complementary-complementary-musket_1777-ads.png):
   модель и текстура видны, кремнёвый замок справа; это не проверка пушки или взрыва.
-- [ППШ / BSL](../../shots/aiarsenal/shaderpack/run-38823863961-bsl/shaderpack-bsl-bsl-ppsh41-ads.png):
+- [ППШ / BSL](https://github.com/standimaoff-oss/aimods/blob/3444a19e3a9542fb469e9e80c3b906f10295e3ca/shots/aiarsenal/shaderpack/run-38823863961-bsl/shaderpack-bsl-bsl-ppsh41-ads.png):
   модель и открытый прицел видны; освещение металла тёмное, отсутствующих/пурпурных текстур не видно.
 
 ## Второй цикл: исходник 6baed82
@@ -91,7 +91,7 @@ Photon выстрелил из Sturmtiger, но не завершил перез
 возраст последнего ввода достигал 42 тиков; прежний порог сохранения прогресса 20 тиков
 обнулял длинную загрузку. Максимум прогресса — 9 из необходимых 400 тиков.
 Это отдельная проблема редкого ввода на программном GL, не доказательство причины Windows native crash.
-Просмотрен оригинальный [F2 после таймаута](../../shots/aiarsenal/shaderpack/run-38825961607-photon/shaderpack-photon-photon-failure.png):
+Просмотрен оригинальный [F2 после таймаута](https://github.com/standimaoff-oss/aimods/blob/3444a19e3a9542fb469e9e80c3b906f10295e3ca/shots/aiarsenal/shaderpack/run-38825961607-photon/shaderpack-photon-photon-failure.png):
 модель машины и текстуры видны, HUD показывает отсутствие боеприпаса; завершения загрузки снимок не подтверждает.
 
 ## Текущий повтор: исходник 71dd4b6
@@ -161,8 +161,12 @@ Complementary Reimagined r5.9.3 и BSL 10.1.8 (настройки издател
 ### Визуальный контроль четвёртого цикла
 
 Просмотрены F2 Photon: обычный дым виден; nuclear/legacy fallback рисуются, но камера стоит
-слишком близко для оценки формы всего облака. Кадр `flash-nuke` оказался снят **до** получения
-ядерного пакета (виден остаток предыдущего обычного дыма); его название не доказывает вспышку.
+слишком близко для оценки формы всего облака. На кадре `flash-nuke` виден остаток предыдущего обычного дыма, а ядерная вспышка не видна;
+возможен захват до обработки нового пакета. Название снимка не доказывает вспышку.
 Аналогичный ранний кадр BSL тоже не подтверждает вспышку. Автоматический PASS этих двух паков
 поэтому не закрывает визуальную приёмку вспышек. QA-повтор теперь ждёт клиентский пакетный
 барьер перед F2, а delivery требует записи обоих таких подтверждений и отдельного ручного просмотра.
+
+Актуальный QA-повтор: [38829581137](https://github.com/standimaoff-oss/aimods/actions/runs/38829581137),
+исходник сценария `3444a19e3a9542fb469e9e80c3b906f10295e3ca`; полный mod/build tree идентичен
+`71dd4b6`. Промежуточный повтор 38829401098 заменён этим прогоном, его частичные результаты не PASS.
