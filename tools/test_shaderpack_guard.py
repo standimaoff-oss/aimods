@@ -93,7 +93,13 @@ class WiringTests(unittest.TestCase):
         start = text.index('public static void render(')
         end = text.index('try (GlStateSnapshot', start)
         self.assertIn('&& available()', text[start:end])
-        self.assertIn('&& !ShaderPackCompatibility.blocked()', text)
+        available=text[text.index('public static boolean available()'):text.index('/** Render-thread resource reload',text.index('public static boolean available()'))]
+        self.assertIn('boolean blocked = ShaderPackCompatibility.blocked();', available)
+        self.assertIn('return !blocked || shaderpackVolumeProbeEnabled();', available)
+        self.assertIn('Boolean.getBoolean("aiarsenal.visualQa")', text)
+        self.assertIn('Boolean.getBoolean("aiarsenal.shaderpackVolumeProbe")', text)
+        self.assertIn('"shaderpack-raymarch-probe"', text)
+        self.assertIn('RenderLevelStageEvent.Stage.AFTER_LEVEL : RenderLevelStageEvent.Stage.AFTER_PARTICLES',text)
 
     def test_native_upload_state_is_scoped(self):
         folder=SOURCE.parent
