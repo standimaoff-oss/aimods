@@ -140,7 +140,12 @@ overrideHeight:600
         before=local('status')
         g.command('arsenal_visual_test '+effect+' 0 -60 22')
         if effect != 'blast':
-            time.sleep(.2);g.screenshot(PACK+'-flash-'+effect)
+            # RCON confirms sending, not client receipt. The old .2s capture
+            # sometimes photographed the PREVIOUS effect before this packet.
+            ack=local('status')
+            g.screenshot(PACK+'-flash-'+effect)
+            REPORT.setdefault('flashObservations',[]).append(dict(effect=effect,clientAck=ack))
+            save()
         time.sleep(4)
         g.screenshot(PACK+'-fallback-'+effect)
         after=local('status')

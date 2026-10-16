@@ -46,6 +46,7 @@ class MatrixDeliveryTest(unittest.TestCase):
               functional='MAIN_GUN_FIRE_RELOAD_REPEAT_PASS',mainGunShot='PASS',mainGunReload='PASS',mainGunRepeatShot='PASS',drive='PASS')],
           fallbackObservations=[dict(effect=e,before='safeParticles=0 safeCloudFrames=0',after='safeParticles=5 safeCloudFrames=5')
             for e in ['blast','nuke','legacy_nuke']],
+          flashObservations=[dict(effect=e,clientAck='FX QA status: acknowledged') for e in ['nuke','legacy_nuke']],
           toggles=[dict(round=i,framesBefore=40,framesAfter=40) for i in range(2)])
 
     def test_shader_actions_and_safe_draws(self):
@@ -56,6 +57,8 @@ class MatrixDeliveryTest(unittest.TestCase):
                          lambda r:r['actions'][2].update(mainGunReload='NOT_VERIFIED'),
                          lambda r:r['fallbackObservations'][0].update(after='safeParticles=0 safeCloudFrames=0'),
                          lambda r:r.update(playerEffects=['minecraft:blindness']),
+                         lambda r:r.update(flashObservations=[]),
+                         lambda r:r['flashObservations'][0].update(clientAck=''),
                          lambda r:r['toggles'][0].update(framesAfter=41)]:
             report=self.report();mutation(report)
             with self.assertRaises(AssertionError):check_shader(report,'photon')

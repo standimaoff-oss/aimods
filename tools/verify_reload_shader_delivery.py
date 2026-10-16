@@ -72,6 +72,9 @@ def check_shader(report,pack):
         key='safeCloudFrames' if row['effect']=='legacy_nuke' else 'safeParticles'
         old=int(re.search(key+r'=(\d+)',row['before'])[1]);new=int(re.search(key+r'=(\d+)',row['after'])[1])
         assert new>old,'fallback never executed'
+    flashes=report['flashObservations']
+    assert len(flashes)==2 and {r['effect'] for r in flashes}=={'nuke','legacy_nuke'}
+    assert all('FX QA status:' in r['clientAck'] for r in flashes),'flash capture lacked client barrier'
     assert len(report['toggles'])==2 and {r['round'] for r in report['toggles']}=={0,1}
     assert all(r['framesAfter']<=r['framesBefore'] for r in report['toggles'])
     assert not {'minecraft:blindness','minecraft:nausea'}.intersection(report['playerEffects'])
