@@ -27,7 +27,7 @@ The item and entity IDs are part of existing worlds; avoid installing two versio
 2. Put the built `aiarsenal-*.jar` in the `mods` folder on the client and server.
 3. Remove older AI Arsenal JARs from that folder.
 
-The latest CI build is available from [GitHub Actions](https://github.com/standimaoff-oss/aimods/actions). Open the successful **Build AI Arsenal JAR** run and download its `aiarsenal-jar-*` artifact.
+The latest successful build is available as a [direct download](https://api.github.com/repos/standimaoff-oss/aimods/actions/artifacts/12072526708/zip) (ZIP containing the JAR and `SHA256SUMS`; built from [commit `e76a3f8`](https://github.com/standimaoff-oss/aimods/commit/e76a3f89effee2dab2e195e97b08ab79d664bdc4)). See the [build log](https://github.com/standimaoff-oss/aimods/actions/runs/38959840931). GitHub Actions expires this artifact on **2026-10-30**.
 
 ## Build from source
 
