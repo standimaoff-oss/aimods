@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "aiarsenal:uranium_ore",
-    "aiarsenal:deepslate_uranium_ore",
     "aiarsenal:steel_block",
     "aiarsenal:reinforced_concrete",
     "aiarsenal:launch_pad_1",

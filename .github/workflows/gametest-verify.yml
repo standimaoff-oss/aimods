@@ -1,0 +1,43 @@
+name: GameTests — fast regression diagnostics
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+  workflow_dispatch:
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash
+concurrency:
+  group: gametest-${{ github.ref }}-${{ (contains(github.event.head_commit.message, '[gametest]') || github.event_name == 'workflow_dispatch') && 'active' || github.run_id }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[gametest]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Isolate disposable runtime
+        run: |
+          echo "MC_RUNS=$RUNNER_TEMP/mc-runs" >> "$GITHUB_ENV"
+          echo "GRADLE_USER_HOME=$RUNNER_TEMP/gradle-home" >> "$GITHUB_ENV"
+          mkdir -p verification/logs
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/gradle-home
+          key: forge-47.4.23-gradle8.8-v1
+      - name: Minecraft GameTests
+        run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
+      - name: Archive logs privately as a short-lived Actions artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gametest-evidence
+          path: verification/logs/
+          if-no-files-found: warn
+          retention-days: 14

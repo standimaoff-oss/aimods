@@ -146,7 +146,7 @@ public final class DecoTests {
             if (l.getRecipeManager().byKey(new net.minecraft.resources.ResourceLocation("aiarsenal", e.getKey())).isEmpty()) { h.fail("no recipe " + e.getKey()); return; }
             n++;
         }
-        if (n != ru.aiforge.realwar.item.UniformItem.SETS.length * 4 || n != 64) { h.fail("uniform count " + n); return; }
+        if (n != ru.aiforge.realwar.item.UniformItem.SETS.length * 4 || n != 128) { h.fail("uniform count " + n); return; }
         var z = h.spawn(EntityType.ZOMBIE, new BlockPos(2, 2, 2));
         z.setNoAi(true);
         final int base = z.getArmorValue();

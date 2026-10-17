@@ -24,16 +24,16 @@ public final class DamageFx {
         VehicleDamage.Geo g = VehicleDamage.geo(v);
         double ez = g.engineFront() ? g.cz() + g.hz() * 0.6 : g.cz() - g.hz() * 0.7;
         Vec3 eng = v.localToWorld(g.cx(), g.cy() + g.hy() + 0.1, ez);
-        if (s.hurtBit(ENGINE) && t % 3 == 0) puff(l, ParticleTypes.SMOKE, eng, r, 0.4, 0.05);
-        if (s.broken(ENGINE) && t % 2 == 0) puff(l, ParticleTypes.LARGE_SMOKE, eng, r, 0.4, 0.06);
+        if (s.hurtBit(ENGINE) && t % 3 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), eng, r, 0.4, 0.05);
+        if (s.broken(ENGINE) && t % 2 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), eng, r, 0.4, 0.06);
         if (s.burning()) {
             for (int i = 0; i < 2; i++) puff(l, ParticleTypes.FLAME, eng, r, 0.6, 0.03);
-            if (t % 3 == 0) puff(l, ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, eng.add(0, 0.5, 0), r, 0.4, 0.07);
+            if (t % 3 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), eng.add(0, 0.5, 0), r, 0.4, 0.07);
             if (r.nextInt(6) == 0) puff(l, ParticleTypes.LAVA, eng, r, 0.5, 0);
         }
         if (s.dead()) {
             Vec3 top = g.yp() != null ? v.localToWorld(g.yp()[0], g.yp()[1] + 0.3, g.yp()[2]) : v.localToWorld(0, g.cy() + g.hy(), g.cz());
-            if (t % 3 == 0) puff(l, ParticleTypes.CAMPFIRE_COSY_SMOKE, top, r, 0.5, 0.05);
+            if (t % 3 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), top, r, 0.5, 0.05);
             if (s.broken(TURRET_GONE) && s.burning()) for (int i = 0; i < 3; i++) puff(l, ParticleTypes.FLAME, top, r, 0.6, 0.06);
         }
         if (s.repairMod >= 0 && !s.burning() && t % 8 == 0 && Math.abs(v.speedMs) < 0.3) {
@@ -51,23 +51,23 @@ public final class DamageFx {
         Vec3 eng = c.localToWorld(CraftDamage.enginePoint(c));
         boolean big = c.kind.water != null && c.kind.water.length() > 60;
         double sp = big ? 2.5 : 0.4;
-        if (s.hurtBit(ENGINE) && t % 2 == 0) puff(l, ParticleTypes.SMOKE, eng, r, sp, 0.04);
-        if (s.broken(ENGINE)) puff(l, big ? ParticleTypes.CAMPFIRE_COSY_SMOKE : ParticleTypes.LARGE_SMOKE, eng, r, sp, 0.05);
+        if (s.hurtBit(ENGINE) && t % 2 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), eng, r, sp, 0.04);
+        if (s.broken(ENGINE)) puff(l, big ? ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get() : ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), eng, r, sp, 0.05);
         if (s.burning()) {
             Vec3 fp = c.localToWorld(CraftDamage.firePoint(c));
             for (int i = 0; i < (big ? 6 : 2); i++) puff(l, ParticleTypes.FLAME, fp, r, big ? 3.0 : 0.5, 0.04);
-            puff(l, ParticleTypes.LARGE_SMOKE, fp, r, big ? 3.0 : 0.5, 0.08);
-            if (t % 3 == 0) puff(l, ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, fp, r, big ? 3.0 : 0.3, 0.1);
+            puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), fp, r, big ? 3.0 : 0.5, 0.08);
+            if (t % 3 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), fp, r, big ? 3.0 : 0.3, 0.1);
         }
         for (int i = 0; i < N_GUNS; i++) {
             if (s.broken(GUN0 + i) && t % 4 == 0) {
                 Vec3 p = CraftDamage.gunPoint(c, i);
-                if (p != null) puff(l, ParticleTypes.LARGE_SMOKE, c.localToWorld(p), r, 0.8, 0.05);
+                if (p != null) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), c.localToWorld(p), r, 0.8, 0.05);
             }
         }
-        if (s.broken(WING_L) && t % 2 == 0) puff(l, ParticleTypes.LARGE_SMOKE, c.localToWorld(CraftDamage.wingRoot(c, true)), r, 0.2, 0.0);
-        if (s.broken(WING_R) && t % 2 == 0) puff(l, ParticleTypes.LARGE_SMOKE, c.localToWorld(CraftDamage.wingRoot(c, false)), r, 0.2, 0.0);
-        if ((s.broken(ROTOR) || s.broken(TAIL_ROTOR)) && t % 2 == 0) puff(l, ParticleTypes.LARGE_SMOKE, eng, r, 0.4, 0.05);
+        if (s.broken(WING_L) && t % 2 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), c.localToWorld(CraftDamage.wingRoot(c, true)), r, 0.2, 0.0);
+        if (s.broken(WING_R) && t % 2 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), c.localToWorld(CraftDamage.wingRoot(c, false)), r, 0.2, 0.0);
+        if ((s.broken(ROTOR) || s.broken(TAIL_ROTOR)) && t % 2 == 0) puff(l, ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), eng, r, 0.4, 0.05);
     }
 
     static void puff(Level l, ParticleOptions p, Vec3 c, RandomSource r, double spread, double up) {

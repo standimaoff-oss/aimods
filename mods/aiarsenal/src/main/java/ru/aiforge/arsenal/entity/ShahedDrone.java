@@ -115,12 +115,12 @@ public class ShahedDrone extends ArsEntity {
                 v = d.scale(speed);
                 Vec3 back = position().subtract(d.scale(1.6));
                 sl.sendParticles(ParticleTypes.FLAME, back.x, back.y, back.z, 3, 0.05, 0.05, 0.05, 0.01);
-                sl.sendParticles(ParticleTypes.LARGE_SMOKE, back.x, back.y, back.z, 4, 0.15, 0.15, 0.15, 0.02);
+                sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), back.x, back.y, back.z, 4, 0.15, 0.15, 0.15, 0.02);
                 if (phaseT >= 45) {
                     setAux(0);
                     setState(CRUISE);
                     phaseT = 0;
-                    sl.sendParticles(ParticleTypes.SMOKE, back.x, back.y, back.z, 15, 0.3, 0.3, 0.3, 0.05);
+                    sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), back.x, back.y, back.z, 15, 0.3, 0.3, 0.3, 0.05);
                 }
             }
             case CRUISE -> {
@@ -160,7 +160,7 @@ public class ShahedDrone extends ArsEntity {
             case FALLING -> {
                 v = v.add(0, -g * 2, 0).scale(0.99);
                 setRoll(roll() + 9f);
-                if (age % 2 == 0) sl.sendParticles(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 1, 0.1, 0.1, 0.1, 0.01);
+                if (age % 2 == 0) sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), getX(), getY(), getZ(), 1, 0.1, 0.1, 0.1, 0.01);
             }
             default -> {
             }

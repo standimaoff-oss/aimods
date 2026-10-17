@@ -45,7 +45,7 @@ def triangles(path):
         if name in GROUPS:
             grp = GROUPS[name]
             pivots[grp] = (M[0, 3], M[2, 3])
-        skip = skip or bool(SKIP.search(name))
+        skip = skip or bool(SKIP.search(name)) or (os.path.basename(path) == 'mark_i.glb' and name in {'launcher_yaw', 'launcher_yaw_left'})
         if 'mesh' in node and not skip:
             for p in j['meshes'][node['mesh']]['primitives']:
                 if p.get('mode', 4) != 4:

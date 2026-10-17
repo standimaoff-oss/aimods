@@ -33,6 +33,7 @@ import ru.aiforge.realwar.network.ModNetwork;
 @Mod.EventBusSubscriber(modid = "aiarsenal", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class GunClient {
     private static float ads, adsPrev;
+    private static GunKind lastHeld;
     private static boolean trig, aim, rPrev, bPrev;
     private static long shotN = Long.MIN_VALUE / 2, lastFrameN, reloadN;
     private static float pendP, pendY, debt, debtY;
@@ -65,8 +66,8 @@ public final class GunClient {
      *  the AK-12, PKP and the RPG-7 (default) aim over their iron sights with the 3D model */
     public static boolean scoped() {
         GunKind k = held();
-        boolean optic = k == GunKind.M4A1 || k == GunKind.T5000 || k == GunKind.RPG7 && rpgOptic;
-        return optic && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
+        boolean optic = k == GunKind.M4A1 || k != null && k.scope() || k == GunKind.RPG7 && rpgOptic;
+        return optic && Minecraft.getInstance().options.getCameraType().isFirstPerson() && !reloading && adsLerp(Minecraft.getInstance().getFrameTime()) > 0.85f;
     }
 
     /** RPG-7: PGO-7V3 selected (B) instead of the iron sights */
@@ -122,7 +123,7 @@ public final class GunClient {
     // ------------------------------------------------------------------ input
 
     private static void send(int a) {
-        ModNetwork.CHANNEL.sendToServer(new GunActionPacket(a));
+        if (Minecraft.getInstance().getConnection() != null) ModNetwork.CHANNEL.sendToServer(new GunActionPacket(a));
     }
 
     @SubscribeEvent
@@ -140,6 +141,16 @@ public final class GunClient {
         }
         adsPrev = ads;
         GunKind k = held();
+        if (k != lastHeld) {
+            if (trig) send(Firearms.TRIGGER_UP);
+            if (aim) send(Firearms.AIM_OFF);
+            trig = aim = false;
+            ads = adsPrev = 0f;
+            reloading = false;
+            shotN = Long.MIN_VALUE / 2;
+            pendP = pendY = debt = debtY = 0f;
+            lastHeld = k;
+        }
         boolean ok = p != null && k != null && mc.screen == null && p.getVehicle() == null && !p.isSpectator();
         if (!ok) {
             if (trig) send(Firearms.TRIGGER_UP);
@@ -159,7 +170,7 @@ public final class GunClient {
             aim = a;
             send(a ? Firearms.AIM_ON : Firearms.AIM_OFF);
         }
-        float target = aim && !reloading && !p.isSprinting() ? 1f : 0f;
+        float target = aim && !reloading && !(k.boltAction() && sinceShot() < 1.25f) && !p.isSprinting() ? 1f : 0f;
         float sp = k.launcher() ? 0.14f : 0.24f;
         ads += Math.max(-sp, Math.min(sp, target - ads));
         boolean r = VehicleClient.KEY_RELOAD.isDown(), rc = false, bc = false;
@@ -211,6 +222,7 @@ public final class GunClient {
             case GunFxPacket.SHOT -> {
                 shotN = System.nanoTime();
                 shotCount++;
+                if (k != null && k.boltAction()) ads = adsPrev = 0f;
                 if (k != null) {
                     float m = (ads > 0.5f ? 0.65f : 1f);
                     Player p = Minecraft.getInstance().player;
@@ -221,8 +233,11 @@ public final class GunClient {
             }
             case GunFxPacket.RELOAD, GunFxPacket.RELOAD_EMPTY -> {
                 reloading = true;
+                ads = adsPrev = 0f; // never show an enlarged hip/reload model through residual scope zoom
                 reloadEmpty = fx == GunFxPacket.RELOAD_EMPTY;
                 reloadN = System.nanoTime();
+                if (Boolean.getBoolean("aiarsenal.visualQa") && k != null)
+                    ru.aiforge.arsenal.AiArsenal.LOGGER.info("WEAPON QA reload-start {}", k.id);
             }
             case GunFxPacket.LOADED, GunFxPacket.CANCEL -> reloading = false;
             default -> {
@@ -298,6 +313,7 @@ public final class GunClient {
 
     @SubscribeEvent
     public static void fov(ComputeFovModifierEvent e) {
+        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) return;
         GunKind k = held();
         if (k == null) return;
         float a = adsLerp(Minecraft.getInstance().getFrameTime());
@@ -308,21 +324,39 @@ public final class GunClient {
 
     // ------------------------------------------------------------------ HUD
 
+    @SubscribeEvent
+    public static void scopeOverlays(net.minecraftforge.client.event.RenderGuiOverlayEvent.Pre e) {
+        // Iron-sight ADS needs the same clean view as an optical sight; restore chat outside ADS.
+        var mc = Minecraft.getInstance();
+        if (held() == null || !mc.options.getCameraType().isFirstPerson() || adsLerp(mc.getFrameTime()) < 0.4f) return;
+        var id = e.getOverlay().id();
+        if (id.equals(net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.CHAT_PANEL.id())
+                || id.equals(net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.ITEM_NAME.id())) e.setCanceled(true);
+    }
+
     public static void render(ForgeGui gui, GuiGraphics g, float pt, int w, int h) {
         Minecraft mc = Minecraft.getInstance();
         Player p = mc.player;
         GunKind k = held();
         if (p == null || k == null || mc.options.hideGui || p.getVehicle() != null) return;
+        g.flush();
+        g.pose().pushPose();
+        g.pose().translate(0, 0, 400); // above chat depth, including the compact ammo panel
         float a = adsLerp(pt);
         if (scoped()) {
             if (k == GunKind.RPG7) pgo7(g, mc.font, w, h, mc.options.fov().get() * k.adsFov);
+            else if (k.singleLoad()) historicalScope(g, mc.font, w, h, k);
             else if (k == GunKind.T5000) riflescope(g, mc.font, w, h, mc.options.fov().get() * adsFactor(k));
             else aimpoint(g, w, h);
+        } else if (!mc.options.getCameraType().isFirstPerson()) {
+            hipCross(g, w, h, k, p, 1f);
         } else if (a < 0.4f) {
             hipCross(g, w, h, k, p, 1f - a / 0.4f);
         }
         if (k.manpads() && a > 0.5f && !reloading && FirearmItem.ammo(p.getMainHandItem()) > 0) seeker(g, mc.font, p, k, w, h, pt);
         panel(g, mc.font, p, k, w, h);
+        g.flush();
+        g.pose().popPose();
     }
 
     private static void hipCross(GuiGraphics g, int w, int h, GunKind k, Player p, float alpha) {
@@ -370,6 +404,7 @@ public final class GunClient {
         if (k.manpads()) b.append(Component.translatable("hud.aiarsenal.gun.m." + k.id).getString());
         else if (k.launcher()) b.append(Component.translatable("hud.aiarsenal.gun.pg7vl").getString()).append("  \u00b7  ")
                 .append(Component.translatable(rpgOptic ? "hud.aiarsenal.gun.pgo" : "hud.aiarsenal.gun.irons").getString());
+        else if (k.singleLoad()) b.append(k.fixedMagnification()).append("×");
         else if (k.scope()) b.append(zoom()).append("\u00d7");
         else b.append(Component.translatable(auto ? "hud.aiarsenal.gun.auto" : "hud.aiarsenal.gun.semi").getString());
         b.append("  \u00b7  +").append(spare);
@@ -459,6 +494,27 @@ public final class GunClient {
             g.fill(0, y, cx - half, y + 1, col);
             g.fill(cx + half, y, w, y + 1, col);
         }
+    }
+
+    /** PU three-post reticle and ZF39 German No.1 pointed post; no modern mil-dot tree. */
+    private static void historicalScope(GuiGraphics g, Font f, int w, int h, GunKind k) {
+        int cx = w / 2, cy = h / 2, r = Math.round(h * 0.45f), ink = 0xFF090909;
+        ring(g, cx, cy, r, w, h, 0xFF080808);
+        int gap = Math.max(8, r / 7), thick = Math.max(2, r / 42);
+        g.fill(cx - r, cy - thick, cx - gap, cy + thick, ink);
+        g.fill(cx + gap, cy - thick, cx + r, cy + thick, ink);
+        if (k == GunKind.MOSIN_PU) {
+            g.fill(cx - 1, cy, cx + 1, cy + gap, ink);
+            g.fill(cx - thick, cy + gap, cx + thick, cy + r, ink);
+            g.fill(cx - gap, cy, cx + gap, cy + 1, ink);
+        } else {
+            for (int y = 0; y < gap; y++) {
+                int half = Math.max(0, thick * y / gap);
+                g.fill(cx - half, cy + y, cx + half + 1, cy + y + 1, ink);
+            }
+            g.fill(cx - thick, cy + gap, cx + thick + 1, cy + r, ink);
+        }
+        g.drawString(f, k == GunKind.MOSIN_PU ? "PU 3.5×" : "ZF39 4×", cx - 24, h - 14, 0xFFC8C2AF, false);
     }
 
     /** Aimpoint CompM4: 30 mm tube seen at the eye, 2 MOA red dot with a soft halo */

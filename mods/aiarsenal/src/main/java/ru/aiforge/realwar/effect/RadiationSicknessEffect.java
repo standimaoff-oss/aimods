@@ -41,9 +41,6 @@ extends MobEffect {
             e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, amp >= 2 ? 1 : 0, true, false, false));
             e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, true, false, false));
         }
-        if (amp >= 2) {
-            e.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 120, 0, true, false, false));
-        }
         if (amp == 2 && e.getHealth() > 6.0f) {
             e.hurt(ModDamage.source(e.level(), ModDamage.RADIATION), 1.0f);
         }

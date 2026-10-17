@@ -100,9 +100,16 @@ public final class Warheads {
             }
             if (stop) break;
         }
-        sl.sendParticles((ParticleOptions)ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 1.0, pos.z, 30, 0.6, 0.6, 0.6, 0.1);
+        sl.sendParticles((ParticleOptions)ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), pos.x, pos.y + 1.0, pos.z, 30, 0.6, 0.6, 0.6, 0.1);
         sl.playSound(null, pos.x, pos.y, pos.z, (SoundEvent)ModSounds.BLAST_SMALL.get(), SoundSource.HOSTILE, 4.0f, 0.6f);
         return new Vec3(pos.x, (double)(y - Math.max(1, depth - 1)) + 1.5, pos.z);
+    }
+
+    /** Spread the declared payload over the release window without rounding it
+     * into one extra submunition per late hidden tick (48 previously became 50). */
+    public static int clusterReleases(int tick, int payload) {
+        if (tick <= 0 || tick > 45 || payload <= 0) return 0;
+        return (int)((long)tick * payload / 45 - (long)(tick - 1) * payload / 45);
     }
 
     public static void clusterTick(ServerLevel sl, MissileType type, Vec3 center, int tick, double bombKg) {
@@ -111,7 +118,7 @@ public final class Warheads {
             sl.playSound(null, center.x, center.y, center.z, (SoundEvent)ModSounds.BLAST_SMALL.get(), SoundSource.HOSTILE, 3.0f, 1.4f);
             sl.sendParticles((ParticleOptions)ParticleTypes.FIREWORK, center.x, center.y + 30.0, center.z, 40, 3.0, 3.0, 3.0, 0.15);
         }
-        int per = Math.max(1, type.warheads / 45);
+        int per = clusterReleases(tick, type.warheads);
         for (int i = 0; i < per; ++i) {
             double a = rnd.nextDouble() * Math.PI * 2.0;
             double r = Math.sqrt(rnd.nextDouble()) * type.footprint;
@@ -119,7 +126,7 @@ public final class Warheads {
             double z = center.z + Math.sin(a) * r;
             if (!sl.hasChunk(Mth.floor((double)x) >> 4, Mth.floor((double)z) >> 4)) continue;
             double y = (double)sl.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mth.floor((double)x), Mth.floor((double)z)) + 0.3;
-            sl.sendParticles((ParticleOptions)ParticleTypes.SMOKE, x, y + 14.0, z, 3, 0.1, 6.0, 0.1, 0.0);
+            sl.sendParticles((ParticleOptions)ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), x, y + 14.0, z, 3, 0.1, 6.0, 0.1, 0.0);
             ConventionalBlast.explode(sl, new Vec3(x, y, z), bombKg, 1.3);
         }
     }

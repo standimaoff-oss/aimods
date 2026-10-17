@@ -50,9 +50,9 @@ public final class ArsTrails {
         if (e.tickCount == 2 && st == MissileEntity.BOOST)
             TrailFx.launch(l, b, dir(a, b, e.getYRot(), e.getXRot()), booster ? 1 : 0, 1.5);
         if (booster || (st == MissileEntity.BOOST && k == Kind.HELLFIRE)) {
-            TrailFx.trail(l, a, b, k == Kind.HELLFIRE ? 0.55 : 1.0, tail(k) + (booster ? 0.9 : 0), true, false);
+            TrailFx.trail(l, e.getId(), a, b, k == Kind.HELLFIRE ? 0.55 : 1.0, tail(k) + (booster ? 0.9 : 0), true, false);
         } else if (k == Kind.HELLFIRE && st != MissileEntity.DROP) {
-            TrailFx.trail(l, a, b, 0.45, tail(k), true, false);
+            TrailFx.trail(l, e.getId(), a, b, 0.45, tail(k), true, false);
         } else if (e.engine()) {
             TrailFx.engineWisp(l, b.subtract(dir(a, b, e.getYRot(), e.getXRot()).scale(tail(k))), dir(a, b, e.getYRot(), e.getXRot()), 1.0);
         }
@@ -68,9 +68,9 @@ public final class ArsTrails {
         if (st == IcbmEntity.BOOST) {
             int stages = Integer.bitCount(e.aux() & (IcbmEntity.B_S1 | IcbmEntity.B_S2 | IcbmEntity.B_S3));
             double s = stages >= 3 ? 3.0 : stages == 2 ? 2.2 : 1.5;
-            TrailFx.trail(l, a, b, s, tail(Kind.YARS) * stages / 3.0 + 1.0, true, false);
+            TrailFx.trail(l, e.getId(), a, b, s, tail(Kind.YARS) * stages / 3.0 + 1.0, true, false);
         } else if (st == IcbmEntity.REENTRY) {
-            TrailFx.trail(l, a, b, 0.8, 0.4, false, true);
+            TrailFx.trail(l, e.getId(), a, b, 0.8, 0.4, false, true);
         }
     }
 
@@ -82,7 +82,7 @@ public final class ArsTrails {
         if (st == ShahedDrone.BOOST) {
             Vec3 d = dir(a, b, e.getYRot(), e.getXRot());
             if (e.tickCount < 4) TrailFx.launch(l, b, d, 0, 1.0);
-            if ((e.aux() & ShahedDrone.B_BOOSTER) != 0) TrailFx.trail(l, a, b, 0.7, 1.2, true, false);
+            if ((e.aux() & ShahedDrone.B_BOOSTER) != 0) TrailFx.trail(l, e.getId(), a, b, 0.7, 1.2, true, false);
         } else if (st == ShahedDrone.CRUISE || st == ShahedDrone.DIVE) {
             Vec3 d = dir(a, b, e.getYRot(), e.getXRot());
             TrailFx.engineWisp(l, b.subtract(d.scale(1.4)), d, 0.6);

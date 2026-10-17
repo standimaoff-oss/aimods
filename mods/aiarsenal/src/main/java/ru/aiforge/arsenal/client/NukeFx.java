@@ -7,6 +7,12 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+import ru.aiforge.arsenal.volumetric.client.render.ShaderPackCompatibility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
@@ -41,6 +47,11 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = AiArsenal.MODID, value = Dist.CLIENT)
 public final class NukeFx {
     private static final int LIFE = 3000;
+    private static long shaderSafeFrames;
+    public static long shaderSafeFrames() { return shaderSafeFrames; }
+    private static final RenderType SAFE_CLOUD = RenderType.entityTranslucent(
+            new ResourceLocation("aiarsenal", "textures/misc/fx_white.png"));
+    private record CloudVertices(VertexConsumer sink, boolean textured) {}
 
     private static final class Fx {
         final double x, y, z, gy;
@@ -93,6 +104,7 @@ public final class NukeFx {
             boolean los = h.getType() == HitResult.Type.MISS || h.getLocation().distanceTo(b) < 4 || d > 300;
             f.vis = (float) Mth.clamp(6 * f.r / Math.max(1, d), 0, 1) * (los ? 1f : 0.35f);
         }
+        ru.aiforge.arsenal.volumetric.client.VolumetricEffects.nuclear(p.x(), p.y(), p.z(), p.radius(), f.seed);
         FX.add(f);
         if (f.y - f.gy < 0.6 * f.r) ZONES.add(new Zone(f.x, f.z, 1.4f * f.r, 6000));
     }
@@ -161,26 +173,36 @@ public final class NukeFx {
     // ------------------------------------------------------------------ mushroom cloud rendering
     @SubscribeEvent
     public static void render(RenderLevelStageEvent e) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) return;
         if (e.getStage() != RenderLevelStageEvent.Stage.AFTER_WEATHER || FX.isEmpty()) return;
         Vec3 cam = e.getCamera().getPosition();
         PoseStack ps = e.getPoseStack();
         float pt = e.getPartialTick();
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.enableDepthTest();
-        RenderSystem.depthMask(false);
-        RenderSystem.disableCull();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        boolean safe = ShaderPackCompatibility.blocked();
+        if (!safe) {
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.enableDepthTest();
+            RenderSystem.depthMask(false);
+            RenderSystem.disableCull();
+            RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        }
         for (Fx f : FX) {
             ps.pushPose();
             ps.translate(f.x - cam.x, 0 - cam.y, f.z - cam.z);
             Matrix4f m = ps.last().pose();
-            draw(m, f, f.age + pt, cam.subtract(f.x, 0, f.z));
+            draw(m, f, f.age + pt, cam.subtract(f.x, 0, f.z), safe);
             ps.popPose();
         }
-        RenderSystem.depthMask(true);
-        RenderSystem.enableCull();
-        RenderSystem.disableBlend();
+        if (safe) {
+            Minecraft.getInstance().renderBuffers().bufferSource().endBatch(SAFE_CLOUD);
+            shaderSafeFrames++;
+        }
+        else {
+            RenderSystem.depthMask(true);
+            RenderSystem.enableCull();
+            RenderSystem.disableBlend();
+        }
     }
 
     private static float[] lerpCol(float[] a, float[] b, float t) {
@@ -188,7 +210,7 @@ public final class NukeFx {
         return new float[]{a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t};
     }
 
-    private static void draw(Matrix4f m, Fx f, float t, Vec3 camRel) {
+    private static void draw(Matrix4f m, Fx f, float t, Vec3 camRel, boolean safe) {
         float r = f.r;
         double hb = Math.max(0, f.y - f.gy);
         double ground = f.gy;
@@ -204,8 +226,10 @@ public final class NukeFx {
         float[] core = t < 8 ? white : t < 40 ? lerpCol(white, orange, (t - 8) / 32f) : t < 180 ? lerpCol(orange, red, (t - 40) / 140f)
                 : lerpCol(red, smoke, (t - 180) / 200f);
         float[] cloud = t < 200 ? lerpCol(smoke, smoke, 0) : lerpCol(smoke, grey, (t - 200) / 900f);
-        BufferBuilder bb = Tesselator.getInstance().getBuilder();
-        bb.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        BufferBuilder raw = safe ? null : Tesselator.getInstance().getBuilder();
+        if (raw != null) raw.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        CloudVertices bb = new CloudVertices(safe
+                ? Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(SAFE_CLOUD) : raw, safe);
         // ---- shock ring on the ground
         double rs = 343.0 * ArsEntity.scale() / 20.0 * t;
         if (rs < 3 * r) {
@@ -242,19 +266,21 @@ public final class NukeFx {
             double px = Math.cos(ang) * a1 * (0.9 + pr.nextFloat() * 0.3), pz = Math.sin(ang) * a1 * (0.9 + pr.nextFloat() * 0.3);
             sphere(bb, m, (float) px, hc + (pr.nextFloat() - 0.3) * b1 * 0.8, (float) pz, pr2, 0.8f, capCol, capA, f.seed + 20 + i, t, 0.15f, 10, 6);
         }
-        BufferUploader.drawWithShader(bb.end());
+        if (raw != null) BufferUploader.drawWithShader(raw.end());
         // ---- glowing fireball (additive)
         if (t < 260) {
-            RenderSystem.blendFunc(com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA,
-                    com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE);
-            bb.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+            if (raw != null) {
+                RenderSystem.blendFunc(com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA,
+                        com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE);
+                raw.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+            }
             float rf = (float) (0.32 * r * Math.min(1, Math.sqrt(t / 8.0)));
             float a = (float) (t < 10 ? 1 : Math.max(0, 1 - (t - 10) / 250.0));
             double fy = t < 40 ? f.y : hc;
             sphere(bb, m, 0, fy, 0, rf, 1f, core, a, f.seed + 1, t, 0.08f, 18, 12);
             if (t < 40) sphere(bb, m, 0, f.y, 0, rf * 1.4f, 1f, white, a * 0.35f, f.seed + 2, t, 0.02f, 14, 8);
-            BufferUploader.drawWithShader(bb.end());
-            RenderSystem.defaultBlendFunc();
+            if (raw != null) BufferUploader.drawWithShader(raw.end());
+            if (raw != null) RenderSystem.defaultBlendFunc();
         }
     }
 
@@ -266,12 +292,16 @@ public final class NukeFx {
         return base + 0.3f * (float) Math.sin(t * 0.01 + i * 1.7 + j * 2.3);
     }
 
-    private static void v(BufferBuilder bb, Matrix4f m, double x, double y, double z, float[] c, float shade, float a) {
-        bb.vertex(m, (float) x, (float) y, (float) z).color(c[0] * shade, c[1] * shade, c[2] * shade, a).endVertex();
+    private static void v(CloudVertices bb, Matrix4f m, double x, double y, double z, float[] c, float shade, float a) {
+        VertexConsumer vertex = bb.sink.vertex(m, (float) x, (float) y, (float) z)
+                .color(c[0] * shade, c[1] * shade, c[2] * shade, a);
+        if (bb.textured) vertex.uv(.5f, .5f).overlayCoords(OverlayTexture.NO_OVERLAY)
+                .uv2(LightTexture.FULL_BRIGHT).normal(0, 1, 0);
+        vertex.endVertex();
     }
 
     /** Ellipsoid (yScale) with noisy surface; shading darkens the underside (sun from above). */
-    private static void sphere(BufferBuilder bb, Matrix4f m, float cx, double cy, float cz, float r, float yScale, float[] c, float a,
+    private static void sphere(CloudVertices bb, Matrix4f m, float cx, double cy, float cz, float r, float yScale, float[] c, float a,
                                long seed, float t, float bump, int seg, int rings) {
         for (int i = 0; i < rings; i++)
             for (int j = 0; j < seg; j++) {
@@ -290,7 +320,7 @@ public final class NukeFx {
             }
     }
 
-    private static void torus(BufferBuilder bb, Matrix4f m, double cy, double big, double small, float[] c, float a, long seed, float t, int seg,
+    private static void torus(CloudVertices bb, Matrix4f m, double cy, double big, double small, float[] c, float a, long seed, float t, int seg,
                               int sides) {
         for (int i = 0; i < seg; i++)
             for (int j = 0; j < sides; j++) {
@@ -306,7 +336,7 @@ public final class NukeFx {
             }
     }
 
-    private static void cylinder(BufferBuilder bb, Matrix4f m, double y0, double y1, float r0, float r1, float[] c, float a, long seed, float t,
+    private static void cylinder(CloudVertices bb, Matrix4f m, double y0, double y1, float r0, float r1, float[] c, float a, long seed, float t,
                                  int seg, int rings) {
         for (int i = 0; i < rings; i++)
             for (int j = 0; j < seg; j++) {
@@ -322,7 +352,7 @@ public final class NukeFx {
             }
     }
 
-    private static void ring(BufferBuilder bb, Matrix4f m, double y, double r, double w, float[] c, float a) {
+    private static void ring(CloudVertices bb, Matrix4f m, double y, double r, double w, float[] c, float a) {
         int seg = 64;
         for (int j = 0; j < seg; j++) {
             double p0 = 2 * Math.PI * j / seg, p1 = 2 * Math.PI * (j + 1) / seg;

@@ -5,3 +5,6 @@ run/
 __pycache__/
 .idea/
 *.iml
+verification/
+.arena/
+/volpyro-1.5.6-nuclear (1).jar

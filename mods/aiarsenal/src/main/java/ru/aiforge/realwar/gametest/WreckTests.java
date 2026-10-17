@@ -129,11 +129,28 @@ public final class WreckTests {
     @GameTest(template = "arena", batch = "rw_wgen", timeoutTicks = 40)
     public static void worldgen_sites(GameTestHelper h) {
         ServerLevel l = h.getLevel();
-        BlockPos c = h.absolutePos(new BlockPos(4, 0, 4));
+        // Both sites need a prepared footprint, outside neighbouring GameTest structures.
+        // Previously only the cache's 9x9 area was cleared; adding a test could shift the wreck into a building.
+        BlockPos c = h.absolutePos(new BlockPos(516, 0, 516));
         BlockPos cc0 = new BlockPos((c.getX() & ~15) + 8, 0, (c.getZ() & ~15) + 8);
-        int top = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, cc0.getX(), cc0.getZ());
-        for (BlockPos p : BlockPos.betweenClosed(cc0.offset(-4, top - 2, -4), cc0.offset(4, top + 5, 4)))
-            l.setBlock(p, p.getY() < top ? Blocks.GRASS_BLOCK.defaultBlockState() : Blocks.AIR.defaultBlockState(), 2);
+        // ServerLevel.getHeight on an UNLOADED column returns minBuildHeight; load both footprints first.
+        for (int offset : new int[]{0, 48})
+            for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++)
+                l.getChunk(((cc0.getX() + offset) >> 4) + dx, (cc0.getZ() >> 4) + dz);
+        int top = Math.max(l.getMinBuildHeight() + 8, l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, cc0.getX(), cc0.getZ()));
+        for (int offset : new int[]{0, 48}) {
+            BlockPos centre = cc0.offset(offset, 0, 0);
+            for (BlockPos p : BlockPos.betweenClosed(centre.offset(-14, top - 2, -14), centre.offset(14, top + 12, 14)))
+                l.setBlock(p, p.getY() < top ? Blocks.GRASS_BLOCK.defaultBlockState() : Blocks.AIR.defaultBlockState(), 2);
+        }
+        // WORLD_SURFACE_WG belongs to world generation and isn't updated by ServerLevel.setBlock.
+        // Re-prime it from the real fixture blocks, rather than relying on a stale generation snapshot.
+        for (int offset : new int[]{0, 48})
+            for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++)
+                Heightmap.primeHeightmaps(l.getChunk(((cc0.getX() + offset) >> 4) + dx, (cc0.getZ() >> 4) + dz),
+                        java.util.EnumSet.of(Heightmap.Types.WORLD_SURFACE_WG));
+        h.assertTrue(l.getHeight(Heightmap.Types.WORLD_SURFACE_WG, cc0.getX(), cc0.getZ()) == top, "cache fixture heightmap");
+        h.assertTrue(l.getHeight(Heightmap.Types.WORLD_SURFACE_WG, cc0.getX()+48, cc0.getZ()) == top, "wreck fixture heightmap");
         c = c.atY(top);
         boolean cache = ModFeatures.SUPPLY_CACHE.get().place(NoneFeatureConfiguration.INSTANCE, l, l.getChunkSource().getGenerator(), RandomSource.create(5), c);
         boolean wreck = ModFeatures.WRECK_SITE.get().place(NoneFeatureConfiguration.INSTANCE, l, l.getChunkSource().getGenerator(), RandomSource.create(7),

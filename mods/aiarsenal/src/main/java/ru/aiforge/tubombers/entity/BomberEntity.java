@@ -101,6 +101,7 @@ public class BomberEntity extends Entity {
     private Vector3f[] hullNow;
     private float hullSweep = -1;
     private boolean initialized;
+    private boolean positionAfterLoad;
     public boolean allowDismount;
     private boolean crewDirty;
     private int lastInputTick = -100, consentTick = -100;
@@ -244,6 +245,7 @@ public class BomberEntity extends Entity {
         st.setYPR(yaw, 0, 0);
         st.vel.set(0);
         initialized = true;
+        positionAfterLoad = false;
         entityData.set(DATA_HEALTH, kind.health);
         entityData.set(DATA_SCALE, Config.SPEED_SCALE.get().floatValue());
         entityData.set(DATA_Q, new Quaternionf(st.q));
@@ -343,6 +345,14 @@ public class BomberEntity extends Entity {
     @Override
     public void tick() {
         if (!initialized) initState(getX(), getY(), getZ(), getYRot());
+        // /summon applies its position AFTER readAdditionalSaveData. Reconcile once,
+        // before physics, without resetting saved attitude, velocity, health or controls.
+        if (positionAfterLoad) {
+            st.x = getX();
+            st.y = getY();
+            st.z = getZ();
+            positionAfterLoad = false;
+        }
         super.tick();
         gearO = gear;
         bayO = bay;
@@ -442,7 +452,7 @@ public class BomberEntity extends Entity {
         if (dead) {
             destroyedTicks++;
             if (tickCount % 3 == 0)
-                sl.sendParticles(net.minecraft.core.particles.ParticleTypes.LARGE_SMOKE, getX(), getY() + 4, getZ(), 6, 3, 1, 3, 0.02);
+                sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), getX(), getY() + 4, getZ(), 6, 3, 1, 3, 0.02);
             if (st.onGround && destroyedTicks > 60) crash("destroyed");
         }
         if (getY() < level().getMinBuildHeight() - 64) discard();
@@ -1111,6 +1121,7 @@ public class BomberEntity extends Entity {
         st.y = getY();
         st.z = getZ();
         initialized = true;
+        positionAfterLoad = true;
         entityData.set(DATA_Q, new Quaternionf(st.q));
         entityData.set(DATA_FLAGS, t.getInt("flags") & ~F_STALL);
         in.throttle = t.getFloat("throttle");

@@ -1,0 +1,118 @@
+name: Stage 3 — locomotion and indexed GLB rendering
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
+permissions:
+  contents: write
+concurrency:
+  group: stage3-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[stage3]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 75
+    env:
+      DISPLAY: ':99'
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      GALLIUM_DRIVER: llvmpipe
+      ALSOFT_DRIVERS: pulse
+      QA_STAGE1C: '1'
+      QA_PREFIX: stage3
+      QA_STAGE2: '1'
+      QA_STAGE3: '1'
+      QA_STAGE1D: '1'
+      QA_VOLUMETRIC: '1'
+      QA_INSTALLED: '1'
+      QA_RECORD: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Isolate disposable runtime
+        run: |
+          echo "MC_RUNS=$RUNNER_TEMP/mc-runs" >> "$GITHUB_ENV"
+          echo "GRADLE_USER_HOME=$RUNNER_TEMP/gradle-home" >> "$GITHUB_ENV"
+          mkdir -p verification/logs
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/gradle-home
+          key: forge-47.4.23-gradle8.8-v1
+      - name: Display and real audio capture
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb xdotool x11-utils ffmpeg pulseaudio libegl1 libgl1-mesa-dri libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
+          pip install minecraft-launcher-lib==7.1 numpy==2.2.6 soundfile==0.13.1 pillow
+          Xvfb :99 -screen 0 1400x1000x24 -nolisten tcp > verification/logs/xvfb.log 2>&1 &
+          python - <<'PY'
+          import subprocess,time
+          end=time.monotonic()+30
+          while subprocess.run(['xdpyinfo','-display',':99'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:
+              if time.monotonic()>end: raise RuntimeError('X11 not ready')
+              time.sleep(.1)
+          PY
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=qa rate=48000
+          pactl set-default-sink qa
+          pactl set-default-source qa.monitor
+          pactl info > verification/logs/pulse-info.log
+      - name: Static and protocol tests
+        run: |
+          python -m unittest discover -s tools -p 'test_historical_uniforms.py'
+          python tools/check_stage1c.py
+          python tools/check_volumetric.py
+          python -m unittest discover -s tools -p 'test_rcon.py'
+          python -m unittest discover -s tools -p 'test_pistol_audio.py'
+          python -m unittest discover -s tools -p 'test_audio_capture.py'
+      - name: Build release JAR
+        id: build
+        working-directory: mods/aiarsenal
+        run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
+      - name: Minecraft GameTests
+        run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
+      - name: Installed server old world migration
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: python tools/verify_ore_migration.py 2>&1 | tee verification/logs/ore-migration-driver.log
+      - name: Installed Forge client and server — full gameplay, audio and video
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: python tools/verify_game.py client 2>&1 | tee verification/logs/client-driver.log
+      - name: Archive evidence and binary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage3-evidence
+          path: |
+            models/historical_uniforms.blend
+            verification/
+            mods/aiarsenal/build/libs/*.jar
+      - name: Preserve logs and genuine screenshots
+        if: always()
+        run: |
+          DEST="reports/stage3/run-${GITHUB_RUN_ID}"
+          mkdir -p "$DEST" "shots/aiarsenal/stage3/run-${GITHUB_RUN_ID}"
+          cp verification/logs/* "$DEST/"
+          if [ -d verification/blender ]; then cp -r verification/blender "$DEST/"; fi
+          if [ -d verification/video-review ]; then cp -r verification/video-review "$DEST/"; fi
+          if [ -d verification/shots ]; then cp verification/shots/*.png "shots/aiarsenal/stage3/run-${GITHUB_RUN_ID}/"; fi
+          printf 'Source: %s\nRun: https://github.com/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > "$DEST/provenance.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/stage3 shots/aiarsenal/stage3
+          for path in models/historical_uniforms.blend mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb/historical_uniforms.glb mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_ww2* mods/aiarsenal/src/main/resources/assets/aiarsenal/textures/item/uniform_nap*; do
+            if [ -e "$path" ]; then git add "$path"; fi
+          done
+          git commit -m '[stage3-evidence] Locomotion and render-index installed multiplayer review'
+          git push origin HEAD:arena/10158ad9-aimods
+      - name: Draft only after all checks
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.7.jar > verification/SHA256SUMS
+          gh release create "stage3-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.7.jar verification/SHA256SUMS models/historical_uniforms.blend verification/videos/*.mp4 --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 3: locomotion and render index — pending review' --notes "Source $GITHUB_SHA. Real installed Forge client/server, 163 GameTests, saved-world migration, continuous X11+PulseAudio captures. Manual visual review required. Software GPU only; no hardware FPS claim."

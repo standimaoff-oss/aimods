@@ -63,6 +63,7 @@ public final class ClientSetup {
             @Override
             public void tick(BomberEntity b) {
                 BomberSounds.ensure(b);
+                BomberExhaust.tick(b);
             }
 
             @Override

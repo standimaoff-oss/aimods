@@ -62,7 +62,7 @@ public final class SmokeScreen {
                     double x = c.pos.x + Math.cos(a) * d, z = c.pos.z + Math.sin(a) * d;
                     double y = c.pos.y - 0.8 + sl.random.nextDouble() * r * 0.6;
                     double wx = (sl.random.nextDouble() - 0.5) * 0.01, wz = (sl.random.nextDouble() - 0.5) * 0.01;
-                    sl.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y, z, 0, wx, 0.0015, wz, 1.0);
+                    sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), x, y, z, 0, wx, 0.0015, wz, 1.0);
                 }
             }
         }

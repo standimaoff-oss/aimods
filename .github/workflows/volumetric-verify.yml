@@ -1,0 +1,91 @@
+name: Volumetric smoke integration QA
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+defaults:
+  run:
+    shell: bash
+permissions:
+  contents: write
+concurrency:
+  group: volumetric-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[volumetric]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    env:
+      DISPLAY: ':99'
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      GALLIUM_DRIVER: llvmpipe
+      ALSOFT_DRIVERS: 'null'
+      QA_VOLUMETRIC: '1'
+      QA_PREFIX: volpyro
+    steps:
+      - uses: actions/checkout@v4
+      - name: Isolate caches and logs
+        run: |
+          echo "MC_RUNS=$RUNNER_TEMP/mc-runs" >> "$GITHUB_ENV"
+          echo "GRADLE_USER_HOME=$RUNNER_TEMP/gradle-home" >> "$GITHUB_ENV"
+          mkdir -p verification/logs
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/cache/restore@v4
+        id: gradle-cache
+        with:
+          path: ${{ runner.temp }}/gradle-home
+          key: forge-47.4.23-gradle8.8-v1
+      - name: Static regression checks
+        run: |
+          python tools/check_ppsh.py 2>&1 | tee verification/logs/ppsh.log
+          python tools/check_volumetric.py 2>&1 | tee verification/logs/port-checks.log
+      - name: Build mod
+        working-directory: mods/aiarsenal
+        run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
+      - name: Save dependency cache after a successful build
+        if: steps.gradle-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/gradle-home
+          key: forge-47.4.23-gradle8.8-v1
+      - name: Run all Minecraft GameTests
+        run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
+      - name: Install software display
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb xdotool libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
+          pip install pillow
+      - name: Real client, weapon regression and volumetric effects
+        run: |
+          Xvfb :99 -screen 0 1024x768x24 -nolisten tcp > verification/logs/xvfb.log 2>&1 &
+          python tools/verify_game.py client 2>&1 | tee verification/logs/client-driver.log
+      - name: Archive build and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: volumetric-evidence
+          path: |
+            verification/
+            mods/aiarsenal/build/libs/*.jar
+      - name: Preserve readable QA evidence on the session branch
+        if: always()
+        run: |
+          DEST="reports/stage1b/run-${GITHUB_RUN_ID}"
+          mkdir -p "$DEST" "shots/aiarsenal/stage1b/run-${GITHUB_RUN_ID}"
+          cp verification/logs/*.log "$DEST/"
+          if [ -d verification/shots ]; then cp verification/shots/*.png "shots/aiarsenal/stage1b/run-${GITHUB_RUN_ID}/"; fi
+          printf 'Source commit: %s\nRun: https://github.com/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > "$DEST/provenance.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/stage1b shots/aiarsenal/stage1b
+          git commit -m '[stage1-evidence] Preserve volumetric QA logs and genuine F2 screenshots'
+          git push origin HEAD:arena/10158ad9-aimods
+      - name: Stage a draft release for visual review (not auto-published)
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "volumetric-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.2.jar verification/shots/*.png --draft --prerelease --target "$GITHUB_SHA" --title 'Stage 1b: VolPyro smoke — awaiting visual review' --notes "Port of supplied VolPyro shaders/renderer into AI Arsenal. No donor items/rockets imported. Source: $GITHUB_SHA. QA: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . Real F2 screenshots; visual acceptance still required. Stage 1 overall is NOT complete: new weapons and era/removal work remain. Forge 1.20.1 / 47.4.23, Java 17."

@@ -201,10 +201,6 @@ implements BlastTask {
             double distB = eye.distanceTo(this.burst);
             double q = BlastPhysics.thermalFluence(this.yieldKt, distB * this.prof.metersPerBlock);
             if (q < 2.0 || (q *= BlastUtil.thermalTransmission(this.level, this.burst, eye)) < 2.0) continue;
-            if (e instanceof ServerPlayer) {
-                ServerPlayer sp = (ServerPlayer)e;
-                sp.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, (int)Math.min(400.0, 40.0 + q * 12.0), 0, false, false, false));
-            }
             if (!(q >= 3.0)) continue;
             e.setSecondsOnFire((int)Math.min(40.0, 2.0 + q));
             e.hurt(ModDamage.source((Level)this.level, ModDamage.NUCLEAR_THERMAL), (float)Math.min(1000.0, q * 1.6));

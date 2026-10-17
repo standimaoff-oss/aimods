@@ -92,14 +92,18 @@ public class FirearmItem extends Item {
         tip.add(Component.translatable("tooltip.aiarsenal.gun." + this.kind.id).withStyle(ChatFormatting.GRAY));
         tip.add(Component.translatable("tooltip.aiarsenal.gun.ammo", ammo(st), this.kind.cap,
                 Component.translatable("item.aiarsenal." + this.kind.ammo)).withStyle(ChatFormatting.GOLD));
-        tip.add(Component.translatable(this.kind.manpads() ? "tooltip.aiarsenal.gun.keys_manpads" : this.kind.launcher() ? "tooltip.aiarsenal.gun.keys_rpg" : this.kind.scope() ? "tooltip.aiarsenal.gun.keys_sniper"
-                : this.kind.clipFed() ? "tooltip.aiarsenal.gun.keys_bolt"
+        tip.add(Component.translatable(this.kind.flintlock() ? "tooltip.aiarsenal.gun.keys_flintlock" : this.kind.manpads() ? "tooltip.aiarsenal.gun.keys_manpads" : this.kind.launcher() ? "tooltip.aiarsenal.gun.keys_rpg" : this.kind.singleLoad() ? "tooltip.aiarsenal.gun.keys_historical_scope" : this.kind.scope() ? "tooltip.aiarsenal.gun.keys_sniper"
+                : this.kind == GunKind.C96 ? "tooltip.aiarsenal.gun.keys_c96" : this.kind.clipFed() ? "tooltip.aiarsenal.gun.keys_bolt"
                 : this.kind.selector() ? "tooltip.aiarsenal.gun.keys" : this.kind.tube() ? "tooltip.aiarsenal.gun.keys_pump"
                 : !this.kind.auto ? "tooltip.aiarsenal.gun.keys_semi" : "tooltip.aiarsenal.gun.keys_mg").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> c) {
+        // Register during Item construction, BEFORE HumanoidModel builds its enum-switch lookup table.
+        // Lazy creation on the first pistol render expands the enum too late and crashes poseRightArm.
+        var pistolPose = ru.aiforge.realwar.client.render.PistolPose.HOLD;
+        var longGunPose = ru.aiforge.realwar.client.render.PistolPose.LONG_GUN;
         c.accept(new IClientItemExtensions() {
             @Override
             public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
@@ -108,7 +112,8 @@ public class FirearmItem extends Item {
 
             @Override
             public net.minecraft.client.model.HumanoidModel.ArmPose getArmPose(LivingEntity e, InteractionHand hand, ItemStack st) {
-                return net.minecraft.client.model.HumanoidModel.ArmPose.CROSSBOW_HOLD;
+                return kind.pistol() ? pistolPose
+                        : longGunPose;
             }
         });
     }

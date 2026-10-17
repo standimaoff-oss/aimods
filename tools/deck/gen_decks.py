@@ -11,10 +11,14 @@ Output: mods/aiarsenal/src/main/java/ru/aiforge/realwar/deck/DeckShapes.java (ge
 Model space = glTF: +X left, +Y up, +Z forward, metres.
 """
 import json, struct, sys, os, math
+from pathlib import Path
 import numpy as np
 
-ROOT = '/home/user/mods/aiarsenal/src/main/resources/assets/aiarsenal/'
-OUT = '/home/user/mods/aiarsenal/src/main/java/ru/aiforge/realwar/deck/DeckShapes.java'
+REPO_ROOT = Path(__file__).resolve().parents[2]
+ASSET_ROOT = REPO_ROOT / 'mods/aiarsenal/src/main/resources/assets/aiarsenal'
+JAVA_ROOT = REPO_ROOT / 'mods/aiarsenal/src/main/java/ru/aiforge/realwar/deck'
+ROOT = str(ASSET_ROOT) + os.sep
+OUT = str(JAVA_ROOT / 'DeckShapes.java')
 FINE = 0.2
 MAXCELLS = 44
 
@@ -23,6 +27,8 @@ MODELS = [
     'models/glb/t90m.glb', 'models/glb/abrams.glb', 'models/glb/bmp3.glb', 'models/glb/msta.glb',
     'models/glb/d30.glb', 'models/glb/m777.glb', 'models/glb/grad.glb', 'models/glb/smerch.glb',
     'models/glb/s400.glb', 'models/glb/zu23.glb', 'models/glb/radar_mobile.glb', 'glb/yarstel.glb',
+    # WWI vertical prototype
+    'models/glb/mark_i.glb',
     # WW2 (reply 8)
     'models/glb/pz2.glb', 'models/glb/pz4.glb', 'models/glb/tiger.glb', 'models/glb/sturmtiger.glb', 'models/glb/maus.glb', 'models/glb/ratte.glb',
     'models/glb/t34.glb', 'models/glb/kv2.glb', 'models/glb/is2.glb', 'models/glb/kv5.glb', 'models/glb/bm13.glb',

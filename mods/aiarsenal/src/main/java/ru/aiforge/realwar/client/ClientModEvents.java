@@ -105,6 +105,9 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void renderers(EntityRenderersEvent.RegisterRenderers e) {
+        e.registerEntityRenderer(ModEntities.CANNON_FR6.get(), ru.aiforge.realwar.client.render.PowderCannonRenderer::new);
+        e.registerEntityRenderer(ModEntities.CANNON_RI12.get(), ru.aiforge.realwar.client.render.PowderCannonRenderer::new);
+        e.registerEntityRenderer(ModEntities.CANNONBALL.get(), ru.aiforge.realwar.client.render.CannonballRenderer::new);
         e.registerBlockEntityRenderer((BlockEntityType)ModBlockEntities.BOMB.get(), BombRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.FALLING_BOMB.get(), FallingBombRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.AT_MISSILE.get(), ru.aiforge.realwar.client.render.AtMissileRenderer::new);
@@ -135,6 +138,7 @@ public final class ClientModEvents {
         e.registerEntityRenderer((EntityType)ModEntities.BRADLEY.get(), VehicleRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.TOS1A.get(), VehicleRenderer::new);
         e.registerEntityRenderer((EntityType)ModEntities.URAL.get(), VehicleRenderer::new);
+        e.registerEntityRenderer((EntityType)ModEntities.MARK_I.get(), VehicleRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.KA52.get(), ru.aiforge.realwar.client.craft.CraftRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.AH64.get(), ru.aiforge.realwar.client.craft.CraftRenderer::new);
         e.registerEntityRenderer(ru.aiforge.realwar.craft.CraftRegistry.RAPTOR.get(), ru.aiforge.realwar.client.craft.CraftRenderer::new);
@@ -183,6 +187,7 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void keys(RegisterKeyMappingsEvent e) {
+        e.register(WeaponMotionClient.SLOW);
         e.register(VehicleClient.KEY_RELOAD);
         e.register(VehicleClient.KEY_LOCK);
         e.register(VehicleClient.KEY_ENGINE);

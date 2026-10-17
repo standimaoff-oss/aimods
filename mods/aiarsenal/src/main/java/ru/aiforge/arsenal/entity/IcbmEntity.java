@@ -148,7 +148,7 @@ public class IcbmEntity extends ArsEntity {
                 if (state() == REENTRY) {
                     if (age % 10 == 0) Tickets.keep(sl, aim, 3);
                     sl.sendParticles(ParticleTypes.FLAME, getX(), getY(), getZ(), 4, 0.3, 0.3, 0.3, 0.02);
-                    sl.sendParticles(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 2, 0.4, 0.4, 0.4, 0.0);
+                    sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), getX(), getY(), getZ(), 2, 0.4, 0.4, 0.4, 0.0);
                     if (fuze == ChargeRegistry.FUZE_AIR && getY() - ground(sl, getX(), getZ()) <= burstHeight()) {
                         detonate(sl);
                         return;
@@ -188,7 +188,7 @@ public class IcbmEntity extends ArsEntity {
     private void flame(ServerLevel sl, int n) {
         Vec3 back = position().subtract(dir(getYRot(), pitch()).scale(9));
         sl.sendParticles(ParticleTypes.FLAME, back.x, back.y, back.z, n, 0.3, 0.3, 0.3, 0.05);
-        sl.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, back.x, back.y, back.z, n, 0.6, 0.6, 0.6, 0.02);
+        sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), back.x, back.y, back.z, n, 0.6, 0.6, 0.6, 0.02);
     }
 
     public void detonate(ServerLevel sl) {

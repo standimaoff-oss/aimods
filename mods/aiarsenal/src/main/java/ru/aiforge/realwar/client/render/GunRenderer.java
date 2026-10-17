@@ -63,7 +63,7 @@ public final class GunRenderer {
         if (p == null || p.getVehicle() != null) return;
         ItemStack st = p.getMainHandItem();
         if (!(st.getItem() instanceof FirearmItem g)) return;
-        e.setCanceled(true);                                    // two-handed: the off hand holds the handguard
+        e.setCanceled(true); // custom firearm hands; pistol support hand is used only during reload
         if (e.getHand() != InteractionHand.MAIN_HAND || GunClient.scoped()) return;
         GunKind k = g.kind;
         GlbAssets.Loaded lm = GlbAssets.get(glb(k.id));
@@ -84,9 +84,18 @@ public final class GunRenderer {
         float kick = Math.max(0f, 1f - since / kickT);
         kick = kick * kick;
         PoseStack ps = e.getPoseStack();
+        ps.pushPose();
+        // Remove vanilla hand bob/sway as ADS settles. It must not move the sights off the camera ray.
+        ps.last().pose().lerp(new Matrix4f(), a);
+        ps.last().normal().set(new org.joml.Matrix3f(ps.last().pose()).invert().transpose());
         Matrix4f base = new Matrix4f(ps.last().pose());
         ps.pushPose();
-        ps.translate(tx, ty - 0.55f * e.getEquipProgress(), tz + (k.launcher() ? 0.09f : 0.035f) * kick * (1f - 0.5f * a));
+        var motion = ru.aiforge.realwar.client.WeaponMotionClient.frame(p, pt, a, GunClient.reloading(), k.pistol());
+        ps.translate(motion.x(), motion.y(), motion.z());
+        ps.mulPose(Axis.XP.rotationDegrees(motion.pitch()));
+        ps.mulPose(Axis.YP.rotationDegrees(motion.yaw()));
+        ps.mulPose(Axis.ZP.rotationDegrees(motion.roll()));
+        ps.translate(tx, ty - 0.55f * e.getEquipProgress() * (1f - a), tz + (k.launcher() ? 0.09f : 0.035f) * kick * (1f - 0.5f * a));
         ps.mulPose(Axis.ZP.rotationDegrees(fp[3] * (1f - a)));
         ps.mulPose(Axis.XP.rotationDegrees((k.launcher() ? 5f : 2.2f) * kick * (1f - 0.55f * a)));
         ps.mulPose(Axis.YP.rotationDegrees(180f));
@@ -101,6 +110,16 @@ public final class GunRenderer {
             GlbModel.Animation an = lm.model.animation(k.id + (k.boltAction() ? "_bolt" : "_pump"));
             if (an != null && since - 0.12f < an.duration) pose.sample(an, Math.min(since - 0.12f, an.duration - 0.001f));
         }
+        if (k.flintlock()) {
+            float progress = GunClient.reloadTime() / (k.reload / 20f);
+            pose.hide(k.id + ".charge", !rel || progress < .15f || progress > .43f);
+            pose.hide(k.id + ".ramrod", !rel || progress < .43f || progress > .9f);
+            pose.hide(k.id + ".rod_stowed", rel && progress >= .43f && progress <= .9f);
+            if (!rel && since < .25f) pose.rotate(k.id + ".cock", -.7f * (1 - since / .25f), 1, 0, 0);
+        }
+        if (k == GunKind.C96 || k == GunKind.GEWEHR98) pose.hide(k.id + ".clip", !rel);
+        if (k == GunKind.GEWEHR98) pose.hide(k.id + ".round", FirearmItem.ammo(st) == 0);
+        if (k.singleLoad()) pose.hide(k.id + ".round", !rel);
         boolean flash = since < (k.launcher() ? 0.09f : 0.045f);
         pose.hide(k.id + ".flash", !flash);
         if (flash) {
@@ -108,7 +127,7 @@ public final class GunRenderer {
             float fs = 0.8f + (GunClient.shotCount() * 37 % 10) * 0.05f;
             pose.scale(k.id + ".flash", fs, fs, fs);
         }
-        if (!k.launcher() && !k.manual() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -0.075f * (1f - since / 0.06f));
+        if (!k.launcher() && !k.manual() && !k.flintlock() && since < 0.06f) pose.translate(k.id + ".bolt", 0, 0, -(k.pistol() ? 0.032f : 0.075f) * (1f - since / 0.06f));
         // spent tube: no grenade (RPG-7) / open muzzle without the seeker dome or covers (MANPADS) until the fresh tube is on
         if (k.launcher() && FirearmItem.ammo(st) == 0 && (!rel || k.manpads() && GunClient.reloadTime() < k.reload / 20f * 0.4f))
             pose.hide(k.id + ".round", true);
@@ -119,8 +138,9 @@ public final class GunRenderer {
         Vector3f hl = anchor(lm, pose, ps, base, k.id + ".arm_l");
         ps.popPose();
         int armLight = e.getPackedLight();
-        if (hr != null) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hr, true);
-        if (hl != null) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hl, false);
+        if (hr != null) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hr, true, k.pistol() ? 0.82f : 1f);
+        if (hl != null && (!k.pistol() || rel)) arm(mc, p, ps, e.getMultiBufferSource(), armLight, hl, false, k.pistol() ? 0.82f : 1f);
+        ps.popPose();
     }
 
     // ------------------------------------------------------------------ vanilla arms
@@ -147,7 +167,13 @@ public final class GunRenderer {
      * shoulder to the grip, the hand's palm faces the weapon (inwards / up), the arm is stretched along its length only
      * so that it always reaches back to the shoulder outside the screen.
      */
-    private static void arm(Minecraft mc, LocalPlayer p, PoseStack ps, MultiBufferSource buf, int light, Vector3f hand, boolean right) {
+    private static void arm(Minecraft mc, LocalPlayer p, PoseStack ps, MultiBufferSource buf, int light, Vector3f hand, boolean right, float widthScale) {
+        if ((p.getMainHandItem().getItem() instanceof FirearmItem f && f.kind.pistol())
+                || (p.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).getItem() instanceof ru.aiforge.realwar.item.UniformItem u
+                    && ru.aiforge.realwar.item.HistoricalUniforms.contains(u.set))) {
+            FirstPersonArms.draw(p, ps, buf, light, hand, right);
+            return;
+        }
         if (!(mc.getEntityRenderDispatcher().getRenderer(p) instanceof net.minecraft.client.renderer.entity.player.PlayerRenderer pr)) return;
         net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer> m = pr.getModel();
         boolean slim = "slim".equals(p.getModelName());
@@ -155,7 +181,7 @@ public final class GunRenderer {
         net.minecraft.client.model.geom.ModelPart sleeve = right ? m.rightSleeve : m.leftSleeve;
         // live-tunable "arms" = [width, rShX, rShY, rShZ, lShX, lShY, lShZ, gripPx] (handheld_view.json)
         float[] t = HandheldView.raw("arms");
-        float armW = t != null && t.length >= 8 ? t[0] : ARM_W;
+        float armW = (t != null && t.length >= 8 ? t[0] : ARM_W) * widthScale;
         Vector3f sh = t != null && t.length >= 8 ? (right ? new Vector3f(t[1], t[2], t[3]) : new Vector3f(t[4], t[5], t[6])) : right ? SHOULDER_R : SHOULDER_L;
         float grip = t != null && t.length >= 8 ? t[7] : 9.6f;
         // the support hand holds the handguard from below: its arm axis runs under the anchor (palm up, fingers around)
@@ -183,6 +209,10 @@ public final class GunRenderer {
         float ax = armP.x, ay = armP.y, az = armP.z, rx = armP.xRot, ry = armP.yRot, rz = armP.zRot;
         float sx = sleeve.x, sy = sleeve.y, sz = sleeve.z, srx = sleeve.xRot, sry = sleeve.yRot, srz = sleeve.zRot;
         boolean sv = sleeve.visible;
+        float asx = armP.xScale, asy = armP.yScale, asz = armP.zScale;
+        float ssx = sleeve.xScale, ssy = sleeve.yScale, ssz = sleeve.zScale;
+        armP.xScale = armP.yScale = armP.zScale = 1f;
+        sleeve.xScale = sleeve.yScale = sleeve.zScale = 1f;
         armP.setPos(0, 0, 0);
         armP.setRotation(0, 0, 0);
         sleeve.setPos(0, 0, 0);
@@ -197,6 +227,8 @@ public final class GunRenderer {
         sleeve.setPos(sx, sy, sz);
         sleeve.setRotation(srx, sry, srz);
         sleeve.visible = sv;
+        armP.xScale = asx; armP.yScale = asy; armP.zScale = asz;
+        sleeve.xScale = ssx; sleeve.yScale = ssy; sleeve.zScale = ssz;
         ps.popPose();
     }
 
@@ -256,10 +288,20 @@ public final class GunRenderer {
             float[] b = bounds(model, lm);
             ps.pushPose();
             HandheldView.apply(ps, v, b);
+            if (stack.getItem() instanceof FirearmItem
+                    && (ctx == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND || ctx == ItemDisplayContext.THIRD_PERSON_LEFT_HAND)) {
+                float[] grip = node(lm, id + ".arm_r");
+                ps.translate(-grip[0], -grip[1], -grip[2]);
+            }
             Pose pose = lm.scratch();
             pose.hide(id + ".arm_l", true);
             pose.hide(id + ".arm_r", true);
             pose.hide(id + ".flash", true);
+            pose.hide(id + ".ramrod", true);
+            pose.hide(id + ".charge", true);
+            if (id.equals("c96")) pose.hide(id + ".clip", true);
+            if (id.equals("gewehr98") && stack.getItem() instanceof FirearmItem f) pose.hide(id + ".round", FirearmItem.ammo(stack) == 0);
+            if (id.equals("mosin_pu") || id.equals("k98k_zf39")) pose.hide(id + ".round", true);
             if (stack.getItem() instanceof FirearmItem && FirearmItem.ammo(stack) == 0 && ctx != ItemDisplayContext.GUI) pose.hide(id + ".round", true);
             pose.compute();
             GlbRenderer.render(lm, pose, ps, buf, light, OverlayTexture.NO_OVERLAY);

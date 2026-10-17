@@ -103,6 +103,69 @@ public final class MissileTests {
         return l.getEntitiesOfClass(MissileEntity.class, new AABB(c, c).inflate(r, 4000.0, r));
     }
 
+    @GameTest(template="arena", batch="rw_mirv_remote", timeoutTicks=1000000)
+    public static void mirv_children_finish_outside_player_chunks(GameTestHelper h) {
+        ServerLevel level=h.getLevel();
+        BlockPos origin=h.absolutePos(new BlockPos(4,4,4)).offset(12000,0,12000);
+        int y=level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,origin.getX(),origin.getZ());
+        Vec3 start=new Vec3(origin.getX()+.5,y+5,origin.getZ()+.5);
+        Vec3 target=start.add(3100,-5,0);
+        // GameTestServer.runAllTasks() is unthrottled: 1800 test ticks can be
+        // only 7 seconds, not 90. Async generation must get a bounded wall-clock
+        // window, without forcing the route or synchronously generating it.
+        long deadline=System.nanoTime()+java.util.concurrent.TimeUnit.SECONDS.toNanos(90);
+        int tasksBefore=ru.aiforge.realwar.blast.BlastManager.completedBlasts;
+        long blocksBefore=ru.aiforge.realwar.blast.BlastManager.totalBlocksChanged;
+        MissileEntity parent=MissileEntity.launch(level,MissileType.ICBM_MIRV,start,target);
+        java.util.Set<MissileEntity> children=new java.util.HashSet<>();
+        class Probe {
+            void tick() {
+                // Keep an empty dimension awake, not its route chunks forced.
+                level.resetEmptyTime();
+                for (net.minecraft.world.entity.Entity entity:level.getAllEntities())
+                    if(entity instanceof MissileEntity m && m.type()==MissileType.ICBM_MIRV && m.mode()==1
+                            && Math.abs(m.getZ()-origin.getZ())<300 && m.getX()>origin.getX()) children.add(m);
+                boolean finished=parent.isRemoved() && children.size()==8
+                        && children.stream().allMatch(net.minecraft.world.entity.Entity::isRemoved)
+                        && ru.aiforge.realwar.blast.BlastManager.completedBlasts>=tasksBefore+8
+                        && ru.aiforge.realwar.blast.BlastManager.active(level)==0;
+                if (finished) {
+                    // Unload != impact. Require actual destruction and discard,
+                    // not merely disappearing from the visible entity lookup.
+                    for(var child:children)h.assertTrue(child.getRemovalReason()==net.minecraft.world.entity.Entity.RemovalReason.DISCARDED,
+                            "MIRV child unloaded instead of impacting");
+                    h.assertTrue(ru.aiforge.realwar.blast.BlastManager.totalBlocksChanged>blocksBefore,"no destructive impacts");
+                    h.succeed();return;
+                }
+                if(System.nanoTime()>=deadline) {
+                    String state="parent age="+parent.tickCount+" pos="+parent.position()+" "+ru.aiforge.realwar.missile.MissileChunkLeases.diagnostics(parent);
+                    for(var child:children)if(!child.isRemoved())state+="; child age="+child.tickCount+" pos="+child.position()+" "+ru.aiforge.realwar.missile.MissileChunkLeases.diagnostics(child);
+                    h.fail("MIRV did not complete eight impacts within 90 real seconds: "+state);return;
+                }
+                // One pending callback, not a million preallocated scheduled tasks.
+                h.runAfterDelay(1,this::tick);
+            }
+        }
+        h.runAfterDelay(1,new Probe()::tick);
+    }
+
+    @GameTest(template="arena", batch="rw_s3")
+    public static void cluster_payload_exact_even_with_late_ticks(GameTestHelper h) {
+        for (int payload : new int[]{1, 14, MissileType.CRUISE_CLUSTER.warheads, 90, 1000}) {
+            int total = 0;
+            for (int tick = 1; tick <= 50; tick++) {
+                int count = Warheads.clusterReleases(tick, payload);
+                h.assertTrue(count >= 0, "negative release count");
+                if (tick > 45) h.assertTrue(count == 0, "extra submunitions after release window");
+                total += count;
+            }
+            h.assertTrue(total == payload, "payload changed: " + payload + " -> " + total);
+        }
+        h.assertTrue(Warheads.clusterReleases(0, 48) == 0 && Warheads.clusterReleases(-1, 48) == 0,
+                "submunitions before release starts");
+        h.succeed();
+    }
+
     @GameTest(template="arena", batch="rw_s3")
     public static void missile_items_and_types(GameTestHelper h) {
         h.assertTrue(MissileType.values().length == 14, "\u0442\u0438\u043f\u043e\u0432 \u0440\u0430\u043a\u0435\u0442 " + MissileType.values().length);

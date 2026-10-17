@@ -104,7 +104,7 @@ public class NukeEntity extends ArsEntity {
                     setState(GROUND);
                     setDeltaMovement(Vec3.ZERO);
                     setPitch(0);
-                    sl.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, getX(), getY(), getZ(), 20, 1, 0.2, 1, 0.02);
+                    sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), getX(), getY(), getZ(), 20, 1, 0.2, 1, 0.02);
                 } else {
                     detonate(sl);
                     return;

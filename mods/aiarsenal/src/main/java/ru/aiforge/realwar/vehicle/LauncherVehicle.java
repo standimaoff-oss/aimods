@@ -436,6 +436,11 @@ extends VehicleEntity {
             }
             return;
         }
+        // Client render stalls / packet jitter must not erase a 20-second
+        // loading operation every 200 ms. Do NOT advance or consume ammunition
+        // during the gap. Explicit key release, dismount or >5s silence cancels.
+        if (rp == null && op != null && this.reloadInputInGrace(this.operatorSeat())
+                && this.mayReload() && this.hasAmmo(op)) return;
         if (rp == null || !this.mayReload() || !this.hasAmmo(rp)) {
             this.entityData.set(RELOAD_TUBE, -1);
             this.entityData.set(RELOAD_T, 0);
@@ -500,6 +505,13 @@ extends VehicleEntity {
         this.setLoadedMask(this.loadedMask() & (1L << k ^ 0xFFFFFFFFFFFFFFFFL));
     }
 
+    /** One synchronized muzzle event for a twin mount: consume both loaded positions but publish one salvo pulse. */
+    protected void markFiredPair(int first, int second) {
+        this.entityData.set(FIRED_TUBE, -2);
+        this.entityData.set(FIRED_SEQ, this.firedSeq() + 1);
+        this.setLoadedMask(this.loadedMask() & ~((1L << first) | (1L << second)));
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -534,17 +546,26 @@ extends VehicleEntity {
         this.applyCommonPose(pose, pt);
         float az = Mth.lerp((float)pt, (float)this.azVisO, (float)this.azVis);
         float el = Mth.lerp((float)pt, (float)this.elVisO, (float)this.elVis);
-        if (this.spec.yawPivot() != null && this.kind.fireAxisZ() > 0) {
+        if (this.spec.yawPivot() != null && this.kind.fireAxisZ() > 0 && this.kind != VehicleKind.MARK_I) {
             // r11: stabilised turret on a tilted hull - draw the barrel along the true line of fire
             float[] st = this.stabilised(az, el, this.pitchLerp(pt), this.rollLerp(pt));
             az = st[0];
             el = st[1];
         }
         float pitchDeg = -this.kind.fireAxisZ() * (el - this.kick * 0.8f);
-        if (this.spec.yawPivot() != null) {
-            pose.rotate("launcher_yaw", (float)Math.toRadians(az), 0.0f, 1.0f, 0.0f);
+        if (this.kind == VehicleKind.MARK_I) {
+            // Sponson bases are fixed outward by 90 degrees in the GLB; counter-rotate each so both 6-pdrs follow
+            // the shared direct-aim line. This is not a turret and receives no stabilisation.
+            pose.rotate("launcher_yaw", (float)Math.toRadians(az + 90.0f), 0.0f, 1.0f, 0.0f);
+            pose.rotate("launcher_yaw_left", (float)Math.toRadians(az - 90.0f), 0.0f, 1.0f, 0.0f);
+            pose.rotate("launcher_pitch", (float)Math.toRadians(pitchDeg), 1.0f, 0.0f, 0.0f);
+            pose.rotate("launcher_pitch_left", (float)Math.toRadians(pitchDeg), 1.0f, 0.0f, 0.0f);
+        } else {
+            if (this.spec.yawPivot() != null) {
+                pose.rotate("launcher_yaw", (float)Math.toRadians(az), 0.0f, 1.0f, 0.0f);
+            }
+            pose.rotate("launcher_pitch", (float)Math.toRadians(pitchDeg), 1.0f, 0.0f, 0.0f);
         }
-        pose.rotate("launcher_pitch", (float)Math.toRadians(pitchDeg), 1.0f, 0.0f, 0.0f);
         float jk = this.jack();
         for (int i = 0; i < this.spec.jacks().length; ++i) {
             pose.translate("jack_" + i, 0.0f, -this.spec.jacks()[i][2] * jk, 0.0f);

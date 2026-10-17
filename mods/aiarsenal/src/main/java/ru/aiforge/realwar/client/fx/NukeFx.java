@@ -154,7 +154,9 @@ public final class NukeFx {
         if (!this.spawned) {
             this.spawned = true;
             if (this.playerDistance(mc) <= (Double)RWConfig.CLIENT.maxEffectDistance.get()) {
-                this.spawnCloud(level);
+                float visualRadius = Math.max(6f, (float)this.cloud.fireballMax);
+                if (!ru.aiforge.arsenal.volumetric.client.VolumetricEffects.nuclear(this.bx, this.by, this.bz, visualRadius, this.m.seed()))
+                    this.spawnCloud(level);
             }
         }
         Iterator<Timed> it = this.events.iterator();
@@ -164,7 +166,7 @@ public final class NukeFx {
             it.remove();
             e.run().run();
         }
-        if (this.playerDistance(mc) <= (Double)RWConfig.CLIENT.maxEffectDistance.get()) {
+        if (!ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active() && this.playerDistance(mc) <= (Double)RWConfig.CLIENT.maxEffectDistance.get()) {
             this.shockFront(level);
         }
         ++this.tick;

@@ -56,6 +56,8 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<ru.aiforge.realwar.vehicle.GunVehicle>> BRADLEY = ModEntities.vehicle("bradley", (t, l) -> new ru.aiforge.realwar.vehicle.GunVehicle(t, l, VehicleKind.BRADLEY), VehicleKind.BRADLEY);
     public static final RegistryObject<EntityType<ru.aiforge.realwar.vehicle.GunVehicle>> TOS1A = ModEntities.vehicle("tos1a", (t, l) -> new ru.aiforge.realwar.vehicle.GunVehicle(t, l, VehicleKind.TOS1A), VehicleKind.TOS1A);
     public static final RegistryObject<EntityType<ru.aiforge.realwar.vehicle.TruckEntity>> URAL = ModEntities.vehicle("ural", (t, l) -> new ru.aiforge.realwar.vehicle.TruckEntity(t, l, VehicleKind.URAL), VehicleKind.URAL);
+    // WWI Mark I: reuse the established tracked gun-vehicle simulation, with its own no-turret profile and twin sponsons.
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.vehicle.GunVehicle>> MARK_I = ModEntities.vehicle("mark_i", (t, l) -> new ru.aiforge.realwar.vehicle.GunVehicle(t, l, VehicleKind.MARK_I), VehicleKind.MARK_I);
     public static final RegistryObject<EntityType<MlrsEntity>> GRAD = ModEntities.vehicle("grad", (t, l) -> new MlrsEntity(t, l, VehicleKind.GRAD), VehicleKind.GRAD);
     public static final RegistryObject<EntityType<MlrsEntity>> SMERCH = ModEntities.vehicle("smerch", (t, l) -> new MlrsEntity(t, l, VehicleKind.SMERCH), VehicleKind.SMERCH);
     public static final RegistryObject<EntityType<SamLauncherEntity>> S400 = ModEntities.vehicle("s400", (t, l) -> new SamLauncherEntity(t, l, VehicleKind.S400), VehicleKind.S400);
@@ -71,6 +73,10 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<AircraftEntity>> TU95 = ENTITIES.register("tu95", () -> EntityType.Builder.of(AircraftEntity::new, (MobCategory)MobCategory.MISC).sized(10.0f, 5.5f).clientTrackingRange(32).updateInterval(1).fireImmune().build("tu95"));
     public static final RegistryObject<EntityType<ru.aiforge.realwar.strike.StrikePlaneEntity>> STRIKE_PLANE = ENTITIES.register("strike_plane", () -> EntityType.Builder.<ru.aiforge.realwar.strike.StrikePlaneEntity>of(ru.aiforge.realwar.strike.StrikePlaneEntity::new, MobCategory.MISC).sized(4.0f, 2.0f).clientTrackingRange(48).updateInterval(2).fireImmune().noSummon().build("strike_plane"));
     public static final RegistryObject<EntityType<AirBombEntity>> AIR_BOMB = ENTITIES.register("air_bomb", () -> EntityType.Builder.of(AirBombEntity::new, (MobCategory)MobCategory.MISC).sized(0.6f, 0.6f).clientTrackingRange(32).updateInterval(1).fireImmune().noSummon().build("air_bomb"));
+
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.napoleonic.PowderCannonEntity>> CANNON_FR6 = ENTITIES.register("cannon_fr6", () -> EntityType.Builder.<ru.aiforge.realwar.napoleonic.PowderCannonEntity>of(ru.aiforge.realwar.napoleonic.PowderCannonEntity::new, MobCategory.MISC).sized(1.8f,1.5f).clientTrackingRange(48).updateInterval(2).build("cannon_fr6"));
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.napoleonic.PowderCannonEntity>> CANNON_RI12 = ENTITIES.register("cannon_ri12", () -> EntityType.Builder.<ru.aiforge.realwar.napoleonic.PowderCannonEntity>of(ru.aiforge.realwar.napoleonic.PowderCannonEntity::new, MobCategory.MISC).sized(1.9f,1.6f).clientTrackingRange(48).updateInterval(2).build("cannon_ri12"));
+    public static final RegistryObject<EntityType<ru.aiforge.realwar.napoleonic.CannonballEntity>> CANNONBALL = ENTITIES.register("cannonball", () -> EntityType.Builder.<ru.aiforge.realwar.napoleonic.CannonballEntity>of(ru.aiforge.realwar.napoleonic.CannonballEntity::new, MobCategory.MISC).sized(.18f,.18f).clientTrackingRange(64).updateInterval(1).build("cannonball"));
 
     private ModEntities() {
     }

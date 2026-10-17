@@ -1,0 +1,100 @@
+name: WWII weapons and ore retirement QA
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
+permissions:
+  contents: write
+concurrency:
+  group: stage1c-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[stage1c]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    env:
+      DISPLAY: ':99'
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      GALLIUM_DRIVER: llvmpipe
+      ALSOFT_DRIVERS: 'null'
+      QA_STAGE1C: '1'
+      QA_PREFIX: stage1c
+    steps:
+      - uses: actions/checkout@v4
+      - name: Isolate caches
+        run: |
+          echo "MC_RUNS=$RUNNER_TEMP/mc-runs" >> "$GITHUB_ENV"
+          echo "GRADLE_USER_HOME=$RUNNER_TEMP/gradle-home" >> "$GITHUB_ENV"
+          mkdir -p verification/logs verification/blender
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/gradle-home
+          key: forge-47.4.23-gradle8.8-v1
+      - name: Install real Blender GUI and pinned MCP addon
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb xdotool libegl1 libgl1-mesa-dri libgl1 libxi6 libxrender1 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libflite1
+          pip install pillow
+          cd "$RUNNER_TEMP"
+          curl --fail --retry 3 -LO https://download.blender.org/release/Blender4.2/blender-4.2.5-linux-x64.tar.xz
+          curl --fail --retry 3 -LO https://download.blender.org/release/Blender4.2/blender-4.2.5.sha256
+          grep 'blender-4.2.5-linux-x64.tar.xz$' blender-4.2.5.sha256 | sha256sum --check -
+          tar -xf blender-4.2.5-linux-x64.tar.xz
+          echo "$RUNNER_TEMP/blender-4.2.5-linux-x64" >> "$GITHUB_PATH"
+          gh api 'repos/ahujasid/blender-mcp/contents/addon.py?ref=7a0373ec9199183cb460068c4f96aed9c579fb4f' --jq .content | base64 -d > addon.py
+          echo "BLENDER_MCP_ADDON=$RUNNER_TEMP/addon.py" >> "$GITHUB_ENV"
+      - name: Live Blender MCP modelling and viewport capture
+        run: |
+          Xvfb :99 -screen 0 1400x1000x24 -nolisten tcp > verification/logs/xvfb.log 2>&1 &
+          blender --factory-startup --python tools/blender/start_mcp.py > verification/logs/blender-gui.log 2>&1 &
+          BLENDER_PID=$!
+          trap 'kill "$BLENDER_PID" 2>/dev/null || true' EXIT
+          python tools/blender/verify_stage1c_mcp.py 2>&1 | tee verification/logs/blender-driver.log
+          python tools/check_stage1c.py 2>&1 | tee verification/logs/stage1c-static.log
+      - name: Build mod
+        working-directory: mods/aiarsenal
+        run: ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../../verification/logs/build.log
+      - name: Minecraft GameTests
+        run: python tools/verify_game.py gametest 2>&1 | tee verification/logs/gametest-driver.log
+      - name: Real Minecraft scopes pistols and retained weapon regression
+        run: python tools/verify_game.py client 2>&1 | tee verification/logs/client-driver.log
+      - name: Archive evidence and JAR
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage1c-evidence
+          path: |
+            verification/
+            models/weapons_stage1c.blend
+            mods/aiarsenal/build/libs/*.jar
+      - name: Preserve models and honest QA evidence
+        if: always()
+        run: |
+          DEST="reports/stage1c/run-${GITHUB_RUN_ID}"
+          mkdir -p "$DEST" "shots/aiarsenal/stage1c/run-${GITHUB_RUN_ID}"
+          cp verification/logs/* "$DEST/"
+          if [ -d verification/blender ]; then cp -r verification/blender "$DEST/"; fi
+          if [ -d verification/shots ]; then cp verification/shots/*.png "shots/aiarsenal/stage1c/run-${GITHUB_RUN_ID}/"; fi
+          printf 'Source: %s\nRun: https://github.com/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > "$DEST/provenance.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/stage1c shots/aiarsenal/stage1c models mods/aiarsenal/src/main/resources/assets/aiarsenal/models/glb
+          git commit -m '[stage1-evidence] Preserve live Blender MCP models and stage1c verification'
+          git push origin HEAD:arena/10158ad9-aimods
+      - name: Draft release only after all checks (manual visual review still required)
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.3.jar > verification/SHA256SUMS
+          gh release create "stage1c-${GITHUB_RUN_ID}" mods/aiarsenal/build/libs/aiarsenal-1.0.1-alpha.3.jar models/weapons_stage1c.blend verification/SHA256SUMS verification/shots/*.png --draft --prerelease --target "$(git rev-parse HEAD)" --title 'Stage 1c: WWII weapons and ore removal — pending visual review' --notes "Source $GITHUB_SHA; live Blender MCP models and real Minecraft QA https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . 154 GameTests. Uranium registrations/worldgen removed with old-ID remapping; old-world migration not yet runtime-tested. All carrier missiles, nukes and drones preserved. Era tabs and remaining stage 1 gates are NOT complete. Forge 1.20.1 / 47.4.23 / Java 17."

@@ -39,8 +39,6 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create((IForgeRegistry)ForgeRegistries.BLOCKS, (String)"aiarsenal");
-    public static final RegistryObject<Block> URANIUM_ORE = ModBlocks.oreBlock("uranium_ore", MapColor.STONE, false, 2, 5);
-    public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = ModBlocks.oreBlock("deepslate_uranium_ore", MapColor.DEEPSLATE, true, 2, 5);
     public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0f, 18.0f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
     public static final RegistryObject<Block> REINFORCED_CONCRETE = BLOCKS.register("reinforced_concrete", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(8.0f, 40.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
     public static final RegistryObject<Block> SCORCHED_EARTH = BLOCKS.register("scorched_earth", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(0.6f, 0.6f).sound(SoundType.GRAVEL)));

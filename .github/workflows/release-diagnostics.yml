@@ -1,0 +1,26 @@
+name: Release — retain publication diagnostics
+on:
+  push:
+    branches: [arena/10158ad9-aimods]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  diagnose:
+    if: contains(github.event.head_commit.message, '[release-diagnostics]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-22.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve failed publication step
+        shell: bash
+        run: |
+          DEST="reports/publication/run-${GITHUB_RUN_ID}"
+          mkdir -p "$DEST"
+          gh run view 38818319821 --log-failed > "$DEST/context-draft-failure.log"
+          gzip "$DEST/context-draft-failure.log"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python tools/publish_evidence.py "$DEST/context-draft-failure.log.gz"

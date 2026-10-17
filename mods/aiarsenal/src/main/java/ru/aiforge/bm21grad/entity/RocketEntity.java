@@ -158,6 +158,10 @@ public class RocketEntity extends Projectile {
     }
 
     private void trail(Vec3 from, Vec3 to, int a) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(getId(), to, a < Ballistics.BURN_TICKS + 2 ? to.subtract(from) : Vec3.ZERO);
+            return;
+        }
         Vec3 d = to.subtract(from);
         Vec3 back = getDeltaMovement().normalize().scale(-1.6);
         boolean burning = a < Ballistics.BURN_TICKS + 2;
@@ -166,11 +170,11 @@ public class RocketEntity extends Projectile {
             double f = i / (double) n;
             double x = from.x + d.x * f + back.x, y = from.y + d.y * f + back.y, z = from.z + d.z * f + back.z;
             if (burning) {
-                level().addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true, x, y, z,
+                level().addAlwaysVisibleParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), true, x, y, z,
                         (random.nextDouble() - 0.5) * 0.03, 0.01, (random.nextDouble() - 0.5) * 0.03);
                 level().addParticle(ParticleTypes.FLAME, x, y, z, back.x * 0.05, back.y * 0.05, back.z * 0.05);
             } else if (a < 200) {
-                level().addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0.005, 0);
+                level().addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), x, y, z, 0, 0.005, 0);
             }
         }
     }

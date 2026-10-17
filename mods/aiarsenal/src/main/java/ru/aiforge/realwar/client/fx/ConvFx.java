@@ -66,6 +66,7 @@ public final class ConvFx {
     }
 
     private void spawn(ClientLevel level, Vec3 c) {
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.blast(c.x, c.y, c.z, (float)Math.cbrt(this.m.massKg()), this.m.seed())) return;
         double a;
         double sp;
         float q = ((Double)RWConfig.CLIENT.particleQuality.get()).floatValue();

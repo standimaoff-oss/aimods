@@ -35,6 +35,10 @@ import ru.aiforge.realwar.item.UniformItem;
  */
 public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     private static final ResourceLocation MODEL = new ResourceLocation("aiarsenal", "models/glb/uniforms.glb");
+    private static final ResourceLocation HISTORICAL = new ResourceLocation("aiarsenal", "models/glb/historical_uniforms.glb");
+    private static ResourceLocation modelFor(String set) {
+        return ru.aiforge.realwar.item.HistoricalUniforms.contains(set) ? HISTORICAL : MODEL;
+    }
     private static final Piece[] PIECES = {
             new Piece("head", EquipmentSlot.HEAD, m -> m.head, 0f, 1.5f, 0f),
             new Piece("body", EquipmentSlot.CHEST, m -> m.body, 0f, 1.5f, 0f),
@@ -45,16 +49,19 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
             new Piece("boot_r", EquipmentSlot.FEET, m -> m.rightLeg, -0.119f, 0.75f, 0f),
             new Piece("boot_l", EquipmentSlot.FEET, m -> m.leftLeg, 0.119f, 0.75f, 0f)};
     /** node indices per "set.piece", rebuilt when the model is reloaded */
-    private static Object indexedFor;
-    private static final Map<String, int[]> NODES = new HashMap<>();
+    private record NodeIndex(Object model, Map<String, int[]> nodes) {}
+    // At most one current index per asset. Mixed historical/modern outfits must not rebuild
+    // the entire node table on every arm/leg, nor retain every model across resource reloads.
+    private static final Map<ResourceLocation, NodeIndex> INDICES = new HashMap<>();
 
     public UniformLayer(RenderLayerParent<T, M> parent) {
         super(parent);
     }
 
     private static int[] nodes(GlbAssets.Loaded lm, String key) {
-        if (indexedFor != lm) {
-            NODES.clear();
+        ResourceLocation asset = modelFor(key.substring(0, key.indexOf('.')));
+        NodeIndex index = INDICES.get(asset);
+        if (index == null || index.model() != lm) {
             Map<String, List<Integer>> tmp = new HashMap<>();
             for (int i = 0; i < lm.model.nodes.size(); i++) {
                 String n = lm.model.nodes.get(i).name;
@@ -63,10 +70,12 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
                 if (p.length < 2) continue;
                 tmp.computeIfAbsent(p[0] + "." + p[1], k -> new ArrayList<>()).add(i);
             }
-            tmp.forEach((k, v) -> NODES.put(k, v.stream().mapToInt(Integer::intValue).toArray()));
-            indexedFor = lm;
+            Map<String, int[]> nodes = new HashMap<>();
+            tmp.forEach((k, v) -> nodes.put(k, v.stream().mapToInt(Integer::intValue).toArray()));
+            index = new NodeIndex(lm, nodes);
+            INDICES.put(asset, index);
         }
-        return NODES.getOrDefault(key, new int[0]);
+        return index.nodes().getOrDefault(key, new int[0]);
     }
 
     private static String setOf(ItemStack st) {
@@ -83,24 +92,31 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
             any |= sets[s.getIndex()] != null;
         }
         if (!any) return;
-        GlbAssets.Loaded lm = GlbAssets.get(MODEL);
-        if (lm == null) return;
         M m = this.getParentModel();
         int overlay = LivingEntityRenderer.getOverlayCoords(pl, 0f);
         for (Piece pc : PIECES) {
             String set = sets[pc.slot.getIndex()];
             if (set == null) continue;
-            drawPiece(lm, set, pc, pc.bone.apply(m), ps, buf, light, overlay);
+            GlbAssets.Loaded lm = GlbAssets.get(modelFor(set));
+            if (lm == null) continue;
+            drawPiece(lm, set, pc, pc.bone.apply(m), ps, buf, light, overlay, pl instanceof AbstractClientPlayer ap && "slim".equals(ap.getModelName()));
         }
     }
 
-    private static void drawPiece(GlbAssets.Loaded lm, String set, Piece pc, ModelPart bone, PoseStack ps, MultiBufferSource buf, int light, int overlay) {
+    private static void drawPiece(GlbAssets.Loaded lm, String set, Piece pc, ModelPart bone, PoseStack ps, MultiBufferSource buf, int light, int overlay, boolean slim) {
         int[] ns = nodes(lm, set + "." + pc.node);
         if (ns.length == 0) return;
         ps.pushPose();
         bone.translateAndRotate(ps);
+        boolean arm = pc.node.startsWith("arm_");
+        if (slim && arm) ps.translate(0, -.03125, 0);
         ps.scale(1f, -1f, -1f);
         ps.translate(-pc.px, -pc.py, -pc.pz);
+        if (slim && arm) {
+            float center = pc.node.equals("arm_r") ? -.375f : .375f;
+            float inset = pc.node.equals("arm_r") ? .03125f : -.03125f;
+            ps.translate(center + inset, 0, 0); ps.scale(.75f, 1, 1); ps.translate(-center, 0, 0);
+        }
         for (int ni : ns) GlbRenderer.renderNode(lm, ni, ps, buf, light, overlay);
         ps.popPose();
     }
@@ -110,7 +126,7 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
         AbstractClientPlayer pl = e.getPlayer();
         String set = setOf(pl.getItemBySlot(EquipmentSlot.CHEST));
         if (set == null) return;
-        GlbAssets.Loaded lm = GlbAssets.get(MODEL);
+        GlbAssets.Loaded lm = GlbAssets.get(modelFor(set));
         if (lm == null) return;
         if (!(Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(pl) instanceof PlayerRenderer pr)) return;
         e.setCanceled(true);
@@ -120,6 +136,8 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
         PoseStack ps = e.getPoseStack();
         MultiBufferSource buf = e.getMultiBufferSource();
         int light = e.getPackedLight();
+        m.rightArm.yScale = m.leftArm.yScale = m.rightSleeve.yScale = m.leftSleeve.yScale = 1f;
+        m.rightArmPose = m.leftArmPose = HumanoidModel.ArmPose.EMPTY;
         m.attackTime = 0f;
         m.crouching = false;
         m.swimAmount = 0f;
@@ -127,10 +145,9 @@ public final class UniformLayer<T extends LivingEntity, M extends HumanoidModel<
         arm.xRot = 0f;
         sleeve.xRot = 0f;
         arm.visible = true;
-        sleeve.visible = true;
+        sleeve.visible = false; // The uniform supplies the outer sleeve, not the skin jacket overlay.
         arm.render(ps, buf.getBuffer(RenderType.entitySolid(pl.getSkinTextureLocation())), light, OverlayTexture.NO_OVERLAY);
-        sleeve.render(ps, buf.getBuffer(RenderType.entityTranslucent(pl.getSkinTextureLocation())), light, OverlayTexture.NO_OVERLAY);
-        drawPiece(lm, set, right ? PIECES[2] : PIECES[3], arm, ps, buf, light, OverlayTexture.NO_OVERLAY);
+        drawPiece(lm, set, right ? PIECES[2] : PIECES[3], arm, ps, buf, light, OverlayTexture.NO_OVERLAY, "slim".equals(pl.getModelName()));
     }
 
     private record Piece(String node, EquipmentSlot slot, Function<HumanoidModel<?>, ModelPart> bone, float px, float py, float pz) {

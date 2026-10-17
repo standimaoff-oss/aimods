@@ -48,6 +48,12 @@ extends TextureSheetParticle {
     public static final ParticleRenderType ADDITIVE;
     public static final ParticleRenderType SMOKE;
     private final boolean additive;
+    private boolean shaderSafe;
+    /** Fixed before ParticleEngine queues this particle; never change its queue key in flight. */
+    public void useShaderSafeRendering() { shaderSafe = true; }
+    private final boolean volumetricSmoke;
+    public boolean volumetricSmoke() { return volumetricSmoke; }
+    public float lifeSeconds() { return lifetime / 20f; }
     public Motion motion;
     public float size;
     private float prevSize;
@@ -71,6 +77,7 @@ extends TextureSheetParticle {
     public FxParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite, int lifetime, boolean additive, float size) {
         super(level, x, y, z);
         this.additive = additive;
+        this.volumetricSmoke = !additive && sprite.contents().name().getPath().contains("smoke");
         this.size = size;
         this.prevSize = size;
         this.lifetime = Math.max(2, lifetime);
@@ -187,7 +194,7 @@ extends TextureSheetParticle {
     }
 
     public ParticleRenderType getRenderType() {
-        return this.additive ? ADDITIVE : SMOKE;
+        return shaderSafe ? ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT : this.additive ? ADDITIVE : SMOKE;
     }
 
     protected int getLightColor(float partial) {

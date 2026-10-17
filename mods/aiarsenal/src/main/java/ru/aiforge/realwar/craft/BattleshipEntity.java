@@ -634,7 +634,7 @@ public class BattleshipEntity extends BoatEntity {
             Vec3 p = new Vec3(b[0], b[1], b[2]);
             if (!sl.hasChunkAt(BlockPos.containing(p))) continue;
             sl.sendParticles(ParticleTypes.EXPLOSION, p.x, p.y, p.z, 1, 0, 0, 0, 0);
-            sl.sendParticles(ParticleTypes.LARGE_SMOKE, p.x, p.y, p.z, 10, 0.6, 0.6, 0.6, 0.01);
+            sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), p.x, p.y, p.z, 10, 0.6, 0.6, 0.6, 0.01);
             sl.playSound(null, p.x, p.y, p.z, ModSounds.FLAK_BURST.get(), SoundSource.NEUTRAL, 6f, 0.8f);
             for (Entity e : sl.getEntities(this, new AABB(p, p).inflate(7.0), e -> e.isAlive() && !this.ownAir(e) && e.getVehicle() != this)) {
                 double d = e.getBoundingBox().getCenter().distanceTo(p);

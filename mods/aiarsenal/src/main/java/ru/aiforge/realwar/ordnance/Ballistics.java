@@ -196,7 +196,10 @@ public final class Ballistics {
         M242_HE("M792 HEI-T", 0.183, 0.0, 0.001, 0.0, 0.34, 0.025, 0.0, 1100.0, 0.030, 0.5),
         M242_AP("M919 APFSDS-T", 0.134, 0.0, 0.001, 0.0, 0.55, 0.025, 0.0, 1385.0, 0.0, 0.0),
         TOW2B("BGM-71F TOW-2B", 22.6, 0.0, 0.001, 0.0, 0.25, 0.152, 0.0, 300.0, 6.0, 0.4),
-        TOS220("MO.1.01.04M", 217.0, 30.0, 1.2, 1900.0, 0.42, 0.220, 0.0, 0.0, 90.0, 1.6);
+        TOS220("MO.1.01.04M", 217.0, 30.0, 1.2, 1900.0, 0.42, 0.220, 0.0, 0.0, 90.0, 1.6),
+        // ---- WWI vertical slice: QF 6-pdr 6 cwt sponson cannon, 57 mm / 6 lb shell, ~538 m/s.
+        QF6_HE("QF 6-pdr HE", 2.72, 0.0, 0.001, 0.0, 0.42, 0.057, 0.0, 538.0, 0.10, 0.8),
+        QF6_AP("QF 6-pdr AP", 2.72, 0.0, 0.001, 0.0, 0.48, 0.057, 0.0, 538.0, 0.0, 0.0);
 
         public boolean isShell() {
             return this.mp <= 0.0;   // no motor = gun projectile (r8: rocket profiles may follow shells in the enum)

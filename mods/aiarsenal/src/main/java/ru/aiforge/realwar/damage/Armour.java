@@ -57,6 +57,7 @@ public final class Armour {
             return switch (p) {
                 case T125_AP -> new Ammo(p.title, Type.APFSDS, 700, p.ejectSpeed, cal, 0);        // 3BM60 Svinets-2
                 case T120_AP -> new Ammo(p.title, Type.APFSDS, 790, p.ejectSpeed, cal, 0);        // M829A4
+                case QF6_AP -> new Ammo(p.title, Type.AP, 55, p.ejectSpeed, cal, 0);               // QF 6-pdr AP shot, Mark I-era armour
                 case M242_AP -> new Ammo(p.title, Type.APFSDS, 110, p.ejectSpeed, cal, 0);        // M919 (DU rod)
                 case KW20_AP -> new Ammo(p.title, Type.APCR, 52, p.ejectSpeed, cal, 0);           // 2 cm Pzgr 40
                 case K75_AP -> new Ammo(p.title, Type.APHE, 140, p.ejectSpeed, cal, 0.018);       // KwK 40 L/48 Pzgr 39
@@ -115,6 +116,8 @@ public final class Armour {
             case BRADLEY -> t(35, 30, 40, 25, 25, 15, 40, 35, 25, 25, 60, 40, 0, 0, 30, 0, 0, 1.1f);
             case MSTA -> t(30, 20, 15, 15, 15, 15, 20, 15, 15, 15, 35, 30, 0, 0, 15, 0, 0, 1f);
             case TOS1A -> t(410, 80, 80, 40, 20, 20, 30, 20, 20, 15, 0, 60, 0, 0, 0, 0, 0, 1.3f);
+            // British Mark I: about 12 mm at the front, 8 mm on the sides and rear, 6 mm roof / floor.
+            case MARK_I -> t(12, 12, 8, 8, 6, 6, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1f);
             case PZ2 -> t(35, 35, 15, 15, 10, 5, 30, 15, 15, 10, 10, 20, 0, 0, 10, 22, 22, 1f);
             case PZ4 -> t(80, 80, 30, 20, 12, 10, 50, 30, 30, 18, 10, 14, 0, 10, 10, 25, 15, 1f);
             case TIGER -> t(100, 100, 80, 80, 25, 25, 120, 80, 80, 25, 10, 24, 0, 8, 0, 0, 0, 1f);
@@ -133,13 +136,13 @@ public final class Armour {
 
     /** True for vehicles with real armour (the hit camera shows the X-ray of every vehicle anyway). */
     public static boolean armoured(VehicleKind k) {
-        return of(k).mm[HULL_UF] >= 15;
+        return k == VehicleKind.MARK_I || of(k).mm[HULL_UF] >= 15;
     }
 
     // ============================================================================================ geometry
 
     public record Result(int result, int zone, float nominal, float eff, float angle, float pen, Vector3d entry, Vector3d normal,
-                         boolean viaTrack, boolean overmatch) {
+                         boolean viaTrack, boolean overmatch, int module) {
         public double excess() {
             return (this.pen - this.eff) / Math.max(1.0, this.eff);
         }
@@ -203,6 +206,15 @@ public final class Armour {
     public static boolean inside(VehicleDamage.Geo g, VehicleKind k, boolean turretGone, float[] ang, double x, double y, double z) {
         double tw = g.tracked() ? g.trackW() : 0.1;
         if (Math.abs(x - g.cx()) < g.hx() - tw && y > g.cy() - g.hy() * 0.7 && y < g.cy() + g.hy() && Math.abs(z - g.cz()) < g.hz()) return true;
+        if (k == VehicleKind.MARK_I) {
+            String[] names = k.spec.partKinds();
+            float[][] parts = k.spec.parts();
+            for (int i = 0; i < names.length; ++i) {
+                if (!names[i].startsWith("sponson_")) continue;
+                float[] b = parts[i];
+                if (Math.abs(x - b[0]) < b[3] && Math.abs(y - b[1]) < b[4] && Math.abs(z - b[2]) < b[5]) return true;
+            }
+        }
         float[] tb = turretGone ? null : turretBox(g, k);
         if (tb == null) return false;
         Vector3d q = unrot(new Vector3d(x - g.yp()[0], y, z - g.yp()[2]), ang[0]);
@@ -246,18 +258,46 @@ public final class Armour {
             face = th;
             turretFace = true;
         }
-        // ---- the gun barrel sticks out in front of every box: an external module hit, no armour involved
-        double tGun = -1;
-        for (double s = 0; s < Math.min(tHit, 10.0); s += 0.05) {
-            Vector3d q = new Vector3d(o).add(new Vector3d(d).mul(s));
-            if (VehicleDamage.zone(g, k, turretGone, q.x, q.y, q.z, ang) == DamageState.BARREL) {
-                tGun = s;
-                break;
+        // Mark I Male has two external armoured sponsons, not a fictitious central turret.
+        if (k == VehicleKind.MARK_I) {
+            String[] names = k.spec.partKinds();
+            float[][] parts = k.spec.parts();
+            for (int i = 0; i < names.length; ++i) {
+                if (!names[i].startsWith("sponson_")) continue;
+                float[] b = parts[i];
+                double[] sh = slab(o.x - b[0], o.y - b[1], o.z - b[2], d.x, d.y, d.z, b[3], b[4], b[5]);
+                if (sh != null && sh[0] >= -0.01 && sh[0] < tHit) {
+                    tHit = sh[0];
+                    face = sh;
+                    turretFace = false;
+                }
             }
         }
-        if (tGun >= 0) {
-            Vector3d e = new Vector3d(o).add(new Vector3d(d).mul(tGun));
-            return new Result(MODULE, GUN, 0, 0, 0, (float) a.penAt(speed), e, new Vector3d(d).negate(), false, false);
+        // External modules (barrels, plus Mark I track belts) are resolved before the armour plate behind them.
+        double tModule = -1;
+        int hitModule = -1;
+        boolean externalTrackHit = false;
+        for (double s = 0; s < Math.min(tHit, 10.0); s += 0.05) {
+            Vector3d q = new Vector3d(o).add(new Vector3d(d).mul(s));
+            int m = VehicleDamage.zone(g, k, turretGone, q.x, q.y, q.z, ang);
+            if (m == DamageState.BARREL) {
+                tModule = s;
+                hitModule = m;
+                break;
+            }
+            if (k == VehicleKind.MARK_I && (m == DamageState.TRACK_L || m == DamageState.TRACK_R)) {
+                externalTrackHit = true; // the link belt takes module damage and adds spaced armour, but the shell continues
+            }
+        }
+        if (tModule >= 0) {
+            Vector3d e = new Vector3d(o).add(new Vector3d(d).mul(tModule));
+            return new Result(MODULE, GUN, 0, 0, 0, (float) a.penAt(speed), e, new Vector3d(d).negate(), false, false, hitModule);
+        }
+        if (face == null && k == VehicleKind.MARK_I && externalTrackHit) {
+            // A hit on the exposed lower run can pass under the hull; damage the track only, never invent a hull plate.
+            int trackModule = p0.x > g.cx() ? DamageState.TRACK_L : DamageState.TRACK_R;
+            return new Result(MODULE, TRACK, 0, 0, 0, (float) a.penAt(speed), new Vector3d(p0),
+                    new Vector3d(d).negate(), false, false, trackModule);
         }
         Vector3d entry;
         int axis;
@@ -286,7 +326,7 @@ public final class Armour {
         if (sg == 0) sg = 1;
         int zone;
         Vector3d n;
-        boolean viaTrack = false;
+        boolean viaTrack = externalTrackHit;
         if (turretFace) {
             double aTF = Math.toRadians(tb.ang[TUR_F]), aTS = Math.toRadians(tb.ang[TUR_S]), aTR = Math.toRadians(tb.ang[TUR_R]);
             Vector3d ln;
@@ -370,7 +410,7 @@ public final class Armour {
         int res;
         if (pr > 0 && roll < pr) res = RICOCHET;
         else res = pen >= eff ? PEN : NO_PEN;
-        return new Result(res, zone, nominal, (float) eff, (float) angle, (float) pen, entry, n, viaTrack, overmatch);
+        return new Result(res, zone, nominal, (float) eff, (float) angle, (float) pen, entry, n, viaTrack, overmatch, -1);
     }
 
     /** Ricochet direction: the flight vector reflected off the plate and flattened a bit (energy loss). */

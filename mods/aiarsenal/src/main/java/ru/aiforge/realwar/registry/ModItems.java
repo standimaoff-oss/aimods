@@ -72,6 +72,19 @@ public final class ModItems {
     public static final RegistryObject<Item> STINGER_MISSILE = ITEMS.register("stinger_missile", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.STINGER, new Item.Properties()));
     // r26 WW2 small arms
     public static final RegistryObject<Item> PPSH41 = ITEMS.register("ppsh41", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.PPSH41, new Item.Properties()));
+    public static final RegistryObject<Item> MUSKET_1777 = ITEMS.register("musket_1777", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.MUSKET_1777, new Item.Properties()));
+    public static final RegistryObject<Item> MUSKET_1808 = ITEMS.register("musket_1808", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.MUSKET_1808, new Item.Properties()));
+    public static final RegistryObject<Item> PISTOL_AN13 = ITEMS.register("pistol_an13", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.PISTOL_AN13, new Item.Properties()));
+    public static final RegistryObject<Item> PISTOL_1809 = ITEMS.register("pistol_1809", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.PISTOL_1809, new Item.Properties()));
+    public static final RegistryObject<Item> PAPER_CARTRIDGE = ITEMS.register("paper_cartridge", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PISTOL_CARTRIDGE = ITEMS.register("pistol_cartridge", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHARGE_FR6 = ITEMS.register("charge_fr6", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHARGE_RI12 = ITEMS.register("charge_ri12", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CANNONBALL = ITEMS.register("cannonball", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SABRE_BRIQUET = ITEMS.register("sabre_briquet", ru.aiforge.realwar.napoleonic.SabreItem::new);
+    public static final RegistryObject<Item> SABRE_1809 = ITEMS.register("sabre_1809", ru.aiforge.realwar.napoleonic.SabreItem::new);
+    public static final RegistryObject<Item> CANNON_FR6 = ITEMS.register("cannon_fr6", () -> new ru.aiforge.realwar.napoleonic.CannonItem(true));
+    public static final RegistryObject<Item> CANNON_RI12 = ITEMS.register("cannon_ri12", () -> new ru.aiforge.realwar.napoleonic.CannonItem(false));
     public static final RegistryObject<Item> MAG_PPSH = ITEMS.register("mag_ppsh", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.PPSH41, new Item.Properties()));
     public static final RegistryObject<Item> MP40 = ITEMS.register("mp40", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.MP40, new Item.Properties()));
     public static final RegistryObject<Item> MAG_MP40 = ITEMS.register("mag_mp40", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.MP40, new Item.Properties()));
@@ -79,9 +92,20 @@ public final class ModItems {
     public static final RegistryObject<Item> CLIP_MOSIN = ITEMS.register("clip_mosin", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_mosin"));
     public static final RegistryObject<Item> K98K = ITEMS.register("k98k", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.K98K, new Item.Properties()));
     public static final RegistryObject<Item> CLIP_K98 = ITEMS.register("clip_k98", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_k98"));
+    // WWI: Gewehr 98 uses the same five-round 7.92x57 Mauser stripper clip as the later Kar98k.
+    public static final RegistryObject<Item> GEWEHR98 = ITEMS.register("gewehr98", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.GEWEHR98, new Item.Properties()));
     public static final RegistryObject<Item> JAVELIN_MISSILE = ITEMS.register("javelin_missile", () -> new ru.aiforge.realwar.handheld.HandheldAmmoItem(ru.aiforge.realwar.handheld.HandheldKind.JAVELIN, new Item.Properties()));
     public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new GeigerCounterItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> POTASSIUM_IODIDE = ITEMS.register("potassium_iodide", () -> new PotassiumIodideItem(new Item.Properties().stacksTo(16).food(new FoodProperties.Builder().nutrition(0).saturationMod(0.0f).alwaysEat().build())));
+    // Stage 1c: separate scoped variants, fixed-magazine C96 and detachable-magazine TT-33.
+    public static final RegistryObject<Item> MOSIN_PU = ITEMS.register("mosin_pu", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.MOSIN_PU, new Item.Properties()));
+    public static final RegistryObject<Item> K98K_ZF39 = ITEMS.register("k98k_zf39", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.K98K_ZF39, new Item.Properties()));
+    public static final RegistryObject<Item> C96 = ITEMS.register("c96", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.C96, new Item.Properties()));
+    public static final RegistryObject<Item> TT33 = ITEMS.register("tt33", () -> new ru.aiforge.realwar.handheld.FirearmItem(ru.aiforge.realwar.handheld.GunKind.TT33, new Item.Properties()));
+    public static final RegistryObject<Item> ROUND_762X54R = ITEMS.register("round_762x54r", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.round_762x54r"));
+    public static final RegistryObject<Item> ROUND_792X57 = ITEMS.register("round_792x57", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.round_792x57"));
+    public static final RegistryObject<Item> CLIP_C96 = ITEMS.register("clip_c96", () -> new ru.aiforge.realwar.handheld.ShellItem(new Item.Properties(), "tooltip.aiarsenal.clip_c96"));
+    public static final RegistryObject<Item> MAG_TT33 = ITEMS.register("mag_tt33", () -> new ru.aiforge.realwar.handheld.MagazineItem(ru.aiforge.realwar.handheld.GunKind.TT33, new Item.Properties()));
     public static final RegistryObject<Item> HAZMAT_HELMET = ITEMS.register("hazmat_helmet", () -> new HazmatArmorItem(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> HAZMAT_CHESTPLATE = ITEMS.register("hazmat_chestplate", () -> new HazmatArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> HAZMAT_LEGGINGS = ITEMS.register("hazmat_leggings", () -> new HazmatArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties()));
@@ -96,10 +120,6 @@ public final class ModItems {
     public static final RegistryObject<Item> STEEL_PLATE = ModItems.item("steel_plate");
     public static final RegistryObject<Item> STEEL_TUBE = ModItems.item("steel_tube");
     public static final RegistryObject<Item> RUBBERIZED_FABRIC = ModItems.item("rubberized_fabric");
-    public static final RegistryObject<Item> RAW_URANIUM = ModItems.item("raw_uranium", 0.4, 64);
-    public static final RegistryObject<Item> URANIUM_INGOT = ModItems.item("uranium_ingot", 1.2, 64);
-    public static final RegistryObject<Item> URANIUM_ORE = ModItems.blockItem("uranium_ore", ModBlocks.URANIUM_ORE);
-    public static final RegistryObject<Item> DEEPSLATE_URANIUM_ORE = ModItems.blockItem("deepslate_uranium_ore", ModBlocks.DEEPSLATE_URANIUM_ORE);
     public static final RegistryObject<Item> SANDBAGS = ModItems.blockItem("sandbags", ModBlocks.SANDBAGS);
     public static final RegistryObject<Item> BARBED_WIRE = ModItems.blockItem("barbed_wire", ModBlocks.BARBED_WIRE);
     public static final RegistryObject<Item> CONCERTINA_WIRE = ModItems.blockItem("concertina_wire", ModBlocks.CONCERTINA_WIRE);
@@ -242,7 +262,10 @@ public final class ModItems {
     public static final RegistryObject<Item> BRADLEY_VEHICLE = ITEMS.register("bradley_vehicle", () -> new VehicleItem(VehicleKind.BRADLEY, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TOS1A_VEHICLE = ITEMS.register("tos1a_vehicle", () -> new VehicleItem(VehicleKind.TOS1A, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> URAL_VEHICLE = ITEMS.register("ural_vehicle", () -> new VehicleItem(VehicleKind.URAL, new Item.Properties().stacksTo(1)));
+    // WWI Mark I item is appended with the model and double-sponson simulation.
+    public static final RegistryObject<Item> MARK_I_VEHICLE = ITEMS.register("mark_i_vehicle", () -> new VehicleItem(VehicleKind.MARK_I, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SHELLS_20 = ModItems.item("shells_20", 0.0, 16);
+    public static final RegistryObject<Item> SHELLS_57 = ModItems.item("shells_57", 0.0, 8);
     public static final RegistryObject<Item> SHELLS_75 = ModItems.item("shells_75", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_88 = ModItems.item("shells_88", 0.0, 16);
     public static final RegistryObject<Item> SHELLS_85 = ModItems.item("shells_85", 0.0, 16);
@@ -339,6 +362,7 @@ public final class ModItems {
             case BRADLEY -> BRADLEY_VEHICLE;
             case TOS1A -> TOS1A_VEHICLE;
             case URAL -> URAL_VEHICLE;
+            case MARK_I -> MARK_I_VEHICLE;
         };
     }
 

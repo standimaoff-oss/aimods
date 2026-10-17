@@ -22,6 +22,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import ru.aiforge.realwar.RealWar;
+import ru.aiforge.arsenal.volumetric.client.render.ShaderPackCompatibility;
 import ru.aiforge.realwar.client.particle.FxParticle;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,11 +38,24 @@ public final class FxSystem {
     private static final List<FxParticle> ALL = new ArrayList<FxParticle>();
     private static final List<FxParticle> VISIBLE = new ArrayList<FxParticle>();
     private static boolean renderFailed;
+    private static long shaderSafeParticles;
+    public static long shaderSafeParticles() { return shaderSafeParticles; }
 
     private FxSystem() {
     }
 
+    private static void handToParticleEngine(FxParticle p) {
+        p.useShaderSafeRendering();
+        shaderSafeParticles++;
+        Minecraft.getInstance().particleEngine.add(p);
+    }
+
     public static void add(FxParticle p) {
+        if (ShaderPackCompatibility.blocked()) {
+            handToParticleEngine(p);
+            return;
+        }
+        if (p.volumetricSmoke() && ru.aiforge.arsenal.volumetric.client.VolumetricEffects.smoke(p.px(), p.py(), p.pz(), p.size, p.lifeSeconds())) return;
         ALL.add(p);
     }
 
@@ -55,6 +69,13 @@ public final class FxSystem {
     }
 
     public static void tick() {
+        if (ShaderPackCompatibility.blocked()) {
+            // Transfer ownership exactly once when a pack is enabled mid-effect.
+            // The vanilla engine now owns both ticking and rendering.
+            for (FxParticle p : ALL) handToParticleEngine(p);
+            ALL.clear();VISIBLE.clear();
+            return;
+        }
         Iterator<FxParticle> it = ALL.iterator();
         while (it.hasNext()) {
             FxParticle p = it.next();
@@ -65,7 +86,7 @@ public final class FxSystem {
     }
 
     public static void render(PoseStack levelPose, Camera camera, float partial, Frustum frustum) {
-        if (ALL.isEmpty() || renderFailed) {
+        if (ShaderPackCompatibility.blocked() || ALL.isEmpty() || renderFailed) {
             return;
         }
         try {

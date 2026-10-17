@@ -214,7 +214,7 @@ public class YarsVehicle extends LauncherVehicle {
         this.lowerAt = this.tickCount + 100;
         Vec3 top = this.muzzleWorld(0);
         sl.sendParticles(ParticleTypes.EXPLOSION, top.x, top.y, top.z, 3, 0.6, 0.6, 0.6, 0);
-        sl.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, base.x, this.getY() + 1, base.z, 80, 4, 1, 4, 0.03);
+        sl.sendParticles(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), base.x, this.getY() + 1, base.z, 80, 4, 1, 4, 0.03);
         sl.sendParticles(ParticleTypes.CLOUD, base.x, this.getY() + 0.5, base.z, 60, 5, 0.4, 5, 0.08);
     }
 

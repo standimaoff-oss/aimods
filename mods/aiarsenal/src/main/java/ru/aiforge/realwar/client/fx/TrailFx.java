@@ -56,6 +56,11 @@ public final class TrailFx {
     }
 
     public static void rocketTick(RocketEntity e) {
+        if (e.tickCount < 1) return;
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(e.getId(), e.position(), e.isBurning() ? e.getDeltaMovement() : Vec3.ZERO, 1f);
+            return;
+        }
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || e.tickCount < 1) {
             return;
@@ -102,6 +107,11 @@ public final class TrailFx {
     }
 
     public static void missileTick(MissileEntity e) {
+        if (e.tickCount < 2 || e.mode() == 2) return;
+        if (ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(e.getId(), e.position(), e.getDeltaMovement(), 1.5f);
+            return;
+        }
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || e.tickCount < 2 || e.mode() == 2) {
             return;
@@ -157,6 +167,16 @@ public final class TrailFx {
      * drone boosters): smoke puffs + flame, optional bright core. {@code s} is the plume scale (1 = tactical missile),
      * {@code tailOff} the distance from the body origin back to the nozzle, {@code plasma} = re-entry glow instead of smoke.
      */
+    public static void trail(ClientLevel level, int entityId, Vec3 a, Vec3 b, double s, double tailOff, boolean core, boolean plasma) {
+        Vec3 delta = b.subtract(a);
+        if (!plasma && ru.aiforge.arsenal.volumetric.client.VolumetricEffects.active()) {
+            if (delta.lengthSqr() > 0.0001 && delta.lengthSqr() < 25600)
+                ru.aiforge.arsenal.volumetric.client.sim.VolumetricFxManager.recordRocket(entityId, b.subtract(delta.normalize().scale(tailOff)), delta, (float)s);
+            return;
+        }
+        trail(level, a, b, s, tailOff, core, plasma);
+    }
+
     public static void trail(ClientLevel level, Vec3 a, Vec3 b, double s, double tailOff, boolean core, boolean plasma) {
         if (level == null) {
             return;

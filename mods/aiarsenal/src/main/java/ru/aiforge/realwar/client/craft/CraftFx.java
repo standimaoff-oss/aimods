@@ -78,12 +78,13 @@ public final class CraftFx {
         if (h.engineOn() && R.nextInt(3) == 0) {
             for (int s = -1; s <= 1; s += 2) {
                 Vec3 ex = h.localToWorld(s * 0.95, 2.55, h.kind == CraftKind.AH64 ? -0.4 : -0.9);
-                level.addParticle(ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.02, 0);
+                Vec3 back = h.localToWorld(0,0,-1).subtract(h.localToWorld(0,0,0)).scale(.1);
+                level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get(), ex.x, ex.y, ex.z, back.x, back.y, back.z);
             }
         }
         if (h.hp() < h.kind.hp * 0.3f) {
             Vec3 ex = h.localToWorld(0, 2.5, -0.8);
-            level.addParticle(ParticleTypes.LARGE_SMOKE, ex.x, ex.y, ex.z, 0, 0.12, 0);
+            level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), ex.x, ex.y, ex.z, 0, 0.12, 0);
             if (R.nextInt(3) == 0) level.addParticle(ParticleTypes.FLAME, ex.x, ex.y, ex.z, 0, 0.05, 0);
         }
     }
@@ -104,7 +105,7 @@ public final class CraftFx {
                 if (p.abVis > 0.5f && R.nextInt(2) == 0)
                     level.addParticle(ParticleTypes.FLAME, nz.x, nz.y, nz.z, back.x * 0.5, back.y * 0.5, back.z * 0.5);
                 if (p.engineOn() && p.aux > 0.3f && R.nextInt(3) == 0)
-                    level.addParticle(ParticleTypes.WHITE_ASH, nz.x, nz.y, nz.z, back.x, back.y, back.z);
+                    level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get(), nz.x, nz.y, nz.z, back.x, back.y, back.z);
                 if (p.aux > 0.5f && p.agl < 6 && R.nextInt(2) == 0) {
                     Vec3 g = p.localToWorld(e[0], 0.1, e[2] - 4.0);
                     BlockState st = level.getBlockState(below(g));
@@ -116,7 +117,7 @@ public final class CraftFx {
             if (p.engineOn() && R.nextInt(p.aux < 0.35f ? 1 : 4) == 0) {
                 for (int s = -1; s <= 1; s += 2) {
                     Vec3 ex = p.localToWorld(e[0] + s * (n == 1 ? 0.42 : 0.55), e[1] + 0.05, e[2] - (n == 1 ? 1.0 : 1.3));
-                    level.addParticle(p.aux < 0.35f ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, ex.x, ex.y, ex.z,
+                    level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.EXHAUST.get(), ex.x, ex.y, ex.z,
                             -bas[0].x * 0.1 + bas[2].x * s * 0.05, 0.02, -bas[0].z * 0.1 + bas[2].z * s * 0.05);
                 }
             }
@@ -132,7 +133,7 @@ public final class CraftFx {
             }
             if (p.hp() < p.kind.hp * 0.3f && i == p.getId() % n) {
                 Vec3 ex = p.localToWorld(e[0], e[1] + 0.3, e[2] - 1.5);
-                level.addParticle(ParticleTypes.LARGE_SMOKE, ex.x, ex.y, ex.z, 0, 0.08, 0);
+                level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), ex.x, ex.y, ex.z, 0, 0.08, 0);
                 if (R.nextInt(2) == 0) level.addParticle(ParticleTypes.FLAME, ex.x, ex.y, ex.z, 0, 0.03, 0);
             }
         }
@@ -196,11 +197,11 @@ public final class CraftFx {
         }
         if (b.engineOn() && !sub && R.nextInt(4) == 0) {
             Vec3 ex = b.localToWorld(0.6, w.hullH() + 0.4, -w.length() * 0.35);
-            level.addParticle(ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.03, 0);
+            level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), ex.x, ex.y, ex.z, 0, 0.03, 0);
         }
         if (sub && b.engineOn() && R.nextInt(3) == 0) {
             Vec3 ex = b.localToWorld(0, 13.2, 7.0);
-            level.addParticle(ParticleTypes.SMOKE, ex.x, ex.y, ex.z, 0, 0.05, 0);
+            level.addParticle(ru.aiforge.arsenal.volumetric.VolumetricParticles.SMOKE.get(), ex.x, ex.y, ex.z, 0, 0.05, 0);
         }
     }
 
@@ -250,16 +251,16 @@ public final class CraftFx {
         if (o.tickCount < 2) return;
         switch (o.type()) {
             case VIKHR, HELLFIRE -> {
-                if (o.tickCount < 70) TrailFx.trail(level, a, b, 0.42, 0.9, true, false);
+                if (o.tickCount < 70) TrailFx.trail(level, o.getId(), a, b, 0.42, 0.9, true, false);
             }
             case S8, HYDRA -> {
-                if (o.tickCount < o.type().burn + 4) TrailFx.trail(level, a, b, 0.38, 0.7, true, false);
+                if (o.tickCount < o.type().burn + 4) TrailFx.trail(level, o.getId(), a, b, 0.38, 0.7, true, false);
             }
             case KALIBR -> {
                 if (level.getFluidState(o.blockPosition()).is(FluidTags.WATER)) {
                     if (R.nextInt(2) == 0) level.addParticle(ParticleTypes.BUBBLE_COLUMN_UP, b.x, b.y, b.z, 0, 0.3, 0);
                 } else {
-                    TrailFx.trail(level, a, b, 0.5, 1.1, true, false);
+                    TrailFx.trail(level, o.getId(), a, b, 0.5, 1.1, true, false);
                 }
             }
             case TORPEDO -> {
