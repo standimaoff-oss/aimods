@@ -2,7 +2,7 @@
 
 Forge content mod for Minecraft 1.20.1. Adds vehicles, firearms, artillery, aircraft and equipment from several historical periods.
 
-**Version:** `1.0.1-alpha.11` · **Minecraft:** `1.20.1` · **Forge:** `47.4.23` · **Java:** `17`
+**Version:** `1.0.1-alpha.12` · **Minecraft:** `1.20.1` · **Forge:** `47.4.23` · **Java:** `17`
 
 ## In-game previews
 
@@ -27,7 +27,7 @@ The item and entity IDs are part of existing worlds; avoid installing two versio
 2. Put the built `aiarsenal-*.jar` in the `mods` folder on the client and server.
 3. Remove older AI Arsenal JARs from that folder.
 
-The latest successful build is available as a [direct download](https://api.github.com/repos/standimaoff-oss/aimods/actions/artifacts/12072526708/zip) (ZIP containing the JAR and `SHA256SUMS`; built from [commit `e76a3f8`](https://github.com/standimaoff-oss/aimods/commit/e76a3f89effee2dab2e195e97b08ab79d664bdc4)). See the [build log](https://github.com/standimaoff-oss/aimods/actions/runs/38959840931). GitHub Actions expires this artifact on **2026-10-30**.
+Download the [AI Arsenal 1.0.1-alpha.12 JAR](https://github.com/standimaoff-oss/aimods/releases/download/v1.0.1-alpha.12/aiarsenal-1.0.1-alpha.12.jar) directly. The [pre-release page](https://github.com/standimaoff-oss/aimods/releases/tag/v1.0.1-alpha.12) also includes `SHA256SUMS` and build provenance.
 
 ## Build from source
 
